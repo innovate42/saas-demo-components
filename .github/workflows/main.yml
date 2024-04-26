@@ -3,7 +3,7 @@ name: Mirror Repository to CodeCommit via HTTPS
 on:
   push:
     branches:
-      - media-demo
+      - saas-dev
 
 jobs:
   mirror:
