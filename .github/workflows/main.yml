@@ -20,5 +20,5 @@ jobs:
           CODECOMMIT_USER: ${{ secrets.CODECOMMIT_USER }}
           CODECOMMIT_PASS: ${{ secrets.CODECOMMIT_PASS }}
         run: |
-          git remote add codecommit https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/media-demo-components
-          git push --all -f https://${{ secrets.CODECOMMIT_USER }}:${{ secrets.CODECOMMIT_PASS }}@git-codecommit.eu-central-1.amazonaws.com/v1/repos/media-demo-components
+          git remote add codecommit https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/saas-dev-components
+          git push --all -f https://${{ secrets.CODECOMMIT_USER }}:${{ secrets.CODECOMMIT_PASS }}@git-codecommit.eu-central-1.amazonaws.com/v1/repos/saas-dev-components
