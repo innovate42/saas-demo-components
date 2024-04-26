@@ -1,0 +1,23 @@
+{
+  "name": "@limio/change-saas-order-change-confirm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "uuid": "^9.0.0",
+    "luxon": "^2.4.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+  },
+  "limioProps": []
+}

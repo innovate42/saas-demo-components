@@ -1,0 +1,105 @@
+{
+  "name": "@limio/component-saas-cancel-option",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fortawesome/pro-light-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@i42/shared": "workspace:packages/shared",
+    "@limio/ui-preview-context": "workspace:^"
+  },
+  "limioProps": [
+    {
+      "id": "pageTitle",
+      "label": "Page Title",
+      "type": "string",
+      "default": "Cancellation Options"
+    },
+    {
+      "id": "boxTextAndTitles",
+      "label": "Text for the Boxes",
+      "type": "list",
+      "fields": {
+        "boxTitle": {
+          "id": "boxTitle",
+          "label": "Box Title",
+          "type": "string"
+        },
+        "boxText": {
+          "id": "boxText",
+          "label": "Box Text",
+          "type": "richtext"
+        },
+        "onTermText": {
+          "id": "onTermText",
+          "label": "If there is an existing term, show this text for this box",
+          "type": "richtext"
+        },
+        "buttonText": {
+          "id": "buttonText",
+          "label": "Button Text",
+          "type": "string"
+        },
+        "highlighted": {
+          "id": "highlighted",
+          "label": "Highlighted",
+          "type": "boolean"
+        },
+        "buttonLink": {
+          "id": "buttonLink",
+          "label": "Button Link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "boxTitle": "Hibernate",
+          "boxText": "freeze your subscription to be able to resume it at a later day.",
+          "onTermText": "You already have a term, you can only hibernate your subscription.",
+          "buttonText": "Hibernate",
+          "highlighted": true,
+          "buttonLink": "/"
+        },
+        {
+          "boxTitle": "Cancel",
+          "boxText": "click here to cancel your subscription.",
+          "onTermText": "You already have a term, you can only hibernate your subscription.",
+          "buttonText": "Cancel",
+          "highlighted": false,
+          "buttonLink": "/"
+        }
+      ]
+    },
+    {
+      "id": "existingTermBoxTitle",
+      "label": "Title of the box to hide if there is an existing term",
+      "type": "string",
+      "default": "hibernate"
+    },
+    {
+      "id": "highlightBoxText",
+      "label": "Text for the highlighted box",
+      "type": "string",
+      "default": "Recommended"
+    },
+    {
+      "id": "returnToAccountLink",
+      "label": "Link to return to account",
+      "type": "string",
+      "default": "/mma"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+
+@font-face {
+  font-family: 'brandon-black';
+  src: url(https://jazzhr-dev.prod.limio.com/public/e5452b0f-b7d9-426f-9fc8-eab90fa254a5/HVD%20Fonts%20-%20BrandonText-Black.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-black-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/9c191233-6380-41b6-a696-4ac2fadabc38/HVD%20Fonts%20-%20BrandonText-BlackItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-bold';
+  src: url(https://jazzhr-dev.prod.limio.com/public/fc60bf11-829b-404e-82a9-db3fb87a82dd/HVD%20Fonts%20-%20BrandonText-Bold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-bold-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/544d476f-e00d-46b9-becd-52567efa9e5b/HVD%20Fonts%20-%20BrandonText-BoldItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-light';
+  src: url(https://jazzhr-dev.prod.limio.com/public/3055ab7a-5285-4fc2-8e78-fa9633c836f4/HVD%20Fonts%20-%20BrandonText-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-light-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/745c1105-89b5-45df-82ee-c0db343930b3/HVD%20Fonts%20-%20BrandonText-LightItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-medium';
+  src: url(https://jazzhr-dev.prod.limio.com/public/d94d18c6-4d90-46a4-9682-1a85bdd3bfb3/HVD%20Fonts%20-%20BrandonText-Medium.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-medium-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/d91c8f88-4c7c-4ef6-96f5-e376aeab066a/HVD%20Fonts%20-%20BrandonText-MediumItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-regular';
+  src: url(https://jazzhr-dev.prod.limio.com/public/549e7ce9-5ed1-4c10-9302-6105c1c879ec/HVD%20Fonts%20-%20BrandonText-Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-regular-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/326791fc-2200-4447-bd83-51b1abec6bad/HVD%20Fonts%20-%20BrandonText-RegularItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-thin';
+  src: url(https://jazzhr-dev.prod.limio.com/public/f613c281-ff3c-4fa3-95af-f5e9b9c8051f/HVD%20Fonts%20-%20BrandonText-Thin.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-thin-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/f140c25a-16e0-4e04-9b6f-4d441eb86d3c/HVD%20Fonts%20-%20BrandonText-ThinItalic.otf) format('opentype');
+}
+
+.brandon-regular{
+  font-family: 'brandon-regular', sans-serif;
+}
+
+body {
+  height: 100vh;
+  font-family: 'brandon-regular', sans-serif !important;
+}
+
+li {
+  list-style: disc;
+  margin-left: 2rem;
+}
+
+.height-100 {
+  height: 100vh;
+}
+
+.bg-grey {
+  background-color: #F4F5F7;
+}
+
+.bg-light-grey {
+  background-color: #f5f5f5;
+}
+
+.flex {
+  display: flex;
+}
+
+flex-1 {
+  flex: 1;
+}
+
+.wrap{
+  flex-wrap: wrap;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.purple-btn{
+  background-color: purple;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.w-full {
+  width: 100%
+}
+
+.p0 {
+  padding: 0;
+}
+
+.p-1r {
+  padding: 1rem;
+}
+
+.pb-2r {
+  padding-bottom: 2rem;
+}
+
+.pt-2r {
+  padding-top: 2rem;
+}
+
+.gap-2r {
+  gap: 2rem;
+}
+
+.highlighted {
+  border: purple 2px solid;
+}
+
+.shadow {
+  box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.6);
+}
+
+.mw-custom {
+  max-width: 600px;
+}
+
+.mh-min {
+  min-height: 400px;
+}
+
+.mh-max {
+  max-height: 600px;
+}
+
+.highlighted::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 0.5rem;
+  background-color: purple;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+  border-bottom-left-radius: 10px;
+  content: var(--dynamicContent, "Default content");
+}
+
+.link-button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+}
+
+.link-button:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.relative {
+  position: relative;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
+.basis-650 {
+  flex-basis: 550px;
+}

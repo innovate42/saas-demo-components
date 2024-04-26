@@ -1,0 +1,316 @@
+/* when the page is complete it will need to be a grid with a bottom border */
+@font-face {
+  font-family: 'brandon-black';
+  src: url(https://jazzhr-dev.prod.limio.com/public/e5452b0f-b7d9-426f-9fc8-eab90fa254a5/HVD%20Fonts%20-%20BrandonText-Black.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-black-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/9c191233-6380-41b6-a696-4ac2fadabc38/HVD%20Fonts%20-%20BrandonText-BlackItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-bold';
+  src: url(https://jazzhr-dev.prod.limio.com/public/fc60bf11-829b-404e-82a9-db3fb87a82dd/HVD%20Fonts%20-%20BrandonText-Bold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-bold-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/544d476f-e00d-46b9-becd-52567efa9e5b/HVD%20Fonts%20-%20BrandonText-BoldItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-light';
+  src: url(https://jazzhr-dev.prod.limio.com/public/3055ab7a-5285-4fc2-8e78-fa9633c836f4/HVD%20Fonts%20-%20BrandonText-Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-light-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/745c1105-89b5-45df-82ee-c0db343930b3/HVD%20Fonts%20-%20BrandonText-LightItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-medium';
+  src: url(https://jazzhr-dev.prod.limio.com/public/d94d18c6-4d90-46a4-9682-1a85bdd3bfb3/HVD%20Fonts%20-%20BrandonText-Medium.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-medium-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/d91c8f88-4c7c-4ef6-96f5-e376aeab066a/HVD%20Fonts%20-%20BrandonText-MediumItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-regular';
+  src: url(https://jazzhr-dev.prod.limio.com/public/549e7ce9-5ed1-4c10-9302-6105c1c879ec/HVD%20Fonts%20-%20BrandonText-Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-regular-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/326791fc-2200-4447-bd83-51b1abec6bad/HVD%20Fonts%20-%20BrandonText-RegularItalic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-thin';
+  src: url(https://jazzhr-dev.prod.limio.com/public/f613c281-ff3c-4fa3-95af-f5e9b9c8051f/HVD%20Fonts%20-%20BrandonText-Thin.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'brandon-thin-italic';
+  src: url(https://jazzhr-dev.prod.limio.com/public/f140c25a-16e0-4e04-9b6f-4d441eb86d3c/HVD%20Fonts%20-%20BrandonText-ThinItalic.otf) format('opentype');
+}
+
+
+
+body {
+  height: 100vh;
+  font-family: 'brandon-regular' !important;
+  font-size: 1.25rem !important;
+}
+
+.f32 {
+  font-size: 32px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.grey {
+  background-color: #F4F5F7;
+}
+
+.plan-page {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-row-gap: 1px;
+}
+
+.left-side-plan-page {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 1rem;
+  padding-right: 2rem;
+  margin: 2rem;
+  grid-auto-rows: min-content;
+}
+
+.right-side {
+  margin: 2rem;
+}
+
+@media (min-width: 800px) {
+  .left-side-plan-page {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: 1rem;
+    padding-right: 2rem;
+    margin: 2rem;
+    border-right: 2px solid rgb(195, 200, 205);
+  }
+}
+
+.plan-title {
+  text-align: left;
+  color: rgb(146, 152, 162)
+}
+
+.selection__select {
+  font-size: 1.15rem;
+  padding: 10px 100px 5px 10px;
+  background-color: #fff;
+  border: 2px solid #8f9699;
+  color: #000;
+  cursor: pointer;
+}
+
+.billing-option-input--checked {
+  color: black;
+  margin-right: 8px;
+}
+
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.mr-4 {
+  margin-right: 4em;
+}
+
+.mt-4 {
+  margin-top: 4em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.less-bold {
+  font-weight: 600;
+}
+
+.center {
+  align-items: center;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+.place-end {
+  place-content: end;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.row-border {
+  grid-column: 1 / span 2;
+  border-bottom: 2px solid rgb(229, 233, 236);
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.inset {
+  margin: 2rem 2rem 2rem 1rem;
+}
+
+.gap {
+  margin-right: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+  text-align: center;
+}
+
+.description {
+  padding-top: 2rem;
+}
+
+.bill-btn {
+  background-color: rgb(176, 59, 78);
+  color: white;
+  cursor: pointer;
+  font-size: 1.15rem;
+  padding: 0.275em 1em 0.275em 1em;
+  border-radius: 8px;
+  border: none;
+}
+
+.ml-4 {
+  margin-left: 4em
+}
+
+.add-remove-btns {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.w-6 {
+  width: 6em;
+}
+
+.add-btn {
+  background-color: #00addf;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.remove-btn {
+  background-color: #b13a4d;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.pl-2 {
+  padding-left: 2rem;
+}
+
+.inline {
+  display: inline;
+}
+
+.grid-stretch {
+  grid-column: 1 / -1;
+}
+
+.ml-2r {
+  margin-left: 2rem;
+}
+
+.list-style-none {
+  list-style: none;
+  padding: 0;
+}
+
+.offer-btn {
+  color: white;
+  cursor: pointer;
+  background-color: #3263ca;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border: 2px #d4d8dc;
+  border-radius: 8px;
+  margin-left: -1rem;
+}
+
+.offer-input {
+  background-color: #d4d8dc;
+  border: 2px darkgray;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 8px;
+}
+
+.border-add-on {
+  border: 2px solid #e6e9ec;
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.cont-btn {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+}
+
+.cont-btn:disabled {
+  background-color: #acb8c6;
+}
+
+.p-all {
+  padding: 0 2rem 2rem 2rem;
+}
+.alert-blue {
+  color: #4773CF;
+}
+
+.alert-red {
+  color: #B13A4D;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@limio/components-saas-edit-base-plan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "luxon": "^1.28.1",
+    "ramda": "^0.28.0",
+    "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "defaultToBase",
+      "Label": "Show base plan in the select by default",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "compareLink",
+      "Label": "Link to the compare page",
+      "type": "string",
+      "default": "#"
+    }
+  ]
+}

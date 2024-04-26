@@ -1,0 +1,36 @@
+
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.bg-grey {
+  background-color: #f2f2f2;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.m-2 {
+  margin: 2rem;
+}
+
+.m-2-tlr {
+  margin: 2rem 2rem 0 2rem;
+}
+
+.center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}

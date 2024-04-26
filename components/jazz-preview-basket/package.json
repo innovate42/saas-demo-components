@@ -1,0 +1,115 @@
+{
+  "name": "@limio/component-jazz-preview-basket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fortawesome/pro-light-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@limio/internal-checkout-sdk": "*",
+    "@limio/shop": "workspace:^",
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "@limio/shop-redux": "workspace:^",
+    "@limio/ui-preview-context": "workspace:^",
+    "react": "*"
+  },
+  "devDependencies": {
+    "@limio/sdk": "*",
+    "@limio/swr": "*",
+    "@limio/ui-preview-context": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "type": "string",
+      "label": "Heading",
+      "default": "Basket"
+    },
+    {
+      "id": "subheading",
+      "type": "string",
+      "label": "Subheading",
+      "default": "Continue shopping or checkout now"
+    },
+    {
+      "id": "productHeading",
+      "type": "string",
+      "label": "Product heading",
+      "default": "Product"
+    },
+    {
+      "id": "quantityHeading",
+      "type": "string",
+      "label": "Quantity heading",
+      "default": "Quantity"
+    },
+    {
+      "id": "itemTotalHeading",
+      "type": "string",
+      "label": "Item total heading",
+      "default": "Item Total"
+    },
+    {
+      "id": "emptyBasketText",
+      "type": "string",
+      "label": "Empty basket display text",
+      "default": "Your basket is empty, please add something to your order."
+    },
+    {
+      "id": "removeLabel",
+      "type": "string",
+      "label": "Remove from basket label",
+      "default": "Remove"
+    },
+    {
+      "id": "totalLabel",
+      "type": "string",
+      "label": "Total label",
+      "default": "Total:"
+    },
+    {
+      "id": "taxInfo",
+      "type": "string",
+      "label": "Tax information",
+      "default": "*Tax calculated at next step."
+    },
+    {
+      "id": "goBackToPreviousPage",
+      "type": "boolean",
+      "label": "Go back goes to previous page in history?",
+      "default": false
+    },
+    {
+      "id": "goBackLabel",
+      "type": "string",
+      "label": "Go back label",
+      "default": "Continue shopping"
+    },
+    {
+      "id": "goBackUrl",
+      "type": "string",
+      "label": "Go back URL (If not set the button will go back to the referrer)",
+      "default": ""
+    },
+    {
+      "id": "goToCheckoutLabel",
+      "type": "string",
+      "label": "Go to checkout label",
+      "default": "Checkout"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "basket-limio"
+    }
+  ]
+}

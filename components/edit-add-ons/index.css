@@ -1,0 +1,368 @@
+/* when the page is complete it will need to be a grid with a bottom border */
+
+@font-face {
+  font-family: 'brandon-regular';
+  src: url(https://jazzhr-dev.prod.limio.com/public/549e7ce9-5ed1-4c10-9302-6105c1c879ec/HVD%20Fonts%20-%20BrandonText-Regular.otf) format('opentype');
+}
+
+body {
+  height: 100vh;
+  font-size: 1.25rem;
+  font-family: 'brandon-regular', sans-serif !important;
+}
+
+.li-no {
+  list-style: none;
+
+}
+
+.grey {
+  background-color: #F4F5F7;
+}
+
+.inline {
+  display: inline;
+}
+
+.r-125 {
+  font-size: 1.25rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.plan-page {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-row-gap: 1px;
+}
+
+.left-side-plan-page {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 1rem;
+  padding-right: 2rem;
+  margin: 2rem;
+  grid-auto-rows: min-content;
+}
+
+.right-side {
+  margin: 2rem 2rem 2rem 0;
+}
+
+@media (min-width: 800px) {
+  .left-side-plan-page {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: 1rem;
+    padding-right: 2rem;
+    margin: 2rem;
+    border-right: 2px solid rgb(195, 200, 205);
+  }
+}
+
+.prlb-2 {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+}
+
+.plr-0 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+.plan-title {
+  text-align: left;
+  color: rgb(146, 152, 162)
+}
+
+.text-left {
+  text-align: left;
+}
+
+.selection__select {
+  font-size: 1.15rem;
+  padding: 10px 100px 5px 10px;
+  background-color: #fff;
+  border: 2px solid #8f9699;
+  color: #000;
+  cursor: pointer;
+}
+
+.billing-option-input--checked {
+  color: black;
+  margin-right: 8px;
+}
+
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.mr-4 {
+  margin-right: 4em;
+}
+
+
+.mr-2 {
+  margin-right: 2em;
+}
+
+.mt-4 {
+  margin-top: 4em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.less-bold {
+  font-weight: 600;
+}
+
+.center {
+  align-items: center;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+.place-end {
+  place-content: end;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.row-border {
+  grid-column: 1 / span 2;
+  /* Span across two columns */
+  border-bottom: 2px solid rgb(229, 233, 236);
+  /* Add a border at the bottom of the row */
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.inset {
+  margin: 2rem 2rem 2rem 1rem;
+}
+
+.gap {
+  margin-right: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+  text-align: center;
+}
+
+.description {
+  padding-top: 2rem;
+}
+
+.bill-btn {
+  background-color: rgb(176, 59, 78);
+  color: white;
+  cursor: pointer;
+  font-size: 1.15rem;
+  padding: 0.275em 1em 0.275em 1em;
+  border-radius: 8px;
+  border: none;
+}
+
+.ml-4 {
+  margin-left: 4em
+}
+
+.add-remove-btns {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.w-6 {
+  width: 6em;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+.alert-color {
+  display: inline;
+  color: #B13A4D;
+}
+
+.add-btn {
+  background-color: #00addf;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.remove-btn {
+  background-color: #b13a4d;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.grid-stretch {
+  grid-column: 1 / -1;
+}
+
+.ml-2r {
+  margin-left: 2rem;
+}
+
+.list-style-none {
+  list-style: none;
+  padding: 0;
+}
+
+.offer-btn {
+  color: white;
+  cursor: pointer;
+  background-color: #3263ca;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border: 2px #d4d8dc;
+  border-radius: 8px;
+  margin-left: -1rem;
+}
+
+.offer-input {
+  background-color: #d4d8dc;
+  border: 2px darkgray;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 8px;
+}
+
+.border-add-on {
+  border: 2px solid #e6e9ec;
+  padding: 1rem 1rem 0.5rem 1rem;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.cont-btn {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+}
+
+.cont-btn:disabled {
+  background-color: #acb8c6;
+}
+
+.p-all {
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.grid-stretch {
+  grid-column: 1 / -1;
+}
+
+.toggle-btn {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.15rem;
+  border-radius: 8px;
+  border: none;
+  width: 10%;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.toggle-btn:focus {
+  outline: none;
+}
+
+.toggle-btn:active {
+  transform: scale(0.9);
+}
+
+.toggle-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+
+.dialog-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #3263ca;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  font-size: 1.15rem;
+  color: black !important;
+  font-weight: 600;
+}
+
+.yellow {
+  background-color: #fffde9;
+}
+
+.yellow-border {
+  border: 2px solid #fece48;
+}
+
+
+.modal {
+  background-color: white;
+  height: 90%;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+}

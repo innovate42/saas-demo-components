@@ -1,0 +1,130 @@
+{
+  "name": "@limio/component-saas-cancel-radio-buttons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "luxon": "^3.4.4",
+    "uuid": "^9.0.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "limioProps": [
+    {
+      "id": "title",
+      "label": "Title",
+      "type": "string",
+      "default": "Before you go"
+    },
+    {
+      "id": "subtitle",
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Please tell us why you want to cancel your subscription"
+    },
+    {
+      "id": "reasonsHeading",
+      "label": "Reasons heading",
+      "type": "richtext",
+      "default": "Why would you like to cancel your subscription?"
+    },
+    {
+      "id": "reasons",
+      "label": "Reasons",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "value": {
+          "id": "value",
+          "label": "Value",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Url",
+          "type": "string"
+        },
+        "bundleOnly": {
+          "id": "bundleOnly",
+          "label": "Bundle Only",
+          "type": "boolean"
+        }
+      },
+      "default": [
+        {
+          "label": "expensive",
+          "value": "This subscription is too expensive",
+          "url": "/expensive"
+        },
+        {
+          "label": "quantity",
+          "value": "I have too much",
+          "url": "/quantity"
+        },
+        {
+          "label": "dislike",
+          "value": "I did not like the membership benefits",
+          "url": "/dislike"
+        },
+        {
+          "label": "alternative",
+          "value": "I found an alternative",
+          "url": "/alternative"
+        },
+        {
+          "label": "I'd rather not say",
+          "value": "Something else",
+          "url": "/help"
+        }
+      ]
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": "true"
+    },
+    {
+      "id": "imageUrl",
+      "label": "Image Url",
+      "type": "string",
+      "default": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1156184/860406_495342.png"
+    },
+    {
+      "id": "cancelButtonText",
+      "label": "Cancel button text",
+      "type": "string",
+      "default": "Continue to cancel"
+    },
+    {
+      "id": "keepSubscriptionButtonText",
+      "label": "Keep subscription button text",
+      "type": "string",
+      "default": "Keep my subscription"
+    },
+    {
+      "id": "keepSubscriptionUrl",
+      "label": "Keep subscription url",
+      "type": "string",
+      "default": "https://limio.com"
+    },
+    {
+      "id": "cancelLink",
+      "label": "Link for on cancel",
+      "type": "string",
+      "default": "https://limio.com"
+    }
+  ]
+}

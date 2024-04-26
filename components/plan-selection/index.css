@@ -1,0 +1,240 @@
+/* when the page is complete it will need to be a grid with a bottom border */
+
+/*remove first url before build*/
+
+@font-face {
+  font-family: 'brandon-regular';
+  src: url(https://jazzhr-dev.prod.limio.com/public/549e7ce9-5ed1-4c10-9302-6105c1c879ec/HVD%20Fonts%20-%20BrandonText-Regular.otf) format('opentype');
+}
+
+body {
+  height: 100vh;
+  font-size: 1.25rem;
+  font-family: 'brandon-regular', sans-serif !important;
+}
+
+.component-container {
+  padding: 0 2rem 2rem;
+  background-color: #F4F5F7;
+}
+
+.font-125 {
+  font-size: 1.25rem;
+}
+
+.plan-page {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-row-gap: 1px;
+  font-family: 'brandon-regular', sans-serif;
+
+}
+
+.left-side-plan-page {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 1rem;
+  padding-right: 2rem;
+  margin: 2rem;
+  grid-auto-rows: min-content;
+}
+
+@media (min-width: 800px) {
+  .left-side-plan-page {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: 1rem;
+    padding-right: 2rem;
+    margin: 2rem;
+    border-right: 2px solid rgb(195, 200, 205);
+  }
+}
+
+.plan-title {
+  text-align: left;
+  color: rgb(146, 152, 162)
+}
+
+.text-left {
+  text-align: left;
+}
+
+
+.selection__select {
+  font-size: 1.15rem;
+  padding: 10px 100px 5px 10px;
+  background-color: #fff;
+  border: 2px solid #8f9699;
+  color: #000;
+  cursor: pointer;
+}
+
+.billing-option-input--checked {
+  color: black;
+  margin-right: 8px;
+}
+
+.offer-btn {
+  color: white;
+  cursor: pointer;
+  background-color: #3263ca;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border: 2px #d4d8dc;
+  border-radius: 8px;
+  margin-left: -1rem;
+}
+
+.offer-input {
+  background-color: #d4d8dc;
+  border: 2px darkgray;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 8px;
+}
+
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.w-inherit {
+  width: inherit;
+}
+
+.ml-2r {
+  margin-left: 2rem;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.mr-4 {
+  margin-right: 4em;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.center {
+  align-items: center;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.border-add-on {
+  border: 2px solid #e6e9ec;
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 0;
+}
+
+.row-border {
+  grid-column: 1 / span 2;
+  /* Span across two columns */
+  border-bottom: 2px solid rgb(229, 233, 236);
+  /* Add a border at the bottom of the row */
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.grid-stretch {
+  grid-column: 1 / -1;
+}
+
+.w-6 {
+  width: 6em;
+}
+
+.add-remove-btns {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-btn {
+  background-color: #00addf;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.remove-btn {
+  background-color: #b13a4d;
+}
+
+å
+.inset {
+  margin: 2rem 2rem 2rem 1rem;
+}
+
+.gap {
+  margin-right: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+  text-align: center;
+}
+
+.description {
+  padding-top: 2rem;
+}
+
+.bill-btn {
+  background-color: rgb(176, 59, 78);
+  color: white;
+  cursor: pointer;
+  font-size: 1.15rem;
+  padding: 0.275em 1em 0.275em 1em;
+  border-radius: 8px;
+  border: none;
+}
+
+.ml-4 {
+  margin-left: 4em
+}
+
+
+.modal {
+  background-color: white;
+  height: 90%;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: auto;
+}
+
+.dialog-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #3263ca;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+

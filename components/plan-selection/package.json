@@ -1,0 +1,62 @@
+{
+  "name": "@limio/component-saas-plan-selection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "@limio/ui-preview-context": "*",
+    "@limio/swr": "*",
+    "@limio/design-system": "*",
+    "@limio/shop-redux": "*"
+  },
+  "devDependencies": {
+    "@i42/shared": "*",
+    "@limio/sdk": "*",
+    "@limio/swr": "*"
+  },
+  "limioProps": [
+    {
+      "id": "monthlyTermLabel",
+      "type": "string",
+      "default": "Month to Month",
+      "label": "Monthly Term Label"
+    },
+    {
+      "id": "oneYearTermLabel",
+      "type": "string",
+      "default": "1 Year Agreement",
+      "label": "Annual Term Label"
+    },
+    {
+      "id": "twoYearTermLabel",
+      "type": "string",
+      "default": "2 Year Agreement",
+      "label": "Biannual Term Label"
+    },
+    {
+      "id": "threeYearTermLabel",
+      "type": "string",
+      "default": "3 Year Agreement",
+      "label": "Triennial Term Label"
+    },
+    {
+      "id": "basketDescText",
+      "type": "richtext",
+      "default": "<p>Choose the plan that best fits your needs. You can change your plan at any time.</p>",
+      "label": "Description Text for the basket summary"
+    }
+  ]
+}
+
+
