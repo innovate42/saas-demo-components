@@ -1,0 +1,164 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.limio-page {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+}
+
+.limio-page body {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+}
+
+.limio-page h1 {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  font-size: 50px;
+  line-height: 60px;
+  color: #ffffff;
+}
+
+.limio-page h2 {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  font-size: 34px;
+  line-height: 40px;
+  color: #333f48;
+}
+
+.limio-page h3 {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  color: #333f48;
+}
+
+.limio-page h4 {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  color: #5b6770;
+}
+
+.limio-page p {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  color: #5b6770;
+}
+
+.limio-page a {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  color: #dc582a;
+}
+
+.limio-page a:hover {
+  color: #e37a58;
+}
+
+.limio-page button {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  border-radius: 0;
+  font-size: 12px;
+  height: 45px;
+  color: #ffffff;
+  padding: 1em;
+  border: none;
+  background: #dc582a;
+}
+
+.limio-page button:hover {
+  color: #dc582a;
+  background: #ffffff;
+}
+
+.limio-page .btn-secondary {
+  font-size: 12px;
+  height: 50px;
+  background-color: #333f48;
+  color: #ffffff;
+  border: 2px #ffffff;
+  padding: 1em;
+  border-radius: 0;
+}
+
+.limio-page .btn-secondary:hover {
+  color: #dc582a;
+  background: #ffffff;
+}
+
+.limio-page .btn-secondary:disabled {
+  opacity: 0.65;
+}
+
+.limio-page .feature-button {
+  font-size: 12px;
+  height: 50px;
+  color: #ffffff;
+  border: 2px #ffffff;
+  border: none;
+  padding: 1em;
+  border-radius: 0;
+}
+
+.limio-page .feature-button:hover {
+  color: #dc582a;
+  background: #ffffff;
+}
+
+.limio-page .feature-button:disabled {
+  opacity: 0.65;
+}
+
+.limio-page .to-checkout-button {
+  font-size: 12px;
+  height: 50px;
+  color: #ffffff;
+  background: #dc582a;
+  border: none;
+  padding: 1em;
+  border-radius: 0;
+}
+
+.limio-page .to-checkout-button:hover {
+  color: #dc582a;
+  background: #ffffff;
+}
+
+.limio-page .to-checkout-button:disabled {
+  font-size: 12px;
+  height: 50px;
+  color: #ffffff;
+  background: #dc582a;
+  border: none;
+  padding: 1em;
+  opacity: 0.65;
+}
+
+.limio-page .btn.btn-lg.btn-block.btn-outline-light.add.add-to-basket {
+  font-size: 12px;
+  height: 50px;
+  color: #ffffff;
+  background: #dc582a;
+  border: none;
+  padding: 1em;
+  border-radius: 0;
+}
+
+.limio-page .btn.btn-lg.btn-block.btn-outline-light.add.add-to-basket:hover {
+  color: #dc582a;
+  background: #ffffff;
+}
+
+.limio-page .btn.btn-lg.btn-block.btn-outline-light.add.add-to-basket:disabled {
+  font-size: 12px;
+  height: 50px;
+  color: #ffffff;
+  background: #dc582a;
+  border: none;
+  padding: 1em;
+  opacity: 0.65;
+}
+
+.limio-page .FooterOuter .FooterWrapper .FooterContent .FooterSections .FooterLink {
+  font-family: GothamBlack, Arial, Roboto, Helvetica Neue, sans-serif;
+  color: #dc582a;
+}
+.limio-page .FooterOuter .FooterWrapper .FooterContent .FooterSections .FooterLink:hover {
+  color: #e37a58;
+}

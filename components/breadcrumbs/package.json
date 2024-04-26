@@ -1,0 +1,62 @@
+{
+  "name": "@limio/component-breadcrumbs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "reactstrap": "^8.9.0"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "limioProps": [
+    {
+      "id": "breadcrumbs",
+      "label": "Breadcrumbs",
+      "type": "list",
+      "fields": {
+        "text": {
+          "id": "text",
+          "label": "Breadcrumb text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Breadcrumb Link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "text": "Manage My Account",
+          "url": "/mma"
+        },
+        {
+          "text": "Cancel",
+          "url": "/cancel"
+        },
+        {
+          "text": "Change Payment Method",
+          "url": "/change-payment"
+        }
+      ]
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "breadcrumbs-limio"
+    }
+  ]
+}

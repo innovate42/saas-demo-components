@@ -1,0 +1,22 @@
+{
+  "name": "@limio/design-system",
+  "version": "0.0.1",
+  "main": "default/index.js",
+  "dependencies": {
+    "@economist/design-system": "^5.13.2",
+    "@limio/ui": "workspace:^",
+    "@which/seatbelt": "^v6.3.0",
+    "bootstrap": "^4.6.0",
+    "react": "^17.0.2",
+    "reactstrap": "^8.9.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  }
+}

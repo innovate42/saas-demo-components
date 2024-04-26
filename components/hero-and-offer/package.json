@@ -1,0 +1,51 @@
+{
+  "name": "@limio/component-hero-and-offer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+  },
+  "limioProps": [
+    {
+      "id": "useDefaultSVG",
+      "type": "boolean",
+      "default": "true",
+      "label": "Use default SVG"
+    },
+    {
+      "id": "logoTextImg",
+      "type": "string",
+      "default": "https://web-media.mailsubscriptions.co.uk/prod/images/original/8331e791a850-489042c2c928-maillogolarge.png",
+      "label": "Logo text image"
+    },
+    {
+      "id": "heroBannerText",
+      "type": "string",
+      "default": "Get More From The Sun",
+      "label": "Text in between the logo and the hero image"
+    },
+    {
+      "id": "heroImg",
+      "type": "string",
+      "default": "https://web-media.mailsubscriptions.co.uk/prod/images/gm_preview/9f244e375278-hero-asset-still.png",
+      "label": "Central hero image"
+    },
+    {
+      "id": "underbuttonText",
+      "type": "string",
+      "default": "No commitment, cancel any time",
+      "label": "Text under the button"
+    }
+  ]
+}

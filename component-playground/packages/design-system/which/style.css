@@ -1,0 +1,44 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@which/seatbelt/build/main.css";
+
+.limio-page body {
+  background: #fff !important;
+  font-family: National2-Regular, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.limio-page h1,
+.limio-page h2 {
+  font-family: National2-Bold, Arial, sans-serif;
+}
+
+.limio-page h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.limio-page h2 {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.limio-page p {
+  font-family: National2-Regular, Arial, sans-serif;
+  line-height: 21px;
+  font-size: 16px;
+}
+
+.limio-page input {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 13px 8px;
+}
+
+.limio-page input[type="text"] {
+  height: 98px;
+  width: 427px;
+}
+
+.limio-page .custom-input-error {
+  color: #d32f2f;
+}

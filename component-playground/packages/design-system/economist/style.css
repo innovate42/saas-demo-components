@@ -1,0 +1,23 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@economist/design-system/dist/umd/common.css";
+
+.phone-input-field .country-code-select-container .btn-secondary:not(:disabled):not(.disabled).active:focus,
+.phone-input-field .country-code-select-container .btn-secondary:not(:disabled):not(.disabled):active:focus,
+.phone-input-field .country-code-select-container .btn-secondary:not(:disabled):not(.disabled).active,
+.phone-input-field .country-code-select-container .btn-secondary:not(:disabled):not(.disabled):active,
+.phone-input-field .country-code-select-container .show > .btn-secondary.dropdown-toggle:focus,
+.phone-input-field .country-code-select-container .btn-secondary.focus,
+.phone-input-field .country-code-select-container .btn-secondary:focus,
+.phone-input-field .country-code-select-container button:active,
+.phone-input-field .country-code-select-container button:focus,
+.phone-input-field .country-code-select-container button.country-code-field:active,
+.phone-input-field .country-code-select-container button.country-code-field:focus {
+  border-color: var(--ds-color-london-5);
+  box-shadow: 0 0 0 0.125rem var(--ds-color-hong-kong-55);
+  outline: solid transparent;
+}
+
+.Features.square-theme .FeaturesWrapper .Feature a {
+  margin-top: auto;
+  cursor: pointer;
+}

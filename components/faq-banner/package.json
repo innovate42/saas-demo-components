@@ -1,0 +1,74 @@
+{
+  "name": "@limio/component-faq-banner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "reactstrap": "^8.9.0"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "FAQ Headline",
+      "type": "string",
+      "default": "Any questions?"
+    },
+    {
+      "id": "subline",
+      "label": "FAQ Subline",
+      "type": "string",
+      "default": "We’ve got answers."
+    },
+    {
+      "id": "faqItems",
+      "label": "FAQ Items",
+      "type": "list",
+      "fields": {
+        "question": {
+          "id": "question",
+          "label": "Question",
+          "type": "string"
+        },
+        "answer__limio_richtext": {
+          "id": "answer__limio_richtext",
+          "label": "Answer",
+          "type": "richtext"
+        }
+      },
+      "default": [
+        {
+          "question": "How can I contact Customer Services?",
+          "answer": "Go to our help centre"
+        },
+        {
+          "question": "Can I cancel my subscription?",
+          "answer": "Yes, of course!"
+        },
+        {
+          "question": "I cannot subscribe – my email address is already recognised",
+          "answer": "Go to login"
+        }
+      ]
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "faq-banner-limio"
+    }
+  ]
+}

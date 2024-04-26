@@ -1,0 +1,152 @@
+{
+  "name": "@limio/component-b2b-offer-cards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "styled-components": "^6.0.8",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "luxon": "^1.25.0",
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "i18next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "limioProps": [
+    {
+      "id": "offerWidth",
+      "label": "Card width",
+      "type": "number",
+      "default": 3.5
+    },
+    {
+      "id": "offerOverflowLayout",
+      "label": "Card alignment",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "stretch",
+          "label": "Stretch",
+          "value": "stretch"
+        },
+        {
+          "id": "center",
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "id": "start",
+          "label": "Start",
+          "value": "start"
+        },
+        {
+          "id": "end",
+          "label": "End",
+          "value": "end"
+        }
+      ],
+      "default": "stretch"
+    },
+    {
+      "id": "includedFeaturesTitle",
+      "label": "Features Title",
+      "type": "string",
+      "default": "Learn more"
+    },
+    {
+      "id": "ineligibleMessage",
+      "label": "Ineligible for trial message",
+      "type": "string",
+      "default": "You are not eligible for a trial offer. Please select a different offer to continue."
+    },
+    {
+      "id": "showOfferImages",
+      "label": "Show images for offers?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "maxCards",
+      "label": "Max number of offer cards per row (leave blank if no limit)",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "alwaysMinimise",
+      "label": "Always minimise features?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "header",
+      "label": "Header",
+      "type": "string",
+      "default": "Other digital subscriptions options"
+    },
+    {
+      "id": "subHeader",
+      "label": "Subheader",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "imageFit",
+      "label": "Image shape",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "cover",
+          "label": "Cover",
+          "value": "cover"
+        },
+        {
+          "id": "contain",
+          "label": "Contain",
+          "value": "contain"
+        },
+        {
+          "id": "scale-down",
+          "label": "Scale down",
+          "value": "scale-down"
+        },
+        {
+          "id": "right",
+          "label": "Right",
+          "value": "right"
+        },
+        {
+          "id": "top",
+          "label": "Top",
+          "value": "top"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "globe-b2b-offer-cards"
+    },
+    {
+      "id": "analyticsIdentifier",
+      "label": "Analytics Identifier",
+      "type": "string",
+      "default": "globe-b2b-offer-cards"
+    }
+  ]
+}

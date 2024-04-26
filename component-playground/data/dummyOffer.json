@@ -1,0 +1,65 @@
+{
+  "id": "55d4e83b8d86dd69dc64798002fed24efcf2bb68.97d170e1550eee4afc0af065b78cda302a97321d",
+  "name": "Limio Offer",
+  "path": "/offers/Limio/Limio Digital",
+  "parent_path": "/offers/Limio",
+  "type": "item",
+  "data": {
+    "name": "Limio Offer (Digital)",
+    "attachments": [
+      {
+        "name": "Print-Digital",
+        "path": "/assets/Print-Digital",
+        "type": "image/png",
+        "url": "https://subscribenow.economist.com/public/ae478a06-5cb3-483a-b7b5-3e538b169e71/201103%20FCX%20Digital%20offer%20lock%20up.png"
+      }
+    ],
+    "products": [
+      {
+        "baseTemplate": "/limio/catalogs/1/items/config/templates/products/productBase",
+        "path": "/products/Limio/Digital",
+        "name": "Limio Digital",
+        "attributes": { "has_delivery__limio": true }
+      }
+    ],
+    "attributes": {
+      "price__limio": [
+        {
+          "delay_interval_type": "weeks",
+          "subscription_start_day": null,
+          "name": "charge_1",
+          "repeat_interval": 1,
+          "attributes": [],
+          "label": "Charge 1",
+          "trigger": "order_date",
+          "repeat_interval_type": "weeks",
+          "repeat_count": 0,
+          "type": "recurring",
+          "value": "15.00",
+          "currencyCode": "GBP"
+        }
+      ],
+      "valid_date_range__limio": {
+        "from": "2020-04-06T18:00:45.218Z",
+        "to": "2021-04-13T18:00:47.196Z"
+      },
+      "display_price__limio": "£15 a week",
+      "cta_text__limio": "Subscribe",
+      "payment_types__limio": ["direct_debit", "zuora_card"],
+      "offer_features__limio": "All the good Limio stuff, digitally",
+      "detailed_display_price__limio": "Pay £15 per week. Forever.",
+      "display_name__limio": "Limio Subscription (Digital)",
+      "push_to_checkout__limio": true,
+      "allow_multibuy__limio": false,
+      "request_company_info__limio": false,
+      "is_gift__limio": false,
+      "choose_gift_date__limio": true,
+      "allowed_countries__limio": ["GB"],
+      "student__limio": false,
+      "tax__limio": "",
+      "trial__limio": false,
+      "autoRenew__limio": true
+    },
+    "baseTemplate": "/limio/catalogs/1/items/config/templates/offers/OfferBase"
+  }
+}

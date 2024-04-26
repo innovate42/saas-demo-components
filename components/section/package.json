@@ -1,0 +1,91 @@
+{
+  "name": "@limio/component-section",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "reactstrap": "^8.9.0"
+  },
+  "peerDependencies": {
+    "@limio/swr": "*",
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.18.6",
+    "@limio/sdk": "workspace:packages/limio-sdk"
+  },
+  "limioProps": [
+    {
+      "id": "image",
+      "label": "Image",
+      "type": "string",
+      "default": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1156184/860406_495342.png",
+      "format": "uri",
+      "purpose": "image"
+    },
+    {
+      "id": "showButtons",
+      "label": "Show buttons",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "buttons",
+      "label": "Buttons",
+      "type": "list",
+      "fields": {
+        "buttonText": {
+          "id": "buttonText",
+          "label": "Button text",
+          "type": "string"
+        },
+        "buttonLocation": {
+          "id": "buttonLocation",
+          "label": "Button link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "buttonText": "Learn More",
+          "buttonLocation": "https://limio.com"
+        }
+      ]
+    },
+    {
+      "id": "header",
+      "label": "Header",
+      "type": "string",
+      "default": "Commerce tool for subscription companies"
+    },
+    {
+      "id": "text",
+      "label": "Text",
+      "type": "richtext",
+      "default": "From checkout to retention experience compliance, companies around the world use Limio to simplify their subscription stack"
+    },
+    {
+      "id": "secondaryTextImage",
+      "label": "Secondary image",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "section-limio"
+    }
+  ]
+}

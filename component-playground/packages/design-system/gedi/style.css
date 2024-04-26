@@ -1,0 +1,2304 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.limio-page .wrapper {
+    max-width: 978px;
+    padding: 0 15px;
+    margin-top: 0!important
+}
+
+.limio-page .wf-active body,
+.limio-page .wf-lato-n4-active body {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+}
+
+.limio-page body {
+    background: #FFF!important;
+    font-family: Lato, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    font-weight: 400
+}
+
+.limio-page h1,
+.limio-page h2 {
+    font-family: Lato, BlinkMacSystemFont, Helvetica, Arial, sans-serif
+}
+
+.limio-page button {
+    background-color: #275273;
+    border-color: #275273;
+    font-family: Lato, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 16px;
+    text-transform: uppercase;
+    border-radius: 3px
+}
+
+.limio-page button:hover {
+    background: #3a8bbb
+}
+
+.limio-page button.light {
+    color: #275273
+}
+
+.limio-page form {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+}
+
+.limio-page form fieldset {
+    color: #275273
+}
+
+.limio-page form fieldset,
+.limio-page form input,
+.limio-page form select {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 14px
+}
+
+.limio-page .modal a.close-modal {
+    background-color: #275273
+}
+
+.limio-page #dialog a.close {
+    background-color: #275273!important
+}
+
+.limio-page #dialog .content-mod button {
+    font-size: 12px
+}
+
+.limio-page #colak.optin {
+    top: 140px
+}
+
+.limio-page #colak #areapersonale-box {
+    border-top-color: #275273
+}
+
+.limio-page #colak #areapersonale-box.guida h5,
+.limio-page #colak #areapersonale-box.guida ul li {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+}
+
+.limio-page .limio-page #colak #areapersonale-box.guida ul li .button {
+    background: #275273
+}
+
+.limio-page #colak #areapersonale-box.guida ul li .button:hover {
+    background: #4188bf
+}
+
+.limio-page #page-footer {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    background-color: #FFF;
+    color: #000;
+    border: 0
+}
+
+#page-footer a,
+.limio-page #page-footer a:visited {
+    color: #1a1a1a;
+    text-decoration: underline
+}
+
+.limio-page #page-footer a:hover {
+    color: #275273;
+    text-decoration: underline
+}
+
+.limio-page #lsSlimHeader {
+    margin: 0 -15px 90px
+}
+
+.limio-page .snodo #lsSlimHeader {
+    margin: 0 -15px 45px
+}
+
+.limio-page .main-story .apertura-slider .apertura-slider-text {
+    background: #275273;
+    position: relative;
+    display: none
+}
+
+.limio-page .main-story .apertura-slider .apertura-slider-text p {
+    color: #FFF;
+    font-size: 15px;
+    font-size: 21px;
+    line-height: 30px;
+    font-weight: 500
+}
+
+.limio-page .main-title {
+    font-size: 15px
+}
+
+.limio-page .main-title .subtitle {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    color: #717171;
+    font-size: 18px
+}
+
+.limio-page .main-title h1 {
+    color: #000
+}
+
+.limio-page .main-title h1 .title-brand {
+    color: #387286
+}
+
+.limio-page table#member-list {
+    margin-bottom: 5px
+}
+
+.limio-page table#member-list thead th.a-member {
+    border-top-color: #4EA5E7
+}
+
+.limio-page table#member-list thead th.a-member li {
+    font-size: 15px
+}
+
+.limio-page table#member-list thead th.a-member li:before {
+    color: #4EA5E7
+}
+
+.limio-page table#member-list thead th.a-member button {
+    background: #4EA5E7;
+    border: none;
+    color: #fff;
+    text-transform: uppercase
+}
+
+.limio-page table#member-list thead th.a-member button:hover {
+    background: #a8d3f3
+}
+
+.limio-page table#member-list thead th.c-member {
+    border-top-color: #165276
+}
+
+.limio-page table#member-list thead th.c-member li {
+    font-size: 15px
+}
+
+.limio-page table#member-list thead th.c-member li:before {
+    color: #165276
+}
+
+.limio-page table#member-list thead th.c-member button {
+    background: #165276;
+    color: #FFF
+}
+
+.limio-page table#member-list thead th.c-member button:hover {
+    background: #268ecc
+}
+
+.limio-page table#member-list thead th.b-member {
+    border-top-color: #24BBA8
+}
+
+.limio-page table#member-list thead th.b-member li {
+    font-size: 15px
+}
+
+.limio-page table#member-list thead th.b-member li:before {
+    color: #24BBA8
+}
+
+.limio-page table#member-list thead th.b-member button {
+    background: #24BBA8;
+    color: #fff
+}
+
+.limio-page table#member-list thead th.b-member button:hover {
+    background: #64e1d1
+}
+
+.limio-page table#member-list thead th .premium-label {
+    color: #000
+}
+
+.limio-page table#member-list thead th .title {
+    font-size: 18px
+}
+
+.limio-page .info {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 4% 15px;
+    border: 0
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card {
+    border: 0;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19);
+    background-color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card ul {
+    list-style: none;
+    padding: 0 10px
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card ul li {
+    font-size: 16px;
+    line-height: 22px;
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 10px
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card ul li:before {
+    content: "\2713";
+    width: 20px;
+    margin-right: 5px;
+    font-size: 22px;
+    margin-left: -22px
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card h3 {
+    color: #000
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card button {
+    color: #fff;
+    width: 100%;
+    background-color: #4EA5E7;
+    border: 0;
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card button:hover {
+    background: #275273;
+    color: #fff
+}
+
+.limio-page .offers-list.unordered-list .offer_cards__card span:before {
+    background: #275273
+}
+
+.limio-page .offer_cards__wrapper .offer_cards__card button {
+    color: #FFF;
+    background-color: #4EA5E7
+}
+
+.limio-page .offer_cards__wrapper .offer_cards__card button:hover {
+    background-color: rgba(78,165,231,.8);
+    color: #FFF
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card .offer_cards__end {
+    background-color: #FFF;
+    color: #4EA5E7;
+    margin-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card .offer_cards__end:hover {
+    color: rgba(78, 165, 231, .8)
+}
+
+
+.limio-page .offers-subscription [class*=column-].section-title h2 p {
+    color: #000
+}
+
+.limio-page .offers-subscription .offers-subscription-item figure {
+    background-color: #fff;
+    height: auto
+}
+
+.limio-page .offers-subscription .offers-subscription-item figure img {
+    width: 80px;
+    height: auto
+}
+
+@media only screen and (max-width:768px) {
+    .limio-page .offers-subscription [class*=column-6] {
+        padding-bottom: 0
+    }
+    .limio-page .offers-subscription .offers-subscription-item {
+        margin-top: 20px;
+        margin-bottom: 40px
+    }
+    .limio-page .offers-subscription .offers-subscription-item p {
+        display: inline-block
+    }
+    .limio-page .offers-subscription .offers-subscription-item figure img {
+        width: 100%
+    }
+}
+
+.limio-page .offers-subscription .offers-subscription-item button.icon-arrow {
+    border-color: #275273;
+    color: #FFF;
+    font-weight: 500;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif!important;
+    padding: 16px
+}
+
+.limio-page .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .faq-questions h3 {
+    color: #000
+}
+
+.limio-page .msgs {
+    font-size: 12px;
+    line-height: 20px;
+    font-style: italic
+}
+
+.limio-page .msgs .row {
+    text-align: center;
+    display: block
+}
+
+.limio-page .img-wide img {
+    width: 100%
+}
+
+.limio-page .abbonamento-pagamento.errore {
+    margin-top: 50px
+}
+
+.limio-page #detail .wrapper {
+    font-size: 17px
+}
+
+.limio-page #detail .wrapper.short {
+    width: auto;
+    margin-bottom: 20px
+}
+
+.limio-page #detail .wrapper .section-template {
+    min-height: 0
+}
+
+.limio-page #detail .wrapper .section-template h3 {
+    font-size: 19px
+}
+
+.limio-page #detail .wrapper .section-template h5 {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template .title {
+    color: #275273;
+    font-size: 22px
+}
+
+.limio-page #detail .wrapper .section-template p {
+    font-size: 16px;
+    line-height: 22px
+}
+
+#detail .wrapper .section-template .label,
+.limio-page #detail .wrapper .section-template .member {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.faq .faq-list .faq-list-item p strong {
+    font-size: 18px
+}
+
+.limio-page #detail .wrapper .section-template.newsletter .newsletter-c-member {
+    background: url(//www.repstatic.it/cless/premium/2017-v1/img/ilsecoloxix-premium/icon-newsletter-pay.svg) no-repeat;
+    padding-left: 35px
+}
+
+.limio-page #detail .wrapper .section-template.newsletter .newsletter-b-member {
+    background: url(//www.repstatic.it/cless/premium/2017-v1/img/ilsecoloxix-premium/icon-newsletter-premium.svg) no-repeat;
+    padding-left: 35px
+}
+
+.limio-page #detail .wrapper .section-template.newsletter .newsletter-subscribe {
+    color: #387286;
+    border-color: #387286
+}
+
+.limio-page #detail .wrapper .section-template.newsletter button.preview {
+    color: #275273;
+    border-color: #275273;
+    width: 100%
+}
+
+#detail .wrapper .section-template.profile .member-data h2,
+#detail .wrapper .section-template.profile .member-device button,
+#detail .wrapper .section-template.profile .member-device h2,
+#detail .wrapper .section-template.profile .member-help button,
+#detail .wrapper .section-template.profile .member-help h2,
+.limio-page #detail .wrapper .section-template.profile .member-service h2 {
+    color: #275273
+}
+
+@media screen and (min-device-width:761px) {
+    .limio-page #detail .wrapper .section-template.profile .member-service ul li {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap
+    }
+    .limio-page #detail .wrapper .section-template.profile .member-service ul li strong {
+        display: block;
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%
+    }
+    .limio-page #detail .wrapper .section-template.profile .member-service ul li p {
+        -ms-flex-preferred-size: 80%;
+        flex-basis: 80%
+    }
+    .limio-page #detail .wrapper .section-template.profile .member-service ul li a {
+        display: inline-block;
+        -ms-flex-preferred-size: 20%;
+        flex-basis: 20%
+    }
+}
+
+#detail .wrapper .section-template.profile .data,
+#detail .wrapper .section-template.profile .data_dx,
+#detail .wrapper .section-template.profile .data_sn,
+.limio-page #detail .wrapper .section-template.profile .note b {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .content-copy {
+    border-top-color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .tabs .tab-link.current {
+    color: #fff;
+    background: #275273
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .tab-content.current section article h1 {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.profile.terms a {
+    color: #275273;
+    text-decoration: underline
+}
+
+.limio-page #detail .wrapper .section-template.profile.member-data li:last-child {
+    border-bottom: 0
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news {
+    padding: 0 2% 20px;
+    margin-top: -40px
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .row div {
+    margin: 0;
+    -ms-flex: none;
+    flex: none;
+    -ms-flex-preferred-size: 48%;
+    flex-basis: 48%
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .row #select-blocco-numeri {
+    margin-top: 0
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .row #select-blocco-numeri .select-2 span {
+    border-color: #275273;
+    font-size: 14px
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .news-copy img {
+    width: 50%
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .buttons.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 20px
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news .buttons button {
+    width: 30%;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border-radius: 4px
+}
+
+.limio-page #detail .wrapper .section-template.newstand.home-news #select-blocco-edition select {
+    border-color: #275273;
+    font-size: 14px
+}
+
+.limio-page #detail .wrapper .section-template.newstand.search-area .areapersonale-box {
+    border-top-color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.newstand.search-area .areapersonale-box h5 {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.newstand.search-area.result .result-list li .numbering {
+    background-color: #aac4cc;
+    color: #fff
+}
+
+.limio-page #detail .wrapper .section-template.newstand.search-area.result .result-list li .edition {
+    font-size: 14px;
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.newstand.search-area.download .edition li a:hover,
+.limio-page #detail .wrapper .section-template.newstand.search-area.result .pagination.mobile .page b,
+.limio-page #detail .wrapper .section-template.newstand.search-area.result .pagination.mobile button {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space {
+    display: inline-block;
+    padding: 0;
+    margin: 20px 0 0;
+    width: 100%
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space h1 {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 400
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space h2 {
+    font-weight: 400;
+    margin-bottom: 0
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space .allegato-launch {
+    margin: 16px 1%;
+    min-height: auto
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space .edizioni-locali {
+    border-top: none!important
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space .other-link {
+    width: 100%;
+    isplay: inline-block;
+    text-align: right;
+    margin: 30px 0 20px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space .other-link a {
+    background-color: #ccc;
+    padding: 9px 16px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space .other-link a:hover {
+    background-color: #eee
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space p {
+    line-height: 24px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space button {
+    padding: 9px 16px;
+    border-radius: 3px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space select {
+    border-color: #275273;
+    width: 50%;
+    margin-top: 10px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.in-evidenza {
+    width: 100%;
+    background-color: #e8f2fc;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    padding: 10px!important
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.in-evidenza select {
+    margin-top: 0;
+    background-color: #FFF
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali {
+    width: 100%;
+    background-color: #f3f4da;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    padding: 10px!important
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali h2 {
+    padding-bottom: 6px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali h3 {
+    font-size: 16px;
+    color: #095084
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali h4 {
+    font-size: 20px;
+    line-height: 30px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali h5 {
+    color: #999;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali .buttons {
+    float: left;
+    margin-top: 10px
+}
+
+.limio-page #detail .wrapper .section-template.allegato-space.rspeciali .buttons button {
+    font-size: 12px;
+    padding: 10px 9px 5px
+}
+
+.limio-page #detail .wrapper .section-template.profile.single.ilsecoloxix-premium button,
+.limio-page #detail .wrapper .section-template.profile.single.ilsecoloxix-premium .tabs .tab-link.current {
+    background-color: #C00
+}
+
+.limio-page #detail .wrapper .sconti {
+    background-color: #aac4cc
+}
+
+.limio-page #detail .wrapper .sconti .table>thead>tr>th {
+    color: #275273
+}
+
+.limio-page #detail .wrapper .sconti .button {
+    background-color: #0b4f65
+}
+
+.limio-page #detail .wrapper#formcont {
+    font-family: PTSans-NarrowRegular
+}
+
+.limio-page #detail .wrapper#formcont .header-alt-mv {
+    background: url(//www.repstatic.it/cless/premium/2017-v1/img/ilsecoloxix-premium/logo-mv.svg) center center no-repeat #fff;
+    background-size: 50%
+}
+
+.limio-page #detail .wrapper#formcont .help-page {
+    font-family: PTSans-NarrowRegular
+}
+
+.limio-page #detail .wrapper#formcont .help-page strong {
+    color: #275273;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+}
+
+.limio-page #detail .wrapper#formcont .help-page dd,
+.limio-page #detail .wrapper#formcont .help-page dl,
+.limio-page #detail .wrapper#formcont .help-page dt {
+    margin: 0;
+    font-size: 15px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif
+}
+
+.limio-page #detail .scaricapdf {
+    font-size: 12px;
+    margin-bottom: 20px
+}
+
+.limio-page .swiper-container .swiper-wrapper img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto
+}
+
+.limio-page .swiper-container .swiper-button-next,
+.limio-page .swiper-container .swiper-button-prev {
+    top: auto;
+    bottom: 30px;
+    width: 26px;
+    height: 24px
+}
+
+.limio-page .swiper-container .swiper-button-prev {
+    left: 0
+}
+
+.limio-page .swiper-container .swiper-button-next {
+    right: 0
+}
+
+.limio-page .offers-ancillari .swiper-container .swiper-wrapper img {
+    max-height: 107px;
+    width: auto
+}
+
+.limio-page .ilsecoloxix-premium-page-footer {
+    margin: 0 -15px
+}
+
+.limio-page .ilsecoloxix-premium-page-footer p {
+    color: #FFF
+}
+
+.limio-page fieldset#select-list-numeri {
+    max-height: 300px;
+    overflow-y: scroll
+}
+
+.limio-page .offers-ancillari h1 {
+    margin: 8px 0
+}
+
+.limio-page .offers-ancillari p {
+    line-height: 22px;
+    font-weight: 400
+}
+
+.limio-page .offers-ancillari p a {
+    color: #087bbb;
+    font-weight: 700
+}
+
+.limio-page .offers-ancillari p strong {
+    font-size: 22px;
+    line-height: 28px
+}
+
+.limio-page .offers-ancillari p a strong {
+    font-size: 14px;
+    color: #087bbb;
+    margin-right: 0
+}
+
+.limio-page .offers-ancillari [class*=column-] article p {
+    text-align: center
+}
+
+.limio-page .offers-ancillari [class*=column-] article p a {
+    margin-bottom: 5px;
+    font-size: 12px;
+    background-color: #087bbb;
+    border-radius: 3px;
+    color: #FFF;
+    padding: 4px 10px 3px;
+    text-transform: uppercase
+}
+
+.limio-page .abbonamentocarta #content-center {
+    float: left;
+    margin-bottom: 30px
+}
+
+.limio-page .abbonamentocarta #content-center .left {
+    width: 60%
+}
+
+.limio-page .abbonamentocarta #content-center .right {
+    width: 35%
+}
+
+.limio-page .abbonamentocarta #content-center button {
+    display: inline-block;
+    border-radius: 3px;
+    line-height: 32px;
+    padding: 0 10px;
+    margin-top: 10px
+}
+
+@media only screen and (max-width:769px) {
+    .limio-page .abbonamentocarta #content-center .left {
+        width: 100%
+    }
+    .limio-page .abbonamentocarta #content-center .right {
+        width: 100%;
+        margin-top: 30px;
+        text-align: center
+    }
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section {
+    -ms-flex-pack: start!important;
+    justify-content: flex-start!important
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article {
+    -ms-flex-preferred-size: 165px;
+    flex-basis: 165px;
+    text-align: center
+}
+
+.limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article figure {
+    max-width: 92px;
+    margin: 0 auto
+}
+
+@media screen and (max-device-width:375px) {
+    .limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article {
+        -ms-flex-preferred-size: 148px;
+        flex-basis: 148px
+    }
+}
+
+@media screen and (max-device-width:320px) {
+    .limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article {
+        -ms-flex-preferred-size: 120px;
+        flex-basis: 120px
+    }
+}
+
+.limio-page #kpm_content .wrapper h1 {
+    color: #c00;
+    text-transform: uppercase;
+    font-size: 30px;
+    margin-bottom: 20px
+}
+
+.limio-page .main-title {
+    margin-top: 80px
+}
+
+.limio-page .main-title h1 {
+    font-family: "Source Serif Pro", Georgia, "Times New Roman", Times, serif;
+    font-size: 28px;
+    line-height: 36px;
+    text-transform: none;
+    font-weight: 700
+}
+
+
+/*!
+ ### Built with css preprocessor, don't modify directly ###
+ */
+
+.limio-page @font-face {
+    font-family: Lato;
+    font-weight: 400;
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-regular.eot);
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-regular.eot?#iefix) format('embedded-opentype'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-regular.woff2) format('woff2'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-regular.woff) format('woff'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-regular.ttf) format('truetype');
+    font-style: normal
+}
+
+.limio-page @font-face {
+    font-family: Lato;
+    font-weight: 700;
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-bold.eot);
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-bold.eot?#iefix) format('embedded-opentype'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-bold.woff2) format('woff2'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-bold.woff) format('woff'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-lato-bold.ttf) format('truetype');
+    font-style: normal
+}
+
+.limio-page @font-face {
+    font-family: 'Source Serif Pro';
+    font-weight: 400;
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-regular.eot);
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-regular.eot?#iefix) format('embedded-opentype'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-regular.woff2) format('woff2'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-regular.woff) format('woff'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-regular.ttf) format('truetype');
+    font-style: normal
+}
+
+.limio-page @font-face {
+    font-family: 'Source Serif Pro';
+    font-weight: 700;
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-bold.eot);
+    src: url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-bold.eot?#iefix) format('embedded-opentype'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-bold.woff2) format('woff2'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-bold.woff) format('woff'), url(//www.gelestatic.it/cless/common/2018-v1/font/gnn-source-serif-pro-bold.ttf) format('truetype');
+    font-style: normal
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card {
+    background: 0 0;
+    padding-bottom: 0;
+    border: 2px solid transparent
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 24px 0 8px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card p {
+    margin: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card p span {
+    font-size: 15px;
+    line-height: 24px;
+    display: block;
+    position: relative;
+    font-weight: 400;
+    text-align: left;
+    margin: 0 9%
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card p span:before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: -15px;
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    background: #087bbb;
+    border-radius: 3px;
+    margin-right: 3px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card button {
+    font-weight: 700;
+    font-size: 17px;
+    padding: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    border: 0;
+    text-align: center;
+    width: 100%
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card a.maggiori-dettagli {
+    padding: 12px 4px 0;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    color: #999
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card a.maggiori-dettagli:hover {
+    text-decoration: underline
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .maggiori-dettagli_cont {
+    display: none
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .maggiori-dettagli_cont h2 {
+    font-size: 16px;
+    text-align: left;
+    font-weight: 600;
+    margin: 18px 0 12px;
+    padding: 0 0 0 10px;
+    text-transform: none
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .maggiori-dettagli_cont .summary2 {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+    font-weight: 700
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .maggiori-dettagli_cont .summary {
+    font-size: 14px;
+    line-height: 20px;
+    padding-bottom: 0;
+    text-align: left
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .entry-overtitle {
+    background-color: #e31e27;
+    color: #FFF;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 28px
+}
+
+.limio-page .offer_cards__wrapper .offer_cards__card .offer_cards__heading,
+.limio-page .offer_cards__wrapper .offer_cards__card .offer_cards__price,
+.limio-page .offer_cards__wrapper .offer_cards__card .offer_cards__detailed_price,
+.limio-page .offer_cards__wrapper .offer_cards__card .offer_cards__included_wrapper {
+    font-family: "Source Serif Pro", Georgia, "Times New Roman", Times, serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    color: #4EA5E7;
+    margin: 0;
+    padding: 0
+}
+
+.limio-page .offer_cards__wrapper .offer_cards__card .summary b {
+    text-decoration: line-through
+}
+
+.limio-page .wrapper .offer_cards__wrapper .offer_cards__card .summary {
+    font-size: 20px
+}
+
+.limio-page .faq-questions .row .column-6 button {
+    border-color: #275273;
+    color: #275273
+}
+
+.limio-page .faq-questions .row .column-6 button:hover {
+    background-color: #275273;
+    color: #FFF
+}
+
+.limio-page .wrapper .offer_cards__wrapper  .offer_cards__card .entry-overtitle {
+    background-color: #FFA630
+}
+
+.limio-page .wrapper .offer_cards__wrapper .offer_cards__card .summary2 {
+    color: #4EA5E7
+}
+
+.limio-page .wrapper .offer_cards__wrapper  .offer_cards__card button {
+    background-color: #4EA5E7
+}
+
+.limio-page .wrapper .offer_cards__wrapper  .offer_cards__card button:hover {
+    background-color: rgba(78, 165, 231, .8)
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card .offer_cards__end {
+    background-color: #FFF;
+    color: #4EA5E7;
+    margin-top: 8px;
+    padding-bottom: 8px
+}
+
+.limio-page .offer_cards__wrapper  .offer_cards__card .offer_cards__end:hover {
+    color: rgba(78, 165, 231, .8)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  .offer_cards__card ul li:before {
+    color: #4EA5E7
+}
+
+.limio-page .wrapper .offer_cards__wrapper  .offer_cards__card p span:before {
+    background: #4EA5E7
+}
+
+.limio-page body:not(.snodo) .wrapper .offer_cards__wrapper  .offer_cards__card .summary {
+    color: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 .faq-questions .faq-item button {
+    border-color: #4EA5E7;
+    color: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 .faq-questions .faq-item button:hover {
+    background-color: rgba(78, 165, 231, .8);
+    color: #FFF
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card .entry-overtitle {
+    background-color: #FFA630
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card .summary2 {
+    color: #ACACAC
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card button {
+    background-color: #ACACAC
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card button.other {
+    background-color: #FFF;
+    color: #ACACAC;
+    margin-top: 8px;
+    padding-bottom: 8px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card button.other:hover {
+    color: #F2f2f2
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card button:hover {
+    background-color: #969696
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card ul li:before {
+    color: #ACACAC
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card p span:before {
+    background: #ACACAC
+}
+
+.limio-page body:not(.snodo) .wrapper .offer_cards__wrapper  div.listino-macroofferta4 .offer_cards__card .summary {
+    color: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 .faq-questions .faq-item button {
+    border-color: #ACACAC;
+    color: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 .faq-questions .faq-item button:hover {
+    background-color: #969696;
+    color: #FFF
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card .entry-overtitle {
+    background-color: #FFA630
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card .summary2 {
+    color: #E66666
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card button {
+    background-color: #E66666
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card button.other {
+    background-color: #FFF;
+    color: #E66666;
+    margin-top: 8px;
+    padding-bottom: 8px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card button.other:hover {
+    color: #F2f2f2
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card button:hover {
+    background-color: #FA6E6E
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card ul li:before {
+    color: #E66666
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card p span:before {
+    background: #E66666
+}
+
+.limio-page body:not(.snodo) .wrapper .offer_cards__wrapper  div.listino-macroofferta5 .offer_cards__card .summary {
+    color: #E66666
+}
+
+.limio-page .offerta-macroofferta5 .faq-questions .faq-item button {
+    border-color: #E66666;
+    color: #E66666
+}
+
+.limio-page .offerta-macroofferta5 .faq-questions .faq-item button:hover {
+    background-color: #FA6E6E;
+    color: #FFF
+}
+
+.limio-page .offerta-macroofferta1 table#member-list thead th.a-member button {
+    background: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 table#member-list thead th.a-member button:hover {
+    background: #a8d3f3
+}
+
+.limio-page .offerta-macroofferta1 table#member-list td.a-member-flag span {
+    background: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 table#member-list thead th.a-member {
+    border-top-color: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 button {
+    background: #4EA5E7
+}
+
+.limio-page .offerta-macroofferta1 .offers-subscription .offers-subscription-item button.icon-arrow {
+    background-color: #4EA5E7;
+    color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offerta-macroofferta1 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .offerta-macroofferta2 table#member-list thead th.a-member button {
+    background: #165276
+}
+
+.limio-page .offerta-macroofferta2 table#member-list thead th.a-member button:hover {
+    background: #268ecc
+}
+
+.limio-page .offerta-macroofferta2 table#member-list td.a-member-flag span {
+    background: #165276
+}
+
+.limio-page .offerta-macroofferta2 table#member-list thead th.a-member {
+    border-top-color: #165276
+}
+
+.limio-page .offerta-macroofferta2 button {
+    background: #165276
+}
+
+.limio-page .offerta-macroofferta2 .offers-subscription .offers-subscription-item button.icon-arrow {
+    background-color: #165276;
+    color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offerta-macroofferta2 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .offerta-macroofferta3 table#member-list thead th.a-member button {
+    background: #24BBA8
+}
+
+.limio-page .offerta-macroofferta3 table#member-list thead th.a-member button:hover {
+    background: #64e1d1
+}
+
+.limio-page .offerta-macroofferta3 table#member-list td.a-member-flag span {
+    background: #24BBA8
+}
+
+.limio-page .offerta-macroofferta3 table#member-list thead th.a-member {
+    border-top-color: #24BBA8
+}
+
+.limio-page .offerta-macroofferta3 button {
+    background: #24BBA8
+}
+
+.limio-page .offerta-macroofferta3 .offers-subscription .offers-subscription-item button.icon-arrow {
+    background-color: #24BBA8;
+    color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offerta-macroofferta3 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .offerta-macroofferta4 table#member-list thead th.a-member button {
+    background: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 table#member-list thead th.a-member button:hover {
+    background: #dfdfdf
+}
+
+.limio-page .offerta-macroofferta4 table#member-list td.a-member-flag span {
+    background: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 table#member-list thead th.a-member {
+    border-top-color: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 button {
+    background: #ACACAC
+}
+
+.limio-page .offerta-macroofferta4 .offers-subscription .offers-subscription-item button.icon-arrow {
+    background-color: #ACACAC;
+    color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offerta-macroofferta4 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .offerta-macroofferta5 table#member-list thead th.a-member button {
+    background: #E66666
+}
+
+.limio-page .offerta-macroofferta5 table#member-list thead th.a-member button:hover {
+    background: #f4bebe
+}
+
+.limio-page .offerta-macroofferta5 table#member-list td.a-member-flag span {
+    background: #E66666
+}
+
+.limio-page .offerta-macroofferta5 table#member-list thead th.a-member {
+    border-top-color: #E66666
+}
+
+.limio-page .offerta-macroofferta5 button {
+    background: #E66666
+}
+
+.limio-page .offerta-macroofferta5 .offers-subscription .offers-subscription-item button.icon-arrow {
+    background-color: #E66666;
+    color: #FFF;
+    padding: 16px
+}
+
+.limio-page .offerta-macroofferta5 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+    color: #FFF
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] {
+    margin: 0 0 12px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66.noborder,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88.noborder {
+    border: none
+}
+
+.limio-page .snodo .ls-slim-header__nav.ls-slim-header--funnel {
+    display: none
+}
+
+.limio-page .snodo .main-title {
+    padding-top: 20px;
+    margin-top: 50px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24.noborder .offer_cards__card {
+    position: relative;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26.noborder .offer_cards__card {
+    position: relative;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212.noborder .offer_cards__card {
+    position: relative;
+    margin-top: 20px;
+    box-shadow: -3px 8px 28px -8px rgba(0, 0, 0, .19)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212.noborder .offer_cards__card .entry-overtitle {
+    background-color: #FFA630;
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+    position: absolute;
+    padding: 0 12px;
+    top: 0;
+    right: 0
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88 .offer_cards__card {
+    padding: 16px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46 .offer-item,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66 .offer_cards__card {
+    padding: 12px
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].noborder .offer-item.promo {
+    border: 2px solid #ffa630;
+    box-shadow: -3px 8px 28px -8px rgba(255, 166, 48, .5)
+}
+
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].noborder .offer-item.promo .summary,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].noborder .offer-item.promo .summary2,
+.limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].noborder .offer-item.promo ul li:before {
+    color: #ffa630
+}
+
+@media screen and (min-device-width:761px) {
+    .limio-page .wrapper {
+        padding: 0
+    }
+    .limio-page #lsSlimHeader {
+        margin: 0;
+        height: 81px
+    }
+    .limio-page .main-title {
+        font-size: 15px;
+        margin: 10px -30px 0;
+        padding: 70px 40px 40px
+    }
+    .limio-page .main-title h1 {
+        font-family: "Source Serif Pro", Georgia, "Times New Roman", Times, serif;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 44px;
+        text-transform: none
+    }
+    .limio-page .main-title .subtitle {
+        font-family: Lato, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px
+    }
+    .limio-page #bar-member-list {
+        background: #fff
+    }
+    .limio-page #bar-member-list .bar-member-list-container {
+        max-width: 978px
+    }
+    .limio-page #bar-member-list .bar-member-list-container div.member-list-compares {
+        color: #000;
+        border-left: 1px solid #ebebeb;
+        border-right-color: #275273;
+        border-top-color: #ccc;
+        background: #f9f8f8;
+        font-weight: 400
+    }
+    .limio-page #bar-member-list .bar-member-list-container div.a-member {
+        background: #275273
+    }
+    .limio-page #bar-member-list .bar-member-list-container div.b-member {
+        background: #ddb453;
+        border-left-color: #ddb453;
+        border-right-color: #ddb453
+    }
+    .limio-page .main-story {
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #ebebeb
+    }
+    .limio-page .main-story .apertura-slider .apertura-slider-text {
+        display: block;
+        width: 40%;
+        padding: 0 5%
+    }
+    .limio-page .main-story .apertura-slider .apertura-slider-text p {
+        font-size: 28px;
+        bottom: 33%;
+        line-height: 40px
+    }
+    .limio-page .main-story .apertura-slider.wide .swiper-container .swiper-button-next,
+    .limio-page .main-story .apertura-slider.wide .swiper-container .swiper-button-next:hover,
+    .limio-page .main-story .apertura-slider.wide .swiper-container .swiper-button-prev,
+    .limio-page .main-story .apertura-slider.wide .swiper-container .swiper-button-prev:hover {
+        background-color: #275273
+    }
+    .limio-page .swiper-container .swiper-wrapper img {
+        display: -ms-flexbox;
+        display: flex
+    }
+    .limio-page .swiper-container .swiper-button-next,
+    .limio-page .swiper-container .swiper-button-prev {
+        top: auto;
+        bottom: 0;
+        width: 26px;
+        height: 200px
+    }
+    .limio-page .swiper-container .swiper-button-prev {
+        left: 0
+    }
+    .limio-page .swiper-container .swiper-button-next {
+        right: 0
+    }
+    .limio-page table#member-list {
+        margin-bottom: 10px
+    }
+    .limio-page table#member-list th {
+        font-size: 17px
+    }
+    .limio-page table#member-list th img {
+        width: auto!important
+    }
+    .limio-page table#member-list th.member-list-compares {
+        border-top-color: #ccc;
+        background: #f9f8f8;
+        font-weight: 400;
+        color: #000
+    }
+    .limio-page table#member-list th.member-list-compares .member-list-compares-title {
+        font-size: 22px;
+        color: #275273;
+        margin-bottom: 10px
+    }
+    .limio-page table#member-list th button.demo {
+        padding: 6px 10px 4px
+    }
+    .limio-page table#member-list td.a-member-flag span {
+        background: #275273
+    }
+    .limio-page table#member-list td.a-member-flag span:before {
+        color: #fff
+    }
+    .limio-page table#member-list td.c-member-flag span {
+        background: #000
+    }
+    .limio-page table#member-list td.c-member-flag span:before {
+        color: #FFF
+    }
+    .limio-page table#member-list td.b-member-flag span {
+        background: #f08140
+    }
+    .limio-page table#member-list td.b-member-flag span:before {
+        color: #fff
+    }
+    .limio-page .info {
+        margin-bottom: 25px;
+        padding: 10px 20% 20px;
+        border: 1px solid #ebebeb;
+        border-width: 0 0 1px
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card h3 {
+        font-size: 24px
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card p {
+        font-size: 18px;
+        line-height: 25px
+    }
+    .limio-page .offers-subscription .offers-subscription-item button.icon-arrow {
+        width: 100%;
+        color: #275273;
+        padding: 0
+    }
+    .limio-page .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        font-size: 12px;
+        color: #275273
+    }
+    .limio-page .offers-subscription .offers-subscription-item button.icon-arrow:after:hover,
+    .limio-page .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: #3a8bbb
+    }
+    .limio-page #lista-collane .offers-subscription .offers-subscription-item {
+        width: 50%;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #efefef;
+        padding-bottom: 20px;
+        float: left
+    }
+    .limio-page #lista-collane .offers-subscription .offers-subscription-item figure {
+        width: auto;
+        height: auto
+    }
+    .limio-page #lista-collane .offers-subscription .offers-subscription-item button.icon-arrow {
+        width: auto;
+        float: none;
+        margin: 0!important;
+        display: inline-block
+    }
+    .limio-page #detail .wrapper .section-template {
+        min-height: 0
+    }
+    .limio-page #detail .wrapper .section-template h3 {
+        font-size: 21px
+    }
+    .limio-page #detail .wrapper .section-template .title {
+        color: #275273;
+        font-size: 30px
+    }
+    .limio-page #detail .wrapper .section-template p {
+        font-size: 17px;
+        line-height: 25px
+    }
+    .limio-page #detail .wrapper .section-template #select-blocco-numeri p a {
+        text-decoration: none;
+        font-size: 13px
+    }
+    .limio-page #detail .wrapper .section-template.faq .faq-list .faq-list-item p strong {
+        font-size: 20px
+    }
+    .limio-page #detail .wrapper .section-template.newstand.home-news {
+        padding: 70px 10% 20px
+    }
+    .limio-page #detail .wrapper .section-template.newstand.home-news .news-copy img {
+        width: 80%
+    }
+    .limio-page #detail .wrapper .section-template.newstand.search-area.result .pagination.desktop button,
+    .limio-page #detail .wrapper .section-template.newstand.search-area.result .pagination.desktop ul li a.active,
+    .limio-page #detail .wrapper .section-template.newstand.search-area.result .pagination.desktop ul li a:hover {
+        color: #275273
+    }
+    .limio-page #detail .wrapper .section-template.allegato-space h1 {
+        margin: 30px 0 20px;
+        font-size: 30px
+    }
+    .limio-page #detail .wrapper .section-template.allegato-space .allegato-launch {
+        width: 48%;
+        min-height: 170px
+    }
+    .limio-page #detail .wrapper .section-template.allegato-space select {
+        margin-top: 0
+    }
+    .limio-page #detail .wrapper .section-template.newsletter button.preview {
+        width: 220px
+    }
+    .limio-page .ls-footer {
+        margin: 30px -30px 0!important
+    }
+    .limio-page .ls-footer p {
+        color: #FFF
+    }
+    .limio-page .faq-questions .row .column-6 p {
+        font-size: 16px
+    }
+    .limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section {
+        -ms-flex-pack: start!important;
+        justify-content: flex-start!important
+    }
+    .limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article {
+        -ms-flex-preferred-size: 175px;
+        flex-basis: 175px;
+        text-align: center
+    }
+    .limio-page #detail .wrapper .section-template.profile.single .profilo_info .tab-content.current section article figure {
+        max-width: 92px;
+        margin: 0 auto
+    }
+    .limio-page #detail .wrapper .section-template.profile .member-service ul li button {
+        width: 148px
+    }
+    .limio-page #detail .wrapper .login .profile-text {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 21px;
+        margin: 20px 0 5px
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix,
+    .limio-page #detail .wrapper .section-template .app-telegram,
+    .limio-page #detail .wrapper .section-template .facebook-messenger,
+    .limio-page #detail .wrapper .section-template .google-chrome {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #efefef;
+        padding-bottom: 20px
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix h1,
+    .limio-page #detail .wrapper .section-template .app-telegram h1,
+    .limio-page #detail .wrapper .section-template .facebook-messenger h1,
+    .limio-page #detail .wrapper .section-template .google-chrome h1 {
+        font-size: 18px;
+        color: #087bbb
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix .column-3,
+    .limio-page #detail .wrapper .section-template .app-telegram .column-3,
+    .limio-page #detail .wrapper .section-template .facebook-messenger .column-3,
+    .limio-page #detail .wrapper .section-template .google-chrome .column-3 {
+        text-align: center
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix ul,
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix ul li,
+    .limio-page #detail .wrapper .section-template .app-telegram ul,
+    .limio-page #detail .wrapper .section-template .app-telegram ul li,
+    .limio-page #detail .wrapper .section-template .facebook-messenger ul,
+    .limio-page #detail .wrapper .section-template .facebook-messenger ul li,
+    .limio-page #detail .wrapper .section-template .google-chrome ul,
+    .limio-page #detail .wrapper .section-template .google-chrome ul li {
+        width: 100%
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix h2,
+    .limio-page #detail .wrapper .section-template .app-telegram h2,
+    .limio-page #detail .wrapper .section-template .facebook-messenger h2,
+    .limio-page #detail .wrapper .section-template .google-chrome h2 {
+        font-size: 11px;
+        padding-bottom: 5px;
+        text-align: center
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix button,
+    .limio-page #detail .wrapper .section-template .app-telegram button,
+    .limio-page #detail .wrapper .section-template .facebook-messenger button,
+    .limio-page #detail .wrapper .section-template .google-chrome button {
+        display: inline-block
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix .app-store a {
+        display: block;
+        background: url(//www.repstatic.it/cless/premium/2017-v1/img/ilsecoloxix/apple.png) top left no-repeat;
+        text-indent: -99999px;
+        width: 120px;
+        height: 38px;
+        background-size: 120px;
+        margin: 20px auto 0
+    }
+    .limio-page #detail .wrapper .section-template .app-ilsecoloxix img,
+    .limio-page #detail .wrapper .section-template .app-telegram img {
+        display: inline-block
+    }
+    .limio-page #detail .wrapper .section-template .switch {
+        display: inline-block;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin: 20px 0
+    }
+    .limio-page #detail .wrapper .section-template .switch input[type=checkbox],
+    .limio-page #detail .wrapper .section-template .switch input[type=radio] {
+        display: none
+    }
+    .limio-page #detail .wrapper .section-template .switch input[type=checkbox]+label:before,
+    .limio-page #detail .wrapper .section-template .switch input[type=radio]+label:before {
+        border-radius: 15px;
+        background-color: #e3e3e3;
+        height: 28px;
+        width: 48px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24 {
+        width: 48%;
+        margin-right: 4%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24:last-child {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24 .offer_cards__card {
+        width: 90%;
+        float: left;
+        margin-top: 20px;
+        margin-left: 5%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24.noborder .offer_cards__card {
+        width: 100%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26 {
+        width: 31%;
+        margin-right: 4%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26:last-child {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26 .offer_cards__card {
+        width: 90%;
+        float: left;
+        margin-top: 20px;
+        margin-left: 5%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26.noborder .offer_cards__card {
+        width: 100%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44 {
+        width: 100%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44 .offer_cards__card {
+        width: 44%;
+        float: left;
+        margin-left: 4%;
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44.noborder .offer_cards__card {
+        width: 48%;
+        margin-right: 4%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44.noborder .offer-item:last-child {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88 {
+        width: 100%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88 .offer_cards__card {
+        width: 44%;
+        float: left;
+        margin-left: 4%;
+        margin-right: 0;
+        margin-top: 20px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88.noborder .offer_cards__card {
+        width: 48%;
+        margin-right: 4%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88.noborder .offer-item:nth-child(2n) {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46 {
+        width: 65%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46 .offer_cards__card {
+        width: 44%;
+        float: left;
+        margin-left: 4%;
+        margin-right: 0;
+        margin-top: 20px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46.noborder .offer_cards__card {
+        width: 47%;
+        margin-right: 6%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46.noborder .offer-item:last-child {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66 {
+        width: 100%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66 .offer_cards__card {
+        width: 30%;
+        float: left;
+        margin-left: 2%;
+        margin-right: 0;
+        margin-top: 20px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66.noborder .offer_cards__card {
+        width: 30%;
+        margin-right: 5%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66.noborder .offer-item:last-child {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010 {
+        width: 100%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010 .offer_cards__card {
+        width: 30%;
+        float: left;
+        margin-left: 2%;
+        margin-right: 0;
+        margin-top: 20px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010.noborder .offer_cards__card {
+        width: 30%;
+        margin-right: 5%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010.noborder .offer-item:nth-child(3n) {
+        margin-right: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212 {
+        width: 100%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212 .offer_cards__card {
+        width: 30%;
+        float: left;
+        margin-left: 2%;
+        margin-right: 0;
+        margin-top: 20px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212.noborder .offer_cards__card {
+        width: 30%;
+        margin-right: 5%;
+        margin-left: 0
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212.noborder .offer-item:nth-child(3n) {
+        margin-right: 0
+    }
+    .limio-page .offerta-macroofferta1 .main-story .apertura-slider.wide .swiper-container .swiper-button-prev {
+        background-color: #4EA5E7
+    }
+    .limio-page .offerta-macroofferta2 .main-story .apertura-slider.wide .swiper-container .swiper-button-prev {
+        background-color: #165276
+    }
+    .limio-page .offerta-macroofferta3 .main-story .apertura-slider.wide .swiper-container .swiper-button-prev {
+        background-color: #24BBA8
+    }
+    .limio-page .offerta-macroofferta4 .main-story .apertura-slider.wide .swiper-container .swiper-button-prev {
+        background-color: #ACACAC
+    }
+    .limio-page .offerta-macroofferta5 .main-story .apertura-slider.wide .swiper-container .swiper-button-prev {
+        background-color: #E66666
+    }
+    .limio-page .offerta-macroofferta1 .main-story .apertura-slider.wide .swiper-container .swiper-button-next {
+        background-color: #4EA5E7
+    }
+    .limio-page .offerta-macroofferta2 .main-story .apertura-slider.wide .swiper-container .swiper-button-next {
+        background-color: #165276
+    }
+    .limio-page .offerta-macroofferta3 .main-story .apertura-slider.wide .swiper-container .swiper-button-next {
+        background-color: #24BBA8
+    }
+    .limio-page .offerta-macroofferta4 .main-story .apertura-slider.wide .swiper-container .swiper-button-next {
+        background-color: #ACACAC
+    }
+    .limio-page .offerta-macroofferta5 .main-story .apertura-slider.wide .swiper-container .swiper-button-next {
+        background-color: #E66666
+    }
+    .limio-page .wrapper .offer_cards__wrapper  {
+        border: 2px solid #4EA5E7
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta2 {
+        border: 2px solid #165276
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta3 {
+        border: 2px solid #24BBA8
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta4 {
+        border: 2px solid #ACACAC
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div.listino-macroofferta5 {
+        border: 2px solid #E66666
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card span {
+        display: block;
+        position: relative;
+        font-size: 15px;
+        line-height: 28px;
+        font-weight: 400;
+        text-align: left;
+        margin-left: 11.55%
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card button {
+        font-size: 16px;
+        width: 100%;
+        margin-top: 16px;
+        padding: 16px;
+        text-align: center;
+        font-weight: 700
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-] .offer_cards__card .entry-overtitle {
+        margin: 0 auto -28px;
+        font-size: 15px;
+        line-height: 28px
+    }
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1010 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq1212 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq24 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq26 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq44 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq46 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq66 .offer_cards__card .summary2,
+    .limio-page .wrapper .offer_cards__wrapper  div[class*=listino-].seq88 .offer_cards__card .summary2 {
+        font-size: 32px;
+        line-height: 40px
+    }
+    .limio-page .offerta-macroofferta1 .offers-subscription .offers-subscription-item button.icon-arrow {
+        background-color: #FFF;
+        border: none;
+        color: #4EA5E7;
+        padding: 0;
+        width: auto
+    }
+    .limio-page .offerta-macroofferta1 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        color: #4EA5E7
+    }
+    .limio-page .offerta-macroofferta1 .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: rgba(78, 165, 231, .8)
+    }
+    .limio-page .offerta-macroofferta2 .offers-subscription .offers-subscription-item button.icon-arrow {
+        background-color: #FFF;
+        border: none;
+        color: #165276;
+        padding: 0;
+        width: auto
+    }
+    .limio-page .offerta-macroofferta2 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        color: #165276
+    }
+    .limio-page .offerta-macroofferta2 .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: rgba(22, 82, 118, .8)
+    }
+    .limio-page .offerta-macroofferta3 .offers-subscription .offers-subscription-item button.icon-arrow {
+        background-color: #FFF;
+        border: none;
+        color: #24BBA8;
+        padding: 0;
+        width: auto
+    }
+    .limio-page .offerta-macroofferta3 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        color: #24BBA8
+    }
+    .limio-page .offerta-macroofferta3 .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: rgba(36, 187, 168, .8)
+    }
+    .limio-page .offerta-macroofferta4 .offers-subscription .offers-subscription-item button.icon-arrow {
+        background-color: #FFF;
+        border: none;
+        color: #ACACAC;
+        padding: 0;
+        width: auto
+    }
+    .limio-page .offerta-macroofferta4 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        color: #ACACAC
+    }
+    .limio-page .offerta-macroofferta4 .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: #969696
+    }
+    .limio-page .offerta-macroofferta5 .offers-subscription .offers-subscription-item button.icon-arrow {
+        background-color: #FFF;
+        border: none;
+        color: #E66666;
+        padding: 0;
+        width: auto
+    }
+    .limio-page .offerta-macroofferta5 .offers-subscription .offers-subscription-item button.icon-arrow:after {
+        color: #E66666
+    }
+    .limio-page .offerta-macroofferta5 .offers-subscription .offers-subscription-item button.icon-arrow:hover {
+        color: #FA6E6E
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card ul {
+        list-style: none;
+        padding: 0 10px
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card ul li {
+        font-size: 16px;
+        line-height: 22px;
+        list-style: none
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card button {
+        width: 100%
+    }
+    .limio-page .column-6 {
+        -ms-flex-positive: 1;
+        flex-grow: 1
+    }
+    .limio-page .offers-subscription [class*=column-]:first-child {
+        border-right: none
+    }
+    .limio-page .offers-subscription [class*=column-]:nth-child(odd):not(:last-child) {
+        border-right: 1px #ebebeb solid
+    }
+    .limio-page .offer_cards__wrapper  .offer_cards__card {
+        max-width: 480px
+    }
+    .limio-page #page-footer {
+        font-size: 13px
+    }
+}
+
+.limio-page .ls-slim-header--funnel.ls-slim-header__nav {
+    max-width: 978px;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 3
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__menu {
+    background: #EFEFEF
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__menu ul {
+    list-style: none;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__menu ul li {
+    position: relative
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__menu ul li a {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: Lato, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    padding: 10px 12px;
+    font-size: 13px
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__submenu {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 170px;
+    background-color: #fff;
+    box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, .5);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    text-align: left;
+    border-radius: 4px
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__hassubmenu {
+    position: relative
+}
+
+.limio-page .ls-slim-header--funnel .ls-header__hassubmenu:hover ul.ls-header__submenu {
+    opacity: 1;
+    visibility: visible;
+    list-style: none;
+    padding-left: 16px
+}
+
+@media screen and (min-width:768px) {
+    .limio-page .ls-slim-header--funnel .ls-header__menu ul li a {
+        font-size: 14px;
+        padding: 12px
+    }
+}
+
+@media screen and (max-width:767px) {
+    .limio-page .ls-slim-header--funnel {
+        position: fixed;
+        z-index: 3;
+        top: 66px;
+        max-width: 978px;
+        left: 0;
+        right: 0
+    }
+    .limio-page .ls-slim-header--funnel.ls-slim-header__nav {
+        top: 97px
+    }
+    .limio-page .ls-slim-header--funnel .ls-header__menu {
+        position: relative;
+        overflow-x: hidden
+    }
+    .limio-page .ls-slim-header--funnel .ls-header__menu:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -20px;
+        bottom: 0;
+        box-shadow: -15px 0 15px 0 #fff;
+        width: 20px
+    }
+    .limio-page .ls-slim-header--funnel .ls-header__menu ul {
+        padding: 0;
+        margin: 0;
+        -ms-flex-pack: left;
+        justify-content: left;
+        overflow-x: scroll;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+}
