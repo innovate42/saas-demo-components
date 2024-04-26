@@ -1,0 +1,5 @@
+node_modules/
+component-playground/node_modules/
+.idea/
+.yarn/
+

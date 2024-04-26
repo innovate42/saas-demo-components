@@ -1,0 +1,24 @@
+name: Mirror Repository to CodeCommit via HTTPS
+
+on:
+  push:
+    branches:
+      - media-demo
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to CodeCommit Repository (HTTPS)
+        env:
+          CODECOMMIT_USER: ${{ secrets.CODECOMMIT_USER }}
+          CODECOMMIT_PASS: ${{ secrets.CODECOMMIT_PASS }}
+        run: |
+          git remote add codecommit https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/media-demo-components
+          git push --all -f https://${{ secrets.CODECOMMIT_USER }}:${{ secrets.CODECOMMIT_PASS }}@git-codecommit.eu-central-1.amazonaws.com/v1/repos/media-demo-components
