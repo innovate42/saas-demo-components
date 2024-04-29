@@ -16,58 +16,10 @@
   "license": "SEE LICENSE IN LICENSE",
   "limioProps": [
     {
-      "id": "showCancelButton",
-      "label": "Show cancel button?",
-      "type": "boolean",
-      "default": false
-    },
-    {
       "id": "showGoBackButton",
       "label": "Show go back button?",
       "type": "boolean",
       "default": false
-    },
-    {
-      "id": "showChangePaymentButton",
-      "label": "Show change payment button?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showReactivateCancelledSubButton",
-      "label": "Show reactivate button for cancelled subscriptions?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showPaymentAmount",
-      "label": "Show payment amount?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showSubscriptionNumber",
-      "label": "Show subscription number?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showTermEndMessage",
-      "label": "Show end of subscription message for cancelled subscriptions",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showAutoRenew",
-      "label": "Show if subscription is auto-renewing?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "subheading__limio_richtext",
-      "label": "Subscription Line Item Heading",
-      "type": "richtext",
-      "default": ""
     },
     {
       "id": "cancelLink",
@@ -106,12 +58,6 @@
       "default": "/reactivate"
     },
     {
-      "id": "showReactiveCancelledSubLabel",
-      "label": "Re-activate button label",
-      "type": "string",
-      "default": "click here to reactivate"
-    },
-    {
       "id": "changePaymentHeading",
       "label": "Change payment button label",
       "type": "string",
@@ -142,18 +88,6 @@
       "default": "limio"
     },
     {
-      "id": "showOfferImage",
-      "label": "Show offer image?",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "showMmaDescription",
-      "label": "Display Description for the offer",
-      "type": "boolean",
-      "default": false
-    },
-    {
       "id": "notFoundText__limio_richtext",
       "label": "Not found text",
       "type": "richtext",
@@ -166,28 +100,10 @@
       "default": "You have a pending change to your subscription. To change something else, please contact us."
     },
     {
-      "id": "limitSubscriptions",
-      "label": "Limit Subscriptions?",
-      "type": "boolean",
-      "default": true
-    },
-    {
-      "id": "subscriptionLimit",
-      "label": "Subscription Limit",
-      "type": "number",
-      "default": 1
-    },
-    {
       "id": "componentId",
       "label": "Component Id",
       "type": "string",
       "default": "orders-table-limio"
-    },
-    {
-      "id": "showNextPayments",
-      "label": "Show next payment",
-      "type": "boolean",
-      "default": false
     },
     {
       "id": "noAddOnsText",

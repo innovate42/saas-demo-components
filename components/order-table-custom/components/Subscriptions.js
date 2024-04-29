@@ -1,4 +1,3 @@
-// @flow
 import * as React from "react"
 import { SubscriptionItem } from "./SubscriptionItem.js"
 import { useSubscriptions } from "@limio/sdk"
@@ -6,9 +5,7 @@ import { useSubscriptions } from "@limio/sdk"
 type Props = {
   updateNotification: Function,
   propsObject: {
-    subscriptionLimit: number,
     cancelLink: string,
-    limitSubscriptions: boolean,
     cancelHeading: string,
     switchHeading: string,
     changePaymentHeading: string,
@@ -20,12 +17,10 @@ type Props = {
   }
 }
 
-export function Subscriptions({ updateNotification, propsObject }: Props): React.Node {
+export function Subscriptions({ updateNotification, propsObject }) {
   const {
     basePlanSwitchHeading,
-    subscriptionLimit,
     cancelLink,
-    limitSubscriptions,
     cancelHeading,
     switchHeading,
     changePaymentHeading,

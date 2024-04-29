@@ -15,16 +15,13 @@ type Props = {
   links: { [key: string]: string },
   updateNotification: UpdateNotification,
   propsObject: {
-    showCancelButton: boolean,
     pendingChangeMessage: string,
     reactivateCancelledSubUrl: string,
-    showReactivateCancelledSubButton: boolean,
-    showReactiveCancelledSubLabel: string
   }
 }
 
 export function SubscriptionItem({ id, onClick = noop, expanded, links, headings, updateNotification, propsObject }: Props): React.Node {
-  const { showCancelButton, pendingChangeMessage, reactivateCancelledSubUrl, showReactivateCancelledSubButton, showReactiveCancelledSubLabel } = propsObject
+  const {  pendingChangeMessage, reactivateCancelledSubUrl } = propsObject
   const { t } = useTranslation()
   const { subscriptions } = useSubscriptions()
   const { schedule, offers, addOns } = subscriptions[0]

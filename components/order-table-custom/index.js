@@ -1,4 +1,3 @@
-// @flow
 import * as React from "react"
 import { useState } from "react"
 import { ErrorBoundary } from "@limio/sdk"
@@ -10,40 +9,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 
 type Props = {
-  showCancelButton: boolean,
-  showChangePaymentButton: boolean,
-  showExchangeButton: boolean,
   showGoBackButton: boolean,
-  showPaymentAmount: boolean,
-  showSubscriptionNumber: boolean,
-  showTermEndMessage: boolean,
-  showAutoRenew: boolean,
-  subheading__limio_richtext: string,
   cancelLink: string,
   cancelHeading: string,
   switchLink: string,
   switchHeading: string,
   changePaymentLink: string,
   reactivateCancelledSubUrl: string,
-  showReactivateCancelledSubButton: boolean,
-  showReactiveCancelledSubLabel: string,
   changePaymentHeading: string,
   goBackLink: string,
   goBackHeading: string,
   subscriptionsHeading: string,
   productName: string,
-  showOfferImage: boolean,
-  showMmaDescription: boolean,
   notFoundText__limio_richtext: string,
   pendingChangeMessage: string,
-  limitSubscriptions: boolean,
-  subscriptionLimit: number,
   noAddOnsText: string,
   componentId: string,
-  showNextPayments: boolean
 }
 
-export function OrdersTable(props: Props): React.Node {
+export function OrdersTable(props) {
   const { notFoundText__limio_richtext, showGoBackButton, goBackLink, goBackHeading, subscriptionsHeading, componentId } = props
 
   const [toasts, setToasts] = useState({})
