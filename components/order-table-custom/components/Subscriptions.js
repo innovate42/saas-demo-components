@@ -39,7 +39,7 @@ export function Subscriptions({updateNotification, propsObject}) {
         <div>
             {subscriptions
                 .sort(({created: a}, {created: b}) => new Date(b) - new Date(a))
-                .map(({subscription}) => (
+                .map((subscription) => (
                     <SubscriptionItem
                         subId={subscription.id}
                         key={uuid()}
