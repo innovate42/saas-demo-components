@@ -22,8 +22,9 @@ function CancelOptionBox({
 
     const handleClick = () => {
         const absoluteUrl = new URL(buttonLink, window.location.origin)
+        const currentParams = new URLSearchParams(window.location.search)
         const searchParams = new URLSearchParams(absoluteUrl.search)
-        const subscriptionId = searchParams.get("subId")
+        const subscriptionId = currentParams.get("subId")
 
         searchParams.set("ltm_option", boxTitle)
         searchParams.set("subId", subscriptionId)
