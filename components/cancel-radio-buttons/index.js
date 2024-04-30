@@ -41,7 +41,7 @@ function CancelRadioButtons({
     const onCancel = async () => {
         const searchParams = new URLSearchParams(window.location.search)
         const option = searchParams.get("ltm_option")
-        const subId = searchParams.get("sub_id")
+        const subId = searchParams.get("subId")
         const subscription = subscriptions.find(sub => sub.id === subId)
 
         const cancelIntentOrder = {
