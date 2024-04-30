@@ -118,7 +118,6 @@ function CancelRadioButtons({
                     </div>
                 )}
             </div>
-            <hr className={"divider"}/>
             <div className={"list"}>
                 <div className={"listItem"}>
                     <Button onClick={onCancel} disabled={selectedReason == null}>
