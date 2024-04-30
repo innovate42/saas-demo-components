@@ -68,7 +68,7 @@ function CancelRadioButtons({
                 }
             },
             subscriptionId: subId,
-            external_id: params.get("subId") || params.get("subRef")
+            external_id: subId
         }
 
         const order = useCancelIntent ? cancelIntentOrder : cancelOrder
