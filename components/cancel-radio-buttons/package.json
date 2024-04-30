@@ -125,6 +125,12 @@
       "label": "Link for on cancel",
       "type": "string",
       "default": "https://limio.com"
+    },
+    {
+      "id": "useCancelIntent",
+      "label": "Only allow a cancel intent order not a direct cancellation",
+      "type": "boolean",
+      "default": "false"
     }
   ]
 }
