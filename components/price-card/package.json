@@ -1,0 +1,115 @@
+
+{
+  "name": "component-price-card",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+   
+    {
+      "id": "PriceOfferData",
+      "label": "PriceOfferData",
+      "type": "list",
+      "fields": {
+        "id":{
+          "id":"id",
+          "label":"id",
+          "type":"string"
+        },
+        "title": {
+          "id": "title",
+          "label": "Title",
+          "type": "string"
+        },
+        "priceMonthly": {
+          "id": "priceMonthly",
+          "label": "Monthly Price",
+          "type": "number"
+        },
+        "priceYearly": {
+          "id": "priceYearly",
+          "label": "Yearly Price",
+          "type": "number"
+        },
+        "savings": {
+          "id": "savings",
+          "label": "Savings",
+          "type": "number"
+        },
+        "quantity": {
+          "id": "quantity",
+          "label": "Quantity",
+          "type": "number"
+        },
+        "billingPeriod": {
+          "id": "billingPeriod",
+          "label": "Billing Period",
+          "type": "string"
+        },
+        "onToggleBillingPeriod": {
+          "id": "onToggleBillingPeriod",
+          "label": "Toggle Billing Period",
+          "type": "string"
+        },
+        "mostPopular": {
+          "id": "mostPopular",
+          "label": "Most Popular",
+          "type": "boolean"
+        }
+     
+      },
+      "default": [
+        {
+          "id":1,
+          "title": "basicPlan",
+          "priceMonthly": 10,
+          "priceYearly": 100,
+          "savings": 20,
+          "quantity": 5,
+          "billingPeriod": "monthly",
+          "onToggleBillingPeriod": "handleToggleBillingPeriod",
+          "mostPopular": true
+        },
+        {
+          "id":2,
+          "title": "proPlan",
+          "priceMonthly": 20,
+          "priceYearly": 200,
+          "savings": 40,
+          "quantity": 6,
+          "billingPeriod": "monthly",
+          "onToggleBillingPeriod": "handleToggleBillingPeriod",
+          "mostPopular": false
+        },
+        {
+          "id":3,
+          "title": "premiumPlan",
+          "priceMonthly": 20,
+          "priceYearly": 200,
+          "savings": 40,
+          "quantity": 1,
+          "billingPeriod": "monthly",
+          "onToggleBillingPeriod": "handleToggleBillingPeriod",
+          "mostPopular": false
+        }
+      ]
+    }
+  
+    
+
+  ]
+}
