@@ -56,7 +56,9 @@ function getArgType(limioProp) {
 
 
 function run() {
-    const components = fs.readdirSync("../components", { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
+    // const components = fs.readdirSync("../components", { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
+
+    const components = ["saas-pricing-page"]
 
     components.forEach(component => {
         if(component !== "source") {

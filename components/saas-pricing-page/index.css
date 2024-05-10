@@ -1,0 +1,244 @@
+
+.options-box {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin: 6rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    }
+
+.options-element-box {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap:1rem;
+}
+
+.br {
+    border-right: 1px solid #e0e0e0;
+}
+
+.toggle-switch {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+}
+
+.toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.toggle-option.selected {
+    background-color: #f38c43; /* Orange color */
+    color: white;
+}
+
+.toggle-option:not(.selected):hover {
+    background-color: #e0e0e0;
+}
+
+.input-field {
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 5%;
+    padding: 20px;
+
+}
+
+.options-box {
+    display: grid;
+    align-items: center;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.options-element-box {
+    text-align: center;
+}
+
+.br {
+    border-right: 1px solid #e0e0e0;
+}
+
+.input-field {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.toggle-switch {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+}
+
+.toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.toggle-option.selected {
+    background-color: #f38c43; /* Orange color */
+    color: white;
+}
+
+.toggle-option:not(.selected):hover {
+    background-color: #e0e0e0;
+}
+
+/* Pricing Table */
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #d3d3d3, #ffffff); /* Grey to white gradient */
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-table thead {
+    background: white !important;
+    border: none;
+}
+
+.pricing-table th {
+    border-right: none;
+}
+
+.pricing-table td {
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+}
+
+.pricing-table th:last-child,
+.pricing-table td:last-child {
+    border-right: none;
+}
+
+.pricing-table tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.best-value {
+    border: 2px solid #f38c43 !important; /* Orange color */
+    border-bottom: none !important;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.best-value-badge {
+    background-color: #f38c43; /* Orange color */
+    color: white;
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+}
+
+.best-value-offer {
+    border-right: 2px solid #f38c43 !important;
+    border-left: 2px solid #f38c43 !important;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+tr:last-child .best-value-offer {
+    border-bottom: 2px solid #f38c43 !important;
+}
+
+.best-value-cta {
+    background-color: #f38c43; /* Orange color */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    width: 25%;
+
+}
+
+.table-head {
+    height: 150px;
+    position: relative;
+
+}
+
+
+.cta {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: white; /* Orange color */
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid #f38c43;
+    width: 25%;
+    color: #f38c43
+}
+
+.cta:hover {
+    background-color: #d9752d;
+}
+
+.icon {
+    font-size: 1.2em;
+}
+
+table {
+    background: linear-gradient(grey, white);
+}
+
+
+
+td:first-child {
+    background: transparent;
+}
+
+.best-value.table-head {
+    height: 200px;
+}
+
+.internal-offer-head {
+    display: flex;
+    justify-content: space-between;
+align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
