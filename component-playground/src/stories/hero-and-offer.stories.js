@@ -35,7 +35,7 @@ export const Primary = {
   args: {
     useDefaultSVG: "true",
     logoTextImg: "https://web-media.mailsubscriptions.co.uk/prod/images/original/8331e791a850-489042c2c928-maillogolarge.png",
-    heroBannerText: "Get More From The Mail",
+    heroBannerText: "Get More From The Sun",
     heroImg: "https://web-media.mailsubscriptions.co.uk/prod/images/gm_preview/9f244e375278-hero-asset-still.png",
     underbuttonText: "No commitment, cancel any time"
   }

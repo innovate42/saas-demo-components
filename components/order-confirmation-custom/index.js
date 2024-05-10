@@ -10,7 +10,7 @@ type Props = {
   buttonLink: string
 }
 
-function OrderConfirmation({ buttonLink }: Props): React.Node {
+function OrderConfirmationCustom({ buttonLink }: Props): React.Node {
   const { useCheckoutSelector } = useCheckout()
   const { order = {} } = useCheckoutSelector(state => state)
 
@@ -40,4 +40,4 @@ function OrderConfirmation({ buttonLink }: Props): React.Node {
   )
 }
 
-export default OrderConfirmation
+export default OrderConfirmationCustom

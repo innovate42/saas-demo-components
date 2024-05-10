@@ -1,5 +1,5 @@
 //@flow
-import R from "ramda"
+import * as R from "ramda"
 
 export const stripPathToProductName = (path: string): string => {
   //"/products/Hero Plan" => "Hero Plan")

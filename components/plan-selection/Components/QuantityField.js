@@ -1,7 +1,7 @@
 // @flow
 import React from "react"
 import { useCampaign } from "@limio/sdk"
-import R from "ramda"
+import * as R from "ramda"
 
 type Props = {
   quantity: number,

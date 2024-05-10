@@ -1,0 +1,69 @@
+{
+  "name": "@limio/component-saas-pricing-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "reactstrap": "^8.9.0"
+  },
+  "peerDependencies": {
+    "@limio/swr": "*",
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.18.6",
+    "@limio/sdk": "workspace:packages/limio-sdk"
+  },
+  "limioProps": [
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "groupId",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "id": "annual",
+          "label": "Annual"
+        }
+      ]
+    },
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Our Pricing"
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Pricing"
+    }
+  ]
+}
