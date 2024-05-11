@@ -11,6 +11,11 @@ export function renderElementWithProp(prop, elementTag, children) {
 export function getAllOfferFeatures(offers) {
   const allFeatures = offers.reduce((acc, offer) => {
     const features = offer.data.attributes.offer_features;
+
+    if (!features) {
+      return acc;
+    }
+    
     return R.concat(acc, features);
   }, []);
 
