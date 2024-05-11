@@ -15,7 +15,7 @@ export function getAllOfferFeatures(offers) {
     if (!features) {
       return acc;
     }
-    
+
     return R.concat(acc, features);
   }, []);
 
