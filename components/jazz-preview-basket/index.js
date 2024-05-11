@@ -1,18 +1,18 @@
 //@flow
-import React, { Suspense, useEffect } from "react"
-import { ErrorBoundary, useBasket, useLimioContext } from "@limio/sdk"
-import { Button, LoadingSpinner } from "@limio/design-system"
-import { getRedirectUrl } from "@limio/shop/src/shop/checkout/helpers"
-import { useSelector } from "@limio/shop"
-import LineItem from "./components/LineItem"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShoppingCart } from "@fortawesome/pro-light-svg-icons"
-import { PreviewProvider, usePreview } from "@limio/ui-preview-context"
-import { getCookie } from "@limio/helpers-browser/src/cookie"
-import { useCheckout } from "@limio/internal-checkout-sdk"
-import { formatCurrency } from "./components/helpers"
-import "./index.css"
-import * as R from "ramda"
+import React, { Suspense, useEffect } from "react";
+import { ErrorBoundary, useBasket, useLimioContext } from "@limio/sdk";
+import { Button, LoadingSpinner } from "@limio/design-system";
+import { getRedirectUrl } from "@limio/shop/src/shop/checkout/helpers";
+import { useSelector } from "@limio/shop";
+import LineItem from "./components/LineItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/pro-light-svg-icons";
+import { PreviewProvider, usePreview } from "@limio/ui-preview-context";
+import { getCookie } from "@limio/helpers-browser/src/cookie";
+import { useCheckout } from "@limio/internal-checkout-sdk";
+import { formatCurrency } from "./components/helpers";
+import "./index.css";
+import * as R from "ramda";
 
 type Props = {
   totalLabel: string,
@@ -27,46 +27,72 @@ type Props = {
   goToCheckoutLabel: string,
   goBackLabel: string,
   removeLabel: string,
-  goBackUrl: string
-}
+  goBackUrl: string,
+};
 
 type BasketItemsType = {
   orderItems: Array<{}>,
   totalLabel: string,
-  taxInfo: string
-}
+  taxInfo: string,
+};
 
 const OrderTotal = ({ orderItems, taxInfo, totalLabel }: BasketItemsType) => {
-  const { isInPageBuilder } = useLimioContext()
-  const defaultCountry = getCookie("limio-country")
+  const { isInPageBuilder } = useLimioContext();
+  const defaultCountry = getCookie("limio-country");
 
-  const order = useSelector(state => state.order)
-  const orderCountry = useSelector(state => state.order.country)
-  const billingDetails = useSelector(state => state.order.billingDetails)
-  const total = useSelector(state => state.order.total)
-  const locale = useSelector(state => state.locale)
-  const externalPriceAnyOffer = useSelector(state =>
-    state.order.orderItems.map(item => item.offer?.data?.attributes?.price__limio?.[0]?.use_external_price)
-  ).includes(true)
+  const order = useSelector((state) => state.order);
+  const orderCountry = useSelector((state) => state.order.country);
+  const billingDetails = useSelector((state) => state.order.billingDetails);
+  const total = useSelector((state) => state.order.total);
+  const locale = useSelector((state) => state.locale);
+  const externalPriceAnyOffer = useSelector((state) =>
+    state.order.orderItems.map(
+      (item) =>
+        item.offer?.data?.attributes?.price__limio?.[0]?.use_external_price
+    )
+  ).includes(true);
 
-  const country = orderCountry || defaultCountry
-  const currency = orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode // Assuming multi currency won't be enabled for a while
-  const { zuoraPreview, previewSchedule, loadingPreview, preview } = usePreview()
+  const country = orderCountry || defaultCountry;
 
-  const previewAmount = previewSchedule[0]?.amountWithoutTax
-  const orderTotal = !isInPageBuilder && externalPriceAnyOffer ? { currency, amount: previewAmount } : total
-  const totalText = !zuoraPreview?.success && externalPriceAnyOffer ? "-" : formatCurrency(Number(orderTotal.amount), currency || "GBP")
+  const currency =
+    orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode; // Assuming multi currency won't be enabled for a while
+
+  const { zuoraPreview, previewSchedule, loadingPreview, preview } =
+    usePreview();
+
+  const previewAmount =
+    +previewSchedule[0]?.amountWithoutTax + +previewSchedule[0]?.taxAmount;
+
+  const orderTotal =
+    !isInPageBuilder && externalPriceAnyOffer
+      ? { currency, amount: previewAmount }
+      : total;
+
+  const totalText =
+    !zuoraPreview?.success && externalPriceAnyOffer
+      ? "-"
+      : formatCurrency(Number(orderTotal.amount), currency || "GBP");
 
   useEffect(() => {
-    const smallBillingDetails = { postalCode: billingDetails?.postalCode, country: billingDetails?.country }
-    const nilOrUndefined = val => val === null || val === undefined || val === ""
+    const smallBillingDetails = {
+      postalCode: billingDetails?.postalCode,
+      country: billingDetails?.country,
+    };
+    const nilOrUndefined = (val) =>
+      val === null || val === undefined || val === "";
 
     // short circuit the request
-    if (R.map(nilOrUndefined, R.values(smallBillingDetails)).includes(true)) return
+    if (R.map(nilOrUndefined, R.values(smallBillingDetails)).includes(true))
+      return;
 
-    const previewOrderData = { ...order, billingDetails: billingDetails, order_type: "new", mode: "production" }
-    preview(previewOrderData, true)
-  }, [preview, billingDetails, currency, country, order])
+    const previewOrderData = {
+      ...order,
+      billingDetails: billingDetails,
+      order_type: "new",
+      mode: "production",
+    };
+    preview(previewOrderData, true);
+  }, [preview, billingDetails, currency, country, order]);
 
   return (
     <>
@@ -85,25 +111,42 @@ const OrderTotal = ({ orderItems, taxInfo, totalLabel }: BasketItemsType) => {
       </div>
       {currency === "USD" && <div className={"basket-tax"}>{taxInfo}</div>}
     </>
-  )
-}
+  );
+};
 
-const BasketItemsContainer = ({ emptyBasketText, productHeading, quantityHeading, itemTotalHeading, totalLabel, taxInfo }: Props) => {
-  const { useCheckoutSelector } = useCheckout()
-  const { previewSchedule, loadingPreview, preview } = usePreview()
-  const orderItems = useCheckoutSelector(state => state.order.orderItems)
-  const order = useSelector(state => state.order)
-  const currency = orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode // Assuming multi currency won't be enabled for a while
+const BasketItemsContainer = ({
+  emptyBasketText,
+  productHeading,
+  quantityHeading,
+  itemTotalHeading,
+  totalLabel,
+  taxInfo,
+}: Props) => {
+  const { useCheckoutSelector } = useCheckout();
+  const { previewSchedule, loadingPreview, preview } = usePreview();
+  const orderItems = useCheckoutSelector((state) => state.order.orderItems);
+  const order = useSelector((state) => state.order);
+  const currency =
+    orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode; // Assuming multi currency won't be enabled for a while
 
   useEffect(() => {
     // We'll never use the tax so this isn't important but Zuora requires it - we just need the price
-    const previewBillingDetails = currency === "USD" ? { state: "NY", postalCode: "10001", country: "US" } : { ...billingDetails, country }
-    const previewOrderData = { ...order, billingDetails: previewBillingDetails, order_type: "new", mode: "production" }
+    const previewBillingDetails =
+      currency === "USD"
+        ? { state: "NY", postalCode: "10001", country: "US" }
+        : { ...billingDetails, country };
+    const previewOrderData = {
+      ...order,
+      billingDetails: previewBillingDetails,
+      order_type: "new",
+      mode: "production",
+    };
 
-    preview(previewOrderData, true)
-  }, [])
+    preview(previewOrderData, true);
+  }, []);
 
-  const previewLineItems = previewSchedule[0] === undefined ? [] : previewSchedule[0].lineItems
+  const previewLineItems =
+    previewSchedule[0] === undefined ? [] : previewSchedule[0].lineItems;
 
   return (
     <div className={"basket-items-container"}>
@@ -139,13 +182,17 @@ const BasketItemsContainer = ({ emptyBasketText, productHeading, quantityHeading
               </div>
             }
           >
-            <OrderTotal orderItems={orderItems} totalLabel={totalLabel} taxInfo={taxInfo} />
+            <OrderTotal
+              orderItems={orderItems}
+              totalLabel={totalLabel}
+              taxInfo={taxInfo}
+            />
           </Suspense>
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
 const Basket = ({
   heading,
@@ -157,31 +204,33 @@ const Basket = ({
   goToCheckoutLabel = "Checkout",
   ...props
 }: Props): React.Node => {
-  const order = useSelector(state => state.order)
+  const order = useSelector((state) => state.order);
 
-  const { goToCheckout } = useBasket()
+  const { goToCheckout } = useBasket();
 
   const getReturnURL = () => {
     if (goBackUrl) {
-      return goBackUrl
+      return goBackUrl;
     }
 
-    let returnUrl = goBackToPreviousPage ? document.referrer : getRedirectUrl(order) || ""
+    let returnUrl = goBackToPreviousPage
+      ? document.referrer
+      : getRedirectUrl(order) || "";
 
-    let checkoutId = new URL(document.location).searchParams.get("basket")
+    let checkoutId = new URL(document.location).searchParams.get("basket");
 
     if (!checkoutId) {
-      checkoutId = window.sessionStorage.getItem("limio_order")
+      checkoutId = window.sessionStorage.getItem("limio_order");
     }
 
     if (checkoutId) {
-      const returnLocation = new URL(returnUrl)
-      returnLocation.searchParams.set("basket", checkoutId)
-      returnUrl = returnLocation.href
+      const returnLocation = new URL(returnUrl);
+      returnLocation.searchParams.set("basket", checkoutId);
+      returnUrl = returnLocation.href;
     }
 
-    return returnUrl
-  }
+    return returnUrl;
+  };
 
   return (
     <PreviewProvider>
@@ -207,18 +256,24 @@ const Basket = ({
               </div>
             }
           >
-            <BasketItemsContainer emptyBasketText={emptyBasketText} {...props} />
+            <BasketItemsContainer
+              emptyBasketText={emptyBasketText}
+              {...props}
+            />
           </Suspense>
         </ErrorBoundary>
         <div className="basket-buttons">
-          <Button className={"go-back"} onClick={() => (window.location = getReturnURL())}>
+          <Button
+            className={"go-back"}
+            onClick={() => (window.location = getReturnURL())}
+          >
             {goBackLabel}
           </Button>
           <Button onClick={() => goToCheckout()}>{goToCheckoutLabel}</Button>
         </div>
       </div>
     </PreviewProvider>
-  )
-}
+  );
+};
 
-export default Basket
+export default Basket;

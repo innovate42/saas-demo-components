@@ -1,9 +1,14 @@
 //@flow
-import * as React from "react"
-import { Input } from "@limio/design-system"
+import * as React from "react";
+import { Input } from "@limio/design-system";
 
 const LineItem = ({ lineItem }) => {
-  const { amountWithoutTax, chargeName, productName, quantity } = lineItem
+  const { amountWithoutTax, chargeName, productName, quantity, taxAmount } =
+    lineItem;
+  const formatAmount = () => {
+    const total = amountWithoutTax + taxAmount;
+    return total.toFixed(2);
+  };
 
   return (
     <tr className={`basket-item-container`}>
@@ -16,7 +21,16 @@ const LineItem = ({ lineItem }) => {
       </td>
       <td>
         <div className="basket-item-quantity">
-          <Input name="quantity" placeholder="1" min={1} max={100} type="number" step="1" disabled={true} value={quantity} />
+          <Input
+            name="quantity"
+            placeholder="1"
+            min={1}
+            max={100}
+            type="number"
+            step="1"
+            disabled={true}
+            value={quantity}
+          />
         </div>
       </td>
       <td>
@@ -25,7 +39,7 @@ const LineItem = ({ lineItem }) => {
         </div>
       </td>
     </tr>
-  )
-}
+  );
+};
 
-export default LineItem
+export default LineItem;
