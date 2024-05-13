@@ -14,7 +14,7 @@ function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): Re
 
     React.useEffect(() => {
         document.documentElement.style.setProperty('--highlight-color', highlightColor);
-    }, []);
+    }, [highlightColor]);
 
     const [licenses, setLicenses] = React.useState(1);
 
