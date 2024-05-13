@@ -58,20 +58,42 @@ const OrderTotal = ({ orderItems, taxInfo, totalLabel }: BasketItemsType) => {
     orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode; // Assuming multi currency won't be enabled for a while
 
   const { zuoraPreview, previewSchedule, loadingPreview, preview } =
-    usePreview();
+    usePreview()
 
-  const previewAmount =
-    +previewSchedule[0]?.amountWithoutTax + +previewSchedule[0]?.taxAmount;
+  const totalAmount =
+      +previewSchedule[0]?.amountWithoutTax + +previewSchedule[0]?.taxAmount;
 
-  const orderTotal =
-    !isInPageBuilder && externalPriceAnyOffer
-      ? { currency, amount: previewAmount }
-      : total;
+  const totalVal =
+      !isInPageBuilder && externalPriceAnyOffer
+          ? { currency, amount:  totalAmount }
+          : total;
 
   const totalText =
+      !zuoraPreview?.success && externalPriceAnyOffer
+          ? "-"
+          : formatCurrency(Number(totalVal.amount), currency || "GBP");
+
+  const subTotal =
+    !isInPageBuilder && externalPriceAnyOffer
+      ? { currency, amount:  +previewSchedule[0]?.amountWithoutTax }
+      : total;
+
+  const subTotalText =
     !zuoraPreview?.success && externalPriceAnyOffer
       ? "-"
-      : formatCurrency(Number(orderTotal.amount), currency || "GBP");
+      : formatCurrency(Number(subTotal.amount), currency || "GBP");
+
+  const taxTotal =
+      !isInPageBuilder && externalPriceAnyOffer
+          ? { currency, amount:  +previewSchedule[0]?.taxAmount }
+          : total;
+
+  const taxTotalText =
+      !zuoraPreview?.success && externalPriceAnyOffer
+          ? "-"
+          : formatCurrency(Number(taxTotal.amount), currency || "GBP");
+
+
 
   useEffect(() => {
     const smallBillingDetails = {
@@ -104,6 +126,9 @@ const OrderTotal = ({ orderItems, taxInfo, totalLabel }: BasketItemsType) => {
             <div className={"basket-total-label"}>{totalLabel}</div>
             <div className={"basket-total-amount"}>
               {totalText}
+              <p>Subtotal: {subTotalText}</p>
+              <p>Tax: {taxTotalText}</p>
+              <p>Total: {totalText}</p>
               {currency === "USD" ? "*" : ""}
             </div>
           </>
