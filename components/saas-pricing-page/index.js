@@ -93,7 +93,11 @@ function SaasPricingPage({}: Props): React.Node {
                                     )}
                                     <div className="internal-offer-head">
                                         <div>{offer.data.attributes.display_name__limio}</div>
-                                        <div>{offer.data.attributes.display_price__limio}</div>
+                                        <div className="pricing-texts">
+                                            <div>{offer.data.attributes.display_price__limio || ""}</div>
+                                            <div>{offer.data.attributes.detailed_display_price__limio || ""}</div>
+                                        </div>
+
                                         <button className={bestValue ? "best-value-cta" : "cta"}>
                                             {offer.data.attributes.cta_text__limio}
                                         </button>

@@ -130,26 +130,23 @@ tr:last-child .best-value-offer {
     border-bottom: 2px solid #f38c43 !important;
 }
 
+.table-head {
+    height: auto;
+    min-height: 150px;
+    position: relative;
+}
+
 .best-value-cta {
     background-color: #f38c43; /* Orange color */
     color: white;
-    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    border: none;
     width: 25%;
-
+    padding: 5px 10px;
+    border: 2px solid #f38c43;
 }
-
-.table-head {
-    height: 150px;
-    position: relative;
-
-}
-
 
 .cta {
-    margin-top: 10px;
     padding: 5px 10px;
     background-color: white; /* Orange color */
     border-radius: 5px;
@@ -178,7 +175,7 @@ td:first-child {
 }
 
 .best-value.table-head {
-    height: 200px;
+    height: 220px;
 }
 
 .internal-offer-head {
@@ -187,4 +184,10 @@ td:first-child {
 align-items: center;
     flex-direction: column;
     gap: 1rem;
+    min-height: 150px;
+}
+
+
+.pricing-texts {
+    min-height: 48px;
 }

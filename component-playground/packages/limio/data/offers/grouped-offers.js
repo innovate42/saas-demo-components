@@ -605,6 +605,8 @@ export const groupedOffers = [
         display_name__limio: "asdasd",
         cta_text__limio: "buy",
         payment_types__limio: ["zuora_card"],
+              detailed_display_price__limio: "Cancel at any time",
+
         price__limio: [
           {
             name: "charge_1",
@@ -935,6 +937,8 @@ export const groupedOffers = [
       baseTemplate: "/config/templates/offers/Sam",
       attributes: {
         group__limio: "Yearly",
+        detailed_display_price__limio: "Cancel at any time",
+
         display_price__limio: "Two years for £319",
         default_quantity_options__limio: {},
         display_name__limio: "asdasd",
