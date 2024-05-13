@@ -14,5 +14,18 @@
   "peerDependencies": {
     "react": "*"
   },
-  "limioProps": []
+  "limioProps": [
+    {
+      "id": "includeDesc",
+      "label": "Include Description?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "ctaText",
+      "label": "Button Text",
+      "type": "string",
+      "default": "Add To Basket"
+    }
+  ]
 }
