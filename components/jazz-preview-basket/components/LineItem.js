@@ -7,6 +7,7 @@ const LineItem = ({ lineItem }) => {
     lineItem;
 
   const formatAmount = () => {
+      // 
     const total = amountWithoutTax + taxAmount;
     return total.toFixed(2);
   };
