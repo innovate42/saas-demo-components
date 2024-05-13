@@ -149,7 +149,7 @@ function PreviewBasket({
       const offerIdsAndPath = { id: selectedOfferObj.id, path: selectedOfferObj.path }
       combined = [...combined, offerIdsAndPath]
     }
-    if (combined.length > 0) {
+    if (combined.length  > 0) {
       combined.forEach(item => dispatch(removeFromBasketAction(item.id, item.path)))
     }
   }, [selectedOfferObj, selectedAddOnsList, selectedAddOnsListWithQuantity, offerQuantity])
