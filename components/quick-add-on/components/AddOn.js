@@ -15,9 +15,10 @@ const AddOn = ({addOn}) => {
     } = addOn.data.attributes;
 
 
-    const {basketItems = []} = useBasket();
     const dispatch = useDispatch()
     const state = useSelector(state => state);
+    const basketItems = useSelector(state => state.basket.basketItems);
+
 
     const basketAddOns = R.pathOr([], ["0", "addOns"], basketItems);
 
