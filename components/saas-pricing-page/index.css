@@ -117,6 +117,7 @@
     top: 0;
     left: 0;
     width:100%;
+    text-align: center;
 }
 
 .best-value-offer {
@@ -175,7 +176,7 @@ td:first-child {
 }
 
 .best-value.table-head {
-    height: 220px;
+    height: 270px;
 }
 
 .internal-offer-head {
@@ -190,4 +191,5 @@ align-items: center;
 
 .pricing-texts {
     min-height: 48px;
+    text-align: center;
 }
