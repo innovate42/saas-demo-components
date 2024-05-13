@@ -1,6 +1,7 @@
 // @flow
 import * as React from "react";
-import {groupedOffers} from "../../data/offers";
+import {groupedOffers, groupedAddOns} from "../../data/offers";
+
 import {basketItems} from "../../data/basket";
 import {docUser} from "../../data/user";
 
@@ -13,8 +14,8 @@ export function useCampaign() {
     if (context === undefined) {
         throw new Error("useBasket must be used within a LimioProvider");
     }
-    const {campaign, offers} = dummyContext.shop;
-    return {campaign, offers};
+    const {campaign, offers, addOns} = dummyContext.shop;
+    return {campaign, offers, addOns};
 }
 
 
@@ -120,6 +121,7 @@ const dummyContext = {
             },
         },
         offers: groupedOffers,
+        addOns: groupedAddOns,
         tag: "/tags/limio",
         location: {pathname: "/default"},
         basketItems: basketItems,
