@@ -125,11 +125,9 @@ const OrderTotal = ({ orderItems, taxInfo, totalLabel }: BasketItemsType) => {
           <>
             <div className={"basket-total-label"}>{totalLabel}</div>
             <div className={"basket-total-amount"}>
-              {totalText}
               <p>Subtotal: {subTotalText}</p>
               <p>Tax: {taxTotalText}</p>
               <p>Total: {totalText}</p>
-              {currency === "USD" ? "*" : ""}
             </div>
           </>
         )}
