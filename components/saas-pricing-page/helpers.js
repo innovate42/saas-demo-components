@@ -21,3 +21,15 @@ export function getAllOfferFeatures(offers) {
 
   return R.uniq(allFeatures);
 }
+
+export function getSaveXText(offers) {
+  const saveXText = offers.find(offer => {
+    return R.pathOr(false, ["data", "attributes", "save_x_text"], offer)
+  })
+
+  if (!saveXText) {
+    return "";
+  }
+
+  return saveXTest;
+}

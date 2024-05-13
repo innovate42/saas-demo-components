@@ -5,7 +5,7 @@ import "./index.css";
 import ToggleSwitch from "./components/ToggleSwitch";
 import PricingPageError from "./components/PricingPageError";
 import {ErrorBoundary, useCampaign, useBasket} from "@limio/sdk";
-import {getAllOfferFeatures} from "./helpers";
+import {getAllOfferFeatures, getSaveXText} from "./helpers";
 
 
 type Props = {};
@@ -14,9 +14,15 @@ function SaasPricingPage({}: Props): React.Node {
     const [licenses, setLicenses] = React.useState(1);
     const { addToBasket } = useBasket();
 
+
     const {offers = []} = useCampaign();
     const allFeatures = React.useMemo(
         () => getAllOfferFeatures(offers),
+        [offers]
+    );
+
+    const saveText = React.useMemo(
+        () => getSaveXText(offers),
         [offers]
     );
 
@@ -69,6 +75,7 @@ function SaasPricingPage({}: Props): React.Node {
               selected={selected}
               setSelected={setSelected}
               offerGroups={offerGroups}
+              saveText={saveText}
           />
         </div>
         <div className="options-element-box">
