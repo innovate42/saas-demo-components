@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as R from "ramda";
 import {useBasket, useCampaign} from "@limio/sdk";
 import {useDispatch} from "@limio/shop-redux"
 import {addToBasketAction} from "@limio/shop-redux/src/shop/redux"
@@ -9,10 +10,9 @@ type Props = {};
 
 function QuickAddOn({includeDesc, ctaText}: Props): React.Node {
     const {addOns = []} = useCampaign();
-    const {basketItems = {}} = useBasket();
+    const {basketItems = []} = useBasket();
+    const basketAddOns = R.pathOr([], ["0", "addOns"], basketItems);
     const dispatch = useDispatch()
-
-    const {addOns: basketAddOns} = basketItems;
 
     const addOnInBasket = (addOn) => basketAddOns && basketAddOns.find(basketAddOn => basketAddOn.id === addOn.id);
 
@@ -21,7 +21,11 @@ function QuickAddOn({includeDesc, ctaText}: Props): React.Node {
             return;
         }
 
-        const newBasketAddOns = basketAddOns ? [...basketAddOns, addOn] : [addOn];
+        const newBasketAddOns = basketAddOns ? [...basketAddOns, {addOn: addOn, quantity: 1}] : [{
+            addOn: addOn,
+            quantity: 1
+        }];
+
         const {offer, quantity} = basketItems;
 
         dispatch(addToBasketAction({offer: offer, addOns: newBasketAddOns, quantity: quantity, pushToCheckout: false}))
