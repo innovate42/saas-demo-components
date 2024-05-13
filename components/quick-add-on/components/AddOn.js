@@ -27,7 +27,7 @@ const AddOn = ({addOn}) => {
         }
 
         // clear the basket here
-        dispatch(removeFromBasketAction({id: basketItems.id, path: basketItems.offer.path}));
+        dispatch(removeFromBasketAction({id: basketItems[0].id, path: basketItems[0].offer.path}));
 
         const newBasketAddOns = basketAddOns ? [...basketAddOns, {addOn: addOn, quantity: 1}] : [{
             addOn: addOn,
