@@ -1,10 +1,10 @@
 // @flow
 import * as React from "react";
 import * as R from "ramda";
-import {useBasket} from "@limio/sdk";
+import {useLimioContext} from "@limio/sdk";
 import {useDispatch} from "@limio/shop-redux"
 import { useSelector } from "@limio/shop"
-import {addToBasketAction, removeFromBasketAction, setBasketAction} from "@limio/shop-redux/src/shop/redux"
+import {addToBasketAction, setBasketAction} from "@limio/shop-redux/src/shop/redux"
 import {sanitizeString} from "@limio/shop/src/shop/offers/helpers"
 
 const AddOn = ({addOn}) => {
@@ -16,18 +16,20 @@ const AddOn = ({addOn}) => {
     const dispatch = useDispatch()
     const state = useSelector(state => state);
     const basketItems = useSelector(state => state.basket.basketItems);
+    const { isInPageBuilder } = useLimioContext()
+
     const offer = basketItems && basketItems.length > 0 ? basketItems[0].offer : null;
     const offerGroup = offer && offer.data.attributes.group__limio;
     const addOnGroup = R.pathOr(null, ["data", "attributes", "term_group"], addOn);
     const basketItemAddOnsIds = R.pathOr([], ["0", "addOns"], basketItems).map(item => item.addOn.id);
 
-    if (addOnGroup) {
+    if (addOnGroup && !isInPageBuilder) {
         if (offerGroup !== addOnGroup) {
             return null;
         }
     }
 
-    if (basketItemAddOnsIds.includes(addOn.id)) {
+    if (basketItemAddOnsIds.includes(addOn.id) && !isInPageBuilder) {
         return null;
     }
 
