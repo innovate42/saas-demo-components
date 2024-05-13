@@ -8,6 +8,7 @@ function ToggleSwitch({selected, setSelected, offerGroups, saveText}) {
     const right =
         offerGroups[1].charAt(0).toUpperCase() + offerGroups[1].slice(1);
 
+    console.log(saveText)
 
     return (
         <>
@@ -29,7 +30,7 @@ function ToggleSwitch({selected, setSelected, offerGroups, saveText}) {
                     {right}
                 </div>
             </div>
-            {saveText}
+            <p>{saveText}</p>
         </>
     );
 }

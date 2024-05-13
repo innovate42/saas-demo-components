@@ -23,13 +23,13 @@ export function getAllOfferFeatures(offers) {
 }
 
 export function getSaveXText(offers) {
-  const saveXText = offers.find(offer => {
+  const saveTextOffer = offers.find(offer => {
     return R.pathOr(false, ["data", "attributes", "save_x_text"], offer)
   })
 
-  if (!saveXText) {
+  if (!saveTextOffer) {
     return "";
   }
 
-  return saveXText;
+  return R.pathOr(false, ["data", "attributes", "save_x_text"], saveTextOffer);
 }
