@@ -29,7 +29,7 @@ function ToggleSwitch({selected, setSelected, offerGroups, saveText}) {
                     {right}
                 </div>
             </div>
-            <p>{saveText}</p>
+            {saveText}
         </>
     );
 }

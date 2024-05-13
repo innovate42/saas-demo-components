@@ -21,7 +21,10 @@ function SaasPricingPage({subTermText, quantityText}: Props): React.Node {
         [offers]
     );
 
-    const saveText = getSaveXText(offers);
+    const saveText = React.useMemo(
+        () => getSaveXText(offers),
+        [offers]
+    );
 
     const offerGroups = offers.reduce((acc, offer) => {
         const key = offer.data.attributes.group__limio || false;
