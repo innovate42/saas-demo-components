@@ -171,6 +171,29 @@ const BasketItemsContainer = ({
   const previewLineItems =
     previewSchedule[0] === undefined ? [] : previewSchedule[0].lineItems;
 
+  const getProductPath = (item) => {
+    return R.pathOr("", ["data", "productBundles", "0", "product_path"], item)
+  }
+
+  const getSortedLineItems = () => {
+
+    if (!previewLineItems || previewLineItems.length < 1) {
+      return [];
+    }
+
+    const offer = R.pathOr({}, ["offer"], orderItems);
+    const path = getProductPath(offer);
+    const cleanPath = path.split("/").pop();
+
+    return previewLineItems.reduce((acc, lineItem) => {
+      if (lineItem.productName === cleanPath) {
+        return [lineItem, ...acc];
+      } else {
+        return [...acc, lineItem];
+      }
+    }, []);
+  }
+
   return (
     <div className={"basket-items-container"}>
       {orderItems.length < 1 ? (
@@ -192,7 +215,7 @@ const BasketItemsContainer = ({
                 </tr>
               </thead>
               <tbody className={"basket-items"}>
-                {previewLineItems?.map((lineItem, i) => (
+                {getSortedLineItems()?.map((lineItem, i) => (
                   <LineItem lineItem={lineItem} key={i} />
                 ))}
               </tbody>

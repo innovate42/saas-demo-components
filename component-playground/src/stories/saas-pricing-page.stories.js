@@ -1,7 +1,5 @@
 import { fn } from '@storybook/test';
 import SaasPricingPage from './../../../components/saas-pricing-page';
-import { Canvas } from '@storybook/blocks';
-
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -14,20 +12,10 @@ export default {
     "autodocs"
   ],
   argTypes: {
-    groupLabels: [
-      {
-        id: {
-          control: "text"
-        },
-        label: {
-          control: "text"
-        }
-      }
-    ],
-    heading: {
+    subTermText: {
       control: "text"
     },
-    subheading: {
+    quantityText: {
       control: "text"
     }
   }
@@ -36,17 +24,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
   args: {
-    groupLabels: [
-      {
-        "id": "monthly",
-        "label": "Monthly"
-      },
-      {
-        "id": "annual",
-        "label": "Annual"
-      }
-    ],
-    heading: "Our Pricing",
-    subheading: "Pricing"
+    subTermText: "Subscription Term",
+    quantityText: "Number of Licenses"
   }
 };
