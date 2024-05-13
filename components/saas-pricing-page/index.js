@@ -13,7 +13,7 @@ type Props = {};
 function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): React.Node {
 
     React.useEffect(() => {
-        document.documentElement.style.setProperty('--highlight-color', 'highlightColor');
+        document.documentElement.style.setProperty('--highlight-color', highlightColor);
     }, []);
 
     const [licenses, setLicenses] = React.useState(1);
