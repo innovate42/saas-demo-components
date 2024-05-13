@@ -7,7 +7,7 @@ import { useSelector } from "@limio/shop"
 import {addToBasketAction, setBasketAction} from "@limio/shop-redux/src/shop/redux"
 import {sanitizeString} from "@limio/shop/src/shop/offers/helpers"
 
-const AddOn = ({addOn}) => {
+const AddOn = ({addOn, ctaText}) => {
     const {
         display_name__limio,
         description__limio,
@@ -69,7 +69,7 @@ const AddOn = ({addOn}) => {
             </div>
             <p className="subtext"></p>
             <p className="description" dangerouslySetInnerHTML={{__html: description__limio}}></p>
-            <button className="cta-button" onClick={() => addToBasket(addOn)}>Call to Action</button>
+            <button className="cta-button" onClick={() => addToBasket(addOn)}>{ctaText}</button>
         </div>
     );
 };

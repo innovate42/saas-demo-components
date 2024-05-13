@@ -9,7 +9,7 @@ type Props = {
     subheading: string
 };
 
-export const AddOnCards = ({heading, subheading}: Props) => {
+export const AddOnCards = ({heading, subheading, ctaText}: Props) => {
     const {addOns = []} = useCampaign()
 
     return (
@@ -23,7 +23,7 @@ export const AddOnCards = ({heading, subheading}: Props) => {
                 <div className="add-on-grid">
                     {addOns.length > 0 ? (
                         addOns.map((addOn) => (
-                            <AddOn key={addOn.path + "/parent"} addOn={addOn}
+                            <AddOn key={addOn.path + "/parent"} addOn={addOn} ctaText={ctaText}
                             />
                         ))
                     ) : (
