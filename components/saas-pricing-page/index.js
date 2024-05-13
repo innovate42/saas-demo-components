@@ -74,7 +74,7 @@ function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): Re
     return (
         <ErrorBoundary fallback={<PricingPageError/>}>
             <div className="page-container">
-      <span className="options-box" style={style}>
+      <span className="options-box">
         <div className="options-element-box br">
           <h2>{subTermText}</h2>
           <ToggleSwitch
