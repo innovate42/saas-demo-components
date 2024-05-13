@@ -41,7 +41,7 @@
     {
       "id": "highlightColor",
       "label": "Master Color",
-      "type": "string",
+      "type": "color",
       "default": "#f38c43"
     }
   ]
