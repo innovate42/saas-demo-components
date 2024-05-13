@@ -1,16 +1,16 @@
 //@flow
-import React, { Suspense, useEffect } from "react";
-import { ErrorBoundary, useBasket, useLimioContext } from "@limio/sdk";
-import { Button, LoadingSpinner } from "@limio/design-system";
-import { getRedirectUrl } from "@limio/shop/src/shop/checkout/helpers";
-import { useSelector } from "@limio/shop";
+import React, {Suspense, useEffect} from "react";
+import {ErrorBoundary, useBasket, useLimioContext} from "@limio/sdk";
+import {Button, LoadingSpinner} from "@limio/design-system";
+import {getRedirectUrl} from "@limio/shop/src/shop/checkout/helpers";
+import {useSelector} from "@limio/shop";
 import LineItem from "./components/LineItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/pro-light-svg-icons";
-import { PreviewProvider, usePreview } from "@limio/ui-preview-context";
-import { getCookie } from "@limio/helpers-browser/src/cookie";
-import { useCheckout } from "@limio/internal-checkout-sdk";
-import { formatCurrency } from "./components/helpers";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faShoppingCart} from "@fortawesome/pro-light-svg-icons";
+import {PreviewProvider, usePreview} from "@limio/ui-preview-context";
+import {getCookie} from "@limio/helpers-browser/src/cookie";
+import {useCheckout} from "@limio/internal-checkout-sdk";
+import {formatCurrency} from "./components/helpers";
 import "./index.css";
 import * as R from "ramda";
 
@@ -166,7 +166,7 @@ const BasketItemsContainer = ({
     };
 
     preview(previewOrderData, true);
-  }, []);
+  }, [orderItems]);
 
   const previewLineItems =
     previewSchedule[0] === undefined ? [] : previewSchedule[0].lineItems;
@@ -184,15 +184,13 @@ const BasketItemsContainer = ({
     const offer = R.pathOr({}, ["0", "offer"], orderItems);
     const path = getProductPath(offer);
     const cleanPath = path.split("/").pop();
-    const items = previewLineItems.reduce((acc, lineItem) => {
+    return previewLineItems.reduce((acc, lineItem) => {
       if (lineItem.productName === cleanPath) {
         return [lineItem, ...acc];
       } else {
         return [...acc, lineItem];
       }
-    }, []);
-
-    return items
+    }, [])
   }
 
   return (
