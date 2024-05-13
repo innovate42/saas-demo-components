@@ -37,6 +37,12 @@
       "label": "Quantity Input Text",
       "type": "string",
       "default": "Number of Licenses"
+    },
+    {
+      "id": "highlightColor",
+      "label": "Master Color",
+      "type": "string",
+      "default": "#f38c43"
     }
   ]
 }

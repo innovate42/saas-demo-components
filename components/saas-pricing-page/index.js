@@ -10,8 +10,13 @@ import {getAllOfferFeatures, getSaveXText} from "./helpers";
 
 type Props = {};
 
-function SaasPricingPage({subTermText, quantityText}: Props): React.Node {
+function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): React.Node {
+    const style = {
+        '--highlight-color': highlightColor
+    };
+
     const [licenses, setLicenses] = React.useState(1);
+
     const { addToBasket } = useBasket();
 
 
@@ -68,7 +73,7 @@ function SaasPricingPage({subTermText, quantityText}: Props): React.Node {
     return (
         <ErrorBoundary fallback={<PricingPageError/>}>
             <div className="page-container">
-      <span className="options-box">
+      <span className="options-box" style={style}>
         <div className="options-element-box br">
           <h2>{subTermText}</h2>
           <ToggleSwitch
