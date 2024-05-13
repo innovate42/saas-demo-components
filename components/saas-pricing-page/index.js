@@ -10,7 +10,7 @@ import {getAllOfferFeatures, getSaveXText} from "./helpers";
 
 type Props = {};
 
-function SaasPricingPage({}: Props): React.Node {
+function SaasPricingPage({subTermText, quantityText}: Props): React.Node {
     const [licenses, setLicenses] = React.useState(1);
     const { addToBasket } = useBasket();
 
@@ -70,7 +70,7 @@ function SaasPricingPage({}: Props): React.Node {
             <div className="page-container">
       <span className="options-box">
         <div className="options-element-box br">
-          <h2>Subscription Term</h2>
+          <h2>{subTermText}</h2>
           <ToggleSwitch
               selected={selected}
               setSelected={setSelected}
@@ -79,7 +79,7 @@ function SaasPricingPage({}: Props): React.Node {
           />
         </div>
         <div className="options-element-box">
-          <h2>Number of licenses</h2>
+          <h2>{quantityText}</h2>
           <input
               type="number"
               value={licenses}

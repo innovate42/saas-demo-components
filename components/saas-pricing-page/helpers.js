@@ -31,5 +31,5 @@ export function getSaveXText(offers) {
     return "";
   }
 
-  return saveXTest;
+  return saveXText;
 }
