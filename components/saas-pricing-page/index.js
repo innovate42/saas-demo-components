@@ -4,7 +4,7 @@ import {useState} from "react";
 import "./index.css";
 import ToggleSwitch from "./components/ToggleSwitch";
 import PricingPageError from "./components/PricingPageError";
-import {ErrorBoundary, useCampaign} from "@limio/sdk";
+import {ErrorBoundary, useCampaign, useBasket} from "@limio/sdk";
 import {getAllOfferFeatures} from "./helpers";
 
 
@@ -12,6 +12,7 @@ type Props = {};
 
 function SaasPricingPage({}: Props): React.Node {
     const [licenses, setLicenses] = React.useState(1);
+    const { addToBasket } = useBasket();
 
     const {offers = []} = useCampaign();
     const allFeatures = React.useMemo(
@@ -52,6 +53,10 @@ function SaasPricingPage({}: Props): React.Node {
 
     const renderFeatureCell = (offer, feature) => {
         return offer.data.attributes.offer_features.includes(feature) ? "✔️" : "➖";
+    };
+
+    const addToBasketHandler = (offer) => {
+        addToBasket(offer, null, licenses)
     };
 
     return (
@@ -98,7 +103,7 @@ function SaasPricingPage({}: Props): React.Node {
                                             <div>{offer.data.attributes.detailed_display_price__limio || ""}</div>
                                         </div>
 
-                                        <button className={bestValue ? "best-value-cta" : "cta"}>
+                                        <button className={bestValue ? "best-value-cta" : "cta"} onClick={() => addToBasketHandler(offer)}>
                                             {offer.data.attributes.cta_text__limio}
                                         </button>
                                     </div>
