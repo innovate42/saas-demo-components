@@ -3,7 +3,8 @@ import * as React from "react";
 import * as R from "ramda";
 import {useBasket} from "@limio/sdk";
 import {useDispatch} from "@limio/shop-redux"
-import {addToBasketAction, removeFromBasketAction} from "@limio/shop-redux/src/shop/redux"
+import { useSelector } from "@limio/shop"
+import {addToBasketAction, removeFromBasketAction, setBasketAction} from "@limio/shop-redux/src/shop/redux"
 import {sanitizeString} from "@limio/shop/src/shop/offers/helpers"
 
 const AddOn = ({addOn}) => {
@@ -16,6 +17,7 @@ const AddOn = ({addOn}) => {
 
     const {basketItems = []} = useBasket();
     const dispatch = useDispatch()
+    const state = useSelector(state => state);
 
     const basketAddOns = R.pathOr([], ["0", "addOns"], basketItems);
 
@@ -26,9 +28,11 @@ const AddOn = ({addOn}) => {
             return ;
         }
 
-        // clear the basket here
-        dispatch(removeFromBasketAction("", ""));
+        const newState = R.clone(state);
+        newState.basket.basketItems = [];
+        newState.order.orderItems = []
 
+        dispatch(setBasketAction(newState))
         const newBasketAddOns = basketAddOns ? [...basketAddOns, {addOn: addOn, quantity: 1}] : [{
             addOn: addOn,
             quantity: 1
