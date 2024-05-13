@@ -19,7 +19,7 @@ const AddOn = ({addOn}) => {
     const offer = basketItems && basketItems.length > 0 ? basketItems[0].offer : null;
     const offerGroup = offer && offer.data.attributes.group__limio;
     const addOnGroup = R.pathOr(null, ["data", "attributes", "term_group"], addOn);
-    const basketItemAddOnsIds = R.pathOr([], ["0", "addOns"], basketItems).map(addOn => addOn.id);
+    const basketItemAddOnsIds = R.pathOr([], ["0", "addOns"], basketItems).map(item => item.addOn.id);
 
     if (addOnGroup) {
         if (offerGroup !== addOnGroup) {
@@ -33,13 +33,8 @@ const AddOn = ({addOn}) => {
 
     const basketAddOns = R.pathOr([], ["0", "addOns"], basketItems);
 
-    const addOnInBasket = (addOn) => basketAddOns && basketAddOns.find(basketAddOn => basketAddOn.id === addOn.id);
 
     const addToBasket = (addOn) => {
-        if (addOnInBasket(addOn)) {
-            return ;
-        }
-
         const newState = R.clone(state);
         newState.basket.basketItems = [];
         newState.order.orderItems = []
