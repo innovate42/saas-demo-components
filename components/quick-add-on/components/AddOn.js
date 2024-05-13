@@ -23,14 +23,16 @@ const AddOn = ({addOn}) => {
 
     const addToBasket = (addOn) => {
         if (addOnInBasket(addOn)) {
-
             return ;
         }
+
+        // clear the basket here
+
         const newBasketAddOns = basketAddOns ? [...basketAddOns, {addOn: addOn, quantity: 1}] : [{
             addOn: addOn,
             quantity: 1
         }];
-        const {offer, quantity} = basketItems;
+        const {offer, quantity} = basketItems[0];
         dispatch(addToBasketAction({offer: offer, addOns: newBasketAddOns, quantity: quantity, pushToCheckout: false}))
     };
 
