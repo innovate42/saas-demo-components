@@ -184,14 +184,15 @@ const BasketItemsContainer = ({
     const offer = R.pathOr({}, ["offer"], orderItems);
     const path = getProductPath(offer);
     const cleanPath = path.split("/").pop();
-
-    return previewLineItems.reduce((acc, lineItem) => {
+    const items = previewLineItems.reduce((acc, lineItem) => {
       if (lineItem.productName === cleanPath) {
         return [lineItem, ...acc];
       } else {
         return [...acc, lineItem];
       }
     }, []);
+
+    return items
   }
 
   return (
