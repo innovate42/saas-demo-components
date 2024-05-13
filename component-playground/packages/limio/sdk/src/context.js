@@ -105,6 +105,10 @@ export function groupOffers(offers = [], groupLabels = []) {
     })
 }
 
+export function ErrorBoundary({children}) {
+    return <>{children}</>;
+}
+
 const dummyContext = {
     pageBuilder__limio: false,
     shop: {

@@ -26,8 +26,9 @@ function SaasPricingPage({}: Props): React.Node {
             return acc;
         }
 
-        return [key, ...acc];
+        return [...acc, key];
     }, []);
+
 
     const [selected, setSelected] = useState(offerGroups[0].toLowerCase());
 

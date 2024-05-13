@@ -1269,6 +1269,7 @@ export const groupedOffers = [
       baseTemplate: "/config/templates/offers/Sam",
       attributes: {
         best_value__limio: true,
+        group__limio: "Monthly",
 
         default_quantity_options__limio: {},
         display_price__limio: "Two years for £319",
