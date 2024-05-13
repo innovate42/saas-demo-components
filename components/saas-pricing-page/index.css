@@ -1,4 +1,6 @@
-
+:root {
+    --highlight-color: #f38c43;
+}
 
 .options-box {
     display: grid;

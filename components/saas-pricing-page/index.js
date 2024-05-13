@@ -11,9 +11,10 @@ import {getAllOfferFeatures, getSaveXText} from "./helpers";
 type Props = {};
 
 function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): React.Node {
-    const style = {
-        '--highlight-color': highlightColor
-    };
+
+    React.useEffect(() => {
+        document.documentElement.style.setProperty('--highlight-color', 'highlightColor');
+    }, []);
 
     const [licenses, setLicenses] = React.useState(1);
 
