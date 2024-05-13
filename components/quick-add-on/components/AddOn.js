@@ -23,7 +23,8 @@ const AddOn = ({addOn}) => {
 
     const addToBasket = (addOn) => {
         if (addOnInBasket(addOn)) {
-            return;
+
+            return ;
         }
         const newBasketAddOns = basketAddOns ? [...basketAddOns, {addOn: addOn, quantity: 1}] : [{
             addOn: addOn,
