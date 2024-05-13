@@ -56,7 +56,6 @@ function SaasPricingPage({}: Props): React.Node {
     };
 
     const addToBasketHandler = (offer) => {
-       //
         addToBasket(offer, null, licenses)
     };
 
