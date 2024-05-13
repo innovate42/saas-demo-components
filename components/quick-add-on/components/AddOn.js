@@ -13,12 +13,23 @@ const AddOn = ({addOn}) => {
         description__limio,
         price__limio,
     } = addOn.data.attributes;
-
-
     const dispatch = useDispatch()
     const state = useSelector(state => state);
     const basketItems = useSelector(state => state.basket.basketItems);
+    const offer = basketItems && basketItems.length > 0 ? basketItems[0].offer : null;
+    const offerGroup = offer && offer.data.attributes.group__limio;
+    const addOnGroup = R.pathOr(null, ["data", "attributes", "term_group"], addOn);
+    const basketItemAddOnsIds = R.pathOr([], ["0", "addOns"], basketItems).map(addOn => addOn.id);
 
+    if (addOnGroup) {
+        if (offerGroup !== addOnGroup) {
+            return null;
+        }
+    }
+
+    if (basketItemAddOnsIds.includes(addOn.id)) {
+        return null;
+    }
 
     const basketAddOns = R.pathOr([], ["0", "addOns"], basketItems);
 
