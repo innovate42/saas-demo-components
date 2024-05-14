@@ -4,7 +4,7 @@ import {useState} from "react";
 import "./index.css";
 import ToggleSwitch from "./components/ToggleSwitch";
 import PricingPageError from "./components/PricingPageError";
-import {ErrorBoundary, useCampaign, useBasket} from "@limio/sdk";
+import {ErrorBoundary, useBasket, useCampaign} from "@limio/sdk";
 import {getAllOfferFeatures, getSaveXText} from "./helpers";
 
 
@@ -18,7 +18,7 @@ function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): Re
 
     const [licenses, setLicenses] = React.useState(1);
 
-    const { addToBasket } = useBasket();
+    const {addToBasket} = useBasket();
 
 
     const {offers = []} = useCampaign();
@@ -100,6 +100,7 @@ function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): Re
                         <th></th>
                         {sortedOffers.map((offer, index) => {
                             const bestValue = offer.data.attributes.best_value__limio || "";
+                            const bestValueText = offer.data.attributes.display_description__limio || "Best Value";
 
                             return (
                                 <th
@@ -107,16 +108,19 @@ function SaasPricingPage({subTermText, quantityText, highlightColor}: Props): Re
                                     className={bestValue ? "best-value table-head" : "table-head"}
                                 >
                                     {bestValue && (
-                                        <div className="best-value-badge">Best Value</div>
+                                        <div className="best-value-badge">{bestValueText}</div>
                                     )}
                                     <div className="internal-offer-head">
                                         <div>{offer.data.attributes.display_name__limio}</div>
                                         <div className="pricing-texts">
-                                            <div dangerouslySetInnerHTML={{__html: offer.data.attributes.display_price__limio || ""}} />
-                                            <div dangerouslySetInnerHTML={{__html: offer.data.attributes.detailed_display_price__limio || ""}} />
+                                            <div
+                                                dangerouslySetInnerHTML={{__html: offer.data.attributes.display_price__limio || ""}}/>
+                                            <div
+                                                dangerouslySetInnerHTML={{__html: offer.data.attributes.detailed_display_price__limio || ""}}/>
                                         </div>
 
-                                        <button className={bestValue ? "best-value-cta" : "cta"} onClick={() => addToBasketHandler(offer)}>
+                                        <button className={bestValue ? "best-value-cta" : "cta"}
+                                                onClick={() => addToBasketHandler(offer)}>
                                             {offer.data.attributes.cta_text__limio}
                                         </button>
                                     </div>
