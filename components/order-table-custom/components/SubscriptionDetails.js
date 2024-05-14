@@ -1,9 +1,9 @@
 //@flow
 import * as React from "react"
-import { useOfferInfo, useSubscriptions, useTranslation } from "@limio/sdk"
-import { Table } from "@limio/design-system"
-import { formatCurrency, stripPathToProductName, checkCurrentSchedule, formatDate } from "../helpers/index.js"
-import { DateTime } from "@limio/date"
+import {useOfferInfo, useSubscriptions, useTranslation} from "@limio/sdk"
+import {Table} from "@limio/design-system"
+import {checkCurrentSchedule, formatCurrency, formatDate, stripPathToProductName} from "../helpers/index.js"
+import {DateTime} from "@limio/date"
 import * as R from "ramda"
 
 type Props = {
@@ -66,15 +66,14 @@ export function SubscriptionDetails({ currentOffers = [], propsObject }: Props):
   const getPrice = () => {
     // recurring payment
     if (schedule.length === 1) {
-      return formatCurrency(schedule[0].data?.amountWithoutTax, currency)
+      return formatCurrency(schedule[0].data?.amount, currency)
     }
     // no charges in the future
-    if (R.isNil(nextSchedule?.data.amountWithoutTax)) {
+    if (R.isNil(nextSchedule?.data.amount)) {
       return "No pending payments"
     }
 
-    const result = formatCurrency(nextSchedule?.data.amountWithoutTax, currency)
-    return result
+    return formatCurrency(nextSchedule?.data.amount, currency)
   }
 
   return (
