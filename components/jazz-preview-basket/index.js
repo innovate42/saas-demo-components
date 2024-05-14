@@ -246,6 +246,7 @@ const Basket = ({
                     goBackToPreviousPage,
                     emptyBasketText,
                     goToCheckoutLabel = "Checkout",
+                    checkoutLink,
                     ...props
                 }: Props): React.Node => {
     const order = useSelector((state) => state.order);
@@ -277,12 +278,10 @@ const Basket = ({
     };
 
     const goToCheckoutHandler = () => {
-        const link = R.pathOr("", ["orderItems", "0", "offer", "data", "attributes", "checkout__limio"], order);
-        if (!link) {
+        if (!checkoutLink) {
             return goToCheckout();
         }
-
-        goToCheckout(null, {journey: {checkout: link}});
+        goToCheckout(null, {journey: {checkout: checkoutLink}});
     }
 
     return (
@@ -322,7 +321,7 @@ const Basket = ({
                     >
                         {goBackLabel}
                     </Button>
-                    <Button onClick={() => goToCheckout()}>{goToCheckoutLabel}</Button>
+                    <Button onClick={() => goToCheckoutHandler()}>{goToCheckoutLabel}</Button>
                 </div>
             </div>
         </PreviewProvider>
