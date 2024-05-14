@@ -270,6 +270,7 @@ const Basket = ({
 
         if (checkoutId) {
             const returnLocation = new URL(returnUrl);
+            
             returnLocation.searchParams.set("basket", checkoutId);
             returnUrl = returnLocation.href;
         }
