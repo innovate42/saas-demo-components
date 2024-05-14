@@ -270,7 +270,7 @@ const Basket = ({
 
         if (checkoutId) {
             const returnLocation = new URL(returnUrl);
-            
+
             returnLocation.searchParams.set("basket", checkoutId);
             returnUrl = returnLocation.href;
         }
@@ -282,7 +282,7 @@ const Basket = ({
         if (!checkoutLink) {
             return goToCheckout();
         }
-        goToCheckout(null, {journey: {checkout: checkoutLink}});
+        goToCheckout(null, {journey: {checkout: {checkout_type: "external", external_url: checkoutLink}}});
     }
 
     return (
