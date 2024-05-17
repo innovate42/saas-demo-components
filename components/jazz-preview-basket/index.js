@@ -38,82 +38,48 @@ type BasketItemsType = {
 
 const OrderTotal = ({orderItems, taxInfo, totalLabel}: BasketItemsType) => {
     const {isInPageBuilder} = useLimioContext();
-    const defaultCountry = getCookie("limio-country");
-
-    const order = useSelector((state) => state.order);
-    const orderCountry = useSelector((state) => state.order.country);
-    const billingDetails = useSelector((state) => state.order.billingDetails);
     const total = useSelector((state) => state.order.total);
-    const locale = useSelector((state) => state.locale);
-    const externalPriceAnyOffer = useSelector((state) =>
-        state.order.orderItems.map(
-            (item) =>
-                item.offer?.data?.attributes?.price__limio?.[0]?.use_external_price
-        )
-    ).includes(true);
 
-    const country = orderCountry || defaultCountry;
 
     const currency =
         orderItems?.[0]?.offer?.data?.attributes?.price__limio?.[0]?.currencyCode; // Assuming multi currency won't be enabled for a while
 
-    const {zuoraPreview, previewSchedule, loadingPreview, preview} =
+    const {zuoraPreview, previewSchedule, loadingPreview} =
         usePreview()
 
     const totalAmount =
         +previewSchedule[0]?.amountWithoutTax + +previewSchedule[0]?.taxAmount;
 
     const totalVal =
-        !isInPageBuilder && externalPriceAnyOffer
+        !isInPageBuilder
             ? {currency, amount: totalAmount}
             : total;
 
     const totalText =
-        !zuoraPreview?.success && externalPriceAnyOffer
+        !zuoraPreview?.success
             ? "-"
             : formatCurrency(Number(totalVal.amount), currency || "GBP");
 
     const subTotal =
-        !isInPageBuilder && externalPriceAnyOffer
+        !isInPageBuilder
             ? {currency, amount: +previewSchedule[0]?.amountWithoutTax}
             : total;
 
     const subTotalText =
-        !zuoraPreview?.success && externalPriceAnyOffer
+        !zuoraPreview?.success
             ? "-"
             : formatCurrency(Number(subTotal.amount), currency || "GBP");
 
     const taxTotal =
-        !isInPageBuilder && externalPriceAnyOffer
+        !isInPageBuilder
             ? {currency, amount: +previewSchedule[0]?.taxAmount}
             : total;
 
     const taxTotalText =
-        !zuoraPreview?.success && externalPriceAnyOffer
+        !zuoraPreview?.success
             ? "-"
             : formatCurrency(Number(taxTotal.amount), currency || "GBP");
 
-
-    useEffect(() => {
-        const smallBillingDetails = {
-            postalCode: billingDetails?.postalCode,
-            country: billingDetails?.country,
-        };
-        const nilOrUndefined = (val) =>
-            val === null || val === undefined || val === "";
-
-        // short circuit the request
-        if (R.map(nilOrUndefined, R.values(smallBillingDetails)).includes(true))
-            return;
-
-        const previewOrderData = {
-            ...order,
-            billingDetails: billingDetails,
-            order_type: "new",
-            mode: "production",
-        };
-        preview(previewOrderData, true);
-    }, [preview, billingDetails, currency, country, order]);
 
     return (
         <>
