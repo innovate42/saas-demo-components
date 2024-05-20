@@ -17,7 +17,7 @@ function SubscriptionSection(): React.Node {
   const frequency = orderItems[0].offer.data.attributes.billing_plan[0]
   const addOns = orderItems[0].addOns
 
-  const addOnList = addOns.length
+  const addOnList = addOns?.length
     ? addOns.map((addOn, index) => {
         const addOnName = addOn.addOn.name
         return (
