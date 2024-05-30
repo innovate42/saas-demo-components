@@ -26,7 +26,8 @@ function EditAddOns({
                         customiseAddOnTitle,
                         cantFindCopy,
                         basketPayText,
-                        longTexts
+                        longTexts,
+                        continueWord
                     }: Props): React.Node {
     const [updates, setUpdates] = React.useState([])
     const {offers = [], addOns: addOnsFromCampaign} = useCampaign()
