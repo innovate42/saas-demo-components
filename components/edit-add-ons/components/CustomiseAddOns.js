@@ -6,6 +6,7 @@ import { DateTime } from "@limio/date"
 import * as R from "ramda"
 import CustomiseAddOn from "./CustomiseAddOn"
 import { usePreview } from "@limio/ui-preview-context"
+import {useLimioContext} from "@limio/sdk";
 
 type Props = {
   updates: Array<{ id: string, type: string }>,
@@ -34,8 +35,15 @@ const standardiseOfferPlan = billingPlan => {
   return standariseString(billingPlan)
 }
 
+const filterOffer = (pageBuilder, offer) => {
+  // if pagebuilder is true then
+  if (pageBuilder) return offer.status === "active" || offer.status === undefined
+  return offer.status === "active"
+}
+
 function CustomiseAddOns({ updates, handleAdd, handleFilter, handleRemove, billingPlan, handleQuantityChange, baseProduct }: Props): React.Node {
   const { subscriptions } = useSubscriptions() // returns a subscription[]
+  const { isInPageBuilder } = useLimioContext();
   const subscription = subscriptions[0]
   const { loadingPreview } = usePreview()
 
@@ -48,7 +56,7 @@ function CustomiseAddOns({ updates, handleAdd, handleFilter, handleRemove, billi
   }
   const filteredSubscriptionAddOns = subscription.addOns.filter(isExpired)
   const subscribedAddOns = filteredSubscriptionAddOns.map(addOn => stripAdd_on_id(addOn.data?.add_on?.id))
-  const activeOffers = subscription.offers.filter(offer => offer.status === "active")
+  const activeOffers = subscription.offers.filter(offer => filterOffer(isInPageBuilder, offer.data.offer))
   const activeOffer = activeOffers[0]
   const billingPlanFromOffer = activeOffer.data.offer.data.attributes.billing_plan[0]
 
