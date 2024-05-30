@@ -167,13 +167,7 @@ function CustomiseAddOns({
             })}
             <div className={"flex center mb-20 border-add-on yellow yellow-border"}>
                 <div className={"flex col ml-2r text-left"} dangerouslySetInnerHTML={{__html: cantFindCopy }}>
-                    <p>can't find what you are looking for?</p>
-                    <p>
-                        {" "}
-                        please contact our sales team at <a
-                        href={"mailto:sales@gmail.comcom?subject=Add On Sales"}>sales@gmail.com</a> or on 1234567890 for
-                        further help.
-                    </p>
+                  
                 </div>
             </div>
         </>
