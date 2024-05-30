@@ -10,6 +10,7 @@ import {sendOrder} from "@limio/shop/src/shop/helpers/postRequests.js"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faCircleInfo, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
 import DialogContainer from "./DialogContainer"
+import {useLimioUserSubscriptionPaymentMethods} from "@limio/internal-checkout-sdk"
 
 const buildOrder = (subscription, updates) => {
     return {
@@ -45,6 +46,9 @@ type Props = {
 
 function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Props): React.Node {
     const {subscriptions = []} = useSubscriptions()
+    const subscription = subscriptions[0]
+    const {payment_methods, revalidate: revalidatePayments} = useLimioUserSubscriptionPaymentMethods(subscription.id)
+
     const {offers = [], addOns: addOnsFromCampaign} = useCampaign()
     let addOns
     if (Array.isArray(addOnsFromCampaign)) {
@@ -60,7 +64,6 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
 
     const {zuoraPreview, previewSchedule, loadingPreview, preview, previewError} = usePreview()
 
-    const subscription = subscriptions[0]
     const dateOfEffect = formatDate(checkCurrentSchedule(subscription.schedule).data.date)
 
     const additions = updates.filter(update => update.type === "add").map(({id}) => id)
@@ -161,12 +164,17 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
     }
 
     const getSecondPaymentDetails = () => {
-        if (previewSchedule){
+        if (previewSchedule) {
             const secondPayment = previewSchedule.find(schedule => new Date(schedule.date).getDay() === new Date().getDay() + 1)
-            if (secondPayment){
+            if (secondPayment) {
                 return `Your next payment of ${formatCurrency(secondPayment.amountWithoutTax, "USD")} will be on ${formatDate(secondPayment.date)}`
             }
         }
+    }
+
+    const showPaymentDetals = () => {
+console.log(payment_methods)
+
     }
 
     return (
