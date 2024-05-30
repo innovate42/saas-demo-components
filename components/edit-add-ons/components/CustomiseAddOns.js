@@ -107,7 +107,7 @@ function CustomiseAddOns({
             }
         }
 
-        if (isOwned || onlyShowPurchase) {
+        if (isOwned && !onlyShowPurchase) {
             return (
                 <button
                     onClick={removeAction}
@@ -167,7 +167,7 @@ function CustomiseAddOns({
             })}
             <div className={"flex center mb-20 border-add-on yellow yellow-border"}>
                 <div className={"flex col ml-2r text-left"} dangerouslySetInnerHTML={{__html: cantFindCopy }}>
-                  
+
                 </div>
             </div>
         </>
