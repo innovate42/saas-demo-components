@@ -15,7 +15,8 @@ type Props = {
   handleRemove: Function,
   billingPlan: string,
   handleQuantityChange: Function,
-  baseProduct: string
+  baseProduct: string,
+  onlyShowPurchase: boolean
 }
 
 // returns not expired add ons or cancelled
@@ -41,7 +42,7 @@ const filterOffer = (pageBuilder, offer) => {
   return offer.status === "active"
 }
 
-function CustomiseAddOns({ updates, handleAdd, handleFilter, handleRemove, billingPlan, handleQuantityChange, baseProduct }: Props): React.Node {
+function CustomiseAddOns({ updates, handleAdd, handleFilter, handleRemove, billingPlan, handleQuantityChange, baseProduct, onlyShowPurchase }: Props): React.Node {
   const { subscriptions } = useSubscriptions() // returns a subscription[]
   const { isInPageBuilder } = useLimioContext();
   const subscription = subscriptions[0]
@@ -96,7 +97,7 @@ function CustomiseAddOns({ updates, handleAdd, handleFilter, handleRemove, billi
       }
     }
 
-    if (isOwned) {
+    if (isOwned || onlyShowPurchase) {
       return (
         <button
           onClick={removeAction}

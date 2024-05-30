@@ -10,7 +10,12 @@ import { PreviewProvider } from "@limio/ui-preview-context"
 import { mapTermObjectToDisplayStr, stripPathToProductName } from "./components/helpers"
 import * as R from "ramda"
 
-function EditAddOns(): React.Node {
+type Props = {
+  onlyShowPurchase: boolean
+}
+
+
+function EditAddOns({onlyShowPurchase}: Props): React.Node {
   const [updates, setUpdates] = React.useState([])
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
   let addOns
@@ -136,6 +141,7 @@ function EditAddOns(): React.Node {
             <StaticSection label={"Billing Frequency"} content={term} />
             <div className={"grid-stretch"}>
               <CustomiseAddOns
+                  onlyShowPurchase={onlyShowPurchase}
                 updates={updates}
                 handleRemove={handleRemove}
                 handleAdd={handleAdd}

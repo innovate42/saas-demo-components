@@ -17,5 +17,12 @@
   "peerDependencies": {
     "react": "*"
   },
-  "limioProps": []
+  "limioProps": [
+    {
+      "id": "onlyShowPurchase",
+      "label": "Only show purchases?",
+      "type": "boolean",
+      "default": false
+    }
+  ]
 }
