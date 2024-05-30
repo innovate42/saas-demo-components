@@ -19,6 +19,42 @@
   },
   "limioProps": [
     {
+      "id": "title",
+      "label": "Title on the page",
+      "type": "string",
+      "default": "Edit Add-Ons"
+    },
+    {
+      "id": "customiseAddOnTitle",
+      "label": "Customise Add-On Title",
+      "type": "string",
+      "default": "Customise Add-Ons"
+    },
+    {
+      "id": "basketPayText",
+      "label": "Basket Pay Button Text",
+      "type": "richtext",
+      "default": "Pay"
+    },
+    {
+      "id": "longTexts",
+      "label": "Texts for the below basket",
+      "type": "richtext",
+      "default": "Lorem ipsum"
+    },
+    {
+      "id": "continueWord",
+      "label": "Continue Button Text",
+      "type": "string",
+      "default": "continue"
+    },
+    {
+      "id": "cantFindCopy",
+      "label": "Can't find what you're looking for?",
+      "type": "richtext",
+      "default": "<p>Can't find what you're looking for? <a href='mailto:sales@limio.com'>Contact us</a> to discuss your requirements.</p>"
+    },
+    {
       "id": "onlyShowPurchase",
       "label": "Only show purchases?",
       "type": "boolean",
