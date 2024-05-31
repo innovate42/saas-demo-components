@@ -70,8 +70,7 @@ function CustomiseAddOns({
     const subscribedAddOns = filteredSubscriptionAddOns.map(addOn => stripAdd_on_id(addOn.data?.add_on?.id))
     const activeOffers = subscription.offers.filter(offer => filterOffer(isInPageBuilder, offer.data.offer))
     const activeOffer = activeOffers[0]
-    const billingPlanFromOffer = R.pathOr(false, ["data", "offer", "data", "attributes", "billing_plan", "0"], activeOffer) || isInPageBuilder ? "monthly" : undefined
-
+    const billingPlanFromOffer = R.pathOr(false, ["data", "offer", "data", "attributes", "billing_plan", "0"], activeOffer) || (isInPageBuilder ? "monthly" : undefined)    // data.offer.data.attributes.billing_plan[0]
     const filteredBillingPlanAddOns = addOns.filter(addOn =>
         standardiseOfferPlan(billingPlanFromOffer).includes(standariseString(addOn.data.attributes.billing_option[0]))
     )
