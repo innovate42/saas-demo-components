@@ -273,7 +273,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
                 <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
                     {continueWord}
                 </button>
-                <p>{payment_methods && payment_methods.length && showPaymentDetails()}</p>
+                <p>{payment_methods && payment_methods.length ? showPaymentDetails() : null}</p>
             </div>
             <section className={"description"} dangerouslySetInnerHTML={{__html: longTexts}}>
             </section>
