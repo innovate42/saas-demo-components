@@ -24,7 +24,10 @@ function Select({ selectedProduct, handleBaseProductChange, compareLink }: Props
     addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
   }
   const { subscriptions } = useSubscriptions() // returns a subscription[]
-  const subscription = subscriptions[0]
+    // get the subId query string param and find the sub.id that matches otherwise return the first in the list
+    const subId = new URLSearchParams(window.location.search).get("subId")
+    const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
+
 
   const termEndDate = R.pathOr("N/A", ["data", "termEndDate"], subscription)
   const renewDate = DateTime.fromISO(termEndDate).toFormat("MMMM d, yyyy")

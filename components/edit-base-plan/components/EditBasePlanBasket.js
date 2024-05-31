@@ -109,7 +109,10 @@ const isExpired = (addOn) => {
 
 function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts, continueButtonText,yourOldPlanCopy, yourNewPlanCopy }: Props): React.Node {
   const { subscriptions = [] } = useSubscriptions();
-  const subscription = subscriptions[0];
+  // get the subId query string param and find the sub.id that matches otherwise return the first in the list
+  const subId = new URLSearchParams(window.location.search).get("subId")
+  const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
+
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign();
   let addOns;
   if (Array.isArray(addOnsFromCampaign)) {
