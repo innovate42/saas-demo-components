@@ -172,8 +172,18 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
         }
     }
 
-    const showPaymentDetals = () => {
-console.log(payment_methods)
+    const showPaymentDetails = () => {
+        const activePaymentMethods = payment_methods.filter(paymentMethod => paymentMethod.status === "Active")
+        if (activePaymentMethods.length === 0) {
+            return
+        }
+        const [activePaymentMethod] = activePaymentMethods.sort((a, b) => new Date(b.start) - new Date(a.start))
+
+        const paymentMethodType = activePaymentMethod.type
+        const paymentMethodData = R.path(["data", paymentMethodType, "result"], activePaymentMethod)
+        const { CreditCardMaskNumber: creditCardMask,CreditCardType = ""} = paymentMethodData
+        return `Charge to your ${CreditCardType} (${creditCardMask})`
+
 // const paymentMethod =
     }
 
@@ -263,6 +273,7 @@ console.log(payment_methods)
                 <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
                     {continueWord}
                 </button>
+                <p>{payment_methods && payment_methods.length && showPaymentDetails()}</p>
             </div>
             <section className={"description"} dangerouslySetInnerHTML={{__html: longTexts}}>
             </section>
