@@ -165,10 +165,11 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
 
     const getSecondPaymentDetails = () => {
         if (previewSchedule) {
-            const secondPayment = previewSchedule.find(schedule => new Date(schedule.date).getDay() === new Date().getDay() + 1)
-            if (secondPayment) {
+            if (previewSchedule.length > 1) {
+                const secondPayment = previewSchedule[1]
                 return `Your next payment of ${formatCurrency(secondPayment.amountWithoutTax, "USD")} will be on ${formatDate(secondPayment.date)}`
             }
+
         }
     }
 
@@ -181,7 +182,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
 
         const paymentMethodType = activePaymentMethod.type
         const paymentMethodData = R.path(["data", paymentMethodType, "result"], activePaymentMethod)
-        const { CreditCardMaskNumber: creditCardMask,CreditCardType = ""} = paymentMethodData
+        const {CreditCardMaskNumber: creditCardMask, CreditCardType = ""} = paymentMethodData
         return `Charge to your ${CreditCardType} (${creditCardMask})`
 
     }
