@@ -145,7 +145,7 @@ function CustomiseAddOns({
                 // match the add on with subscription add on and check if it has an attribute saying dont allow remove
                 // if yes return if no render
                 const owned = checkIfOwned(addOn)
-                if (owned && onlyShowPurchase){
+                if (owned.props.id.startsWith("subscription") && onlyShowPurchase){
                     const additions = updates.filter(update => update.type === "add").map(({id}) => id)
                     const inAdditions = additions.includes(addOn.id)
                     if (!inAdditions) return <></>
