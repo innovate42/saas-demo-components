@@ -331,7 +331,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
       </div>
       <div className="row-border" />
       <div className={"flex space-between mr-4 mt-4"}>
-        <h2 className={"less-bold"}>{toPayText}</h2>
+        <div className={"less-bold"} dangerouslySetInnerHTML={{__html: toPayText}}/>
         <p>
           {processToday.current ? (
             !emptyOrNil(price.add) && !emptyOrNil(price.remove) ? (
