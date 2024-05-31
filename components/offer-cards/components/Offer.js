@@ -1,8 +1,7 @@
 // @flow
 import React from "react";
-import { sanitizeString } from "../source//utils/string";
-import { useBasket } from "@limio/sdk";
-import { formatDisplayPrice } from "../source/utils/string";
+import { sanitizeString } from "@limio/shop/src/shop/offers/helpers";
+import { useBasket, formatDisplayPrice } from "@limio/sdk";
 
 const formatBulletPoints = (string) => {
     const sanitised = sanitizeString(string)
