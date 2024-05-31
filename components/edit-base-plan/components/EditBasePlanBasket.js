@@ -14,6 +14,7 @@ import { v4 as uuid } from "uuid";
 import { DateTime } from "@limio/date";
 import { usePreview } from "@limio/ui-preview-context";
 import PlanAndPricing from "./PlanAndPricing";
+import {useLimioUserSubscriptionPaymentMethods} from "@limio/internal-checkout-sdk"
 
 type Props = {
   successLink: string,
@@ -110,6 +111,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
   // get the subId query string param and find the sub.id that matches otherwise return the first in the list
   const subId = new URLSearchParams(window.location.search).get("subId")
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
+  const {payment_methods, revalidate: revalidatePayments} = useLimioUserSubscriptionPaymentMethods(subscription.id)
 
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign();
   let addOns;
@@ -273,6 +275,20 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
     return formatCurrency(total, "USD");
   };
 
+  const showPaymentDetails = () => {
+    const activePaymentMethods = payment_methods.filter(paymentMethod => paymentMethod.status === "active")
+    if (activePaymentMethods.length === 0) {
+      return
+    }
+    const [activePaymentMethod] = activePaymentMethods.sort((a, b) => new Date(b.start) - new Date(a.start))
+
+    const paymentMethodType = activePaymentMethod.type
+    const paymentMethodData = R.path(["data", paymentMethodType, "result"], activePaymentMethod)
+    const {CreditCardMaskNumber: creditCardMask, CreditCardType = ""} = paymentMethodData
+    return `Charge to your ${CreditCardType} (${creditCardMask})`
+
+  }
+
   React.useEffect(() => {
     setPrice({});
     getPreview();
@@ -330,12 +346,14 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
       </div>
       <div className={"flex place-end mr-4"}>
         <button
-          onClick={handleSubmit}
-          className={"add-remove-btns add-btn cont-btn"}
-          disabled={submitting}
+            onClick={handleSubmit}
+            className={"add-remove-btns add-btn cont-btn"}
+            disabled={submitting}
         >
           {continueButtonText}
         </button>
+        <p>{payment_methods && payment_methods.length ? showPaymentDetails() : null}</p>
+
       </div>
 
       <section className={"description"} dangerouslySetInnerHTML={{__html: longTexts}}>
