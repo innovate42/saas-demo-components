@@ -10,6 +10,7 @@ type Props = {
 }
 
 function PlanAndPricing({ selectedOfferObj, price, processToday }: Props) {
+    if (!selectedOfferObj) return <></>
   return (
     <>
       <div className="flex space-between center mb-2 pt-2 pb-2 mr-4">

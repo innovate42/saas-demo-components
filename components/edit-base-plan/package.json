@@ -25,6 +25,40 @@
       "default": true
     },
     {
+      "id": "titleText",
+      "label": "The title",
+      "type": "string",
+      "default": "Change your plan"
+    },
+    {
+      "id": "manageText",
+      "label": "Manage add on text",
+      "type": "richtext",
+      "default": "Need to manage your subscription add-ons? Please visit your subscription page and choose ‘Edit Add-ons’ to make your changes."
+    },
+    {"id": "yourPlanTitle", "label": "Title of the right hand side of the page", "type": "string","default": "Your Plan"},
+    {"id": "toPayText", "label": "The text for the proceed button", "type": "richtext", "default": "To pay today"},
+    {"id": "longTexts", "label":  "Text below the continue button", "type":  "richtext", "default": "Lorem Ipsum"},
+    {"id":  "continueButtonText", "label":  "Copy for the continue button", "type":  "string", "default":  "Continue"},
+    {
+      "id": "onlyIncrease",
+      "label": "Only allow increases in quantity",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "id": "hideBillingFrequency",
+      "label": "Hide change in billing frequency",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "id": "hideBillingPlan",
+      "label": "Hide change in billing plan",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
       "id": "compareLink",
       "Label": "Link to the compare page",
       "type": "string",

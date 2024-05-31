@@ -21,6 +21,9 @@ import PlanAndPricing from "./PlanAndPricing";
 type Props = {
   selectedOffer: string,
   quantity: string,
+    yourPlanTitle: string,
+    toPayText: string,
+    longTexts:string,
 };
 
 const buildOrder = (
@@ -102,7 +105,7 @@ const isExpired = (addOn) => {
   );
 };
 
-function EditBasePlanBasket({ selectedOffer, quantity }: Props): React.Node {
+function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts, continueButtonText }: Props): React.Node {
   const { subscriptions = [] } = useSubscriptions();
   const subscription = subscriptions[0];
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign();
@@ -285,7 +288,7 @@ function EditBasePlanBasket({ selectedOffer, quantity }: Props): React.Node {
 
   return (
     <div className={"right-side"}>
-      <h3 className={"mb-2 pb-2"}>Your Plan </h3>
+      <h3 className={"mb-2 pb-2"}>{yourPlanTitle}</h3>
       <PlanAndPricing
         selectedOfferObj={selectedOfferObj}
         price={price}
@@ -306,7 +309,7 @@ function EditBasePlanBasket({ selectedOffer, quantity }: Props): React.Node {
       </div>
       <div className="row-border" />
       <div className={"flex space-between mr-4 mt-4"}>
-        <h2 className={"less-bold"}>To Pay Today</h2>
+        <h2 className={"less-bold"}>{toPayText}</h2>
         <p>
           {processToday.current ? (
             !emptyOrNil(price.add) && !emptyOrNil(price.remove) ? (
@@ -325,29 +328,11 @@ function EditBasePlanBasket({ selectedOffer, quantity }: Props): React.Node {
           className={"add-remove-btns add-btn cont-btn"}
           disabled={submitting}
         >
-          CONTINUE
+          {continueButtonText}
         </button>
       </div>
 
-      <section className={"description"}>
-        Rorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis
-        molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
-        fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus
-        elit sed risus. Maecenas eget condimentum velit, sit amet feugiat
-        lectus. Class aptent taciti sociosqu ad litora torquent per conubia
-        nostra, per inceptos himenaeos. Praesent auctor purus luctus enim
-        egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse
-        ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi
-        convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-        Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque
-        quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo
-        vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu
-        vestibulum vestibulum. Morbi a eleifend magna. Nam metus lacus,
-        porttitor eu mauris a, blandit ultrices nibh. Mauris sit amet magna non
-        ligula vestibulum eleifend. Nulla varius volutpat turpis sed lacinia.
-        Nam eget mi in purus lobortis eleifend. Sed nec ante dictum sem
-        condimentum ullamcorper quis venenatis nisi. Proin vitae facilisis nisi,
-        ac posuere
+      <section className={"description"} dangerouslySetInnerHTML={{__html: longTexts}}>
       </section>
     </div>
   );
