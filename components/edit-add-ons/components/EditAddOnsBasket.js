@@ -174,7 +174,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
 
     const showPaymentDetals = () => {
 console.log(payment_methods)
-
+// const paymentMethod =
     }
 
     return (

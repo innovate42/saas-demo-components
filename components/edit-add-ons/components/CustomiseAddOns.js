@@ -107,7 +107,10 @@ function CustomiseAddOns({
             }
         }
 
-        if (isOwned && !onlyShowPurchase) {
+        if (isOwned) {
+            if (!onlyShowPurchase) {
+                return <></>
+            }
             return (
                 <button
                     onClick={removeAction}
