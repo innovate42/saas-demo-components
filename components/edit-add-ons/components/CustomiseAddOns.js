@@ -108,7 +108,7 @@ function CustomiseAddOns({
         }
 
         if (isOwned) {
-            if (!onlyShowPurchase) {
+            if (onlyShowPurchase) {
                 return <></>
             }
             return (

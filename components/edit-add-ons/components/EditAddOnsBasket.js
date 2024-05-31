@@ -184,7 +184,6 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
         const { CreditCardMaskNumber: creditCardMask,CreditCardType = ""} = paymentMethodData
         return `Charge to your ${CreditCardType} (${creditCardMask})`
 
-// const paymentMethod =
     }
 
     return (
