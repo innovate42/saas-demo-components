@@ -39,7 +39,10 @@ function EditAddOns({
     }
     const {subscriptions} = useSubscriptions() // returns a subscription[]
 
-    const subscription = subscriptions[0] // use first as org is limited to single base plans
+    // get the subId query string param and find the sub.id that matches otherwise return the first in the list
+    const subId = new URLSearchParams(window.location.search).get("subId")
+    const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
+
     const activeOffer = subscription.offers.find(offer => offer.data.end === undefined || offer.data.end > DateTime.local().toISODate())
 
     // TODO: create an offer level attribute for this

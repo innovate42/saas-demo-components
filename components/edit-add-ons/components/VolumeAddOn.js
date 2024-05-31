@@ -23,7 +23,8 @@ function VolumeAddOn({ addOn, owned, handleQuantityChange, subscribedAddOns, upd
   )
   const { subscriptions } = useSubscriptions() // returns a subscription[]
   const { loadingPreview } = usePreview()
-  const subscription = subscriptions[0]
+  const subId = new URLSearchParams(window.location.search).get("subId")
+  const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
   let update
   let updateQuantity = ""
   let origQuantity = ""

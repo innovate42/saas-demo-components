@@ -59,11 +59,11 @@ export function SubscriptionItem({
     }
 
     const handleEditAddOnsClick = () => {
-        window.location.href = `${links.editAddOns}`
+        window.location.href = `${links.editAddOns}?subId=${id}`
     }
 
     const handleEditBasePlanClick = () => {
-        window.location.href = `${links.editBasePlan}`
+        window.location.href = `${links.editBasePlan}?subId=${id}`
     }
 
 

@@ -46,7 +46,8 @@ type Props = {
 
 function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Props): React.Node {
     const {subscriptions = []} = useSubscriptions()
-    const subscription = subscriptions[0]
+    const subId = new URLSearchParams(window.location.search).get("subId")
+    const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
     const {payment_methods, revalidate: revalidatePayments} = useLimioUserSubscriptionPaymentMethods(subscription.id)
 
     const {offers = [], addOns: addOnsFromCampaign} = useCampaign()
