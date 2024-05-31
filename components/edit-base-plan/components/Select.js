@@ -47,10 +47,10 @@ function Select({ selectedProduct, handleBaseProductChange, compareLink }: Props
         </select>
         <a href={compareLink}>Compare</a>
       </div>
-      <Alert color={"primary"} className={"grid-stretch"}>
-        <FontAwesomeIcon icon={faCircleInfo} />
-        <p className={"mb-0 alert-blue inline pl-2"}>{`Your plan is set to remove ${renewDate}.`}</p>
-      </Alert>
+      {/*<Alert color={"primary"} className={"grid-stretch"}>*/}
+      {/*  <FontAwesomeIcon icon={faCircleInfo} />*/}
+      {/*  <p className={"mb-0 alert-blue inline pl-2"}>{`Your plan is set to remove ${renewDate}.`}</p>*/}
+      {/*</Alert>*/}
       <div className="row-border" />
     </>
   )
