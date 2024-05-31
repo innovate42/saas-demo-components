@@ -139,7 +139,7 @@ function EditBasePlan(props: Props): React.Node {
                                 handleFrequencyChange={handleFrequencyChange}
                                 selectedTerm={selectedTerm}
                             />)}
-                            <QuantityField quantity={quantity} setQuantity={setQuantity} onlyIncrease={props.onlyIncrease} subQuantity={subscription.data.quantity || 1}/>
+                            <QuantityField quantity={quantity} setQuantity={setQuantity} onlyIncrease={props.onlyIncrease} subQuantity={currentOffer.data.quantity || 1}/>
                             <div className={"grid-stretch"}>
                                 <Alert color={"primary"}>
                                     <FontAwesomeIcon icon={faCircleInfo}/>
