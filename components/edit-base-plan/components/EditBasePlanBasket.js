@@ -6,10 +6,7 @@ import {
   checkActiveSubscriptionOffer,
   emptyOrNil,
   formatCurrency,
-  formatDate,
-  matchPartialString,
-  planChangeStatus,
-  stripPathToProductName,
+
 } from "./helpers";
 import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js";
 import { Alert, LoadingSpinner } from "@limio/design-system";
@@ -129,7 +126,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
   const [dateOfEffect, setDateOfEffect] = React.useState(new Date());
   const [submitting, setSubmitting] = React.useState(false);
   const processToday = React.useRef(true);
-  const currentOffer = checkActiveSubscriptionOffer(subscriptions[0].offers);
+  const currentOffer = checkActiveSubscriptionOffer(subscription.offers)
 
   const { zuoraPreview, previewSchedule, preview } = usePreview();
 
@@ -143,7 +140,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
     addOn.data.add_on?.data.products[0].entitlements?.map((e) => e.$ref) ?? [];
 
   // owned and active add ons
-  const ownedAddOns = subscriptions[0].addOns.filter(
+  const ownedAddOns = subscription.addOns.filter(
     (addOn) => addOn.status === "active" && !isExpired(addOn)
   );
 
@@ -230,7 +227,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
     );
 
     const order = buildOrder(
-      subscriptions[0],
+      subscription,
       selectedOfferObj,
       dateOfEffect,
       [...matchedReAdds, ...matchedRemovals],
@@ -245,11 +242,11 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
 
   const getPreview = () => {
     const matchingAddOns = matchAddOnsWithEntitlements(
-      subscriptions[0].addOns,
+      subscription.addOns,
       entitlementsToRemove
     );
     const order = buildOrder(
-      subscriptions[0],
+      subscription,
       selectedOfferObj,
       dateOfEffect,
       matchingAddOns,
@@ -301,6 +298,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
         processToday={processToday}
         yourNewPlanCopy={yourNewPlanCopy}
         yourOldPlanCopy={yourOldPlanCopy}
+        currentOffer={currentOffer}
       />
       <div className="flex space-between mr-4 mt-2">
         <label className="bold">Offer Code </label>

@@ -2,17 +2,22 @@
 import * as React from "react"
 import {emptyOrNil, formatCurrency, stripPathToProductName} from "./helpers"
 import {LoadingSpinner} from "@limio/design-system"
+import * as R from "ramda"
 
 type Props = {
     selectedOfferObj: Object,
     price: Object,
     processToday: Object,
     yourNewPlanCopy: string,
-    yourOldPlanCopy: string
+    yourOldPlanCopy: string,
+    currentOffer: Object
 }
 
-function PlanAndPricing({selectedOfferObj, price, processToday, yourNewPlanCopy, yourOldPlanCopy}: Props) {
-    if (!selectedOfferObj) return <></>
+function PlanAndPricing({selectedOfferObj, price, processToday, yourNewPlanCopy, yourOldPlanCopy, currentOffer}: Props) {
+
+    const currentOfferId = R.pathOr(null, ["data", "offer", "id"], currentOffer)
+    // offers[0].data.offer.id
+    if (currentOfferId === selectedOfferObj.id) return <></>
     return (
         <>
             <div className="flex space-between center mb-2 pt-2 pb-2 mr-4">
