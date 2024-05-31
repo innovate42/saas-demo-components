@@ -24,6 +24,8 @@ type Props = {
     yourPlanTitle: string,
     toPayText: string,
     longTexts:string,
+  yourNewPlanCopy: string,
+  yourOldPlanCopy: string
 };
 
 const buildOrder = (
@@ -105,7 +107,7 @@ const isExpired = (addOn) => {
   );
 };
 
-function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts, continueButtonText }: Props): React.Node {
+function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts, continueButtonText,yourOldPlanCopy, yourNewPlanCopy }: Props): React.Node {
   const { subscriptions = [] } = useSubscriptions();
   const subscription = subscriptions[0];
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign();
@@ -293,6 +295,8 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
         selectedOfferObj={selectedOfferObj}
         price={price}
         processToday={processToday}
+        yourNewPlanCopy={yourNewPlanCopy}
+        yourOldPlanCopy={yourOldPlanCopy}
       />
       <div className="flex space-between mr-4 mt-2">
         <label className="bold">Offer Code </label>

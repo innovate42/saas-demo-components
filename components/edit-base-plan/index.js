@@ -26,6 +26,8 @@ type Props = {
     toPayText: string,
     longTexts:string,
     continueButtonText: string,
+    yourOldPlanCopy:string,
+    yourNewPlanCopy: string
 };
 
 function EditBasePlan(props: Props): React.Node {
@@ -145,7 +147,8 @@ function EditBasePlan(props: Props): React.Node {
                             </div>
                         </div>
                         {/* column 2 */}
-                        <EditBasePlanBasket selectedOffer={selectedOffer} quantity={quantity} yourPlanTitle={props.yourPlanTitle} toPayText={props.toPayText} longTexts={props.longTexts} continueButtonText={props.continueButtonText}/>
+                        <EditBasePlanBasket selectedOffer={selectedOffer} quantity={quantity} yourPlanTitle={props.yourPlanTitle} toPayText={props.toPayText} longTexts={props.longTexts} continueButtonText={props.continueButtonText} yourNewPlanCopy={props.yourNewPlanCopy} yourOldPlanCopy={props.yourOldPlanCopy}/>
+
                     </div>
                 </div>
             </PreviewProvider>
