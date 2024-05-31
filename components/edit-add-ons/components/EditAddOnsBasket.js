@@ -269,7 +269,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
                     <p>{getSecondPaymentDetails()}</p>
                 </div>
             </div>
-            <div className={"flex place-end mr-4"}>
+            <div className={"flex place-end mr-4 checkout-btn"}>
                 <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
                     {continueWord}
                 </button>

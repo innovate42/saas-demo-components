@@ -366,3 +366,10 @@ ul {
   transform: translate(-50%, -50%);
   overflow-y: auto;
 }
+
+.checkout-btn {
+  flex-direction: column;
+  float: right;
+  min-width: 120px;
+  width: 25%;
+}
