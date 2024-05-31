@@ -108,9 +108,7 @@ function CustomiseAddOns({
         }
 
         if (isOwned) {
-            if (onlyShowPurchase) {
-                return <></>
-            }
+
             return (
                 <button
                     onClick={removeAction}
@@ -146,6 +144,11 @@ function CustomiseAddOns({
                 // match the add on with subscription add on and check if it has an attribute saying dont allow remove
                 // if yes return if no render
                 const owned = checkIfOwned(addOn)
+                if (owned && onlyShowPurchase){
+                    const additions = updates.filter(update => update.type === "add").map(({id}) => id)
+                    const inAdditions = additions.includes(addOn.id)
+                    if (!inAdditions) return <></>
+                }
                 // if the addon is marked as incompatible with the base product, don't render it
                 // if the addon has base then render
                 const compatibleWith = addOn.data.attributes.compatible_products
