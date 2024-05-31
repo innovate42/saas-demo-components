@@ -20,7 +20,7 @@
   "limioProps": [
     {
       "id": "defaultToBase",
-      "Label": "Show base plan in the select by default",
+      "label": "Show base plan in the select by default",
       "type": "boolean",
       "default": true
     },
@@ -92,7 +92,7 @@
     },
     {
       "id": "compareLink",
-      "Label": "Link to the compare page",
+      "label": "Link to the compare page",
       "type": "string",
       "default": "#"
     }
