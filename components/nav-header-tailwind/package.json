@@ -1,0 +1,99 @@
+{
+  "name": "@limio/component-nav-header-tailwind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "reactstrap": "^8.9.0"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logo",
+      "label": "Logo",
+      "type": "string",
+      "format": "uri",
+      "purpose": "image",
+      "default": "https://sandbox.dev.limio.com/public/51ed4975-c2b9-47f3-bf20-70d7240564af/Limio-Original-White.png"
+    },
+    {
+      "id": "logoHref",
+      "label": "Logo link",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "logoText",
+      "label": "Logo Text",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "items",
+      "label": "Navigation bar items",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Text",
+          "type": "string"
+        },
+        "href": {
+          "id": "href",
+          "label": "Link",
+          "type": "string"
+        },
+        "button__limio_boolean": {
+          "id": "button__limio_boolean",
+          "label": "Show as button",
+          "type": "boolean"
+        },
+        "login__limio_boolean": {
+          "id": "button__limio_boolean",
+          "label": "Show as login button",
+          "type": "boolean"
+        }
+      },
+      "default": [
+        {
+          "label": "Premium",
+          "href": "/uk/premium",
+          "button__limio_boolean": false,
+          "login__limio_boolean": false
+        },
+        {
+          "label": "Help",
+          "href": "/help",
+          "button__limio_boolean": false,
+          "login__limio_boolean": false
+        },
+        {
+          "label": "Download",
+          "href": "/download",
+          "button__limio_boolean": false,
+          "login__limio_boolean": false
+        }
+      ]
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "nav-header-limio"
+    }
+  ],
+  "translatableFields": [
+    "Checkout",
+    "My basket",
+    "Quantity"
+  ]
+}

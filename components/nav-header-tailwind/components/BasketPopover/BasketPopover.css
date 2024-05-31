@@ -1,0 +1,129 @@
+.basket-popover {
+  max-width: 375px;
+  min-width: 250px;
+}
+
+.basket-popover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  right: 0rem;
+  top: calc(100%);
+  transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+}
+
+h3.popover-header {
+  font-size: 1.25em;
+  margin-bottom: 0;
+}
+
+.popover-header svg {
+  cursor: pointer;
+  width: 10px;
+}
+
+.popover-body {
+  background-color: #ffffff;
+  height: 85vh;
+  overflow-y: scroll;
+}
+
+.popover-body .list-group-item {
+  border: none;
+  padding: 0em;
+}
+
+.popover-body .list-group-item h4 {
+  display: inline-block;
+  font-size: 1.2em;
+}
+
+.popover-body .list-group-item h4 span {
+  margin-right: .5em;
+  font-weight: 600;
+}
+
+.popover-body .basket-popover-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popover-body .list-group-item .price-details .display-price {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.popover-body .list-group-item .price-details .detailed-display-price,
+.popover-body .list-group-item .price-details .quantity {
+  font-size: 0.8em;
+}
+
+.popover-body .list-group-item span.remove {
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.popover-body .list-group-item span.remove svg {
+  vertical-align: unset;
+  width: 10px;
+}
+
+.popover-body .list-group-item span.remove:hover {
+  text-decoration: underline;
+}
+
+.popover-body .list-group-item span.break {
+  background-color: #e0e0e0;
+  display: block;
+  height: 2px;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.list-group-item p,
+.popover-body p {
+  margin-bottom: 0em;
+}
+
+.popover-body .price-item {
+  margin-top: 0.5em;
+}
+
+.basket-popover.hidden {
+  transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+  transform: translate3d(100vw, 0, 0);
+}
+
+.basket-quantity {
+  display: flex;
+}
+
+.basket-quantity .basket-quantity-label {
+  display: flex;
+  margin: auto 0.5em auto 0;
+}
+
+.basket-quantity .basket-quantity-input {
+  margin: auto 0;
+  text-align: center;
+  width: 60px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.basket-validation-error-label {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem
+}
+
+@media (max-width: 991px) {
+  .navbar .basket-button.mobile .basket-popover {
+    max-height: 75vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    right: 0;
+    top: calc(100% + 5px);
+  }
+}
