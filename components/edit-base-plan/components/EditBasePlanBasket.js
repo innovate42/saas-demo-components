@@ -19,6 +19,7 @@ import { usePreview } from "@limio/ui-preview-context";
 import PlanAndPricing from "./PlanAndPricing";
 
 type Props = {
+  successLink: string,
   selectedOffer: string,
   quantity: string,
     yourPlanTitle: string,
@@ -107,7 +108,7 @@ const isExpired = (addOn) => {
   );
 };
 
-function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts, continueButtonText,yourOldPlanCopy, yourNewPlanCopy }: Props): React.Node {
+function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText, longTexts,successLink, continueButtonText,yourOldPlanCopy, yourNewPlanCopy }: Props): React.Node {
   const { subscriptions = [] } = useSubscriptions();
   // get the subId query string param and find the sub.id that matches otherwise return the first in the list
   const subId = new URLSearchParams(window.location.search).get("subId")
@@ -239,7 +240,7 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
     );
     setSubmitting(true);
     await sendOrder(order);
-    window.location.href = "/billing";
+    window.location.href = successLink;
   };
 
   const getPreview = () => {

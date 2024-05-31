@@ -17,6 +17,7 @@ type Props = {
     basketPayText: string,
     longTexts: string,
     continueWord: string,
+    successLink: string,
 }
 
 
@@ -27,7 +28,8 @@ function EditAddOns({
                         cantFindCopy,
                         basketPayText,
                         longTexts,
-                        continueWord
+                        continueWord,
+                        successLink
                     }: Props): React.Node {
     const [updates, setUpdates] = React.useState([])
     const {offers = [], addOns: addOnsFromCampaign} = useCampaign()
@@ -171,7 +173,7 @@ function EditAddOns({
                         </div>
                     </div>
                     {/* column 2 */}
-                    <EditAddOnsBasket updates={updates} basketPayText={basketPayText} longTexts={longTexts} continueWord={continueWord}/>
+                    <EditAddOnsBasket updates={updates} basketPayText={basketPayText} longTexts={longTexts} continueWord={continueWord} successLink={successLink}/>
                 </div>
             </div>
         </PreviewProvider>

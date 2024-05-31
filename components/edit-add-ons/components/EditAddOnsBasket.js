@@ -41,10 +41,11 @@ type Props = {
     updates: Array<AddOnUpdateAction>,
     basketPayText: string,
     longTexts: string,
-    continueWord: string
+    continueWord: string,
+    successLink: string
 }
 
-function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Props): React.Node {
+function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText, successLink}: Props): React.Node {
     const {subscriptions = []} = useSubscriptions()
     const subId = new URLSearchParams(window.location.search).get("subId")
     const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
@@ -101,7 +102,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
             let order = buildOrder(subscription, updates)
             setSubmitting(true)
             await sendOrder(order)
-            window.location.href = "/updateSuccess"
+            window.location.href = successLink
         }
     }
 
@@ -265,11 +266,12 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
                 <div dangerouslySetInnerHTML={{__html: basketPayText}}/>
                 <p>{addEmpty ? "--" : R.isEmpty(addOnsPrice) ? <LoadingSpinner/> : orderTotal()}</p>
             </div>
-            <div className={"flex"}>
-                <div>
-                    <p>{getSecondPaymentDetails()}</p>
-                </div>
-            </div>
+            {/* this shows total renewal price not the item being added. */}
+            {/*<div className={"flex"}>*/}
+            {/*    <div>*/}
+            {/*        <p>{getSecondPaymentDetails()}</p>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className={"flex place-end mr-4 checkout-btn"}>
                 <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
                     {continueWord}
