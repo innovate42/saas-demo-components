@@ -174,7 +174,7 @@ function EditAddOnsBasket({updates, longTexts, continueWord, basketPayText}: Pro
     }
 
     const showPaymentDetails = () => {
-        const activePaymentMethods = payment_methods.filter(paymentMethod => paymentMethod.status === "Active")
+        const activePaymentMethods = payment_methods.filter(paymentMethod => paymentMethod.status === "active")
         if (activePaymentMethods.length === 0) {
             return
         }
