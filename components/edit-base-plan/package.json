@@ -96,7 +96,11 @@
       "type": "string",
       "default": "#"
     },
-    {"id":  "successLink", "label": "The end of the link to go to on order success", "type":  "string", "default":  "/updateSuccess"}
-
+    {
+      "id": "successLink",
+      "label": "The end of the link to go to on order success",
+      "type": "string",
+      "default": "/updateSuccess"
+    }
   ]
 }

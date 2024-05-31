@@ -139,7 +139,7 @@ function EditBasePlan(props: Props): React.Node {
                                 handleFrequencyChange={handleFrequencyChange}
                                 selectedTerm={selectedTerm}
                             />)}
-                            <QuantityField quantity={quantity} setQuantity={setQuantity} onlyIncrease={props.onlyIncrease}/>
+                            <QuantityField quantity={quantity} setQuantity={setQuantity} onlyIncrease={props.onlyIncrease} subQuantity={subscription.data.quantity || 1}/>
                             <div className={"grid-stretch"}>
                                 <Alert color={"primary"}>
                                     <FontAwesomeIcon icon={faCircleInfo}/>
@@ -151,7 +151,7 @@ function EditBasePlan(props: Props): React.Node {
                             </div>
                         </div>
                         {/* column 2 */}
-                        <EditBasePlanBasket selectedOffer={selectedOffer} quantity={quantity} yourPlanTitle={props.yourPlanTitle} toPayText={props.toPayText} longTexts={props.longTexts} continueButtonText={props.continueButtonText} yourNewPlanCopy={props.yourNewPlanCopy} yourOldPlanCopy={props.yourOldPlanCopy} successLink={props.successLink}/>
+                        <EditBasePlanBasket selectedOffer={selectedOffer} quantity={quantity} yourPlanTitle={props.yourPlanTitle} toPayText={props.toPayText} longTexts={props.longTexts} continueButtonText={props.continueButtonText} yourNewPlanCopy={props.yourNewPlanCopy} yourOldPlanCopy={props.yourOldPlanCopy} successLink={props.successLink} />
 
                     </div>
                 </div>

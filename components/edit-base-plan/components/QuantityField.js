@@ -5,13 +5,14 @@ type Props = {
   quantity: number,
   setQuantity: (quantity: number) => void,
   onlyIncrease: boolean,
+  subQuantity: number,
 }
 
-function QuantityField({ quantity, setQuantity , onlyIncrease}: Props): React.Node {
+function QuantityField({ quantity, setQuantity , onlyIncrease, subQuantity = 1 }: Props): React.Node {
   const [localQuantity, setLocalQuantity] = React.useState(quantity.toString())
 
   const handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    if (onlyIncrease && parseInt(e.target.value, 10) < quantity) {
+    if (onlyIncrease && parseInt(e.target.value) < subQuantity) {
       return
     }
     const inputValue = e.target.value
