@@ -344,10 +344,10 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
           )}
         </p>
       </div>
-      <div className={"flex place-end mr-4"}>
+      <div className={"flex place-end mr-4 checkout-btn"}>
         <button
             onClick={handleSubmit}
-            className={"add-remove-btns add-btn cont-btn"}
+            className={"add-remove-btns add-btn cont-btn "}
             disabled={submitting}
         >
           {continueButtonText}

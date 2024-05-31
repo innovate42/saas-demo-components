@@ -314,3 +314,9 @@ body {
 .alert-red {
   color: #B13A4D;
 }
+.checkout-btn {
+  flex-direction: column;
+  float: right;
+  min-width: 120px;
+  width: 25%;
+}
