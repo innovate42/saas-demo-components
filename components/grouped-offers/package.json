@@ -10,7 +10,6 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "query-string": "^6.11.1",

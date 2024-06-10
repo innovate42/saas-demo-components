@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useBasket, formatDisplayPrice } from "@limio/sdk";
 import type { Offer as OfferType, CatalogItem } from "@limio/types";
@@ -143,7 +142,6 @@ export default function Offer({
                 }`}
               >
                 <p>{includedFeaturesTitle}</p>
-                <FontAwesomeIcon icon={faChevronDown} />
               </button>
               <div
                 data-testid="features"
