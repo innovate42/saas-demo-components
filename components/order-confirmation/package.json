@@ -10,7 +10,6 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@limio/internal-checkout-sdk": "workspace:^",
     "@limio/shop": "workspace:^",
     "ramda": "^0.28.0",
     "uuid": "^9.0.0",
