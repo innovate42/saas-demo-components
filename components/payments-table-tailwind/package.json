@@ -1,0 +1,50 @@
+{
+  "name": "component-payments-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "goBackHeading",
+      "label": "Go back label",
+      "type": "string",
+      "default": "Return"
+    },
+    {
+      "id": "goBackLink",
+      "label": "Link to go back",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "cancelLink",
+      "label": "Link to cancel page",
+      "type": "string",
+      "default": "/cancel"
+    },
+    {
+      "id": "switchLink",
+      "label": "Link to switch page",
+      "type": "string",
+      "default": "/switch"
+    },
+
+    {
+      "id": "changePaymentLink",
+      "label": "Link to change payment page",
+      "type": "string",
+      "default": "/change-payment"
+    }
+  ]
+}

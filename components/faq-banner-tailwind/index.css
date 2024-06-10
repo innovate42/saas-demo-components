@@ -1,0 +1,109 @@
+.FaqBanner {
+  align-items: center;
+  background-color: #ececec;
+  color: #444;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.FaqBanner .FaqWrapper {
+  max-width: 1200px;
+  position: relative;
+  width: 100%;
+}
+
+.FaqBanner .FaqWrapper h2 {
+  font-size: 2.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0rem;
+  text-align: center;
+}
+
+#faq-banner-limio > div > p {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer {
+  margin: 2.5rem 1rem;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem {
+  margin: 0.5rem auto;
+  max-width: 900px;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem {
+  align-items: center;
+  background-color: #ffffff;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  font-family: unset;
+  font-size: unset;
+  justify-content: space-between;
+  outline: none;
+  padding: 1rem 2rem;
+  text-align: left;
+  width: 100%;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem:hover {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem:focus {
+  border-width: 2px;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem .Question {
+  font-weight: 700;
+  margin: 0;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem .Arrow {
+  margin-left: 0.75em;
+  width: 1.25rem;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .AccordionItem .Arrow.active {
+  transform: rotate(180deg);
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .Answer {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .Answer *:last-child {
+  margin-bottom: 0em;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .Panel {
+  background-color: #ffffff;
+  max-height: 0rem;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.FaqBanner .FaqWrapper .AccordionContainer .FaqItem .Panel.active {
+  max-height: none;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+@media (max-width: 599px) {
+  .FaqBanner {
+    font-size: 90%;
+  }
+
+  .FaqBanner .FaqWrapper .AccordionContainer .FaqItem .Answer ul {
+    padding-inline-start: 1em;
+  }
+}

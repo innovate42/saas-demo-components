@@ -1,0 +1,126 @@
+{
+  "name": "@limio/component-footer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@limio/swr": "*",
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "dependencies": {
+    "@limio/components": "workspace:^",
+    "@limio/sdk": "workspace:^"
+  },
+  "limioProps": [
+    {
+      "id": "logo",
+      "label": "Logo link",
+      "type": "string",
+      "format": "uri",
+      "purpose": "image",
+      "default": "https://sandbox.dev.limio.com/public/51ed4975-c2b9-47f3-bf20-70d7240564af/Limio-Original-White.png"
+    },
+    {
+      "id": "contactFields",
+      "label": "Contact fields",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Label text",
+          "type": "string"
+        },
+        "value": {
+          "id": "value",
+          "label": "Value text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "label": "Email:",
+          "value": "support@limio.com",
+          "url": "mailto:support@limio.com"
+        },
+        {
+          "label": "Telephone:",
+          "value": "020 1234 1234",
+          "url": "tel:020 1234 1234"
+        },
+        {
+          "label": "Address:",
+          "value": "Leather Market, Weston Street, London, SE1 3ER",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "id": "copyrightText",
+      "label": "Copyright text",
+      "type": "string",
+      "default": "Copyright © 2019 Limio"
+    },
+    {
+      "id": "facebookLink",
+      "label": "Facebook link",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "twitterLink",
+      "label": "Twitter link",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "instagramLink",
+      "label": "Instagram link",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "navigation",
+      "label": "Navigation",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Label text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Gift",
+          "url": "/gift"
+        },
+        {
+          "label": "Manage My Account",
+          "url": "/mma"
+        }
+      ]
+    }
+  ]
+}

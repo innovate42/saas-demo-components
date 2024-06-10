@@ -1,0 +1,109 @@
+{
+  "name": "component-cancel-save-offer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Your cancel/save offer"
+    },
+    {
+      "id": "subheading__limio_richtext",
+      "label": "Subheading",
+      "type": "richtext",
+      "default": "Stay with us"
+    },
+    {
+      "id": "discountDetails",
+      "label": "Provide more information about any discounts",
+      "type": "string",
+      "default": "Get {{discountRate}} off for the next {{discountPeriod}}."
+    },
+    {
+      "id": "nextPaymentDetails__limio__richtext",
+      "label": "Provide more information about next payment",
+      "type": "richtext",
+      "default": "Next Payment {{currentPrice}}{{nextPriceWithDiscount}}."
+    },
+    {
+      "id": "detailedSubheading",
+      "label": "Detailed Subheading",
+      "type": "string",
+      "default": "We won't charge you until your subscription renews."
+    },
+    {
+      "id": "imageUrl",
+      "label": "Image Url",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "confirmOfferButtonLabel",
+      "label": "Change Subscription Confirmation Button Label",
+      "type": "string",
+      "default": "I'd like to change my subscription"
+    },
+    {
+      "id": "confirmHeading",
+      "label": "Confirm change modal heading",
+      "type": "string",
+      "default": "Are you sure you want to update your subscription?"
+    },
+    {
+      "id": "confirmSubheading",
+      "label": "Confirm change modal subheading",
+      "type": "richtext",
+      "default": "You will be switched over to this offer, starting on your next billing date"
+    },
+    {
+      "id": "confirmationOk",
+      "label": "Confirm change modal process button local",
+      "type": "string",
+      "default": "I want to change my subscription"
+    },
+    {
+      "id": "confirmationCancel",
+      "label": "Confirm cancel modal go back button label",
+      "type": "string",
+      "default": "Go back"
+    },
+    {
+      "id": "paymentMethodHeading",
+      "label": "Payment method heading",
+      "type": "string",
+      "default": "Payment Method"
+    },
+    {
+      "id": "redirectUrl",
+      "label": "Redirect Url On Change Subscription Confirmation",
+      "type": "string",
+      "default": "cancel/save-confirm"
+    },
+    {
+      "id": "goBackHeading",
+      "label": "Go back label",
+      "type": "string",
+      "default": "Return"
+    },
+    {
+      "id": "goBackLink",
+      "label": "Link to go back",
+      "type": "string",
+      "default": "/"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "name": "@limio/component-features",
+  "version": "0.0.6",
+  "homepage": "https://bit.dev/limio/landing/features",
+  "main": "./index.js",
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "scripts": {
+    "build": "yarn component:webpack"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.2"
+    }
+  },
+  "limioProps": [
+    {
+      "id": "header",
+      "label": "Header",
+      "type": "string",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "id": "subHeader",
+      "label": "Subheader",
+      "type": "string",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit."
+    },
+    {
+      "id": "features",
+      "label": "Features",
+      "type": "list",
+      "fields": {
+        "image": {
+          "id": "image",
+          "label": "Image link",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        },
+        "header": {
+          "id": "header",
+          "label": "Header text",
+          "type": "richtext"
+        },
+        "text": {
+          "id": "text",
+          "label": "Body text",
+          "type": "richtext"
+        },
+        "showButton__limio_boolean": {
+          "id": "showButton__limio_boolean",
+          "label": "Show button?",
+          "type": "boolean"
+        },
+        "buttonText": {
+          "id": "buttonText",
+          "label": "Button text",
+          "type": "string"
+        },
+        "buttonLink": {
+          "id": "buttonLink",
+          "label": "Button link",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "image": "https://campaigns.scdn.co/images/midyear-prem-benefit0.png",
+          "header": "Download Music.",
+          "text": "Listen anywhere.",
+          "showButton__limio_boolean": false,
+          "buttonText": "Click here",
+          "buttonLink": "https://www.limio.com"
+        },
+        {
+          "image": "https://campaigns.scdn.co/images/midyear-prem-benefit1.png",
+          "header": "Listen without ads.",
+          "text": "Enjoy nonstop music.",
+          "showButton__limio_boolean": false,
+          "buttonText": "Click here",
+          "buttonLink": "https://www.limio.com"
+        },
+        {
+          "image": "https://campaigns.scdn.co/images/midyear-prem-benefit2.png",
+          "header": "Play any song.",
+          "text": "Even on mobile.",
+          "showButton__limio_boolean": false,
+          "buttonText": "Click here",
+          "buttonLink": "https://www.limio.com"
+        }
+      ]
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "features-limio"
+    }
+  ]
+}

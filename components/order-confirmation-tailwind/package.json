@@ -1,0 +1,41 @@
+{
+  "name": "component-order-confirmation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "luxon": "^2.4.0",
+    "@limio/internal-checkout-sdk": "workspace:^"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "title",
+      "label": "Title",
+      "type": "string",
+      "default": "Order complete"
+    },
+    {
+      "id": "message",
+      "label": "Message",
+      "type": "richtext",
+      "default": "Thank you for your order. You will receive an email confirmation shortly."
+    },
+    {
+      "id": "messageTitle",
+      "label": "Message Title",
+      "type": "richtext",
+      "default": "Thank you for subscribing"
+    }
+   
+  ]
+}
