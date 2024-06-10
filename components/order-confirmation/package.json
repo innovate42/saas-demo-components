@@ -10,8 +10,6 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@fortawesome/pro-regular-svg-icons": "^6.1.2",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@limio/internal-checkout-sdk": "workspace:^",
     "@limio/shop": "workspace:^",
     "ramda": "^0.28.0",

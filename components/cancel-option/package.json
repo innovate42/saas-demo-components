@@ -10,7 +10,6 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "ramda": "^0.28.0"
   },
   "peerDependencies": {

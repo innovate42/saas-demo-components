@@ -11,7 +11,6 @@
   "license": "UNLICENSED",
   "dependencies": {
     "styled-components": "^6.0.8",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "luxon": "^1.25.0",
     "ramda": "^0.28.0",
     "xss": "^1.0.8"
