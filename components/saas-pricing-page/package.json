@@ -22,7 +22,6 @@
     "redux": "*"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.18.6",
     "@limio/sdk": "workspace:packages/limio-sdk"
   },
   "limioProps": [
