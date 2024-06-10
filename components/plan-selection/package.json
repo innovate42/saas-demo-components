@@ -21,7 +21,6 @@
     "@limio/shop-redux": "*"
   },
   "devDependencies": {
-    "@i42/shared": "*",
     "@limio/sdk": "*",
     "@limio/swr": "*"
   },

@@ -1,0 +1,73 @@
+{
+  "name": "component-switch-subscription",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Alternative subscriptions"
+    },
+    {
+      "id": "subheading",
+      "label": "Heading",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "filterSameTerm",
+      "label": "Filter same term offers?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "confirmationOk",
+      "label": "Confirmation Ok label",
+      "type": "string",
+      "default": "OK"
+    },
+    {
+      "id": "confirmationCancel",
+      "label": "Confirmation Cancel label",
+      "type": "string",
+      "default": "Cancel"
+    },
+    {
+      "id": "confirmHeading",
+      "label": "Confirm Heading",
+      "type": "string",
+      "default": "Are you sure you want change your subscription?"
+    },
+    {
+      "id": "confirmSubHeading",
+      "label": "Confirm Sub Heading",
+      "type": "string",
+      "default": "You will be switched over to this offer, starting your next billing date:"
+    },
+    {
+      "id": "redirectUrl",
+      "label": "Redirect Url",
+      "type": "string",
+      "default": ""
+    }
+  ]
+}

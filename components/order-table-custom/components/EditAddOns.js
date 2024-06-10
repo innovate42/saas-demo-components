@@ -2,14 +2,14 @@
 import * as React from "react"
 import { Button, Table } from "@limio/design-system"
 import type { AddOn } from "../types"
-import type { UserSubscription } from "@i42/shared/src/objects/types"
+
 
 
 type Props = {
   addOns: Array<AddOn>,
   reviewChangesLink: string,
   nextSchedule: string,
-  subscription: UserSubscription,
+  subscription,
   setEditAddOns: () => void
 }
 

@@ -18,7 +18,6 @@
     "react": "*"
   },
   "devDependencies": {
-    "@i42/shared": "workspace:packages/shared",
     "@limio/ui-preview-context": "workspace:^"
   },
   "limioProps": [
