@@ -1,5 +1,5 @@
 {
-  "name": "@limio/component-breadcrumbs",
+  "name": "@limio/component-breadcrumbs-tailwind",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",

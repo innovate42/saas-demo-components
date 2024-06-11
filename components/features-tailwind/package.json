@@ -1,5 +1,5 @@
 {
-  "name": "@limio/component-features",
+  "name": "@limio/component-features-tailwind",
   "version": "0.0.6",
   "homepage": "https://bit.dev/limio/landing/features",
   "main": "./index.js",
