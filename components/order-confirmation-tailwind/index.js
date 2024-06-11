@@ -28,6 +28,8 @@ const { termStartDate, termEndDate } = getTermDates(order, paymentMethod, subscr
 const today = DateTime.local().toISO()
 const {customerDetails, billingDetails} = order
 
+console.log("test")
+
 
   return (
   <div className="bg-white dark:bg-gray-900">
