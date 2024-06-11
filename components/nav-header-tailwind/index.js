@@ -6,7 +6,7 @@ export function NavHeader({ logo, logoHref, logoText, items, componentId }) {
     const [expanded, setExpanded] = useState(false)
 
     return (
-        <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700" id={componentId}>
+        <nav className="border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700" id={componentId}>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href={logoHref} className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src={logo} className="h-8" alt="Header Logo"/>
