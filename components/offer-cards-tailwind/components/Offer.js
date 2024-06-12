@@ -19,7 +19,7 @@ const Offer = ({ offer, showImage, offerWidth }) => {
     } = offer.data.attributes;
 
     return (
-        <div className="flex flex-col p-6 mr-2 text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white lg:min-w-full"
+        <div className="flex flex-col p-6 mr-2 text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white"
         style={{minWidth: `${1.5 * 10}em`, maxWidth: `${1.5 * 10}em`, marginBottom: "20px"}}
         >
           <h3 className="mb-4 text-2xl font-semibold break-words">{display_name__limio}</h3>
