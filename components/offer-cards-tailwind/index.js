@@ -7,7 +7,7 @@ import "../source/style/style.css"
 
 type Props = {
   heading: string,
-  subheading: string
+  subheading: string,
   offerWidth: number,
 };
 
