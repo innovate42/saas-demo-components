@@ -8,14 +8,18 @@ import "../source/style/style.css"
 type Props = {
   heading: string,
   subheading: string
+  offerWidth: number,
 };
 
-export const OfferCards = ({heading, subheading, showImage, componentId}: Props) => {
+export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth}: Props) => {
   const { offers } = useCampaign()
 
   useEffect(() => {
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
   }, []);
+
+  const numberOfOffers = offers.length;
+  console.log("Number of offers: ",  numberOfOffers)
 
   return (
       <section className="bg-white dark:bg-gray-900" id={componentId}>
@@ -24,10 +28,10 @@ export const OfferCards = ({heading, subheading, showImage, componentId}: Props)
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{heading}</h2>
             <p className="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">{subheading}</p>
           </div>
-          <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+          <div className=" flex justify-center flex-wrap ">
           {offers.length > 0 ? (
                 offers.map((offer, i) => (
-                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage}/>
+                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth}/>
                 ))
             ) : (
                 <p>No offers to display...</p>

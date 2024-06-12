@@ -2,12 +2,11 @@
 import React from "react";
 import { sanitizeString, formatDisplayPrice } from "../../source/utils/string";
 import { AddToBasketButton } from "./AddToBasketButton";
-import { useBasket } from "@limio/sdk"
 import { formatBulletPoints } from "../../source/utils/string";
 
 
 
-const Offer = ({ offer, showImage }) => {
+const Offer = ({ offer, showImage, offerWidth }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
 
@@ -20,8 +19,10 @@ const Offer = ({ offer, showImage }) => {
     } = offer.data.attributes;
 
     return (
-        <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white lg:min-w-full">
-          <h3 className="mb-4 text-2xl font-semibold">{display_name__limio}</h3>
+        <div className="flex flex-col p-6 mr-2 text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white lg:min-w-full"
+        style={{minWidth: `${1.5 * 10}em`, maxWidth: `${1.5 * 10}em`, marginBottom: "20px"}}
+        >
+          <h3 className="mb-4 text-2xl font-semibold break-words">{display_name__limio}</h3>
             {(showImage && hasAttachments) && (
                 <div className="flex flex-row justify-center">
                     <div style={{maxWidth: "40%"}}>
@@ -31,10 +32,11 @@ const Offer = ({ offer, showImage }) => {
             )}
             <div className="flex justify-center items-baseline my-4">
               <span className="mr-2 text-3xl font-extrabold"
+              style={{overflowWrap: "anywhere"}}
                     dangerouslySetInnerHTML={{ __html: sanitizeString(formatDisplayPrice(display_price__limio, [{currencyCode: price__limio[0].currencyCode, value: price__limio[0].value,}])) }}
               />
             </div>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-4">
+            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-4 v">
                 {display_equivalent_price}
             </p>
             <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-6"
