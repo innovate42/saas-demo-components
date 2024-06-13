@@ -47,6 +47,12 @@
       "label": "Offer card width",
       "type": "number",
       "default": "2"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#F47C24"
     }
     
   ]
