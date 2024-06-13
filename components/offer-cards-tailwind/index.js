@@ -8,7 +8,7 @@ import "./index.css"
 
 type Props = {
   heading: string,
-  subheading: string
+  subheading: string,
   offerWidth: number,
 };
 
