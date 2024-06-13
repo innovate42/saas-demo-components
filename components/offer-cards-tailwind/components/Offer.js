@@ -6,7 +6,7 @@ import { formatBulletPoints } from "../../source/utils/string";
 
 
 
-const Offer = ({ offer, showImage, offerWidth }) => {
+const Offer = ({ offer, showImage, offerWidth, primaryColor }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
 
@@ -45,7 +45,7 @@ const Offer = ({ offer, showImage, offerWidth }) => {
             <ul role="list" className="mb-8 space-y-4 text-left">
                 {offer_features__limio && formatBulletPoints(offer_features__limio)}
             </ul>
-            <AddToBasketButton offer={offer} />
+            <AddToBasketButton offer={offer} primaryColor={primaryColor}/>
         </div>
   );
 };

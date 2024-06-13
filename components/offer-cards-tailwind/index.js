@@ -12,7 +12,7 @@ type Props = {
   offerWidth: number,
 };
 
-export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth}: Props) => {
+export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth, primaryColor__limio_color}: Props) => {
   const { offers } = useCampaign()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           <div className=" flex justify-center flex-wrap ">
           {offers.length > 0 ? (
                 offers.map((offer, i) => (
-                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth}/>
+                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
                 ))
             ) : (
                 <p>No offers to display...</p>

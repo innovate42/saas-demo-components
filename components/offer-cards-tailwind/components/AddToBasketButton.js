@@ -2,7 +2,7 @@
 import * as React from "react"
 import { useBasket } from "@limio/sdk"
 
-export function AddToBasketButton({ offer }): React.Node {
+export function AddToBasketButton({ offer, primaryColor }): React.Node {
   const { addToBasket, removeFromBasket, basketItems } = useBasket()
   const  { cta_text__limio } = offer.data.attributes
   const offerInBasket = basketItems?.find(basketItem => basketItem.offer?.id === offer.id)
