@@ -60,10 +60,9 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
 
   const [selectedGroup, setSelectedGroup] = useState(offerGroups[0]?.groupId)
   const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selectedGroup)
-  const selectedGroupOffers = selectedGroupItem?.offers
-  console.log("selectedGroupOffers", selectedGroupOffers)
+  const selectedGroupOffers = selectedGroupItem?.offers || []
 
-  const styleSelectedGroup = (group, id) => group === id ? true : false
+
 
   useEffect(() => {
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
@@ -93,7 +92,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
               ))}
           </div>
           <div className=" flex justify-center flex-wrap ">
-          {offers.length > 0 ? (
+          {selectedGroupOffers ? (
                 selectedGroupOffers.map((offer, i) => (
                     <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
                 ))
