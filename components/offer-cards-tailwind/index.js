@@ -59,9 +59,9 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
   }, [offers, groupLabels])
 
   const [selectedGroup, setSelectedGroup] = useState(offerGroups[0]?.groupId)
-const test = offerGroups.filter(group => group !== undefined)
   const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selectedGroup)
-  const selectedGroupOffers = selectedGroupItem.offers
+  const selectedGroupOffers = selectedGroupItem?.offers
+  console.log("selectedGroupOffers", selectedGroupOffers)
 
   const styleSelectedGroup = (group, id) => group === id ? true : false
 
@@ -70,7 +70,6 @@ const test = offerGroups.filter(group => group !== undefined)
   }, []);
 
 
-console.log("showGroupedOffers", showGroupedOffers)
 
 
 
