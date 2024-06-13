@@ -1,0 +1,9 @@
+.add-to-basket-button{
+    opacity: 1;
+    transition: opacity 0.3s; 
+}
+
+.add-to-basket-button:hover{
+
+    opacity: 0.5;
+}

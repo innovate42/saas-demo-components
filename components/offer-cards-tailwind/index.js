@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useCampaign } from "@limio/sdk";
 import Offer from "./components/Offer.js";
 import "../source/style/style.css"
+import "./index.css"
 
 
 type Props = {
