@@ -53,6 +53,46 @@
       "label": "Primary color",
       "type": "color",
       "default": "#F47C24"
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "URL",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        }
+      },
+      "default": [
+        {
+          "id": "digital",
+          "label": "Digital"
+        },
+        {
+          "id": "bundle",
+          "label": "Print + Digital"
+        }
+      ]
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Group offers",
+      "type": "boolean",
+      "default": false
     }
     
   ]
