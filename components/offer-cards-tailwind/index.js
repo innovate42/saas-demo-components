@@ -92,7 +92,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
               ))}
           </div>
           <div className=" flex justify-center flex-wrap ">
-          {selectedGroupOffers ? (
+          {selectedGroup.length > 0 ? (
                 selectedGroupOffers.map((offer, i) => (
                     <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
                 ))
