@@ -6,7 +6,8 @@ import { AddToBasketButton } from "./AddToBasketButton";
 
 
 
-const Offer = ({ offer, showImage, offerWidth, primaryColor }) => {
+
+const Offer = ({ offer, showImage, offerWidth, primaryColor, freeTrialLink }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
 
@@ -68,6 +69,7 @@ const Offer = ({ offer, showImage, offerWidth, primaryColor }) => {
                 {offer_features__limio && formatBulletPoints(offer_features__limio)}
             </ul>
             <AddToBasketButton offer={offer} primaryColor={primaryColor} />
+            <span className="text-gray-400 text-sm" dangerouslySetInnerHTML={{ __html: sanitizeString(freeTrialLink) }}/>
         </div>
   );
 };

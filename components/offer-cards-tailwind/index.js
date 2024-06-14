@@ -8,6 +8,7 @@ import * as R from "ramda";
 
 
 
+
 type Props = {
   heading: string,
   subheading: string,
@@ -66,7 +67,7 @@ const sortedGroup = reorderKeys(groups, groupLabelArray);
 
 
 
-export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth, primaryColor__limio_color, groupLabels, showGroupedOffers}: Props) => {
+export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth, primaryColor__limio_color, groupLabels, showGroupedOffers, freeTrialLink}: Props) => {
   const { offers } = useCampaign()
 
   const offerGroups = useMemo(() => {
@@ -87,6 +88,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
   }, []);
 
+
   return (
       <section className="bg-white dark:bg-gray-900" id={componentId}>
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex flex-col">
@@ -100,7 +102,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           style={{minWidth: "320px"}}
           >
               {offerGroups.map((offerGroup, i) => (
-                  <button onClick={() => setSelectedGroup(offerGroup.id)}   key={`${offerGroup.id}-${i}`} className={`whitespace-nowrap py-2.5 px-1.5 sm:px-3.5 mx-auto   dark:bg-gray-600 hover:bg-gray-500 dark:text-white hover:text-white rounded-md text-xs sm:text-lg  ${selectedGroup === offerGroup.id ? "dark:bg-gray-400  dark:text-white bg-white" : ""}`}
+                  <button onClick={() => setSelectedGroup(offerGroup.id)}   key={`${offerGroup.id}-${i}`} className={`whitespace-nowrap py-2.5 px-1.5 sm:px-3.5 mx-auto   dark:bg-gray-600 hover:bg-gray-500 dark:text-white hover:text-white rounded-md text-xs sm:text-lg ${selectedGroup === offerGroup.id ? "dark:bg-gray-400  dark:text-white bg-white" : ""}`}
                   >
                       {offerGroup.label}
                   </button>
@@ -109,7 +111,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           <div className=" flex justify-center flex-wrap ">
           {selectedGroupOffers.length > 0 ? (
                 selectedGroupOffers.map((offer, i) => (
-                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
+                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color} freeTrialLink={freeTrialLink}/>
                 ))
             ) : (
                 <p>No offers to display...Please an a label to view offers</p>
@@ -121,7 +123,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           <div className=" flex justify-center flex-wrap ">
           {offers.length > 0 ? (
                 offers.map((offer, i) => (
-                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
+                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color} freeTrialLink={freeTrialLink}/>
                 ))
             ) : (
                 <p>No offers to display...</p>
