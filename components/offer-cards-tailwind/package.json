@@ -93,6 +93,12 @@
       "label": "Group offers",
       "type": "boolean",
       "default": false
+    },
+    {
+      "id": "freeTrialLink",
+      "label": "Free trial link",
+      "type": "richText",
+      "default": "Start a free trial"
     }
     
   ]
