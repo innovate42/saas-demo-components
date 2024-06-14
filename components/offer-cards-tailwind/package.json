@@ -97,8 +97,14 @@
     {
       "id": "freeTrialLink",
       "label": "Free trial link",
-      "type": "richtext",
+      "type": "richText",
       "default": "Start a free trial"
+    },
+    {
+      "id": "best_value_color__limio_color",
+      "label": "Best value color",
+      "type": "color",
+      "default": "#F47C24"
     }
     
   ]

@@ -7,7 +7,7 @@ import { AddToBasketButton } from "./AddToBasketButton";
 
 
 
-const Offer = ({ offer, showImage, offerWidth, primaryColor, freeTrialLink }) => {
+const Offer = ({ offer, showImage, offerWidth, primaryColor, freeTrialLink, bestValueColor }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
 
@@ -17,8 +17,20 @@ const Offer = ({ offer, showImage, offerWidth, primaryColor, freeTrialLink }) =>
         display_equivalent_price,
         offer_features__limio,
         price__limio,
-        detailed_display_price__limio
+        detailed_display_price__limio,
+        best_value__limio,
+        display_description__limio
     } = offer.data.attributes;
+
+  
+
+    const bestVauleStyle = () => {
+        if (best_value__limio) {
+            return `2px solid ${bestValueColor}`
+        }
+    }
+
+    const bestValueText = display_description__limio || "Best Value"
 
    const formatBulletPoints = (string) => {
         const sanitised = sanitizeString(string)
@@ -42,9 +54,12 @@ const Offer = ({ offer, showImage, offerWidth, primaryColor, freeTrialLink }) =>
 
 
     return (
-        <div className="flex flex-col p-6 mr-2 text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white "
-        style={{minWidth: `${offerWidth * 10}em`, maxWidth: `${offerWidth * 10}em`, marginBottom: "20px"}}
+        <div className={`flex flex-col p-6 mr-2 text-center text-gray-900 ${!best_value__limio ? `border border-gray-100  dark:border-gray-600 rounded-lg`: `` } bg-white  shadow  xl:p-8 dark:bg-gray-800 dark:text-white`}
+        style={{minWidth: `${offerWidth * 10}em`, maxWidth: `${offerWidth * 10}em`, marginBottom: "20px", position: "relative", borderLeft: bestVauleStyle(), borderRight: bestVauleStyle(), borderBottom: bestVauleStyle(), borderTop: bestVauleStyle(), borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" }}
         >
+            {best_value__limio && (
+                <span className="best-value" style={{backgroundColor: bestValueColor}}>{bestValueText.toUpperCase()}</span>
+            )}
           <h3 className="mb-4 text-2xl font-semibold break-words">{display_name__limio}</h3>
             {(showImage && hasAttachments) && (
                 <div className="flex flex-row justify-center">

@@ -67,7 +67,7 @@ const sortedGroup = reorderKeys(groups, groupLabelArray);
 
 
 
-export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth, primaryColor__limio_color, groupLabels, showGroupedOffers, freeTrialLink}: Props) => {
+export const OfferCards = ({heading, subheading, showImage, componentId, offerWidth, primaryColor__limio_color, groupLabels, showGroupedOffers, freeTrialLink, best_value_color__limio_color}: Props) => {
   const { offers } = useCampaign()
 
   const offerGroups = useMemo(() => {
@@ -87,6 +87,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
   useEffect(() => {
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
   }, []);
+
 
 
   return (
@@ -123,7 +124,7 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           <div className=" flex justify-center flex-wrap ">
           {offers.length > 0 ? (
                 offers.map((offer, i) => (
-                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color} freeTrialLink={freeTrialLink}/>
+                    <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color} freeTrialLink={freeTrialLink} bestValueColor={best_value_color__limio_color}/>
                 ))
             ) : (
                 <p>No offers to display...</p>
