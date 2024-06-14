@@ -97,7 +97,7 @@
     {
       "id": "freeTrialLink",
       "label": "Free trial link",
-      "type": "richText",
+      "type": "richtext",
       "default": "Start a free trial"
     }
     
