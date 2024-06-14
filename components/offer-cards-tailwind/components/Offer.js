@@ -16,6 +16,7 @@ const Offer = ({ offer, showImage, offerWidth, primaryColor }) => {
         display_equivalent_price,
         offer_features__limio,
         price__limio,
+        detailed_display_price__limio
     } = offer.data.attributes;
 
    const formatBulletPoints = (string) => {
@@ -61,7 +62,7 @@ const Offer = ({ offer, showImage, offerWidth, primaryColor }) => {
                 {display_equivalent_price}
             </p>
             <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-6"
-               dangerouslySetInnerHTML={{ __html: sanitizeString(formatDisplayPrice(display_price__limio, [{currencyCode: price__limio[0].currencyCode, value: price__limio[0].value,}])) }}
+               dangerouslySetInnerHTML={{ __html: sanitizeString(formatDisplayPrice(detailed_display_price__limio, [{currencyCode: price__limio[0].currencyCode, value: price__limio[0].value,}])) }}
             />
             <ul role="list" className="mb-8 space-y-4 text-left">
                 {offer_features__limio && formatBulletPoints(offer_features__limio)}

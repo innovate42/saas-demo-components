@@ -5,6 +5,7 @@ import Offer from "./components/Offer.js";
 import "../source/style/style.css"
 import "./index.css"
 import * as R from "ramda";
+import { set } from "core-js/core/dict";
 
 
 type Props = {
@@ -24,12 +25,10 @@ function groupOffers(
       offers
   );
 
-  console.log("groups", groups)
-  console.log("groupLabels", groupLabels)
 
 
   const groupedOffers = Object.keys(groups).map((groupId) => {
-    console.log("groupId", groupId)
+
     // return just the groups that are defined on offer and component
       const group = groupLabels.find((group) => group.id === groupId) 
      
@@ -58,19 +57,20 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
      return groupOffers(offers, groupLabels).filter(group => group !== undefined);
   }, [offers, groupLabels])
 
-  const [selectedGroup, setSelectedGroup] = useState(offerGroups[0]?.groupId)
+  const [selectedGroup, setSelectedGroup] = useState()
   const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selectedGroup)
   const selectedGroupOffers = selectedGroupItem?.offers || []
+
+
+  React.useEffect(() => {
+  setSelectedGroup(offerGroups[0]?.id)
+  }, [offerGroups])
 
 
 
   useEffect(() => {
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
   }, []);
-
-
-
-
 
   return (
       <section className="bg-white dark:bg-gray-900" id={componentId}>
@@ -92,12 +92,12 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
               ))}
           </div>
           <div className=" flex justify-center flex-wrap ">
-          {selectedGroupOffers.length.length > 0 ? (
-                selectedGroupOffers.length.map((offer, i) => (
+          {selectedGroupOffers.length > 0 ? (
+                selectedGroupOffers.map((offer, i) => (
                     <Offer key={`${offer.path}/parent-${i}`} offer={offer} showImage={showImage} offerWidth={offerWidth} primaryColor={primaryColor__limio_color}/>
                 ))
             ) : (
-                <p>No offers to display...Please add an label to view offers</p>
+                <p>No offers to display...Please add a label to view offers</p>
             )}
           </div>
           </>
