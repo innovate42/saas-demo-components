@@ -5,7 +5,7 @@ import Offer from "./components/Offer.js";
 import "../source/style/style.css"
 import "./index.css"
 import * as R from "ramda";
-import { set } from "core-js/core/dict";
+
 
 
 type Props = {
