@@ -86,9 +86,12 @@ const styleBestValue = () => {
   }
 }
   
-const updatesSeletedGroup = useMemo (() => {
-  setSelectedGroup(offerGroups[0]?.id)
-}, [offerGroups])
+React.useEffect(() => {
+  if(!selectedGroup){
+    setSelectedGroup(offerGroups[0]?.id)
+  } 
+}, [offerGroups, selectedGroup])
+
 
 
   // React.useEffect(() => {
