@@ -92,14 +92,6 @@ React.useEffect(() => {
   } 
 }, [offerGroups, selectedGroup])
 
-
-
-  // React.useEffect(() => {
-  //   console.log("updating")
-  // setSelectedGroup(offerGroups[0]?.id)
-  // }, [offerGroups])
-
-
   useEffect(() => {
     typeof performance !== "undefined" && performance?.mark?.("offers-init");
   }, []);
