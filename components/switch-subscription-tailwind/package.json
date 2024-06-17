@@ -74,6 +74,12 @@
       "label": "Primary color",
       "type": "color",
       "default": "#F47C24"
+    },
+    {
+      "id": "offerWidth",
+      "label": "Offer card width",
+      "type": "number",
+      "default": "2"
     }
   ]
 }

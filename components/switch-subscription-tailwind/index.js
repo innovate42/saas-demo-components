@@ -13,15 +13,17 @@ type Props = {
 }
 
 function switchSubscription({heading,
-   subheading,
-    filterSameTerm,
-     showImage,
-      confirmationOk,
-       confirmationCancel,
-        confirmHeading,
-         confirmSubHeading,
-          redirectUrl, 
-          primaryColor__limio_color }: Props): React.Node {
+      subheading,
+        filterSameTerm,
+        showImage,
+          confirmationOk,
+          confirmationCancel,
+            confirmHeading,
+            confirmSubHeading,
+              redirectUrl, 
+              primaryColor__limio_color,
+              offerWidth
+         }: Props): React.Node {
   const {subscriptions} = useSubscriptions()
   const params = new URL(window.location).searchParams
   const subIdParam = params.get("subId") || ""
@@ -42,7 +44,7 @@ return (
       <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{heading}</h2>
       <p className="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">{subheading}</p>
     </div>
-    <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0 ">
+    <div className="flex justify-center flex-wrap">
     {filteredOffers.length > 0 ? (
           filteredOffers.map((offer, i) => (
               <Offer key={`${offer.path}/parent-${i}`} 
@@ -58,6 +60,7 @@ return (
               revalidate={revalidate}
               redirectUrl={redirectUrl}
               primaryColor={primaryColor__limio_color}
+              offerWidth={offerWidth}
               />
           ))
       ) : (
