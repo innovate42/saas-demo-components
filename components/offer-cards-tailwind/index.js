@@ -78,8 +78,18 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
   const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selectedGroup)
   const selectedGroupOffers = selectedGroupItem?.offers || []
 
+  const hasBestValue = selectedGroupOffers.some(offer => offer.data.attributes.best_value__limio)
+
+const styleBestValue = () => {
+  if (hasBestValue) {
+      return `60px`
+  }
+}
+  
+
 
   React.useEffect(() => {
+    console.log("updating")
   setSelectedGroup(offerGroups[0]?.id)
   }, [offerGroups])
 
@@ -99,8 +109,8 @@ export const OfferCards = ({heading, subheading, showImage, componentId, offerWi
           </div>
          {showGroupedOffers ?
           <>
-          <div className="flex p-2 mx-auto  text-center text-gray-900 bg-gray-100 rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-4 dark:bg-gray-800 dark:text-white mb-8"
-          style={{minWidth: "320px"}}
+          <div className={`flex p-2 mx-auto  text-center text-gray-900 bg-gray-100 rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-4 dark:bg-gray-800 dark:text-white ${!hasBestValue ? "mb-8" : ""}`}
+          style={{minWidth: "320px", marginBottom: styleBestValue()}}
           >
               {offerGroups.map((offerGroup, i) => (
                   <button onClick={() => setSelectedGroup(offerGroup.id)}   key={`${offerGroup.id}-${i}`} className={`whitespace-nowrap py-2.5 px-1.5 sm:px-3.5 mx-auto   dark:bg-gray-600 hover:bg-gray-500 dark:text-white hover:text-white rounded-md text-xs sm:text-lg ${selectedGroup === offerGroup.id ? "dark:bg-gray-400  dark:text-white bg-white" : ""}`}
