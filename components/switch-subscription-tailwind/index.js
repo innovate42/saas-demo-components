@@ -12,7 +12,16 @@ import "../source/style/style.css"
 type Props = {
 }
 
-function switchSubscription({heading, subheading, filterSameTerm, showImage, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, redirectUrl }: Props): React.Node {
+function switchSubscription({heading,
+   subheading,
+    filterSameTerm,
+     showImage,
+      confirmationOk,
+       confirmationCancel,
+        confirmHeading,
+         confirmSubHeading,
+          redirectUrl, 
+          primaryColor__limio_color }: Props): React.Node {
   const {subscriptions} = useSubscriptions()
   const params = new URL(window.location).searchParams
   const subIdParam = params.get("subId") || ""
@@ -24,6 +33,8 @@ function switchSubscription({heading, subheading, filterSameTerm, showImage, con
 const activeOffer = getCurrentOffer(subscription)
 const campaign = useCampaign()
 const filteredOffers = filterOffers(campaign.offers, subscription, filterSameTerm)
+
+console.log("subscription", subscriptions)
 return (
   <section className="bg-white dark:bg-gray-900 py-8" >
   <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6   rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 ">
@@ -46,6 +57,7 @@ return (
               addresses={addresses}
               revalidate={revalidate}
               redirectUrl={redirectUrl}
+              primaryColor={primaryColor__limio_color}
               />
           ))
       ) : (

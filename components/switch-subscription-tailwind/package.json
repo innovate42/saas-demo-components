@@ -68,6 +68,12 @@
       "label": "Redirect Url",
       "type": "string",
       "default": ""
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#F47C24"
     }
   ]
 }

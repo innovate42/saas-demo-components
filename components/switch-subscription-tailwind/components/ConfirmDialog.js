@@ -26,6 +26,8 @@ export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirm
         return { deliveryAddress, billingAddress }
       })
 
+      console.log("offer", offer)
+
       const [newAddress, setNewAddress] = React.useState({
         firstName: "",
         lastName: "",
@@ -176,11 +178,14 @@ const handleAddressFieldChange = (e) => {
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Start date</th>
                 <td className="px-4 py-2  text-sm">{formatDate(effectiveDate, dateFormat)}</td>
               </tr>
+              {
+              hasDelivery &&
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Use this address</th>
                 <td className="px-4 py-2  text-sm">{addressSummary(addresses.deliveryAddress)}</td>
                 <input type="checkbox" checked={!editAddress} onChange={() => setEditAddress(!editAddress)}  />
               </tr>
+}
         </table>
 
         {hasDelivery && editAddress && (

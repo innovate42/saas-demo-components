@@ -7,26 +7,9 @@ import { DateTime } from "@limio/date"
 import {useUser} from "@limio/sdk"
 
 
-const formatBulletPoints = (string) => {
-    const sanitised = sanitizeString(string)
 
-    const features = document.createElement("div")
-    features.innerHTML = sanitised
 
-    return [].slice.call(features.children).map((feature, i) => (
-        <li className="flex items-center space-x-3" key={`${feature.innerText}-${i}`}>
-            <svg className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor"
-                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"></path>
-            </svg>
-            <span>{feature.innerText}</span>
-        </li>
-    ))
-}
-
-const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, addresses, revalidate, redirectUrl }) => {
+const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, addresses, revalidate, redirectUrl, primaryColor }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
     const [showConfirm, setShowConfirm] = React.useState(false)
@@ -70,6 +53,28 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
         return handleSubmitSwitch( { userAttributes  }, id, order)
       }
 
+      console.log("primaryColor", primaryColor)
+
+      const formatBulletPoints = (string) => {
+        const sanitised = sanitizeString(string)
+    
+        const features = document.createElement("div")
+        features.innerHTML = sanitised
+    
+        return [].slice.call(features.children).map((feature, i) => (
+            <li className="flex items-center space-x-3" key={`${feature.innerText}-${i}`}>
+                <svg className="flex-shrink-0 w-5 h-5" fill="currentColor"
+                style={{color: primaryColor}}
+                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"></path>
+                </svg>
+                <span>{feature.innerText}</span>
+            </li>
+        ))
+    }
+
 
     return (
         <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white lg:min-w-full">
@@ -112,11 +117,13 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
             <ul role="list" className="mb-8 space-y-4 text-left">
                 {offer_features__limio && formatBulletPoints(offer_features__limio)}
             </ul>
-            <button type="button"
+            <div
                           onClick={() => setShowConfirm(true)}
-                          className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                          className="mt-auto text-white   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 add-to-basket-button"
+                          style={{backgroundColor: `${primaryColor}`}}
+                          >
                   {cta_text__limio ? cta_text__limio : `Subscribe` }
-                </button>
+                </div>
         </div>
   
   );
