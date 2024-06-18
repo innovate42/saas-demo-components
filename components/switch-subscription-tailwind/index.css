@@ -1,0 +1,28 @@
+.add-to-basket-button{
+    opacity: 1;
+    transition: opacity 0.3s; 
+}
+
+.add-to-basket-button:hover{
+    opacity: 0.5!important;
+    cursor: pointer;
+}
+
+.best-value{
+    position: absolute;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    line-height: 33px;
+    font-size: .85rem;
+    letter-spacing: 1px;
+   
+    /* padding : 0 10px; */
+    top: -35px;
+   
+  left:-2px;
+  right:-2px;
+  
+ 
+  
+}

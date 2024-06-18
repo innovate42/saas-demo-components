@@ -1,5 +1,5 @@
 {
-  "name": "component-switch-subscription-tailwind",
+  "name": "component-switch-subscription",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",
@@ -120,6 +120,12 @@
       "label": "Group offers",
       "type": "boolean",
       "default": false
+    },
+    {
+      "id": "best_value_color__limio_color",
+      "label": "Best value color",
+      "type": "color",
+      "default": "#F47C24"
     }
   ]
 }

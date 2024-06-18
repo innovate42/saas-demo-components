@@ -9,7 +9,7 @@ import {useUser} from "@limio/sdk"
 
 
 
-const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, addresses, revalidate, redirectUrl, primaryColor, offerWidth }) => {
+const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, addresses, revalidate, redirectUrl, primaryColor, offerWidth, bestValueColor }) => {
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
     const [showConfirm, setShowConfirm] = React.useState(false)
@@ -21,7 +21,10 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
         display_equivalent_price,
         offer_features__limio,
         price__limio,
-        cta_text__limio
+        detailed_display_price__limio,
+        cta_text__limio,
+        best_value__limio,
+        display_description__limio
     } = offer.data.attributes;
     const params = new URL(window.location).searchParams
     const reason = params.get("reason")
@@ -53,7 +56,6 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
         return handleSubmitSwitch( { userAttributes  }, id, order)
       }
 
-      console.log("primaryColor", primaryColor)
 
       const formatBulletPoints = (string) => {
         const sanitised = sanitizeString(string)
@@ -76,9 +78,22 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
     }
 
 
+    const bestVauleStyle = () => {
+      if (best_value__limio) {
+          return `2px solid ${bestValueColor}`
+      }
+  }
+
+  console.log("bestValueColor", bestValueColor)
+
+  const bestValueText = display_description__limio || "Best Value"
+
     return (
-        <div className="flex flex-col p-6 mr-2  text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white "
-                  style={{minWidth: `${offerWidth * 10}em`, maxWidth: `${offerWidth * 10}em`,  marginBottom: "20px"}}>
+      <div className={`flex flex-col p-6 mr-2 text-center text-gray-900 ${!best_value__limio ? `border border-gray-100  dark:border-gray-600 rounded-lg`: `` } bg-white  shadow  xl:p-8 dark:bg-gray-800 dark:text-white`}
+      style={{minWidth: `${offerWidth * 10}em`, maxWidth: `${offerWidth * 10}em`, marginBottom: "20px", position: "relative", borderLeft: bestVauleStyle(), borderRight: bestVauleStyle(), borderBottom: bestVauleStyle(), borderTop: bestVauleStyle(), borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" }}>
+            {best_value__limio && (
+                <span className="best-value" style={{backgroundColor: bestValueColor}}>{bestValueText.toUpperCase()}</span>
+            )}
                  {showConfirm && (
                <ConfirmDialog 
                offer={offer}
@@ -96,6 +111,7 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
                 redirectUrl={redirectUrl}
                />
            )}
+        
           <h3 className="mb-4 text-2xl font-semibold">{display_name__limio}</h3>
             {(showImage && hasAttachments) && (
                 <div className="flex flex-row justify-center">
@@ -114,7 +130,7 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
                 {display_equivalent_price}
             </p>
             <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-6"
-               dangerouslySetInnerHTML={{ __html: sanitizeString(formatDisplayPrice(display_price__limio, [{currencyCode: price__limio[0].currencyCode, value: price__limio[0].value,}])) }}
+               dangerouslySetInnerHTML={{ __html: sanitizeString(formatDisplayPrice(detailed_display_price__limio, [{currencyCode: price__limio[0].currencyCode, value: price__limio[0].value,}])) }}
             />
             <ul role="list" className="mb-8 space-y-4 text-left">
                 {offer_features__limio && formatBulletPoints(offer_features__limio)}

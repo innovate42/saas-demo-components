@@ -9,6 +9,7 @@ import { filterOffers } from "./helpers";
 import Offer from "./components/Offer"
 import "../source/style/style.css"
 import * as R from "ramda";
+import "./index.css"
 
 function groupOffers(
   offers,
@@ -74,7 +75,8 @@ function switchSubscription({heading,
               primaryColor__limio_color,
               offerWidth,
               groupLabels,
-               showGroupedOffers
+               showGroupedOffers,
+               best_value_color__limio_color
          })  {
   const {subscriptions} = useSubscriptions()
   const params = new URL(window.location).searchParams
@@ -97,11 +99,19 @@ const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selec
 const selectedGroupOffers = selectedGroupItem?.offers || []
 const hasBestValue = selectedGroupOffers.some(offer => offer.data.attributes.best_value__limio)
 const hasGroupedOffers = offerGroups.length > 0
-const groupedOffersStyle = () => {
-  return hasGroupedOffers ? "40px" : "0px"
+
+
+
+const styleBestValue = () => {
+  if (hasBestValue) {
+      return `60px`
+  } else { 
+    return `40px`
+  
+  }
 }
 
-React.useEffect(() => {
+useEffect(() => {
   if(!selectedGroup){
     setSelectedGroup(offerGroups[0]?.id)
   } 
@@ -110,7 +120,7 @@ React.useEffect(() => {
 
 
 
-console.log("subscription", subscriptions)
+
 return (
   <section className="bg-white dark:bg-gray-900 py-8" >
   <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6   rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 flex flex-col ">
@@ -122,7 +132,7 @@ return (
     {showGroupedOffers ?
           <>
           <div className={`flex p-2 mx-auto  text-center text-gray-900 bg-gray-100 rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-4 dark:bg-gray-800 dark:text-white ${!hasBestValue ? "mb-8" : ""}`}
-          style={{minWidth: "320px", marginBottom: groupedOffersStyle()}}
+          style={{minWidth: "320px",  marginBottom: styleBestValue()}}
           >
               {offerGroups.map((offerGroup, i) => (
                   <button onClick={() => setSelectedGroup(offerGroup.id)}   key={`${offerGroup.id}-${i}`} className={`whitespace-nowrap py-2.5 px-1.5 sm:px-3.5 mx-auto   dark:bg-gray-600 hover:bg-gray-500 dark:text-white hover:text-white rounded-md text-xs sm:text-lg ${selectedGroup === offerGroup.id ? "dark:bg-gray-400  dark:text-white bg-white" : ""}`}
@@ -148,6 +158,7 @@ return (
                     redirectUrl={redirectUrl}
                     primaryColor={primaryColor__limio_color}
                     offerWidth={offerWidth}
+                    bestValueColor={best_value_color__limio_color}
                     />
                 ))
             ) : (
@@ -174,6 +185,7 @@ return (
                     redirectUrl={redirectUrl}
                     primaryColor={primaryColor__limio_color}
                     offerWidth={offerWidth}
+                    bestValueColor={best_value_color__limio_color}
                     />
                 ))
             ) : (
