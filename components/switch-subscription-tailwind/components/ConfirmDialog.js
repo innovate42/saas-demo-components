@@ -214,7 +214,7 @@ const handleAddressFieldChange = (e) => {
           </div> 
           :
         
-            <div className="p-12 flex flex-col items-start w-2/4  text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white max-h-[80vh] overflow-y-auto">
+            <div className="p-12 flex flex-col items-start md:w-2/4  text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white max-h-[80vh] overflow-y-auto">
                 <div className="flex flex-col">
                     <h3 className="mb-4 text-lg sm:text-2xl font-semibold">{confirmHeading}</h3>
                     <p className="mb-4 text-base  text-gray-500 sm:text-lg dark:text-gray-400">{confirmSubHeading}</p>
@@ -229,10 +229,6 @@ const handleAddressFieldChange = (e) => {
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Amount due today:</th>
                 <td className="px-4 py-2  text-sm">
-
-
-
-
                 {!externalPriceOnOffer && !taxCalculationNeeded ? (
                     getPrice()
                   ) : loadingPreview ? (
