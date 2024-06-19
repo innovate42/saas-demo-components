@@ -1,5 +1,6 @@
 import * as R from "ramda"
 import { getPaymentIcon } from "./paymentIcons"
+import { capitaliseFirstLetter } from "../string"
 
 export function getCurrentPayment(payments) {
     const [mostRecent, ...rest] = payments.sort((a, b) => new Date(b.start) - new Date(a.start))
