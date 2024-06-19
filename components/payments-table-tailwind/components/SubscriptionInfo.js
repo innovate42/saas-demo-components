@@ -25,21 +25,13 @@ const [addresses, setAddresses] = React.useState(() => {
   const { data: billingAddress = {} } = getCurrentAddress("billing", customerAddress)
   return { deliveryAddress, billingAddress }
 })
-const [newAddress, setNewAddress] = React.useState({
-  firstName: "",
-  lastName: "",
-  country: "",
-  address2: "",
-  city: "",
-  address1: "",
-  postalCode: "",
-  state: ""
-})
+const [newAddress, setNewAddress] = React.useState(addresses.billingAddress)
 const [formErrors, setFormErrors] = React.useState({})
 const [loading, setLoading] = React.useState(false)
 const requiredFields = ["firstName", "lastName", "address1", "city", "postalCode", "country"]
 const [sameAsDelivery, setSameAsDelivery] = React.useState(R.equals(addresses.deliveryAddress, addresses.billingAddress))
 const { payment_methods } = useLimioUserSubscriptionPaymentMethods(id)
+console.log("payment_methods", payment_methods)
 const productName = data.products[0].attributes.display_name__limio
 const offer = getCurrentOffer(subscription)
 const isAutoRenew = offer.data.attributes.autoRenew__limio ? "Yes" : "No"
@@ -99,6 +91,7 @@ const handleAddressFieldChange = (e) => {
 }
 
 const updateCustomerAddress = async (address, type) => {
+    console.log("updated address", address)
   const order = {
     order_type: "change_address",
     type: type,
@@ -163,6 +156,8 @@ mutateCacheById(`/api/mma/subscriptions`)
 }
 
 
+console.log("paymentMethodData", paymentMethodData)
+
 
     return(
       <div>
@@ -196,7 +191,7 @@ mutateCacheById(`/api/mma/subscriptions`)
               </tbody>
         </table>
         
-       {editAddress && <EditAddress setEditAddress={setEditAddress} handleAddressFieldChange={handleAddressFieldChange} handleSubmit={handleSubmit} newAddress={newAddress} formErrors={formErrors} loading={loading}/>}
+       {editAddress && <EditAddress setEditAddress={setEditAddress} handleAddressFieldChange={handleAddressFieldChange} handleSubmit={handleSubmit} newAddress={newAddress} formErrors={formErrors} loading={loading} currentAddress={addresses.billingAddress}/>}
         <div className="mt-8 flex flex-col md:flex-row justify-start">
             <button className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4"
             onClick={() => (window.location.href = `${changePaymentLink}?subId=${id}`)}
