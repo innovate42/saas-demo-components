@@ -80,6 +80,7 @@ function switchSubscription({heading,
          })  {
   
   const {subscriptions} = useSubscriptions()
+  console.log("subscriptions", subscriptions)
   const params = new URL(window.location).searchParams
   const subIdParam = params.get("subId") || ""
   const subscription = subscriptions?.find(sub => sub?.id === subIdParam)

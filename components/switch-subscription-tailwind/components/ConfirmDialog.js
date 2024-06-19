@@ -16,6 +16,7 @@ export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirm
     const [loading, setLoading] = React.useState(false)
     const externalPriceOnOffer = offer?.data?.attributes?.price__limio?.[0]?.use_external_price || false
     const effectiveDate = offer?.data?.attributes?.switch_date__limio === "immediate" ? DateTime.utc().toISO() : nextSchedule?.data?.schedule_date || subscription?.data?.termEndDate
+    console.log("effectiveDate", effectiveDate)
     const dateFormat = getAppConfigValue(["shop", "default_date_format"])
     const showPriceWithTax = getAppConfigValue(["shop", "show_price_with_tax"]) || false
     const showPriceWithTaxCountries = getAppConfigValue(["shop", "show_price_with_tax_country_codes"]) || []
@@ -23,7 +24,8 @@ export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirm
     const products = offer?.data?.products
     const hasDelivery = products?.[0]?.attributes?.has_delivery__limio || products?.[0]?.data?.attributes?.has_delivery__limio
     const [editAddress, setEditAddress] = React.useState(false)
-    const { id, mode } = subscription
+    const id = subscription?.id
+    const mode = subscription?.mode
     const [addresses, setAddresses] = React.useState(() => {
         const { data: deliveryAddress = {} } = getCurrentAddress("delivery", customerAddress)
         const { data: billingAddress = {} } = getCurrentAddress("billing", customerAddress)
@@ -234,7 +236,10 @@ const handleAddressFieldChange = (e) => {
                 {!externalPriceOnOffer && !taxCalculationNeeded ? (
                     getPrice()
                   ) : loadingPreview ? (
-                    <LoadingSpinner />
+                  
+                    <div className="flex justify-center items-center h-full">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-black dark:border-white"></div>
+                  </div>
                   ) : externalPriceReady || priceWithTaxReady ? (
                     formatCurrency(getPreviewAmountDueToday(), previewSchedule?.[0]?.currency) || "Not available"
                   ) : (
