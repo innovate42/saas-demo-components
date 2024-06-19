@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { formatCurrency } from "../../source/currency";
 import { getAppConfigValue } from "@limio/shop/src/shop/appConfig.js"
 import { DateTime } from "@limio/date"
@@ -11,11 +11,15 @@ import * as R from "ramda";
 
 
 
-export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, customerAddress, revalidate, redirectUrl}) => {
+
+export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirmationOk, confirmationCancel, confirmHeading, confirmSubHeading, nextSchedule, customerAddress, revalidate, redirectUrl, previewOrder}) => {
     const [loading, setLoading] = React.useState(false)
     const externalPriceOnOffer = offer?.data?.attributes?.price__limio?.[0]?.use_external_price || false
     const effectiveDate = offer?.data?.attributes?.switch_date__limio === "immediate" ? DateTime.utc().toISO() : nextSchedule?.data?.schedule_date || subscription?.data?.termEndDate
     const dateFormat = getAppConfigValue(["shop", "default_date_format"])
+    const showPriceWithTax = getAppConfigValue(["shop", "show_price_with_tax"]) || false
+    const showPriceWithTaxCountries = getAppConfigValue(["shop", "show_price_with_tax_country_codes"]) || []
+    const purchaseCountry = subscription?.data?.purchaseCountry
     const products = offer?.data?.products
     const hasDelivery = products?.[0]?.attributes?.has_delivery__limio || products?.[0]?.data?.attributes?.has_delivery__limio
     const [editAddress, setEditAddress] = React.useState(false)
@@ -26,7 +30,6 @@ export const ConfirmDialog = ({offer, subscription, onCancel, onConfirm, confirm
         return { deliveryAddress, billingAddress }
       })
 
-      console.log("offer", offer)
 
       const [newAddress, setNewAddress] = React.useState({
         firstName: "",
@@ -42,6 +45,50 @@ const [formErrors, setFormErrors] = React.useState({})
 const [addressFormLoading, setAddressFormLoading] = React.useState(false)
 const requiredFields = ["firstName", "lastName", "address1", "city", "postalCode", "country"]
 const [sameAsDelivery, setSameAsDelivery] = React.useState(R.equals(addresses.deliveryAddress, addresses.billingAddress))
+const [loadingPreview, setLoadingPreview] = useState(false)
+const [previewSchedule, setPreviewSchedule] = useState([])
+const externalPriceReady = externalPriceOnOffer && !loadingPreview && previewSchedule
+const taxCalculationNeeded = showPriceWithTax && purchaseCountry && showPriceWithTaxCountries.includes(purchaseCountry)
+
+const getPreviewAmountDueToday = () => {
+  if (taxCalculationNeeded) {
+    return previewSchedule[0]?.amount
+  } else {
+    return previewSchedule[0]?.amountWithoutTax
+  }
+}
+
+const getPreviewNextAmount = () => {
+  if (taxCalculationNeeded) {
+    return previewSchedule[1]?.amount
+  } else {
+    return previewSchedule[1]?.amountWithoutTax
+  }
+}
+
+useEffect(() => {
+  if (externalPriceOnOffer || taxCalculationNeeded) {
+    setLoadingPreview(true)
+
+    previewOrder()
+      .then(response => {
+        setLoadingPreview(false)
+
+        if (response?.preview?.success === true) {
+          setPreviewSchedule(response?.schedule)
+        }
+      })
+      .catch(error => {
+        // use preview will log the error
+      })
+      .finally(() => {
+        setLoadingPreview(false)
+      })
+  }
+}, [externalPriceOnOffer, previewOrder,  taxCalculationNeeded])
+
+
+console.log("previewSchedule", previewSchedule)
 
 const handleAddressFieldChange = (e) => {
     const { id, value } = e.target
@@ -65,6 +112,7 @@ const handleAddressFieldChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
   
+
   
   
   // Check all required fields are populates
@@ -74,7 +122,6 @@ const handleAddressFieldChange = (e) => {
       errors[key] = `${key} is required`
     }
   }
-  
   
   // Display relevant errors on form  
   setFormErrors(errors)
@@ -138,10 +185,14 @@ const handleAddressFieldChange = (e) => {
         return `${repeat_interval} ${repeat_interval > 1 ? repeat_interval_type : repeat_interval_type.substr(0, repeat_interval_type.length - 1)}`
       }
 
-    const getPrice = () => {
+
+
+      const getPrice = () => {
         const price = offer?.data?.attributes?.price__limio?.[0]
         const { currencyCode, value } = price
-        const amount = (value * ( 1)).toFixed(2)
+    
+        // for external price or if we need to show tax inclusive then get it from the preview, else we can show the limio price
+        const amount = externalPriceReady || priceWithTaxReady ? getPreviewNextAmount() : (value * 1).toFixed(2)
         return formatCurrency(amount, currencyCode)
       }
 
@@ -150,7 +201,9 @@ const handleAddressFieldChange = (e) => {
 
 
     return(
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
+     
+        >
             {loading ?
             
             <div className="flex justify-center items-center h-full">
@@ -172,7 +225,21 @@ const handleAddressFieldChange = (e) => {
               </tr>
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Amount due today:</th>
-                <td className="px-4 py-2  text-sm">{getPrice()}</td>
+                <td className="px-4 py-2  text-sm">
+
+
+
+
+                {!externalPriceOnOffer && !taxCalculationNeeded ? (
+                    getPrice()
+                  ) : loadingPreview ? (
+                    <LoadingSpinner />
+                  ) : externalPriceReady || priceWithTaxReady ? (
+                    formatCurrency(getPreviewAmountDueToday(), previewSchedule?.[0]?.currency) || "Not available"
+                  ) : (
+                    ""
+                  )}
+                  </td>
               </tr>
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Start date</th>
@@ -180,6 +247,14 @@ const handleAddressFieldChange = (e) => {
               </tr>
               {
               hasDelivery &&
+              <tr className="dark:text-white text-left flex flex-row md:flex-col ">
+                <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Use this address</th>
+                <td className="px-4 py-2  text-sm">{addressSummary(addresses.deliveryAddress)}</td>
+                <input type="checkbox" checked={!editAddress} onChange={() => setEditAddress(!editAddress)}  />
+              </tr>
+}
+{
+              loadingPreview &&
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Use this address</th>
                 <td className="px-4 py-2  text-sm">{addressSummary(addresses.deliveryAddress)}</td>

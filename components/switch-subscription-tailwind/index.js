@@ -78,6 +78,7 @@ function switchSubscription({heading,
                showGroupedOffers,
                best_value_color__limio_color
          })  {
+  
   const {subscriptions} = useSubscriptions()
   const params = new URL(window.location).searchParams
   const subIdParam = params.get("subId") || ""
@@ -118,12 +119,9 @@ useEffect(() => {
 }, [offerGroups, selectedGroup])
 
 
-
-
-
 return (
   <section className="bg-white dark:bg-gray-900 py-8" >
-  <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6   rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 flex flex-col ">
+  <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6   rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 flex flex-col z-40">
     <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
       <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{heading}</h2>
       <p className="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">{subheading}</p>
@@ -194,27 +192,7 @@ return (
           </div>
           </>
 }
-    {/* {filteredOffers.length > 0 ? (
-          filteredOffers.map((offer, i) => (
-              <Offer key={`${offer.path}/parent-${i}`} 
-              offer={offer} 
-              subscription={subscription}
-              showImage={showImage} 
-              confirmationOk={confirmationOk} 
-              confirmationCancel={confirmationCancel} 
-              confirmHeading={confirmHeading}
-              confirmSubHeading={confirmSubHeading}
-              nextSchedule={nextSchedule}
-              addresses={addresses}
-              revalidate={revalidate}
-              redirectUrl={redirectUrl}
-              primaryColor={primaryColor__limio_color}
-              offerWidth={offerWidth}
-              />
-          ))
-      ) : (
-          <p>No offers to display...</p>
-      )} */}
+
     </div>
 
 </section>

@@ -1,10 +1,15 @@
 // @flow
 import React from "react";
+import { useState, useCallback } from "react"
 import { sanitizeString, formatDisplayPrice } from "../../source/utils/string";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { handleSubmitSwitch } from "../requests";
 import { DateTime } from "@limio/date"
 import {useUser} from "@limio/sdk"
+import { getRecaptchaToken } from "@limio/shop/src/shop/checkout/helpers"
+import { getAppConfigValue } from "@limio/shop/src/shop/appConfig.js"
+import { previewOrder } from "@limio/shop/src/shop/helpers/postRequests.js"
+
 
 
 
@@ -31,11 +36,38 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
     const user = useUser()
     const userAttributes = user.attributes
     const onCancel = () =>  setShowConfirm(false)
+    const recaptchaId = getAppConfigValue(["analytics", "google_recaptcha_v3"])
 
-    const onConfirm = async () => {
+    // const onConfirm = async () => {
  
-        setShowConfirm(false)
-    }
+    //     setShowConfirm(false)
+    // }
+
+
+    const previewCurrentOrder = useCallback(async () => {
+    
+        const orderForPreview = offer
+  
+        const unverifiedRecaptchaToken = await getRecaptchaToken(recaptchaId)
+
+        const previewResults =  previewOrder(
+          {
+            offer: orderForPreview,
+            customerDetails: userAttributes,
+            subscriptionId: id,
+            effectiveDate: effectiveDate,
+            order_type: "change_offer",
+            quantity:  1
+          },
+          { "x-limio-recaptcha": unverifiedRecaptchaToken }
+        )
+      
+        return previewResults
+      
+    }, [ offer, recaptchaId, userAttributes, id, effectiveDate])
+
+
+
 
     const handleSubmit = async (offer, deliveryDetails) => {
         const order = {
@@ -84,7 +116,6 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
       }
   }
 
-  console.log("bestValueColor", bestValueColor)
 
   const bestValueText = display_description__limio || "Best Value"
 
@@ -97,6 +128,7 @@ const Offer = ({ offer, subscription, showImage, confirmationOk, confirmationCan
                  {showConfirm && (
                <ConfirmDialog 
                offer={offer}
+               previewOrder={previewCurrentOrder}
                subscription={subscription}
                onCancel={onCancel}
                onConfirm={address => handleSubmit(offer, address)}
