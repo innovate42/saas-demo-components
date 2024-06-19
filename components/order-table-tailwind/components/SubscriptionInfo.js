@@ -22,16 +22,7 @@ const [addresses, setAddresses] = React.useState(() => {
   const { data: billingAddress = {} } = getCurrentAddress("billing", customerAddress)
   return { deliveryAddress, billingAddress }
 })
-const [newAddress, setNewAddress] = React.useState({
-  firstName: "",
-  lastName: "",
-  country: "",
-  address2: "",
-  city: "",
-  address1: "",
-  postalCode: "",
-  state: ""
-})
+const [newAddress, setNewAddress] = React.useState(addresses.deliveryAddress)
 const [formErrors, setFormErrors] = React.useState({})
 const [loading, setLoading] = React.useState(false)
 const requiredFields = ["firstName", "lastName", "address1", "city", "postalCode", "country"]
@@ -52,6 +43,7 @@ const handleAddressFieldChange = (e) => {
 }
 
 const updateCustomerAddress = async (address, type) => {
+  console.log("address", address)
   const order = {
     order_type: "change_address",
     type: type,

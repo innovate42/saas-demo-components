@@ -29,27 +29,27 @@ export const EditAddress = ({setEditAddress, handleAddressFieldChange, handleSub
         </div>
         <div className="mb-4 w-full flex flex-col">
         <label htmlFor="lastName" className="block text-gray-700 dark:text-white  mb-2">Last name</label>
-        <input type="text" id="lastName" name="lastName" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="lastName" name="lastName" value={newAddress.lastName} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         {formErrors.lastName && <p className="text-red-500 text-xs mt-1">{formErrors.lastName}</p>}
         </div>
         <div className="mb-4 w-full flex flex-col">
         <label htmlFor="address1" className="block text-gray-700 dark:text-white  mb-2">Address line 1</label>
-        <input type="text" id="address1" name="address1" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="address1" name="address1" value={newAddress.address1} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         {formErrors.address1 && <p className="text-red-500 text-xs mt-1">{formErrors.address1}</p>}
         </div>
         <div className="mb-4 w-full flex flex-col">
         <label htmlFor="address2" className="block text-gray-700 dark:text-white  mb-2">Address line 2</label>
-        <input type="text" id="address2" name="address2" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="address2" name="address2" value={newAddress.address2} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         </div>
         <div className="mb-4 w-full flex flex-col">
         <label htmlFor="city" className="block text-gray-700 dark:text-white  mb-2">City</label>
-        <input type="text" id="city" name="city" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="city" name="city" value={newAddress.city} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         {formErrors.city && <p className="text-red-500 text-xs mt-1">{formErrors.city}</p>}
@@ -57,13 +57,13 @@ export const EditAddress = ({setEditAddress, handleAddressFieldChange, handleSub
         <div className="flex  w-full flex-col md:flex-row justify-items-start mb-4">
         <div className="mb-4 sm:mr-1 w-full flex flex-col">
         <label htmlFor="county" className="block text-gray-700 dark:text-white  mb-2">County</label>
-        <input type="text" id="county" name="county" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="county" name="county" value={newAddress.county} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         </div>
         <div className="mb-4 w-full flex flex-col">
         <label htmlFor="postalCode" className="block text-gray-700 dark:text-white  mb-2">Post code</label>
-        <input type="text" id="postalCode" name="postalCode" className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
+        <input type="text" id="postalCode" name="postalCode" value={newAddress.postalCode} className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black"
         onChange={(e) => handleAddressFieldChange(e)}
         />
         {formErrors.postalCode && <p className="text-red-500 text-xs mt-1">{formErrors.postalCode}</p>}
@@ -71,7 +71,7 @@ export const EditAddress = ({setEditAddress, handleAddressFieldChange, handleSub
         </div>
         <div className="mb-4 w-full flex flex-col">
             <label htmlFor="country" className="block text-gray-700 dark:text-white  mb-2">Country</label>
-        <select className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black" id="country" name="country"
+        <select className="w-full  px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500 dark:text-black" id="country" name="country" value={newAddress.country}
         onChange={(e) => handleAddressFieldChange(e)}>
         {countryDataJSON.map((country) => (
             <option value={country["alpha-2"]}>{country.name}</option>
