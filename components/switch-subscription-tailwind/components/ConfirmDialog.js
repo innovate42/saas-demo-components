@@ -49,6 +49,7 @@ const [loadingPreview, setLoadingPreview] = useState(false)
 const [previewSchedule, setPreviewSchedule] = useState([])
 const externalPriceReady = externalPriceOnOffer && !loadingPreview && previewSchedule
 const taxCalculationNeeded = showPriceWithTax && purchaseCountry && showPriceWithTaxCountries.includes(purchaseCountry)
+const priceWithTaxReady = taxCalculationNeeded && !loadingPreview && previewSchedule
 
 const getPreviewAmountDueToday = () => {
   if (taxCalculationNeeded) {
@@ -253,14 +254,7 @@ const handleAddressFieldChange = (e) => {
                 <input type="checkbox" checked={!editAddress} onChange={() => setEditAddress(!editAddress)}  />
               </tr>
 }
-{
-              loadingPreview &&
-              <tr className="dark:text-white text-left flex flex-row md:flex-col ">
-                <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Use this address</th>
-                <td className="px-4 py-2  text-sm">{addressSummary(addresses.deliveryAddress)}</td>
-                <input type="checkbox" checked={!editAddress} onChange={() => setEditAddress(!editAddress)}  />
-              </tr>
-}
+
         </table>
 
         {hasDelivery && editAddress && (
