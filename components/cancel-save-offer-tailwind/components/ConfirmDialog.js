@@ -3,13 +3,15 @@ import PaymentDetails from "./PaymentDetails";
 import { formatCurrency } from "../../source/currency";
 import { formatDate } from "../../source/utils/date";
 import { getAppConfigValue } from "@limio/shop/src/shop/appConfig.js"
+import { DateTime } from "@limio/date"
 
 
 
 export const ConfirmDialog = ({confirmHeading, offer, previewSchedule, nextSchedule, paymentMethodHeading, paymentMethod, loading, setLoading, setShowDialog, confirmationOk, confirmationCancel, onConfirm, redirectUrl, userSubscription }) => {
     const dateFormat = getAppConfigValue(["shop", "default_date_format"])
     const currentOfferTermData = offer?.data?.attributes?.term__limio
-    const { length: currentOfferTermLength, type: currentOfferTermType } = currentOfferTermData
+    const currentOfferTermLength = currentOfferTermData?.length
+    const currentOfferTermType = currentOfferTermData?.type
     const offerTerm = `${currentOfferTermLength} ${
       currentOfferTermLength > 1 ? currentOfferTermType : currentOfferTermType?.substr(0, currentOfferTermType.length - 1)
     }`
