@@ -3,8 +3,6 @@ import * as React from "react"
 import { useState } from "react"
 import { useTranslation } from "@limio/sdk"
 import { Button, Alert } from "@limio/design-system"
-
-import { LoadingIcon } from "../../helpers/LoadingIcon.js"
 import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js"
 import { selectAppConfigValue } from "@limio/shop/src/shop/appConfig.js"
 import { authenticatedRequest } from "@limio/shop/src/shop/helpers/postRequests.js"
@@ -86,7 +84,10 @@ export function DatatransEditor({ subId, cusId, owner, userData, closePaymentEdi
         </Alert>
       )}
       {isLoading ? (
-        <LoadingIcon />
+       
+        <div className="flex justify-center items-center h-full">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-black dark:border-white"></div>
+          </div>
       ) : (
         !paymentError && (
           <div className="payment-information-change-group">

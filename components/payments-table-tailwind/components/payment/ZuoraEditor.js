@@ -11,7 +11,7 @@ import { getCookie } from "@limio/shop/src/helpers/cookie.js"
 import { parseRichText } from "@limio/shop/src/components/helpers.js"
 import { sanitizeString } from "@limio/shop/src/shop/offers/helpers"
 import { PaymentError } from "@limio/old-shop-components/src/shop/checkout/PaymentManager/errors"
-import { useToaster } from "@limio/ui-toaster"
+// import { useToaster } from "@limio/ui-toaster"
 import { getRecaptchaToken } from "@limio/shop/src/shop/checkout/helpers"
 import * as Sentry from "@sentry/browser"
 
@@ -52,7 +52,7 @@ export const ZuoraEditor = ({
   const country = subData ? subData?.data?.purchaseCountry : getCookie("limio-country")
   const recaptchaId = getAppConfigValue(["analytics", "google_recaptcha_v3"])
   const store = useStore()
-  const { toaster, Toaster } = useToaster()
+  // const { toaster, Toaster } = useToaster()
   const { showCheckbox } = useComponentStaticProps()
 
   const { sdk: zuora } = useContext(ZuoraContext)
@@ -114,7 +114,7 @@ export const ZuoraEditor = ({
         const payment_method = await Promise.resolve(process({ billingDetails: billingAddress, customerDetails: userData?.attributes, savePaymentDetails }))
         await updatePayment(payment_method)
       }
-      toaster.success("Your payment details have been updated.")
+      // toaster.success("Your payment details have been updated.")
       setIsLoading(false)
       onFinished(true)
     } catch (error) {
@@ -127,7 +127,7 @@ export const ZuoraEditor = ({
         message = `Payment method could not be updated: ${error.userErrorMessage}`
       }
 
-      toaster.error(message)
+      // toaster.error(message)
     }
   }
 
@@ -143,7 +143,7 @@ export const ZuoraEditor = ({
   return (
     <>
       <div className={`payment-editor-container${focus ? " focus" : ""}`} onClick={() => setFocus(true)} ref={ref}>
-        <Toaster />
+        {/* <Toaster /> */}
         <div id="zuora_payment" ref={nodeRef} style={{ width: "100%", minHeight }} />
         {paymentInformationText && parseRichText(paymentInformationText).length > 0 && (
           <div className="additional-payment-information" dangerouslySetInnerHTML={{ __html: sanitizeString(paymentInformationText) }} />
