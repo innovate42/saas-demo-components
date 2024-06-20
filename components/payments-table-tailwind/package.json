@@ -45,6 +45,162 @@
       "label": "Link to change payment page",
       "type": "string",
       "default": "/change-payment"
+    },
+    {
+      "id": "paypalHeading",
+      "label": "PayPal heading",
+      "type": "string",
+      "default": "Pay with alternative Paypal"
+    },
+    {
+      "id": "paypalSubheading",
+      "label": "PayPal subheading",
+      "type": "string",
+      "default": "Payment will be applied at the start of your next renewal date."
+    },
+    {
+      "id": "cardHeading",
+      "label": "Credit card heading",
+      "type": "string",
+      "default": "Pay with credit card"
+    },
+    {
+      "id": "cardSubheading",
+      "label": "Credit card subheading",
+      "type": "string",
+      "default": "Payment will be applied at the start of your next renewal date."
+    },
+    {
+      "id": "achBankTransferHeading",
+      "label": "ACH Bank Transfer heading",
+      "type": "string",
+      "default": "Pay with ACH Bank Transfer"
+    },
+    {
+      "id": "achBankTransferSubheading",
+      "label": "ACH Bank Transfer subheading",
+      "type": "string",
+      "default": "Payment will be applied at the start of your next renewal date."
+    },
+    {
+      "id": "directDebitInfoText",
+      "label": "Direct debit info text",
+      "type": "string",
+      "default": "To edit your direct debit details please contact your bank."
+    },
+    {
+      "id": "directDebitHeading",
+      "label": "Direct Debit heading",
+      "type": "string",
+      "default": "Pay with direct debit"
+    },
+    {
+      "id": "directDebitSubheading",
+      "label": "Direct Debit subheading",
+      "type": "string",
+      "default": "Payment will be applied at the start of your next renewal date."
+    },
+    {
+      "id": "googlePayHeading",
+      "label": "Google Pay heading",
+      "type": "string",
+      "default": "Pay with Google Pay"
+    },
+    {
+      "id": "googlePaySubheading",
+      "label": "Google Pay subheading",
+      "type": "string",
+      "default": "Payment will be applied at the start of your next renewal date."
+    },
+    {
+      "id": "invalidFirstNameMessage",
+      "label": "Invalid first name message",
+      "type": "string",
+      "default": "First name is required"
+    },
+    {
+      "id": "invalidLastNameMessage",
+      "label": "Invalid last name message",
+      "type": "string",
+      "default": "Last name is required"
+    },
+    {
+      "id": "invalidAddressMessage",
+      "label": "Invalid address message",
+      "type": "string",
+      "default": "Address is required"
+    },
+    {
+      "id": "invalidCityMessage",
+      "label": "Invalid city message",
+      "type": "string",
+      "default": "City is required"
+    },
+    {
+      "id": "invalidStateMessage",
+      "label": "Invalid state/county message",
+      "type": "string",
+      "default": "{{state_name_type}} is required"
+    },
+    {
+      "id": "invalidPostalCodeMessage",
+      "label": "Invalid zip/postal code message",
+      "type": "string",
+      "default": "{{zip_name_type}} is required"
+    },
+    {
+      "id": "invalidCountryMessage",
+      "label": "Invalid country message",
+      "type": "string",
+      "default": "Country is required"
+    },
+    {
+      "id": "firstNameLabel",
+      "label": "First name label",
+      "type": "string",
+      "default": "First name"
+    },
+    {
+      "id": "lastNameLabel",
+      "label": "Last name label",
+      "type": "string",
+      "default": "Last name"
+    },
+    {
+      "id": "address1Label",
+      "label": "Billing address line 1 label",
+      "type": "string",
+      "default": "Address line 1"
+    },
+    {
+      "id": "address2Label",
+      "label": "Billing address line 1 label",
+      "type": "string",
+      "default": "Address line 2"
+    },
+    {
+      "id": "cityLabel",
+      "label": "Billing city label",
+      "type": "string",
+      "default": "City"
+    },
+    {
+      "id": "stateLabel",
+      "label": "Billing county/state label",
+      "type": "string",
+      "default": "{{state_name_type}}"
+    },
+    {
+      "id": "postalCodeLabel",
+      "label": "Billing postal code/ZIP code label",
+      "type": "string",
+      "default": "{{zip_name_type}}"
+    },
+    {
+      "id": "countryLabel",
+      "label": "Billing country label",
+      "type": "string",
+      "default": "Country"
     }
   ]
 }

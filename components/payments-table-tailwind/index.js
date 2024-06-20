@@ -12,7 +12,38 @@ type Props = {
   changePaymentLink: string
 }
 
-function PaymentsTable({goBackHeading, goBackLink, cancelLink, switchLink, changePaymentLink  }:  Props): React.Node {
+function PaymentsTable({
+  goBackHeading,
+   goBackLink,
+    cancelLink,
+     switchLink,
+      changePaymentLink,
+      cardHeading,
+      cardSubheading,
+      paypalHeading,
+      paypalSubheading,
+      directDebitHeading,
+      directDebitSubheading,
+      achBankTransferHeading,
+      achBankTransferSubheading,
+      googlePayHeading,
+      googlePaySubheading,
+      firstNameLabel,
+    lastNameLabel,
+    address1Label,
+    address2Label,
+    cityLabel,
+    stateLabel,
+    postalCodeLabel,
+    countryLabel,
+    invalidFirstNameMessage,
+    invalidLastNameMessage,
+    invalidAddressMessage,
+    invalidCityMessage,
+    invalidStateMessage,
+    invalidPostalCodeMessage,
+    invalidCountryMessage,
+}:  Props): React.Node {
   const {subscriptions} = useSubscriptions()
 
   
@@ -30,7 +61,61 @@ function PaymentsTable({goBackHeading, goBackLink, cancelLink, switchLink, chang
         
         subscriptions.map((subscription, i) => (
     <div className="mb-8"key={`${subscription.id}-${i}`}>
-          <SubscriptionInfo key={subscription.id} subscription={subscription} cancelLink={cancelLink} switchLink={switchLink} changePaymentLink={changePaymentLink} />
+          <SubscriptionInfo key={subscription.id} subscription={subscription} cancelLink={cancelLink} switchLink={switchLink} changePaymentLink={changePaymentLink}
+          paymentHeadings={{
+            zuora_bank_transfer_ach: {
+              heading: achBankTransferHeading,
+              subheading: achBankTransferSubheading
+            },
+            zuora_card: {
+              heading: cardHeading,
+              subheading: cardSubheading
+            },
+            nexi: {
+              heading: cardHeading,
+              subheading: cardSubheading
+            },
+            zuora_upc_datatrans: {
+              heading: cardHeading,
+              subheading: cardSubheading
+            },
+            credit_card: {
+              heading: cardHeading,
+              subheading: cardSubheading
+            },
+            zuora_paypal: {
+              heading: paypalHeading,
+              subheading: paypalSubheading
+            },
+            zuora_dd: {
+              heading: directDebitHeading,
+              subheading: directDebitSubheading
+            },
+            google_pay: {
+              heading: googlePayHeading,
+              subheading: googlePaySubheading
+            }
+          }}
+          addressLabels={{
+            firstNameLabel,
+            lastNameLabel,
+            address1Label,
+            address2Label,
+            cityLabel,
+            stateLabel,
+            postalCodeLabel,
+            countryLabel
+          }}
+          invalidMessages={{
+            invalidFirstNameMessage,
+            invalidLastNameMessage,
+            invalidAddressMessage,
+            invalidCityMessage,
+            invalidStateMessage,
+            invalidPostalCodeMessage,
+            invalidCountryMessage
+          }}
+          />
           </div>
         ))
         :

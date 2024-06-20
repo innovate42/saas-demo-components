@@ -4,6 +4,7 @@ import * as R from "ramda";
 import { getPeriodForOffer, getCurrentOffer } from "../../source/utils/offers"
 import { formatDate } from "../../source/utils/date"
 import {getPriceForUserSubscription, getRenewalDateForUserSubscription} from "../../source/utils/subscriptions"
+import {   useUser} from "@limio/sdk";
 import {  getCurrentAddress, addressSummary } from "../../source/utils/address";
 import { getCurrentPayment, processPaymentMethod, getPaymentLabel } from "../../source/utils/paymentMethods";
 import { checkCurrentSchedule, checkPreviousSchedule } from "../../source/utils/subscriptions";
@@ -13,10 +14,11 @@ import { useLimioUserSubscriptionAddresses, useLimioUserSubscriptionPaymentMetho
 import { EditAddress } from "./EditAddress";
 import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js"
 import { mutateCacheById } from "@limio/shop/src/components/helpers.js"
+import PaymentEditor from "./payment/PaymentEditor"
 
 
 
-export const SubscriptionInfo = ({subscription, cancelLink, switchLink, changePaymentLink}) => {
+export const SubscriptionInfo = ({subscription, cancelLink, switchLink, changePaymentLink, paymentHeadings,  addressLabels,   invalidMessages, }) => {
 const [editAddress, setEditAddress] = React.useState(false)
 const {status, data, name, id, mode} = subscription
 const { addresses: customerAddress, revalidate: revalidateAddresses} = useLimioUserSubscriptionAddresses(id)
@@ -47,6 +49,9 @@ const quantity = subscription.data.quantity
 const previousPrice = getPrice(price, previousSchedule, quantity, addresses.billingAddress.country)
 const nextPrice = getPrice(price, nextSchedule, quantity, addresses.billingAddress.country)
 const paymentLabel = getPaymentLabel(paymentMethod)
+const [isEditingPayment, setIsEditingPayment] = React.useState(false)
+const user = useUser()
+
 
 
 const getPaymentDetails = paymentType => {
@@ -155,9 +160,15 @@ setEditAddress(false)
 mutateCacheById(`/api/mma/subscriptions`)
 }
 
+const onFinish = refresh => {
+  setIsEditingPayment(false)
+  updateNotification({ paymentChange: { show: true, message: paymentChangeSuccessText, variant: "success" } })
 
-console.log("paymentMethodData", paymentMethodData)
-
+  if (refresh) {
+    revalidatePayments()
+    revalidateAddresses()
+  }
+}
 
     return(
       <div>
@@ -192,9 +203,23 @@ console.log("paymentMethodData", paymentMethodData)
         </table>
         
        {editAddress && <EditAddress setEditAddress={setEditAddress} handleAddressFieldChange={handleAddressFieldChange} handleSubmit={handleSubmit} newAddress={newAddress} formErrors={formErrors} loading={loading} currentAddress={addresses.billingAddress}/>}
+       {isEditingPayment && <PaymentEditor 
+       headings={paymentHeadings}
+       subId={subscription.id}
+       cusId={subscription.customer}
+       owner={subscription.owner}
+       paymentTypes={R.path(["data", "offer", "data", "attributes", "payment_types__limio"], subscription)}
+       subData={subscription}
+       invalidMessages={invalidMessages}
+       addressLabels={addressLabels}
+       userData={user}
+       address={addresses.billingAddress}
+       onFinished={refresh => onFinish(refresh)}
+       closePaymentEditor={() => setIsEditingPayment(false)}
+       />}
         <div className="mt-8 flex flex-col md:flex-row justify-start">
             <button className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4"
-            onClick={() => (window.location.href = `${changePaymentLink}?subId=${id}`)}
+            onClick={() => setIsEditingPayment(!isEditingPayment)}
             >Change Payment</button>
               {/* <button className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4"
             onClick={() => (window.location.href = `${switchLink}?subId=${id}`)}
@@ -207,5 +232,9 @@ console.log("paymentMethodData", paymentMethodData)
         </div>
     )
 }
+
+{/* <button className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4"
+onClick={() => (window.location.href = `${changePaymentLink}?subId=${id}`)}
+>Change Payment</button> */}
 
 
