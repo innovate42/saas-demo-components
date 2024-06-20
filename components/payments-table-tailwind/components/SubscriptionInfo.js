@@ -161,7 +161,7 @@ console.log("paymentMethodData", paymentMethodData)
 
     return(
       <div>
-        <table className=" bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+        <table className=" bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white flex">
         <tbody className="flex flex-col md:flex-row justify-evenly py-8">
         <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2  text-sm h-14 w-14">{paymentIcon}</th>
