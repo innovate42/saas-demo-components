@@ -40,6 +40,7 @@ export const ZuoraEditor = ({
   subData,
   invalidMessages,
   closePaymentEditor,
+  showCheckbox,
   paymentType
 }: Props): React.Node => {
   const ref = useRef()
@@ -54,7 +55,7 @@ export const ZuoraEditor = ({
   const recaptchaId = getAppConfigValue(["analytics", "google_recaptcha_v3"])
   const store = useStore()
   // const { toaster, Toaster } = useToaster()
-  const { showCheckbox } = useComponentStaticProps()
+
 
   const { sdk: zuora } = useContext(ZuoraContext)
 
