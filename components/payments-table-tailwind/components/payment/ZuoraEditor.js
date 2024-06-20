@@ -168,11 +168,11 @@ export const ZuoraEditor = ({
       </div>
       <>
         {!isLoading && typeof processPayment?.process === "function" ? (
-          <div className="payment-information-change-group">
-            <div className="payment-information-change cancel-change" onClick={() => closePaymentEditor()}>
+          <div className="flex flex-col sm:flex-row">
+            <div className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4" onClick={() => closePaymentEditor()}>
               {t("Cancel")}
             </div>
-            <div className="payment-information-change" onClick={() => handleSubmit()}>
+            <div className="mt-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full md:w-1/4" onClick={() => handleSubmit()}>
               {t("Save Details")}
             </div>
           </div>

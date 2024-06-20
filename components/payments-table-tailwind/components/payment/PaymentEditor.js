@@ -14,7 +14,7 @@ const SinglePaymentEditor = ({ paymentType, headings, subheadings, ...rest }) =>
             <h2 className="mb-2 font-light text-gray-500 sm:text-xl dark:text-gray-400">{heading}</h2>
             <h3 className="mb-2">{subheading}</h3>
           </div>
-          <div className=" bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white flex p-8">
+          <div className=" bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white flex flex-col p-8">
             <PaymentComponent {...rest} />
           </div>
         </div>
