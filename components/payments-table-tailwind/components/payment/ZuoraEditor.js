@@ -11,9 +11,10 @@ import { getCookie } from "@limio/shop/src/helpers/cookie.js"
 import { parseRichText } from "@limio/shop/src/components/helpers.js"
 import { sanitizeString } from "@limio/shop/src/shop/offers/helpers"
 import { PaymentError } from "@limio/old-shop-components/src/shop/checkout/PaymentManager/errors"
-// import { useToaster } from "@limio/ui-toaster"
+import { useToaster } from "@limio/ui-toaster"
 import { getRecaptchaToken } from "@limio/shop/src/shop/checkout/helpers"
 import * as Sentry from "@sentry/browser"
+import { getAppConfigValue } from "@limio/shop/src/shop/appConfig.js"
 
 
 type Props = {
@@ -21,7 +22,7 @@ type Props = {
   cusId: string,
   owner: string,
   address: Address,
-  onFinished: boolean,
+  onFinished: boolean => void,
   userData: User,
   paymentType: string,
   closePaymentEditor: () => void,
@@ -52,7 +53,7 @@ export const ZuoraEditor = ({
   const country = subData ? subData?.data?.purchaseCountry : getCookie("limio-country")
   const recaptchaId = getAppConfigValue(["analytics", "google_recaptcha_v3"])
   const store = useStore()
-  // const { toaster, Toaster } = useToaster()
+  const { toaster, Toaster } = useToaster()
   const { showCheckbox } = useComponentStaticProps()
 
   const { sdk: zuora } = useContext(ZuoraContext)
@@ -114,7 +115,7 @@ export const ZuoraEditor = ({
         const payment_method = await Promise.resolve(process({ billingDetails: billingAddress, customerDetails: userData?.attributes, savePaymentDetails }))
         await updatePayment(payment_method)
       }
-      // toaster.success("Your payment details have been updated.")
+      toaster.success("Your payment details have been updated.")
       setIsLoading(false)
       onFinished(true)
     } catch (error) {
@@ -127,7 +128,7 @@ export const ZuoraEditor = ({
         message = `Payment method could not be updated: ${error.userErrorMessage}`
       }
 
-      // toaster.error(message)
+      toaster.error(message)
     }
   }
 
@@ -143,10 +144,25 @@ export const ZuoraEditor = ({
   return (
     <>
       <div className={`payment-editor-container${focus ? " focus" : ""}`} onClick={() => setFocus(true)} ref={ref}>
-        {/* <Toaster /> */}
+        <Toaster />
         <div id="zuora_payment" ref={nodeRef} style={{ width: "100%", minHeight }} />
         {paymentInformationText && parseRichText(paymentInformationText).length > 0 && (
           <div className="additional-payment-information" dangerouslySetInnerHTML={{ __html: sanitizeString(paymentInformationText) }} />
+        )}
+        {showCheckbox && (
+          <FormGroup className="SavePaymentDetails">
+            <CustomInput
+              type="checkbox"
+              id="savePaymentDetails"
+              name="savePaymentDetails"
+              label={t("I agree to save my details for future payments")}
+              onChange={() => setSavePaymentDetails(!savePaymentDetails)}
+              error={showValidation && !savePaymentDetails ? "Please accept to continue" : null}
+              required
+              checked={savePaymentDetails}
+            />
+            <FormFeedback>{t("Please accept to continue")}</FormFeedback>
+          </FormGroup>
         )}
       </div>
       <>

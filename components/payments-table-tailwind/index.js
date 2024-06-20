@@ -43,6 +43,7 @@ function PaymentsTable({
     invalidStateMessage,
     invalidPostalCodeMessage,
     invalidCountryMessage,
+    showCheckbox
 }:  Props): React.Node {
   const {subscriptions} = useSubscriptions()
 
@@ -115,6 +116,7 @@ function PaymentsTable({
             invalidPostalCodeMessage,
             invalidCountryMessage
           }}
+          showCheckbox={showCheckbox}
           />
           </div>
         ))

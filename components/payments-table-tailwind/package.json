@@ -201,6 +201,12 @@
       "label": "Billing country label",
       "type": "string",
       "default": "Country"
+    },
+    {
+      "id": "showCheckbox",
+      "label": "Show agree to payment change checkbox",
+      "type": "boolean",
+      "default": true
     }
   ]
 }
