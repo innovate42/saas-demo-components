@@ -177,7 +177,7 @@ console.log("paymentMethodData", paymentMethodData)
               </tr>
               <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Payment details</th>
-                <td className="px-4 py-2  text-sm">{getPaymentDetails(paymentMethodData.Type)}</td>
+                <td className="px-4 py-2  text-sm">{getPaymentDetails(paymentMethodData?.Type)}</td>
               </tr>
                 <tr className="dark:text-white text-left flex flex-col">
                 <th className="px-4 py-2 w-40 md:w-auto  text-sm ">Billing Address</th>
