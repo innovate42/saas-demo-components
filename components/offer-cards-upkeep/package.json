@@ -1,0 +1,111 @@
+{
+  "name": "OfferCardsUpkeep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Subscribe today"
+    },
+    {
+      "id": "subheading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Join today for instant access."
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "offers-limio"
+    },
+    {
+      "id": "offerWidth",
+      "label": "Offer card width",
+      "type": "number",
+      "default": "2"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#F47C24"
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "URL",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        }
+      },
+      "default": [
+        {
+          "id": "digital",
+          "label": "Digital"
+        },
+        {
+          "id": "bundle",
+          "label": "Print + Digital"
+        }
+      ]
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Group offers",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "freeTrialLink",
+      "label": "Free trial link",
+      "type": "richText",
+      "default": "Start a free trial"
+    },
+    {
+      "id": "best_value_color__limio_color",
+      "label": "Best value color",
+      "type": "color",
+      "default": "#F47C24"
+    }
+    
+  ]
+}

@@ -56,9 +56,21 @@ function getArgType(limioProp) {
 
 
 function run() {
-    const components = fs.readdirSync("../components", { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
-
-
+    let components = fs.readdirSync("../components", { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
+    // start cmd is yarn "limio:update": "node ./scripts/update-storybook.js", and i want to allow for an optional argument for specific components
+    // if the argument is passed, only update the storybook for that component
+    // if the argument is not passed, update the storybook for all components
+    // yarn limio:update offer-cards-tailwind
+    // yarn limio:update
+    if (process.argv.length > 2) {
+        const component = process.argv[2]
+        if (components.includes(component)) {
+            components = [component]
+        } else {
+            console.log(`Component ${component} not found`)
+            return
+        }
+    }
 
     components.forEach(component => {
         if(component !== "source") {
