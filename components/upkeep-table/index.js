@@ -40,7 +40,9 @@ function UpkeepTable({}: Props): React.Node {
                                 let gradient = '';
                                 let tick;
 
-                                if (value.value === "✔️") {
+                                console.log("value", value.value == "✔️")
+
+                                if (value.value && value.value.trim() !== "" && value.value.trim() !== "-") {
                                     tick = <FontAwesomeIcon icon={faCircleCheck} />;
                                 } else {
                                     tick = value?.value || '-';
