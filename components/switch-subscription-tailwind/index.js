@@ -76,7 +76,8 @@ function switchSubscription({heading,
               offerWidth,
               groupLabels,
                showGroupedOffers,
-               best_value_color__limio_color
+               best_value_color__limio_color,
+    filterBySameProduct,
          })  {
   
   const {subscriptions} = useSubscriptions()
@@ -89,8 +90,10 @@ function switchSubscription({heading,
   const { payment_methods } = useLimioUserSubscriptionPaymentMethods(subIdParam)
   const nextSchedule = checkCurrentSchedule(schedule)
 const activeOffer = getCurrentOffer(subscription)
+    const currentProduct = R.pathOr("", ["data", "products", "0", "path"], activeOffer)
+
 const campaign = useCampaign()
-const filteredOffers = filterOffers(campaign.offers, subscription, filterSameTerm)
+const filteredOffers = filterOffers(campaign.offers, subscription, filterSameTerm, filterBySameProduct, currentProduct)
 
 const offerGroups = useMemo(() => {
   return groupOffers(filteredOffers, groupLabels).filter(group => group !== undefined);

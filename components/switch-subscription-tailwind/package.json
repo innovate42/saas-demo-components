@@ -116,6 +116,12 @@
       ]
     },
     {
+      "id": "filterBySameProduct",
+      "label": "Filter by same product",
+      "type": "boolean",
+      "default": false
+    },
+    {
       "id": "showGroupedOffers",
       "label": "Group offers",
       "type": "boolean",

@@ -1,9 +1,13 @@
 import { formatCurrency } from "../../source/currency"
 
-export function filterOffers(offerItems: ElasticOffer[], subData: LimioObject<Subscription>, filterSameTerm: boolean): ElasticOffer[] {
+export function filterOffers(offerItems: ElasticOffer[], subData: LimioObject<Subscription>, filterSameTerm: boolean, filterBySameProduct: boolean, currentProduct: string): ElasticOffer[] {
     let filteredItems = offerItems.filter(
       offerItem => (offerItem.path !== subData?.data.offer.path || subData?.data.offer?.data?.attributes?.allow_multibuy__limio) && offerItem.type === "item"
     ) // This allows to attach a whole directory and only exclude offer already applied
+
+    if (filterBySameProduct) {
+        filteredItems = filteredItems.filter(offerItem => offerItem.data.products[0].path === currentProduct)
+    }
     const isDiscount = offerItems.map(offerItem => offerItem?.data?.record_subtype === "discount").includes(true)
   
     // Discounts can only be applied to the same term type
