@@ -5,7 +5,7 @@ import * as R from 'ramda';
 import {TableContext, useTableContext} from './context';
 import './index.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from "@fortawesome/free-regular-svg-icons"
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
 
 
 type Props = {}
@@ -39,7 +39,7 @@ function UpkeepTable({}: Props): React.Node {
                             {sortedOffers.map((offer, offerIndex) => {
                                 const value = offer.data.attributes.pricing_table.find(item => item.label === row.label);
                                 let gradient = '';
-                                let tick = '';
+                                let tick;
 
                                 if (value.value === "✔️") {
                                     tick = <FontAwesomeIcon icon={faCircleCheck} />;
