@@ -78,7 +78,7 @@ const Offer = ({offer, showImage, offerWidth, primaryColor, freeTrialLink, bestV
     return (
         <>
             <div
-                className={`flex flex-col p-6 mr-2 text-gray-900 bg-white  shadow  xl:p-8 dark:bg-gray-800 dark:text-white relative`}
+                className={`flex flex-col p-6 mr-2 text-gray-900 bg-white  shadow  xl:p-8 dark:bg-gray-800 dark:text-white relative max-width-card`}
                 style={{
                     minWidth: `${offerWidth * 10}em`,
                     maxWidth: `${offerWidth * 10}em`,

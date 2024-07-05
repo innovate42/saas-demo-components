@@ -94,3 +94,11 @@ ul li::before {
 .mh-50 {
     min-height: 50px;
 }
+
+.max-width-card {
+    max-width: 394px;
+}
+
+.max-page-width {
+    max-width: 1241px;
+}

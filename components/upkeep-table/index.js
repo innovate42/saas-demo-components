@@ -18,7 +18,7 @@ function UpkeepTable({}: Props): React.Node {
     console.log(tableHeads);
 
     return (
-        <div className="table-container">
+        <div className="table-container max-page-width">
             {/*<div className="sticky-bar">*/}
             {/*    <div className="sticky-bar-item">Features</div>*/}
             {/*    {sortedOffers.map((offer, index) => (*/}
