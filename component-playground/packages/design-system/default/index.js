@@ -4,8 +4,8 @@ import * as React from "react"
 import { Input as ReactStrapInput, FormFeedback as FormNotice, CustomInput as StrapCustomInput, Button as StrapButton } from "reactstrap"
 import { useState } from "react"
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { Skeleton } from "@limio/ui/Skeleton"
 
 type InputProps = {
@@ -51,19 +51,19 @@ function NavTabs({ content, renderContent }): React.Node {
   )
 }
 
-function LoadingSpinner(): React$Element<any> {
-  return (
-    <FontAwesomeIcon
-      icon={faSpinner}
-      style={{ margin: "auto", width: "100%", textAlign: "center" }}
-      className="fa-spin"
-      title="loading"
-      aria-busy="true"
-      aria-live="polite"
-    />
-  )
-}
-
+// function LoadingSpinner(): React$Element<any> {
+//   return (
+//     <FontAwesomeIcon
+//       icon={faSpinner}
+//       style={{ margin: "auto", width: "100%", textAlign: "center" }}
+//       className="fa-spin"
+//       title="loading"
+//       aria-busy="true"
+//       aria-live="polite"
+//     />
+//   )
+// }
+//
 type SkeletonProps = {
   width: string,
   height: string
@@ -74,7 +74,8 @@ function LoadingSkeleton({ width, height }: SkeletonProps): React.Node {
 }
 
 export * from "reactstrap"
-export { Input, FormNotice, NavTabs, LoadingSpinner, LoadingSkeleton }
+export { Input, FormNotice, NavTabs, LoadingSkeleton }
+// LoadingSpinner
 
 // make the export explict so they are picked up by flow
 export { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
