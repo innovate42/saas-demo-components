@@ -90,6 +90,7 @@ ul li::before {
     align-items: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    min-height: 164px;
 }
 
 .mh-50 {
