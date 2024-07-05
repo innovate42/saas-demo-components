@@ -15,10 +15,9 @@ function UpkeepTable({}: Props): React.Node {
     const {
         tableHeads,
         sortedOffers,
-        categoriesForEachTableHead
+        categoriesForEachTableHead,
+        getPricingTableObject
     } = useTableContext();
-    console.log(offers);
-    console.log(tableHeads);
 
     return (
         <div className="table-container max-page-width">
@@ -37,7 +36,7 @@ function UpkeepTable({}: Props): React.Node {
                         <tr key={JSON.stringify(row)} className={` ${bgColorAlternate}`}>
                             <th scope="row" className={`tr-th-label ${bgColorAlternate}`}>{row.label}</th>
                             {sortedOffers.map((offer, offerIndex) => {
-                                const value = offer.data.attributes.pricing_table.find(item => item.label === row.label);
+                                const value = getPricingTableObject(offer).find(item => item.label === row.label);
                                 let gradient = '';
                                 let tick;
 
@@ -93,10 +92,26 @@ function UpkeepTable({}: Props): React.Node {
 function UpkeepTableWrapper() {
     const {offers} = useCampaign();
 
+    const getPricingTableObject = (offer) => {
+        const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table'], offer);
+        const richTextSplit = pricingTableRichText.split(';');
+        // each split will be "Work Orders, Work Order Management, ✔️ "
+        // create objects of the form {section: "Work Orders",label: "Work Order ManageMent",value: "✔️"}
+        return richTextSplit.map((richText) => {
+            const split = richText.split(',');
+            return {
+                section: split[0].trim(),
+                label: split[1].trim(),
+                value: R.pathOr('', [2].trim(), split)
+            };
+        });
+
+    }
+
     // TODO: in live these will be offer data attributes as path
     const tableHeads = React.useMemo(() => {
         return R.uniq(((offers.flatMap(offer => {
-            return offer.data.attributes.pricing_table.flatMap(row => {
+            return getPricingTableObject(offer).flatMap(row => {
                 const keys = Object.keys(row);
                 if (!keys.includes('value')) {
                     return row;
@@ -107,8 +122,8 @@ function UpkeepTableWrapper() {
 
     const sortedOffers = React.useMemo(() => {
         return offers.sort((a, b) => {
-            const valueA = a.data.attributes.pricing_table.map(row => row.value ? row.value : 0);
-            const valueB = b.data.attributes.pricing_table.map(row => row.value ? row.value : 0);
+            const valueA = getPricingTableObject(a).map(row => row.value ? row.value : 0);
+            const valueB = getPricingTableObject(b).map(row => row.value ? row.value : 0);
             return valueA - valueB;
         });
     }, [offers]);
@@ -116,7 +131,7 @@ function UpkeepTableWrapper() {
     const categoriesForEachTableHead = React.useMemo(() => {
         const objectWithVals = tableHeads.map(head => {
             return sortedOffers.map(offer => {
-                return offer.data.attributes.pricing_table.filter(row => row.section === head);
+                return getPricingTableObject(offer).filter(row => row.section === head);
             });
         }).reduce((acc, curr, index) => {
             return {
@@ -136,14 +151,12 @@ function UpkeepTableWrapper() {
 
         return objectWithVals;
     }, [sortedOffers]);
-    console.log(categoriesForEachTableHead);
-
-    console.log(sortedOffers);
 
     const context = {
         tableHeads,
         sortedOffers,
-        categoriesForEachTableHead
+        categoriesForEachTableHead,
+        getPricingTableObject
     };
 
     return (
