@@ -31,7 +31,7 @@ function UpkeepTable({}: Props): React.Node {
                         <tr key={JSON.stringify(row)}>
                             <th scope="row" className="tr-th-label">{row.label}</th>
                             {sortedOffers.map(offer => {
-                                const value = offer.attributes.pricing_table.find(item => item.label === row.label);
+                                const value = offer.data.attributes.pricing_table.find(item => item.label === row.label);
                                 console.log("value", value.value);
                                 return <td key={offer.id} className="td-row">{value && value.value ? value.value : '-'}</td>;
                             })}
@@ -73,7 +73,7 @@ function UpkeepTableWrapper() {
     // TODO: in live these will be offer data attributes as path
     const tableHeads = React.useMemo(() => {
         return R.uniq(((offers.flatMap(offer => {
-            return offer.attributes.pricing_table.flatMap(row => {
+            return offer.data.attributes.pricing_table.flatMap(row => {
                 const keys = Object.keys(row);
                 if (!keys.includes('value')) {
                     return row;
@@ -84,8 +84,8 @@ function UpkeepTableWrapper() {
 
     const sortedOffers = React.useMemo(() => {
         return offers.sort((a, b) => {
-            const valueA = a.attributes.pricing_table.map(row => row.value ? row.value : 0);
-            const valueB = b.attributes.pricing_table.map(row => row.value ? row.value : 0);
+            const valueA = a.data.attributes.pricing_table.map(row => row.value ? row.value : 0);
+            const valueB = b.data.attributes.pricing_table.map(row => row.value ? row.value : 0);
             return valueA - valueB;
         });
     }, [offers]);
@@ -93,7 +93,7 @@ function UpkeepTableWrapper() {
     const categoriesForEachTableHead = React.useMemo(() => {
         const objectWithVals = tableHeads.map(head => {
             return sortedOffers.map(offer => {
-                return offer.attributes.pricing_table.filter(row => row.section === head);
+                return offer.data.attributes.pricing_table.filter(row => row.section === head);
             });
         }).reduce((acc, curr, index) => {
             return {
