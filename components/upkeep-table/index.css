@@ -9,17 +9,18 @@
 }
 
 .table-container .styled-table:first-child {
-    box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15); /* Top, bottom and side shadows */
 }
 
 .table-container .styled-table:last-child {
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15), 0 -10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15); /* Bottom, top and side shadows */
 }
 
 .table-container .styled-table:not(:first-child):not(:last-child) {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Left and right shadow only */
+    border-top: none;
+    border-bottom: none;
 }
-
 .styled-table thead tr {
     background-color:white;
     color: #111827;

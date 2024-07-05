@@ -114,7 +114,7 @@ const Offer = ({offer, showImage, offerWidth, primaryColor, freeTrialLink, bestV
                 <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-4 v">
                     {display_equivalent_price}
                 </p>
-                <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-6 mh-50"
+                <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400 mb-6 "
                    dangerouslySetInnerHTML={{
                        __html: sanitizeString(formatDisplayPrice(detailed_display_price__limio, [{
                            currencyCode: price__limio[0].currencyCode,

@@ -64,7 +64,7 @@ function UpkeepTable({}: Props): React.Node {
                         <tr>
                             <th>{head}</th>
                             {index === 0 && sortedOffers.map((offer, index) => (
-                                <th key={index}>{offer.name}</th>
+                                <th key={index}>{offer.data.attributes.display_name__limio}</th>
                             ))}
                         </tr>
                         </thead>
