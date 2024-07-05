@@ -47,7 +47,7 @@ const Offer = ({offer, showImage, offerWidth, primaryColor, freeTrialLink, bestV
             const mappedLiElements = liElements.map((liElement, i) => {
                 const text = liElement.replace(/<\/?li>/g, "")
                 return (
-                    <li key={i} className="flex-column items-center space-x-3">
+                    <li key={i} className="flex items-center space-x-3">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="16px" width="16px" style={{minWidth: "16px", minHeight: "16px", maxWidth: "16px", maxHeight: "16px"}}
                              fill="none">
                             <rect width="24" height="24" rx="12" fill="#007CB0"/>
