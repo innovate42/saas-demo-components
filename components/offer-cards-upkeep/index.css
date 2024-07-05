@@ -103,3 +103,8 @@ ul li::before {
     max-width: 1280px;
     margin: auto;
 }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
