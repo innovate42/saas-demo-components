@@ -4,7 +4,6 @@ import * as React from "react"
 import { Input as ReactStrapInput, FormFeedback as FormNotice, CustomInput as StrapCustomInput, Button as StrapButton } from "reactstrap"
 import { useState } from "react"
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 // import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { Skeleton } from "@limio/ui/Skeleton"
 
@@ -85,3 +84,4 @@ export { ListGroup, ListGroupItem } from "reactstrap"
 export { Table, Col, Row } from "reactstrap"
 export { Form, FormFeedback, FormText, FormGroup } from "reactstrap"
 export { Label } from "reactstrap"
+

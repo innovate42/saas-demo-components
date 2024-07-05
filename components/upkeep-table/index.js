@@ -4,6 +4,9 @@ import {useCampaign} from '@limio/sdk';
 import * as R from 'ramda';
 import {TableContext, useTableContext} from './context';
 import './index.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons"
+
 
 type Props = {}
 
@@ -36,6 +39,14 @@ function UpkeepTable({}: Props): React.Node {
                             {sortedOffers.map((offer, offerIndex) => {
                                 const value = offer.data.attributes.pricing_table.find(item => item.label === row.label);
                                 let gradient = '';
+                                let tick = '';
+
+                                if (value.value === "✔️") {
+                                    tick = <FontAwesomeIcon icon={faCircleCheck} />;
+                                } else {
+                                    tick = value?.value || '-';
+                                }
+
                                 if (bgColorAlternate === 'bg-not-light') {
                                     if (offerIndex === 0) {
                                         gradient = 'gradient-1';
@@ -45,8 +56,9 @@ function UpkeepTable({}: Props): React.Node {
                                         gradient = 'gradient-3';
                                     }
                                 }
+
                                 return <td key={offer.id}
-                                           className={`td-row ${gradient}`}>{value && value.value ? value.value : '-'}</td>;
+                                           className={`td-row ${gradient}`}>{tick}</td>;
                             })}
                         </tr>
                     );
