@@ -1,14 +1,14 @@
 // @flow
 import * as React from "react";
-import { useCampaign } from '@limio/sdk';
+import {useCampaign} from '@limio/sdk';
 import * as R from 'ramda';
-import { TableContext, useTableContext } from './context';
+import {TableContext, useTableContext} from './context';
 import './index.css';
 
 type Props = {}
 
 function UpkeepTable({}: Props): React.Node {
-    const { offers } = useCampaign();
+    const {offers} = useCampaign();
     const {
         tableHeads,
         sortedOffers,
@@ -18,7 +18,7 @@ function UpkeepTable({}: Props): React.Node {
     console.log(tableHeads);
 
     return (
-        <div>
+        <div className="table-container">
             {/*<div className="sticky-bar">*/}
             {/*    <div className="sticky-bar-item">Features</div>*/}
             {/*    {sortedOffers.map((offer, index) => (*/}
@@ -26,14 +26,27 @@ function UpkeepTable({}: Props): React.Node {
             {/*    ))}*/}
             {/*</div>*/}
             {tableHeads.map((head, index) => {
-                const rows = categoriesForEachTableHead[head].map(row => {
+                const rows = categoriesForEachTableHead[head].map((row, i) => {
+
+                    const bgColorAlternate = (i % 2) ? 'bg-light' : 'bg-not-light';
+
                     return (
-                        <tr key={JSON.stringify(row)}>
-                            <th scope="row" className="tr-th-label">{row.label}</th>
-                            {sortedOffers.map(offer => {
+                        <tr key={JSON.stringify(row)} className={` ${bgColorAlternate}`}>
+                            <th scope="row" className={`tr-th-label ${bgColorAlternate}`}>{row.label}</th>
+                            {sortedOffers.map((offer, offerIndex) => {
                                 const value = offer.data.attributes.pricing_table.find(item => item.label === row.label);
-                                console.log("value", value.value);
-                                return <td key={offer.id} className="td-row">{value && value.value ? value.value : '-'}</td>;
+                                let gradient = '';
+                                if (bgColorAlternate === 'bg-not-light') {
+                                    if (offerIndex === 0) {
+                                        gradient = 'gradient-1';
+                                    } else if (offerIndex === 1) {
+                                        gradient = 'gradient-2';
+                                    } else if (offerIndex === 2) {
+                                        gradient = 'gradient-3';
+                                    }
+                                }
+                                return <td key={offer.id}
+                                           className={`td-row ${gradient}`}>{value && value.value ? value.value : '-'}</td>;
                             })}
                         </tr>
                     );
@@ -46,21 +59,19 @@ function UpkeepTable({}: Props): React.Node {
                         : 'styled-table middle-table';
 
                 return (
-                    <div className="table-container" key={JSON.stringify(head)}>
-                        <table className={tableClass}>
-                            <thead>
-                            <tr>
-                                <th>{head}</th>
-                                {sortedOffers.map((offer, index) => (
-                                    <th key={index}>{offer.name}</th>
-                                ))}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {rows}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table className={tableClass}>
+                        <thead>
+                        <tr>
+                            <th>{head}</th>
+                            {index === 0 && sortedOffers.map((offer, index) => (
+                                <th key={index}>{offer.name}</th>
+                            ))}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {rows}
+                        </tbody>
+                    </table>
                 );
             })}
         </div>
@@ -68,7 +79,7 @@ function UpkeepTable({}: Props): React.Node {
 }
 
 function UpkeepTableWrapper() {
-    const { offers } = useCampaign();
+    const {offers} = useCampaign();
 
     // TODO: in live these will be offer data attributes as path
     const tableHeads = React.useMemo(() => {
@@ -125,7 +136,7 @@ function UpkeepTableWrapper() {
 
     return (
         <TableContext.Provider value={context}>
-            <UpkeepTable />
+            <UpkeepTable/>
         </TableContext.Provider>
     );
 }

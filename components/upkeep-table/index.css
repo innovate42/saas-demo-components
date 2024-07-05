@@ -1,13 +1,27 @@
+/* General table styling */
 .styled-table {
-    width: fit-content;
+    width: 100%;
     border-collapse: collapse;
     font-size: 18px;
     text-align: left;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    table-layout: fixed; /* Ensure columns have fixed width */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Default shadow */
+}
+
+.table-container .styled-table:first-child {
+    box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.table-container .styled-table:last-child {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.table-container .styled-table:not(:first-child):not(:last-child) {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Left and right shadow only */
 }
 
 .styled-table thead tr {
-    background-color: #f1f5f9;
+    background-color:white;
     color: #111827;
     text-align: left;
     font-weight: bold;
@@ -15,40 +29,18 @@
 
 .styled-table th, .styled-table td {
     padding: 12px 15px;
+    word-wrap: break-word; /* Ensure long text wraps */
 }
 
-.styled-table tbody tr {
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f9fafb;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #e5e7eb;
-}
-
-.styled-table tbody tr:hover {
-    background-color: #f1f5f9;
-}
-
-.styled-table.first-table {
-    border-radius: 8px 8px 0 0;
-}
-
-.styled-table.last-table {
-    border-radius: 0 0 8px 8px;
-}
-
-.styled-table.middle-table {
-    border-radius: 0;
-    margin-top: 0;
-}
-
+/* Specific table container styling */
 .table-container {
     padding-left: 4rem;
     padding-right: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
 }
 
 .table-container:first-child {
@@ -59,14 +51,38 @@
     padding-bottom: 4rem;
 }
 
-.tr-th-label {
-    width: 150px;
+.styled-table tbody tr {
+    border-bottom: 0.5px solid rgb(227, 235, 247);
 }
 
-.td-row {
-    width: 100px;
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9fafb;
 }
 
+.styled-table tbody tr:last-of-type {
+    border-bottom: 0.5px solid rgb(227, 235, 247);
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.styled-table.first-table {
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+}
+
+.styled-table.last-table > tbody > tr:last-child {
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.styled-table.middle-table {
+    border-radius: 0;
+    margin-top: 0;
+}
+
+/* Sticky header styling */
 .sticky-header {
     position: sticky;
     top: 0;
@@ -74,6 +90,7 @@
     z-index: 10;
 }
 
+/* Sticky bar styling */
 .sticky-bar {
     display: flex;
     justify-content: space-around;
@@ -91,4 +108,34 @@
     text-align: center;
     padding: 10px;
     font-weight: bold;
+}
+
+/* Class for table columns to ensure equal width */
+.equal-width {
+    width: 20%; /* Adjust this value as needed */
+}
+
+/* Use this class for th and td elements to enforce consistent width */
+.styled-table th.equal-width, .styled-table td.equal-width {
+    width: 20%;
+}
+
+.bg-light {
+    background-color: rgb(247, 250, 255);
+}
+
+.bg-not-light {
+    background:  rgba(182, 205, 246, 0.1);
+}
+.gradient-3 {
+    background-color: rgba(182, 205, 246, 0.1);
+}
+.gradient-2 { background-color: rgba(182, 205, 246, 0.1);}
+
+.gradient-1 {
+    background-color: rgb(247, 250, 255);
+}
+
+td {
+    border:0.5px solid rgb(227, 235, 247);
 }
