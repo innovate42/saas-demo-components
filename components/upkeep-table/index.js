@@ -92,33 +92,51 @@ function UpkeepTable({}: Props): React.Node {
 function UpkeepTableWrapper() {
     const {offers} = useCampaign();
 
+
     const getPricingTableObject = (offer) => {
-        const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table'], offer);
-        const richTextSplit = pricingTableRichText.split(';');
-        // each split will be "Work Orders, Work Order Management, ✔️ "
-        // create objects of the form {section: "Work Orders",label: "Work Order ManageMent",value: "✔️"}
-        return richTextSplit.map((richText) => {
+        const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table_richtext'], offer);
+
+        // Replace all HTML tags with an empty string
+        const richTextSplit = pricingTableRichText.split(';').map((richText) => richText.trim().replace(/<[^>]*>?/gm, ''));
+
+        // Each split will be "Work Orders, Work Order Management, ✔️"
+        // Create objects of the form {section: "Work Orders", label: "Work Order Management", value: "✔️"}
+        let pricingTableObjects = richTextSplit.map((richText) => {
+            if (richText.includes("Locations, Assets, and Parts,")) {
+                // Split this based on the specific section "Locations, Assets, and Parts,"
+                const section = "Locations, Assets, and Parts,";
+                const remainingText = richText.replace(section, '');
+                const split = remainingText.split(',');
+
+                return {
+                    section: section,
+                    label: split[0],
+                    value: R.pathOr('', [1], split)
+                };
+            }
+
             const split = richText.split(',');
+
             return {
-                section: split[0].trim(),
-                label: split[1].trim(),
-                value: R.pathOr('', [2].trim(), split)
+                section: split[0],
+                label: split[1],
+                value: R.pathOr('', [2], split)
             };
         });
 
-    }
+        return pricingTableObjects.filter(item => !!item.section && !!item.label);
+    };
 
-    // TODO: in live these will be offer data attributes as path
     const tableHeads = React.useMemo(() => {
-        return R.uniq(((offers.flatMap(offer => {
-            return getPricingTableObject(offer).flatMap(row => {
-                const keys = Object.keys(row);
-                if (!keys.includes('value')) {
-                    return row;
-                }
-            });
-        })).filter(Boolean).map(row => row.section)));
+        return R.uniq(offers.flatMap(offer => {
+                const sections = R.uniq(getPricingTableObject(offer).map(row => row.section));
+                console.log("sections", sections)
+                return sections
+            }
+        ))
+
     }, [offers]);
+
 
     const sortedOffers = React.useMemo(() => {
         return offers.sort((a, b) => {

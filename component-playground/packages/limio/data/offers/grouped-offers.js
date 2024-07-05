@@ -2812,238 +2812,6 @@
 // }]
 export const groupedOffers = [
   {
-    "path": "/offers2/Upkeep Business ",
-    "name": "Upkeep Business ",
-    "type": "item",
-    "data": {
-      "record_type": "offer",
-      "baseTemplate": "/config/templates/offers/offer-features",
-      "synced": true,
-      "lastSynced": "2024-03-04T14:25:32.589Z",
-      "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
-      "attributes": {
-        "display_name__limio": "Upkeep Lite",
-        "is_gift__limio": false,
-        "is_redeem_gift__limio": false,
-        "autoRenew__limio": true,
-        "rate_plan__zuora": "Per Seat Annual",
-        "price__limio": [
-          {
-            "use_external_price": true,
-            "currency": {
-              "id": "USD",
-              "label": "USD - US Dollar",
-              "symbol": "$"
-            },
-            "currencyCode": "USD"
-          }
-        ],
-        "payment_types__limio": [
-          "zuora_card",
-          "zuora_paypal"
-        ],
-        "initial_term__limio": {
-          "renewal_type": "TERMED",
-          "renewal_trigger": "EXTERNAL",
-          "length": 1,
-          "type": "years"
-        },
-        "term__limio": {
-          "renewal_type": "TERMED",
-          "renewal_trigger": "EXTERNAL",
-          "length": 1,
-          "type": "years"
-        },
-        "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
-        "detailed_display_price__limio": "",
-        "allow_multibuy__limio": true,
-        "push_to_checkout__limio": true,
-        "checkout__limio": {
-          "checkout_type": "external",
-          "external_url": "/checkout"
-        },
-        "default_quantity_options__limio": {
-          "quantity": 1,
-          "increment": 1,
-          "maximum_quantity": 100,
-          "minimum_quantity": 1
-        },
-        "label__limio": [
-          "upkeep"
-        ],
-        "allowed_countries__limio": [
-          "US"
-        ],
-        "ltm_Product_Type": "BasePlan",
-        "billing_plan": [
-          "annual"
-        ],
-        "best_value__limio": false,
-        "offer_type__limio": "standard",
-        "ltm_Agreement_Length": "current term (12 month(s))",
-        "sales_channel__limio": [
-          "Salesforce"
-        ],
-        "offer_features": [
-          "Includes Webroot® Computer Antivirus",
-          "Devices"
-        ],
-        "cta_text__limio": "Buy Now",
-        "group__limio": "yearly",
-        "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
-        "display_description__limio": "",
-        "test for me": [
-          {
-            "test": "TEst",
-            "title": "work orders",
-            "value": "Work Order Management",
-            "label": "✔️"
-          },
-          {
-            "test": "Test"
-          },
-          {
-            "test": "TEst"
-          },
-          {},
-          {}
-        ],
-        "pricing_table": [
-          {
-            "section": "Work Orders",
-            "label": "Work Order Management",
-            "value": "✔️"
-          },
-          {
-            "label": "Recurring Work Orders",
-            "section": "Work Orders",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Categories",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Data Importing",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": "Limited"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": ""
-          },
-          {
-            "section": "Work Orders",
-            "label": "Checklists"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Time and Cost Tracking"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Signature Capture"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Work Order Configuration"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Work Order Statuses"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Workflow Automation"
-          },
-          {
-            "section": "Work Requests",
-            "label": "Internal Requests",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Requests",
-            "label": "External Request Portal"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Location Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Asset Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Barcode Scanning",
-            "value": "✔️"
-          },
-          {
-            "label": "Inventory Management",
-            "section": "Locations, Assets, and Parts"
-          }
-        ]
-      },
-      "productBundles": [
-        {
-          "revenue_split": "100",
-          "product_path": "/products/Saas",
-          "rate_plan": "Per Seat Annual"
-        }
-      ],
-      "products": [
-        {
-          "path": "/products/Saas",
-          "record_type": "product",
-          "baseTemplate": "/config/templates/products/default",
-          "synced": true,
-          "lastSynced": "2024-06-05T14:55:04.105Z",
-          "syncedFrom": "8ad0877b83f1cbfa0183f5b89ef619f3",
-          "attributes": {
-            "product_code__limio": "SKU-00000122",
-            "has_delivery__limio": false,
-            "display_name__limio": "Saas"
-          },
-          "created": "2024-02-29T14:08:06+00:00",
-          "modified": "2024-06-05T14:55:04+00:00",
-          "entitlements": [
-            {
-              "$ref": "/entitlements/Accurate"
-            },
-            {
-              "$ref": "/entitlements/All-Access Support"
-            }
-          ]
-        }
-      ],
-      "created": "2024-07-05T08:49:28+00:00",
-      "modified": "2024-07-05T08:49:28+00:00",
-      "duplicatedFrom": "/offers2/Upkeep Professional",
-      "priceReference": "/offers2/Saas - Per Seat Annual",
-      "price__limio": [],
-      "price": [],
-      "attachments": [
-        {
-          "url": "/public/bb20be0b-f97f-44c7-919b-0bfb28b05145/499462_48070.webp",
-          "type": "image/webp",
-          "path": "/assets/basic",
-          "name": "basic"
-        }
-      ]
-    },
-    "id": "4279157eb47b2e5d848452982d33c7663d95806a",
-    "version": "de3e40ec84b3106def15f60df1c33dfe30402593"
-  },
-  {
     "path": "/offers2/Upkeep Light USD",
     "name": "Upkeep Light USD",
     "type": "item",
@@ -3058,7 +2826,7 @@ export const groupedOffers = [
         "is_gift__limio": false,
         "is_redeem_gift__limio": false,
         "autoRenew__limio": true,
-        "rate_plan__zuora": "Per Seat Annual",
+        "rate_plan__zuora": "Lite - Monthly",
         "price__limio": [
           {
             "use_external_price": true,
@@ -3078,13 +2846,13 @@ export const groupedOffers = [
           "renewal_type": "TERMED",
           "renewal_trigger": "EXTERNAL",
           "length": 1,
-          "type": "years"
+          "type": "months"
         },
         "term__limio": {
           "renewal_type": "TERMED",
           "renewal_trigger": "EXTERNAL",
           "length": 1,
-          "type": "years"
+          "type": "months"
         },
         "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
         "detailed_display_price__limio": "",
@@ -3121,7 +2889,7 @@ export const groupedOffers = [
           "Devices"
         ],
         "cta_text__limio": "Buy Now",
-        "group__limio": "yearly",
+        "group__limio": "monthly",
         "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
         "display_description__limio": "",
         "test for me": [
@@ -3140,125 +2908,39 @@ export const groupedOffers = [
           {},
           {}
         ],
-        "pricing_table": [
-          {
-            "section": "Work Orders",
-            "label": "Work Order Management",
-            "value": "✔️"
-          },
-          {
-            "label": "Recurring Work Orders",
-            "section": "Work Orders",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Categories",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Data Importing",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": "Limited"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": ""
-          },
-          {
-            "section": "Work Orders",
-            "label": "Checklists"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Time and Cost Tracking"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Signature Capture"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Work Order Configuration"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Work Order Statuses"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Workflow Automation"
-          },
-          {
-            "section": "Work Requests",
-            "label": "Internal Requests",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Requests",
-            "label": "External Request Portal"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Location Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Asset Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Barcode Scanning",
-            "value": "✔️"
-          },
-          {
-            "label": "Inventory Management",
-            "section": "Locations, Assets, and Parts"
-          }
-        ]
+        "pricing_table": [],
+        "offer_card_color": "rgb(0, 180, 81)",
+        "products": [
+          "/products/SaaS 2"
+        ],
+        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, Limited ; Work Orders, Preventive Maintenance,&nbsp;; Work Orders, Checklists, - ; Work Orders, Time and Cost Tracking, - ; Work Orders, Signature Capture, - ; Work Orders, Work Order Configuration, - ; Work Orders, Custom Work Order Statuses, - ; Work Orders, Workflow Automation, - ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, - ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, - ;</p><p><br></p>"
       },
       "productBundles": [
         {
+          "product_path": "/products/SaaS 2",
           "revenue_split": "100",
-          "product_path": "/products/Saas",
-          "rate_plan": "Per Seat Annual"
+          "rate_plan": "Lite - Monthly"
         }
       ],
       "products": [
         {
-          "path": "/products/Saas",
+          "path": "/products/SaaS 2",
           "record_type": "product",
           "baseTemplate": "/config/templates/products/default",
           "synced": true,
-          "lastSynced": "2024-06-05T14:55:04.105Z",
-          "syncedFrom": "8ad0877b83f1cbfa0183f5b89ef619f3",
+          "lastSynced": "2024-07-05T13:48:42.237Z",
+          "syncedFrom": "8ad081dd907cbaef019082b9afa379a0",
           "attributes": {
-            "product_code__limio": "SKU-00000122",
+            "product_code__limio": "SKU-00000149",
             "has_delivery__limio": false,
-            "display_name__limio": "Saas"
+            "display_name__limio": "SaaS 2"
           },
-          "created": "2024-02-29T14:08:06+00:00",
-          "modified": "2024-06-05T14:55:04+00:00",
-          "entitlements": [
-            {
-              "$ref": "/entitlements/Accurate"
-            },
-            {
-              "$ref": "/entitlements/All-Access Support"
-            }
-          ]
+          "created": "2024-07-05T11:55:57+00:00",
+          "modified": "2024-07-05T13:48:42+00:00"
         }
       ],
       "created": "2024-07-04T14:34:03+00:00",
-      "modified": "2024-07-04T14:50:40+00:00",
+      "modified": "2024-07-05T14:19:43+00:00",
       "duplicatedFrom": "/offers2/Saas - Per Seat Annual - To Cart",
       "priceReference": "/offers2/Saas - Per Seat Annual",
       "price__limio": [],
@@ -3273,239 +2955,7 @@ export const groupedOffers = [
       ]
     },
     "id": "93dc9ec8e217ec8031ff38267ac58d4330b6181e",
-    "version": "7e056ede3adf22fe30b055cf4c811b48745362ea"
-  },
-  {
-    "path": "/offers2/Upkeep Professional",
-    "name": "Upkeep Professional",
-    "type": "item",
-    "data": {
-      "record_type": "offer",
-      "baseTemplate": "/config/templates/offers/offer-features",
-      "synced": true,
-      "lastSynced": "2024-03-04T14:25:32.589Z",
-      "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
-      "attributes": {
-        "display_name__limio": "Upkeep Lite",
-        "is_gift__limio": false,
-        "is_redeem_gift__limio": false,
-        "autoRenew__limio": true,
-        "rate_plan__zuora": "Per Seat Annual",
-        "price__limio": [
-          {
-            "use_external_price": true,
-            "currency": {
-              "id": "USD",
-              "label": "USD - US Dollar",
-              "symbol": "$"
-            },
-            "currencyCode": "USD"
-          }
-        ],
-        "payment_types__limio": [
-          "zuora_card",
-          "zuora_paypal"
-        ],
-        "initial_term__limio": {
-          "renewal_type": "TERMED",
-          "renewal_trigger": "EXTERNAL",
-          "length": 1,
-          "type": "years"
-        },
-        "term__limio": {
-          "renewal_type": "TERMED",
-          "renewal_trigger": "EXTERNAL",
-          "length": 1,
-          "type": "years"
-        },
-        "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
-        "detailed_display_price__limio": "",
-        "allow_multibuy__limio": true,
-        "push_to_checkout__limio": true,
-        "checkout__limio": {
-          "checkout_type": "external",
-          "external_url": "/checkout"
-        },
-        "default_quantity_options__limio": {
-          "quantity": 1,
-          "increment": 1,
-          "maximum_quantity": 100,
-          "minimum_quantity": 1
-        },
-        "label__limio": [
-          "upkeep"
-        ],
-        "allowed_countries__limio": [
-          "US"
-        ],
-        "ltm_Product_Type": "BasePlan",
-        "billing_plan": [
-          "annual"
-        ],
-        "best_value__limio": false,
-        "offer_type__limio": "standard",
-        "ltm_Agreement_Length": "current term (12 month(s))",
-        "sales_channel__limio": [
-          "Salesforce"
-        ],
-        "offer_features": [
-          "Includes Webroot® Computer Antivirus",
-          "Devices"
-        ],
-        "cta_text__limio": "Buy Now",
-        "group__limio": "yearly",
-        "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
-        "display_description__limio": "",
-        "test for me": [
-          {
-            "test": "TEst",
-            "title": "work orders",
-            "value": "Work Order Management",
-            "label": "✔️"
-          },
-          {
-            "test": "Test"
-          },
-          {
-            "test": "TEst"
-          },
-          {},
-          {}
-        ],
-        "pricing_table": [
-          {
-            "section": "Work Orders",
-            "label": "Work Order Management",
-            "value": "✔️"
-          },
-          {
-            "label": "Recurring Work Orders",
-            "section": "Work Orders",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Categories",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Data Importing",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": "Limited"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": ""
-          },
-          {
-            "section": "Work Orders",
-            "label": "Checklists"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Time and Cost Tracking"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Signature Capture"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Work Order Configuration"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Work Order Statuses"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Workflow Automation"
-          },
-          {
-            "section": "Work Requests",
-            "label": "Internal Requests",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Requests",
-            "label": "External Request Portal"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Location Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Asset Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Barcode Scanning",
-            "value": "✔️"
-          },
-          {
-            "label": "Inventory Management",
-            "section": "Locations, Assets, and Parts"
-          }
-        ]
-      },
-      "productBundles": [
-        {
-          "revenue_split": "100",
-          "product_path": "/products/Saas",
-          "rate_plan": "Per Seat Annual"
-        }
-      ],
-      "products": [
-        {
-          "path": "/products/Saas",
-          "record_type": "product",
-          "baseTemplate": "/config/templates/products/default",
-          "synced": true,
-          "lastSynced": "2024-06-05T14:55:04.105Z",
-          "syncedFrom": "8ad0877b83f1cbfa0183f5b89ef619f3",
-          "attributes": {
-            "product_code__limio": "SKU-00000122",
-            "has_delivery__limio": false,
-            "display_name__limio": "Saas"
-          },
-          "created": "2024-02-29T14:08:06+00:00",
-          "modified": "2024-06-05T14:55:04+00:00",
-          "entitlements": [
-            {
-              "$ref": "/entitlements/Accurate"
-            },
-            {
-              "$ref": "/entitlements/All-Access Support"
-            }
-          ]
-        }
-      ],
-      "created": "2024-07-05T08:49:19+00:00",
-      "modified": "2024-07-05T08:49:19+00:00",
-      "duplicatedFrom": "/offers2/Upkeep Starter",
-      "priceReference": "/offers2/Saas - Per Seat Annual",
-      "price__limio": [],
-      "price": [],
-      "attachments": [
-        {
-          "url": "/public/bb20be0b-f97f-44c7-919b-0bfb28b05145/499462_48070.webp",
-          "type": "image/webp",
-          "path": "/assets/basic",
-          "name": "basic"
-        }
-      ]
-    },
-    "id": "80b7b1d51f27f83f135325d7c1a8a316029f8264",
-    "version": "9a8d1a0cbc3f02936bc84c4a831d3af232a557d6"
+    "version": "ec338ae3185d3e746e1985e6bb439036bfa8b72c"
   },
   {
     "path": "/offers2/Upkeep Starter",
@@ -3518,11 +2968,11 @@ export const groupedOffers = [
       "lastSynced": "2024-03-04T14:25:32.589Z",
       "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
       "attributes": {
-        "display_name__limio": "Upkeep Lite",
+        "display_name__limio": "Upkeep Starter",
         "is_gift__limio": false,
         "is_redeem_gift__limio": false,
         "autoRenew__limio": true,
-        "rate_plan__zuora": "Per Seat Annual",
+        "rate_plan__zuora": "Starter - Monthly",
         "price__limio": [
           {
             "use_external_price": true,
@@ -3542,15 +2992,15 @@ export const groupedOffers = [
           "renewal_type": "TERMED",
           "renewal_trigger": "EXTERNAL",
           "length": 1,
-          "type": "years"
+          "type": "months"
         },
         "term__limio": {
           "renewal_type": "TERMED",
           "renewal_trigger": "EXTERNAL",
           "length": 1,
-          "type": "years"
+          "type": "months"
         },
-        "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
+        "display_price__limio": "<p><strong>$45</strong>/month per user</p>",
         "detailed_display_price__limio": "",
         "allow_multibuy__limio": true,
         "push_to_checkout__limio": true,
@@ -3585,8 +3035,8 @@ export const groupedOffers = [
           "Devices"
         ],
         "cta_text__limio": "Buy Now",
-        "group__limio": "yearly",
-        "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
+        "group__limio": "monthly",
+        "offer_features__limio": "<p><strong>Everything in Lite plus: </strong></p><p>Preventive Maintenance Optimization&nbsp;</p><p>Custom Checklists</p><p>Inventory management/Costing</p><p>Time and Manpower Tracking</p><p>30 day Analytics &amp; Reporting</p>",
         "display_description__limio": "",
         "test for me": [
           {
@@ -3604,125 +3054,39 @@ export const groupedOffers = [
           {},
           {}
         ],
-        "pricing_table": [
-          {
-            "section": "Work Orders",
-            "label": "Work Order Management",
-            "value": "✔️"
-          },
-          {
-            "label": "Recurring Work Orders",
-            "section": "Work Orders",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Categories",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Data Importing",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": "Limited"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Preventive Maintenance",
-            "value": ""
-          },
-          {
-            "section": "Work Orders",
-            "label": "Checklists"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Time and Cost Tracking"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Signature Capture"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Work Order Configuration"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Custom Work Order Statuses"
-          },
-          {
-            "section": "Work Orders",
-            "label": "Workflow Automation"
-          },
-          {
-            "section": "Work Requests",
-            "label": "Internal Requests",
-            "value": "✔️"
-          },
-          {
-            "section": "Work Requests",
-            "label": "External Request Portal"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Location Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Asset Management",
-            "value": "✔️"
-          },
-          {
-            "section": "Locations, Assets, and Parts",
-            "label": "Barcode Scanning",
-            "value": "✔️"
-          },
-          {
-            "label": "Inventory Management",
-            "section": "Locations, Assets, and Parts"
-          }
-        ]
+        "pricing_table": [],
+        "offer_card_color": "#f3bd33",
+        "products": [
+          "/products/SaaS 2"
+        ],
+        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Checklists, ✔️ ; Work Orders, Time and Cost Tracking, ✔️ ; Work Orders, Signature Capture, - ; Work Orders, Work Order Configuration, - ; Work Orders, Custom Work Order Statuses, - ; Work Orders, Workflow Automation, - ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, - ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, ✔️ ;</p><p><br></p>"
       },
       "productBundles": [
         {
+          "product_path": "/products/SaaS 2",
           "revenue_split": "100",
-          "product_path": "/products/Saas",
-          "rate_plan": "Per Seat Annual"
+          "rate_plan": "Starter - Monthly"
         }
       ],
       "products": [
         {
-          "path": "/products/Saas",
+          "path": "/products/SaaS 2",
           "record_type": "product",
           "baseTemplate": "/config/templates/products/default",
           "synced": true,
-          "lastSynced": "2024-06-05T14:55:04.105Z",
-          "syncedFrom": "8ad0877b83f1cbfa0183f5b89ef619f3",
+          "lastSynced": "2024-07-05T13:48:42.237Z",
+          "syncedFrom": "8ad081dd907cbaef019082b9afa379a0",
           "attributes": {
-            "product_code__limio": "SKU-00000122",
+            "product_code__limio": "SKU-00000149",
             "has_delivery__limio": false,
-            "display_name__limio": "Saas"
+            "display_name__limio": "SaaS 2"
           },
-          "created": "2024-02-29T14:08:06+00:00",
-          "modified": "2024-06-05T14:55:04+00:00",
-          "entitlements": [
-            {
-              "$ref": "/entitlements/Accurate"
-            },
-            {
-              "$ref": "/entitlements/All-Access Support"
-            }
-          ]
+          "created": "2024-07-05T11:55:57+00:00",
+          "modified": "2024-07-05T13:48:42+00:00"
         }
       ],
       "created": "2024-07-05T08:48:44+00:00",
-      "modified": "2024-07-05T08:48:44+00:00",
+      "modified": "2024-07-05T14:10:30+00:00",
       "duplicatedFrom": "/offers2/Upkeep Medium",
       "priceReference": "/offers2/Saas - Per Seat Annual",
       "price__limio": [],
@@ -3737,6 +3101,298 @@ export const groupedOffers = [
       ]
     },
     "id": "5de5addd17964851b6988d423a8c7d7d5ecec068",
-    "version": "23bbf0014f16c6603e54afe6928c168641ac9b04"
+    "version": "7af9183f814930724713445eb7f2405db1b78f85"
+  },
+  {
+    "path": "/offers2/Upkeep Professional",
+    "name": "Upkeep Professional",
+    "type": "item",
+    "data": {
+      "record_type": "offer",
+      "baseTemplate": "/config/templates/offers/offer-features",
+      "synced": true,
+      "lastSynced": "2024-03-04T14:25:32.589Z",
+      "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
+      "attributes": {
+        "display_name__limio": "Upkeep Professional",
+        "is_gift__limio": false,
+        "is_redeem_gift__limio": false,
+        "autoRenew__limio": true,
+        "rate_plan__zuora": "Professional - Monthly",
+        "price__limio": [
+          {
+            "use_external_price": true,
+            "currency": {
+              "id": "USD",
+              "label": "USD - US Dollar",
+              "symbol": "$"
+            },
+            "currencyCode": "USD"
+          }
+        ],
+        "payment_types__limio": [
+          "zuora_card",
+          "zuora_paypal"
+        ],
+        "initial_term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "display_price__limio": "<p><strong>$75</strong>/month per user</p>",
+        "detailed_display_price__limio": "",
+        "allow_multibuy__limio": true,
+        "push_to_checkout__limio": true,
+        "checkout__limio": {
+          "checkout_type": "external",
+          "external_url": "/checkout"
+        },
+        "default_quantity_options__limio": {
+          "quantity": 1,
+          "increment": 1,
+          "maximum_quantity": 100,
+          "minimum_quantity": 1
+        },
+        "label__limio": [
+          "upkeep"
+        ],
+        "allowed_countries__limio": [
+          "US"
+        ],
+        "ltm_Product_Type": "BasePlan",
+        "billing_plan": [
+          "annual"
+        ],
+        "best_value__limio": false,
+        "offer_type__limio": "standard",
+        "ltm_Agreement_Length": "current term (12 month(s))",
+        "sales_channel__limio": [
+          "Salesforce"
+        ],
+        "offer_features": [
+          "Includes Webroot® Computer Antivirus",
+          "Devices"
+        ],
+        "cta_text__limio": "Buy Now",
+        "group__limio": "monthly",
+        "offer_features__limio": "<p><strong>Everything in Starter plus:</strong></p><p>Multiple Inventory Lines</p><p>Signature Capture</p><p>Customizable Request Portal</p><p>Mobile Offline Mode</p><p>Advanced Analytics &amp; Reporting</p>",
+        "display_description__limio": "",
+        "test for me": [
+          {
+            "test": "TEst",
+            "title": "work orders",
+            "value": "Work Order Management",
+            "label": "✔️"
+          },
+          {
+            "test": "Test"
+          },
+          {
+            "test": "TEst"
+          },
+          {},
+          {}
+        ],
+        "pricing_table": [],
+        "offer_card_color": "rgb(255, 52, 41)",
+        "products": [
+          "/products/SaaS 2"
+        ],
+        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Checklists, ✔️ ; Work Orders, Time and Cost Tracking, ✔️ ; Work Orders, Signature Capture, ✔️ ; Work Orders, Work Order Configuration, - ; Work Orders, Custom Work Order Statuses, - ; Work Orders, Workflow Automation, - ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, ✔️ ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, ✔️ ;</p><p><br></p>"
+      },
+      "productBundles": [
+        {
+          "product_path": "/products/SaaS 2",
+          "revenue_split": "100",
+          "rate_plan": "Professional - Monthly"
+        }
+      ],
+      "products": [
+        {
+          "path": "/products/SaaS 2",
+          "record_type": "product",
+          "baseTemplate": "/config/templates/products/default",
+          "synced": true,
+          "lastSynced": "2024-07-05T13:48:42.237Z",
+          "syncedFrom": "8ad081dd907cbaef019082b9afa379a0",
+          "attributes": {
+            "product_code__limio": "SKU-00000149",
+            "has_delivery__limio": false,
+            "display_name__limio": "SaaS 2"
+          },
+          "created": "2024-07-05T11:55:57+00:00",
+          "modified": "2024-07-05T13:48:42+00:00"
+        }
+      ],
+      "created": "2024-07-05T08:49:19+00:00",
+      "modified": "2024-07-05T14:10:40+00:00",
+      "duplicatedFrom": "/offers2/Upkeep Starter",
+      "priceReference": "/offers2/Saas - Per Seat Annual",
+      "price__limio": [],
+      "price": [],
+      "attachments": [
+        {
+          "url": "/public/bb20be0b-f97f-44c7-919b-0bfb28b05145/499462_48070.webp",
+          "type": "image/webp",
+          "path": "/assets/basic",
+          "name": "basic"
+        }
+      ]
+    },
+    "id": "80b7b1d51f27f83f135325d7c1a8a316029f8264",
+    "version": "eb80ac2a669c60df67805748a6f4d261c5114801"
+  },
+  {
+    "path": "/offers2/Upkeep Business",
+    "name": "Upkeep Business",
+    "type": "item",
+    "data": {
+      "record_type": "offer",
+      "baseTemplate": "/config/templates/offers/offer-features",
+      "synced": true,
+      "lastSynced": "2024-03-04T14:25:32.589Z",
+      "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
+      "attributes": {
+        "display_name__limio": "Upkeep Lite",
+        "is_gift__limio": false,
+        "is_redeem_gift__limio": false,
+        "autoRenew__limio": true,
+        "rate_plan__zuora": "Lite - Monthly",
+        "price__limio": [
+          {
+            "use_external_price": true,
+            "currency": {
+              "id": "USD",
+              "label": "USD - US Dollar",
+              "symbol": "$"
+            },
+            "currencyCode": "USD"
+          }
+        ],
+        "payment_types__limio": [
+          "zuora_card",
+          "zuora_paypal"
+        ],
+        "initial_term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
+        "detailed_display_price__limio": "",
+        "allow_multibuy__limio": true,
+        "push_to_checkout__limio": true,
+        "checkout__limio": {
+          "checkout_type": "external",
+          "external_url": "/checkout"
+        },
+        "default_quantity_options__limio": {
+          "quantity": 1,
+          "increment": 1,
+          "maximum_quantity": 100,
+          "minimum_quantity": 1
+        },
+        "label__limio": [
+          "upkeep"
+        ],
+        "allowed_countries__limio": [
+          "US"
+        ],
+        "ltm_Product_Type": "BasePlan",
+        "billing_plan": [
+          "annual"
+        ],
+        "best_value__limio": false,
+        "offer_type__limio": "standard",
+        "ltm_Agreement_Length": "current term (12 month(s))",
+        "sales_channel__limio": [
+          "Salesforce"
+        ],
+        "offer_features": [
+          "Includes Webroot® Computer Antivirus",
+          "Devices"
+        ],
+        "cta_text__limio": "Buy Now",
+        "group__limio": "monthly",
+        "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
+        "display_description__limio": "",
+        "test for me": [
+          {
+            "test": "TEst",
+            "title": "work orders",
+            "value": "Work Order Management",
+            "label": "✔️"
+          },
+          {
+            "test": "Test"
+          },
+          {
+            "test": "TEst"
+          },
+          {},
+          {}
+        ],
+        "pricing_table": [],
+        "offer_card_color": "rgb(0, 124, 176)",
+        "products": [
+          "/products/SaaS 2"
+        ],
+        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, Limited ; Work Orders, Preventive Maintenance,&nbsp;✔️; Work Orders, Checklists, ✔️; Work Orders, Time and Cost Tracking, ✔️ ; Work Orders, Signature Capture, ✔️ ; Work Orders, Work Order Configuration, ✔️ ; Work Orders, Custom Work Order Statuses, ✔️ ; Work Orders, Workflow Automation, ✔️ ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, ✔️ ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, ✔️ ;</p>"
+      },
+      "productBundles": [
+        {
+          "product_path": "/products/SaaS 2",
+          "revenue_split": "100",
+          "rate_plan": "Lite - Monthly"
+        }
+      ],
+      "products": [
+        {
+          "path": "/products/SaaS 2",
+          "record_type": "product",
+          "baseTemplate": "/config/templates/products/default",
+          "synced": true,
+          "lastSynced": "2024-07-05T13:48:42.237Z",
+          "syncedFrom": "8ad081dd907cbaef019082b9afa379a0",
+          "attributes": {
+            "product_code__limio": "SKU-00000149",
+            "has_delivery__limio": false,
+            "display_name__limio": "SaaS 2"
+          },
+          "created": "2024-07-05T11:55:57+00:00",
+          "modified": "2024-07-05T13:48:42+00:00"
+        }
+      ],
+      "created": "2024-07-05T14:18:10+00:00",
+      "modified": "2024-07-05T14:21:18+00:00",
+      "duplicatedFrom": "/offers2/Upkeep Light USD",
+      "priceReference": "/offers2/Saas - Per Seat Annual",
+      "price__limio": [],
+      "price": [],
+      "attachments": [
+        {
+          "url": "/public/bb20be0b-f97f-44c7-919b-0bfb28b05145/499462_48070.webp",
+          "type": "image/webp",
+          "path": "/assets/basic",
+          "name": "basic"
+        }
+      ]
+    },
+    "id": "3ab93be5db54061ad72056de234c57b79759f303",
+    "version": "e7f06d691d28b568f4ffc503a67b7bc5330d4244"
   }
 ]
