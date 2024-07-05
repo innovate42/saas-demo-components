@@ -2958,6 +2958,152 @@ export const groupedOffers = [
     "version": "ec338ae3185d3e746e1985e6bb439036bfa8b72c"
   },
   {
+    "path": "/offers2/Upkeep Light USD",
+    "name": "Upkeep Light USD",
+    "type": "item",
+    "data": {
+      "record_type": "offer",
+      "baseTemplate": "/config/templates/offers/offer-features",
+      "synced": true,
+      "lastSynced": "2024-03-04T14:25:32.589Z",
+      "syncedFrom": "8ad09c9f8dd04644018de4c9e8927cb9",
+      "attributes": {
+        "display_name__limio": "Upkeep Lite",
+        "is_gift__limio": false,
+        "is_redeem_gift__limio": false,
+        "autoRenew__limio": true,
+        "rate_plan__zuora": "Lite - Monthly",
+        "price__limio": [
+          {
+            "use_external_price": true,
+            "currency": {
+              "id": "USD",
+              "label": "USD - US Dollar",
+              "symbol": "$"
+            },
+            "currencyCode": "USD"
+          }
+        ],
+        "payment_types__limio": [
+          "zuora_card",
+          "zuora_paypal"
+        ],
+        "initial_term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "term__limio": {
+          "renewal_type": "TERMED",
+          "renewal_trigger": "EXTERNAL",
+          "length": 1,
+          "type": "months"
+        },
+        "display_price__limio": "<p><strong>$20</strong>/month per user</p>",
+        "detailed_display_price__limio": "",
+        "allow_multibuy__limio": true,
+        "push_to_checkout__limio": true,
+        "checkout__limio": {
+          "checkout_type": "external",
+          "external_url": "/checkout"
+        },
+        "default_quantity_options__limio": {
+          "quantity": 1,
+          "increment": 1,
+          "maximum_quantity": 100,
+          "minimum_quantity": 1
+        },
+        "label__limio": [
+          "upkeep"
+        ],
+        "allowed_countries__limio": [
+          "US"
+        ],
+        "ltm_Product_Type": "BasePlan",
+        "billing_plan": [
+          "annual"
+        ],
+        "best_value__limio": false,
+        "offer_type__limio": "standard",
+        "ltm_Agreement_Length": "current term (12 month(s))",
+        "sales_channel__limio": [
+          "Salesforce"
+        ],
+        "offer_features": [
+          "Includes Webroot® Computer Antivirus",
+          "Devices"
+        ],
+        "cta_text__limio": "Buy Now",
+        "group__limio": "monthly",
+        "offer_features__limio": "<p>Unlimited work orders</p><p>Schedule Preventative Maintenance</p><p>Custom tasks</p><p>Unlimited Request User Licenses</p><p>Asset Management</p><p>24/7 Phone, email, chat support</p>",
+        "display_description__limio": "",
+        "test for me": [
+          {
+            "test": "TEst",
+            "title": "work orders",
+            "value": "Work Order Management",
+            "label": "✔️"
+          },
+          {
+            "test": "Test"
+          },
+          {
+            "test": "TEst"
+          },
+          {},
+          {}
+        ],
+        "pricing_table": [],
+        "offer_card_color": "rgb(0, 180, 81)",
+        "products": [
+          "/products/SaaS 2"
+        ],
+        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, Limited ; Work Orders, Preventive Maintenance,&nbsp;; Work Orders, Checklists, - ; Work Orders, Time and Cost Tracking, - ; Work Orders, Signature Capture, - ; Work Orders, Work Order Configuration, - ; Work Orders, Custom Work Order Statuses, - ; Work Orders, Workflow Automation, - ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, - ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, - ;</p><p><br></p>"
+      },
+      "productBundles": [
+        {
+          "product_path": "/products/SaaS 2",
+          "revenue_split": "100",
+          "rate_plan": "Lite - Monthly"
+        }
+      ],
+      "products": [
+        {
+          "path": "/products/SaaS 2",
+          "record_type": "product",
+          "baseTemplate": "/config/templates/products/default",
+          "synced": true,
+          "lastSynced": "2024-07-05T13:48:42.237Z",
+          "syncedFrom": "8ad081dd907cbaef019082b9afa379a0",
+          "attributes": {
+            "product_code__limio": "SKU-00000149",
+            "has_delivery__limio": false,
+            "display_name__limio": "SaaS 2"
+          },
+          "created": "2024-07-05T11:55:57+00:00",
+          "modified": "2024-07-05T13:48:42+00:00"
+        }
+      ],
+      "created": "2024-07-04T14:34:03+00:00",
+      "modified": "2024-07-05T14:19:43+00:00",
+      "duplicatedFrom": "/offers2/Saas - Per Seat Annual - To Cart",
+      "priceReference": "/offers2/Saas - Per Seat Annual",
+      "price__limio": [],
+      "price": [],
+      "attachments": [
+        {
+          "url": "/public/bb20be0b-f97f-44c7-919b-0bfb28b05145/499462_48070.webp",
+          "type": "image/webp",
+          "path": "/assets/basic",
+          "name": "basic"
+        }
+      ]
+    },
+    "id": "93dc9ec8e217ec8031ff38267ac58d4330b6181e",
+    "version": "ec338ae3185d3e746e1985e6bb439036bfa8b72c"
+  },
+  {
     "path": "/offers2/Upkeep Starter",
     "name": "Upkeep Starter",
     "type": "item",
@@ -3059,7 +3205,7 @@ export const groupedOffers = [
         "products": [
           "/products/SaaS 2"
         ],
-        "pricing_table_richtext": "<p>Work Orders, Work Order Management, ✔️ ; Work Orders, Recurring Work Orders, ✔️ ; Work Orders, Custom Categories, ✔️ ; Work Orders, Data Importing, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Preventive Maintenance, ✔️ ; Work Orders, Checklists, ✔️ ; Work Orders, Time and Cost Tracking, ✔️ ; Work Orders, Signature Capture, - ; Work Orders, Work Order Configuration, - ; Work Orders, Custom Work Order Statuses, - ; Work Orders, Workflow Automation, - ; Work Requests, Internal Requests, ✔️ ; Work Requests, External Request Portal, - ; Locations, Assets, and Parts, Location Management, ✔️ ; Locations, Assets, and Parts, Asset Management, ✔️ ; Locations, Assets, and Parts, Barcode Scanning, ✔️ ; Locations, Assets, and Parts, Inventory Management, ✔️ ;</p><p><br></p>"
+        "pricing_table_richtext": ""
       },
       "productBundles": [
         {

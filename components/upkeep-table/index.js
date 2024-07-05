@@ -40,9 +40,8 @@ function UpkeepTable({}: Props): React.Node {
                                 let gradient = '';
                                 let tick;
 
-                                console.log("value", value.value == "✔️")
 
-                                if (value.value && value.value.trim() !== "" && value.value.trim() !== "-") {
+                                if (value?.value && value.value.trim() !== "" && value.value.trim() !== "-") {
                                     tick = <FontAwesomeIcon icon={faCircleCheck} />;
                                 } else {
                                     tick = value?.value || '-';
@@ -94,6 +93,8 @@ function UpkeepTable({}: Props): React.Node {
 function UpkeepTableWrapper() {
     const {offers} = useCampaign();
 
+    const filteredOffers = React.useRef(offers.filter(offer => offer.data.attributes.pricing_table_richtext)).current
+
 
     const getPricingTableObject = (offer) => {
         const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table_richtext'], offer);
@@ -130,23 +131,24 @@ function UpkeepTableWrapper() {
     };
 
     const tableHeads = React.useMemo(() => {
-        return R.uniq(offers.flatMap(offer => {
+        return R.uniq(filteredOffers.flatMap(offer => {
                 const sections = R.uniq(getPricingTableObject(offer).map(row => row.section));
                 console.log("sections", sections)
                 return sections
             }
         ))
 
-    }, [offers]);
+    }, [filteredOffers]);
 
 
     const sortedOffers = React.useMemo(() => {
-        return offers.sort((a, b) => {
-            const valueA = getPricingTableObject(a).map(row => row.value ? row.value : 0);
-            const valueB = getPricingTableObject(b).map(row => row.value ? row.value : 0);
+        return filteredOffers.sort((a, b) => {
+
+            const valueA = getPricingTableObject(a).map(row => row?.value ? row.value : 0);
+            const valueB = getPricingTableObject(b).map(row => row?.value ? row.value : 0);
             return valueA - valueB;
         });
-    }, [offers]);
+    }, [filteredOffers]);
 
     const categoriesForEachTableHead = React.useMemo(() => {
         const objectWithVals = tableHeads.map(head => {
