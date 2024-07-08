@@ -34,12 +34,11 @@ function UpkeepTable({}: Props): React.Node {
 
                     return (
                         <tr key={JSON.stringify(row)} className={` ${bgColorAlternate}`}>
-                            <th scope="row" className={`tr-th-label ${bgColorAlternate}`}>{row.label}</th>
+                            <th scope="row" className={`tr-th-label ${bgColorAlternate} not-bold`}>{row.label}</th>
                             {sortedOffers.map((offer, offerIndex) => {
                                 const value = getPricingTableObject(offer).find(item => item.label === row.label);
                                 let gradient = '';
                                 let tick;
-
 
                                 if (value?.value && value.value.trim() !== "" && value.value.trim() !== "-") {
                                     tick = <FontAwesomeIcon icon={faCircleCheck} />;
@@ -81,7 +80,6 @@ function UpkeepTable({}: Props): React.Node {
                         </tr>
                         <tr>
                             <th>{head}</th>
-
                         </tr>
                         </thead>
                         <tbody>
