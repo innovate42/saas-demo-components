@@ -77,6 +77,9 @@ function switchSubscription({
                                 showGroupedOffers,
                                 best_value_color__limio_color,
                                 filterBySameProduct,
+                                confirmationPeriodHeader,
+                                confirmationAmountDueToday,
+                                confirmationStartDateHeader
                             }) {
 
     const {subscriptions} = useSubscriptions()
@@ -148,6 +151,9 @@ function switchSubscription({
                             {selectedGroupOffers.length > 0 ? (
                                 selectedGroupOffers.map((offer, i) => (
                                     <Offer key={`${offer.path}/parent-${i}`}
+                                           confirmationAmountDueToday={confirmationAmountDueToday}
+                                           confirmationStartDateHeader={confirmationStartDateHeader}
+                                           confirmationPeriodHeader={confirmationPeriodHeader}
                                            offer={offer}
                                            subscription={subscription}
                                            showImage={showImage}
@@ -175,6 +181,9 @@ function switchSubscription({
                             {filteredOffers.length > 0 ? (
                                 filteredOffers.map((offer, i) => (
                                     <Offer key={`${offer.path}/parent-${i}`}
+                                           confirmationAmountDueToday={confirmationAmountDueToday}
+                                           confirmationStartDateHeader={confirmationStartDateHeader}
+                                           confirmationPeriodHeader={confirmationPeriodHeader}
                                            offer={offer}
                                            subscription={subscription}
                                            showImage={showImage}

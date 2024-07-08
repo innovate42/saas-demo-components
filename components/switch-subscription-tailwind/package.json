@@ -132,6 +132,24 @@
       "label": "Best value color",
       "type": "color",
       "default": "#F47C24"
+    },
+    {
+      "id": "confirmationPeriodHeader",
+      "label": "Confirmation period header",
+      "type": "string",
+      "default": "Period:"
+    },
+    {
+      "id": "confirmationAmountDueToday",
+      "label": "Confirmation amount due today header",
+      "type": "string",
+      "default": "Amount due today:"
+    },
+    {
+      "id": "confirmationStartDateHeader",
+      "label": "Confirmation start date header",
+      "type": "string",
+      "default": "Start date:"
     }
   ]
 }
