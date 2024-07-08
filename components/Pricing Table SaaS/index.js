@@ -14,9 +14,6 @@ function UpkeepTable({}: Props): React.Node {
         sortedOffers,
         categoriesForEachTableHead
     } = useTableContext();
-    console.log(offers);
-    console.log(tableHeads);
-
     return (
         <div className="table-container max-page-width">
             {/*<div className="sticky-bar">*/}

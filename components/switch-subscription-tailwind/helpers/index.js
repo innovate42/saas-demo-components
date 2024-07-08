@@ -6,7 +6,7 @@ export function filterOffers(offerItems: ElasticOffer[], subData: LimioObject<Su
     ) // This allows to attach a whole directory and only exclude offer already applied
 
     if (filterBySameProduct) {
-        filteredItems = filteredItems.filter(offerItem => offerItem.data.products[0].path === currentProduct)
+        filteredItems = filteredItems.filter(offerItem => offerItem.data.products[0].path !== currentProduct)
     }
     const isDiscount = offerItems.map(offerItem => offerItem?.data?.record_subtype === "discount").includes(true)
   
