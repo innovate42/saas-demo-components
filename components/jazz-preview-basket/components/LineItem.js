@@ -3,11 +3,10 @@ import * as React from "react";
 import { Input } from "@limio/design-system";
 
 const LineItem = ({ lineItem }) => {
-  const { amountWithoutTax, chargeName, productName, quantity, taxAmount } =
+  const { name, amountWithoutTax, chargeName, productName, quantity, taxAmount } =
     lineItem;
 
   const formatAmount = () => {
-      //
     const total = amountWithoutTax + taxAmount;
     return total.toFixed(2);
   };
@@ -16,7 +15,7 @@ const LineItem = ({ lineItem }) => {
     <tr className={`basket-item-container`}>
       <td>
         <div className="basket-item-description">
-          <h4>{productName}</h4>
+          <h4>{name || productName}</h4>
           <p className="display-price">{`$${amountWithoutTax}`}</p>
           <p className="detailed-display-price">{chargeName}</p>
         </div>

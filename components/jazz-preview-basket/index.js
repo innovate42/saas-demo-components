@@ -8,7 +8,6 @@ import LineItem from "./components/LineItem";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/pro-light-svg-icons";
 import {PreviewProvider, usePreview} from "@limio/ui-preview-context";
-import {getCookie} from "@limio/helpers-browser/src/cookie";
 import {useCheckout} from "@limio/internal-checkout-sdk";
 import {formatCurrency} from "./components/helpers";
 import "./index.css";
@@ -141,7 +140,6 @@ const BasketItemsContainer = ({
     }
 
     const getSortedLineItems = () => {
-
         if (!previewLineItems || previewLineItems.length < 1) {
             return [];
         }
@@ -151,7 +149,8 @@ const BasketItemsContainer = ({
         const cleanPath = path.split("/").pop();
         return previewLineItems.reduce((acc, lineItem) => {
             if (lineItem.productName === cleanPath) {
-                return [lineItem, ...acc];
+                const newLineItem = {name: offer.data.attributes.display_name__limio, ...lineItem};
+                return [newLineItem, ...acc];
             } else {
                 return [...acc, lineItem];
             }
