@@ -97,17 +97,16 @@ function UpkeepTable({}: Props): React.Node {
 function UpkeepTableWrapper() {
     const {offers} = useCampaign();
 
-    const filteredOffers = React.useRef(offers.filter(offer => offer.data.attributes.pricing_table_richtext)).current
+    const filteredOffers = React.useRef(offers.filter(offer => offer.data.attributes.pricing_table_richtext.replace(/<[^>]*>?/gm, ''))).current
+
+    console.log("filteredOffers", filteredOffers)
 
 
     const getPricingTableObject = (offer) => {
         const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table_richtext'], offer);
 
-        // Replace all HTML tags with an empty string
         const richTextSplit = pricingTableRichText.split(';').map((richText) => richText.trim().replace(/<[^>]*>?/gm, ''));
 
-        // Each split will be "Work Orders, Work Order Management, ✔️"
-        // Create objects of the form {section: "Work Orders", label: "Work Order Management", value: "✔️"}
         let pricingTableObjects = richTextSplit.map((richText) => {
             if (richText.includes("Locations, Assets, and Parts,")) {
                 // Split this based on the specific section "Locations, Assets, and Parts,"
