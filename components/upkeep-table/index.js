@@ -1,12 +1,10 @@
-// @flow
 import * as React from "react";
 import {useCampaign} from '@limio/sdk';
 import * as R from 'ramda';
 import {TableContext, useTableContext} from './context';
 import './index.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons"
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 type Props = {}
 
@@ -20,66 +18,44 @@ function UpkeepTable({}: Props): React.Node {
     } = useTableContext();
 
     return (
-        <div className="table-container max-page-width">
-            {/*<div className="sticky-bar">*/}
-            {/*    <div className="sticky-bar-item">Features</div>*/}
-            {/*    {sortedOffers.map((offer, index) => (*/}
-            {/*        <div className="sticky-bar-item" key={index}>{offer.name}</div>*/}
-            {/*    ))}*/}
-            {/*</div>*/}
-            {tableHeads.map((head, index) => {
-                const rows = categoriesForEachTableHead[head].map((row, i) => {
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-6 m-6">
+            {tableHeads.map((head, headIndex) => {
+                const rows = categoriesForEachTableHead[head].map((row, i) => (
+                    <tr key={JSON.stringify(row)} className="bg-white border-b hover:bg-gray-50">
+                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap min-w-240p">
+                            {row.label}
+                        </th>
+                        {sortedOffers.map((offer) => {
+                            const value = getPricingTableObject(offer).find(item => item.label === row.label);
+                            let tick;
 
-                    const bgColorAlternate = (i % 2) ? 'bg-light' : 'bg-not-light';
-
-                    return (
-                        <tr key={JSON.stringify(row)} className={` ${bgColorAlternate}`}>
-                            <th scope="row" className={`tr-th-label ${bgColorAlternate} not-bold`}>{row.label}</th>
-                            {sortedOffers.map((offer, offerIndex) => {
-                                const value = getPricingTableObject(offer).find(item => item.label === row.label);
-                                let gradient = '';
-                                let tick;
-
-                                if (value?.value && value.value.trim() !== "" && value.value.trim() !== "-") {
-                                    tick = <FontAwesomeIcon icon={faCircleCheck} />;
-                                } else {
-                                    tick = value?.value || '-';
-                                }
-
-                                if (bgColorAlternate === 'bg-not-light') {
-                                    if (offerIndex === 0) {
-                                        gradient = 'gradient-1';
-                                    } else if (offerIndex === 1) {
-                                        gradient = 'gradient-2';
-                                    } else if (offerIndex === 2) {
-                                        gradient = 'gradient-3';
-                                    }
-                                }
-
-                                return <td key={offer.id}
-                                           className={`td-row ${gradient}`}>{tick}</td>;
-                            })}
-                        </tr>
-                    );
-                });
-
-                const tableClass = index === 0
-                    ? 'styled-table first-table'
-                    : index === tableHeads.length - 1
-                        ? 'styled-table last-table'
-                        : 'styled-table middle-table';
+                            if (value?.value && value.value.trim() !== "" && value.value.trim() !== "-") {
+                                tick = <FontAwesomeIcon icon={faCircleCheck} />;
+                            } else {
+                                tick = value?.value || '-';
+                            }
+                            return (
+                                <td key={offer.id} className="px-6 py-4">
+                                    {tick}
+                                </td>
+                            );
+                        })}
+                    </tr>
+                ));
 
                 return (
-                    <table className={tableClass}>
-                        <thead>
+                    <table key={headIndex} className="w-full text-sm text-left text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
-                            <th></th>
-                            {index === 0 && sortedOffers.map((offer, index) => (
-                                <th key={index}>{offer.data.attributes.display_name__limio}</th>
+                            <th className="px-6 py-3"></th>
+                            {sortedOffers.map((offer, index) => (
+                                <th key={index} className="px-6 py-3">
+                                    {headIndex !== 0 ? <span className="invisible">{offer.data.attributes.display_name__limio}</span> : offer.data.attributes.display_name__limio}
+                                </th>
                             ))}
                         </tr>
                         <tr>
-                            <th>{head}</th>
+                            <th colSpan={sortedOffers.length + 1} className="px-6 py-3">{head}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -95,14 +71,10 @@ function UpkeepTable({}: Props): React.Node {
 function UpkeepTableWrapper() {
     const {offers} = useCampaign();
 
-    const filteredOffers = React.useRef(offers.filter(offer => offer.data.attributes.pricing_table_richtext.replace(/<[^>]*>?/gm, ''))).current
-
-    console.log("filteredOffers", filteredOffers)
-
+    const filteredOffers = React.useRef(offers.filter(offer => offer.data.attributes.pricing_table_richtext.replace(/<[^>]*>?/gm, ''))).current;
 
     const getPricingTableObject = (offer) => {
         const pricingTableRichText = R.pathOr([], ['data', 'attributes', 'pricing_table_richtext'], offer);
-
         const richTextSplit = pricingTableRichText.split(';').map((richText) => richText.trim().replace(/<[^>]*>?/gm, ''));
 
         let pricingTableObjects = richTextSplit.map((richText) => {
@@ -120,7 +92,6 @@ function UpkeepTableWrapper() {
             }
 
             const split = richText.split(',');
-
             return {
                 section: split[0],
                 label: split[1],
@@ -133,18 +104,12 @@ function UpkeepTableWrapper() {
 
     const tableHeads = React.useMemo(() => {
         return R.uniq(filteredOffers.flatMap(offer => {
-                const sections = R.uniq(getPricingTableObject(offer).map(row => row.section));
-                console.log("sections", sections)
-                return sections
-            }
-        ))
-
+            return R.uniq(getPricingTableObject(offer).map(row => row.section));
+        }));
     }, [filteredOffers]);
-
 
     const sortedOffers = React.useMemo(() => {
         return filteredOffers.sort((a, b) => {
-
             const valueA = getPricingTableObject(a).map(row => row?.value ? row.value : 0);
             const valueB = getPricingTableObject(b).map(row => row?.value ? row.value : 0);
             return valueA - valueB;
