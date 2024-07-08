@@ -22,7 +22,7 @@ function PlanAndPricing({selectedOfferObj, price, processToday, yourNewPlanCopy,
         <>
             <div className="flex space-between center mb-2 pt-2 pb-2 mr-4">
                 <div className={"flex col"}>
-                    <h4 className="bold">{stripPathToProductName(selectedOfferObj.data.products[0].path)}</h4>
+                    <h4 className="bold">{stripPathToProductName(selectedOfferObj.data.attributes.display_name__limio)}</h4>
                     <p>{yourNewPlanCopy}</p>
                 </div>
                 <p>{processToday.current ? !emptyOrNil(price.add) && !emptyOrNil(price.remove) ? formatCurrency(price.add.amountWithoutTax, "USD") :
@@ -31,7 +31,7 @@ function PlanAndPricing({selectedOfferObj, price, processToday, yourNewPlanCopy,
             {processToday.current ? !emptyOrNil(price.add) && !emptyOrNil(price.remove) ?
                 <div className="flex space-between center mb-2 pt-2 pb-2 mr-4">
                     <div className={"flex col"}>
-                        <h4 className="bold">{stripPathToProductName(price.remove.productName)}</h4>
+                        <h4 className="bold">{currentOffer.data.attributes.display_name__limio}</h4>
                         <p>{yourOldPlanCopy}</p>
                     </div>
                     <p>{formatCurrency(price.remove.amountWithoutTax, "USD")}</p>
