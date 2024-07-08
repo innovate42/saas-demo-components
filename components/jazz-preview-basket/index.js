@@ -139,19 +139,29 @@ const BasketItemsContainer = ({
         return R.pathOr("", ["data", "productBundles", "0", "product_path"], item)
     }
 
+
     const getSortedLineItems = () => {
         if (!previewLineItems || previewLineItems.length < 1) {
             return [];
         }
 
         const offer = R.pathOr({}, ["0", "offer"], orderItems);
-        const path = getProductPath(offer);
-        const cleanPath = path.split("/").pop();
+        const offerRatePlan = R.pathOr("", ["data","productBundles", "0", "rate_plan"], offer)
+
         return previewLineItems.reduce((acc, lineItem) => {
-            if (lineItem.productName === cleanPath) {
+            if (lineItem.chargeName === offerRatePlan) {
                 const newLineItem = {name: offer.data.attributes.display_name__limio, ...lineItem};
                 return [newLineItem, ...acc];
             } else {
+                const addOnInBasket = orderItems.find((item) => R.pathOr(false, ["addOns"], item));
+                if (addOnInBasket) {
+                    // match the add-on to the line item
+                    const addOn = addOnInBasket.addOns.find((addOn) => addOn.addOn.data.productBundles.rate_plan === lineItem.chargeName);
+                    if (addOn) {
+                        const newLineItem = {name: addOn.addOn.data.attributes.display_name__limio, ...lineItem};
+                        return [newLineItem, ...acc];
+                    }
+                }
                 return [...acc, lineItem];
             }
         }, [])
