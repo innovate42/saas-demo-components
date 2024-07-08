@@ -25,6 +25,15 @@ export const Features = ({
   imageFit
 }: Props) => {
 
+  const removeHTMLTags = (str) => {
+    if ((str===null) || (str===''))
+      return "";
+    else
+      str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  }
+
+
   return (
       <section className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
@@ -44,8 +53,9 @@ export const Features = ({
                     />
                   </div>
               ) : null}
-                <h3 className="mb-2 text-xl font-bold dark:text-white">{feature.header}</h3>
-                <p className="text-gray-500 dark:text-gray-400">{feature.text}</p>
+                <h3 className="mb-2 text-xl font-bold dark:text-white">{removeHTMLTags(feature.header)}</h3>
+                <div className="flex mb-4" dangerouslySetInnerHTML={{__html: feature.text}}>
+                {/*<p className="text-gray-500 dark:text-gray-400">{feature.text}</p>*/}
                 {feature.showButton__limio_boolean && feature.buttonLink && (
                     <a onClick={() => (window.location = feature.buttonLink + window.location.search)}>
                       <button type="button"
