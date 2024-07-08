@@ -16,7 +16,6 @@ type Props = {
 function PlanAndPricing({selectedOfferObj, price, processToday, yourNewPlanCopy, yourOldPlanCopy, currentOffer}: Props) {
 
     const currentOfferId = R.pathOr(null, ["data", "offer", "id"], currentOffer)
-    // offers[0].data.offer.id
     if (currentOfferId === selectedOfferObj.id) return <></>
     return (
         <>
