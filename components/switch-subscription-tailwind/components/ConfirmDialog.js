@@ -271,8 +271,13 @@ export const ConfirmDialog = ({
                             <td className="px-4 py-2  text-sm">{formatDate(effectiveDate, dateFormat)}</td>
                         </tr>
                         <tr className="dark:text-white text-left flex flex-row md:flex-col ">
-                            <th className="px-4 py-2 w-40 md:w-auto  text-sm">Quantity</th>
-                            <input className=""
+
+                            <label
+                                   className="label-custom">Quantity:</label>
+                            {/*<input type="text" id="first_name"*/}
+                            {/*       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"*/}
+                            {/*      />*/}
+                            <input className="input-custom"
                                    type="number"
                                    disabled={!allowMultibuy}
                                    value={quantity}
