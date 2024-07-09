@@ -31,7 +31,8 @@ const Offer = ({
                    confirmationStartDateHeader
 
                }) => {
-    const [quantity, setQuantity] = React.useState(checkActiveOffers(subscription.offers[0])?.data?.quantity || 1)
+
+    const [quantity, setQuantity] = React.useState(checkActiveOffers(subscription.offers)[0]?.data.quantity || 1)
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
     const [showConfirm, setShowConfirm] = React.useState(false)
