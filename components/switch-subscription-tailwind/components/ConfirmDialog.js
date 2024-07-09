@@ -102,7 +102,7 @@ export const ConfirmDialog = ({
                     setLoadingPreview(false)
                 })
         }
-    }, [externalPriceOnOffer, previewOrder, taxCalculationNeeded])
+    }, [externalPriceOnOffer, taxCalculationNeeded])
 
     const handleAddressFieldChange = (e) => {
         const {id, value} = e.target
