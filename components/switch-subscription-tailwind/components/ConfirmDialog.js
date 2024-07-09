@@ -97,13 +97,12 @@ export const ConfirmDialog = ({
                     }
                 })
                 .catch(error => {
-                    // use preview will log the error
                 })
                 .finally(() => {
                     setLoadingPreview(false)
                 })
         }
-    }, [externalPriceOnOffer, previewOrder, taxCalculationNeeded, quantity])
+    }, [externalPriceOnOffer, previewOrder, taxCalculationNeeded])
 
     const handleAddressFieldChange = (e) => {
         const {id, value} = e.target
@@ -209,6 +208,25 @@ export const ConfirmDialog = ({
         setQuantity(e.target.value)
     }
 
+    const handleBlur = () => {
+        if (externalPriceOnOffer || taxCalculationNeeded) {
+            setLoadingPreview(true)
+
+            previewOrder()
+                .then(response => {
+                    setLoadingPreview(false)
+
+                    if (response?.preview?.success === true) {
+                        setPreviewSchedule(response?.schedule)
+                    }
+                })
+                .catch(error => {
+                })
+                .finally(() => {
+                    setLoadingPreview(false)
+                })
+        }
+    }
 
     return (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
@@ -258,6 +276,7 @@ export const ConfirmDialog = ({
                                    disabled={!allowMultibuy}
                                    value={quantity}
                                    onChange={(e) => handleQuantityChange(e)}/>
+                            onBlur={}
                         </tr>
                         {
                             hasDelivery &&
