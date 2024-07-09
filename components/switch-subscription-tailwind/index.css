@@ -67,3 +67,8 @@
 .dark .label-custom {
     color: #ffffff; /* dark:text-white */
 }
+
+.tr-custom {
+    display: block !important;
+    padding-top: 1rem;
+}

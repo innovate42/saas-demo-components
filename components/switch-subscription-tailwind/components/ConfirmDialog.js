@@ -270,7 +270,7 @@ export const ConfirmDialog = ({
                             <th className="px-4 py-2 w-40 md:w-auto  text-sm ">{confirmationStartDateHeader}</th>
                             <td className="px-4 py-2  text-sm">{formatDate(effectiveDate, dateFormat)}</td>
                         </tr>
-                        <tr className="dark:text-white text-left flex flex-row md:flex-col ">
+                        <tr className="dark:text-white text-left tr-custom">
 
                             <label
                                    className="label-custom">Quantity:</label>
