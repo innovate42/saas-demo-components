@@ -8,6 +8,7 @@ import {useUser} from "@limio/sdk"
 import {getRecaptchaToken} from "@limio/shop/src/shop/checkout/helpers"
 import {getAppConfigValue} from "@limio/shop/src/shop/appConfig.js"
 import {previewOrder} from "@limio/shop/src/shop/helpers/postRequests.js"
+import {getCurrentOffer} from "../../source/utils/offers";
 
 
 const Offer = ({
@@ -30,6 +31,7 @@ const Offer = ({
                    confirmationStartDateHeader
 
                }) => {
+    const [quantity, setQuantity] = React.useState(getCurrentOffer(subscription)?.data?.quantity || 1)
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
     const [showConfirm, setShowConfirm] = React.useState(false)
@@ -65,28 +67,26 @@ const Offer = ({
 
         const unverifiedRecaptchaToken = await getRecaptchaToken(recaptchaId)
 
-        const previewResults = previewOrder(
+        return previewOrder(
             {
                 offer: orderForPreview,
                 customerDetails: userAttributes,
                 subscriptionId: id,
                 effectiveDate: effectiveDate,
                 order_type: "change_offer",
-                quantity: 1
+                quantity: quantity
             },
             {"x-limio-recaptcha": unverifiedRecaptchaToken}
         )
 
-        return previewResults
-
-    }, [offer, recaptchaId, userAttributes, id, effectiveDate])
+    }, [offer, recaptchaId, userAttributes, id, effectiveDate, quantity])
 
 
     const handleSubmit = async (offer, deliveryDetails) => {
         const order = {
             offer,
             deliveryDetails,
-            quantity: 1,
+            quantity: quantity,
             effectiveDate,
             // if there is a cancel reason in the URL, we want to pass that in the order - to support switch being used as a cancel/save
             ...(reason && {
@@ -155,7 +155,6 @@ const Offer = ({
                 <ConfirmDialog
                     confirmationAmountDueToday={confirmationAmountDueToday}
                     confirmationStartDateHeader={confirmationStartDateHeader}
-
                     confirmationPeriodHeader={confirmationPeriodHeader}
                     offer={offer}
                     previewOrder={previewCurrentOrder}
@@ -171,6 +170,8 @@ const Offer = ({
                     revalidate={revalidate}
                     handleSubmit={handleSubmit}
                     redirectUrl={redirectUrl}
+                    quantity={quantity}
+                    setQuantity={setQuantity}
                 />
             )}
 

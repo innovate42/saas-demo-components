@@ -107,7 +107,6 @@ function switchSubscription({
     const hasBestValue = selectedGroupOffers.some(offer => offer.data.attributes.best_value__limio)
     const hasGroupedOffers = offerGroups.length > 0
 
-
     const styleBestValue = () => {
         if (hasBestValue) {
             return `60px`
@@ -122,7 +121,6 @@ function switchSubscription({
             setSelectedGroup(offerGroups[0]?.id)
         }
     }, [offerGroups, selectedGroup])
-
 
     return (
         <section className="bg-white dark:bg-gray-900 py-8">

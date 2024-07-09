@@ -26,12 +26,13 @@ export const ConfirmDialog = ({
                                   previewOrder,
                                   confirmationPeriodHeader,
                                   confirmationAmountDueToday,
-                                  confirmationStartDateHeader
+                                  confirmationStartDateHeader,
+    quantity, setQuantity
                               }) => {
     const [loading, setLoading] = React.useState(false)
     const externalPriceOnOffer = offer?.data?.attributes?.price__limio?.[0]?.use_external_price || false
+    const allowMultibuy = offer?.data?.attributes?.allow_multibuy__limio || false
     const effectiveDate = offer?.data?.attributes?.switch_date__limio === "immediate" ? DateTime.utc().toISO() : nextSchedule?.data?.schedule_date || subscription?.data?.termEndDate
-    console.log("effectiveDate", effectiveDate)
     const dateFormat = getAppConfigValue(["shop", "default_date_format"])
     const showPriceWithTax = getAppConfigValue(["shop", "show_price_with_tax"]) || false
     const showPriceWithTaxCountries = getAppConfigValue(["shop", "show_price_with_tax_country_codes"]) || []
@@ -102,7 +103,7 @@ export const ConfirmDialog = ({
                     setLoadingPreview(false)
                 })
         }
-    }, [externalPriceOnOffer, previewOrder, taxCalculationNeeded])
+    }, [externalPriceOnOffer, previewOrder, taxCalculationNeeded, quantity])
 
     const handleAddressFieldChange = (e) => {
         const {id, value} = e.target
@@ -199,6 +200,15 @@ export const ConfirmDialog = ({
         return formatCurrency(amount, currencyCode)
     }
 
+    const handleQuantityChange = (e) => {
+        // dont allow negative
+        if (e.target.value < 0) {
+            return setQuantity(1)
+        }
+
+        setQuantity(e.target.value)
+    }
+
 
     return (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
@@ -241,6 +251,13 @@ export const ConfirmDialog = ({
                         <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                             <th className="px-4 py-2 w-40 md:w-auto  text-sm ">{confirmationStartDateHeader}</th>
                             <td className="px-4 py-2  text-sm">{formatDate(effectiveDate, dateFormat)}</td>
+                        </tr>
+                        <tr className="dark:text-white text-left flex flex-row md:flex-col ">
+                            <th className="px-4 py-2 w-40 md:w-auto  text-sm">Quantity</th>
+                            <input type="number"
+                                   disabled={!allowMultibuy}
+                                   value={quantity}
+                                   onChange={(e) => setQuantity(e)}/>
                         </tr>
                         {
                             hasDelivery &&
