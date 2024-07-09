@@ -192,7 +192,7 @@ const BasketItemsContainer = ({
                             </thead>
                             <tbody className={"basket-items"}>
                             {getSortedLineItems()?.map((lineItem, i) => (
-                                <LineItem lineItem={lineItem} key={i}}/>
+                                <LineItem lineItem={lineItem} key={i}/>
                             ))}
                             </tbody>
                         </table>
