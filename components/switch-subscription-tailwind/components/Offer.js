@@ -8,7 +8,7 @@ import {useUser} from "@limio/sdk"
 import {getRecaptchaToken} from "@limio/shop/src/shop/checkout/helpers"
 import {getAppConfigValue} from "@limio/shop/src/shop/appConfig.js"
 import {previewOrder} from "@limio/shop/src/shop/helpers/postRequests.js"
-import {getCurrentOffer} from "../../source/utils/offers";
+import {checkActiveOffers} from "../../source/utils/offers";
 
 
 const Offer = ({
@@ -31,7 +31,7 @@ const Offer = ({
                    confirmationStartDateHeader
 
                }) => {
-    const [quantity, setQuantity] = React.useState(getCurrentOffer(subscription)?.data?.quantity || 1)
+    const [quantity, setQuantity] = React.useState(checkActiveOffers(subscription.offers[0])?.data?.quantity || 1)
     const attachments = offer.data.attachments ? offer.data.attachments.filter(x => x.type.includes("image")) : []
     const hasAttachments = attachments.length > 0
     const [showConfirm, setShowConfirm] = React.useState(false)

@@ -27,7 +27,7 @@ export const ConfirmDialog = ({
                                   confirmationPeriodHeader,
                                   confirmationAmountDueToday,
                                   confirmationStartDateHeader,
-    quantity, setQuantity
+                                  quantity, setQuantity
                               }) => {
     const [loading, setLoading] = React.useState(false)
     const externalPriceOnOffer = offer?.data?.attributes?.price__limio?.[0]?.use_external_price || false
@@ -272,7 +272,8 @@ export const ConfirmDialog = ({
                         </tr>
                         <tr className="dark:text-white text-left flex flex-row md:flex-col ">
                             <th className="px-4 py-2 w-40 md:w-auto  text-sm">Quantity</th>
-                            <input type="number"
+                            <input className=""
+                                   type="number"
                                    disabled={!allowMultibuy}
                                    value={quantity}
                                    onChange={(e) => handleQuantityChange(e)}
