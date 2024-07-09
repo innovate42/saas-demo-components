@@ -257,7 +257,7 @@ export const ConfirmDialog = ({
                             <input type="number"
                                    disabled={!allowMultibuy}
                                    value={quantity}
-                                   onChange={(e) => setQuantity(e)}/>
+                                   onChange={(e) => handleQuantityChange(e)}/>
                         </tr>
                         {
                             hasDelivery &&
