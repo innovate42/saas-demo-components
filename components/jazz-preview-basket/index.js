@@ -121,7 +121,7 @@ const BasketItemsContainer = ({
         const previewBillingDetails =
             currency === "USD"
                 ? {state: "NY", postalCode: "10001", country: "US"}
-                : {...billingDetails, country};
+                : {...{}, ...{}};
         const previewOrderData = {
             ...order,
             billingDetails: previewBillingDetails,
@@ -146,11 +146,14 @@ const BasketItemsContainer = ({
         }
 
         const offer = R.pathOr({}, ["0", "offer"], orderItems);
-        const offerRatePlan = R.pathOr("", ["data","productBundles", "0", "rate_plan"], offer)
+        const offerRatePlan = R.pathOr("", ["data", "productBundles", "0", "rate_plan"], offer)
 
         return previewLineItems.reduce((acc, lineItem) => {
             if (lineItem.chargeName === offerRatePlan) {
-                const newLineItem = {name: offer.data.attributes.display_name__limio, ...lineItem};
+                const newLineItem = {
+                    name: offer.data.attributes.display_name__limio,
+                    multibuy: offer.data.attributes.allow_multibuy__limio, isOffer: true, ...lineItem
+                };
                 return [newLineItem, ...acc];
             } else {
                 const addOnInBasket = orderItems.find((item) => R.pathOr(false, ["addOns"], item));
@@ -189,7 +192,7 @@ const BasketItemsContainer = ({
                             </thead>
                             <tbody className={"basket-items"}>
                             {getSortedLineItems()?.map((lineItem, i) => (
-                                <LineItem lineItem={lineItem} key={i}/>
+                                <LineItem lineItem={lineItem} key={i}}/>
                             ))}
                             </tbody>
                         </table>
