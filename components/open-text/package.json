@@ -19,7 +19,7 @@
       "id": "heading",
       "label": "Heading",
       "type": "string",
-      "default": "Subscribe today"
+      "default": "Lorem ipsum dolor sit amet"
     }
   ]
 }
