@@ -6,6 +6,7 @@ import "../source/style/style.css"
 import "./index.css"
 import * as R from "ramda";
 
+
 type Props = {
     heading: string,
     subheading: string,
