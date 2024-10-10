@@ -191,6 +191,9 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
 
   const matchAddOnsWithNotEntitlements = (addOns, entitlements) => {
     const addOnsToReplace = [];
+    if (entitlements.length === 0) {
+      return addOns;
+    }
     addOns.forEach((addOn) => {
       const addOnEntitlements = getEntitlementsFromAddOn(addOn);
       if (
