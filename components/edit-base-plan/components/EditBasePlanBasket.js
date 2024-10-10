@@ -172,6 +172,9 @@ function EditBasePlanBasket({ selectedOffer, quantity, yourPlanTitle, toPayText,
 
   // match the add ons with the entitlements to be removed
   const matchAddOnsWithEntitlements = (addOns, entitlements) => {
+    if (entitlements.length === 0) {
+      return addOns;
+    }
     const addOnsToRemove = [];
     addOns.forEach((addOn) => {
       const addOnEntitlements = getEntitlementsFromAddOn(addOn);
