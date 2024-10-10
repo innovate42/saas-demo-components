@@ -42,7 +42,7 @@ const buildOrder = (
   // these will stay removed after the change
   // build removal for all add ons
   if (!R.isEmpty(matchingAddOns)) {
-    removeAddOns = matchingAddOns.map((addOn) => {
+    removeAddOns = R.uniq(matchingAddOns).map((addOn) => {
       return {
         type: "remove",
         quantity: 1,
@@ -54,7 +54,7 @@ const buildOrder = (
   }
 
   if (!R.isEmpty(matchedAddOnsToReadd)) {
-    addAddOns = matchedAddOnsToReadd.map((addOn) => {
+    addAddOns = R.uniq(matchedAddOnsToReadd).map((addOn) => {
       return {
         type: "add",
         quantity: 1,
