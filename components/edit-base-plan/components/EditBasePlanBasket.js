@@ -47,6 +47,7 @@ const buildOrder = (subscription, selectedOfferObj, date, matchingAddOns = [], c
       if (addOnId.startsWith("subscription_add_on")) {
         console.log(addOn)
         // might need to strip off add_on
+        
         addOnId = addOn.data.add_on.id
         version = addOn.data.add_on.version
       }
