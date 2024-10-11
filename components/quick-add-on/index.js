@@ -3,6 +3,7 @@ import React from "react"
 import { useCampaign, useBasket } from "@limio/sdk"
 import AddOn from "./components/AddOn"
 import "./index.css"
+import { useCheckout } from "@limio/internal-checkout-sdk"
 
 type Props = {
   heading: string,
@@ -11,7 +12,8 @@ type Props = {
 
 export const AddOnCards = ({ heading, subheading, ctaText }: Props) => {
   const { addOns = [] } = useCampaign()
-  const { basketItems = [] } = useBasket()
+  const { useCheckoutSelector } = useCheckout()
+  const basketItems = useCheckoutSelector(state => state.order.orderItems)
   const currentOffer = basketItems[0]?.offer
 
   const filteredAddOns = addOns.filter(addOn => {
