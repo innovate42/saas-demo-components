@@ -23,25 +23,27 @@ export const AddOnCards = ({ heading, subheading, ctaText }: Props) => {
   })
 
   return (
-    <section className="add-on-section">
-      <div className="add-on-container">
-        {heading || subheading ? (
-          <div className="add-on-heading-container">
-            {heading && <h2 className="add-on-heading">Heading Text</h2>}
-            {subheading && <p className="add-on-subheading">Subheading Text</p>}
-          </div>
-        ) : (
-          <> </>
-        )}
-        <div className="add-on-grid">
-          {filteredAddOns.length > 0 ? (
-            filteredAddOns.map(addOn => <AddOn key={addOn.path + "/parent"} addOn={addOn} ctaText={ctaText} />)
+    <React.Suspense fallback={<div></div>}>
+      <section className="add-on-section">
+        <div className="add-on-container">
+          {heading || subheading ? (
+            <div className="add-on-heading-container">
+              {heading && <h2 className="add-on-heading">Heading Text</h2>}
+              {subheading && <p className="add-on-subheading">Subheading Text</p>}
+            </div>
           ) : (
-            <p>No add-ons to display...</p>
+            <> </>
           )}
+          <div className="add-on-grid">
+            {filteredAddOns.length > 0 ? (
+              filteredAddOns.map(addOn => <AddOn key={addOn.path + "/parent"} addOn={addOn} ctaText={ctaText} />)
+            ) : (
+              <p>No add-ons to display...</p>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </React.Suspense>
   )
 }
 
