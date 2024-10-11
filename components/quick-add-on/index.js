@@ -10,7 +10,7 @@ type Props = {
   subheading: string
 }
 
-export const AddOnCards = ({ heading, subheading, ctaText }: Props) => {
+export const AddOnCards = ({ heading, subheading, ctaText, noAddOnsText }: Props) => {
   const { addOns = [] } = useCampaign()
   const { useCheckoutSelector } = useCheckout()
   const basketItems = useCheckoutSelector(state => state.order.orderItems)
@@ -19,6 +19,10 @@ export const AddOnCards = ({ heading, subheading, ctaText }: Props) => {
   const filteredAddOns = addOns.filter(addOn => {
     const { data } = addOn
     const { compatibleLabel } = data.attributes
+    const labelExists = compatibleLabel && currentOffer.data?.attributes?.compatibleLabel
+    if (!labelExists) {
+      return
+    }
     return compatibleLabel.some(label => currentOffer.data.attributes.compatibleLabel.includes(label))
   })
 
@@ -38,7 +42,7 @@ export const AddOnCards = ({ heading, subheading, ctaText }: Props) => {
             {filteredAddOns.length > 0 ? (
               filteredAddOns.map(addOn => <AddOn key={addOn.path + "/parent"} addOn={addOn} ctaText={ctaText} />)
             ) : (
-              <p>No add-ons to display...</p>
+              <p>{noAddOnsText}</p>
             )}
           </div>
         </div>

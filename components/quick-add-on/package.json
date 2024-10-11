@@ -26,6 +26,12 @@
       "label": "Button Text",
       "type": "string",
       "default": "Add To Basket"
+    },
+    {
+      "id": "noAddOnsText",
+      "label": "No Add-Ons Text",
+      "type": "string",
+      "default": "No Add-Ons Available"
     }
   ]
 }
