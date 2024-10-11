@@ -43,14 +43,18 @@ const buildOrder = (subscription, selectedOfferObj, date, matchingAddOns = [], c
   if (!R.isEmpty(matchedAddOnsToReadd)) {
     addAddOns = R.uniqBy(R.prop("id"), matchingAddOns).map(addOn => {
       let addOnId = addOn.id
+      let version = addOn.version
       if (addOnId.startsWith("subscription_add_on")) {
         console.log(addOn)
+        // might need to strip off add_on
+        addOnId = addOn.data.add_on.id
+        version = addOn.data.add_on.version
       }
       return {
         type: "add",
         quantity: 1,
-        id: addOn.id,
-        version: addOn.version,
+        id: addOnId,
+        version: version,
         effective_date: DateTime.local().toISODate(),
         record_type: "add_on"
       }
