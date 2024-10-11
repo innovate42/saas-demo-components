@@ -36,7 +36,7 @@ function EditBasePlan(props: Props): React.Node {
   const subId = new URLSearchParams(window.location.search).get("subId")
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
 
-  const { offers = [], addOns = [] } = useCampaign()
+  const { offers = [] } = useCampaign()
 
   const currentOffer = checkActiveSubscriptionOffer(subscription.offers)
 
@@ -110,7 +110,6 @@ function EditBasePlan(props: Props): React.Node {
               {props.hideBillingPlan ? null : (
                 <BillingPlan
                   selectedTerm={selectedTerm}
-                  setSelectedTerm={setSelectedTerm}
                   selectedProduct={selectedProduct}
                   handleTermChange={handleTermChange}
                 />

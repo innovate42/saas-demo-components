@@ -10,17 +10,11 @@ type Props = {
   selectedProduct: string,
   selectedTerm: Object,
   handleTermChange: handleTermChange,
-  selectedBillingPlan: string
 }
 
-function BillingPlan({ selectedProduct, selectedTerm, handleTermChange, selectedBillingPlan }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+function BillingPlan({ selectedProduct, selectedTerm, handleTermChange }: Props): React.Node {
+  const { offers = [] } = useCampaign()
+
   const { loadingPreview } = usePreview()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)

@@ -13,13 +13,7 @@ type Props = {
 }
 
 function BillingFrequency({ selectedProduct, handleFrequencyChange, selectedBillingPlan, selectedTerm }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { offers = [] } = useCampaign()
   const { loadingPreview } = usePreview()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
@@ -46,7 +40,6 @@ function BillingFrequency({ selectedProduct, handleFrequencyChange, selectedBill
                 disabled={loadingPreview}
               />
               {ratePlan}
-              {/* change this to whatever value is necessary / set as a customer prop to select the correct attribute?  */}
             </label>
           </div>
         ))}
