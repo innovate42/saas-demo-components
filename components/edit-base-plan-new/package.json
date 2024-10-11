@@ -1,0 +1,106 @@
+{
+  "name": "@limio/components-saas-edit-base-plan-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "luxon": "^1.28.1",
+    "ramda": "^0.28.0",
+    "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "defaultToBase",
+      "label": "Show base plan in the select by default",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "titleText",
+      "label": "The title",
+      "type": "string",
+      "default": "Change your plan"
+    },
+    {
+      "id": "manageText",
+      "label": "Manage add on text",
+      "type": "richtext",
+      "default": "Need to manage your subscription add-ons? Please visit your subscription page and choose ‘Edit Add-ons’ to make your changes."
+    },
+    {
+      "id": "yourPlanTitle",
+      "label": "Title of the right hand side of the page",
+      "type": "string",
+      "default": "Your Plan"
+    },
+    {
+      "id": "toPayText",
+      "label": "The text for the proceed button",
+      "type": "richtext",
+      "default": "To pay today"
+    },
+    {
+      "id": "longTexts",
+      "label": "Text below the continue button",
+      "type": "richtext",
+      "default": "Lorem Ipsum"
+    },
+    {
+      "id": "continueButtonText",
+      "label": "Copy for the continue button",
+      "type": "string",
+      "default": "Continue"
+    },
+    {
+      "id": "yourNewPlanCopy",
+      "label": "SubText for your new plan",
+      "type": "string",
+      "default": "Your new plan"
+    },
+    {
+      "id": "yourOldPlanCopy",
+      "label": "SubText for your old plan",
+      "type": "string",
+      "default": "Credit for your old plan"
+    },
+    {
+      "id": "onlyIncrease",
+      "label": "Only allow increases in quantity",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "id": "hideBillingFrequency",
+      "label": "Hide change in billing frequency",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "id": "hideBillingPlan",
+      "label": "Hide change in billing plan",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "id": "compareLink",
+      "label": "Link to the compare page",
+      "type": "string",
+      "default": "#"
+    },
+    {
+      "id": "successLink",
+      "label": "The end of the link to go to on order success",
+      "type": "string",
+      "default": "/updateSuccess"
+    }
+  ]
+}
