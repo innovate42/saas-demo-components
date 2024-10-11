@@ -3,14 +3,14 @@ import * as React from "react"
 import { useCampaign } from "@limio/sdk"
 import * as R from "ramda"
 import { stripPathToProductName } from "../helpers"
-import { usePreview } from "@limio/ui-preview-context"
 import { ModalBody, ModalHeader } from "@limio/design-system"
 import { groupPath } from "../helpers"
 
 type Props = {
   setSelectedAddOnProducts: string => void,
   selectedAddOnProducts: Array<string>,
-  selectedProduct: string
+  selectedProduct: string,
+  selectedOffer: Object
 }
 
 export const stripHTMLtags = (str: string): string => {
@@ -40,28 +40,29 @@ const standariseString = str => {
   return str.replace(/\s+/g, "-").toLowerCase()
 }
 
-function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selectedProduct }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
+function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selectedProduct, selectedOffer }: Props): React.Node {
+  const { addOns: addOnsFromCampaign } = useCampaign()
   let addOns
   if (Array.isArray(addOnsFromCampaign)) {
     addOns = addOnsFromCampaign
   } else {
     addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
   }
-  const { loadingPreview } = usePreview()
   const [expandedAddOn, setExpandedAddOn] = React.useState("")
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
   const productName = standariseString(stripPathToProductName(selectedProduct).split(" ")[0])
+  const compatibleOfferLabel = standariseString(stripPathToProductName(selectedOffer.data.attributes.compatibleLabel))
 
   const addOnGroups = R.groupBy(addOn => groupPath(addOn), addOns)
 
   // filter add on groups by compatibility which is stored in addOn.data.attributes.compatible_products
-  const filterIncompatibleAddOns = R.map(
-    R.filter(addOn => {
-      return R.any(R.includes(R.__, R.path(["data", "attributes", "compatible_products"], addOn)), [productName, "base"])
-    })
-  )
+  const filterIncompatibleAddOns = addOnGroups => {
+    if (compatibleOfferLabel) return addOnGroups
+    const compatible = addOnGroups.find(addOn => addOn.data.attributes.compatibleLabel === compatibleOfferLabel)
+    if (compatible) return addOnGroups
+  }
+
   const filteredAddOns = filterIncompatibleAddOns(addOnGroups)
   const addOnKeys = Object.keys(R.reject(R.equals([]))(filteredAddOns))
 
