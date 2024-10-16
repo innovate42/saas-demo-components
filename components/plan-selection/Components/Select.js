@@ -12,13 +12,8 @@ type Props = {
 }
 
 function Select({ selectedProduct, setSelectedProduct }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { offers = [] } = useCampaign()
+
   const { loadingPreview } = usePreview()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)

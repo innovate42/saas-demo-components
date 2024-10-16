@@ -22,38 +22,19 @@ type Props = {
 }
 
 function PlanSelection({ monthlyTermLabel, oneYearTermLabel, twoYearTermLabel, threeYearTermLabel, basketDescText }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
-
-  const termLabels = {
-    monthlyTermLabel,
-    oneYearTermLabel,
-    twoYearTermLabel,
-    threeYearTermLabel
-  }
+  const { offers = [] } = useCampaign()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
 
-  // select first product as default
-  const [selectedProduct, setSelectedProduct] = useState(Object.keys(offerGroups)[0]) // "/productPath"
-
-  // select first offer as of first product as default
-  const [selectedOffer, setSelectedOffer] = useState(offerGroups[selectedProduct][0].id) // offer id "vgjh321v3jgh21g312g3y21"
-  const [selectedTerm, setSelectedTerm] = useState(offerGroups[selectedProduct][0].data.attributes.term__limio) // object { length: Number, renewal_trigger:
-  // str, renewal_type: str, type: "months" |
-  // "years" etc }
+  const [selectedProduct, setSelectedProduct] = useState(Object.keys(offerGroups)[0])
+  const [selectedOffer, setSelectedOffer] = useState(offerGroups[selectedProduct][0].id)
+  const [selectedTerm, setSelectedTerm] = useState(offerGroups[selectedProduct][0].data.attributes.term__limio)
   const [selectedAddOnProducts, setSelectedAddOnProducts] = useState<
     Array<{
       product: string,
       quantity?: number
     }>
-  >([]) // add on product path
+  >([])
   const [selectedBillingPlan, setSelectedBillingPlan] = useState(offerGroups[selectedProduct][0].data.attributes.billing_plan[0])
   const [quantity, setQuantity] = useState(1)
 
@@ -72,9 +53,12 @@ function PlanSelection({ monthlyTermLabel, oneYearTermLabel, twoYearTermLabel, t
     })
     if (offer) {
       setSelectedOffer(offer.id)
+    } else {
+      // never seen this happen, but just in case
+      console.error("Offer not found", ratePlan, term)
     }
   }
-  // these handlers are through onChange so React batch updates them automatically.
+
   const handleBaseProductChange = React.useCallback(event => {
     const { value } = event.target
     setSelectedProduct(value)
@@ -111,7 +95,12 @@ function PlanSelection({ monthlyTermLabel, oneYearTermLabel, twoYearTermLabel, t
             <h2 className="grid-stretch text-left">Purchase</h2>
             {/* column 1 */}
             <Select selectedProduct={selectedProduct} setSelectedProduct={handleBaseProductChange} />
-            <BillingPlan selectedTerm={selectedTerm} handleTermChange={handleTermChange} selectedProduct={selectedProduct} termLabels={termLabels} />
+            <BillingPlan selectedTerm={selectedTerm} handleTermChange={handleTermChange} selectedProduct={selectedProduct} termLabels={{
+              monthlyTermLabel,
+              oneYearTermLabel,
+              twoYearTermLabel,
+              threeYearTermLabel
+            }} />
             <BillingFrequency
               selectedBillingPlan={selectedBillingPlan}
               selectedProduct={selectedProduct}
