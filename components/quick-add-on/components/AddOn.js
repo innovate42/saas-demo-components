@@ -39,14 +39,10 @@ const AddOn = ({ addOn, ctaText }) => {
 
     dispatch(setBasketAction(newState))
 
-    const newBasketAddOns = basketAddOns
-      ? [...basketAddOns, { addOn: addOn, quantity: 1 }]
-      : [
-          {
-            addOn: addOn,
-            quantity: 1
-          }
-        ]
+    const defaultQuantity = addOn.data.attributes.default_quantity_options__limio?.quantity || 1
+    const newAddOn = { addOn: addOn, quantity: defaultQuantity }
+
+    const newBasketAddOns = basketAddOns ? [...basketAddOns, newAddOn] : [newAddOn]
 
     const { offer, quantity } = basketItems[0]
     addToBasket(offer, { addOns: newBasketAddOns, quantity: quantity })
