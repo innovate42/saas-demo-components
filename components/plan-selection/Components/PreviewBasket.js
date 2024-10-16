@@ -1,7 +1,7 @@
 // @flow
 import * as React from "react"
 import { useBasket, useCampaign, useLimioContext } from "@limio/sdk"
-import { stripHTMLtags, stripPathToProductName } from "../helpers"
+import { stripHTMLtags, stripPathToProductName, useDeepCompareMemoize, getStrippedProductName, normaliseString, standardiseString, formatCurrency } from "../helpers"
 import { addToBasketAction, removeFromBasketAction } from "@limio/shop-redux/src/shop/redux"
 import { useDispatch, useStore } from "@limio/shop-redux"
 import { LoadingSpinner } from "@limio/design-system"
@@ -17,29 +17,6 @@ type Props = {
   basketDescText: string
 }
 
-const standardiseString = str => str.split(" ")[0].toLowerCase().replace(/\s/g, "")
-const getStrippedProductName = obj => stripPathToProductName(obj.data.products[0].path)
-const normalizeString = str => str.replace(/[^a-z0-9]/gi, "").toLowerCase()
-
-// Custom hook for deep comparison of memoized values
-function useDeepCompareMemoize(value) {
-  const ref = React.useRef()
-
-  if (!R.equals(value, ref.current)) {
-    ref.current = value
-  }
-
-  return ref.current
-}
-
-export function formatCurrency(amount: Number, currency: string): string {
-  if (typeof Intl !== "undefined" && typeof Intl.NumberFormat !== "undefined") {
-    return new Intl.NumberFormat("en-US", { style: "currency", currency: currency }).format(amount)
-  } else {
-    return `${currency} ${amount}`
-  }
-}
-
 function PreviewBasket({
   selectedProduct,
   selectedOffer,
@@ -51,6 +28,10 @@ function PreviewBasket({
   // sdk functionality
   const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
   let addOns
+
+  // check if this is fixed in the page builder
+  console.log("check the structure of this", addOnsFromCampaign)
+  console.log(JSON.stringify(addOnsFromCampaign))
   if (Array.isArray(addOnsFromCampaign)) {
     addOns = addOnsFromCampaign
   } else {
@@ -58,12 +39,10 @@ function PreviewBasket({
   }
   const { addToBasket } = useBasket()
   const dispatch = useDispatch()
-  const { zuoraPreview, previewSchedule, loadingPreview, preview, previewError } = usePreview()
+  const { zuoraPreview, previewSchedule, preview } = usePreview()
   const store = useStore()
   const { isInPageBuilder } = useLimioContext()
 
-  // state
-  const [offerCode, setOfferCode] = React.useState("")
   const [planPrice, setPlanPrice] = React.useState({})
   const [AddOnsPrice, setAddOnsPrice] = React.useState([])
 
@@ -108,61 +87,53 @@ function PreviewBasket({
   }
 
   const applyOffer = () => {
-    // check offer code
-    // if valid, apply offer
-    // else display error message
   }
 
   React.useEffect(() => {
     if (isInPageBuilder) return
 
-    // This stops the attempts to run redux in dev mode.
-    // *********************************************************************************************************************************************************
-    // const inDev = true
-    // if (inDev) return
-    // *********************************************************************************************************************************************************
-
     // create a basket with the selected offer and add ons
     // previewing needs an order so this leverages the basket functionality to create an order
     dispatch(addToBasketAction({ offer: selectedOfferObj, addOns: selectedAddOnsListWithQuantity, pushToCheckout: false, quantity: offerQuantity }))
-
-    // get state to prevent rerender
     const { order } = store.getState()
 
-    // standard billing details for preview as recommended by Zuora
+    // standard billing details for previewing - this is not in a checkout context so this is a dummy value
     const previewBillingDetails = { state: "NY", postalCode: "10001", country: "US" }
     const previewOrderData = { ...order, billingDetails: previewBillingDetails, order_type: "new", mode: "production" }
 
-    // configure state to prevent race conditions
     preview(previewOrderData, true)
-    // for every request clear the state variables
     setPlanPrice({})
     setAddOnsPrice([])
-    // clear the basket after previewing
     let combined = []
 
+    // this is to remove the items from the basket after the preview has been completed
     if (selectedAddOnsList) {
       const addOnIdsAndPath = selectedAddOnsList.map(addOn => ({ id: addOn.id, path: addOn.path }))
       combined = [...combined, ...addOnIdsAndPath]
     }
+
     if (selectedOfferObj) {
       const offerIdsAndPath = { id: selectedOfferObj.id, path: selectedOfferObj.path }
       combined = [...combined, offerIdsAndPath]
     }
+
     if (combined.length  > 0) {
       combined.forEach(item => dispatch(removeFromBasketAction(item.id, item.path)))
     }
+
   }, [selectedOfferObj, selectedAddOnsList, selectedAddOnsListWithQuantity, offerQuantity])
 
   React.useEffect(() => {
-    // if preview error then this never gets updated?
     if (zuoraPreview) {
-      // get the price of the plan and add ons from the preview response
       const productName = getStrippedProductName(selectedOfferObj)
+      console.log(JSON.stringify(previewSchedule))
+      console.log(previewSchedule)
       if (previewSchedule[0]?.lineItems?.length) {
-        setPlanPrice(previewSchedule[0]?.lineItems?.find(item => normalizeString(item.productName) === normalizeString(productName)))
-        setAddOnsPrice(previewSchedule[0]?.lineItems?.filter(item => normalizeString(item.productName) !== normalizeString(productName)))
+        // this splits the offer and add ons into two separate arrays for display because we need it in the order
+        setPlanPrice(previewSchedule[0]?.lineItems?.find(item => normaliseString(item.productName) === normaliseString(productName)))
+        setAddOnsPrice(previewSchedule[0]?.lineItems?.filter(item => normaliseString(item.productName) !== normaliseString(productName)))
       } else {
+        // this means there is an issue so just default clear it
         setPlanPrice({})
         setAddOnsPrice([])
       }
@@ -170,17 +141,17 @@ function PreviewBasket({
   }, [zuoraPreview])
 
   const currency = selectedOfferObj?.data?.attributes.price__limio[0].currencyCode ?? "USD"
-  // use the first payment for any preview
+
+  // use the first payment for any preview - is this correct?
   const previewAmount = previewSchedule[0]?.amountWithoutTax
   const isLoading = R.isEmpty(planPrice) || (selectedAddOnsList.length > 0 && R.isEmpty(AddOnsPrice))
+
   const totalText = !isLoading ? formatCurrency(previewAmount, currency) : <LoadingSpinner />
+
   const getAddOnsPriceMatched = addOn => {
-    // matches the add on listed in the ui to the price value
     const productName = getStrippedProductName(addOn)
-    const matchedAddOn = AddOnsPrice.find(addOnPreview => normalizeString(addOnPreview.productName) === normalizeString(productName))
-    // sometimes a cached value gets populated immediately but there are +n add ons so this prevents the error
-    // state is updated by the second useEffect causing the rerender to display the price
-    if (!matchedAddOn) return <LoadingSpinner />
+    const matchedAddOn = AddOnsPrice.find(addOnPreview => normaliseString(addOnPreview.productName) === normaliseString(productName))
+      if (!matchedAddOn) return <LoadingSpinner />
     return formatCurrency(matchedAddOn.amountWithoutTax, currency)
   }
 
@@ -218,7 +189,7 @@ function PreviewBasket({
           {/* offer code input box for type text */}
           <div>
             <input type="text" onChange={e => setOfferCode(e.target.value)} className={"offer-input"} />
-            <button disabled onClick={() => applyOffer} className={"offer-btn"}>
+            <button disabled className={"offer-btn"}>
               Apply
             </button>
           </div>
