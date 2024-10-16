@@ -38,7 +38,7 @@ function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selecte
     console.log("compatibleOfferLabel", compatibleOfferLabel)
     console.log(JSON.stringify(addOnGroups))
     if (compatibleOfferLabel) return addOnGroups
-    const compatible = addOnGroups.filter(addOn => addOn.data.attributes.compatibleLabel === compatibleOfferLabel)
+    const compatible = addOnGroups.filter(addOn => addOn.data.attributes.compatibleLabel[0] === compatibleOfferLabel)
     if (compatible) return addOnGroups
   }
 
