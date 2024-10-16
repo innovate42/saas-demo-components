@@ -26,17 +26,8 @@ function PreviewBasket({
   basketDescText
 }: Props): React.Node {
   // sdk functionality
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
+  const { offers = [], addOns } = useCampaign()
 
-  // check if this is fixed in the page builder
-  console.log("check the structure of this", addOnsFromCampaign)
-  console.log(JSON.stringify(addOnsFromCampaign))
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
   const { addToBasket } = useBasket()
   const dispatch = useDispatch()
   const { zuoraPreview, previewSchedule, preview } = usePreview()
@@ -129,8 +120,12 @@ function PreviewBasket({
       console.log(JSON.stringify(previewSchedule))
       console.log(previewSchedule)
       if (previewSchedule[0]?.lineItems?.length) {
-        // this splits the offer and add ons into two separate arrays for display because we need it in the order
-        setPlanPrice(previewSchedule[0]?.lineItems?.find(item => normaliseString(item.productName) === normaliseString(productName)))
+        if (previewSchedule[0]?.lineItems?.length === 1) {
+            setPlanPrice(previewSchedule[0]?.lineItems[0])
+            setAddOnsPrice([])
+        }
+
+        setPlanPrice(previewSchedule[0]?.lineItems?.find(item => normaliseString(item.productName).startsWith(normaliseString(productName))))
         setAddOnsPrice(previewSchedule[0]?.lineItems?.filter(item => normaliseString(item.productName) !== normaliseString(productName)))
       } else {
         // this means there is an issue so just default clear it
@@ -162,7 +157,7 @@ function PreviewBasket({
           <h3>Your Plan</h3>
           <div className="flex space-between center">
             <h5 className="bold">{stripPathToProductName(selectedProduct)}</h5>
-            <p className="bold mr-4">{!R.isEmpty(planPrice) ? formatCurrency(planPrice.amountWithoutTax, currency) : <LoadingSpinner />}</p>
+            <p className="bold mr-4">{!R.isEmpty(planPrice) && !R.isNil(planPrice) ? formatCurrency(planPrice.amountWithoutTax, currency) : <LoadingSpinner />}</p>
           </div>
           <p>{stripHTMLtags(selectedOfferObj.data.attributes.display_price__limio)}</p>
         </div>
