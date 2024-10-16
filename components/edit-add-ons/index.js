@@ -11,7 +11,6 @@ import {
   mapTermObjectToDisplayStr,
   stripPathToProductName,
 } from "./components/helpers";
-import * as R from "ramda";
 
 type Props = {
   onlyShowPurchase: boolean,
@@ -34,19 +33,9 @@ function EditAddOns({
   successLink,
 }: Props): React.Node {
   const [updates, setUpdates] = React.useState([]);
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign();
-  let addOns;
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign;
-  } else {
-    addOns =
-      addOnsFromCampaign === null || addOnsFromCampaign === undefined
-        ? []
-        : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign));
-  }
-  const { subscriptions } = useSubscriptions(); // returns a subscription[]
+  const { addOns } = useCampaign();
 
-  // get the subId query string param and find the sub.id that matches otherwise return the first in the list
+  const { subscriptions } = useSubscriptions();
   const subId = new URLSearchParams(window.location.search).get("subId");
   const subscription =
     subscriptions.find((sub) => sub.id === subId) || subscriptions[0];
@@ -57,7 +46,6 @@ function EditAddOns({
       offer.data.end > DateTime.local().toISODate()
   );
 
-  // TODO: create an offer level attribute for this
   const billingPlan = activeOffer.data.offer.data.productBundles[0].rate_plan;
 
   const termObject = activeOffer.data.offer.data.attributes.term__limio;
@@ -66,7 +54,9 @@ function EditAddOns({
   const baseProductWithPlanSuffix = stripPathToProductName(
     activeOffer.data.offer.data.products[0].path
   );
+
   const baseProduct = baseProductWithPlanSuffix.split(" ")[0];
+
   const subName =
     activeOffer.data.name ??
     stripPathToProductName(activeOffer.data.offer.data.products[0].path) ??
@@ -77,12 +67,10 @@ function EditAddOns({
     const dates = schedule.map((item) => item.data.schedule_date);
     const nextDates = dates.filter((date) => date > today);
 
-    // If there are no future dates, return today's date
     if (nextDates.length === 0) {
       return today;
     }
 
-    // Find the earliest date among the future dates
     return nextDates.reduce((a, b) => (a < b ? a : b));
   };
 
