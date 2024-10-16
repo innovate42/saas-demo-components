@@ -77,8 +77,6 @@ function PreviewBasket({
     addToBasket(selectedOfferObj, { addOns: selectedAddOnsListWithQuantity, quantity: offerQuantity })
   }
 
-  const applyOffer = () => {
-  }
 
   React.useEffect(() => {
     if (isInPageBuilder) return
@@ -147,7 +145,6 @@ function PreviewBasket({
 
   const currency = selectedOfferObj?.data?.attributes.price__limio[0].currencyCode ?? "USD"
 
-  // use the first payment for any preview - is this correct?
   const previewAmount = previewSchedule[0]?.amountWithoutTax
   const isLoading = R.isEmpty(planPrice) || (selectedAddOnsList.length > 0 && R.isEmpty(AddOnsPrice))
 

@@ -34,12 +34,11 @@ function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selecte
   const addOnGroups = R.groupBy(addOn => groupPath(addOn), addOns)
 
   const filterIncompatibleAddOns = addOnGroups => {
-    console.log("addOnGroups", addOnGroups)
-    console.log("compatibleOfferLabel", compatibleOfferLabel)
-    console.log(JSON.stringify(addOnGroups))
-    if (compatibleOfferLabel) return addOnGroups
-    const compatible = addOnGroups.filter(addOn => addOn.data.attributes.compatibleLabel[0] === compatibleOfferLabel)
-    if (compatible) return addOnGroups
+    const keys = Object.keys(addOnGroups)
+    if (!keys.length) return {}
+    if (!compatibleOfferLabel) return addOnGroups
+    const compatible = keys.filter(key => addOnGroups[key].find(addOn => addOn.data.attributes.compatibleLabel[0] === compatibleOfferLabel))
+   return R.pick(compatible, addOnGroups)
   }
 
   const filteredAddOns = filterIncompatibleAddOns(addOnGroups)
