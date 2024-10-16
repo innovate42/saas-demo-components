@@ -22,14 +22,20 @@ type Props = {
   yourOldPlanCopy: string
 }
 
-const buildOrder = (subscription, selectedOfferObj, date, matchingAddOns = [], currentOffer, matchedAddOnsToReadd = [], selectedQuantity = 1) => {
+const buildOrder = (
+  subscription,
+  selectedOfferObj,
+  date,
+  matchingAddOns = [],
+  currentOffer,
+  matchedAddOnsToReadd = [],
+  selectedQuantity = 1
+) => {
   let removeAddOns = []
   let addAddOns = []
 
-  // these will stay removed after the change
-  // build removal for all add ons
   if (!R.isEmpty(matchingAddOns)) {
-    removeAddOns = R.uniqBy(R.prop("id"), matchingAddOns).map(addOn => {
+    removeAddOns = matchingAddOns.map(addOn => {
       return {
         type: "remove",
         quantity: 1,
@@ -41,26 +47,24 @@ const buildOrder = (subscription, selectedOfferObj, date, matchingAddOns = [], c
   }
 
   if (!R.isEmpty(matchedAddOnsToReadd)) {
-    addAddOns = R.uniqBy(R.prop("id"), matchingAddOns).map(addOn => {
-      let addOnId = addOn.id
-      let version = addOn.version
-      if (addOnId.startsWith("subscription_add_on")) {
-        addOnId = addOn.data.add_on.id
-        version = addOn.data.add_on.version
-      }
-
-      if (addOnId.startsWith("add_on")) {
-        addOnId = addOnId.split("-")[1]
-      }
-      return {
-        type: "add",
-        quantity: 1,
-        id: addOnId,
-        version: version,
-        effective_date: DateTime.local().toISODate(),
-        record_type: "add_on"
-      }
-    })
+    addAddOns = matchingAddOns
+      .map(addOn => {
+        // to readd should be subscription add ons
+        // so we can say that the record type should start with subscription_add_on
+        if (addOn.record_type.startsWith("subscription_add_on")) {
+          return {
+            type: "add",
+            quantity: 1,
+            id: addOn.data.add_on.id,
+            version: addOn.data.add_on.version,
+            effective_date: DateTime.local().toISODate(),
+            record_type: "add_on"
+          }
+        } else {
+          console.error("Add on record type is not subscription_add_on", addOn)
+        }
+      })
+      .filter(Boolean)
   }
 
   return {
@@ -80,7 +84,8 @@ const buildOrder = (subscription, selectedOfferObj, date, matchingAddOns = [], c
       {
         type: "remove",
         quantity: subscription.data.quantity,
-        // this line needs to be the offers object in the array so like subscription_offer-id
+        // this line needs to be the offers object in the array so like
+        // subscription_offer-id
         id: currentOffer.id,
         effective_date: DateTime.local().toISODate(),
         record_type: "offer"
@@ -111,14 +116,14 @@ function EditBasePlanBasket({
   yourNewPlanCopy
 }: Props): React.Node {
   const { subscriptions = [] } = useSubscriptions()
-  // get the subId query string param and find the sub.id that matches otherwise return the first in the list
+  // get the subId query string param and find the sub.id that matches
+  // otherwise return the first in the list
   const subId = new URLSearchParams(window.location.search).get("subId")
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
 
   const { offers = [], addOns } = useCampaign()
-  const [offerCode, setOfferCode] = React.useState("")
+  const [_, setOfferCode] = React.useState("")
   const [price, setPrice] = React.useState({})
-  const [dateOfEffect, setDateOfEffect] = React.useState(new Date())
   const [submitting, setSubmitting] = React.useState(false)
   const currentOffer = checkActiveSubscriptionOffer(subscription.offers)
 
@@ -126,7 +131,8 @@ function EditBasePlanBasket({
 
   const selectedOfferObj = React.useMemo(() => offers.find(offer => offer.id === selectedOffer), [offers, selectedOffer])
 
-  // logic to determine which add ons to be removed from a subscription update when the base plan is changed
+  // logic to determine which add ons to be removed from a subscription update
+  // when the base plan is changed
   const getEntitlementsFromAddOn = addOn => addOn.data.add_on?.data.products[0].entitlements?.map(e => e.$ref) ?? []
 
   // owned and active add ons
@@ -141,7 +147,8 @@ function EditBasePlanBasket({
     [selectedOfferObj]
   )
 
-  // entitlements that are in both the selected offer and the owned add ons are the ones that will be removed
+  // entitlements that are in both the selected offer and the owned add ons are
+  // the ones that will be removed
   const entitlementsToRemove = React.useMemo(
     () => selectedOfferEntitlements.filter(entitlement => subscribedToAddOns.includes(entitlement)),
     [selectedOfferEntitlements, subscribedToAddOns]
@@ -174,9 +181,9 @@ function EditBasePlanBasket({
   }
 
   const handleSubmit = async () => {
-    // first we get the add ons that are included in the offer entitlements -> these are clean removals
-    // then we get the add ons that are not included in the offer entitlements -> these are add ons that need to be
-    // readded
+    // first we get the add ons that are included in the offer entitlements ->
+    // these are clean removals then we get the add ons that are not included
+    // in the offer entitlements -> these are add ons that need to be readded
 
     const { toRemove: matchedRemovals, toReAdd: matchedReAdds } = matchAddOnsWithEntitlements(ownedAddOns, entitlementsToRemove)
 
@@ -188,7 +195,15 @@ function EditBasePlanBasket({
         selectedOfferObj.data.attributes.billing_plan[0] === addOn.data.attributes.billing_option[0]
     )
 
-    const order = buildOrder(subscription, selectedOfferObj, dateOfEffect, [...matchedReAdds, ...matchedRemovals], currentOffer, matchedAddOnsToReadd, quantity)
+    const order = buildOrder(
+      subscription,
+      selectedOfferObj,
+      new Date(),
+      [...matchedReAdds, ...matchedRemovals],
+      currentOffer,
+      matchedAddOnsToReadd,
+      quantity
+    )
 
     setSubmitting(true)
     await sendOrder(order)
@@ -196,9 +211,9 @@ function EditBasePlanBasket({
   }
 
   const getPreview = () => {
-    // preview ignores effects of addons changing so just send empty array - the resolution process is a bit
-    // complicated so just ignore it for now
-    const order = buildOrder(subscription, selectedOfferObj, dateOfEffect, [], currentOffer, [], quantity)
+    // preview ignores effects of addons changing so just send empty array -
+    // the resolution process is a bit annoying
+    const order = buildOrder(subscription, selectedOfferObj, new Date(), [], currentOffer, [], quantity)
 
     const previewOrderData = {
       ...order,
@@ -247,7 +262,9 @@ function EditBasePlanBasket({
       <div className="row-border" />
       <div className={"flex space-between mr-4 mt-4"}>
         <div className={"less-bold"} dangerouslySetInnerHTML={{ __html: toPayText }} />
-        <p>{!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? formatCurrency(+price.add + +price.remove, "USD") : <LoadingSpinner />}</p>
+        <p>
+          {!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? formatCurrency(+price.add + +price.remove, "USD") : <LoadingSpinner />}
+        </p>
       </div>
       <div className={"flex place-end mr-4 checkout-btn"}>
         <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn "} disabled={submitting}>
