@@ -1,6 +1,6 @@
 // @flow
 import React from "react"
-import { useCampaign, useBasket } from "@limio/sdk"
+import { useCampaign, useLimioContext } from "@limio/sdk"
 import AddOn from "./components/AddOn"
 import "./index.css"
 import { useCheckout } from "@limio/internal-checkout-sdk"
@@ -11,12 +11,16 @@ type Props = {
 }
 
 export const AddOnCards = ({ heading, subheading, ctaText, noAddOnsText }: Props) => {
+  const { isInPageBuilder } = useLimioContext()
   const { addOns = [] } = useCampaign()
   const { useCheckoutSelector } = useCheckout()
   const basketItems = useCheckoutSelector(state => state.order.orderItems)
   const currentOffer = basketItems[0]?.offer
 
   const filteredAddOns = addOns.filter(addOn => {
+    if (isInPageBuilder) {
+      return true
+    }
     const { data } = addOn
     const { compatibleLabel } = data.attributes
     const labelExists = compatibleLabel && currentOffer.data?.attributes?.compatibleLabel
