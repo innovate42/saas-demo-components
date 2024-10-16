@@ -49,17 +49,11 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
   const { subscriptions = [] } = useSubscriptions()
   const subId = new URLSearchParams(window.location.search).get("subId")
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
-  const { payment_methods, revalidate: revalidatePayments } = useLimioUserSubscriptionPaymentMethods(subscription.id)
+  const { payment_methods } = useLimioUserSubscriptionPaymentMethods(subscription.id)
 
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { addOns } = useCampaign()
 
-  const [offerCode, setOfferCode] = React.useState("")
+  const [_, setOfferCode] = React.useState("")
   const [addOnsPrice, setAddOnsPrice] = React.useState([])
   const [submitting, setSubmitting] = React.useState(false)
   const [dialogOpen, setDialogOpen] = React.useState(false)
@@ -95,7 +89,9 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
   const handleSubmit = async () => {
     // if candidate texting has been previously purchased, then we do not need to collect additional info
     const ownedCandidateTexting = subscription.addOns.includes(addOn => addOn.data.products[0].path === "/products/Candidate Texting")
-    const additionalInfoToCollect = matchedAdditionAddOns(additions).filter(addOn => addOn.data.products[0].path === "/products/Candidate Texting")
+    const additionalInfoToCollect = matchedAdditionAddOns(additions).filter(
+      addOn => addOn.data.products[0].path === "/products/Candidate Texting"
+    )
     if (!R.isEmpty(additionalInfoToCollect) && !ownedCandidateTexting) {
       setDialogOpen(true)
     } else {
@@ -262,12 +258,7 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
         <div dangerouslySetInnerHTML={{ __html: basketPayText }} />
         <p>{addEmpty ? "--" : R.isEmpty(addOnsPrice) ? <LoadingSpinner /> : orderTotal()}</p>
       </div>
-      {/* this shows total renewal price not the item being added. */}
-      {/*<div className={"flex"}>*/}
-      {/*    <div>*/}
-      {/*        <p>{getSecondPaymentDetails()}</p>*/}
-      {/*    </div>*/}
-      {/*</div>*/}
+
       <div className={"flex place-end mr-4 checkout-btn"}>
         <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
           {continueWord}
