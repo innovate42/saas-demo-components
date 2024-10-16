@@ -123,9 +123,19 @@ function PreviewBasket({
         if (previewSchedule[0]?.lineItems?.length === 1) {
             setPlanPrice(previewSchedule[0]?.lineItems[0])
             setAddOnsPrice([])
+          return
         }
 
-        setPlanPrice(previewSchedule[0]?.lineItems?.find(item => normaliseString(item.productName).startsWith(normaliseString(productName))))
+        // i hate this but without forcing zuora and limio to use the same names this is the best i can do
+        setPlanPrice(
+            previewSchedule[0]?.lineItems?.find(item => {
+              const normalisedProductName = normaliseString(productName);
+              const normalisedItemProductName = normaliseString(item.productName);
+
+              return normalisedItemProductName.includes(normalisedProductName) ||
+                  normalisedProductName.includes(normalisedItemProductName);
+            })
+        )
         setAddOnsPrice(previewSchedule[0]?.lineItems?.filter(item => normaliseString(item.productName) !== normaliseString(productName)))
       } else {
         // this means there is an issue so just default clear it
