@@ -104,6 +104,8 @@ const isExpired = addOn => {
   return addOn.data.end !== undefined && DateTime.fromISO(addOn.data.end).toFormat("yyyy-MM-dd") <= DateTime.local().toISODate()
 }
 
+const getEntitlementsFromAddOn = addOn => addOn.data.add_on?.data.products[0].entitlements?.map(e => e.$ref) ?? []
+
 function EditBasePlanBasket({
   selectedOffer,
   quantity,
@@ -133,9 +135,7 @@ function EditBasePlanBasket({
 
   // logic to determine which add ons to be removed from a subscription update
   // when the base plan is changed
-  const getEntitlementsFromAddOn = addOn => addOn.data.add_on?.data.products[0].entitlements?.map(e => e.$ref) ?? []
 
-  // owned and active add ons
   const ownedAddOns = subscription.addOns.filter(addOn => addOn.status === "active" && !isExpired(addOn))
 
   // all entitlements from owned add ons
@@ -263,7 +263,11 @@ function EditBasePlanBasket({
       <div className={"flex space-between mr-4 mt-4"}>
         <div className={"less-bold"} dangerouslySetInnerHTML={{ __html: toPayText }} />
         <p>
-          {!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? formatCurrency(+price.add + +price.remove, "USD") : <LoadingSpinner />}
+          {!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? (
+            formatCurrency(Number(price.add) + Number(price.remove), "USD")
+          ) : (
+            <LoadingSpinner />
+          )}
         </p>
       </div>
       <div className={"flex place-end mr-4 checkout-btn"}>
