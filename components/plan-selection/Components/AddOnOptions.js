@@ -39,19 +39,13 @@ const standariseString = str => {
   return str.replace(/\s+/g, "-").toLowerCase()
 }
 
-function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selectedProduct, selectedOffer }: Props): React.Node {
-  const { addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selectedOffer }: Props): React.Node {
+  const { addOns, offers} = useCampaign()
+
   const [expandedAddOn, setExpandedAddOn] = React.useState("")
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
-  const productName = standariseString(stripPathToProductName(selectedProduct).split(" ")[0])
-  const compatibleOfferLabel = standariseString(stripPathToProductName(selectedOffer.data.attributes.compatibleLabel))
+  const compatibleOfferLabel = standariseString(stripPathToProductName(offers.find(offer => offer.id === selectedOffer)?.data?.attributes?.compatibleLabel))
 
   const addOnGroups = R.groupBy(addOn => groupPath(addOn), addOns)
 
