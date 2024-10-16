@@ -13,20 +13,14 @@ type Props = {
 }
 
 function BillingFrequency({ selectedProduct, handleFrequencyChange, selectedBillingPlan, selectedTerm }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { offers = [] } = useCampaign()
+
   const { loadingPreview } = usePreview()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
   const selectedProductOffers = offerGroups[selectedProduct]
   const validOffers = selectedProductOffers.filter(offer => R.equals(offer.data.attributes.term__limio, selectedTerm))
 
-  // TODO: refactor to use offer id in the selection instead of rate plan
   const selectedRatePlans = R.groupBy(offer => offer.data.productBundles[0].rate_plan, validOffers)
 
   return (

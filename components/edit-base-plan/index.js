@@ -46,7 +46,6 @@ function EditBasePlan(props: Props): React.Node {
   const [selectedProduct, setSelectedProduct] = useState(
     Object.keys(offerGroups)[0]
   );
-
   const [selectedBillingPlan, setSelectedBillingPlan] = useState(
     offerGroups[selectedProduct][0].data.productBundles[0].rate_plan
   );
