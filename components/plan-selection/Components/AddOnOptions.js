@@ -32,7 +32,6 @@ const findAddOnDesc = (addOnGroups, addOnKey) => {
 const isVolumeAddOn = (addOnGroups, addOnKey) => {
   const hasVolume = R.pathOr(false, ["data", "attributes", "volume_plan"])
   const matchedGroup = addOnGroups[addOnKey]
-  const anyVolume = matchedGroup.find(addOn => hasVolume(addOn)) ?? false
   return anyVolume
 }
 

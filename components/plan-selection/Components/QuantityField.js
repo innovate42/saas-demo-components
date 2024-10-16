@@ -10,13 +10,8 @@ type Props = {
 }
 
 function QuantityField({ quantity, setQuantity, selectedOffer }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { offers = []} = useCampaign()
+
   const [localQuantity, setLocalQuantity] = React.useState(quantity.toString())
   const selectedMultiBuy = offers.find(offer => offer.id === selectedOffer).data.attributes.allow_multibuy__limio
 

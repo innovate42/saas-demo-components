@@ -15,13 +15,7 @@ type Props = {
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1)
 
 function BillingFrequency({ selectedProduct, selectedBillingPlan, selectedTerm, handleFrequencyChange }: Props): React.Node {
-  const { offers = [], addOns: addOnsFromCampaign } = useCampaign()
-  let addOns
-  if (Array.isArray(addOnsFromCampaign)) {
-    addOns = addOnsFromCampaign
-  } else {
-    addOns = addOnsFromCampaign === null || addOnsFromCampaign === undefined ? [] : (addOns = R.pathOr([], ["tree"], addOnsFromCampaign))
-  }
+  const { offers = [] } = useCampaign()
   const { loadingPreview } = usePreview()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
@@ -47,7 +41,6 @@ function BillingFrequency({ selectedProduct, selectedBillingPlan, selectedTerm, 
                 disabled={loadingPreview}
               />
               {capitalize(billingPlan)}
-              {/* change this to whatever value is necessary / set as a customer prop to select the correct attribute?  */}
             </label>
           </div>
         ))}

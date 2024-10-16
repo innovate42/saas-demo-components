@@ -44,3 +44,39 @@ export function formatCurrency(amount: Number, currency: string): string {
   }
 }
 
+
+export const toDays = obj => {
+  switch (obj.type) {
+    case "years":
+      return obj.length * 365
+    case "months":
+      return obj.length * 30
+    case "days":
+      return obj.length
+    default:
+      return 0
+  }
+}
+
+export const formatTerm = (term, termLabels) => {
+  const {
+    monthlyTermLabel = "Month to Month",
+    oneYearTermLabel = "1 Year Agreement",
+    twoYearTermLabel = "2 Year Agreement",
+    threeYearTermLabel = "3 Year Agreement"
+  } = termLabels
+
+  const { length, type } = term
+  switch (type) {
+    case "years":
+      if (length === 1) return oneYearTermLabel
+      if (length === 2) return twoYearTermLabel
+      if (length === 3) return threeYearTermLabel
+      return `${length} ${type}`
+    case "months":
+      return monthlyTermLabel
+    default:
+      return `${length} ${type}`
+  }
+}
+
