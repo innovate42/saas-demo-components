@@ -29,7 +29,7 @@ const standariseString = str => {
 function AddOnOptions({ selectedAddOnProducts, setSelectedAddOnProducts, selectedOffer }: Props): React.Node {
   const { addOns, offers} = useCampaign()
 
-  const compatibleOfferLabel = standariseString(offers.find(offer => offer.id === selectedOffer)?.data?.attributes?.compatibleLabel)
+  const compatibleOfferLabel = standariseString(offers.find(offer => offer.id === selectedOffer)?.data?.attributes?.compatibleLabel[0])
 
   const addOnGroups = R.groupBy(addOn => groupPath(addOn), addOns)
 
