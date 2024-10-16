@@ -264,7 +264,7 @@ function EditBasePlanBasket({
         <div className={"less-bold"} dangerouslySetInnerHTML={{ __html: toPayText }} />
         <p>
           {!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? (
-            formatCurrency(Number(price.add) + Number(price.remove), "USD")
+            formatCurrency(Number(price.add.amountWithoutTax) + Number(price.remove.amountWithoutTax), "USD")
           ) : (
             <LoadingSpinner />
           )}
