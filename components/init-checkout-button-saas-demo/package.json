@@ -1,0 +1,29 @@
+{
+  "name": "@limio/saas-demo-initiate-checkout-button",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./index.ts",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@limio/sdk": "workspace:^",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "limioProps": [
+    {
+      "id": "buttonLabel",
+      "type": "string",
+      "label": "Button Label",
+      "default": "Continue to checkout"
+    }
+  ],
+  "devDependencies": {
+    "@types/react": "^18.3.4"
+  }
+}
