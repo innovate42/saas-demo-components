@@ -21,6 +21,12 @@
       "type": "string",
       "label": "Button Label",
       "default": "Continue to checkout"
+    },
+    {
+      "id": "checkoutLink",
+      "type": "string",
+      "label": "If provided this will override the offers checkout config",
+      "default": ""
     }
   ],
   "devDependencies": {
