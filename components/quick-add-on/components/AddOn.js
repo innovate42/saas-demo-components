@@ -60,13 +60,10 @@ const AddOn = ({ addOn, ctaText }) => {
   }
 
   const handleAddOnPrice = () => {
-    if (price__limio[0].use_external_price) {
-      if (display_external_price) {
-        return display_external_price
-      } else {
-        return `${addOn.name} is external price with no external display price attribute`
-      }
+    if (display_external_price) {
+      return display_external_price
     } else {
+      console.error("Config missing for display_external_price")
       return formatCurrency(price__limio[0].value, price__limio[0].currencyCode)
     }
   }
