@@ -52,10 +52,17 @@ const buildOrder = (
         // to readd should be subscription add ons
         // so we can say that the record type should start with subscription_add_on
         if (addOn.record_type.startsWith("subscription_add_on")) {
+          // for some incredbily stupid reason the add on id is prefixed if it gets added outside of acquisition ? ? ?
+
+          let id = addOn.data.add_on.id
+          if (id.startsWith("add_on")) {
+            id = id.split("add_on-")[1]
+          }
+
           return {
             type: "add",
             quantity: 1,
-            id: addOn.data.add_on.id,
+            id: id,
             version: addOn.data.add_on.version,
             effective_date: DateTime.local().toISODate(),
             record_type: "add_on"
