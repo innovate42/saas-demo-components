@@ -59,7 +59,9 @@ function VolumeAddOn({ addOn, owned, handleQuantityChange, subscribedAddOns, upd
               Click here to see pricing
             </button>
           </div>
-          <p className={"mb-0"}>{hasDesc(addOn) ? stripHTMLtags(addOn.data.attributes.description__limio) : "no description is available for this product."}</p>
+          <p className={"mb-0"}>
+            {hasDesc(addOn) ? stripHTMLtags(addOn.data.attributes.description__limio) : "no description is available for this product."}
+          </p>
         </div>
       </div>
       {expanded ? (
@@ -98,14 +100,14 @@ function VolumeAddOn({ addOn, owned, handleQuantityChange, subscribedAddOns, upd
           </table>
           <div className={"flex justify-end"}>
             <button onClick={() => setExpanded(false)} className={"toggle-btn"}>
-              <FontAwesomeIcon icon={faChevronUp}/>
+              <FontAwesomeIcon icon={faChevronUp} />
             </button>
           </div>
         </div>
       ) : (
         <div className={"flex justify-end"}>
           <button onClick={() => setExpanded(true)} className={"toggle-btn"}>
-            <FontAwesomeIcon icon={faChevronDown}/>
+            <FontAwesomeIcon icon={faChevronDown} />
           </button>
         </div>
       )}
@@ -114,10 +116,9 @@ function VolumeAddOn({ addOn, owned, handleQuantityChange, subscribedAddOns, upd
         <>
           <div className="modal-backdrop fade show"></div>
           <div className="modal fade show" role="dialog" tabIndex="-1" style={{ display: "block" }}>
-            {/*<Modal isOpen={dialogOpen} toggle={() => setDialogOpen(false)} fullscreen>*/}
             <ModalHeader toggle={() => setDialogOpen(false)}></ModalHeader>
             <ModalBody>
-              <img src={addOnPriceImgLink} alt="pricing for the add on" style={{ maxHeight: "100%", maxWidth: "100%" }}/>
+              <img src={addOnPriceImgLink} alt="pricing for the add on" style={{ maxHeight: "100%", maxWidth: "100%" }} />
             </ModalBody>
             {/*</Modal>*/}
           </div>

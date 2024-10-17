@@ -1,16 +1,13 @@
 // @flow
-import * as React from "react";
-import StaticSection from "./components/StaticSection";
-import CustomiseAddOns from "./components/CustomiseAddOns";
-import EditAddOnsBasket from "./components/EditAddOnsBasket";
-import { DateTime } from "@limio/date";
-import { useCampaign, useSubscriptions } from "@limio/sdk";
-import "./index.css";
-import { PreviewProvider } from "@limio/ui-preview-context";
-import {
-  mapTermObjectToDisplayStr,
-  stripPathToProductName,
-} from "./components/helpers";
+import * as React from "react"
+import StaticSection from "./components/StaticSection"
+import CustomiseAddOns from "./components/CustomiseAddOns"
+import EditAddOnsBasket from "./components/EditAddOnsBasket"
+import { DateTime } from "@limio/date"
+import { useCampaign, useSubscriptions } from "@limio/sdk"
+import "./index.css"
+import { PreviewProvider } from "@limio/ui-preview-context"
+import { findNextScheduleDate, mapTermObjectToDisplayStr, stripPathToProductName } from "./components/helpers"
 
 type Props = {
   onlyShowPurchase: boolean,
@@ -19,8 +16,8 @@ type Props = {
   basketPayText: string,
   longTexts: string,
   continueWord: string,
-  successLink: string,
-};
+  successLink: string
+}
 
 function EditAddOns({
   onlyShowPurchase,
@@ -30,56 +27,26 @@ function EditAddOns({
   basketPayText,
   longTexts,
   continueWord,
-  successLink,
+  successLink
 }: Props): React.Node {
-  const [updates, setUpdates] = React.useState([]);
-  const { addOns } = useCampaign();
+  const [updates, setUpdates] = React.useState([])
+  const { addOns } = useCampaign()
 
-  const { subscriptions } = useSubscriptions();
-  const subId = new URLSearchParams(window.location.search).get("subId");
-  const subscription =
-    subscriptions.find((sub) => sub.id === subId) || subscriptions[0];
+  const { subscriptions } = useSubscriptions()
+  const subId = new URLSearchParams(window.location.search).get("subId")
+  const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
 
-  const activeOffer = subscription.offers.find(
-    (offer) =>
-      offer.data.end === undefined ||
-      offer.data.end > DateTime.local().toISODate()
-  );
+  const activeOffer = subscription.offers.find(offer => offer.data.end === undefined || offer.data.end > DateTime.local().toISODate())
+  const billingPlan = activeOffer.data.offer.data.productBundles[0].rate_plan
+  const termObject = activeOffer.data.offer.data.attributes.term__limio
 
-  const billingPlan = activeOffer.data.offer.data.productBundles[0].rate_plan;
+  const term = mapTermObjectToDisplayStr(termObject)
+  const baseProductWithPlanSuffix = stripPathToProductName(activeOffer.data.offer.data.products[0].path)
+  const baseProduct = baseProductWithPlanSuffix.split(" ")[0]
+  const subName = activeOffer.data.name ?? stripPathToProductName(activeOffer.data.offer.data.products[0].path) ?? "No name"
+  const nextScheduleDate = React.useMemo(() => findNextScheduleDate(subscription.schedule), [subscription.schedule])
 
-  const termObject = activeOffer.data.offer.data.attributes.term__limio;
-  const term = mapTermObjectToDisplayStr(termObject);
-
-  const baseProductWithPlanSuffix = stripPathToProductName(
-    activeOffer.data.offer.data.products[0].path
-  );
-
-  const baseProduct = baseProductWithPlanSuffix.split(" ")[0];
-
-  const subName =
-    activeOffer.data.name ??
-    stripPathToProductName(activeOffer.data.offer.data.products[0].path) ??
-    "No name";
-
-  const findNextScheduleDate = (schedule) => {
-    const today = DateTime.local().toISODate();
-    const dates = schedule.map((item) => item.data.schedule_date);
-    const nextDates = dates.filter((date) => date > today);
-
-    if (nextDates.length === 0) {
-      return today;
-    }
-
-    return nextDates.reduce((a, b) => (a < b ? a : b));
-  };
-
-  const nextScheduleDate = React.useMemo(
-    () => findNextScheduleDate(subscription.schedule),
-    [subscription.schedule]
-  );
-
-  const handleAdd = (event) => {
+  const handleAdd = event => {
     setUpdates([
       ...updates,
       {
@@ -88,12 +55,12 @@ function EditAddOns({
         id: event.target.id,
         version: event.currentTarget.dataset.version,
         effective_date: DateTime.local().toISODate(),
-        record_type: "add_on",
-      },
-    ]);
-  };
+        record_type: "add_on"
+      }
+    ])
+  }
 
-  const handleRemove = (event) => {
+  const handleRemove = event => {
     setUpdates([
       ...updates,
       {
@@ -101,19 +68,19 @@ function EditAddOns({
         quantity: event.currentTarget.dataset.quantity,
         id: event.target.id,
         effective_date: nextScheduleDate,
-        record_type: "add_on",
-      },
-    ]);
-  };
+        record_type: "add_on"
+      }
+    ])
+  }
 
-  const handleFilter = (event) => {
-    setUpdates(updates.filter((update) => update.id !== event.target.id));
-  };
+  const handleFilter = event => {
+    setUpdates(updates.filter(update => update.id !== event.target.id))
+  }
 
-  const handleQuantityChange = (event) => {
+  const handleQuantityChange = event => {
     // handles a change to an add on if it is owned
-    if (!updates.find((update) => update.id === event.target.id)) {
-      const addOnIds = addOns.map((addOn) => addOn.id);
+    if (!updates.find(update => update.id === event.target.id)) {
+      const addOnIds = addOns.map(addOn => addOn.id)
       if (addOnIds.includes(event.target.id)) {
         setUpdates([
           ...updates,
@@ -123,10 +90,10 @@ function EditAddOns({
             id: event.target.id,
             effective_date: DateTime.local().toISODate(),
             record_type: "add_on",
-            version: event.currentTarget.dataset.version,
-          },
-        ]);
-        return;
+            version: event.currentTarget.dataset.version
+          }
+        ])
+        return
       }
       setUpdates([
         ...updates,
@@ -135,25 +102,23 @@ function EditAddOns({
           quantity: event.target.value,
           id: event.target.id,
           effective_date: DateTime.local().toISODate(),
-          record_type: "add_on",
-        },
-      ]);
-      return;
+          record_type: "add_on"
+        }
+      ])
+      return
     }
     // if add on owned remove update if quantity is same as owned quantity to handle changing around
     if (event.target.value === event.currentTarget.dataset.original) {
-      setUpdates(updates.filter((update) => update.id !== event.target.id));
-      return;
+      setUpdates(updates.filter(update => update.id !== event.target.id))
+      return
     }
     // handles an update in basket for a new add on purchase and if the subscription add on is not in updates
     setUpdates(
-      updates.map((update) => {
-        return update.id === event.target.id
-          ? { ...update, quantity: event.target.value }
-          : update;
+      updates.map(update => {
+        return update.id === event.target.id ? { ...update, quantity: event.target.value } : update
       })
-    );
-  };
+    )
+  }
 
   return (
     <PreviewProvider>
@@ -191,7 +156,7 @@ function EditAddOns({
         </div>
       </div>
     </PreviewProvider>
-  );
+  )
 }
 
-export default EditAddOns;
+export default EditAddOns

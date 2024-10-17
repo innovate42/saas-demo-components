@@ -5,12 +5,11 @@ import { useCampaign, useSubscriptions } from "@limio/sdk"
 import { Alert, LoadingSpinner } from "@limio/design-system"
 import * as R from "ramda"
 import { usePreview } from "@limio/ui-preview-context"
-import { checkCurrentSchedule, formatCurrency, formatDate, stripPathToProductName } from "./helpers"
+import { checkCurrentSchedule, formatCurrency, formatDate, normalizeString, stripPathToProductName } from "./helpers"
 import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js"
+import PaymentMethodDetails from "./PaymentMethodDetails"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleInfo, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
-import DialogContainer from "./DialogContainer"
-import { useLimioUserSubscriptionPaymentMethods } from "@limio/internal-checkout-sdk"
 
 const buildOrder = (subscription, updates) => {
   return {
@@ -35,8 +34,6 @@ type AddOnUpdateAction = {
   record_type: "add_on"
 }
 
-const normalizeString = str => str.replace(/[^a-z0-9]/gi, "").toLowerCase()
-
 type Props = {
   updates: Array<AddOnUpdateAction>,
   basketPayText: string,
@@ -49,16 +46,14 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
   const { subscriptions = [] } = useSubscriptions()
   const subId = new URLSearchParams(window.location.search).get("subId")
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
-  const { payment_methods } = useLimioUserSubscriptionPaymentMethods(subscription.id)
 
   const { addOns } = useCampaign()
 
   const [_, setOfferCode] = React.useState("")
   const [addOnsPrice, setAddOnsPrice] = React.useState([])
   const [submitting, setSubmitting] = React.useState(false)
-  const [dialogOpen, setDialogOpen] = React.useState(false)
 
-  const { zuoraPreview, previewSchedule, loadingPreview, preview, previewError } = usePreview()
+  const { zuoraPreview, previewSchedule, loadingPreview, preview } = usePreview()
 
   const dateOfEffect = formatDate(checkCurrentSchedule(subscription.schedule)?.data?.date || new Date())
 
@@ -80,26 +75,11 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
     })
   }
 
-  const applyOffer = () => {
-    // check offer code
-    // if valid, apply offer
-    // else display error message
-  }
-
   const handleSubmit = async () => {
-    // if candidate texting has been previously purchased, then we do not need to collect additional info
-    const ownedCandidateTexting = subscription.addOns.includes(addOn => addOn.data.products[0].path === "/products/Candidate Texting")
-    const additionalInfoToCollect = matchedAdditionAddOns(additions).filter(
-      addOn => addOn.data.products[0].path === "/products/Candidate Texting"
-    )
-    if (!R.isEmpty(additionalInfoToCollect) && !ownedCandidateTexting) {
-      setDialogOpen(true)
-    } else {
-      let order = buildOrder(subscription, updates)
-      setSubmitting(true)
-      await sendOrder(order)
-      window.location.href = successLink
-    }
+    let order = buildOrder(subscription, updates)
+    setSubmitting(true)
+    await sendOrder(order)
+    window.location.href = successLink
   }
 
   React.useEffect(() => {
@@ -129,14 +109,7 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
     }
   }, [zuoraPreview, loadingPreview])
 
-  // match the Zuora products in the rpeview return to the correct add-on displayed in the ui
-  // then interate that array to calculate the total
   const matchAddOnSchedule = (productName, returnNumber = false) => {
-    let productToFind = productName
-    if (productName === "Advanced Reporting") {
-      productToFind = "Advanced Visual Reporting"
-    }
-
     const schedule = addOnsPrice.find(addOn => normalizeString(addOn.productName) === normalizeString(productToFind))
 
     if (!schedule) {
@@ -159,28 +132,6 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
       }
     }, 0)
     return formatCurrency(total, "USD")
-  }
-
-  const getSecondPaymentDetails = () => {
-    if (previewSchedule) {
-      if (previewSchedule.length > 1) {
-        const secondPayment = previewSchedule[1]
-        return `Your next payment of ${formatCurrency(secondPayment.amountWithoutTax, "USD")} will be on ${formatDate(secondPayment.date)}`
-      }
-    }
-  }
-
-  const showPaymentDetails = () => {
-    const activePaymentMethods = payment_methods.filter(paymentMethod => paymentMethod.status === "active")
-    if (activePaymentMethods.length === 0) {
-      return
-    }
-    const [activePaymentMethod] = activePaymentMethods.sort((a, b) => new Date(b.start) - new Date(a.start))
-
-    const paymentMethodType = activePaymentMethod.type
-    const paymentMethodData = R.path(["data", paymentMethodType, "result"], activePaymentMethod)
-    const { CreditCardMaskNumber: creditCardMask, CreditCardType = "" } = paymentMethodData
-    return `Charge to your ${CreditCardType} (${creditCardMask})`
   }
 
   return (
@@ -249,7 +200,7 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
         {/* offer code input box for type text */}
         <div>
           <input type="text" onChange={e => setOfferCode(e.target.value)} className={"offer-input"} />
-          <button disabled onClick={() => applyOffer} className={"offer-btn"}>
+          <button disabled className={"offer-btn"}>
             Apply
           </button>
         </div>
@@ -263,10 +214,9 @@ function EditAddOnsBasket({ updates, longTexts, continueWord, basketPayText, suc
         <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn"} disabled={submitting}>
           {continueWord}
         </button>
-        <p>{payment_methods && payment_methods.length ? showPaymentDetails() : null}</p>
+        <PaymentMethodDetails />
       </div>
       <section className={"description"} dangerouslySetInnerHTML={{ __html: longTexts }}></section>
-      <DialogContainer open={dialogOpen} setOpen={setDialogOpen} order={buildOrder(subscription, updates)} subscription={subscription} />
     </div>
   )
 }
