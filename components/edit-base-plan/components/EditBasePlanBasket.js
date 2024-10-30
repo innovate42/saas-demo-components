@@ -1,15 +1,15 @@
 // // @flow
-import * as React from "react"
-import * as R from "ramda"
-import { useCampaign, useSubscriptions } from "@limio/sdk"
-import { checkActiveSubscriptionOffer, emptyOrNil, formatCurrency } from "./helpers"
-import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js"
-import { LoadingSpinner } from "@limio/design-system"
-import { v4 as uuid } from "uuid"
-import { DateTime } from "@limio/date"
-import { usePreview } from "@limio/ui-preview-context"
-import PlanAndPricing from "./PlanAndPricing"
-import PaymentMethodDeatils from "./PaymentMethodDetails"
+import * as React from "react";
+import * as R from "ramda";
+import { useCampaign, useSubscriptions } from "@limio/sdk";
+import { checkActiveSubscriptionOffer, emptyOrNil, formatCurrency } from "./helpers";
+import { sendOrder } from "@limio/shop/src/shop/helpers/postRequests.js";
+import { LoadingSpinner } from "@limio/design-system";
+import { v4 as uuid } from "uuid";
+import { DateTime } from "@limio/date";
+import { usePreview } from "@limio/ui-preview-context";
+import PlanAndPricing from "./PlanAndPricing";
+import PaymentMethodDeatils from "./PaymentMethodDetails";
 
 type Props = {
   successLink: string,
@@ -19,8 +19,8 @@ type Props = {
   toPayText: string,
   longTexts: string,
   yourNewPlanCopy: string,
-  yourOldPlanCopy: string
-}
+  yourOldPlanCopy: string,
+};
 
 const buildOrder = (
   subscription,
@@ -29,10 +29,10 @@ const buildOrder = (
   matchingAddOns = [],
   currentOffer,
   matchedAddOnsToReadd = [],
-  selectedQuantity = 1
+  selectedQuantity = 1,
 ) => {
-  let removeAddOns = []
-  let addAddOns = []
+  let removeAddOns = [];
+  let addAddOns = [];
 
   if (!R.isEmpty(matchingAddOns)) {
     removeAddOns = matchingAddOns.map(addOn => {
@@ -41,9 +41,9 @@ const buildOrder = (
         quantity: 1,
         id: addOn.id,
         effective_date: DateTime.local().toISODate(),
-        record_type: "add_on"
-      }
-    })
+        record_type: "add_on",
+      };
+    });
   }
 
   if (!R.isEmpty(matchedAddOnsToReadd)) {
@@ -54,9 +54,9 @@ const buildOrder = (
         if (addOn.record_type.startsWith("subscription_add_on")) {
           // for some incredbily stupid reason the add on id is prefixed if it gets added outside of acquisition ? ? ?
 
-          let id = addOn.data.add_on.id
+          let id = addOn.data.add_on.id;
           if (id.startsWith("add_on")) {
-            id = id.split("add_on-")[1]
+            id = id.split("add_on-")[1];
           }
 
           return {
@@ -65,19 +65,19 @@ const buildOrder = (
             id: id,
             version: addOn.data.add_on.version,
             effective_date: DateTime.local().toISODate(),
-            record_type: "add_on"
-          }
+            record_type: "add_on",
+          };
         } else {
-          console.error("Add on record type is not subscription_add_on", addOn)
+          console.error("Add on record type is not subscription_add_on", addOn);
         }
       })
-      .filter(Boolean)
+      .filter(Boolean);
   }
 
   return {
     order_type: "update_subscription",
     forSubscription: {
-      name: subscription.name
+      name: subscription.name,
     },
     updates: [
       {
@@ -86,7 +86,7 @@ const buildOrder = (
         id: selectedOfferObj.id,
         version: selectedOfferObj.version,
         effective_date: DateTime.local().toISODate(),
-        record_type: "offer"
+        record_type: "offer",
       },
       {
         type: "remove",
@@ -95,23 +95,27 @@ const buildOrder = (
         // subscription_offer-id
         id: currentOffer.id,
         effective_date: DateTime.local().toISODate(),
-        record_type: "offer"
+        record_type: "offer",
       },
       ...removeAddOns,
-      ...addAddOns
+      ...addAddOns,
     ],
     owner: subscription.owner,
     external_id: uuid(),
     source: "online",
-    process_immediately: true
-  }
-}
+    process_immediately: true,
+  };
+};
 
 const isExpired = addOn => {
-  return addOn.data.end !== undefined && DateTime.fromISO(addOn.data.end).toFormat("yyyy-MM-dd") <= DateTime.local().toISODate()
-}
+  return (
+    addOn.data.end !== undefined &&
+    DateTime.fromISO(addOn.data.end).toFormat("yyyy-MM-dd") <= DateTime.local().toISODate()
+  );
+};
 
-const getEntitlementsFromAddOn = addOn => addOn.data.add_on?.data.products[0].entitlements?.map(e => e.$ref) ?? []
+const getEntitlementsFromAddOn = addOn =>
+  addOn.data.add_on?.data.products[0].entitlements?.map(e => e.$ref) ?? [];
 
 function EditBasePlanBasket({
   selectedOffer,
@@ -122,85 +126,101 @@ function EditBasePlanBasket({
   successLink,
   continueButtonText,
   yourOldPlanCopy,
-  yourNewPlanCopy
+  yourNewPlanCopy,
 }: Props): React.Node {
-  const { subscriptions = [] } = useSubscriptions()
+  const { subscriptions = [] } = useSubscriptions();
   // get the subId query string param and find the sub.id that matches
   // otherwise return the first in the list
-  const subId = new URLSearchParams(window.location.search).get("subId")
-  const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0]
+  const subId = new URLSearchParams(window.location.search).get("subId");
+  const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0];
+  const currency = subscriptions[0].data?.price?.currency;
 
-  const { offers = [], addOns } = useCampaign()
-  const [_, setOfferCode] = React.useState("")
-  const [price, setPrice] = React.useState({})
-  const [submitting, setSubmitting] = React.useState(false)
-  const currentOffer = checkActiveSubscriptionOffer(subscription.offers)
+  const { offers = [], addOns } = useCampaign();
+  const [_, setOfferCode] = React.useState("");
+  const [price, setPrice] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
+  const currentOffer = checkActiveSubscriptionOffer(subscription.offers);
 
-  const { zuoraPreview, previewSchedule, preview } = usePreview()
+  const { zuoraPreview, previewSchedule, preview } = usePreview();
 
-  const selectedOfferObj = React.useMemo(() => offers.find(offer => offer.id === selectedOffer), [offers, selectedOffer])
+  const selectedOfferObj = React.useMemo(
+    () => offers.find(offer => offer.id === selectedOffer),
+    [offers, selectedOffer],
+  );
 
   // logic to determine which add ons to be removed from a subscription update
   // when the base plan is changed
 
-  const ownedAddOns = subscription.addOns.filter(addOn => addOn.status === "active" && !isExpired(addOn))
+  const ownedAddOns = subscription.addOns.filter(
+    addOn => addOn.status === "active" && !isExpired(addOn),
+  );
 
   // all entitlements from owned add ons
-  const subscribedToAddOns = React.useMemo(() => ownedAddOns.map(getEntitlementsFromAddOn).flat(), [ownedAddOns])
+  const subscribedToAddOns = React.useMemo(
+    () => ownedAddOns.map(getEntitlementsFromAddOn).flat(),
+    [ownedAddOns],
+  );
 
   // all entitlements from selected offer
   const selectedOfferEntitlements = React.useMemo(
-    () => selectedOfferObj?.data.products[0].entitlements?.map(entitlement => entitlement.$ref) ?? [],
-    [selectedOfferObj]
-  )
+    () =>
+      selectedOfferObj?.data.products[0].entitlements?.map(entitlement => entitlement.$ref) ?? [],
+    [selectedOfferObj],
+  );
 
   // entitlements that are in both the selected offer and the owned add ons are
   // the ones that will be removed
   const entitlementsToRemove = React.useMemo(
     () => selectedOfferEntitlements.filter(entitlement => subscribedToAddOns.includes(entitlement)),
-    [selectedOfferEntitlements, subscribedToAddOns]
-  )
+    [selectedOfferEntitlements, subscribedToAddOns],
+  );
 
   // match the add ons with the entitlements to be removed
   const matchAddOnsWithEntitlements = (addOns, entitlements) => {
     const result = {
       toRemove: [],
-      toReAdd: []
-    }
+      toReAdd: [],
+    };
 
     if (entitlements.length === 0) {
-      result.toReAdd = addOns
-      return result
+      result.toReAdd = addOns;
+      return result;
     }
 
     addOns.forEach(addOn => {
-      const addOnEntitlements = getEntitlementsFromAddOn(addOn)
-      const hasMatchingEntitlement = addOnEntitlements.some(entitlement => entitlements.includes(entitlement))
+      const addOnEntitlements = getEntitlementsFromAddOn(addOn);
+      const hasMatchingEntitlement = addOnEntitlements.some(entitlement =>
+        entitlements.includes(entitlement),
+      );
 
       if (hasMatchingEntitlement) {
-        result.toRemove.push(addOn)
+        result.toRemove.push(addOn);
       } else {
-        result.toReAdd.push(addOn)
+        result.toReAdd.push(addOn);
       }
-    })
+    });
 
-    return result
-  }
+    return result;
+  };
 
   const handleSubmit = async () => {
     // first we get the add ons that are included in the offer entitlements ->
     // these are clean removals then we get the add ons that are not included
     // in the offer entitlements -> these are add ons that need to be readded
 
-    const { toRemove: matchedRemovals, toReAdd: matchedReAdds } = matchAddOnsWithEntitlements(ownedAddOns, entitlementsToRemove)
+    const { toRemove: matchedRemovals, toReAdd: matchedReAdds } = matchAddOnsWithEntitlements(
+      ownedAddOns,
+      entitlementsToRemove,
+    );
 
-    const matchedReAddProduct = matchedReAdds.map(addOn => addOn.data.add_on.data.products[0].path)
+    const matchedReAddProduct = matchedReAdds.map(addOn => addOn.data.add_on.data.products[0].path);
 
     const matchedAddOnsToReadd = addOns.filter(
       addOn =>
         matchedReAddProduct.includes(addOn.data.products[0].path) &&
-        selectedOfferObj.data.attributes.billing_plan[0] === addOn.data.attributes.billing_option[0]
-    )
+        selectedOfferObj.data.attributes.billing_plan[0] ===
+          addOn.data.attributes.billing_option[0],
+    );
 
     const order = buildOrder(
       subscription,
@@ -209,43 +229,51 @@ function EditBasePlanBasket({
       [...matchedReAdds, ...matchedRemovals],
       currentOffer,
       matchedAddOnsToReadd,
-      quantity
-    )
+      quantity,
+    );
 
-    setSubmitting(true)
-    await sendOrder(order)
-    window.location.href = successLink
-  }
+    setSubmitting(true);
+    await sendOrder(order);
+    window.location.href = successLink;
+  };
 
   const getPreview = () => {
     // preview ignores effects of addons changing so just send empty array -
     // the resolution process is a bit annoying
-    const order = buildOrder(subscription, selectedOfferObj, new Date(), [], currentOffer, [], quantity)
+    const order = buildOrder(
+      subscription,
+      selectedOfferObj,
+      new Date(),
+      [],
+      currentOffer,
+      [],
+      quantity,
+    );
 
     const previewOrderData = {
       ...order,
       billingDetails: {
         state: "NY",
         postalCode: "10001",
-        country: "US"
-      }
-    }
-    preview(previewOrderData, true)
-  }
+        country: "US",
+      },
+    };
+    preview(previewOrderData, true);
+  };
 
   React.useEffect(() => {
-    setPrice({})
-    getPreview()
-  }, [selectedOfferObj, quantity])
+    setPrice({});
+    getPreview();
+  }, [selectedOfferObj, quantity]);
 
   React.useEffect(() => {
     if (!R.isNil(zuoraPreview) && !R.isEmpty(previewSchedule)) {
-      const lineItems = previewSchedule[0].lineItems
-      const removeSchedule = lineItems.find(item => item.amountWithoutTax < 0)
-      const addSchedule = lineItems.find(item => item.amountWithoutTax > 0)
-      setPrice({ remove: removeSchedule, add: addSchedule })
+      const lineItems = previewSchedule[0].lineItems;
+      const removeSchedule = lineItems.find(item => item.amountWithoutTax < 0);
+      const addSchedule = lineItems.find(item => item.amountWithoutTax > 0);
+      setPrice({ remove: removeSchedule, add: addSchedule });
     }
-  }, [zuoraPreview, previewSchedule])
+  }, [zuoraPreview, previewSchedule]);
 
   return (
     <div className={"right-side"}>
@@ -260,7 +288,11 @@ function EditBasePlanBasket({
       <div className="flex space-between mr-4 mt-2">
         <label className="bold">Offer Code </label>
         <div>
-          <input type="text" onChange={e => setOfferCode(e.target.value)} className={"offer-input"} />
+          <input
+            type="text"
+            onChange={e => setOfferCode(e.target.value)}
+            className={"offer-input"}
+          />
           <button disabled className={"offer-btn"}>
             APPLY
           </button>
@@ -271,14 +303,20 @@ function EditBasePlanBasket({
         <div className={"less-bold"} dangerouslySetInnerHTML={{ __html: toPayText }} />
         <p>
           {!emptyOrNil(price.add) && !emptyOrNil(price.remove) ? (
-            formatCurrency(Number(price.add.amountWithoutTax) + Number(price.remove.amountWithoutTax), "USD")
+            formatCurrency(
+              Number(price.add.amountWithoutTax) + Number(price.remove.amountWithoutTax),
+              currency,
+            )
           ) : (
             <LoadingSpinner />
           )}
         </p>
       </div>
       <div className={"flex place-end mr-4 checkout-btn"}>
-        <button onClick={handleSubmit} className={"add-remove-btns add-btn cont-btn "} disabled={submitting}>
+        <button
+          onClick={handleSubmit}
+          className={"add-remove-btns add-btn cont-btn "}
+          disabled={submitting}>
           {continueButtonText}
         </button>
         <PaymentMethodDeatils />
@@ -286,7 +324,7 @@ function EditBasePlanBasket({
 
       <section className={"description"} dangerouslySetInnerHTML={{ __html: longTexts }}></section>
     </div>
-  )
+  );
 }
 
-export default EditBasePlanBasket
+export default EditBasePlanBasket;

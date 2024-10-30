@@ -58,7 +58,7 @@ function EditAddOnsBasket({
   const { subscriptions = [] } = useSubscriptions();
   const subId = new URLSearchParams(window.location.search).get("subId");
   const subscription = subscriptions.find(sub => sub.id === subId) || subscriptions[0];
-
+  const currency = subscriptions[0].data?.price?.currency;
   const { addOns } = useCampaign();
 
   const [_, setOfferCode] = React.useState("");
@@ -136,7 +136,7 @@ function EditAddOnsBasket({
 
     if (returnNumber) return Number(schedule.amountWithoutTax);
 
-    return formatCurrency(schedule.amountWithoutTax, "USD");
+    return formatCurrency(schedule.amountWithoutTax, currency);
   };
 
   const orderTotal = () => {
@@ -152,7 +152,7 @@ function EditAddOnsBasket({
         return acc;
       }
     }, 0);
-    return formatCurrency(total, "USD");
+    return formatCurrency(total, currency);
   };
 
   return (
