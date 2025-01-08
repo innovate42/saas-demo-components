@@ -8,7 +8,7 @@ type Props = {
   selectedOfferObj: Object,
   price: Object,
   yourNewPlanCopy: string,
-
+  currency: string,
   currentOffer: Object,
 };
 
@@ -18,13 +18,14 @@ function PlanAndPricing({
   yourNewPlanCopy,
   yourOldPlanCopy,
   currentOffer,
+  currency
 }: Props) {
   const currentOfferId = R.pathOr(null, ["data", "offer", "id"], currentOffer);
-  const currency = R.pathOr(
-    "NOK",
-    ["data", "offer", "attributes", "price__limio", "0", "currency"],
-    currentOffer,
-  );
+  // const currency = R.pathOr(
+    // "USD",
+    // ["data", "offer", "attributes", "price__limio", "0", "currencyCode"],
+    // currentOffer,
+  // );
 
   if (currentOfferId === selectedOfferObj.id) return <></>;
 
