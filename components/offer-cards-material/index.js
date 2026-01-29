@@ -37,70 +37,70 @@ const themeStyles = {
         text: "#8F3DB8"
     },
     orange: {
-        primary: "#D97706",
-        background: "#FEF3C7",
+        primary: "#E57C23",
+        background: "#FFF7ED",
         cardBackground: "#FFFFFF",
-        pillBackground: "#FEF3C7",
-        pillText: "#D97706",
-        bestValuePillBackground: "#D97706",
+        pillBackground: "#FFF7ED",
+        pillText: "#E57C23",
+        bestValuePillBackground: "#E57C23",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#F59E0B",
-        text: "#D97706"
+        borderColor: "#FDBA74",
+        text: "#1F1F1F"
     },
     blue: {
         primary: "#2563EB",
-        background: "#DBEAFE",
+        background: "#EFF6FF",
         cardBackground: "#FFFFFF",
-        pillBackground: "#DBEAFE",
+        pillBackground: "#EFF6FF",
         pillText: "#2563EB",
         bestValuePillBackground: "#2563EB",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#60A5FA",
-        text: "#2563EB"
+        borderColor: "#93C5FD",
+        text: "#1F1F1F"
     },
     red: {
         primary: "#DC2626",
-        background: "#FEE2E2",
+        background: "#FEF2F2",
         cardBackground: "#FFFFFF",
-        pillBackground: "#FEE2E2",
+        pillBackground: "#FEF2F2",
         pillText: "#DC2626",
         bestValuePillBackground: "#DC2626",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#F87171",
-        text: "#DC2626"
+        borderColor: "#FCA5A5",
+        text: "#1F1F1F"
     },
     green: {
         primary: "#059669",
-        background: "#D1FAE5",
+        background: "#ECFDF5",
         cardBackground: "#FFFFFF",
-        pillBackground: "#D1FAE5",
+        pillBackground: "#ECFDF5",
         pillText: "#059669",
         bestValuePillBackground: "#059669",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#34D399",
-        text: "#059669"
+        borderColor: "#6EE7B7",
+        text: "#1F1F1F"
     },
     black: {
         primary: "#18181B",
-        background: "#E4E4E7",
+        background: "#F4F4F5",
         cardBackground: "#FFFFFF",
-        pillBackground: "#E4E4E7",
+        pillBackground: "#F4F4F5",
         pillText: "#18181B",
         bestValuePillBackground: "#18181B",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#71717A",
-        text: "#18181B"
+        borderColor: "#A1A1AA",
+        text: "#1F1F1F"
     },
     grey: {
         primary: "#6B7280",
-        background: "#F3F4F6",
+        background: "#F9FAFB",
         cardBackground: "#FFFFFF",
-        pillBackground: "#F3F4F6",
+        pillBackground: "#F9FAFB",
         pillText: "#6B7280",
         bestValuePillBackground: "#6B7280",
         bestValuePillText: "#FFFFFF",
-        borderColor: "#9CA3AF",
-        text: "#6B7280"
+        borderColor: "#D1D5DB",
+        text: "#1F1F1F"
     }
 };
 
