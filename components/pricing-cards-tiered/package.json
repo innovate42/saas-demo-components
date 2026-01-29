@@ -1,0 +1,138 @@
+{
+  "name": "@limio/pricing-cards-tiered",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8",
+    "@mui/material": "5.16.7",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/inter": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Click, subscribe, start hiring."
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Join today for instant access to JazzHR."
+    },
+    {
+      "id": "componentId",
+      "label": "Component ID",
+      "type": "string",
+      "default": "pricing-cards-tiered"
+    },
+    {
+      "id": "showFeatures",
+      "label": "Show Features",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "defaultBillingPeriod",
+      "label": "Default Billing Period (Annual)",
+      "type": "picklist",
+      "options": [
+        { "id": "annual-monthly", "label": "Pay Monthly (Billed Monthly)", "value": "annual-monthly" },
+        { "id": "annual-upfront", "label": "Pay Upfront (Full Year)", "value": "annual-upfront" }
+      ],
+      "default": "annual-monthly"
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme Color",
+      "type": "picklist",
+      "options": [
+        { "id": "jazzHR", "label": "JazzHR", "value": "jazzHR" }
+      ],
+      "default": "jazzHR"
+    },
+    {
+      "id": "tierOrder",
+      "label": "Tier Order",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "Tier ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "hero", "label": "Hero" },
+        { "id": "plus", "label": "Plus" },
+        { "id": "pro", "label": "Pro" }
+      ]
+    },
+    {
+      "id": "billingLabels",
+      "label": "Annual Billing Options",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "Billing ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Button Label",
+          "type": "string"
+        },
+        "description": {
+          "id": "description",
+          "label": "Description",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "annual-monthly", "label": "Pay Monthly", "description": "Annual commitment, billed monthly" },
+        { "id": "annual-upfront", "label": "Pay Upfront", "description": "Annual commitment, save more" }
+      ]
+    },
+    {
+      "id": "topLevelLabels",
+      "label": "Top Level Tabs",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "Tab ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Tab Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly Plans" },
+        { "id": "annual", "label": "1 Year Plans" }
+      ]
+    }
+  ]
+}

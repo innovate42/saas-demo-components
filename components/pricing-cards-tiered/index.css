@@ -1,0 +1,946 @@
+/* JazzHR Pricing Page Styles */
+/* Scoped with .jazzhr-pricing-page prefix */
+
+/* CSS Variables - scoped to component to avoid conflicts */
+.jazzhr-pricing-page {
+  --jazzhr-color-electric-purple: #8F3DB8;
+  --jazzhr-color-deep-purple: #281330;
+  --jazzhr-color-lavender: #F1D9FB;
+  --jazzhr-color-light-lavender: #FBF5FE;
+  --jazzhr-color-white: #440606;
+  --jazzhr-color-black: #000000;
+  --jazzhr-color-gray-border: #DADADA;
+  --jazzhr-color-purple-medium: #B477D2;
+  --jazzhr-font-family: 'Work Sans', sans-serif;
+
+  /* Base styles */
+  font-family: var(--jazzhr-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+.jazzhr-pricing-page html {
+  scroll-behavior: smooth;
+}
+
+/* Button Styles */
+.jazzhr-pricing-page .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border-radius: 11px;
+  font-family: var(--jazzhr-font-family);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.jazzhr-pricing-page .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(143, 61, 184, 0.35);
+}
+
+.jazzhr-pricing-page .btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(143, 61, 184, 0.25);
+}
+
+.jazzhr-pricing-page .btn-white {
+  background: var(--jazzhr-color-white);
+  color: var(--jazzhr-color-electric-purple);
+  font-size: 15px;
+}
+
+.jazzhr-pricing-page .btn-white:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+}
+
+.jazzhr-pricing-page .btn-purple {
+  background: var(--jazzhr-color-electric-purple);
+  color: var(--jazzhr-color-white);
+  font-size: 18px;
+}
+
+.jazzhr-pricing-page .btn-purple-large {
+  background: var(--jazzhr-color-electric-purple);
+  color: var(--jazzhr-color-white);
+  font-size: 20px;
+  padding: 14px 20px;
+}
+
+/* Pill Label */
+.jazzhr-pricing-page .pill-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px 3px;
+  border-radius: 100px;
+  border: 1px solid var(--jazzhr-color-lavender);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
+}
+
+.jazzhr-pricing-page .pill-label-light {
+  color: var(--jazzhr-color-lavender);
+  border-color: var(--jazzhr-color-lavender);
+}
+
+.jazzhr-pricing-page .pill-label-dark {
+  color: var(--jazzhr-color-black);
+  border-color: var(--jazzhr-color-black);
+}
+
+/* Pricing Section */
+.jazzhr-pricing-page .pricing-section {
+  position: relative;
+  background: var(--jazzhr-color-lavender);
+  padding: 100px 0 100px;
+  overflow: visible;
+}
+
+.jazzhr-pricing-page .pricing-bg-graphic {
+  position: absolute;
+  left: 0;
+  top: 200px;
+  width: 100%;
+  height: 300px;
+  z-index: 1;
+}
+
+.jazzhr-pricing-page .pricing-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Billing Toggle */
+.jazzhr-pricing-page .billing-toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 80px;
+}
+
+.jazzhr-pricing-page .billing-toggle-label {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -0.72px;
+  text-align: center;
+}
+
+.jazzhr-pricing-page .billing-toggle {
+  position: relative;
+  width: 86px;
+  height: 37px;
+  background: #F6F6F6;
+  border: 1px solid var(--jazzhr-color-purple-medium);
+  border-radius: 21px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.jazzhr-pricing-page .billing-toggle-knob {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 35px;
+  height: 35px;
+  background: var(--jazzhr-color-electric-purple);
+  border: 4px solid #F6F6F6;
+  border-radius: 50%;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .billing-toggle.annual .billing-toggle-knob {
+  left: calc(100% - 37px);
+}
+
+/* Pricing Cards Container */
+.jazzhr-pricing-page .pricing-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 23px;
+  margin-bottom: 50px;
+  position: relative;
+  align-items: stretch;
+}
+
+/* Individual Card Wrapper */
+.jazzhr-pricing-page .pricing-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 294px;
+}
+
+.jazzhr-pricing-page .pricing-card-wrapper.highlighted {
+  position: relative;
+  margin-top: -42px;
+  background: #b175d1;
+  border-radius: 14px;
+}
+
+.jazzhr-pricing-page .most-popular-badge {
+  background: var(--jazzhr-color-purple-medium);
+  padding: 8px 20px;
+  border-radius: 14px 14px 0 0;
+  text-align: left;
+}
+
+.jazzhr-pricing-page .most-popular-badge span {
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--jazzhr-color-white);
+  letter-spacing: -0.54px;
+}
+
+/* Pricing Card */
+.jazzhr-pricing-page .pricing-card {
+  background: var(--jazzhr-color-white);
+  border: 2.5px solid var(--jazzhr-color-gray-border);
+  border-radius: 14px;
+  padding: 18px 21px 25px;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  flex: 1;
+}
+
+.jazzhr-pricing-page .pricing-card-wrapper.highlighted .pricing-card {
+  border-radius: 14px;
+  box-shadow: 0 -4px 20px rgb(143 61 184 / 47%);
+}
+
+/* Plan Label Pill */
+.jazzhr-pricing-page .pricing-card .plan-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--jazzhr-color-black);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+/* Price Title */
+.jazzhr-pricing-page .pricing-card .price-title {
+  font-size: 26px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -0.9px;
+  line-height: 31px;
+  margin: 0;
+}
+
+/* Cancel Notice */
+.jazzhr-pricing-page .pricing-card .cancel-notice {
+  font-size: 11px;
+  color: var(--jazzhr-color-black);
+  line-height: 15px;
+  letter-spacing: -0.22px;
+}
+
+/* Plan Name Heading */
+.jazzhr-pricing-page .pricing-card .plan-name {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--jazzhr-color-black);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Card Features List */
+.jazzhr-pricing-page .pricing-card .card-features {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.jazzhr-pricing-page .pricing-card .card-features li {
+  font-size: 14px;
+  color: var(--jazzhr-color-black);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.jazzhr-pricing-page .pricing-card .card-features li:last-child {
+  margin-bottom: 0;
+}
+
+/* Pricing Disclaimer */
+.jazzhr-pricing-page .pricing-disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--jazzhr-color-black);
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Card Button */
+.jazzhr-pricing-page .pricing-card .card-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 12px 17px;
+  font-size: 20px;
+  border-radius: 11px;
+}
+
+/* Payment Toggle (inside cards for annual) */
+.jazzhr-pricing-page .payment-toggle {
+  display: none;
+  background: var(--jazzhr-color-lavender);
+  border-radius: 20px;
+  padding: 3px;
+  width: fit-content;
+}
+
+.jazzhr-pricing-page .payment-toggle.visible {
+  display: flex;
+}
+
+.jazzhr-pricing-page .payment-toggle-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--jazzhr-color-black);
+  background: transparent;
+  border: none;
+  border-radius: 17px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--jazzhr-font-family);
+}
+
+.jazzhr-pricing-page .payment-toggle-btn.active {
+  background: var(--jazzhr-color-white);
+  color: var(--jazzhr-color-electric-purple);
+}
+
+.jazzhr-pricing-page .payment-toggle-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Savings Badge */
+.jazzhr-pricing-page .savings-badge {
+  display: none;
+  background: #22c55e;
+  color: var(--jazzhr-color-white);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+}
+
+.jazzhr-pricing-page .savings-badge.visible {
+  display: inline-flex;
+}
+
+/* Price wrapper for inline savings */
+.jazzhr-pricing-page .price-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+}
+
+/* Floating Devices */
+.jazzhr-pricing-page .laptop-floating {
+  position: absolute;
+  left: -50px;
+  top: -80px;
+  width: 330px;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .iphone-floating {
+  position: absolute;
+  left: 100px;
+  bottom: -180px;
+  width: 212px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .tablet-floating {
+  position: absolute;
+  right: -50px;
+  bottom: 75px;
+  width: 230px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Add-on Section */
+.jazzhr-pricing-page .addon-section {
+  position: relative;
+  background: var(--jazzhr-color-white);
+  padding: 120px 0 80px;
+  overflow: hidden;
+}
+
+.jazzhr-pricing-page .addon-bg-graphic {
+  position: absolute;
+  left: -120px;
+  top: -120px;
+  width: 400px;
+  height: 450px;
+  transform: rotate(337deg);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .addon-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.jazzhr-pricing-page .addon-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--jazzhr-color-electric-purple);
+  letter-spacing: -1.08px;
+  margin-bottom: 60px;
+}
+
+.jazzhr-pricing-page .addon-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  background: var(--jazzhr-color-light-lavender);
+  border-radius: 12px;
+  box-shadow: 0px 4px 65px rgba(0, 0, 0, 0.15);
+  padding: 40px 60px;
+  max-width: 844px;
+  margin: 0 auto 40px;
+}
+
+.jazzhr-pricing-page .addon-card-text {
+  text-align: left;
+  max-width: 407px;
+}
+
+.jazzhr-pricing-page .addon-card-text h3 {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -1.08px;
+  line-height: 37px;
+  margin-bottom: 17px;
+}
+
+.jazzhr-pricing-page .addon-card-text p {
+  font-size: 13px;
+  color: var(--jazzhr-color-black);
+  line-height: 18px;
+  letter-spacing: -0.26px;
+  margin: 0;
+}
+
+.jazzhr-pricing-page .addon-image-wrapper {
+  position: relative;
+  width: 231px;
+  height: 270px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.jazzhr-pricing-page .addon-image-wrapper::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(132deg, var(--jazzhr-color-electric-purple) 3%, var(--jazzhr-color-deep-purple) 98%);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.jazzhr-pricing-page .addon-image-wrapper img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* FAQ Section */
+.jazzhr-pricing-page .faq-section {
+  position: relative;
+  background: var(--jazzhr-color-lavender);
+  padding: 120px 0 100px;
+  z-index: 2;
+}
+
+.jazzhr-pricing-page .faq-divider-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 102px;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .faq-divider-bottom {
+  width: 100%;
+  position: relative;
+  height: 120px;
+  margin-bottom: -175px;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .faq-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.jazzhr-pricing-page .faq-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.jazzhr-pricing-page .faq-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--jazzhr-color-electric-purple);
+  letter-spacing: -1.08px;
+  line-height: 37px;
+  max-width: 409px;
+  margin: 0;
+}
+
+.jazzhr-pricing-page .faq-brand-graphic {
+  width: 400px;
+  height: 80px;
+  margin-top: -45px;
+  pointer-events: none;
+}
+
+/* FAQ Items */
+.jazzhr-pricing-page .faq-item {
+  border-bottom: 1px solid var(--jazzhr-color-black);
+  padding: 15px 0;
+}
+
+.jazzhr-pricing-page .faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 20px;
+  padding: 10px 0;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .faq-question:hover {
+  padding-left: 10px;
+}
+
+.jazzhr-pricing-page .faq-question:hover h4 {
+  color: var(--jazzhr-color-electric-purple);
+}
+
+.jazzhr-pricing-page .faq-question h4 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -0.72px;
+  line-height: 28px;
+  flex: 1;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0;
+}
+
+.jazzhr-pricing-page .faq-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jazzhr-pricing-page .faq-chevron {
+  width: 20px;
+  height: 10px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .faq-question:hover .faq-chevron {
+  transform: translateY(2px);
+}
+
+.jazzhr-pricing-page .faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.jazzhr-pricing-page .faq-item.open .faq-question:hover .faq-chevron {
+  transform: rotate(180deg) translateY(2px);
+}
+
+.jazzhr-pricing-page .faq-badge {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .faq-question:hover .faq-badge {
+  transform: scale(1.1);
+}
+
+.jazzhr-pricing-page .faq-badge img {
+  width: 100%;
+  height: 100%;
+}
+
+.jazzhr-pricing-page .faq-badge span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--jazzhr-color-white);
+}
+
+.jazzhr-pricing-page .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.jazzhr-pricing-page .faq-item.open .faq-answer {
+  max-height: 500px;
+  padding: 20px 0;
+  opacity: 1;
+}
+
+.jazzhr-pricing-page .faq-answer p {
+  font-size: 14px;
+  color: var(--jazzhr-color-black);
+  line-height: 22px;
+  letter-spacing: -0.26px;
+  margin: 0;
+}
+
+/* Demo Section */
+.jazzhr-pricing-page .demo-section {
+  position: relative;
+  background: radial-gradient(ellipse at center, #8F3DB8 0%, #753396 25%, #5C2874 50%, #421E52 75%, #281330 100%);
+  padding: 0;
+  overflow: hidden;
+  min-height: 524px;
+  padding-top: 60px;
+}
+
+.jazzhr-pricing-page .demo-brand-graphic {
+  position: absolute;
+  transform: rotate(295deg);
+  z-index: 1;
+  width: 600px;
+  height: 600px;
+  left: 35%;
+  top: -20%;
+  pointer-events: none;
+}
+
+.jazzhr-pricing-page .demo-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 524px;
+}
+
+.jazzhr-pricing-page .demo-image-wrapper {
+  position: relative;
+  width: 721px;
+  height: 480px;
+  flex-shrink: 0;
+  margin-left: 100px;
+  margin-top: 44px;
+}
+
+.jazzhr-pricing-page .demo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.jazzhr-pricing-page .demo-text {
+  max-width: 386px;
+  padding: 80px 0;
+  margin-left: 80px;
+}
+
+.jazzhr-pricing-page .demo-text h2 {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--jazzhr-color-white);
+  line-height: 37px;
+  letter-spacing: -1.08px;
+  margin-bottom: 17px;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jazzhr-pricing-page .demo-text h2 span {
+  font-weight: 700;
+}
+
+.jazzhr-pricing-page .demo-text p {
+  font-size: 15px;
+  color: var(--jazzhr-color-white);
+  line-height: 18px;
+  letter-spacing: -0.26px;
+  margin-bottom: 17px;
+}
+
+.jazzhr-pricing-page .demo-apply-link {
+  margin-top: 40px;
+}
+
+.jazzhr-pricing-page .demo-apply-link p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.jazzhr-pricing-page .demo-apply-link a {
+  font-size: 10px;
+  color: var(--jazzhr-color-white);
+  text-decoration: underline;
+}
+
+/* Support Cards Section */
+.jazzhr-pricing-page .support-section {
+  background: #F1D6FC;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.jazzhr-pricing-page .support-section h2 {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--jazzhr-color-black);
+  letter-spacing: -1.08px;
+  margin-bottom: 10px;
+}
+
+.jazzhr-pricing-page .support-section > p {
+  font-size: 14px;
+  color: var(--jazzhr-color-black);
+  margin-bottom: 40px;
+}
+
+.jazzhr-pricing-page .support-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.jazzhr-pricing-page .support-card {
+  background: #B56CD4;
+  border-radius: 16px;
+  padding: 30px 25px 25px;
+  width: 260px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jazzhr-pricing-page .support-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(143, 61, 184, 0.4);
+  background: #a85cc8;
+}
+
+.jazzhr-pricing-page .support-card .card-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .support-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+.jazzhr-pricing-page .support-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--jazzhr-color-white);
+  margin-bottom: 20px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .support-card:hover h3 {
+  transform: translateY(-2px);
+}
+
+.jazzhr-pricing-page .support-card .card-link {
+  display: inline-block;
+  background: #F1D6FC;
+  color: var(--jazzhr-color-electric-purple);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jazzhr-pricing-page .support-card:hover .card-link {
+  background: var(--jazzhr-color-white);
+  box-shadow: 0 4px 15px rgba(143, 61, 184, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .jazzhr-pricing-page .pricing-cards-container {
+    flex-wrap: wrap;
+  }
+
+  .jazzhr-pricing-page .laptop-floating,
+  .jazzhr-pricing-page .tablet-floating,
+  .jazzhr-pricing-page .iphone-floating {
+    display: none;
+  }
+
+  .jazzhr-pricing-page .demo-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .jazzhr-pricing-page .demo-image-wrapper {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .jazzhr-pricing-page .demo-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .jazzhr-pricing-page .demo-text {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .jazzhr-pricing-page .addon-bg-graphic,
+  .jazzhr-pricing-page .demo-brand-graphic {
+    display: none;
+  }
+
+  .jazzhr-pricing-page .faq-divider-bottom {
+    margin-bottom: -165px;
+  }
+
+  .jazzhr-pricing-page .pricing-card-wrapper {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 0 !important;
+  }
+
+  .jazzhr-pricing-page .pricing-card-wrapper.highlighted {
+    margin-top: 0;
+  }
+
+  .jazzhr-pricing-page .addon-card {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .jazzhr-pricing-page .faq-question h4 {
+    font-size: 18px;
+  }
+
+  .jazzhr-pricing-page .faq-title {
+    font-size: 28px;
+  }
+
+  .jazzhr-pricing-page .faq-header {
+    flex-direction: column;
+  }
+
+  .jazzhr-pricing-page .support-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jazzhr-pricing-page .support-card {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .jazzhr-pricing-page .billing-toggle-wrapper {
+    margin-bottom: 40px;
+  }
+
+  .jazzhr-pricing-page .demo-text {
+    padding: 40px 20px;
+  }
+}
