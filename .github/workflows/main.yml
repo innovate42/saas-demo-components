@@ -3,7 +3,8 @@ name: Mirror Repository to CodeCommit via HTTPS
 on:
   push:
     branches:
-      - saas-dev
+      - development
+      - production
 
 jobs:
   mirror:
@@ -15,10 +16,45 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Mirror to CodeCommit Repository (HTTPS)
-        env:
-          CODECOMMIT_USER: ${{ secrets.CODECOMMIT_USER }}
-          CODECOMMIT_PASS: ${{ secrets.CODECOMMIT_PASS }}
+      - name: Set environment variables dynamically
+        id: set-env
         run: |
-          git remote add codecommit https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/saas-dev-components
-          git push --all -f https://${{ secrets.CODECOMMIT_USER }}:${{ secrets.CODECOMMIT_PASS }}@git-codecommit.eu-central-1.amazonaws.com/v1/repos/saas-dev-components
+          BRANCH="${GITHUB_REF##*/}"
+
+          if [[ "$BRANCH" == "saas-dev" ]]; then
+            echo "REPO_URL=${{ vars.REPO_URL }}" >> $GITHUB_OUTPUT
+            echo "TARGET_BRANCH=${{ vars.BRANCH }}" >> $GITHUB_ENV
+            echo "CODECOMMIT_USER=${{ secrets.CODECOMMIT_USER }}" >> $GITHUB_ENV
+            echo "CODECOMMIT_PASS=${{ secrets.CODECOMMIT_PASS }}" >> $GITHUB_ENV
+          elif [[ "$BRANCH" == "stripe" ]]; then
+            echo "REPO_URL=${{ vars.STRIPE_REPO_URL }}" >> $GITHUB_OUTPUT
+            echo "TARGET_BRANCH=${{ vars.STRIPE_BRANCH }}" >> $GITHUB_ENV
+            echo "CODECOMMIT_USER=${{ secrets.CODECOMMIT_STRIPE_USER }}" >> $GITHUB_ENV
+            echo "CODECOMMIT_PASS=${{ secrets.CODECOMMIT_STRIPE_PASS }}" >> $GITHUB_ENV
+          else
+            echo "Unsupported branch: $BRANCH"
+            exit 1
+          fi
+
+      - name: Mirror to CodeCommit
+        run: |
+          urlencode() {
+            local raw="$1"
+            local encoded=""
+            local length=${#raw}
+            for (( i = 0; i < length; i++ )); do
+              local c="${raw:i:1}"
+              case "$c" in
+                [a-zA-Z0-9.~_-]) encoded+="$c" ;;
+                *) encoded+=$(printf '%%%02X' "'$c") ;;
+              esac
+            done
+            echo "$encoded"
+          }
+
+          ENCODED_USER=$(urlencode "$CODECOMMIT_USER")
+          ENCODED_PASS=$(urlencode "$CODECOMMIT_PASS")
+          FULL_URL="https://${ENCODED_USER}:${ENCODED_PASS}@${{ steps.set-env.outputs.REPO_URL }}"
+
+          git remote add codecommit https://${{ steps.set-env.outputs.REPO_URL }}
+          git push -f "$FULL_URL" HEAD:refs/heads/$TARGET_BRANCH
