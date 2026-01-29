@@ -35,6 +35,72 @@ const themeStyles = {
         bestValuePillText: "#FFFFFF",
         borderColor: "#B477D2",
         text: "#8F3DB8"
+    },
+    orange: {
+        primary: "#D97706",
+        background: "#FEF3C7",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#FEF3C7",
+        pillText: "#D97706",
+        bestValuePillBackground: "#D97706",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#F59E0B",
+        text: "#D97706"
+    },
+    blue: {
+        primary: "#2563EB",
+        background: "#DBEAFE",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#DBEAFE",
+        pillText: "#2563EB",
+        bestValuePillBackground: "#2563EB",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#60A5FA",
+        text: "#2563EB"
+    },
+    red: {
+        primary: "#DC2626",
+        background: "#FEE2E2",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#FEE2E2",
+        pillText: "#DC2626",
+        bestValuePillBackground: "#DC2626",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#F87171",
+        text: "#DC2626"
+    },
+    green: {
+        primary: "#059669",
+        background: "#D1FAE5",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#D1FAE5",
+        pillText: "#059669",
+        bestValuePillBackground: "#059669",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#34D399",
+        text: "#059669"
+    },
+    black: {
+        primary: "#18181B",
+        background: "#E4E4E7",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#E4E4E7",
+        pillText: "#18181B",
+        bestValuePillBackground: "#18181B",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#71717A",
+        text: "#18181B"
+    },
+    grey: {
+        primary: "#6B7280",
+        background: "#F3F4F6",
+        cardBackground: "#FFFFFF",
+        pillBackground: "#F3F4F6",
+        pillText: "#6B7280",
+        bestValuePillBackground: "#6B7280",
+        bestValuePillText: "#FFFFFF",
+        borderColor: "#9CA3AF",
+        text: "#6B7280"
     }
 };
 
