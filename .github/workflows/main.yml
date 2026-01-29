@@ -3,8 +3,8 @@ name: Mirror Repository to CodeCommit via HTTPS
 on:
   push:
     branches:
-      - development
-      - production
+      - saas-dev
+      - stripe
 
 jobs:
   mirror:
