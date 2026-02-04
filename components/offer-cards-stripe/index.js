@@ -209,9 +209,9 @@ const OfferCardsStripe = () => {
             </div>
 
             <div className="stripe-pricing__container">
-                <header className="stripe-header">
-                    <h1 className="stripe-header__title">{heading}</h1>
-                    <p className="stripe-header__subtitle">{subheading}</p>
+                <header className="stripe-pricing__header">
+                    <h1 className="stripe-pricing__title">{heading}</h1>
+                    <p className="stripe-pricing__subtitle">{subheading}</p>
 
                     {showGroupedOffers && validLabels.length > 1 && (
                         <BillingToggle
