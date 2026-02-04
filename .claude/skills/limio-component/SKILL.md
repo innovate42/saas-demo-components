@@ -184,12 +184,15 @@ You can import **any public npm library** in the dependencies. Limio's build sys
 
 ## componentStaticProps.js
 
+**Important:** Use default import for package.json, not `import * as`.
+
 ```javascript
 import { useComponentProps, getPropsFromPackageJson } from "@limio/sdk"
 import packageData from "./package.json"
 
+const defaultComponentProps = getPropsFromPackageJson(packageData)
+
 export function useStaticProps() {
-    const defaultComponentProps = getPropsFromPackageJson(packageData)
     return useComponentProps(defaultComponentProps)
 }
 ```

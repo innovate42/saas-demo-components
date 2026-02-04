@@ -1,7 +1,8 @@
 import { useComponentProps, getPropsFromPackageJson } from "@limio/sdk"
 import packageData from "./package.json"
 
+const defaultComponentProps = getPropsFromPackageJson(packageData)
+
 export function useStaticProps() {
-    const defaultComponentProps = getPropsFromPackageJson(packageData)
     return useComponentProps(defaultComponentProps)
 }
