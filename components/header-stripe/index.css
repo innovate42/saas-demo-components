@@ -18,6 +18,11 @@
     border-bottom-color: transparent;
 }
 
+/* Static positioning for Page Builder */
+.stripe-header--static {
+    position: relative;
+}
+
 .stripe-header__container {
     max-width: 1200px;
     margin: 0 auto;

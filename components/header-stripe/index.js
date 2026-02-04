@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -27,6 +28,7 @@ const CloseIcon = () => (
 
 const HeaderStripe = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const { isInPageBuilder } = useLimioContext() || {}
     const props = useStaticProps() || {}
 
     const {
@@ -41,8 +43,15 @@ const HeaderStripe = () => {
 
     const primaryColor = themes[themeColor] || themes.purple
 
+    // Don't use fixed positioning in Page Builder so it doesn't float over the editor
+    const headerClass = [
+        "stripe-header",
+        transparent && !isInPageBuilder ? "stripe-header--transparent" : "",
+        isInPageBuilder ? "stripe-header--static" : "",
+    ].filter(Boolean).join(" ")
+
     return (
-        <header className={`stripe-header ${transparent ? "stripe-header--transparent" : ""}`}>
+        <header className={headerClass}>
             <div className="stripe-header__container">
                 {/* Logo */}
                 <a href="/" className="stripe-header__logo">
