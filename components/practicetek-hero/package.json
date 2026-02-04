@@ -2,7 +2,7 @@
   "name": "@limio/practicetek-hero",
   "version": "1.0.0",
   "description": "PracticeTek style hero banner with headline and CTA",
-  "main": "./index.js",
+  "main": "index.js",
   "dependencies": {
     "xss": "^1.0.8"
   },

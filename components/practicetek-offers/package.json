@@ -2,7 +2,7 @@
   "name": "@limio/practicetek-offers",
   "version": "1.0.0",
   "description": "PracticeTek style offer cards with pricing",
-  "main": "./index.js",
+  "main": "index.js",
   "dependencies": {
     "ramda": "^0.28.0",
     "xss": "^1.0.8"

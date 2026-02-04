@@ -2,7 +2,7 @@
   "name": "@limio/practicetek-footer",
   "version": "1.0.0",
   "description": "PracticeTek style footer with navigation and social links",
-  "main": "./index.js",
+  "main": "index.js",
   "dependencies": {
     "xss": "^1.0.8"
   },

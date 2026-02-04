@@ -2,7 +2,7 @@
   "name": "@limio/practicetek-header",
   "version": "1.0.0",
   "description": "PracticeTek style header with navigation",
-  "main": "./index.js",
+  "main": "index.js",
   "dependencies": {
     "xss": "^1.0.8"
   },
