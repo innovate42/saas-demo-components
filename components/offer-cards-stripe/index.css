@@ -1,135 +1,402 @@
-.offer-cards-stripe {
+/* Stripe Pricing Component */
+.stripe-pricing {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    background: #f6f9fc;
+    overflow: hidden;
 }
 
-/* Animated gradient orbs */
-@keyframes float-1 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
+.stripe-pricing--dark {
+    background: #0a0a0f;
+    color: #fff;
+}
+
+/* Background */
+.stripe-pricing__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.stripe-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.stripe-orb--1 {
+    width: 800px;
+    height: 800px;
+    top: -20%;
+    right: -10%;
+    animation: float1 20s ease-in-out infinite;
+}
+
+.stripe-orb--2 {
+    width: 600px;
+    height: 600px;
+    bottom: -15%;
+    left: -5%;
+    animation: float2 25s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-30px, 20px); }
+}
+
+@keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -30px); }
+}
+
+.stripe-pricing--minimal .stripe-orb {
+    display: none;
+}
+
+/* Container */
+.stripe-pricing__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.stripe-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.stripe-header__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.75rem;
+    color: #0a2540;
+}
+
+.stripe-pricing--dark .stripe-header__title {
+    color: #fff;
+}
+
+.stripe-header__subtitle {
+    font-size: 1.125rem;
+    color: #425466;
+    margin: 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stripe-pricing--dark .stripe-header__subtitle {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Toggle */
+.stripe-toggle {
+    display: inline-flex;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.stripe-pricing--dark .stripe-toggle {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stripe-toggle__btn {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #425466;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stripe-pricing--dark .stripe-toggle__btn {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stripe-toggle__btn--active {
+    background: #fff;
+    color: #0a2540;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-weight: 600;
+}
+
+.stripe-pricing--dark .stripe-toggle__btn--active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.stripe-toggle__badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Cards Grid */
+.stripe-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* Card */
+.stripe-card {
+    position: relative;
+    flex: 1 1 300px;
+    max-width: 360px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stripe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.stripe-card--popular {
+    background: #fff;
+    border-width: 2px;
+}
+
+.stripe-card--popular:hover {
+    box-shadow: 0 20px 40px rgba(99, 91, 255, 0.2);
+}
+
+.stripe-card--dark {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.stripe-card--dark.stripe-card--popular {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Badge */
+.stripe-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* Card Content */
+.stripe-card__content {
+    padding: 2rem;
+}
+
+.stripe-card__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: #0a2540;
+}
+
+.stripe-card--dark .stripe-card__name {
+    color: #fff;
+}
+
+.stripe-card__description {
+    font-size: 0.875rem;
+    color: #425466;
+    margin: 0 0 1.5rem;
+    line-height: 1.5;
+}
+
+.stripe-card--dark .stripe-card__description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stripe-card__price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0a2540;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+}
+
+.stripe-card--dark .stripe-card__price {
+    color: #fff;
+}
+
+.stripe-card__detailed-price {
+    font-size: 0.8125rem;
+    color: #425466;
+    margin-bottom: 1.5rem;
+}
+
+.stripe-card--dark .stripe-card__detailed-price {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* CTA Button */
+.stripe-cta {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stripe-cta--primary {
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(99, 91, 255, 0.4);
+}
+
+.stripe-cta--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(99, 91, 255, 0.5);
+}
+
+.stripe-cta--secondary {
+    background: transparent;
+    border: 1.5px solid;
+}
+
+.stripe-cta--secondary:hover {
+    background: rgba(99, 91, 255, 0.05);
+}
+
+/* Features */
+.stripe-features {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stripe-card--dark .stripe-features {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.stripe-features__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #425466;
+    margin: 0 0 1rem;
+}
+
+.stripe-card--dark .stripe-features__title {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.stripe-features__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.stripe-features__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    color: #0a2540;
+}
+
+.stripe-card--dark .stripe-features__item {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.stripe-check-icon {
+    flex-shrink: 0;
+    color: #425466;
+}
+
+.stripe-card--popular .stripe-check-icon {
+    color: #635bff;
+}
+
+.stripe-card--dark .stripe-check-icon {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Footer */
+.stripe-footer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    font-size: 0.8125rem;
+    color: #425466;
+}
+
+.stripe-pricing--dark .stripe-footer {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .stripe-pricing {
+        padding: 3rem 1rem;
     }
-    25% {
-        transform: translate(-30px, 20px) scale(1.05);
+
+    .stripe-header__title {
+        font-size: 1.75rem;
     }
-    50% {
-        transform: translate(-10px, -30px) scale(0.95);
+
+    .stripe-card {
+        flex: 1 1 100%;
     }
-    75% {
-        transform: translate(20px, 10px) scale(1.02);
+
+    .stripe-footer {
+        flex-wrap: wrap;
     }
 }
 
-@keyframes float-2 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(40px, -20px) scale(0.98);
-    }
-    50% {
-        transform: translate(20px, 40px) scale(1.05);
-    }
-    75% {
-        transform: translate(-30px, 20px) scale(0.97);
-    }
-}
-
-@keyframes float-3 {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(-20px, -40px) scale(1.03);
-    }
-    50% {
-        transform: translate(30px, -20px) scale(0.96);
-    }
-    75% {
-        transform: translate(10px, 30px) scale(1.04);
-    }
-}
-
-.stripe-gradient-orb-1 {
-    animation: float-1 20s ease-in-out infinite;
-}
-
-.stripe-gradient-orb-2 {
-    animation: float-2 25s ease-in-out infinite;
-}
-
-.stripe-gradient-orb-3 {
-    animation: float-3 22s ease-in-out infinite;
-}
-
-/* Reduced motion preference */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .stripe-gradient-orb-1,
-    .stripe-gradient-orb-2,
-    .stripe-gradient-orb-3 {
+    .stripe-orb {
         animation: none;
     }
-}
 
-/* Card hover animation enhancement */
-.offer-cards-stripe .MuiCard-root {
-    will-change: transform, box-shadow;
-}
-
-/* Glass effect enhancement for dark mode */
-.offer-cards-stripe .dark-glass {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-}
-
-/* Smooth scrolling for the section */
-.offer-cards-stripe {
-    scroll-behavior: smooth;
-}
-
-/* Typography enhancements */
-.offer-cards-stripe h1,
-.offer-cards-stripe h2,
-.offer-cards-stripe h3,
-.offer-cards-stripe h4,
-.offer-cards-stripe h5,
-.offer-cards-stripe h6 {
-    text-rendering: optimizeLegibility;
-}
-
-/* Button focus states for accessibility */
-.offer-cards-stripe button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-}
-
-/* Card transitions */
-.offer-cards-stripe .MuiCard-root {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Price styling */
-.offer-cards-stripe .price-display {
-    font-variant-numeric: tabular-nums;
-}
-
-/* Feature list styling */
-.offer-cards-stripe ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Toggle button transitions */
-.offer-cards-stripe .billing-toggle > div {
-    transition: all 0.2s ease;
-}
-
-/* Gradient text effect (optional, activated via class) */
-.offer-cards-stripe .gradient-text {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    .stripe-card {
+        transition: none;
+    }
 }

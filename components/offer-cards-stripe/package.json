@@ -40,18 +40,11 @@
       "type": "picklist",
       "values": [
         { "label": "Animated Gradient", "value": "animated" },
-        { "label": "Mesh Gradient", "value": "mesh" },
         { "label": "Minimal", "value": "minimal" },
         { "label": "Dark Mode", "value": "dark" }
       ],
       "label": "Background Style",
       "default": "animated"
-    },
-    {
-      "id": "showImage",
-      "type": "boolean",
-      "label": "Show Offer Image",
-      "default": false
     },
     {
       "id": "groupLabels",
@@ -83,12 +76,7 @@
     }
   ],
   "dependencies": {
-    "@mui/material": "5.16.7",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@fontsource/inter": "^4.5.0",
     "ramda": "^0.28.0",
-    "xss": "^1.0.8",
-    "framer-motion": "^10.16.4"
+    "xss": "^1.0.8"
   }
 }

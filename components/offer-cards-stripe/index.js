@@ -1,375 +1,185 @@
 import React, { useState, useMemo } from "react"
-import { useCampaign } from "@limio/sdk"
+import { useCampaign, useBasket } from "@limio/sdk"
+import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import { StyledEngineProvider, ThemeProvider, createTheme } from "@mui/material/styles"
-import CssBaseline from "@mui/material/CssBaseline"
 import { groupBy, prop } from "ramda"
-import Offer from "./components/Offer"
-
+import { filterWhitelistedHTML } from "xss"
 import "./index.css"
-import "@fontsource/inter/400.css"
-import "@fontsource/inter/500.css"
-import "@fontsource/inter/600.css"
-import "@fontsource/inter/700.css"
 
-const theme = createTheme({
-    typography: {
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    },
-})
+const sanitizeString = (str) => filterWhitelistedHTML(str || "")
 
-const themeColors = {
-    purple: {
-        primary: "#635BFF",
-        primaryHover: "#5851EA",
-        gradientStart: "#635BFF",
-        gradientMid: "#A855F7",
-        gradientEnd: "#EC4899",
-        text: "#0A2540",
-        textSecondary: "#425466",
-        background: "#F6F9FC",
-        meshColors: ["#635BFF20", "#A855F720", "#EC489920", "#F6F9FC"],
-    },
-    blue: {
-        primary: "#0073E6",
-        primaryHover: "#005BBB",
-        gradientStart: "#0073E6",
-        gradientMid: "#00A3FF",
-        gradientEnd: "#00D4FF",
-        text: "#0A2540",
-        textSecondary: "#425466",
-        background: "#F0F9FF",
-        meshColors: ["#0073E620", "#00A3FF20", "#00D4FF20", "#F0F9FF"],
-    },
-    indigo: {
-        primary: "#4F46E5",
-        primaryHover: "#4338CA",
-        gradientStart: "#4F46E5",
-        gradientMid: "#7C3AED",
-        gradientEnd: "#A855F7",
-        text: "#1E1B4B",
-        textSecondary: "#4B5563",
-        background: "#EEF2FF",
-        meshColors: ["#4F46E520", "#7C3AED20", "#A855F720", "#EEF2FF"],
-    },
-    emerald: {
-        primary: "#059669",
-        primaryHover: "#047857",
-        gradientStart: "#059669",
-        gradientMid: "#10B981",
-        gradientEnd: "#34D399",
-        text: "#064E3B",
-        textSecondary: "#4B5563",
-        background: "#ECFDF5",
-        meshColors: ["#05966920", "#10B98120", "#34D39920", "#ECFDF5"],
-    },
-    slate: {
-        primary: "#475569",
-        primaryHover: "#334155",
-        gradientStart: "#475569",
-        gradientMid: "#64748B",
-        gradientEnd: "#94A3B8",
-        text: "#0F172A",
-        textSecondary: "#64748B",
-        background: "#F8FAFC",
-        meshColors: ["#47556920", "#64748B20", "#94A3B820", "#F8FAFC"],
-    },
+const themes = {
+    purple: { primary: "#635BFF", hover: "#5851EA" },
+    blue: { primary: "#0073E6", hover: "#005BBB" },
+    indigo: { primary: "#4F46E5", hover: "#4338CA" },
+    emerald: { primary: "#059669", hover: "#047857" },
+    slate: { primary: "#475569", hover: "#334155" },
 }
 
 const groupOffers = groupBy(prop("group__limio"))
 
-const AnimatedBackground = ({ themeStyles, backgroundStyle }) => {
-    if (backgroundStyle === "minimal") {
-        return (
-            <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundColor: themeStyles.background,
-                    zIndex: 0,
-                }}
-            />
-        )
+const CheckIcon = () => (
+    <svg className="stripe-check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+)
+
+const OfferCard = ({ offer, isPopular, primaryColor, showFeatures, isDark }) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = useBasket() || {}
+
+    const attributes = offer?.data?.attributes || {}
+
+    const name = attributes.display_name__limio || "Plan"
+    const price = attributes.display_price__limio || ""
+    const detailedPrice = attributes.detailed_display_price__limio || ""
+    const features = attributes.offer_features__limio || ""
+    const description = attributes.display_description__limio || ""
+    const badgeText = attributes.badge_text__limio || "Most popular"
+    const ctaText = attributes.cta_text__limio || "Get started"
+
+    const featuresList = features
+        .split(/<li[^>]*>|<\/li>/gi)
+        .filter(item => item.trim() && !item.includes("<ul") && !item.includes("</ul"))
+        .map(item => item.replace(/<[^>]*>/g, "").trim())
+        .filter(item => item.length > 0)
+
+    const handleAddToBasket = async () => {
+        setIsLoading(true)
+        try {
+            const checkoutId = getCurrentBasketId()
+            if (!checkoutId) {
+                await initiateCheckout({ order: { orderItems: [{ offer }] } })
+            } else {
+                await addOfferToBasket({ offer })
+            }
+            if (pageOptions?.pushToCheckout) {
+                await navigateToCheckout()
+            }
+        } catch (err) {
+            console.error("Error adding to basket:", err)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
-    if (backgroundStyle === "dark") {
-        return (
-            <>
-                <Box
-                    sx={{
-                        position: "absolute",
-                        inset: 0,
-                        backgroundColor: "#0A0A0F",
-                        zIndex: 0,
-                    }}
-                />
-                <Box
-                    className="stripe-gradient-orb stripe-gradient-orb-1"
-                    sx={{
-                        position: "absolute",
-                        width: "800px",
-                        height: "800px",
-                        borderRadius: "50%",
-                        background: `radial-gradient(circle, ${themeStyles.gradientStart}30 0%, transparent 70%)`,
-                        filter: "blur(80px)",
-                        top: "-20%",
-                        right: "-10%",
-                        zIndex: 0,
-                    }}
-                />
-                <Box
-                    className="stripe-gradient-orb stripe-gradient-orb-2"
-                    sx={{
-                        position: "absolute",
-                        width: "600px",
-                        height: "600px",
-                        borderRadius: "50%",
-                        background: `radial-gradient(circle, ${themeStyles.gradientMid}25 0%, transparent 70%)`,
-                        filter: "blur(60px)",
-                        bottom: "-10%",
-                        left: "-5%",
-                        zIndex: 0,
-                    }}
-                />
-                <Box
-                    className="stripe-gradient-orb stripe-gradient-orb-3"
-                    sx={{
-                        position: "absolute",
-                        width: "400px",
-                        height: "400px",
-                        borderRadius: "50%",
-                        background: `radial-gradient(circle, ${themeStyles.gradientEnd}20 0%, transparent 70%)`,
-                        filter: "blur(40px)",
-                        top: "40%",
-                        left: "30%",
-                        zIndex: 0,
-                    }}
-                />
-            </>
-        )
-    }
+    const cardClass = `stripe-card ${isPopular ? "stripe-card--popular" : ""} ${isDark ? "stripe-card--dark" : ""}`
 
-    if (backgroundStyle === "mesh") {
-        return (
-            <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundColor: themeStyles.background,
-                    backgroundImage: `
-                        radial-gradient(at 0% 0%, ${themeStyles.meshColors[0]} 0px, transparent 50%),
-                        radial-gradient(at 100% 0%, ${themeStyles.meshColors[1]} 0px, transparent 50%),
-                        radial-gradient(at 100% 100%, ${themeStyles.meshColors[2]} 0px, transparent 50%),
-                        radial-gradient(at 0% 100%, ${themeStyles.meshColors[0]} 0px, transparent 50%)
-                    `,
-                    zIndex: 0,
-                }}
-            />
-        )
-    }
-
-    // Animated gradient (default)
     return (
-        <>
-            <Box
-                sx={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundColor: themeStyles.background,
-                    zIndex: 0,
-                }}
-            />
-            <Box
-                className="stripe-gradient-orb stripe-gradient-orb-1"
-                sx={{
-                    position: "absolute",
-                    width: "1000px",
-                    height: "1000px",
-                    borderRadius: "50%",
-                    background: `radial-gradient(circle, ${themeStyles.gradientStart}25 0%, transparent 70%)`,
-                    filter: "blur(100px)",
-                    top: "-30%",
-                    right: "-20%",
-                    zIndex: 0,
-                }}
-            />
-            <Box
-                className="stripe-gradient-orb stripe-gradient-orb-2"
-                sx={{
-                    position: "absolute",
-                    width: "800px",
-                    height: "800px",
-                    borderRadius: "50%",
-                    background: `radial-gradient(circle, ${themeStyles.gradientMid}20 0%, transparent 70%)`,
-                    filter: "blur(80px)",
-                    bottom: "-20%",
-                    left: "-10%",
-                    zIndex: 0,
-                }}
-            />
-            <Box
-                className="stripe-gradient-orb stripe-gradient-orb-3"
-                sx={{
-                    position: "absolute",
-                    width: "500px",
-                    height: "500px",
-                    borderRadius: "50%",
-                    background: `radial-gradient(circle, ${themeStyles.gradientEnd}15 0%, transparent 70%)`,
-                    filter: "blur(60px)",
-                    top: "50%",
-                    left: "40%",
-                    zIndex: 0,
-                }}
-            />
-        </>
+        <div className={cardClass} style={isPopular ? { borderColor: primaryColor } : {}}>
+            {isPopular && (
+                <div className="stripe-badge" style={{ backgroundColor: primaryColor }}>
+                    {badgeText}
+                </div>
+            )}
+
+            <div className="stripe-card__content">
+                <h3 className="stripe-card__name">{name}</h3>
+
+                {description && (
+                    <p className="stripe-card__description">{description}</p>
+                )}
+
+                <div
+                    className="stripe-card__price"
+                    dangerouslySetInnerHTML={{ __html: sanitizeString(price) }}
+                />
+
+                {detailedPrice && (
+                    <div
+                        className="stripe-card__detailed-price"
+                        dangerouslySetInnerHTML={{ __html: sanitizeString(detailedPrice) }}
+                    />
+                )}
+
+                <button
+                    className={`stripe-cta ${isPopular ? "stripe-cta--primary" : "stripe-cta--secondary"}`}
+                    style={isPopular ? { backgroundColor: primaryColor } : { color: primaryColor, borderColor: primaryColor }}
+                    onClick={handleAddToBasket}
+                    disabled={isLoading}
+                >
+                    {isLoading ? "Loading..." : ctaText}
+                </button>
+
+                {showFeatures && featuresList.length > 0 && (
+                    <div className="stripe-features">
+                        <p className="stripe-features__title">What's included</p>
+                        <ul className="stripe-features__list">
+                            {featuresList.map((feature, i) => (
+                                <li key={i} className="stripe-features__item">
+                                    <CheckIcon />
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }
 
-const BillingToggle = ({
-    groupLabels,
-    selectedGroup,
-    onSelectGroup,
-    annualSavingsLabel,
-    themeStyles,
-    isDark,
-}) => {
+const BillingToggle = ({ labels, selected, onSelect, savingsLabel, primaryColor }) => {
+    if (!labels || labels.length < 2) return null
+
     return (
-        <Box
-            sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 0.5,
-                backgroundColor: isDark
-                    ? "rgba(255, 255, 255, 0.08)"
-                    : "rgba(0, 0, 0, 0.04)",
-                borderRadius: "12px",
-                p: 0.5,
-                position: "relative",
-            }}
-        >
-            {groupLabels.map((label, index) => (
-                <Box
+        <div className="stripe-toggle">
+            {labels.map((label, i) => (
+                <button
                     key={label}
-                    onClick={() => onSelectGroup(label)}
-                    sx={{
-                        position: "relative",
-                        px: 3,
-                        py: 1.25,
-                        borderRadius: "10px",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        backgroundColor:
-                            selectedGroup === label
-                                ? isDark
-                                    ? "rgba(255, 255, 255, 0.12)"
-                                    : "#ffffff"
-                                : "transparent",
-                        boxShadow:
-                            selectedGroup === label
-                                ? isDark
-                                    ? "0 2px 8px rgba(0, 0, 0, 0.3)"
-                                    : "0 2px 8px rgba(0, 0, 0, 0.08)"
-                                : "none",
-                        "&:hover": {
-                            backgroundColor:
-                                selectedGroup === label
-                                    ? isDark
-                                        ? "rgba(255, 255, 255, 0.12)"
-                                        : "#ffffff"
-                                    : isDark
-                                        ? "rgba(255, 255, 255, 0.04)"
-                                        : "rgba(0, 0, 0, 0.02)",
-                        },
-                    }}
+                    className={`stripe-toggle__btn ${selected === label ? "stripe-toggle__btn--active" : ""}`}
+                    onClick={() => onSelect(label)}
                 >
-                    <Typography
-                        sx={{
-                            fontFamily: "'Inter', sans-serif !important",
-                            fontSize: "14px !important",
-                            fontWeight: selectedGroup === label ? "600 !important" : "500 !important",
-                            color: isDark
-                                ? selectedGroup === label
-                                    ? "#ffffff !important"
-                                    : "rgba(255, 255, 255, 0.6) !important"
-                                : selectedGroup === label
-                                    ? `${themeStyles.text} !important`
-                                    : `${themeStyles.textSecondary} !important`,
-                            whiteSpace: "nowrap",
-                        }}
-                    >
-                        {label}
-                    </Typography>
-                    {/* Annual savings badge */}
-                    {index === groupLabels.length - 1 && annualSavingsLabel && (
-                        <Box
-                            sx={{
-                                position: "absolute",
-                                top: "-8px",
-                                right: "-12px",
-                                backgroundColor: `${themeStyles.primary} !important`,
-                                color: "#ffffff !important",
-                                px: 1,
-                                py: 0.25,
-                                borderRadius: "6px !important",
-                                fontSize: "10px !important",
-                                fontWeight: "700 !important",
-                                fontFamily: "'Inter', sans-serif !important",
-                                letterSpacing: "0.02em !important",
-                                textTransform: "uppercase !important",
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            {annualSavingsLabel}
-                        </Box>
+                    {label}
+                    {i === labels.length - 1 && savingsLabel && (
+                        <span className="stripe-toggle__badge" style={{ backgroundColor: primaryColor }}>
+                            {savingsLabel}
+                        </span>
                     )}
-                </Box>
+                </button>
             ))}
-        </Box>
+        </div>
     )
 }
 
 const OfferCardsStripe = () => {
-    const { offers } = useCampaign()
-    const {
-        heading,
-        subheading,
-        componentId,
-        themeColor,
-        backgroundStyle,
-        showImage,
-        groupLabels,
-        showGroupedOffers,
-        annualSavingsLabel,
-        showFeatureComparison,
-    } = useStaticProps()
+    const { offers } = useCampaign() || {}
+    const props = useStaticProps() || {}
 
-    const themeStyles = themeColors[themeColor] || themeColors.purple
+    const {
+        heading = "Simple, transparent pricing",
+        subheading = "Choose the plan that's right for you.",
+        componentId = "offers-stripe",
+        themeColor = "purple",
+        backgroundStyle = "animated",
+        groupLabels = [],
+        showGroupedOffers = false,
+        annualSavingsLabel = "",
+        showFeatureComparison = true,
+    } = props
+
+    const theme = themes[themeColor] || themes.purple
     const isDark = backgroundStyle === "dark"
 
-    // Group offers and determine initial selection
     const groupedOffers = useMemo(() => {
         if (!offers || !Array.isArray(offers)) return {}
-
-        const groups = groupOffers(
-            offers.map((offer) => ({
+        return groupOffers(
+            offers.map(offer => ({
                 ...offer,
                 group__limio: offer?.data?.attributes?.group__limio || "default",
             }))
         )
-        return groups
     }, [offers])
 
-    const orderedGroupLabels = useMemo(() => {
-        const existingGroups = Object.keys(groupedOffers)
+    const validLabels = useMemo(() => {
+        const groups = Object.keys(groupedOffers)
         if (groupLabels && groupLabels.length > 0) {
-            return groupLabels.filter((label) => existingGroups.includes(label))
+            return groupLabels.filter(label => groups.includes(label))
         }
-        return existingGroups
+        return groups
     }, [groupLabels, groupedOffers])
 
-    const [selectedGroup, setSelectedGroup] = useState(orderedGroupLabels[0] || "")
+    const [selectedGroup, setSelectedGroup] = useState(validLabels[0] || "")
 
     const displayedOffers = useMemo(() => {
         if (showGroupedOffers && selectedGroup && groupedOffers[selectedGroup]) {
@@ -378,13 +188,9 @@ const OfferCardsStripe = () => {
         return offers || []
     }, [showGroupedOffers, selectedGroup, groupedOffers, offers])
 
-    // Determine which offer should be marked as popular
-    const popularOfferIndex = useMemo(() => {
-        const bestValueIndex = displayedOffers.findIndex(
-            (offer) => offer?.data?.attributes?.best_value__limio === true
-        )
-        if (bestValueIndex !== -1) return bestValueIndex
-        // Default to middle offer for 3+ cards, otherwise first
+    const popularIndex = useMemo(() => {
+        const idx = displayedOffers.findIndex(o => o?.data?.attributes?.best_value__limio === true)
+        if (idx !== -1) return idx
         return displayedOffers.length >= 3 ? 1 : 0
     }, [displayedOffers])
 
@@ -392,179 +198,53 @@ const OfferCardsStripe = () => {
         return null
     }
 
+    const wrapperClass = `stripe-pricing ${isDark ? "stripe-pricing--dark" : ""} stripe-pricing--${backgroundStyle}`
+
     return (
-        <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Box
-                    id={componentId}
-                    className="offer-cards-stripe"
-                    sx={{
-                        position: "relative",
-                        width: "100%",
-                        minHeight: "100vh",
-                        overflow: "hidden",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        py: { xs: 8, lg: 12 },
-                        px: { xs: 2, sm: 4, lg: 6 },
-                    }}
-                >
-                    <AnimatedBackground
-                        themeStyles={themeStyles}
-                        backgroundStyle={backgroundStyle}
-                    />
+        <section id={componentId} className={wrapperClass}>
+            <div className="stripe-pricing__bg">
+                <div className="stripe-orb stripe-orb--1" style={{ background: `radial-gradient(circle, ${theme.primary}25 0%, transparent 70%)` }} />
+                <div className="stripe-orb stripe-orb--2" style={{ background: `radial-gradient(circle, ${theme.primary}20 0%, transparent 70%)` }} />
+            </div>
 
-                    {/* Content */}
-                    <Box
-                        sx={{
-                            position: "relative",
-                            zIndex: 1,
-                            width: "100%",
-                            maxWidth: "1280px",
-                            mx: "auto",
-                        }}
-                    >
-                        {/* Header */}
-                        <Box
-                            sx={{
-                                textAlign: "center",
-                                mb: { xs: 6, lg: 8 },
-                            }}
-                        >
-                            <Typography
-                                variant="h1"
-                                sx={{
-                                    fontFamily: "'Inter', sans-serif !important",
-                                    fontWeight: "700 !important",
-                                    fontSize: { xs: "32px", sm: "40px", lg: "48px" },
-                                    color: isDark
-                                        ? "#ffffff !important"
-                                        : `${themeStyles.text} !important`,
-                                    mb: 2,
-                                    letterSpacing: "-0.03em !important",
-                                    lineHeight: "1.1 !important",
-                                }}
-                            >
-                                {heading}
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    fontFamily: "'Inter', sans-serif !important",
-                                    fontSize: { xs: "16px", lg: "18px" },
-                                    color: isDark
-                                        ? "rgba(255, 255, 255, 0.7) !important"
-                                        : `${themeStyles.textSecondary} !important`,
-                                    maxWidth: "600px",
-                                    mx: "auto",
-                                    lineHeight: "1.6 !important",
-                                }}
-                            >
-                                {subheading}
-                            </Typography>
+            <div className="stripe-pricing__container">
+                <header className="stripe-header">
+                    <h1 className="stripe-header__title">{heading}</h1>
+                    <p className="stripe-header__subtitle">{subheading}</p>
 
-                            {/* Billing Toggle */}
-                            {showGroupedOffers && orderedGroupLabels.length > 1 && (
-                                <Box sx={{ mt: 5 }}>
-                                    <BillingToggle
-                                        groupLabels={orderedGroupLabels}
-                                        selectedGroup={selectedGroup}
-                                        onSelectGroup={setSelectedGroup}
-                                        annualSavingsLabel={annualSavingsLabel}
-                                        themeStyles={themeStyles}
-                                        isDark={isDark}
-                                    />
-                                </Box>
-                            )}
-                        </Box>
+                    {showGroupedOffers && validLabels.length > 1 && (
+                        <BillingToggle
+                            labels={validLabels}
+                            selected={selectedGroup}
+                            onSelect={setSelectedGroup}
+                            savingsLabel={annualSavingsLabel}
+                            primaryColor={theme.primary}
+                        />
+                    )}
+                </header>
 
-                        {/* Cards Grid */}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                justifyContent: "center",
-                                gap: { xs: 3, lg: 4 },
-                                alignItems: "stretch",
-                            }}
-                        >
-                            {displayedOffers.map((offer, index) => (
-                                <Box
-                                    key={offer?.id || index}
-                                    sx={{
-                                        flex: {
-                                            xs: "1 1 100%",
-                                            sm: "1 1 calc(50% - 16px)",
-                                            lg: displayedOffers.length <= 3
-                                                ? "0 1 360px"
-                                                : "1 1 calc(25% - 24px)",
-                                        },
-                                        maxWidth: "360px",
-                                        display: "flex",
-                                    }}
-                                >
-                                    <Offer
-                                        offer={offer}
-                                        themeStyles={themeStyles}
-                                        showImage={showImage}
-                                        showFeatureComparison={showFeatureComparison}
-                                        isPopular={index === popularOfferIndex}
-                                        backgroundStyle={backgroundStyle}
-                                    />
-                                </Box>
-                            ))}
-                        </Box>
+                <div className="stripe-cards">
+                    {displayedOffers.map((offer, i) => (
+                        <OfferCard
+                            key={offer?.id || i}
+                            offer={offer}
+                            isPopular={i === popularIndex}
+                            primaryColor={theme.primary}
+                            showFeatures={showFeatureComparison}
+                            isDark={isDark}
+                        />
+                    ))}
+                </div>
 
-                        {/* Trust indicators */}
-                        <Box
-                            sx={{
-                                textAlign: "center",
-                                mt: { xs: 6, lg: 8 },
-                            }}
-                        >
-                            <Typography
-                                sx={{
-                                    fontFamily: "'Inter', sans-serif !important",
-                                    fontSize: "13px !important",
-                                    color: isDark
-                                        ? "rgba(255, 255, 255, 0.4) !important"
-                                        : `${themeStyles.textSecondary} !important`,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    gap: 2,
-                                    flexWrap: "wrap",
-                                }}
-                            >
-                                <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                    </svg>
-                                    Secure checkout
-                                </span>
-                                <span style={{ opacity: 0.3 }}>•</span>
-                                <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                                        <line x1="1" y1="10" x2="23" y2="10" />
-                                    </svg>
-                                    Cancel anytime
-                                </span>
-                                <span style={{ opacity: 0.3 }}>•</span>
-                                <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
-                                    </svg>
-                                    24/7 support
-                                </span>
-                            </Typography>
-                        </Box>
-                    </Box>
-                </Box>
-            </ThemeProvider>
-        </StyledEngineProvider>
+                <footer className="stripe-footer">
+                    <span>🔒 Secure checkout</span>
+                    <span>•</span>
+                    <span>Cancel anytime</span>
+                    <span>•</span>
+                    <span>24/7 support</span>
+                </footer>
+            </div>
+        </section>
     )
 }
 
