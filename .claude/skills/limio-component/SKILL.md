@@ -1,7 +1,7 @@
 ---
 name: limio-component
-description: This skill should be used when the user asks to "create a Limio component", "build a subscription component", "make offer cards", mentions "limioProps", "Limio SDK", "@limio/sdk", "useCampaign", "useBasket", or discusses building React components for the Limio subscription platform.
-version: 1.0.0
+description: This skill should be used when the user asks to "create a Limio component", "build a subscription component", "make offer cards", mentions "limioProps", "Limio SDK", "@limio/sdk", "useCampaign", "useBasket", "useUser", or discusses building React components for the Limio subscription platform.
+version: 2.0.0
 ---
 
 # Limio Custom Component Creation
@@ -9,8 +9,6 @@ version: 1.0.0
 Use this skill when creating custom components for the Limio subscription management platform.
 
 ## Component Structure
-
-A Limio component requires these files:
 
 ```
 component-name/
@@ -28,10 +26,7 @@ component-name/
   "version": "1.0.0",
   "description": "Component description",
   "main": "./index.js",
-  "dependencies": {
-    "ramda": "^0.28.0",
-    "xss": "^1.0.8"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },
@@ -41,97 +36,64 @@ component-name/
 
 ## Dependencies
 
-You can import **any public npm library** in the dependencies. Limio's build system will bundle them with your component.
+You can import **any public npm library** in the dependencies. Limio's build system will bundle them.
 
-**Recommended approach:** Prefer using well-maintained SDKs and libraries over writing custom code. This makes components:
-- Easier to maintain
-- More reliable
-- Faster to develop
-- Benefit from community updates and security fixes
+**Prefer SDKs/libraries over custom code** - makes components easier to maintain and more reliable.
 
-**Common useful libraries:**
+**Common libraries:**
 - `ramda` - Functional utilities (groupBy, prop, etc.)
 - `xss` - HTML sanitization (required for rich text)
-- `@mui/material` - Material UI components
-- `@emotion/react` / `@emotion/styled` - CSS-in-JS (required for MUI)
-- `framer-motion` - Animations
+- `@mui/material` - Material UI (use **5.16.12** for React 19 compatibility)
+- `@emotion/react` / `@emotion/styled` - Required for MUI
 - `date-fns` or `dayjs` - Date formatting
-- `lodash` - General utilities
 
-**Example with multiple dependencies:**
-```json
-{
-  "dependencies": {
-    "ramda": "^0.28.0",
-    "xss": "^1.0.8",
-    "@mui/material": "5.16.7",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "framer-motion": "^10.16.4"
-  }
+## componentStaticProps.js
+
+**Important:** Use default import for package.json, not `import * as`.
+
+```javascript
+import { useComponentProps, getPropsFromPackageJson } from "@limio/sdk"
+import packageData from "./package.json"
+
+const defaultComponentProps = getPropsFromPackageJson(packageData)
+
+export function useStaticProps() {
+    return useComponentProps(defaultComponentProps)
 }
 ```
+
+---
 
 ## limioProps Types
 
 ### String
 ```json
-{
-  "id": "headline",
-  "label": "Headline",
-  "type": "string",
-  "default": "Welcome"
-}
+{ "id": "headline", "label": "Headline", "type": "string", "default": "Welcome" }
 ```
 
 ### Boolean
 ```json
-{
-  "id": "showImage",
-  "label": "Show image",
-  "type": "boolean",
-  "default": true
-}
+{ "id": "showImage", "label": "Show image", "type": "boolean", "default": true }
 ```
 
 ### Number
 ```json
-{
-  "id": "cardWidth",
-  "label": "Card width",
-  "type": "number",
-  "default": "2"
-}
+{ "id": "cardWidth", "label": "Card width", "type": "number", "default": "2" }
 ```
 
 ### Rich Text (HTML)
 ```json
-{
-  "id": "description__limio_richtext",
-  "label": "Description",
-  "type": "richText",
-  "default": "<p>Default content</p>"
-}
+{ "id": "description__limio_richtext", "label": "Description", "type": "richText", "default": "<p>Content</p>" }
 ```
 
 ### Color
 ```json
-{
-  "id": "primaryColor__limio_color",
-  "label": "Primary color",
-  "type": "color",
-  "default": "#635BFF"
-}
+{ "id": "primaryColor__limio_color", "label": "Primary color", "type": "color", "default": "#635BFF" }
 ```
 
 ### DateTime
 ```json
-{
-  "id": "expiryDateTime",
-  "label": "Expiry Date/Time",
-  "type": "datetime",
-  "default": "2025-12-10T11:30:42.809Z"
-}
+{ "id": "expiryDateTime", "label": "Expiry", "type": "datetime", "default": "2025-12-10T11:30:42.809Z" }
 ```
 
 ### Picklist (Dropdown)
@@ -155,23 +117,9 @@ You can import **any public npm library** in the dependencies. Limio's build sys
   "label": "Group Labels",
   "type": "list",
   "fields": {
-    "name": {
-      "id": "id",
-      "label": "ID",
-      "type": "string"
-    },
-    "url": {
-      "id": "label",
-      "label": "Label",
-      "type": "string"
-    },
-    "thumbnail": {
-      "id": "thumbnail",
-      "label": "Thumbnail",
-      "type": "string",
-      "format": "uri",
-      "purpose": "image"
-    }
+    "name": { "id": "id", "label": "ID", "type": "string" },
+    "url": { "id": "label", "label": "Label", "type": "string" },
+    "thumbnail": { "id": "thumbnail", "label": "Thumbnail", "type": "string", "format": "uri", "purpose": "image" }
   },
   "default": [
     { "id": "monthly", "label": "Monthly" },
@@ -180,27 +128,14 @@ You can import **any public npm library** in the dependencies. Limio's build sys
 }
 ```
 
-**Important:** List items are objects with `id` and `label` properties, not plain strings.
+**Important:** List items are `{id, label}` objects, not plain strings.
 
-## componentStaticProps.js
+---
 
-**Important:** Use default import for package.json, not `import * as`.
-
-```javascript
-import { useComponentProps, getPropsFromPackageJson } from "@limio/sdk"
-import packageData from "./package.json"
-
-const defaultComponentProps = getPropsFromPackageJson(packageData)
-
-export function useStaticProps() {
-    return useComponentProps(defaultComponentProps)
-}
-```
-
-## Limio SDK Hooks
+## Limio SDK - Page/Campaign
 
 ### useCampaign
-Returns campaign data including offers.
+Returns page/campaign data including offers.
 
 ```javascript
 import { useCampaign } from "@limio/sdk"
@@ -208,79 +143,280 @@ import { useCampaign } from "@limio/sdk"
 const { offers, campaign, addOns, tag, groupValues } = useCampaign()
 ```
 
-**offers array** - Each offer has:
-- `offer.id` - Unique identifier
-- `offer.data.attributes.display_name__limio` - Display name
-- `offer.data.attributes.display_price__limio` - Price HTML
-- `offer.data.attributes.detailed_display_price__limio` - Detailed price
-- `offer.data.attributes.offer_features__limio` - Features HTML
-- `offer.data.attributes.cta_text__limio` - CTA button text
-- `offer.data.attributes.best_value__limio` - Boolean for highlighting
-- `offer.data.attributes.group__limio` - Group category ID
-- `offer.data.attachments` - Array of attachments (images, etc.)
+**Returns:**
+- `campaign` - Page metadata: `{ name, path, attributes }`
+- `offers` - Array of subscription products
+- `addOns` - Array of optional products/upsells
+- `tag` - Entry tracking tag (e.g., "/tags/dummytag")
+- `groupValues` - Array of `{ label, id }` for offer categorization
+
+### groupOffers Utility
+```javascript
+import { groupOffers } from "@limio/sdk"
+
+const grouped = groupOffers(offers, groupLabels)
+// Returns: Array<{ groupId, id, label, offers, thumbnail }>
+```
+
+---
+
+## Offer Object Structure
+
+```javascript
+offer = {
+  id: "unique-id",
+  name: "Offer Name",
+  path: "/offers/offer-name",
+  parent_path: "/pages/page-name",
+  type: "item",
+  data: {
+    attributes: {
+      // Display
+      display_name__limio: "Premium Plan",
+      display_price__limio: "<span>$9.99</span>/mo",
+      detailed_display_price__limio: "Billed annually at $119.88",
+      offer_features__limio: "<ul><li>Feature 1</li></ul>",
+      cta_text__limio: "Subscribe Now",
+      checkout_description__limio: "Premium subscription",
+
+      // Grouping & Flags
+      group__limio: "monthly",
+      best_value__limio: true,
+      badge_text__limio: "Most Popular",
+
+      // Commerce
+      payment_types__limio: ["card", "paypal"],
+      allowed_countries__limio: ["US", "GB"],
+      allow_multibuy__limio: false,
+      autoRenew__limio: true,
+
+      // Cross-sell/Upsell
+      cross_sell_addons__limio: [...],
+      cross_sell_offers__limio: [...],
+      upsell_offers__limio: [...],
+
+      // Term
+      term__limio: { renewal_type, renewal_trigger },
+      initial_term__limio: { renewal_type, renewal_trigger }
+    },
+    price: [{
+      name: "Monthly charge",
+      value: 9.99,
+      currencyCode: "USD",
+      type: "recurring",
+      trigger: "subscription_start",
+      repeat_interval: 1,
+      repeat_interval_type: "months"
+    }],
+    products: [{
+      path: "/products/product-name",
+      name: "Product",
+      attributes: { display_name, product_code }
+    }],
+    attachments: [{
+      type: "image",
+      url: "https://..."
+    }]
+  }
+}
+```
+
+---
+
+## Limio SDK - Basket
 
 ### useBasket
-Manages basket/cart functionality.
-
 ```javascript
 import { useBasket } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 
 const {
-    orderItems,
-    basketLoading,
-    formattedTotal,
-    pageOptions,
-    initiateCheckout,
-    addOfferToBasket,
-    removeFromBasket,
-    navigateToCheckout,
-    redeemPromoCode,
-    removePromoCode
+  orderItems,           // Current basket items
+  basketLoading,        // Boolean for async operations
+  formattedTotal,       // e.g., "£10.00"
+  pageOptions,          // Page config settings
+  expiresAt,            // Basket expiration timestamp
+  initiateCheckout,
+  addOfferToBasket,
+  removeFromBasket,
+  updateItemQuantity,
+  swapOffer,
+  clearOrderItems,
+  navigateToCheckout,
+  redeemPromoCode,
+  removePromoCode,
+  updateCustomField,
+  setCheckoutDisabled,
+  validateBasket,
 } = useBasket()
 ```
 
-**Add to basket pattern:**
+### Add to Basket Pattern
 ```javascript
 const handleAddToBasket = async (offer) => {
-    const checkoutId = getCurrentBasketId()
-    if (!checkoutId) {
-        await initiateCheckout({ order: { orderItems: [{ offer }] } })
-    } else {
-        await addOfferToBasket({ offer })
-    }
-    if (pageOptions?.pushToCheckout) {
-        await navigateToCheckout()
-    }
+  const checkoutId = getCurrentBasketId()
+  if (!checkoutId) {
+    await initiateCheckout({ order: { orderItems: [{ offer }] } })
+  } else {
+    await addOfferToBasket({ offer })
+  }
+  if (pageOptions?.pushToCheckout) {
+    await navigateToCheckout()
+  }
 }
 ```
 
-### useComponentProps
-Gets component props with defaults from package.json.
+### Key Methods
+- `initiateCheckout({ order: { orderItems: [{ offer }] } })` - Create new basket
+- `addOfferToBasket({ offer, quantity?, type?, parentId? })` - Add to existing basket
+- `removeFromBasket({ id })` - Remove by OrderItem ID
+- `updateItemQuantity(itemId, quantity)` - Update quantity
+- `swapOffer(itemId, offer)` - Replace item with different offer
+- `clearOrderItems()` - Empty basket
+- `navigateToCheckout()` - Go to checkout page
+- `redeemPromoCode(promoCode)` - Apply discount
+- `removePromoCode(promoCode)` - Remove discount
 
+---
+
+## Limio SDK - User
+
+### useUser
 ```javascript
-import { useComponentProps, getPropsFromPackageJson } from "@limio/sdk"
+import { useUser } from "@limio/sdk"
+
+const { attributes, subscriptions, loginStatus, loaded, token } = useUser()
 ```
 
-### useLimioContext
-Gets context info including Page Builder detection.
+**Returns:**
+- `attributes` - User identity: `{ email, auth_time, sub, crm_id, ... }`
+- `subscriptions` - Array of user's subscriptions
+- `loginStatus` - "logged-in" or other states
+- `loaded` - Boolean for data availability
+- `token` - JWT access token
 
+### useSubscriptions
+```javascript
+import { useSubscriptions } from "@limio/sdk"
+
+const { subscriptions } = useSubscriptions()
+```
+
+**Subscription object:**
+```javascript
+{
+  name: "Premium",
+  status: "active",
+  schedule: [{ date, type, amount, currency, description }],
+  offers: [...],
+  record_type: "subscription",
+  id, ref, reference,
+  created: "2024-01-15T...",
+  mode: "production"
+}
+```
+
+### useSubInfo
+```javascript
+import { useSubInfo } from "@limio/sdk"
+
+const { status, isGift, quantity, hasLapsed, hasPendingChange } = useSubInfo(subscription)
+```
+
+### useSchedule
+```javascript
+import { useSchedule } from "@limio/sdk"
+
+const { nextPaymentAmount, renewalPrice, termStartDate, termEndDate } = useSchedule(subscription)
+// Returns formatted values: "£9.99", "14 Dec 2024"
+```
+
+### useUserInvoices
+```javascript
+const { invoices, revalidate, mutate } = useUserInvoices()
+```
+
+### Utility Functions
+```javascript
+import {
+  getCurrentAddress,      // (type, addresses) => address object
+  getPriceFromSchedule,   // (schedule, country?) => { value, currencyCode }
+  getCurrentOffer,        // (subscription) => offer
+  getPeriodForOffer,      // (offer) => "1 month" | "1 year" | "N/A"
+  getRenewalDateForUserSubscription,  // (subscription) => formatted date
+  getPriceForUserSubscription,        // (subscription) => formatted price
+} from "@limio/sdk"
+```
+
+---
+
+## Limio SDK - Pricing
+
+### useCheckout
+```javascript
+import { useCheckout } from "@limio/sdk"
+
+const { useCheckoutSelector } = useCheckout({ redirectOnFailure: true })
+const orderTotals = useCheckoutSelector((state) => state.display.orderTotal)
+```
+
+**orderTotals object:**
+- `orderSubtotal` - Before discounts/tax
+- `orderTotal` - Final total
+- `currency` - "USD", "GBP", etc.
+- `taxSummary` - Array of `{ taxCode, taxAmount, taxRate }`
+
+### usePreview
+```javascript
+import { usePreview } from "@limio/sdk"
+
+const { loadingPreview, isTaxPreviewCountry, taxCalculated } = usePreview()
+```
+
+### formatCurrencyForCurrentLocale
+```javascript
+import { formatCurrencyForCurrentLocale } from "@limio/sdk"
+
+formatCurrencyForCurrentLocale(9.99, "USD") // "$9.99"
+```
+
+---
+
+## Limio SDK - Context
+
+### useLimioContext
 ```javascript
 import { useLimioContext } from "@limio/sdk"
 
 const { isInPageBuilder } = useLimioContext() || {}
 
-// Use to disable fixed positioning, animations, etc. in Page Builder
+// Disable fixed positioning, heavy animations in Page Builder
 if (isInPageBuilder) {
-    // Render static/simplified version for editor
+  // Render static version for editor
 }
 ```
+
+---
+
+## HTML Sanitization
+
+Always sanitize HTML from Limio attributes:
+
+```javascript
+import xss from "xss"
+
+const sanitizeString = (str) => xss(str || "")
+
+<div dangerouslySetInnerHTML={{ __html: sanitizeString(offer.data.attributes.display_price__limio) }} />
+```
+
+---
 
 ## Component Template
 
 ```javascript
 import React, { useState, useMemo } from "react"
-import { useCampaign, useBasket } from "@limio/sdk"
+import { useCampaign, useBasket, useLimioContext } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
 import { groupBy, prop } from "ramda"
@@ -292,15 +428,11 @@ const groupOffers = groupBy(prop("group__limio"))
 
 const MyComponent = () => {
     const { offers } = useCampaign() || {}
+    const { isInPageBuilder } = useLimioContext() || {}
     const props = useStaticProps() || {}
 
-    const {
-        heading = "Default heading",
-        groupLabels = [],
-        showGroupedOffers = false,
-    } = props
+    const { heading = "Default", groupLabels = [], showGroupedOffers = false } = props
 
-    // Group offers by group__limio attribute
     const groupedOffers = useMemo(() => {
         if (!offers || !Array.isArray(offers)) return {}
         return groupOffers(
@@ -311,10 +443,9 @@ const MyComponent = () => {
         )
     }, [offers])
 
-    // Filter valid labels that have matching offers
     const validLabels = useMemo(() => {
         const groups = Object.keys(groupedOffers)
-        if (groupLabels && groupLabels.length > 0) {
+        if (groupLabels?.length > 0) {
             return groupLabels.filter(item => groups.includes(item.id))
         }
         return groups.map(g => ({ id: g, label: g }))
@@ -329,9 +460,7 @@ const MyComponent = () => {
         return offers || []
     }, [showGroupedOffers, selectedGroup, groupedOffers, offers])
 
-    if (!offers || offers.length === 0) {
-        return null
-    }
+    if (!offers?.length) return null
 
     return (
         <section>
@@ -346,40 +475,20 @@ const MyComponent = () => {
 export default MyComponent
 ```
 
-## HTML Sanitization
-
-Always sanitize HTML from Limio attributes before rendering:
-
-```javascript
-import xss from "xss"
-
-const sanitizeString = (str) => xss(str || "")
-
-// Usage
-<div dangerouslySetInnerHTML={{ __html: sanitizeString(offer.data.attributes.display_price__limio) }} />
-```
+---
 
 ## Best Practices
 
-1. **Use public npm libraries**: Import any public npm package to speed up development and improve maintainability. Don't reinvent the wheel.
-
-2. **Prefer SDKs over custom code**: Use well-maintained libraries instead of writing custom implementations. They're battle-tested, maintained, and receive security updates.
-
-3. **Null safety**: Always use optional chaining and defaults
+1. **Use public npm libraries** - Don't reinvent the wheel
+2. **Prefer SDKs** - Well-maintained libraries over custom code
+3. **Null safety** - Always use optional chaining and defaults
    ```javascript
    const { offers } = useCampaign() || {}
    const attributes = offer?.data?.attributes || {}
    ```
-
-4. **List props**: Remember items are `{id, label}` objects, not strings
-   ```javascript
-   groupLabels.filter(item => groups.includes(item.id))
-   ```
-
-5. **Picklist options**: Use `options` array with `id`, `label`, `value`
-
-6. **Keep CSS simple**: Prefer plain CSS for lightweight components, or use established libraries like MUI for complex UIs
-
-7. **Loading states**: Handle `basketLoading` to prevent double submissions
-
-8. **Sanitize HTML**: Always use `xss` library for user-generated content
+4. **List props** - Items are `{id, label}` objects
+5. **Picklist options** - Use `options` array with `{id, label, value}`
+6. **Page Builder detection** - Use `useLimioContext().isInPageBuilder` to disable fixed positioning
+7. **Loading states** - Handle `basketLoading` to prevent double submissions
+8. **Sanitize HTML** - Always use `xss` library for rich text content
+9. **MUI version** - Use 5.16.12 for React 19 compatibility
