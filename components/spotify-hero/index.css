@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.spotify-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.spotify-hero__bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.spotify-hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.spotify-hero__headline {
+    font-size: 5rem;
+    font-weight: 800;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.spotify-hero__subheadline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0 0 2.5rem 0;
+    opacity: 0.9;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spotify-hero__ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.spotify-hero__cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 500px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.spotify-hero__cta:hover {
+    transform: scale(1.04);
+}
+
+.spotify-hero__cta--secondary {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.spotify-hero__cta--secondary:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.spotify-hero__terms {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.spotify-hero__terms a {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .spotify-hero {
+        min-height: auto;
+        padding: 4rem 1.5rem;
+    }
+
+    .spotify-hero__headline {
+        font-size: 2.75rem;
+    }
+
+    .spotify-hero__subheadline {
+        font-size: 1.1rem;
+    }
+
+    .spotify-hero__ctas {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .spotify-hero__cta {
+        width: 100%;
+        max-width: 300px;
+    }
+}

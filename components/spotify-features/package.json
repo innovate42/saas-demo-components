@@ -1,0 +1,84 @@
+{
+  "name": "@limio/spotify-features",
+  "version": "1.0.0",
+  "description": "Spotify style features/benefits grid",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Section Headline",
+      "type": "string",
+      "default": "Why go Premium?"
+    },
+    {
+      "id": "subheadline",
+      "label": "Section Subheadline",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "features",
+      "label": "Features",
+      "type": "list",
+      "fields": {
+        "icon": {
+          "id": "icon",
+          "label": "Icon (download, shuffle, quality, offline, ads, devices)",
+          "type": "string"
+        },
+        "title": {
+          "id": "title",
+          "label": "Feature Title",
+          "type": "string"
+        },
+        "description": {
+          "id": "description",
+          "label": "Feature Description",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "icon": "ads", "title": "Ad-free music listening", "description": "Enjoy uninterrupted music." },
+        { "id": "2", "icon": "offline", "title": "Download to listen offline", "description": "Save your data by listening offline." },
+        { "id": "3", "icon": "shuffle", "title": "Play songs in any order", "description": "Play any song, any time on any device." },
+        { "id": "4", "icon": "quality", "title": "High audio quality", "description": "Listen to music in high quality audio." }
+      ]
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "cardBackgroundColor__limio_color",
+      "label": "Card Background Color",
+      "type": "color",
+      "default": "#242424"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A7A7A7"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent/Icon Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "@limio/spotify-faq",
+  "version": "1.0.0",
+  "description": "Spotify style expandable FAQ section",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Section Headline",
+      "type": "string",
+      "default": "Frequently asked questions"
+    },
+    {
+      "id": "faqs",
+      "label": "FAQ Items",
+      "type": "list",
+      "fields": {
+        "question": {
+          "id": "question",
+          "label": "Question",
+          "type": "string"
+        },
+        "answer": {
+          "id": "answer",
+          "label": "Answer",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "question": "What happens when my trial ends?", "answer": "Your Premium subscription will automatically continue at the regular price. You can cancel anytime before your trial ends to avoid being charged." },
+        { "id": "2", "question": "Can I cancel anytime?", "answer": "Yes, you can cancel your subscription anytime. Your Premium benefits will continue until the end of your billing period." },
+        { "id": "3", "question": "What payment methods do you accept?", "answer": "We accept credit cards, debit cards, PayPal, and various other payment methods depending on your region." },
+        { "id": "4", "question": "How do I download music for offline listening?", "answer": "With Premium, simply tap the download button on any song, album, or playlist to save it for offline listening." }
+      ]
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "cardBackgroundColor__limio_color",
+      "label": "Card Background Color",
+      "type": "color",
+      "default": "#242424"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A7A7A7"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}

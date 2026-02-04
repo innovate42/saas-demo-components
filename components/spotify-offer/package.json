@@ -1,0 +1,74 @@
+{
+  "name": "@limio/spotify-offer",
+  "version": "1.0.0",
+  "description": "Spotify style single offer card with add to basket",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Section Headline",
+      "type": "string",
+      "default": "Get Premium"
+    },
+    {
+      "id": "subheadline",
+      "label": "Section Subheadline",
+      "type": "string",
+      "default": "1 account, just for you"
+    },
+    {
+      "id": "badgeText",
+      "label": "Badge Text",
+      "type": "string",
+      "default": "1 month free"
+    },
+    {
+      "id": "showBadge",
+      "label": "Show Badge",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "footerText__limio_richtext",
+      "label": "Footer Text (terms)",
+      "type": "richText",
+      "default": "<p>Terms and conditions apply. Offer available to new Premium subscribers only.</p>"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "cardBackgroundColor__limio_color",
+      "label": "Card Background Color",
+      "type": "color",
+      "default": "#242424"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A7A7A7"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}

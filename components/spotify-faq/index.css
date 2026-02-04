@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.spotify-faq {
+    padding: 5rem 2rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.spotify-faq__container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spotify-faq__headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 3rem 0;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.spotify-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.spotify-faq__item {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+}
+
+.spotify-faq__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.spotify-faq__question:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.spotify-faq__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.spotify-faq__icon--open {
+    transform: rotate(180deg);
+}
+
+.spotify-faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.spotify-faq__answer--open {
+    max-height: 500px;
+}
+
+.spotify-faq__answer-content {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .spotify-faq {
+        padding: 3rem 1.5rem;
+    }
+
+    .spotify-faq__headline {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .spotify-faq__question {
+        padding: 1rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .spotify-faq__answer-content {
+        padding: 0 1.25rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}

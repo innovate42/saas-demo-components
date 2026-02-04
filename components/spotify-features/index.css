@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.spotify-features {
+    padding: 5rem 2rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.spotify-features__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.spotify-features__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.spotify-features__headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+}
+
+.spotify-features__subheadline {
+    font-size: 1.125rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.spotify-features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.spotify-features__card {
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.spotify-features__card:hover {
+    transform: translateY(-4px);
+}
+
+.spotify-features__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spotify-features__icon svg {
+    width: 48px;
+    height: 48px;
+}
+
+.spotify-features__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem 0;
+}
+
+.spotify-features__description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .spotify-features {
+        padding: 3rem 1.5rem;
+    }
+
+    .spotify-features__headline {
+        font-size: 2rem;
+    }
+
+    .spotify-features__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spotify-features__card {
+        padding: 1.5rem;
+    }
+}

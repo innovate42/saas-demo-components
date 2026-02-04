@@ -1,0 +1,92 @@
+{
+  "name": "@limio/spotify-hero",
+  "version": "1.0.0",
+  "description": "Spotify style hero banner with gradient background",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Listen without limits"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Try Premium free for 1 month, then just $10.99/month after. Cancel anytime."
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get Started"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA Button URL",
+      "type": "string",
+      "default": "#offer"
+    },
+    {
+      "id": "secondaryCtaText",
+      "label": "Secondary CTA Text",
+      "type": "string",
+      "default": "See all plans"
+    },
+    {
+      "id": "secondaryCtaUrl",
+      "label": "Secondary CTA URL",
+      "type": "string",
+      "default": "#plans"
+    },
+    {
+      "id": "showSecondaryCta",
+      "label": "Show Secondary CTA",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "backgroundImageUrl",
+      "label": "Background Image URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "gradientStart__limio_color",
+      "label": "Gradient Start Color",
+      "type": "color",
+      "default": "#1ED760"
+    },
+    {
+      "id": "gradientEnd__limio_color",
+      "label": "Gradient End Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "ctaBackgroundColor__limio_color",
+      "label": "CTA Background Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "ctaTextColor__limio_color",
+      "label": "CTA Text Color",
+      "type": "color",
+      "default": "#000000"
+    }
+  ]
+}

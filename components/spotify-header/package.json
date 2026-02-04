@@ -1,0 +1,102 @@
+{
+  "name": "@limio/spotify-header",
+  "version": "1.0.0",
+  "description": "Spotify style header with navigation and user state",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "logoText",
+      "label": "Logo Text (if no image)",
+      "type": "string",
+      "default": "Spotify"
+    },
+    {
+      "id": "navLinks",
+      "label": "Navigation Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "premium", "label": "Premium", "url": "/premium" },
+        { "id": "support", "label": "Support", "url": "/support" },
+        { "id": "download", "label": "Download", "url": "/download" }
+      ]
+    },
+    {
+      "id": "showUserInfo",
+      "label": "Show User Info",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showCart",
+      "label": "Show Cart Icon",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "loginUrl",
+      "label": "Login URL",
+      "type": "string",
+      "default": "/login"
+    },
+    {
+      "id": "signupUrl",
+      "label": "Sign Up URL",
+      "type": "string",
+      "default": "/signup"
+    },
+    {
+      "id": "loginText",
+      "label": "Login Button Text",
+      "type": "string",
+      "default": "Log in"
+    },
+    {
+      "id": "signupText",
+      "label": "Sign Up Button Text",
+      "type": "string",
+      "default": "Sign up"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#000000"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}

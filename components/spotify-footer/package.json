@@ -1,0 +1,144 @@
+{
+  "name": "@limio/spotify-footer",
+  "version": "1.0.0",
+  "description": "Spotify style footer with links and social icons",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "logoText",
+      "label": "Logo Text",
+      "type": "string",
+      "default": "Spotify"
+    },
+    {
+      "id": "companyLinks",
+      "label": "Company Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "label": "About", "url": "/about" },
+        { "id": "2", "label": "Jobs", "url": "/jobs" },
+        { "id": "3", "label": "For the Record", "url": "/newsroom" }
+      ]
+    },
+    {
+      "id": "supportLinks",
+      "label": "Support Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "label": "Help Center", "url": "/support" },
+        { "id": "2", "label": "Contact Us", "url": "/contact" },
+        { "id": "3", "label": "Account", "url": "/account" }
+      ]
+    },
+    {
+      "id": "legalLinks",
+      "label": "Legal Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "label": "Legal", "url": "/legal" },
+        { "id": "2", "label": "Privacy Policy", "url": "/privacy" },
+        { "id": "3", "label": "Cookies", "url": "/cookies" }
+      ]
+    },
+    {
+      "id": "socialLinks",
+      "label": "Social Links",
+      "type": "list",
+      "fields": {
+        "platform": {
+          "id": "platform",
+          "label": "Platform (instagram, twitter, facebook)",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "1", "platform": "instagram", "url": "https://instagram.com/spotify" },
+        { "id": "2", "platform": "twitter", "url": "https://twitter.com/spotify" },
+        { "id": "3", "platform": "facebook", "url": "https://facebook.com/spotify" }
+      ]
+    },
+    {
+      "id": "copyrightText",
+      "label": "Copyright Text",
+      "type": "string",
+      "default": "Spotify AB"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A7A7A7"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}

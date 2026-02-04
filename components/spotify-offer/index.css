@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+.spotify-offer {
+    padding: 5rem 2rem;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.spotify-offer__container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.spotify-offer__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.spotify-offer__headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.spotify-offer__subheadline {
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.spotify-offer__card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.spotify-offer__card:hover {
+    transform: scale(1.01);
+}
+
+.spotify-offer__accent {
+    height: 8px;
+    width: 100%;
+}
+
+.spotify-offer__card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.spotify-offer__card-body {
+    padding: 2rem;
+}
+
+.spotify-offer__badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+}
+
+.spotify-offer__name {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+}
+
+.spotify-offer__price {
+    margin: 1rem 0;
+}
+
+.spotify-offer__price-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.spotify-offer__price-detail {
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.spotify-offer__divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+}
+
+.spotify-offer__features {
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.spotify-offer__features li {
+    padding: 0.6rem 0;
+    padding-left: 2rem;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.spotify-offer__features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8rem;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231ED760'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    background-size: contain;
+}
+
+.spotify-offer__cta {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 500px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    font-family: inherit;
+}
+
+.spotify-offer__cta:hover {
+    transform: scale(1.04);
+}
+
+.spotify-offer__cta:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spotify-offer__footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+.spotify-offer__footer p {
+    margin: 0;
+}
+
+.spotify-offer__footer a {
+    text-decoration: underline;
+}
+
+.spotify-offer__empty {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .spotify-offer {
+        padding: 3rem 1.5rem;
+    }
+
+    .spotify-offer__headline {
+        font-size: 2rem;
+    }
+
+    .spotify-offer__card-body {
+        padding: 1.5rem;
+    }
+
+    .spotify-offer__name {
+        font-size: 1.5rem;
+    }
+
+    .spotify-offer__price-value {
+        font-size: 2rem;
+    }
+}
