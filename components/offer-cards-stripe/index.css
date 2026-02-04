@@ -1,0 +1,135 @@
+.offer-cards-stripe {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated gradient orbs */
+@keyframes float-1 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(-30px, 20px) scale(1.05);
+    }
+    50% {
+        transform: translate(-10px, -30px) scale(0.95);
+    }
+    75% {
+        transform: translate(20px, 10px) scale(1.02);
+    }
+}
+
+@keyframes float-2 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(40px, -20px) scale(0.98);
+    }
+    50% {
+        transform: translate(20px, 40px) scale(1.05);
+    }
+    75% {
+        transform: translate(-30px, 20px) scale(0.97);
+    }
+}
+
+@keyframes float-3 {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(-20px, -40px) scale(1.03);
+    }
+    50% {
+        transform: translate(30px, -20px) scale(0.96);
+    }
+    75% {
+        transform: translate(10px, 30px) scale(1.04);
+    }
+}
+
+.stripe-gradient-orb-1 {
+    animation: float-1 20s ease-in-out infinite;
+}
+
+.stripe-gradient-orb-2 {
+    animation: float-2 25s ease-in-out infinite;
+}
+
+.stripe-gradient-orb-3 {
+    animation: float-3 22s ease-in-out infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .stripe-gradient-orb-1,
+    .stripe-gradient-orb-2,
+    .stripe-gradient-orb-3 {
+        animation: none;
+    }
+}
+
+/* Card hover animation enhancement */
+.offer-cards-stripe .MuiCard-root {
+    will-change: transform, box-shadow;
+}
+
+/* Glass effect enhancement for dark mode */
+.offer-cards-stripe .dark-glass {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Smooth scrolling for the section */
+.offer-cards-stripe {
+    scroll-behavior: smooth;
+}
+
+/* Typography enhancements */
+.offer-cards-stripe h1,
+.offer-cards-stripe h2,
+.offer-cards-stripe h3,
+.offer-cards-stripe h4,
+.offer-cards-stripe h5,
+.offer-cards-stripe h6 {
+    text-rendering: optimizeLegibility;
+}
+
+/* Button focus states for accessibility */
+.offer-cards-stripe button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Card transitions */
+.offer-cards-stripe .MuiCard-root {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Price styling */
+.offer-cards-stripe .price-display {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Feature list styling */
+.offer-cards-stripe ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Toggle button transitions */
+.offer-cards-stripe .billing-toggle > div {
+    transition: all 0.2s ease;
+}
+
+/* Gradient text effect (optional, activated via class) */
+.offer-cards-stripe .gradient-text {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

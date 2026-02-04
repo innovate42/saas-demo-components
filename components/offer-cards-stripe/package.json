@@ -1,0 +1,94 @@
+{
+  "name": "@user/offer-cards-stripe",
+  "version": "1.0.0",
+  "description": "Stripe-styled offer cards with animated background for Limio",
+  "main": "index.js",
+  "limioProps": [
+    {
+      "id": "heading",
+      "type": "string",
+      "label": "Heading",
+      "default": "Simple, transparent pricing"
+    },
+    {
+      "id": "subheading",
+      "type": "string",
+      "label": "Subheading",
+      "default": "Choose the plan that's right for you. All plans include a 14-day free trial."
+    },
+    {
+      "id": "componentId",
+      "type": "string",
+      "label": "Component Id",
+      "default": "offers-stripe"
+    },
+    {
+      "id": "themeColor",
+      "type": "picklist",
+      "values": [
+        { "label": "Stripe Purple", "value": "purple" },
+        { "label": "Stripe Blue", "value": "blue" },
+        { "label": "Indigo", "value": "indigo" },
+        { "label": "Emerald", "value": "emerald" },
+        { "label": "Slate", "value": "slate" }
+      ],
+      "label": "Theme Color",
+      "default": "purple"
+    },
+    {
+      "id": "backgroundStyle",
+      "type": "picklist",
+      "values": [
+        { "label": "Animated Gradient", "value": "animated" },
+        { "label": "Mesh Gradient", "value": "mesh" },
+        { "label": "Minimal", "value": "minimal" },
+        { "label": "Dark Mode", "value": "dark" }
+      ],
+      "label": "Background Style",
+      "default": "animated"
+    },
+    {
+      "id": "showImage",
+      "type": "boolean",
+      "label": "Show Offer Image",
+      "default": false
+    },
+    {
+      "id": "groupLabels",
+      "type": "list",
+      "labels": {
+        "add": "Add another group",
+        "empty": "No groups"
+      },
+      "label": "Group Labels",
+      "default": ["Monthly", "Annual"]
+    },
+    {
+      "id": "showGroupedOffers",
+      "type": "boolean",
+      "label": "Show Billing Toggle",
+      "default": true
+    },
+    {
+      "id": "annualSavingsLabel",
+      "type": "string",
+      "label": "Annual Savings Label",
+      "default": "Save 20%"
+    },
+    {
+      "id": "showFeatureComparison",
+      "type": "boolean",
+      "label": "Show Feature Checkmarks",
+      "default": true
+    }
+  ],
+  "dependencies": {
+    "@mui/material": "5.16.7",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/inter": "^4.5.0",
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8",
+    "framer-motion": "^10.16.4"
+  }
+}
