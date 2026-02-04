@@ -1,0 +1,84 @@
+{
+  "name": "@limio/header-stripe",
+  "version": "1.0.0",
+  "description": "Stripe-styled header/navigation component",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": "https://limio-qa-stripe.dev.limio.com/public/0eb540d9-a1d0-4bc4-bf22-ed7d80e51b66/ChatGPT%20Image%20Jan%2029,%202026,%2011_46_45%20AM.png"
+    },
+    {
+      "id": "logoAlt",
+      "label": "Logo Alt Text",
+      "type": "string",
+      "default": "Company Logo"
+    },
+    {
+      "id": "navLinks",
+      "label": "Navigation Links",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "href",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "features", "label": "Features", "href": "#features" },
+        { "id": "pricing", "label": "Pricing", "href": "#pricing" },
+        { "id": "about", "label": "About", "href": "#about" }
+      ]
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get Started"
+    },
+    {
+      "id": "ctaLink",
+      "label": "CTA Button Link",
+      "type": "string",
+      "default": "#pricing"
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme Color",
+      "type": "picklist",
+      "options": [
+        { "id": "purple", "label": "Stripe Purple", "value": "purple" },
+        { "id": "blue", "label": "Stripe Blue", "value": "blue" },
+        { "id": "indigo", "label": "Indigo", "value": "indigo" },
+        { "id": "emerald", "label": "Emerald", "value": "emerald" },
+        { "id": "slate", "label": "Slate", "value": "slate" }
+      ],
+      "default": "purple"
+    },
+    {
+      "id": "transparent",
+      "label": "Transparent Background",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "name": "@limio/hero-stripe",
+  "version": "1.0.0",
+  "description": "Stripe-styled hero section with animated background",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "The future of subscription management"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Powerful tools to grow your recurring revenue. Start in minutes, scale to millions."
+    },
+    {
+      "id": "primaryCtaText",
+      "label": "Primary CTA Text",
+      "type": "string",
+      "default": "Start free trial"
+    },
+    {
+      "id": "primaryCtaLink",
+      "label": "Primary CTA Link",
+      "type": "string",
+      "default": "#pricing"
+    },
+    {
+      "id": "secondaryCtaText",
+      "label": "Secondary CTA Text",
+      "type": "string",
+      "default": "Contact sales"
+    },
+    {
+      "id": "secondaryCtaLink",
+      "label": "Secondary CTA Link",
+      "type": "string",
+      "default": "#contact"
+    },
+    {
+      "id": "showSecondaryBtn",
+      "label": "Show Secondary Button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "heroImage",
+      "label": "Hero Image URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme Color",
+      "type": "picklist",
+      "options": [
+        { "id": "purple", "label": "Stripe Purple", "value": "purple" },
+        { "id": "blue", "label": "Stripe Blue", "value": "blue" },
+        { "id": "indigo", "label": "Indigo", "value": "indigo" },
+        { "id": "emerald", "label": "Emerald", "value": "emerald" },
+        { "id": "slate", "label": "Slate", "value": "slate" }
+      ],
+      "default": "purple"
+    },
+    {
+      "id": "backgroundStyle",
+      "label": "Background Style",
+      "type": "picklist",
+      "options": [
+        { "id": "animated", "label": "Animated Gradient", "value": "animated" },
+        { "id": "minimal", "label": "Minimal", "value": "minimal" },
+        { "id": "dark", "label": "Dark Mode", "value": "dark" }
+      ],
+      "default": "animated"
+    },
+    {
+      "id": "trustBadges",
+      "label": "Trust Badges",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "secure", "label": "Enterprise-grade security" },
+        { "id": "uptime", "label": "99.99% uptime SLA" },
+        { "id": "support", "label": "24/7 support" }
+      ]
+    }
+  ]
+}

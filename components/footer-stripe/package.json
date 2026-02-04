@@ -1,0 +1,183 @@
+{
+  "name": "@limio/footer-stripe",
+  "version": "1.0.0",
+  "description": "Stripe-styled footer component",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": "https://limio-qa-stripe.dev.limio.com/public/0eb540d9-a1d0-4bc4-bf22-ed7d80e51b66/ChatGPT%20Image%20Jan%2029,%202026,%2011_46_45%20AM.png"
+    },
+    {
+      "id": "tagline",
+      "label": "Tagline",
+      "type": "string",
+      "default": "The modern subscription platform for ambitious businesses."
+    },
+    {
+      "id": "copyrightText",
+      "label": "Copyright Text",
+      "type": "string",
+      "default": "© 2025 Company. All rights reserved."
+    },
+    {
+      "id": "column1Title",
+      "label": "Column 1 Title",
+      "type": "string",
+      "default": "Product"
+    },
+    {
+      "id": "column1Links",
+      "label": "Column 1 Links",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "href",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "features", "label": "Features", "href": "#" },
+        { "id": "pricing", "label": "Pricing", "href": "#" },
+        { "id": "integrations", "label": "Integrations", "href": "#" }
+      ]
+    },
+    {
+      "id": "column2Title",
+      "label": "Column 2 Title",
+      "type": "string",
+      "default": "Company"
+    },
+    {
+      "id": "column2Links",
+      "label": "Column 2 Links",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "href",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "about", "label": "About", "href": "#" },
+        { "id": "blog", "label": "Blog", "href": "#" },
+        { "id": "careers", "label": "Careers", "href": "#" }
+      ]
+    },
+    {
+      "id": "column3Title",
+      "label": "Column 3 Title",
+      "type": "string",
+      "default": "Resources"
+    },
+    {
+      "id": "column3Links",
+      "label": "Column 3 Links",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "href",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "docs", "label": "Documentation", "href": "#" },
+        { "id": "help", "label": "Help Center", "href": "#" },
+        { "id": "status", "label": "Status", "href": "#" }
+      ]
+    },
+    {
+      "id": "column4Title",
+      "label": "Column 4 Title",
+      "type": "string",
+      "default": "Legal"
+    },
+    {
+      "id": "column4Links",
+      "label": "Column 4 Links",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "href",
+          "label": "URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "privacy", "label": "Privacy", "href": "#" },
+        { "id": "terms", "label": "Terms", "href": "#" },
+        { "id": "cookies", "label": "Cookies", "href": "#" }
+      ]
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme Color",
+      "type": "picklist",
+      "options": [
+        { "id": "purple", "label": "Stripe Purple", "value": "purple" },
+        { "id": "blue", "label": "Stripe Blue", "value": "blue" },
+        { "id": "indigo", "label": "Indigo", "value": "indigo" },
+        { "id": "emerald", "label": "Emerald", "value": "emerald" },
+        { "id": "slate", "label": "Slate", "value": "slate" }
+      ],
+      "default": "purple"
+    },
+    {
+      "id": "darkMode",
+      "label": "Dark Mode",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
