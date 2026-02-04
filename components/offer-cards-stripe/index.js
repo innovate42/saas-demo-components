@@ -124,13 +124,13 @@ const BillingToggle = ({ labels, selected, onSelect, savingsLabel, primaryColor 
 
     return (
         <div className="stripe-toggle">
-            {labels.map((label, i) => (
+            {labels.map((item, i) => (
                 <button
-                    key={label}
-                    className={`stripe-toggle__btn ${selected === label ? "stripe-toggle__btn--active" : ""}`}
-                    onClick={() => onSelect(label)}
+                    key={item.id}
+                    className={`stripe-toggle__btn ${selected === item.id ? "stripe-toggle__btn--active" : ""}`}
+                    onClick={() => onSelect(item.id)}
                 >
-                    {label}
+                    {item.label}
                     {i === labels.length - 1 && savingsLabel && (
                         <span className="stripe-toggle__badge" style={{ backgroundColor: primaryColor }}>
                             {savingsLabel}
@@ -174,12 +174,13 @@ const OfferCardsStripe = () => {
     const validLabels = useMemo(() => {
         const groups = Object.keys(groupedOffers)
         if (groupLabels && groupLabels.length > 0) {
-            return groupLabels.filter(label => groups.includes(label))
+            // groupLabels is array of {id, label} objects
+            return groupLabels.filter(item => groups.includes(item.id))
         }
-        return groups
+        return groups.map(g => ({ id: g, label: g }))
     }, [groupLabels, groupedOffers])
 
-    const [selectedGroup, setSelectedGroup] = useState(validLabels[0] || "")
+    const [selectedGroup, setSelectedGroup] = useState(validLabels[0]?.id || "")
 
     const displayedOffers = useMemo(() => {
         if (showGroupedOffers && selectedGroup && groupedOffers[selectedGroup]) {

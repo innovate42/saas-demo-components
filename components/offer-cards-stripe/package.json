@@ -25,25 +25,25 @@
     {
       "id": "themeColor",
       "type": "picklist",
-      "values": [
-        { "label": "Stripe Purple", "value": "purple" },
-        { "label": "Stripe Blue", "value": "blue" },
-        { "label": "Indigo", "value": "indigo" },
-        { "label": "Emerald", "value": "emerald" },
-        { "label": "Slate", "value": "slate" }
-      ],
       "label": "Theme Color",
+      "options": [
+        { "id": "purple", "label": "Stripe Purple", "value": "purple" },
+        { "id": "blue", "label": "Stripe Blue", "value": "blue" },
+        { "id": "indigo", "label": "Indigo", "value": "indigo" },
+        { "id": "emerald", "label": "Emerald", "value": "emerald" },
+        { "id": "slate", "label": "Slate", "value": "slate" }
+      ],
       "default": "purple"
     },
     {
       "id": "backgroundStyle",
       "type": "picklist",
-      "values": [
-        { "label": "Animated Gradient", "value": "animated" },
-        { "label": "Minimal", "value": "minimal" },
-        { "label": "Dark Mode", "value": "dark" }
-      ],
       "label": "Background Style",
+      "options": [
+        { "id": "animated", "label": "Animated Gradient", "value": "animated" },
+        { "id": "minimal", "label": "Minimal", "value": "minimal" },
+        { "id": "dark", "label": "Dark Mode", "value": "dark" }
+      ],
       "default": "animated"
     },
     {
