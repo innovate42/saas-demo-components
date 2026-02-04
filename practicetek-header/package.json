@@ -1,0 +1,91 @@
+{
+  "name": "@limio/practicetek-header",
+  "version": "1.0.0",
+  "description": "PracticeTek style header with navigation",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": "https://www.practicetek.com/wp-content/uploads/2024/09/practicetek-logo.svg"
+    },
+    {
+      "id": "logoAlt",
+      "label": "Logo Alt Text",
+      "type": "string",
+      "default": "PracticeTek"
+    },
+    {
+      "id": "navLinks",
+      "label": "Navigation Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "home", "label": "Home", "url": "/" },
+        { "id": "insights", "label": "Insights", "url": "/insights" },
+        { "id": "contact", "label": "Contact", "url": "/contact" },
+        { "id": "careers", "label": "Careers", "url": "/careers" }
+      ]
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get Started"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA Button URL",
+      "type": "string",
+      "default": "/subscribe"
+    },
+    {
+      "id": "showCta",
+      "label": "Show CTA Button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "ctaBackgroundColor__limio_color",
+      "label": "CTA Background Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "ctaTextColor__limio_color",
+      "label": "CTA Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    }
+  ]
+}

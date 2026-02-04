@@ -1,0 +1,122 @@
+{
+  "name": "@limio/practicetek-footer",
+  "version": "1.0.0",
+  "description": "PracticeTek style footer with navigation and social links",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "logoUrl",
+      "label": "Logo URL",
+      "type": "string",
+      "default": "https://www.practicetek.com/wp-content/uploads/2024/09/practicetek-logo.svg"
+    },
+    {
+      "id": "logoAlt",
+      "label": "Logo Alt Text",
+      "type": "string",
+      "default": "PracticeTek"
+    },
+    {
+      "id": "companyDescription__limio_richtext",
+      "label": "Company Description",
+      "type": "richText",
+      "default": "<p>Empowering healthcare professionals with innovative software solutions that streamline operations and drive practice growth.</p>"
+    },
+    {
+      "id": "navLinks",
+      "label": "Navigation Links",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Link Text",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "home", "label": "Home", "url": "/" },
+        { "id": "contact", "label": "Contact", "url": "/contact" },
+        { "id": "careers", "label": "Careers", "url": "/careers" },
+        { "id": "privacy", "label": "Privacy Policy", "url": "/privacy" }
+      ]
+    },
+    {
+      "id": "socialLinks",
+      "label": "Social Media Links",
+      "type": "list",
+      "fields": {
+        "platform": {
+          "id": "platform",
+          "label": "Platform",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "URL",
+          "type": "string"
+        },
+        "iconUrl": {
+          "id": "iconUrl",
+          "label": "Icon URL (optional)",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "linkedin", "platform": "LinkedIn", "url": "https://linkedin.com/company/practicetek" }
+      ]
+    },
+    {
+      "id": "address",
+      "label": "Address",
+      "type": "string",
+      "default": "San Diego, CA"
+    },
+    {
+      "id": "showAddress",
+      "label": "Show Address",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "copyrightText",
+      "label": "Copyright Text",
+      "type": "string",
+      "default": "PracticeTek. All rights reserved."
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "linkColor__limio_color",
+      "label": "Link Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A0A0B0"
+    }
+  ]
+}
