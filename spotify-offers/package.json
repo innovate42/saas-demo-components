@@ -1,0 +1,137 @@
+{
+  "name": "@limio/spotify-offers",
+  "version": "1.0.0",
+  "description": "Spotify style offer cards with hero section",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroHeadline",
+      "label": "Hero Headline",
+      "type": "string",
+      "default": "Get Premium free for 1 month"
+    },
+    {
+      "id": "heroSubheadline",
+      "label": "Hero Subheadline",
+      "type": "string",
+      "default": "Just $10.99/month after. Cancel anytime."
+    },
+    {
+      "id": "heroImageUrl",
+      "label": "Hero Image URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "showHeroSection",
+      "label": "Show Hero Section",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "sectionHeadline",
+      "label": "Section Headline",
+      "type": "string",
+      "default": "Pick your Premium"
+    },
+    {
+      "id": "sectionSubheadline",
+      "label": "Section Subheadline",
+      "type": "string",
+      "default": "Listen without limits on your phone, speaker, and other devices."
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Enable Offer Grouping",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group Labels",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly" },
+        { "id": "annual", "label": "Annual" }
+      ]
+    },
+    {
+      "id": "cardAccentColors",
+      "label": "Card Accent Colors",
+      "type": "list",
+      "fields": {
+        "offerId": {
+          "id": "offerId",
+          "label": "Offer ID (or index: 0, 1, 2...)",
+          "type": "string"
+        },
+        "color": {
+          "id": "color",
+          "label": "Accent Color",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "0", "offerId": "0", "color": "#1ED760" },
+        { "id": "1", "offerId": "1", "color": "#ffd2d7" },
+        { "id": "2", "offerId": "2", "color": "#c4b1d4" },
+        { "id": "3", "offerId": "3", "color": "#ffc862" }
+      ]
+    },
+    {
+      "id": "bestValueLabel",
+      "label": "Best Value Badge Text",
+      "type": "string",
+      "default": "Most Popular"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#121212"
+    },
+    {
+      "id": "cardBackgroundColor__limio_color",
+      "label": "Card Background Color",
+      "type": "color",
+      "default": "#242424"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "mutedTextColor__limio_color",
+      "label": "Muted Text Color",
+      "type": "color",
+      "default": "#A7A7A7"
+    },
+    {
+      "id": "primaryAccentColor__limio_color",
+      "label": "Primary Accent Color",
+      "type": "color",
+      "default": "#1ED760"
+    }
+  ]
+}
