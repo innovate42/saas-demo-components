@@ -48,13 +48,37 @@
     },
     {
       "id": "groupLabels",
-      "type": "list",
-      "labels": {
-        "add": "Add another group",
-        "empty": "No groups"
-      },
       "label": "Group Labels",
-      "default": ["Monthly", "Annual"]
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "URL",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        }
+      },
+      "default": [
+        {
+          "id": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "id": "annual",
+          "label": "Annual"
+        }
+      ]
     },
     {
       "id": "showGroupedOffers",
