@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Stripe-styled header/navigation component",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },

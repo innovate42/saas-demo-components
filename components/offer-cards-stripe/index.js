@@ -3,10 +3,10 @@ import { useCampaign, useBasket } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
 import { groupBy, prop } from "ramda"
-import { filterWhitelistedHTML } from "xss"
+import xss from "xss"
 import "./index.css"
 
-const sanitizeString = (str) => filterWhitelistedHTML(str || "")
+const sanitizeString = (str) => xss(str || "")
 
 const themes = {
     purple: { primary: "#635BFF", hover: "#5851EA" },

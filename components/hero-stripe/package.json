@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Stripe-styled hero section with animated background",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },
