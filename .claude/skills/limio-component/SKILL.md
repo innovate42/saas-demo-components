@@ -8,7 +8,24 @@ version: 2.0.0
 
 Use this skill when creating custom components for the Limio subscription management platform.
 
+## Component Location
+
+**All custom components must be created in the `/components` directory.**
+
+```
+/components/
+├── component-name/
+│   ├── package.json
+│   ├── index.js
+│   ├── componentStaticProps.js
+│   └── index.css
+├── another-component/
+│   └── ...
+```
+
 ## Component Structure
+
+Each component folder contains:
 
 ```
 component-name/
