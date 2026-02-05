@@ -406,10 +406,35 @@ formatCurrencyForCurrentLocale(9.99, "USD") // "$9.99"
 import { useLimioContext } from "@limio/sdk"
 
 const { isInPageBuilder } = useLimioContext() || {}
+```
 
-// Disable fixed positioning, heavy animations in Page Builder
-if (isInPageBuilder) {
-  // Render static version for editor
+### Page Builder Compatibility
+
+When `isInPageBuilder` is true, the component is being rendered in the Limio Page Builder editor. Components using `position: fixed` or `position: absolute` can break out of their designated section and interfere with the Page Builder UI.
+
+**Always ensure components stay within their section bounds in Page Builder**, even if they're designed to float/stick in production:
+
+```javascript
+const { isInPageBuilder } = useLimioContext() || {}
+
+// Conditional class for sticky header
+const headerClasses = [
+    "header",
+    isInPageBuilder ? "header--static" : ""
+].filter(Boolean).join(" ")
+
+return <header className={headerClasses}>...</header>
+```
+
+```css
+.header {
+    position: fixed;  /* Floats in production */
+    top: 0;
+    z-index: 1000;
+}
+
+.header--static {
+    position: relative;  /* Stays in section in Page Builder */
 }
 ```
 
@@ -425,6 +450,53 @@ import xss from "xss"
 const sanitizeString = (str) => xss(str || "")
 
 <div dangerouslySetInnerHTML={{ __html: sanitizeString(offer.data.attributes.display_price__limio) }} />
+```
+
+---
+
+## Offer Attachments
+
+Offers can have image attachments. To find and display an offer's image:
+
+```javascript
+const attachments = offer?.data?.attachments || []
+
+// Find image attachment
+const imageAttachment = attachments.find(a =>
+    a.type === "image" || (a.url && /\.(jpg|jpeg|png|gif|svg|webp)$/i.test(a.url))
+)
+
+// Use in component
+{imageAttachment && (
+    <img src={imageAttachment.url} alt={displayName} />
+)}
+```
+
+---
+
+## Common Utilities
+
+### Contrast Color
+When using configurable background colors for buttons, calculate contrasting text color:
+
+```javascript
+const getContrastColor = (hexColor) => {
+    if (!hexColor) return "#000000"
+    const hex = hexColor.replace("#", "")
+    const r = parseInt(hex.substr(0, 2), 16)
+    const g = parseInt(hex.substr(2, 2), 16)
+    const b = parseInt(hex.substr(4, 2), 16)
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+    return luminance > 0.5 ? "#000000" : "#FFFFFF"
+}
+
+// Usage
+<button style={{
+    backgroundColor: accentColor,
+    color: getContrastColor(accentColor)
+}}>
+    {ctaText}
+</button>
 ```
 
 ---
@@ -505,7 +577,7 @@ export default MyComponent
    ```
 4. **List props** - Items are `{id, label}` objects
 5. **Picklist options** - Use `options` array with `{id, label, value}`
-6. **Page Builder detection** - Use `useLimioContext().isInPageBuilder` to disable fixed positioning
+6. **Page Builder compatibility** - Components with `position: fixed/absolute` must fall back to `position: relative` when `isInPageBuilder` is true, so they stay within their section
 7. **Loading states** - Handle `basketLoading` to prevent double submissions
 8. **Sanitize HTML** - Always use `xss` library for rich text content
 9. **MUI version** - Use 5.16.12 for React 19 compatibility
