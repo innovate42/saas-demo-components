@@ -2,7 +2,7 @@
   "name": "@limio/spotify-offers",
   "version": "1.0.0",
   "description": "Spotify style offer cards with hero section",
-  "main": "./index.js",
+  "main": "index.js",
   "dependencies": {
     "ramda": "^0.28.0",
     "xss": "^1.0.8"

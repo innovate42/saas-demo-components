@@ -1,0 +1,377 @@
+/* IntelliJ-Style Offer Cards */
+/* Inspired by JetBrains dark theme aesthetic */
+
+.ij-offer-cards {
+    --ij-bg-primary: #2B2D30;
+    --ij-bg-secondary: #1E1F22;
+    --ij-bg-card: #2B2D30;
+    --ij-bg-card-hover: #323438;
+    --ij-border: #43454A;
+    --ij-border-focus: #5E6066;
+    --ij-text-primary: #DFE1E5;
+    --ij-text-secondary: #9DA0A8;
+    --ij-text-muted: #6F737A;
+    --ij-accent: var(--accent-color, #087CFA);
+    --ij-accent-hover: #3592FC;
+    --ij-success: #59A869;
+    --ij-warning: #E5C07B;
+    --ij-radius: 8px;
+    --ij-radius-sm: 4px;
+    --ij-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --ij-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --ij-font-family: "JetBrains Mono", "Fira Code", "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
+    --ij-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    background: var(--ij-bg-secondary);
+    padding: 64px 24px;
+    font-family: var(--ij-font-sans);
+}
+
+.ij-offer-cards__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ij-offer-cards__header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.ij-offer-cards__headline {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ij-text-primary);
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+}
+
+.ij-offer-cards__subheadline {
+    font-size: 16px;
+    color: var(--ij-text-secondary);
+    margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.ij-offer-cards__placeholder {
+    text-align: center;
+    color: var(--ij-text-muted);
+    padding: 48px;
+    border: 1px dashed var(--ij-border);
+    border-radius: var(--ij-radius);
+    font-family: var(--ij-font-family);
+    font-size: 14px;
+}
+
+/* Group Toggle - IntelliJ Tab Style */
+.ij-offer-cards__toggle {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 40px;
+    background: var(--ij-bg-primary);
+    padding: 4px;
+    border-radius: var(--ij-radius);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--ij-border);
+}
+
+.ij-offer-cards__toggle-btn {
+    font-family: var(--ij-font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border: none;
+    background: transparent;
+    color: var(--ij-text-secondary);
+    cursor: pointer;
+    border-radius: var(--ij-radius-sm);
+    transition: all 0.15s ease;
+}
+
+.ij-offer-cards__toggle-btn:hover {
+    color: var(--ij-text-primary);
+    background: var(--ij-bg-card-hover);
+}
+
+.ij-offer-cards__toggle-btn--active {
+    background: var(--ij-accent);
+    color: #fff;
+}
+
+.ij-offer-cards__toggle-btn--active:hover {
+    background: var(--ij-accent-hover);
+    color: #fff;
+}
+
+/* Cards Grid */
+.ij-offer-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* Individual Card */
+.ij-card {
+    background: var(--ij-bg-card);
+    border: 1px solid var(--ij-border);
+    border-radius: var(--ij-radius);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: var(--ij-shadow);
+}
+
+.ij-card:hover {
+    background: var(--ij-bg-card-hover);
+    border-color: var(--ij-border-focus);
+    transform: translateY(-2px);
+    box-shadow: var(--ij-shadow-lg);
+}
+
+.ij-card--featured {
+    border-color: var(--ij-accent);
+    background: linear-gradient(
+        180deg,
+        rgba(8, 124, 250, 0.08) 0%,
+        var(--ij-bg-card) 100%
+    );
+}
+
+.ij-card--featured:hover {
+    border-color: var(--ij-accent-hover);
+}
+
+/* Badge */
+.ij-card__badge {
+    position: absolute;
+    top: -1px;
+    right: 24px;
+    background: var(--ij-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 0 0 var(--ij-radius-sm) var(--ij-radius-sm);
+}
+
+/* Card Header */
+.ij-card__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ij-card__icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.ij-card__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ij-card__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ij-text-primary);
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+/* Pricing */
+.ij-card__pricing {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--ij-border);
+}
+
+.ij-card__price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ij-text-primary);
+    font-family: var(--ij-font-family);
+    line-height: 1.2;
+}
+
+.ij-card__price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ij-text-secondary);
+}
+
+.ij-card__price-detail {
+    font-size: 13px;
+    color: var(--ij-text-muted);
+    margin-top: 8px;
+}
+
+/* Features */
+.ij-card__features {
+    flex: 1;
+    margin-bottom: 28px;
+}
+
+.ij-card__features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ij-card__features li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--ij-text-secondary);
+    line-height: 1.5;
+}
+
+.ij-card__features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2359A869' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ij-card__features p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: var(--ij-text-secondary);
+    line-height: 1.5;
+}
+
+/* CTA Button */
+.ij-card__cta {
+    width: 100%;
+    padding: 14px 24px;
+    font-family: var(--ij-font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--ij-bg-primary);
+    color: var(--ij-text-primary);
+    border: 1px solid var(--ij-border);
+    border-radius: var(--ij-radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ij-card__cta:hover {
+    background: var(--ij-bg-card-hover);
+    border-color: var(--ij-border-focus);
+}
+
+.ij-card__cta:active {
+    transform: scale(0.98);
+}
+
+.ij-card__cta:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ij-card--featured .ij-card__cta {
+    background: var(--ij-accent);
+    border-color: var(--ij-accent);
+    color: #fff;
+}
+
+.ij-card--featured .ij-card__cta:hover {
+    background: var(--ij-accent-hover);
+    border-color: var(--ij-accent-hover);
+}
+
+/* Loading Spinner */
+.ij-card__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: ij-spin 0.8s linear infinite;
+}
+
+@keyframes ij-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ij-offer-cards {
+        padding: 48px 16px;
+    }
+
+    .ij-offer-cards__headline {
+        font-size: 28px;
+    }
+
+    .ij-offer-cards__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .ij-card {
+        padding: 24px 20px;
+    }
+
+    .ij-card__price {
+        font-size: 28px;
+    }
+
+    .ij-offer-cards__toggle {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .ij-offer-cards__toggle-btn {
+        flex: 1;
+        padding: 10px 16px;
+    }
+}
+
+/* Focus styles for accessibility */
+.ij-offer-cards__toggle-btn:focus-visible,
+.ij-card__cta:focus-visible {
+    outline: 2px solid var(--ij-accent);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .ij-card,
+    .ij-card__cta,
+    .ij-offer-cards__toggle-btn {
+        transition: none;
+    }
+
+    .ij-card:hover {
+        transform: none;
+    }
+
+    .ij-card__spinner {
+        animation: none;
+    }
+}
