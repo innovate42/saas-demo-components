@@ -1,0 +1,113 @@
+{
+  "name": "@limio/order-complete",
+  "version": "1.0.0",
+  "description": "Stripe-styled order complete page with configurable onboarding steps per product code",
+  "main": "./index.js",
+  "dependencies": {
+    "@limio/internal-checkout-sdk": "workspace:^",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@limio/sdk": "workspace:packages/limio-sdk"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Order Confirmed"
+    },
+    {
+      "id": "successMessage",
+      "label": "Success Message",
+      "type": "string",
+      "default": "Thank you for your purchase! A confirmation email has been sent."
+    },
+    {
+      "id": "orderSummaryTitle",
+      "label": "Order Summary Title",
+      "type": "string",
+      "default": "Order Summary"
+    },
+    {
+      "id": "onboardingTitle",
+      "label": "Onboarding Section Title",
+      "type": "string",
+      "default": "Get Started"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#635BFF"
+    },
+    {
+      "id": "successColor__limio_color",
+      "label": "Success Color",
+      "type": "color",
+      "default": "#30D158"
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Go to Dashboard"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA Button URL",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "onboardingSteps",
+      "label": "Onboarding Steps",
+      "type": "list",
+      "fields": {
+        "productCodeField": {
+          "id": "productCode",
+          "label": "Product Code",
+          "type": "string"
+        },
+        "stepTitleField": {
+          "id": "stepTitle",
+          "label": "Step Title",
+          "type": "string"
+        },
+        "stepDescriptionField": {
+          "id": "stepDescription",
+          "label": "Step Description",
+          "type": "string"
+        },
+        "stepUrlField": {
+          "id": "stepUrl",
+          "label": "Step Link URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "productCode": "default",
+          "stepTitle": "Set up your account",
+          "stepDescription": "Complete your profile and configure your workspace preferences.",
+          "stepUrl": ""
+        },
+        {
+          "productCode": "default",
+          "stepTitle": "Explore your plan",
+          "stepDescription": "Discover the features and tools available with your subscription.",
+          "stepUrl": ""
+        },
+        {
+          "productCode": "default",
+          "stepTitle": "Get support",
+          "stepDescription": "Visit our help center or reach out to our team with any questions.",
+          "stepUrl": ""
+        }
+      ]
+    }
+  ]
+}

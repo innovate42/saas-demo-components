@@ -1,0 +1,267 @@
+/* Order Complete — Stripe-inspired */
+.oc-page {
+    --oc-primary: #635BFF;
+    --oc-success: #30D158;
+    --oc-text: #1a1f36;
+    --oc-text-muted: #697386;
+    --oc-border: #e3e8ee;
+    --oc-bg: #f6f9fc;
+    --oc-card: #ffffff;
+
+    background: var(--oc-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--oc-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.oc-page *, .oc-page *::before, .oc-page *::after {
+    box-sizing: border-box;
+}
+
+/* ---- Container ---- */
+.oc-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+/* ---- Header ---- */
+.oc-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.oc-check-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--oc-success);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.oc-check-circle svg {
+    width: 28px;
+    height: 28px;
+}
+
+.oc-heading {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    color: var(--oc-text);
+}
+
+.oc-subtext {
+    font-size: 15px;
+    color: var(--oc-text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.oc-subtext strong {
+    color: var(--oc-text);
+    font-weight: 600;
+}
+
+/* ---- Card ---- */
+.oc-card {
+    background: var(--oc-card);
+    border: 1px solid var(--oc-border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.oc-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--oc-text-muted);
+    margin: 0 0 16px;
+}
+
+/* ---- Order details ---- */
+.oc-details {
+    margin: 0;
+}
+
+.oc-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--oc-border);
+}
+
+.oc-detail-row:first-child {
+    padding-top: 0;
+}
+
+.oc-detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.oc-detail-row dt {
+    font-size: 14px;
+    color: var(--oc-text-muted);
+    font-weight: 500;
+}
+
+.oc-detail-row dd {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--oc-text);
+    margin: 0;
+    text-align: right;
+}
+
+.oc-mono {
+    font-family: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ---- Onboarding steps ---- */
+.oc-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.oc-step {
+    display: flex;
+    gap: 16px;
+}
+
+.oc-step-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.oc-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--oc-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.oc-step-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--oc-border);
+    min-height: 20px;
+}
+
+.oc-step-body {
+    padding-top: 5px;
+    padding-bottom: 24px;
+}
+
+.oc-step:last-child .oc-step-body {
+    padding-bottom: 0;
+}
+
+.oc-step-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--oc-text);
+    margin: 0 0 2px;
+}
+
+.oc-step-link {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--oc-primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.oc-step-link:hover {
+    text-decoration: underline;
+}
+
+.oc-step-desc {
+    font-size: 14px;
+    color: var(--oc-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ---- CTA button ---- */
+.oc-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 24px;
+    margin-top: 8px;
+    background: var(--oc-primary);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+    font-family: inherit;
+}
+
+.oc-cta:hover {
+    opacity: 0.9;
+}
+
+.oc-cta:active {
+    transform: scale(0.99);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+    .oc-page {
+        padding: 32px 16px;
+    }
+
+    .oc-heading {
+        font-size: 24px;
+    }
+
+    .oc-card {
+        padding: 20px;
+    }
+
+    .oc-check-circle {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+
+    .oc-check-circle svg {
+        width: 24px;
+        height: 24px;
+    }
+}
