@@ -4,14 +4,10 @@
   "description": "Stripe-styled order complete page with configurable onboarding steps per product code",
   "main": "./index.js",
   "dependencies": {
-    "@limio/internal-checkout-sdk": "workspace:^",
     "xss": "^1.0.8"
   },
   "peerDependencies": {
     "react": "*"
-  },
-  "devDependencies": {
-    "@limio/sdk": "workspace:packages/limio-sdk"
   },
   "limioProps": [
     {
@@ -61,6 +57,42 @@
       "label": "CTA Button URL",
       "type": "string",
       "default": "/"
+    },
+    {
+      "id": "planLabel",
+      "label": "Plan Label",
+      "type": "string",
+      "default": "Plan"
+    },
+    {
+      "id": "amountLabel",
+      "label": "Amount Label",
+      "type": "string",
+      "default": "Amount paid"
+    },
+    {
+      "id": "renewalLabel",
+      "label": "Renewal Label",
+      "type": "string",
+      "default": "Renewal price"
+    },
+    {
+      "id": "dateLabel",
+      "label": "Date Label",
+      "type": "string",
+      "default": "Date"
+    },
+    {
+      "id": "emailLabel",
+      "label": "Email Label",
+      "type": "string",
+      "default": "Email"
+    },
+    {
+      "id": "productLabel",
+      "label": "Product Label",
+      "type": "string",
+      "default": "Product"
     },
     {
       "id": "onboardingSteps",

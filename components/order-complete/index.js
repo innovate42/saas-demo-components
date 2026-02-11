@@ -45,6 +45,12 @@ const OrderComplete = () => {
         successColor__limio_color: successColor = "#30D158",
         ctaText = "Go to Dashboard",
         ctaUrl = "/",
+        planLabel = "Plan",
+        amountLabel = "Amount paid",
+        renewalLabel = "Renewal price",
+        dateLabel = "Date",
+        emailLabel = "Email",
+        productLabel = "Product",
         onboardingSteps = []
     } = props
 
@@ -98,34 +104,34 @@ const OrderComplete = () => {
                     <h2 className="oc-card-title">{orderSummaryTitle}</h2>
                     <dl className="oc-details">
                         <div className="oc-detail-row">
-                            <dt>Plan</dt>
+                            <dt>{planLabel}</dt>
                             <dd>{planName}</dd>
                         </div>
                         {price && (
                             <div className="oc-detail-row">
-                                <dt>Amount paid</dt>
+                                <dt>{amountLabel}</dt>
                                 <dd>{price}</dd>
                             </div>
                         )}
                         {renewalPrice && renewalPrice !== price && (
                             <div className="oc-detail-row">
-                                <dt>Renewal price</dt>
+                                <dt>{renewalLabel}</dt>
                                 <dd>{renewalPrice}</dd>
                             </div>
                         )}
                         <div className="oc-detail-row">
-                            <dt>Date</dt>
+                            <dt>{dateLabel}</dt>
                             <dd>{today}</dd>
                         </div>
                         {email && (
                             <div className="oc-detail-row">
-                                <dt>Email</dt>
+                                <dt>{emailLabel}</dt>
                                 <dd>{email}</dd>
                             </div>
                         )}
                         {productCode && productCode !== "default" && (
                             <div className="oc-detail-row">
-                                <dt>Product</dt>
+                                <dt>{productLabel}</dt>
                                 <dd className="oc-mono">{productCode}</dd>
                             </div>
                         )}
