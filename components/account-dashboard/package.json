@@ -1,0 +1,230 @@
+{
+  "name": "@limio/account-dashboard",
+  "version": "2.0.0",
+  "description": "Comprehensive SaaS account dashboard with multi-subscription support, payment history, and available offers",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Page Heading",
+      "type": "string",
+      "default": "Account"
+    },
+    {
+      "id": "profileSectionTitle",
+      "label": "Profile Section Title",
+      "type": "string",
+      "default": "Profile"
+    },
+    {
+      "id": "subscriptionsSectionTitle",
+      "label": "Subscriptions Section Title",
+      "type": "string",
+      "default": "Subscriptions"
+    },
+    {
+      "id": "paymentHistoryTitle",
+      "label": "Payment History Title",
+      "type": "string",
+      "default": "Payment History"
+    },
+    {
+      "id": "availableOffersTitle",
+      "label": "Available Offers Title",
+      "type": "string",
+      "default": "Available Plans"
+    },
+    {
+      "id": "availableOffersSubtitle",
+      "label": "Available Offers Subtitle",
+      "type": "string",
+      "default": "Explore plans to upgrade or add to your account"
+    },
+    {
+      "id": "showPaymentHistory",
+      "label": "Show Payment History",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showAvailableOffers",
+      "label": "Show Available Offers",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showCancelledSubscriptions",
+      "label": "Show Cancelled Subscriptions",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "nameLabel",
+      "label": "Name Label",
+      "type": "string",
+      "default": "Name"
+    },
+    {
+      "id": "emailLabel",
+      "label": "Email Label",
+      "type": "string",
+      "default": "Email"
+    },
+    {
+      "id": "memberSinceLabel",
+      "label": "Member Since Label",
+      "type": "string",
+      "default": "Member since"
+    },
+    {
+      "id": "planLabel",
+      "label": "Plan Label",
+      "type": "string",
+      "default": "Plan"
+    },
+    {
+      "id": "statusLabel",
+      "label": "Status Label",
+      "type": "string",
+      "default": "Status"
+    },
+    {
+      "id": "priceLabel",
+      "label": "Price Label",
+      "type": "string",
+      "default": "Price"
+    },
+    {
+      "id": "periodLabel",
+      "label": "Billing Period Label",
+      "type": "string",
+      "default": "Billing period"
+    },
+    {
+      "id": "renewalLabel",
+      "label": "Renewal Date Label",
+      "type": "string",
+      "default": "Next billing date"
+    },
+    {
+      "id": "startedLabel",
+      "label": "Started Date Label",
+      "type": "string",
+      "default": "Started"
+    },
+    {
+      "id": "referenceLabel",
+      "label": "Reference Label",
+      "type": "string",
+      "default": "Reference"
+    },
+    {
+      "id": "productLabel",
+      "label": "Product Label",
+      "type": "string",
+      "default": "Product"
+    },
+    {
+      "id": "dateColumnLabel",
+      "label": "Payment History Date Column",
+      "type": "string",
+      "default": "Date"
+    },
+    {
+      "id": "descriptionColumnLabel",
+      "label": "Payment History Description Column",
+      "type": "string",
+      "default": "Description"
+    },
+    {
+      "id": "amountColumnLabel",
+      "label": "Payment History Amount Column",
+      "type": "string",
+      "default": "Amount"
+    },
+    {
+      "id": "statusColumnLabel",
+      "label": "Payment History Status Column",
+      "type": "string",
+      "default": "Status"
+    },
+    {
+      "id": "upgradeUrl",
+      "label": "Upgrade Page URL",
+      "type": "string",
+      "default": "/upgrade"
+    },
+    {
+      "id": "upgradeCtaText",
+      "label": "Upgrade Button Text",
+      "type": "string",
+      "default": "Change plan"
+    },
+    {
+      "id": "manageAddOnsUrl",
+      "label": "Manage Add-Ons URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "manageAddOnsText",
+      "label": "Manage Add-Ons Button Text",
+      "type": "string",
+      "default": "Manage add-ons"
+    },
+    {
+      "id": "cancelUrl",
+      "label": "Cancel Subscription URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "cancelCtaText",
+      "label": "Cancel Button Text",
+      "type": "string",
+      "default": "Cancel plan"
+    },
+    {
+      "id": "noSubscriptionHeading",
+      "label": "No Subscription Heading",
+      "type": "string",
+      "default": "No active subscription"
+    },
+    {
+      "id": "noSubscriptionMessage",
+      "label": "No Subscription Message",
+      "type": "string",
+      "default": "You don't have an active plan yet. Choose a plan to get started."
+    },
+    {
+      "id": "getStartedText",
+      "label": "Get Started Button Text",
+      "type": "string",
+      "default": "View plans"
+    },
+    {
+      "id": "getStartedUrl",
+      "label": "Get Started URL",
+      "type": "string",
+      "default": "/pricing"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#635BFF"
+    },
+    {
+      "id": "dangerColor__limio_color",
+      "label": "Danger Color",
+      "type": "color",
+      "default": "#DF1B41"
+    }
+  ]
+}
