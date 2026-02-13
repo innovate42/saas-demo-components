@@ -24,5 +24,6 @@ yarn-error.log*
 
 *storybook.log
 
-# Claude Code prompt file (transient)
+# Claude Code prompt files (transient)
 .prompt.json
+.prompt-status.json

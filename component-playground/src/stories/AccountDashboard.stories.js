@@ -114,3 +114,21 @@ export const CorporateTheme = {
         availableOffersSubtitle: ""
     }
 }
+
+// Limio branded — orange-to-coral with Manrope font
+export const LimioBranded = {
+    args: {
+        ...Default.args,
+        heading: "Your Account",
+        primaryColor__limio_color: "#F96D24",
+        dangerColor__limio_color: "#CC3A5E",
+        profileSectionTitle: "Profile",
+        subscriptionsSectionTitle: "Subscriptions",
+        paymentHistoryTitle: "Billing History",
+        availableOffersTitle: "Explore Plans",
+        availableOffersSubtitle: "Find the perfect plan for your subscription business",
+        upgradeCtaText: "Switch plan",
+        cancelCtaText: "Cancel",
+        manageAddOnsText: "Add-ons",
+    }
+}

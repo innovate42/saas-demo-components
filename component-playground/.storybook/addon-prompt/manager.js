@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react"
+import React, { useState, useCallback, useEffect, useRef } from "react"
 import { addons, types, useStorybookApi } from "@storybook/manager-api"
 
 const ADDON_ID = "claude-prompt"
@@ -12,6 +12,7 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         background: "#f8f9fb",
+        overflow: "auto",
     },
     header: {
         display: "flex",
@@ -37,6 +38,18 @@ const styles = {
         fontWeight: "700",
         color: "#1a1f36",
         margin: 0,
+        flex: 1,
+    },
+    connectionBadge: {
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "5px",
+        padding: "3px 8px",
+        borderRadius: "12px",
+        fontSize: "10px",
+        fontWeight: "600",
+        textTransform: "uppercase",
+        letterSpacing: "0.04em",
     },
     componentBadge: {
         display: "inline-flex",
@@ -56,7 +69,7 @@ const styles = {
     },
     textarea: {
         width: "100%",
-        minHeight: "120px",
+        minHeight: "100px",
         padding: "12px",
         borderRadius: "8px",
         border: "1px solid #e3e8ee",
@@ -98,28 +111,32 @@ const styles = {
         opacity: 0.5,
         cursor: "not-allowed",
     },
-    buttonHover: {
-        opacity: 0.9,
-    },
-    status: {
-        fontSize: "12px",
-        color: "#697386",
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-    },
-    statusDot: {
-        width: "6px",
-        height: "6px",
-        borderRadius: "50%",
-        display: "inline-block",
-    },
     hint: {
         fontSize: "11px",
         color: "#a3acb9",
         marginTop: "8px",
         lineHeight: "1.5",
     },
+    // Status banner
+    statusBanner: {
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        padding: "10px 14px",
+        borderRadius: "8px",
+        marginBottom: "12px",
+        fontSize: "13px",
+        fontWeight: "500",
+        lineHeight: "1.4",
+    },
+    statusIcon: {
+        fontSize: "16px",
+        flexShrink: 0,
+    },
+    statusMessage: {
+        flex: 1,
+    },
+    // History
     historySection: {
         marginTop: "16px",
         borderTop: "1px solid #e3e8ee",
@@ -147,50 +164,87 @@ const styles = {
     },
 }
 
+const STATE_CONFIG = {
+    idle: { icon: "○", bg: "#f0f2f5", color: "#697386", label: "Idle" },
+    listening: { icon: "●", bg: "#ecfdf5", color: "#0d9f6e", label: "Listening" },
+    queued: { icon: "◷", bg: "#fffbeb", color: "#d97706", label: "Queued" },
+    received: { icon: "⟳", bg: "#eef0ff", color: "#635BFF", label: "Working" },
+    working: { icon: "⟳", bg: "#eef0ff", color: "#635BFF", label: "Working" },
+    permission_needed: { icon: "!", bg: "#fffbeb", color: "#d97706", label: "Needs input" },
+    completed: { icon: "✓", bg: "#ecfdf5", color: "#0d9f6e", label: "Done" },
+    error: { icon: "✕", bg: "#fef2f2", color: "#df1b41", label: "Error" },
+}
+
 const extractComponentFromStory = (story) => {
     if (!story) return null
-    // Try to get from importPath: "../../../components/win-back/index"
     const importPath = story.importPath || ""
     const match = importPath.match(/components\/([^/]+)\//)
     if (match) return match[1]
-    // Fallback: derive from title
-    if (story.title) {
-        return story.title.toLowerCase().replace(/\s+/g, "-")
-    }
+    if (story.title) return story.title.toLowerCase().replace(/\s+/g, "-")
     return null
-}
-
-const STATUS_COLORS = {
-    idle: "#a3acb9",
-    sending: "#d97706",
-    sent: "#0d9f6e",
-    error: "#df1b41",
-}
-
-const STATUS_LABELS = {
-    idle: "Ready",
-    sending: "Sending...",
-    sent: "Sent — waiting for Claude Code",
-    error: "Failed to send",
 }
 
 const PromptPanel = () => {
     const api = useStorybookApi()
     const [prompt, setPrompt] = useState("")
-    const [status, setStatus] = useState("idle")
     const [focused, setFocused] = useState(false)
     const [history, setHistory] = useState([])
     const [component, setComponent] = useState(null)
+    const [liveStatus, setLiveStatus] = useState({ state: "idle", message: "" })
+    const [sending, setSending] = useState(false)
+    const pollRef = useRef(null)
+    const lastPromptTs = useRef(null)
 
+    // Update component from current story
     useEffect(() => {
         const story = api.getCurrentStoryData()
         setComponent(extractComponentFromStory(story))
     })
 
-    const handleSubmit = useCallback(async () => {
-        if (!prompt.trim() || status === "sending") return
+    // Poll status endpoint
+    useEffect(() => {
+        const poll = async () => {
+            try {
+                const res = await fetch("/api/prompt-status")
+                if (res.ok) {
+                    const data = await res.json()
+                    setLiveStatus(data)
 
-        setStatus("sending")
+                    // If completed or error, slow down polling
+                    if (data.state === "completed" || data.state === "error") {
+                        clearInterval(pollRef.current)
+                        pollRef.current = setInterval(poll, 5000)
+                    }
+                }
+            } catch {}
+        }
+
+        pollRef.current = setInterval(poll, 1500)
+        poll() // Initial fetch
+
+        return () => {
+            if (pollRef.current) clearInterval(pollRef.current)
+        }
+    }, [])
+
+    // Speed up polling when a prompt is in-flight
+    useEffect(() => {
+        if (sending || liveStatus.state === "queued" || liveStatus.state === "received" || liveStatus.state === "working") {
+            clearInterval(pollRef.current)
+            const poll = async () => {
+                try {
+                    const res = await fetch("/api/prompt-status")
+                    if (res.ok) setLiveStatus(await res.json())
+                } catch {}
+            }
+            pollRef.current = setInterval(poll, 800)
+        }
+    }, [sending, liveStatus.state])
+
+    const handleSubmit = useCallback(async () => {
+        if (!prompt.trim() || sending) return
+
+        setSending(true)
         try {
             const story = api.getCurrentStoryData()
             const comp = extractComponentFromStory(story)
@@ -206,22 +260,16 @@ const PromptPanel = () => {
             })
 
             if (res.ok) {
-                setStatus("sent")
+                lastPromptTs.current = new Date().toISOString()
                 setHistory(prev => [
                     { prompt: prompt.trim(), time: new Date().toLocaleTimeString(), component: comp },
                     ...prev.slice(0, 4),
                 ])
                 setPrompt("")
-                setTimeout(() => setStatus("idle"), 5000)
-            } else {
-                setStatus("error")
-                setTimeout(() => setStatus("idle"), 3000)
             }
-        } catch {
-            setStatus("error")
-            setTimeout(() => setStatus("idle"), 3000)
-        }
-    }, [prompt, status, api])
+        } catch {}
+        setSending(false)
+    }, [prompt, sending, api])
 
     const handleKeyDown = useCallback((e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
@@ -230,13 +278,55 @@ const PromptPanel = () => {
         }
     }, [handleSubmit])
 
+    const stateConfig = STATE_CONFIG[liveStatus.state] || STATE_CONFIG.idle
+    const showBanner = liveStatus.state && liveStatus.state !== "idle"
+    const isWorking = liveStatus.state === "queued" || liveStatus.state === "received" || liveStatus.state === "working"
+
     return (
         <div style={styles.panel}>
+            {/* Header */}
             <div style={styles.header}>
                 <div style={styles.logo}>C</div>
-                <h3 style={styles.title}>Claude Code Prompt</h3>
+                <h3 style={styles.title}>Claude Code</h3>
+                <div
+                    style={{
+                        ...styles.connectionBadge,
+                        background: liveStatus.state === "listening" ? "#ecfdf5" : liveStatus.state === "idle" ? "#f0f2f5" : "#eef0ff",
+                        color: liveStatus.state === "listening" ? "#0d9f6e" : liveStatus.state === "idle" ? "#697386" : "#635BFF",
+                    }}
+                >
+                    <span style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "currentColor",
+                        display: "inline-block",
+                        animation: (liveStatus.state === "listening") ? "none" : undefined,
+                    }} />
+                    {stateConfig.label}
+                </div>
             </div>
 
+            {/* Status Banner */}
+            {showBanner && liveStatus.message && (
+                <div
+                    style={{
+                        ...styles.statusBanner,
+                        background: stateConfig.bg,
+                        color: stateConfig.color,
+                    }}
+                >
+                    <span style={{
+                        ...styles.statusIcon,
+                        animation: isWorking ? "spin 1s linear infinite" : "none",
+                    }}>
+                        {stateConfig.icon}
+                    </span>
+                    <span style={styles.statusMessage}>{liveStatus.message}</span>
+                </div>
+            )}
+
+            {/* Component badge */}
             {component && (
                 <div style={styles.componentBadge}>
                     <span>Component:</span>
@@ -244,46 +334,44 @@ const PromptPanel = () => {
                 </div>
             )}
 
+            {/* Textarea */}
             <textarea
                 style={{
                     ...styles.textarea,
                     ...(focused ? styles.textareaFocused : {}),
+                    ...(isWorking ? { opacity: 0.6 } : {}),
                 }}
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
                 onKeyDown={handleKeyDown}
-                placeholder="Describe changes you want Claude to make to this component..."
-                disabled={status === "sending"}
+                placeholder={isWorking
+                    ? "Claude Code is working on your previous prompt..."
+                    : "Describe changes you want Claude to make to this component..."
+                }
+                disabled={sending || isWorking}
             />
 
+            {/* Footer */}
             <div style={styles.footer}>
                 <button
                     style={{
                         ...styles.button,
-                        ...(!prompt.trim() || status === "sending" ? styles.buttonDisabled : {}),
+                        ...(!prompt.trim() || sending || isWorking ? styles.buttonDisabled : {}),
                     }}
                     onClick={handleSubmit}
-                    disabled={!prompt.trim() || status === "sending"}
+                    disabled={!prompt.trim() || sending || isWorking}
                 >
-                    Send to Claude
+                    {sending ? "Sending..." : isWorking ? "Working..." : "Send to Claude"}
                 </button>
-                <div style={styles.status}>
-                    <span
-                        style={{
-                            ...styles.statusDot,
-                            background: STATUS_COLORS[status],
-                        }}
-                    />
-                    <span>{STATUS_LABELS[status]}</span>
-                </div>
             </div>
 
             <div style={styles.hint}>
-                Press <strong>Cmd+Enter</strong> to send. Claude Code will read this prompt and modify the component files. Storybook will hot-reload with the changes.
+                <strong>Cmd+Enter</strong> to send. Claude Code will modify the component and Storybook will hot-reload.
             </div>
 
+            {/* History */}
             {history.length > 0 && (
                 <div style={styles.historySection}>
                     <h4 style={styles.historyTitle}>Recent prompts</h4>
