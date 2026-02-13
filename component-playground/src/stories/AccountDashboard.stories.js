@@ -22,6 +22,8 @@ export default {
 // Default — Full dashboard with all sections visible
 export const Default = {
     args: {
+        heroTitle: "Subscription Dashboard",
+        heroSubtitle: "Manage your plans, billing, and account details",
         heading: "Account",
         profileSectionTitle: "Profile",
         subscriptionsSectionTitle: "Subscriptions",
@@ -119,6 +121,8 @@ export const CorporateTheme = {
 export const LimioBranded = {
     args: {
         ...Default.args,
+        heroTitle: "Subscription Dashboard",
+        heroSubtitle: "Manage your Limio subscriptions and billing",
         heading: "Your Account",
         primaryColor__limio_color: "#F96D24",
         dangerColor__limio_color: "#CC3A5E",

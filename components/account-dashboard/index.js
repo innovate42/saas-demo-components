@@ -40,11 +40,14 @@ const formatDateShort = (dateStr) => {
 const getCurrentOffer = (subscription) => {
     const offers = subscription?.offers || []
     const now = new Date()
+    // Use subscription.offers[] array — the documented pattern.
+    // A subscription can have multiple offers (standard + discount);
+    // filter where record_subtype is NOT "discount" to find the standard offer.
     const active = offers
         .filter(o => !o.data?.end || new Date(o.data.end) >= now)
         .filter(o => !o.data?.start || new Date(o.data.start) <= now)
         .find(o => o.data?.record_subtype !== "discount")
-    return active?.data?.offer || subscription?.data?.offer || null
+    return active?.data?.offer || null
 }
 
 const getPrice = (subscription) => {
@@ -103,6 +106,8 @@ const AccountDashboard = () => {
     const { offers: campaignOffers } = useCampaign() || {}
 
     const {
+        heroTitle = "Subscription Dashboard",
+        heroSubtitle = "Manage your plans, billing, and account details",
         heading = "Account",
         profileSectionTitle = "Profile",
         subscriptionsSectionTitle = "Subscriptions",
@@ -210,30 +215,59 @@ const AccountDashboard = () => {
         return campaignOffers
     }, [campaignOffers, showAvailableOffers])
 
+    const totalMonthlySpend = useMemo(() => {
+        if (!allSubscriptions?.length) return null
+        let total = 0
+        let currency = "USD"
+        for (const sub of allSubscriptions) {
+            if (sub.status !== "active") continue
+            const offer = getCurrentOffer(sub)
+            const price = offer?.data?.attributes?.price__limio?.[0]
+            if (price?.value) {
+                total += price.value
+                currency = price.currencyCode || currency
+            }
+        }
+        return total > 0 ? formatCurrency(total, currency) : null
+    }, [allSubscriptions])
+
     return (
         <div className="ad-page" style={{ "--ad-primary": primaryColor, "--ad-danger": dangerColor }}>
-            <div className="ad-container">
 
-                {/* Welcome Header */}
-                <div className="ad-welcome">
-                    <div className="ad-welcome-left">
-                        <div className="ad-avatar">{initials}</div>
-                        <div>
-                            <h1 className="ad-heading">{heading}</h1>
-                            <p className="ad-welcome-meta">
-                                {email}
-                                {memberSince && <span className="ad-welcome-dot"> &middot; </span>}
-                                {memberSince && <span>{memberSinceLabel} {memberSince}</span>}
+            {/* Hero Header */}
+            <div className="ad-hero">
+                <div className="ad-hero-inner">
+                    <div className="ad-hero-top">
+                        <div className="ad-hero-avatar">{initials}</div>
+                        <div className="ad-hero-greeting">
+                            <h1 className="ad-hero-title">{heroTitle}</h1>
+                            <p className="ad-hero-subtitle">
+                                {fullName ? `Welcome back, ${firstName}` : heroSubtitle}
                             </p>
                         </div>
                     </div>
-                    {activeCount > 0 && (
-                        <div className="ad-stat-pill">
-                            <span className="ad-stat-number">{activeCount}</span>
-                            <span className="ad-stat-label">Active {activeCount === 1 ? "plan" : "plans"}</span>
+                    <div className="ad-hero-stats">
+                        <div className="ad-hero-stat">
+                            <span className="ad-hero-stat-value">{activeCount}</span>
+                            <span className="ad-hero-stat-label">Active {activeCount === 1 ? "Plan" : "Plans"}</span>
                         </div>
-                    )}
+                        {totalMonthlySpend && (
+                            <div className="ad-hero-stat">
+                                <span className="ad-hero-stat-value">{totalMonthlySpend}</span>
+                                <span className="ad-hero-stat-label">Current Spend</span>
+                            </div>
+                        )}
+                        {memberSince && (
+                            <div className="ad-hero-stat">
+                                <span className="ad-hero-stat-value">{memberSince}</span>
+                                <span className="ad-hero-stat-label">{memberSinceLabel}</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
+            </div>
+
+            <div className="ad-container">
 
                 {/* Profile Card */}
                 <div className="ad-card">

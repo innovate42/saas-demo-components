@@ -11,6 +11,18 @@
   },
   "limioProps": [
     {
+      "id": "heroTitle",
+      "label": "Hero Title",
+      "type": "string",
+      "default": "Subscription Dashboard"
+    },
+    {
+      "id": "heroSubtitle",
+      "label": "Hero Subtitle",
+      "type": "string",
+      "default": "Manage your plans, billing, and account details"
+    },
+    {
       "id": "heading",
       "label": "Page Heading",
       "type": "string",
