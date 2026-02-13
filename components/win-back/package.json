@@ -1,0 +1,98 @@
+{
+  "name": "@limio/win-back",
+  "version": "1.0.0",
+  "description": "Full-page win-back experience for lapsed subscribers with personalized greeting and resubscribe offers",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "We'd love to have you back"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Your account is still here, and we've been making things even better since you left."
+    },
+    {
+      "id": "greetingPrefix",
+      "label": "Greeting Prefix",
+      "type": "string",
+      "default": "Welcome back"
+    },
+    {
+      "id": "fallbackGreeting",
+      "label": "Fallback Greeting (no user name)",
+      "type": "string",
+      "default": "Welcome back"
+    },
+    {
+      "id": "offersSectionTitle",
+      "label": "Offers Section Title",
+      "type": "string",
+      "default": "Pick up where you left off"
+    },
+    {
+      "id": "offersSectionSubtitle",
+      "label": "Offers Section Subtitle",
+      "type": "string",
+      "default": "Choose a plan that works for you and get started again in seconds."
+    },
+    {
+      "id": "showFeatures",
+      "label": "Show Offer Features",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showDetailedPrice",
+      "label": "Show Detailed Price",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "valueProps__limio_richtext",
+      "label": "Value Propositions (Rich Text)",
+      "type": "richText",
+      "default": "<ul><li>All your data and preferences are still saved</li><li>New features and improvements since your last visit</li><li>Cancel anytime — no commitments</li></ul>"
+    },
+    {
+      "id": "footerMessage",
+      "label": "Footer Message",
+      "type": "string",
+      "default": "Questions? Contact our support team anytime."
+    },
+    {
+      "id": "footerLinkText",
+      "label": "Footer Link Text",
+      "type": "string",
+      "default": "Get in touch"
+    },
+    {
+      "id": "footerLinkUrl",
+      "label": "Footer Link URL",
+      "type": "string",
+      "default": "/support"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#635BFF"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#0d9f6e"
+    }
+  ]
+}
