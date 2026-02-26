@@ -1,0 +1,79 @@
+{
+  "name": "@limio/cta-banner",
+  "version": "1.0.0",
+  "description": "Call-to-action banner with headline, description and CTA button",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "All the tools you need to master email marketing."
+    },
+    {
+      "id": "description__limio_richtext",
+      "label": "Description",
+      "type": "richtext",
+      "default": "<p>Emma makes it easier than ever for your team to drive conversions and revenue with email.</p>"
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get a demo"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA Button URL",
+      "type": "string",
+      "default": "/get-started/?sv=pricing"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#0B1D3A"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "ctaBackgroundColor__limio_color",
+      "label": "CTA Background Color",
+      "type": "color",
+      "default": "#1A5DAD"
+    },
+    {
+      "id": "ctaTextColor__limio_color",
+      "label": "CTA Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "layout",
+      "label": "Layout",
+      "type": "picklist",
+      "options": [
+        { "id": "center", "label": "Center", "value": "center" },
+        { "id": "left", "label": "Left", "value": "left" },
+        { "id": "split", "label": "Split (text left, CTA right)", "value": "split" }
+      ],
+      "default": "center"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "cta-banner"
+    }
+  ]
+}
