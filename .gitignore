@@ -3,3 +3,9 @@ component-playground/node_modules/
 .idea/
 .yarn/
 .prettierrc
+package-lock.json
+storybook-static/
+.claude/
+.playwright-mcp/
+*.jpeg
+*.png
