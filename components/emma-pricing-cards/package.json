@@ -1,0 +1,49 @@
+{
+  "name": "component-emma-pricing-cards",
+  "version": "1.0.0",
+  "description": "Emma-style pricing tier cards with offer data from Limio SDK",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Flexible plans for teams of all sizes."
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Prices starting at $99/month."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "ctaColor__limio_color",
+      "label": "CTA button color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "componentId",
+      "label": "Component ID",
+      "type": "string",
+      "default": "emma-pricing-cards"
+    }
+  ]
+}
