@@ -1,0 +1,114 @@
+{
+  "name": "@limio/practicetek-offers",
+  "version": "1.0.0",
+  "description": "PracticeTek style offer cards with pricing",
+  "main": "index.js",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Section Headline",
+      "type": "string",
+      "default": "Choose Your Plan"
+    },
+    {
+      "id": "subheadline",
+      "label": "Section Subheadline",
+      "type": "string",
+      "default": "Select the perfect plan for your practice"
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Enable Offer Grouping",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group Labels",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly" },
+        { "id": "annual", "label": "Annual" }
+      ]
+    },
+    {
+      "id": "bestValueLabel",
+      "label": "Best Value Badge Text",
+      "type": "string",
+      "default": "Most Popular"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#F8F9FA"
+    },
+    {
+      "id": "cardBackgroundColor__limio_color",
+      "label": "Card Background Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "headlineColor__limio_color",
+      "label": "Headline Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#4A4A5A"
+    },
+    {
+      "id": "ctaBackgroundColor__limio_color",
+      "label": "CTA Background Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "ctaTextColor__limio_color",
+      "label": "CTA Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color (Best Value)",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "toggleBackgroundColor__limio_color",
+      "label": "Toggle Background Color",
+      "type": "color",
+      "default": "#E9ECEF"
+    },
+    {
+      "id": "toggleActiveColor__limio_color",
+      "label": "Toggle Active Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    }
+  ]
+}

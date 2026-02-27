@@ -1,0 +1,190 @@
+/* PracticeTek Hero Styles */
+.practicetek-hero {
+    padding: 5rem 2rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.practicetek-hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Centered Layout */
+.practicetek-hero--centered .practicetek-hero__content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Left Layout */
+.practicetek-hero--left .practicetek-hero__content {
+    text-align: left;
+    max-width: 700px;
+}
+
+/* Split Layout */
+.practicetek-hero--split .practicetek-hero__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.practicetek-hero--split .practicetek-hero__content {
+    text-align: left;
+}
+
+.practicetek-hero__image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.practicetek-hero__headline {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.practicetek-hero__subheadline {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    margin: 0 0 2.5rem 0;
+    opacity: 0.85;
+}
+
+.practicetek-hero__subheadline p {
+    margin: 0;
+}
+
+.practicetek-hero__ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.practicetek-hero--centered .practicetek-hero__ctas {
+    justify-content: center;
+}
+
+.practicetek-hero__cta {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-block;
+}
+
+.practicetek-hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.practicetek-hero__cta--secondary {
+    background: transparent !important;
+    border: 2px solid currentColor;
+}
+
+.practicetek-hero__cta--secondary:hover {
+    opacity: 0.8;
+}
+
+/* Partner Logos */
+.practicetek-hero__partners {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.practicetek-hero__partners-label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+}
+
+.practicetek-hero--centered .practicetek-hero__partners-label {
+    text-align: center;
+}
+
+.practicetek-hero__partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+.practicetek-hero--centered .practicetek-hero__partners-grid {
+    justify-content: center;
+}
+
+.practicetek-hero__partner-logo {
+    height: 32px;
+    width: auto;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    filter: grayscale(100%);
+}
+
+.practicetek-hero__partner-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+@media (max-width: 968px) {
+    .practicetek-hero--split .practicetek-hero__container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .practicetek-hero--split .practicetek-hero__image-container {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .practicetek-hero {
+        padding: 3rem 1.5rem;
+        min-height: auto;
+    }
+
+    .practicetek-hero__headline {
+        font-size: 2.25rem;
+    }
+
+    .practicetek-hero__subheadline {
+        font-size: 1.1rem;
+    }
+
+    .practicetek-hero__ctas {
+        flex-direction: column;
+    }
+
+    .practicetek-hero__cta {
+        width: 100%;
+        text-align: center;
+    }
+
+    .practicetek-hero__partners-grid {
+        gap: 1.5rem;
+    }
+
+    .practicetek-hero__partner-logo {
+        height: 24px;
+    }
+}
