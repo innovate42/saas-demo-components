@@ -1,6 +1,6 @@
 {
   "name": "@limio/comparison-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Feature comparison table across pricing tiers with checkmarks, x-marks, and text values",
   "main": "./index.js",
   "dependencies": {
@@ -47,92 +47,6 @@
         { "name": "Essentials", "price": "$159 / MONTH", "ctaText": "Select Plan", "ctaUrl": "/get-started/?sv=pricing" },
         { "name": "Teams", "price": "$249 / MONTH", "ctaText": "Select Plan", "ctaUrl": "/get-started/?sv=pricing" },
         { "name": "Corporate", "price": "TALK TO US", "ctaText": "Talk to us", "ctaUrl": "/get-started/?sv=pricing" }
-      ]
-    },
-    {
-      "id": "sections",
-      "label": "Feature Sections (JSON)",
-      "type": "schema",
-      "default": [
-        {
-          "title": "Account management",
-          "rows": [
-            { "feature": "Tiered account structure", "values": ["no", "2 subaccounts", "5+ subaccounts", "10+ subaccounts"] },
-            { "feature": "Users", "values": ["5 users", "10 users", "25 users", "Unlimited users"] },
-            { "feature": "User permissions", "values": ["2 role types", "5 role types", "6 role types", "6 role types"] },
-            { "feature": "Unlimited email sending", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Custom user permissions", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Approvals dashboard", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Activity dashboard", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Subaccount categories", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Private branding", "values": ["no", "no", "yes", "yes"] }
-          ]
-        },
-        {
-          "title": "Marketing channels & tools",
-          "rows": [
-            { "feature": "Email", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Email scheduling", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Marketing calendar", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Signup forms", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Landing pages", "values": ["no", "yes", "yes", "yes"] },
-            { "feature": "SMS", "values": ["no", "no", "yes", "yes"] }
-          ]
-        },
-        {
-          "title": "Design",
-          "rows": [
-            { "feature": "Drag & drop email editor", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Save Email Rows", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "AI Assistant", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Email template gallery", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Code your own emails", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Asset library", "values": ["yes", "yes", "yes", "yes"] }
-          ]
-        },
-        {
-          "title": "Automation",
-          "rows": [
-            { "feature": "Automation builder", "values": ["1 journey", "Unlimited", "Unlimited", "Unlimited"] },
-            { "feature": "Multiple starting points", "values": ["no", "yes", "yes", "yes"] },
-            { "feature": "Branching points", "values": ["no", "yes", "yes", "yes"] },
-            { "feature": "Custom event-driven automations", "values": ["no", "yes", "yes", "yes"] }
-          ]
-        },
-        {
-          "title": "Audience",
-          "rows": [
-            { "feature": "Segmentation", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Dynamic content", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Subscription management", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Audience sharing", "values": ["no", "no", "no", "yes"] }
-          ]
-        },
-        {
-          "title": "Insights & optimization",
-          "rows": [
-            { "feature": "Real-time reporting", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Comparative reporting", "values": ["no", "yes", "yes", "yes"] },
-            { "feature": "Trends reporting", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Pre-send email testing", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "A/B subject line split testing", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "A/B content split testing", "values": ["no", "yes", "yes", "yes"] },
-            { "feature": "Integrations", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "API access", "values": ["yes", "yes", "yes", "yes"] }
-          ]
-        },
-        {
-          "title": "Help & support",
-          "rows": [
-            { "feature": "In-app support", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Email support", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Phone support", "values": ["yes", "yes", "yes", "Priority support"] },
-            { "feature": "Deliverability support", "values": ["no", "no", "yes", "yes"] },
-            { "feature": "Help center", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Training videos", "values": ["yes", "yes", "yes", "yes"] },
-            { "feature": "Single sign-on", "values": ["no", "no", "yes", "yes"] }
-          ]
-        }
       ]
     },
     {
