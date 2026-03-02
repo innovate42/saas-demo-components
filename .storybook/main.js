@@ -17,6 +17,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       "@limio/sdk": path.resolve(__dirname, "../__mocks__/@limio/sdk.js"),
+      "@limio/shop/src/shop/checkout/basket": path.resolve(__dirname, "../__mocks__/@limio/shop/basket.js"),
     }
 
     // Process .js/.jsx files in components/ with babel-loader (for JSX support)
