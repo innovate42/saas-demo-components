@@ -1,9 +1,10 @@
 import React from "react"
 import { useCampaign, useBasket, sanitiseHTML } from "@limio/sdk"
+import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
-const PricingCard = ({ offer, primaryColor, highlightColor, addOfferToBasket }) => {
+const PricingCard = ({ offer, primaryColor, highlightColor, selectOffer, basketLoading }) => {
   const attrs = offer.data.attributes
   const isHighlighted = attrs.best_value__limio
 
@@ -11,7 +12,7 @@ const PricingCard = ({ offer, primaryColor, highlightColor, addOfferToBasket }) 
 
   const handleCtaClick = (e) => {
     e.preventDefault()
-    addOfferToBasket(offer)
+    selectOffer(offer)
   }
 
   return (
@@ -49,6 +50,7 @@ const PricingCard = ({ offer, primaryColor, highlightColor, addOfferToBasket }) 
         <button
           className={`pricing-card__cta ${isHighlighted ? "pricing-card__cta--highlighted" : "pricing-card__cta--primary"}`}
           onClick={handleCtaClick}
+          disabled={basketLoading}
           style={
             !isHighlighted
               ? { backgroundColor: primaryColor, borderColor: primaryColor }
@@ -77,7 +79,19 @@ const PricingCards = () => {
   } = useStaticProps()
 
   const { offers = [] } = useCampaign()
-  const { addOfferToBasket } = useBasket()
+  const { basketLoading, initiateCheckout, addOfferToBasket, navigateToCheckout, pageOptions } = useBasket()
+
+  async function selectOffer(offer) {
+    const checkoutId = getCurrentBasketId()
+    if (!checkoutId) {
+      await initiateCheckout({ order: { orderItems: [{ offer }] } })
+    } else {
+      await addOfferToBasket({ offer })
+    }
+    if (pageOptions.pushToCheckout) {
+      await navigateToCheckout()
+    }
+  }
 
   return (
     <section id={componentId} className="pricing-cards">
@@ -88,7 +102,8 @@ const PricingCards = () => {
             offer={offer}
             primaryColor={primaryColor}
             highlightColor={highlightColor}
-            addOfferToBasket={addOfferToBasket}
+            selectOffer={selectOffer}
+            basketLoading={basketLoading}
           />
         ))}
       </div>
