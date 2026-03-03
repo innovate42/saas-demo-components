@@ -109,8 +109,16 @@ const PricingCards = () => {
     pageOptions,
   } = useBasket() || {}
 
-  const hasGroups = groupValues.length > 1
-  const [activeGroup, setActiveGroup] = useState(groupValues[0]?.id || null)
+  // Derive active groups from actual offers rather than all possible groupValues
+  const offerGroupIds = [...new Set(
+    offers
+      .map((o) => o?.data?.attributes?.group__limio)
+      .filter(Boolean)
+  )]
+  const activeGroups = groupValues.filter((g) => offerGroupIds.includes(g.id))
+
+  const hasGroups = activeGroups.length > 1
+  const [activeGroup, setActiveGroup] = useState(activeGroups[0]?.id || null)
 
   const filteredOffers = hasGroups
     ? offers.filter((offer) => {
@@ -140,7 +148,7 @@ const PricingCards = () => {
   return (
     <section id={componentId} className="pricing-cards">
       <GroupToggle
-        groupValues={groupValues}
+        groupValues={activeGroups}
         activeGroup={activeGroup}
         onGroupChange={setActiveGroup}
         primaryColor={primaryColor}
