@@ -26,6 +26,12 @@
       "default": "#1A5DAD"
     },
     {
+      "id": "cardGap",
+      "label": "Card Gap (px)",
+      "type": "number",
+      "default": 0
+    },
+    {
       "id": "componentId",
       "label": "Component Id",
       "type": "string",

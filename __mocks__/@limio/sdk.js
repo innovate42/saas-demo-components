@@ -38,6 +38,7 @@ export function useComponentProps(defaultProps) {
 // --- Campaign / Offers ---
 
 const sampleOffers = [
+  // --- Monthly offers ---
   {
     id: "offer-lite",
     path: "/offers/lite",
@@ -114,6 +115,83 @@ const sampleOffers = [
       attachments: [],
     },
   },
+  // --- Annual offers ---
+  {
+    id: "offer-lite-annual",
+    path: "/offers/lite-annual",
+    data: {
+      attributes: {
+        display_name__limio: "Lite",
+        display_description__limio: "Marketers who need to nail the basics.",
+        display_price__limio: "<span class='price-currency'>$</span><span class='price-amount'>89</span><span class='price-period'>/month</span>",
+        detailed_display_price__limio: "<p><strong>10,000 contacts</strong><br/>billed annually at $1,068</p>",
+        offer_features__limio: "<p class='features-heading'>Lite includes:</p><ul><li>Drag and drop editor</li><li>Built-in integrations</li><li>Email and phone support</li></ul>",
+        cta_text__limio: "Request a demo",
+        best_value__limio: false,
+        group__limio: "annual",
+      },
+      price: [{ value: 1068, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "years" }],
+      products: [],
+      attachments: [],
+    },
+  },
+  {
+    id: "offer-essentials-annual",
+    path: "/offers/essentials-annual",
+    data: {
+      attributes: {
+        display_name__limio: "Essentials",
+        display_description__limio: "Growing brands who need more customization and automation.",
+        display_price__limio: "<span class='price-currency'>$</span><span class='price-amount'>143</span><span class='price-period'>/month</span>",
+        detailed_display_price__limio: "<p><strong>10,000 contacts</strong><br/>billed annually at $1,716</p>",
+        offer_features__limio: "<p class='features-heading'>Everything in Lite, plus:</p><ul><li>Landing pages</li><li>Unlimited automation</li><li>SMS*</li></ul>",
+        cta_text__limio: "Request a demo",
+        best_value__limio: false,
+        group__limio: "annual",
+      },
+      price: [{ value: 1716, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "years" }],
+      products: [],
+      attachments: [],
+    },
+  },
+  {
+    id: "offer-teams-annual",
+    path: "/offers/teams-annual",
+    data: {
+      attributes: {
+        display_name__limio: "Teams",
+        display_description__limio: "Teams with multiple departments or locations who need to manage marketing activity from one central account.",
+        display_price__limio: "<span class='price-currency'>$</span><span class='price-amount'>224</span><span class='price-period'>/month</span>",
+        detailed_display_price__limio: "<p><strong>10,000 contacts</strong><br/>billed annually at $2,688</p>",
+        offer_features__limio: "<p class='features-heading'>Everything in Essentials, plus:</p><ul><li>Tiered account structure</li><li>Custom user permissions</li><li>Brand Manager</li><li>Trend reporting</li><li>Share branded assets between subaccounts</li><li>SMS</li></ul>",
+        cta_text__limio: "Request a demo",
+        best_value__limio: false,
+        group__limio: "annual",
+      },
+      price: [{ value: 2688, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "years" }],
+      products: [],
+      attachments: [],
+    },
+  },
+  {
+    id: "offer-corporate-annual",
+    path: "/offers/corporate-annual",
+    data: {
+      attributes: {
+        display_name__limio: "Corporate",
+        display_description__limio: "Larger organizations who need to scale and control their marketing efficiently and seamlessly.",
+        display_price__limio: "Contact us",
+        detailed_display_price__limio: "<p>Build a plan to match your organization's structure.</p>",
+        offer_features__limio: "<p class='features-heading'>Everything in Teams, plus:</p><ul><li>10+ subaccounts</li><li>Unlimited users</li><li>Priority phone support</li><li>Share audiences between subaccounts</li><li>SMS</li></ul>",
+        cta_text__limio: "Let's talk",
+        best_value__limio: true,
+        group__limio: "annual",
+      },
+      price: [],
+      products: [],
+      attachments: [],
+    },
+  },
 ]
 
 export function useCampaign() {
@@ -122,7 +200,10 @@ export function useCampaign() {
     campaign: { name: "Emma Pricing", path: "/pages/emma-pricing", attributes: {} },
     addOns: [],
     tag: "/tags/dummytag",
-    groupValues: [{ label: "Monthly", id: "monthly" }],
+    groupValues: [
+      { label: "Monthly", id: "monthly" },
+      { label: "Annual", id: "annual" },
+    ],
   }
 }
 
