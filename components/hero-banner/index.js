@@ -27,39 +27,94 @@ const getOfferImage = (offer) => {
 }
 
 const WireframeBackground = ({ primaryColor, secondaryColor }) => {
-    const dots = useMemo(() => {
-        const result = []
-        for (let row = 0; row < 5; row++) {
-            for (let col = 0; col < 8; col++) {
-                result.push({
-                    cx: col * 80 + 40,
-                    cy: row * 80 + 40,
-                    delay: ((row * 8 + col) * 0.5) % 4,
-                    mobile: row < 3,
+    const { nodes, edges } = useMemo(() => {
+        const cols = 8
+        const rows = 5
+        const W = 1600
+        const H = 900
+        const padX = 80
+        const padY = 80
+        const spacingX = (W - padX * 2) / (cols - 1)
+        const spacingY = (H - padY * 2) / (rows - 1)
+        const seed = 42
+        const seededRandom = (i) => {
+            const x = Math.sin(seed + i * 127.1) * 43758.5453
+            return x - Math.floor(x)
+        }
+
+        const nodeList = []
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const idx = r * cols + c
+                const jitterX = (seededRandom(idx * 2) - 0.5) * spacingX * 0.45
+                const jitterY = (seededRandom(idx * 2 + 1) - 0.5) * spacingY * 0.45
+                nodeList.push({
+                    x: padX + c * spacingX + jitterX,
+                    y: padY + r * spacingY + jitterY,
+                    delay: seededRandom(idx * 3) * 8,
+                    size: seededRandom(idx * 7) > 0.7 ? 5 : 3,
+                    isAccent: seededRandom(idx * 7) > 0.7,
                 })
             }
         }
-        return result
+
+        const edgeList = []
+        const threshold = spacingX * 1.5
+        for (let i = 0; i < nodeList.length; i++) {
+            for (let j = i + 1; j < nodeList.length; j++) {
+                const dx = nodeList[i].x - nodeList[j].x
+                const dy = nodeList[i].y - nodeList[j].y
+                const dist = Math.sqrt(dx * dx + dy * dy)
+                if (dist < threshold) {
+                    edgeList.push({
+                        x1: nodeList[i].x,
+                        y1: nodeList[i].y,
+                        x2: nodeList[j].x,
+                        y2: nodeList[j].y,
+                        delay: (nodeList[i].delay + nodeList[j].delay) / 2,
+                    })
+                }
+            }
+        }
+
+        return { nodes: nodeList, edges: edgeList }
     }, [])
 
     return (
         <div className="hb-wireframe" aria-hidden="true">
-            <svg className="hb-wireframe__svg" width="100%" height="100%">
+            <svg className="hb-wireframe__svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
                 <defs>
-                    <pattern id="hb-grid" width="80" height="80" patternUnits="userSpaceOnUse">
-                        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                    </pattern>
+                    <filter id="hb-glow">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
-                <rect className="hb-wireframe__grid" width="100%" height="100%" fill="url(#hb-grid)" />
-                {dots.map((dot, i) => (
+                {edges.map((edge, i) => (
+                    <line
+                        key={`e${i}`}
+                        className="hb-wireframe__line"
+                        x1={edge.x1}
+                        y1={edge.y1}
+                        x2={edge.x2}
+                        y2={edge.y2}
+                        stroke={primaryColor}
+                        strokeWidth="0.8"
+                        style={{ animationDelay: `${edge.delay}s` }}
+                    />
+                ))}
+                {nodes.map((node, i) => (
                     <circle
-                        key={i}
-                        className={`hb-wireframe__dot${dot.mobile ? "" : " hb-wireframe__dot--desktop"}`}
-                        cx={dot.cx}
-                        cy={dot.cy}
-                        r="2"
-                        fill={i % 2 === 0 ? primaryColor : secondaryColor}
-                        style={{ animationDelay: `${dot.delay}s` }}
+                        key={`n${i}`}
+                        className="hb-wireframe__dot"
+                        cx={node.x}
+                        cy={node.y}
+                        r={node.size}
+                        fill={node.isAccent ? secondaryColor : primaryColor}
+                        filter="url(#hb-glow)"
+                        style={{ animationDelay: `${node.delay}s` }}
                     />
                 ))}
             </svg>
