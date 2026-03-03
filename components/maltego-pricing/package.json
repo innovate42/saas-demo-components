@@ -1,0 +1,74 @@
+{
+  "name": "@limio/maltego-pricing",
+  "version": "1.0.0",
+  "description": "Maltego-inspired pricing page with tier cards, comparison table, and FAQ",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "headline", "label": "Headline", "type": "string", "default": "Explore plans that power your business" },
+    { "id": "subheadline", "label": "Subheadline", "type": "string", "default": "Choose the plan that fits your needs. Upgrade or downgrade at any time." },
+    { "id": "showComparisonTable", "label": "Show comparison table", "type": "boolean", "default": true },
+    { "id": "showFaq", "label": "Show FAQ section", "type": "boolean", "default": true },
+    { "id": "showGroupToggle", "label": "Show billing toggle", "type": "boolean", "default": true },
+    { "id": "ctaText", "label": "Default CTA text", "type": "string", "default": "Get started" },
+    { "id": "freeCta", "label": "Free tier CTA text", "type": "string", "default": "Use for free" },
+    { "id": "enterpriseCta", "label": "Enterprise CTA text", "type": "string", "default": "Book a demo" },
+    { "id": "bestValueLabel", "label": "Best value badge text", "type": "string", "default": "Best Value" },
+    { "id": "primaryColor", "label": "Primary / accent color", "type": "color", "default": "#EFBF04" },
+    { "id": "bestValueColor", "label": "Best Value badge color", "type": "color", "default": "#EFBF04" },
+    { "id": "backgroundColor", "label": "Background color", "type": "color", "default": "#FFFFFF" },
+    { "id": "cardColor", "label": "Card background color", "type": "color", "default": "#FFFFFF" },
+    { "id": "textColor", "label": "Text color", "type": "color", "default": "#1B2438" },
+    { "id": "mutedTextColor", "label": "Muted text color", "type": "color", "default": "#5A6175" },
+    { "id": "faqHeadline", "label": "FAQ section headline", "type": "string", "default": "Frequently asked questions" },
+    { "id": "comparisonHeadline", "label": "Comparison table headline", "type": "string", "default": "Compare all features" },
+    {
+      "id": "groupLabels",
+      "label": "Billing toggle labels",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "ID", "type": "string" },
+        "url": { "id": "label", "label": "Label", "type": "string" }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly" },
+        { "id": "annual", "label": "Annual" }
+      ]
+    },
+    {
+      "id": "featureCategories",
+      "label": "Feature comparison categories",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "Category ID", "type": "string" },
+        "url": { "id": "label", "label": "Category Label", "type": "string" }
+      },
+      "default": [
+        { "id": "products", "label": "Products" },
+        { "id": "data", "label": "Data" },
+        { "id": "services", "label": "Services" }
+      ]
+    },
+    {
+      "id": "faqItems",
+      "label": "FAQ items",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "ID", "type": "string" },
+        "url": { "id": "label", "label": "Question", "type": "string" }
+      },
+      "default": [
+        { "id": "trial", "label": "Is there a free trial available?" },
+        { "id": "upgrade", "label": "Can I change my plan later?" },
+        { "id": "cancel", "label": "What is the cancellation policy?" },
+        { "id": "payment", "label": "What payment methods do you accept?" },
+        { "id": "discount", "label": "Do you offer discounts for annual billing?" }
+      ]
+    }
+  ]
+}
