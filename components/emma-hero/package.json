@@ -1,0 +1,54 @@
+{
+  "name": "@limio/emma-hero",
+  "version": "1.0.0",
+  "description": "Emma-style pricing page hero with headline, subheadline, and CTA",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Flexible plans for teams of all sizes."
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Prices starting at $99/month."
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Request a demo"
+    },
+    {
+      "id": "ctaLink",
+      "label": "CTA Button Link",
+      "type": "string",
+      "default": "/demo"
+    },
+    {
+      "id": "showCta",
+      "label": "Show CTA button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background color",
+      "type": "color",
+      "default": "#ffffff"
+    }
+  ]
+}

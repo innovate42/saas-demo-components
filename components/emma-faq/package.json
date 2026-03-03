@@ -1,0 +1,113 @@
+{
+  "name": "@limio/emma-faq",
+  "version": "1.0.0",
+  "description": "Emma-style FAQ accordion with professional services CTA banner",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "faqHeading",
+      "label": "FAQ Heading",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "id": "faqItems",
+      "label": "FAQ Items",
+      "type": "list",
+      "fields": {
+        "question": {
+          "id": "question",
+          "label": "Question",
+          "type": "string"
+        },
+        "answer": {
+          "id": "answer",
+          "label": "Answer",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "question": "Who is eligible for these plans?",
+          "answer": "These plans are available to all new Emma customers who purchase a plan from July 21 2022."
+        },
+        {
+          "question": "What if I have more than 10,000 contacts?",
+          "answer": "If you have more than 10,000 contacts, please contact us for a custom quote tailored to your needs."
+        }
+      ]
+    },
+    {
+      "id": "ctaHeading",
+      "label": "CTA Banner Heading",
+      "type": "string",
+      "default": "All the tools you need to master email marketing."
+    },
+    {
+      "id": "ctaDescription",
+      "label": "CTA Banner Description",
+      "type": "string",
+      "default": "Emma makes it easier than ever for your team to drive conversions and revenue with email."
+    },
+    {
+      "id": "ctaButtonText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get a demo"
+    },
+    {
+      "id": "ctaButtonLink",
+      "label": "CTA Button Link",
+      "type": "string",
+      "default": "/demo"
+    },
+    {
+      "id": "showCtaBanner",
+      "label": "Show CTA Banner",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "servicesHeading",
+      "label": "Professional Services Heading",
+      "type": "string",
+      "default": "Get expert help when you need it"
+    },
+    {
+      "id": "servicesDescription",
+      "label": "Professional Services Description",
+      "type": "string",
+      "default": "From Custom Design to Success Management and more, our Professional Services are like an extension of your marketing team, ready to help you create an email program that builds long-term brand loyalty, maximizes the success of your marketing, and drives the best possible results for your business."
+    },
+    {
+      "id": "servicesButtonText",
+      "label": "Professional Services Button Text",
+      "type": "string",
+      "default": "Learn more"
+    },
+    {
+      "id": "servicesButtonLink",
+      "label": "Professional Services Button Link",
+      "type": "string",
+      "default": "/services"
+    },
+    {
+      "id": "showServices",
+      "label": "Show Professional Services",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#053A5E"
+    }
+  ]
+}

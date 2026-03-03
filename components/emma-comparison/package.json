@@ -1,0 +1,36 @@
+{
+  "name": "@limio/emma-comparison",
+  "version": "1.0.0",
+  "description": "Emma-style feature comparison table across pricing tiers",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Compare plans"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "checkColor__limio_color",
+      "label": "Check icon color",
+      "type": "color",
+      "default": "#93c5fd"
+    },
+    {
+      "id": "newBadgeColor__limio_color",
+      "label": "New badge color",
+      "type": "color",
+      "default": "#dbeafe"
+    }
+  ]
+}

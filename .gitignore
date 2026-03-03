@@ -3,3 +3,7 @@ component-playground/node_modules/
 .idea/
 .yarn/
 .prettierrc
+.limio.json
+.claude/*
+.playwright-mcp/*
+
