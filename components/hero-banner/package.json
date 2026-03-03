@@ -1,0 +1,63 @@
+{
+  "name": "@user/hero-banner",
+  "version": "1.0.0",
+  "description": "Tech-styled hero banner with selectable offer sidebar and animated wireframe background",
+  "main": "index.js",
+  "limioProps": [
+    {
+      "id": "headline",
+      "type": "string",
+      "label": "Headline",
+      "default": "Choose Your Plan"
+    },
+    {
+      "id": "subheadline",
+      "type": "string",
+      "label": "Subheadline",
+      "default": "Select a plan to explore features and pricing"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "type": "color",
+      "label": "Primary Color",
+      "default": "#F96D24"
+    },
+    {
+      "id": "secondaryColor__limio_color",
+      "type": "color",
+      "label": "Secondary Color",
+      "default": "#CC3A5E"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "type": "color",
+      "label": "Background Color",
+      "default": "#0a0a14"
+    },
+    {
+      "id": "showWireframe",
+      "type": "boolean",
+      "label": "Show Wireframe Background",
+      "default": true
+    },
+    {
+      "id": "ctaText",
+      "type": "string",
+      "label": "CTA Text Override",
+      "default": ""
+    },
+    {
+      "id": "sidebarPosition",
+      "type": "picklist",
+      "label": "Sidebar Position",
+      "options": [
+        { "id": "left", "label": "Left", "value": "left" },
+        { "id": "right", "label": "Right", "value": "right" }
+      ],
+      "default": "left"
+    }
+  ],
+  "dependencies": {
+    "xss": "^1.0.8"
+  }
+}
