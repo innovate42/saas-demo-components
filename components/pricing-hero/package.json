@@ -1,0 +1,41 @@
+{
+  "name": "@limio/pricing-hero",
+  "version": "1.1.0",
+  "description": "Hero banner for pricing page with headline and subheadline",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Flexible plans for teams of all sizes."
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Prices starting at $99/month."
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#0B1D3A"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "pricing-hero"
+    }
+  ]
+}

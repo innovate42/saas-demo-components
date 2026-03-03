@@ -1,0 +1,62 @@
+{
+  "name": "@limio/comparison-table",
+  "version": "1.1.0",
+  "description": "Feature comparison table across pricing tiers with checkmarks, x-marks, and text values",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Compare plans"
+    },
+    {
+      "id": "tiers",
+      "label": "Tier Columns",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "name",
+          "label": "Tier Name",
+          "type": "string"
+        },
+        "price": {
+          "id": "price",
+          "label": "Price Label",
+          "type": "string"
+        },
+        "ctaText": {
+          "id": "ctaText",
+          "label": "CTA Text",
+          "type": "string"
+        },
+        "ctaUrl": {
+          "id": "ctaUrl",
+          "label": "CTA URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "name": "Lite", "price": "$99 / MONTH", "ctaText": "Select Plan", "ctaUrl": "/get-started/?sv=pricing" },
+        { "name": "Essentials", "price": "$159 / MONTH", "ctaText": "Select Plan", "ctaUrl": "/get-started/?sv=pricing" },
+        { "name": "Teams", "price": "$249 / MONTH", "ctaText": "Select Plan", "ctaUrl": "/get-started/?sv=pricing" },
+        { "name": "Corporate", "price": "TALK TO US", "ctaText": "Talk to us", "ctaUrl": "/get-started/?sv=pricing" }
+      ]
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#1A5DAD"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "comparison-table"
+    }
+  ]
+}

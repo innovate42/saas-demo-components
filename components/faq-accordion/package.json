@@ -1,0 +1,56 @@
+{
+  "name": "@limio/faq-accordion",
+  "version": "1.1.0",
+  "description": "Frequently Asked Questions accordion component with expandable items",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "id": "items",
+      "label": "FAQ Items",
+      "type": "list",
+      "fields": {
+        "question": {
+          "id": "question",
+          "label": "Question",
+          "type": "string"
+        },
+        "answer__limio_richtext": {
+          "id": "answer__limio_richtext",
+          "label": "Answer",
+          "type": "richtext"
+        }
+      },
+      "default": [
+        {
+          "question": "Who is eligible for these plans?",
+          "answer__limio_richtext": "<p>Our plans are available to businesses of all sizes. Contact our sales team to find the right plan for your organization.</p>"
+        },
+        {
+          "question": "What if I have more than 10,000 contacts?",
+          "answer__limio_richtext": "<p>We offer custom pricing for larger contact lists. Please reach out to our sales team for a tailored quote based on your specific needs.</p>"
+        }
+      ]
+    },
+    {
+      "id": "borderColor__limio_color",
+      "label": "Border Color",
+      "type": "color",
+      "default": "#e8ecf1"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "faq-accordion"
+    }
+  ]
+}

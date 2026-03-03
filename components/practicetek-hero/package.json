@@ -1,0 +1,133 @@
+{
+  "name": "@limio/practicetek-hero",
+  "version": "1.0.0",
+  "description": "PracticeTek style hero banner with headline and CTA",
+  "main": "index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Revolutionizing healthcare practices effortlessly."
+    },
+    {
+      "id": "subheadline__limio_richtext",
+      "label": "Subheadline",
+      "type": "richText",
+      "default": "<p>We empower healthcare professionals with innovative software solutions that streamline operations, enhance patient care, and drive practice growth.</p>"
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Get in Touch"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA Button URL",
+      "type": "string",
+      "default": "/contact"
+    },
+    {
+      "id": "secondaryCtaText",
+      "label": "Secondary CTA Text",
+      "type": "string",
+      "default": "Learn More"
+    },
+    {
+      "id": "secondaryCtaUrl",
+      "label": "Secondary CTA URL",
+      "type": "string",
+      "default": "/about"
+    },
+    {
+      "id": "showSecondaryCta",
+      "label": "Show Secondary CTA",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "backgroundImageUrl",
+      "label": "Background Image URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "headlineColor__limio_color",
+      "label": "Headline Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text Color",
+      "type": "color",
+      "default": "#4A4A5A"
+    },
+    {
+      "id": "ctaBackgroundColor__limio_color",
+      "label": "CTA Background Color",
+      "type": "color",
+      "default": "#1A1A2E"
+    },
+    {
+      "id": "ctaTextColor__limio_color",
+      "label": "CTA Text Color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "layout",
+      "label": "Layout Style",
+      "type": "picklist",
+      "options": [
+        { "id": "centered", "label": "Centered", "value": "centered" },
+        { "id": "left", "label": "Left Aligned", "value": "left" },
+        { "id": "split", "label": "Split (Text Left, Image Right)", "value": "split" }
+      ],
+      "default": "centered"
+    },
+    {
+      "id": "heroImageUrl",
+      "label": "Hero Image URL (for split layout)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "partnerLogos",
+      "label": "Partner/Brand Logos",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "name",
+          "label": "Brand Name",
+          "type": "string"
+        },
+        "logoUrl": {
+          "id": "logoUrl",
+          "label": "Logo URL",
+          "type": "string"
+        }
+      },
+      "default": []
+    },
+    {
+      "id": "showPartnerLogos",
+      "label": "Show Partner Logos",
+      "type": "boolean",
+      "default": false
+    }
+  ]
+}

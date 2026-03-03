@@ -4,6 +4,11 @@ component-playground/node_modules/
 .yarn/
 .prettierrc
 .limio.json
-.claude/*
-.playwright-mcp/*
+
+package-lock.json
+storybook-static/
+.claude/
+.playwright-mcp/
+*.jpeg
+*.png
 

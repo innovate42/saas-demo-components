@@ -1,0 +1,41 @@
+{
+  "name": "@limio/pricing-cards",
+  "version": "1.2.0",
+  "description": "Pricing tier cards driven by Limio offer data with add-to-basket checkout flow",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#0B1D3A"
+    },
+    {
+      "id": "highlightColor__limio_color",
+      "label": "Highlight Tier Background",
+      "type": "color",
+      "default": "#0B1D3A"
+    },
+    {
+      "id": "checkColor__limio_color",
+      "label": "Checkmark Color",
+      "type": "color",
+      "default": "#1A5DAD"
+    },
+    {
+      "id": "cardGap",
+      "label": "Card Gap (px)",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "pricing-cards"
+    }
+  ]
+}
