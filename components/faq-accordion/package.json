@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Frequently Asked Questions accordion component with expandable items",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

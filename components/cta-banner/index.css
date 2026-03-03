@@ -1,3 +1,9 @@
+.cta-banner *,
+.cta-banner *::before,
+.cta-banner *::after {
+  box-sizing: border-box;
+}
+
 .cta-banner {
   padding: 64px 24px;
 }

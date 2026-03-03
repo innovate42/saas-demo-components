@@ -1,3 +1,9 @@
+.comparison-table *,
+.comparison-table *::before,
+.comparison-table *::after {
+  box-sizing: border-box;
+}
+
 .comparison-table {
   padding: 48px 24px 64px;
   max-width: 1200px;

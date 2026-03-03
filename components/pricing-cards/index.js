@@ -1,11 +1,11 @@
-import React from "react"
-import { useCampaign, useBasket, sanitiseHTML } from "@limio/sdk"
+import React, { useState } from "react"
+import { useCampaign, useBasket, sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
 const PricingCard = ({ offer, primaryColor, highlightColor, selectOffer, basketLoading }) => {
-  const attrs = offer.data.attributes
+  const attrs = offer?.data?.attributes || {}
   const isHighlighted = attrs.best_value__limio
 
   const cardClass = `pricing-card${isHighlighted ? " pricing-card--highlighted" : ""}`
@@ -71,15 +71,57 @@ const PricingCard = ({ offer, primaryColor, highlightColor, selectOffer, basketL
   )
 }
 
+const GroupToggle = ({ groupValues, activeGroup, onGroupChange, primaryColor }) => {
+  if (!groupValues || groupValues.length <= 1) return null
+
+  return (
+    <div className="pricing-cards__toggle">
+      {groupValues.map((group) => (
+        <button
+          key={group.id}
+          className={`pricing-cards__toggle-btn${activeGroup === group.id ? " pricing-cards__toggle-btn--active" : ""}`}
+          onClick={() => onGroupChange(group.id)}
+          style={activeGroup === group.id ? { backgroundColor: primaryColor, borderColor: primaryColor } : undefined}
+        >
+          {group.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 const PricingCards = () => {
+  const props = useStaticProps() || {}
   const {
     primaryColor__limio_color: primaryColor,
     highlightColor__limio_color: highlightColor,
+    cardGap,
     componentId,
-  } = useStaticProps()
+  } = props
 
-  const { offers = [] } = useCampaign()
-  const { basketLoading, initiateCheckout, addOfferToBasket, navigateToCheckout, pageOptions } = useBasket()
+  const { isInPageBuilder } = useLimioContext() || {}
+  const { offers = [], groupValues = [] } = useCampaign() || {}
+  const {
+    basketLoading,
+    initiateCheckout,
+    addOfferToBasket,
+    navigateToCheckout,
+    pageOptions,
+  } = useBasket() || {}
+
+  const hasGroups = groupValues.length > 1
+  const [activeGroup, setActiveGroup] = useState(groupValues[0]?.id || null)
+
+  const filteredOffers = hasGroups
+    ? offers.filter((offer) => {
+        const group = offer?.data?.attributes?.group__limio
+        return group === activeGroup
+      })
+    : offers
+
+  const cardCount = filteredOffers.length
+  const gap = cardGap != null ? `${cardGap}px` : undefined
+  const gridStyle = gap ? { gap } : undefined
 
   async function selectOffer(offer) {
     const checkoutId = getCurrentBasketId()
@@ -88,17 +130,25 @@ const PricingCards = () => {
     } else {
       await addOfferToBasket({ offer })
     }
-    if (pageOptions.pushToCheckout) {
+    if (pageOptions?.pushToCheckout) {
       await navigateToCheckout()
     }
   }
 
+  const gridClass = `pricing-cards__grid pricing-cards__grid--cols-${Math.min(cardCount, 4)}`
+
   return (
     <section id={componentId} className="pricing-cards">
-      <div className="pricing-cards__grid">
-        {offers.map((offer) => (
+      <GroupToggle
+        groupValues={groupValues}
+        activeGroup={activeGroup}
+        onGroupChange={setActiveGroup}
+        primaryColor={primaryColor}
+      />
+      <div className={gridClass} style={gridStyle}>
+        {filteredOffers.map((offer) => (
           <PricingCard
-            key={offer.id}
+            key={offer?.id || offer?.path}
             offer={offer}
             primaryColor={primaryColor}
             highlightColor={highlightColor}
