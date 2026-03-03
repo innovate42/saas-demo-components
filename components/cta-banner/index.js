@@ -1,11 +1,10 @@
 import React from "react"
+import { sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
-import xss from "xss"
 import "./index.css"
 
-const sanitize = (str) => xss(str || "")
-
 const CTABanner = () => {
+  const props = useStaticProps() || {}
   const {
     headline,
     "description__limio_richtext": descriptionHtml,
@@ -17,7 +16,9 @@ const CTABanner = () => {
     ctaTextColor__limio_color: ctaTextColor,
     layout,
     componentId,
-  } = useStaticProps()
+  } = props
+
+  const { isInPageBuilder } = useLimioContext() || {}
 
   const layoutClass = `cta-banner cta-banner--${layout || "center"}`
 
@@ -30,12 +31,12 @@ const CTABanner = () => {
       <div className="cta-banner__inner">
         <div className="cta-banner__content">
           {headline && (
-            <h2 className="cta-banner__headline">{sanitize(headline)}</h2>
+            <h2 className="cta-banner__headline">{sanitiseHTML(headline)}</h2>
           )}
           {descriptionHtml && (
             <div
               className="cta-banner__description"
-              dangerouslySetInnerHTML={{ __html: sanitize(descriptionHtml) }}
+              dangerouslySetInnerHTML={{ __html: sanitiseHTML(descriptionHtml) }}
             />
           )}
         </div>
@@ -45,7 +46,7 @@ const CTABanner = () => {
             href={ctaUrl}
             style={{ backgroundColor: ctaBgColor, color: ctaTextColor }}
           >
-            {sanitize(ctaText)}
+            {sanitiseHTML(ctaText)}
           </a>
         )}
       </div>

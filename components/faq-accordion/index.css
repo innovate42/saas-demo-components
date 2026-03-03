@@ -1,3 +1,9 @@
+.faq-accordion *,
+.faq-accordion *::before,
+.faq-accordion *::after {
+  box-sizing: border-box;
+}
+
 .faq-accordion {
   padding: 64px 24px;
   max-width: 800px;

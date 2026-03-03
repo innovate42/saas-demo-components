@@ -1,11 +1,8 @@
 {
   "name": "@limio/cta-banner",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Call-to-action banner with headline, description and CTA button",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

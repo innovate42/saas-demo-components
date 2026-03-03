@@ -1,11 +1,8 @@
 {
   "name": "@limio/comparison-table",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Feature comparison table across pricing tiers with checkmarks, x-marks, and text values",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

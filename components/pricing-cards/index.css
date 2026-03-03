@@ -1,9 +1,50 @@
+.pricing-cards *,
+.pricing-cards *::before,
+.pricing-cards *::after {
+  box-sizing: border-box;
+}
+
 .pricing-cards {
   padding: 0 24px 48px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Group toggle */
+.pricing-cards__toggle {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e8ecf1;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-cards__toggle-btn {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+  font-family: inherit;
+}
+
+.pricing-cards__toggle-btn:hover {
+  background: #f5f7fa;
+}
+
+.pricing-cards__toggle-btn--active {
+  color: #fff;
+}
+
+/* Grid */
 .pricing-cards__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -11,6 +52,24 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Dynamic column counts for centering fewer cards */
+.pricing-cards__grid--cols-1 {
+  grid-template-columns: 1fr;
+  max-width: 320px;
+}
+
+.pricing-cards__grid--cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 640px;
+}
+
+.pricing-cards__grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 960px;
 }
 
 /* Card */
@@ -196,6 +255,11 @@
 @media (max-width: 1024px) {
   .pricing-cards__grid {
     grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+  }
+
+  .pricing-cards__grid--cols-1 {
+    grid-template-columns: 1fr;
   }
 
   .pricing-card {
@@ -211,5 +275,10 @@
 
   .pricing-cards {
     padding: 0 16px 32px;
+  }
+
+  .pricing-cards__toggle-btn {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 }
