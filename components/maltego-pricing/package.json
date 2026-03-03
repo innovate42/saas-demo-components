@@ -10,6 +10,7 @@
     "react": "*"
   },
   "limioProps": [
+    { "id": "darkMode", "label": "Dark mode", "type": "boolean", "default": false },
     { "id": "showHero", "label": "Show hero section", "type": "boolean", "default": true },
     { "id": "heroImage", "label": "Hero image URL", "type": "string", "default": "" },
     { "id": "heroImageAlt", "label": "Hero image alt text", "type": "string", "default": "Product preview" },

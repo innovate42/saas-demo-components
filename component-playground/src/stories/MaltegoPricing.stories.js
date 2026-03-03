@@ -19,6 +19,7 @@ export default {
 
 export const Default = {
     args: {
+        darkMode: false,
         showHero: true,
         heroImage: "",
         heroImageAlt: "Product preview",
@@ -58,6 +59,15 @@ export const Default = {
             { id: "payment", label: "What payment methods do you accept?" },
             { id: "discount", label: "Do you offer discounts for annual billing?" },
         ],
+    },
+}
+
+export const DarkMaltego = {
+    args: {
+        ...Default.args,
+        darkMode: true,
+        headline: "Explore plans that power all digital investigations",
+        subheadline: "From individual researchers to enterprise teams — choose the plan that fits your needs.",
     },
 }
 

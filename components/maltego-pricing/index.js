@@ -218,6 +218,7 @@ const MaltegoPricing = () => {
     const props = useStaticProps() || {}
 
     const {
+        darkMode = false,
         showHero = true,
         heroImage = "",
         heroImageAlt = "Product preview",
@@ -233,18 +234,26 @@ const MaltegoPricing = () => {
         freeCta = "Use for free",
         enterpriseCta = "Book a demo",
         bestValueLabel = "Best Value",
-        primaryColor = "#EFBF04",
-        bestValueColor = "#EFBF04",
-        backgroundColor = "#FFFFFF",
-        cardColor = "#FFFFFF",
-        textColor = "#1B2438",
-        mutedTextColor = "#5A6175",
+        primaryColor: primaryColorProp = "#EFBF04",
+        bestValueColor: bestValueColorProp = "#EFBF04",
+        backgroundColor: backgroundColorProp = "#FFFFFF",
+        cardColor: cardColorProp = "#FFFFFF",
+        textColor: textColorProp = "#1B2438",
+        mutedTextColor: mutedTextColorProp = "#5A6175",
         faqHeadline = "Frequently asked questions",
         comparisonHeadline = "Compare all features",
         groupLabels = [],
         featureCategories = [],
         faqItems = [],
     } = props
+
+    // Apply dark mode overrides (Maltego yellow stays)
+    const primaryColor = darkMode ? "#EFBF04" : primaryColorProp
+    const bestValueColor = darkMode ? "#EFBF04" : bestValueColorProp
+    const backgroundColor = darkMode ? "#0E1117" : backgroundColorProp
+    const cardColor = darkMode ? "#161B27" : cardColorProp
+    const textColor = darkMode ? "#F0F2F7" : textColorProp
+    const mutedTextColor = darkMode ? "#8B92A5" : mutedTextColorProp
 
     // Group offers by group__limio
     const grouped = useMemo(() => {
@@ -293,7 +302,7 @@ const MaltegoPricing = () => {
 
     return (
         <section
-            className="mp"
+            className={`mp${darkMode ? " mp--dark" : ""}`}
             style={{
                 "--mp-primary": primaryColor,
                 "--mp-best-value": bestValueColor,
