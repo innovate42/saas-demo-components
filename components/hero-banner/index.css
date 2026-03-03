@@ -48,6 +48,10 @@
     50% { opacity: 0.8; }
 }
 
+.hb-wireframe__pulse-line {
+    opacity: 1;
+}
+
 /* Container */
 .hb-hero__container {
     position: relative;
@@ -372,6 +376,11 @@
     .hb-wireframe__line {
         animation: none;
         opacity: 0.1;
+    }
+
+    .hb-wireframe__pulse-line {
+        animation: none;
+        opacity: 0;
     }
 
     .hb-wireframe__dot {

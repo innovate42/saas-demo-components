@@ -80,6 +80,9 @@ const WireframeBackground = ({ primaryColor, secondaryColor }) => {
                         x2: nodeList[j].x,
                         y2: nodeList[j].y,
                         delay: (nodeList[i].delay + nodeList[j].delay) / 2,
+                        length: dist,
+                        pulseDelay: seededRandom((i + 1) * (j + 1) * 13) * 12,
+                        pulseDuration: 3 + seededRandom((i + 1) * (j + 1) * 17) * 5,
                     })
                 }
             }
@@ -99,6 +102,65 @@ const WireframeBackground = ({ primaryColor, secondaryColor }) => {
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
+                    <filter id="hb-line-glow">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    {edges.map((edge, i) => (
+                        <linearGradient
+                            key={`lg${i}`}
+                            id={`hb-line-grad-${i}`}
+                            gradientUnits="userSpaceOnUse"
+                            x1={edge.x1}
+                            y1={edge.y1}
+                            x2={edge.x2}
+                            y2={edge.y2}
+                        >
+                            <stop offset="0%" stopColor={primaryColor} stopOpacity="0" />
+                            <stop offset="20%" stopColor={primaryColor} stopOpacity="1" />
+                            <stop offset="80%" stopColor={primaryColor} stopOpacity="1" />
+                            <stop offset="100%" stopColor={primaryColor} stopOpacity="0" />
+                        </linearGradient>
+                    ))}
+                    {edges.filter((_, i) => i % 6 === 0).map((edge, i) => {
+                        const color = i % 2 === 0 ? secondaryColor : primaryColor
+                        const dur = `${edge.pulseDuration}s`
+                        const delay = `${edge.pulseDelay}s`
+                        const reverse = i % 3 === 0
+                        const gx1 = reverse ? edge.x2 : edge.x1
+                        const gy1 = reverse ? edge.y2 : edge.y1
+                        const gx2 = reverse ? edge.x1 : edge.x2
+                        const gy2 = reverse ? edge.y1 : edge.y2
+                        return (
+                            <linearGradient
+                                key={`pg${i}`}
+                                id={`hb-pulse-grad-${i}`}
+                                gradientUnits="userSpaceOnUse"
+                                x1={gx1}
+                                y1={gy1}
+                                x2={gx2}
+                                y2={gy2}
+                            >
+                                <stop offset="0" stopColor={color} stopOpacity="0" />
+                                <stop stopColor={color} stopOpacity="0">
+                                    <animate attributeName="offset" values="0;0;0.3;1" keyTimes="0;0.15;0.75;1" dur={dur} begin={delay} repeatCount="indefinite" />
+                                </stop>
+                                <stop stopColor={color} stopOpacity="0.85">
+                                    <animate attributeName="offset" values="0;0.06;0.4;1" keyTimes="0;0.15;0.75;1" dur={dur} begin={delay} repeatCount="indefinite" />
+                                </stop>
+                                <stop stopColor={color} stopOpacity="0.85">
+                                    <animate attributeName="offset" values="0.03;0.35;0.75;1" keyTimes="0;0.15;0.75;1" dur={dur} begin={delay} repeatCount="indefinite" />
+                                </stop>
+                                <stop stopColor={color} stopOpacity="0">
+                                    <animate attributeName="offset" values="0.08;0.45;0.85;1" keyTimes="0;0.15;0.75;1" dur={dur} begin={delay} repeatCount="indefinite" />
+                                </stop>
+                                <stop offset="1" stopColor={color} stopOpacity="0" />
+                            </linearGradient>
+                        )
+                    })}
                 </defs>
                 {edges.map((edge, i) => (
                     <line
@@ -108,9 +170,23 @@ const WireframeBackground = ({ primaryColor, secondaryColor }) => {
                         y1={edge.y1}
                         x2={edge.x2}
                         y2={edge.y2}
-                        stroke={primaryColor}
+                        stroke={`url(#hb-line-grad-${i})`}
                         strokeWidth="0.8"
                         style={{ animationDelay: `${edge.delay}s` }}
+                    />
+                ))}
+                {edges.filter((_, i) => i % 6 === 0).map((edge, i) => (
+                    <line
+                        key={`p${i}`}
+                        className="hb-wireframe__pulse-line"
+                        x1={edge.x1}
+                        y1={edge.y1}
+                        x2={edge.x2}
+                        y2={edge.y2}
+                        stroke={`url(#hb-pulse-grad-${i})`}
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        filter="url(#hb-line-glow)"
                     />
                 ))}
                 {nodes.map((node, i) => (
