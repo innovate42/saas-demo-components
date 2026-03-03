@@ -238,10 +238,10 @@ const OfferCardsStripe = () => {
                 </div>
 
                 <footer className="stripe-footer">
-                    <span>🔒 Secure checkout</span>
-                    <span>•</span>
+                    <span>ð Secure checkout</span>
+                    <span>â¢</span>
                     <span>Cancel anytime</span>
-                    <span>•</span>
+                    <span>â¢</span>
                     <span>24/7 support</span>
                 </footer>
             </div>

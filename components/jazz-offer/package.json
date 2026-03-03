@@ -1,0 +1,20 @@
+{
+  "name": "@limio/jazz-offer",
+  "version": "1.0.0",
+  "description": "Sleek Jazz-themed offer component with subtle design and animated network background",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": { "react": "*" },
+  "limioProps": [
+    { "id": "headline", "label": "Main Headline", "type": "string", "default": "Choose Your Plan" },
+    { "id": "subheadline", "label": "Subheadline", "type": "string", "default": "Find the perfect fit for your team" },
+    { "id": "primaryColor__limio_color", "label": "Primary Color", "type": "color", "default": "#4f46e5" },
+    { "id": "accentColor__limio_color", "label": "Accent Color", "type": "color", "default": "#06b6d4" },
+    { "id": "featuresTitle", "label": "Features Section Title", "type": "string", "default": "What's Included" },
+    { "id": "ctaLoadingText", "label": "CTA Loading Text", "type": "string", "default": "Adding to cart..." },
+    { "id": "noOfferSelectedText", "label": "No Offer Selected Text", "type": "string", "default": "Select a plan to view details" },
+    { "id": "sidebarTitle", "label": "Sidebar Title", "type": "string", "default": "Available Plans" },
+    { "id": "enableAnimations", "label": "Enable Background Animations", "type": "boolean", "default": true },
+    { "id": "mostPopularText", "label": "Most Popular Badge Text", "type": "string", "default": "Most Popular" }
+  ]
+}
