@@ -122,7 +122,7 @@
     "jest-environment-jsdom": "^29.2.1",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
-    "storybook": "^8.0.0",
+    "storybook": "^8.6.15",
     "tailwindcss": "^3.4.1"
   },
   "jest": {
