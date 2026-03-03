@@ -1,5 +1,6 @@
 node_modules/
 component-playground/node_modules/
+.limio.json
 .idea/
 .yarn/
 .prettierrc

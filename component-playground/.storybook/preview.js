@@ -23,4 +23,4 @@ const preview = {
   ],
 };
 
-export default preview;
+export default preview
