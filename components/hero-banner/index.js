@@ -20,10 +20,16 @@ const parseFeatures = (html) =>
         .map(item => item.replace(/<[^>]*>/g, "").trim())
         .filter(item => item.length > 0)
 
+const isValidUrl = (str) => {
+    if (!str || typeof str !== "string") return false
+    try { return /^https?:\/\/.+\..+/.test(str.trim()) } catch { return false }
+}
+
 const getOfferImage = (offer) => {
     const attachments = offer?.data?.attachments || []
     const img = attachments.find(a => a.type?.startsWith("image"))
-    return img?.url || null
+    const url = img?.url
+    return isValidUrl(url) ? url : null
 }
 
 const WireframeBackground = ({ primaryColor, secondaryColor }) => {
@@ -228,7 +234,7 @@ const OfferContent = ({ offer, primaryColor, secondaryColor, ctaOverride }) => {
 
             {image && (
                 <div className="hb-content__image-wrap">
-                    <img className="hb-content__image" src={image} alt={name} />
+                    <img className="hb-content__image" src={image} alt={name} onError={(e) => { e.target.parentElement.style.display = "none" }} />
                 </div>
             )}
         </div>
