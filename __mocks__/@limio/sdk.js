@@ -1,11 +1,18 @@
 // Mock for @limio/sdk used in Storybook
-// Extracts default values from package.json limioProps
+// Aligned to Limio Component Skill v5.0.0
+
+import React from "react"
 
 // Mutable config object — stories can set overrides via this
 export const __mockConfig = {
   propsOverride: null,
   offersOverride: null,
+  userOverride: null,
+  subscriptionsOverride: null,
+  contextOverride: null,
 }
+
+// --- Props ---
 
 export function getPropsFromPackageJson(packageData) {
   const props = {}
@@ -13,12 +20,6 @@ export function getPropsFromPackageJson(packageData) {
     packageData.limioProps.forEach((prop) => {
       if (prop.type === "list" && prop.fields) {
         props[prop.id] = prop.default || []
-      } else if (prop.type === "schema") {
-        try {
-          props[prop.id] = typeof prop.default === "string" ? JSON.parse(prop.default) : prop.default
-        } catch {
-          props[prop.id] = prop.default
-        }
       } else {
         props[prop.id] = prop.default
       }
@@ -34,7 +35,8 @@ export function useComponentProps(defaultProps) {
   return defaultProps
 }
 
-// Sample offers matching Emma pricing page tiers
+// --- Campaign / Offers ---
+
 const sampleOffers = [
   {
     id: "offer-lite",
@@ -50,6 +52,9 @@ const sampleOffers = [
         best_value__limio: false,
         group__limio: "monthly",
       },
+      price: [{ value: 99, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "months" }],
+      products: [],
+      attachments: [],
     },
   },
   {
@@ -66,6 +71,9 @@ const sampleOffers = [
         best_value__limio: false,
         group__limio: "monthly",
       },
+      price: [{ value: 159, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "months" }],
+      products: [],
+      attachments: [],
     },
   },
   {
@@ -82,6 +90,9 @@ const sampleOffers = [
         best_value__limio: false,
         group__limio: "monthly",
       },
+      price: [{ value: 249, currencyCode: "USD", type: "recurring", trigger: "subscription_start", repeat_interval: 1, repeat_interval_type: "months" }],
+      products: [],
+      attachments: [],
     },
   },
   {
@@ -98,32 +109,201 @@ const sampleOffers = [
         best_value__limio: true,
         group__limio: "monthly",
       },
+      price: [],
+      products: [],
+      attachments: [],
     },
   },
 ]
 
 export function useCampaign() {
-  return { offers: __mockConfig.offersOverride || sampleOffers }
+  return {
+    offers: __mockConfig.offersOverride || sampleOffers,
+    campaign: { name: "Emma Pricing", path: "/pages/emma-pricing", attributes: {} },
+    addOns: [],
+    tag: "/tags/dummytag",
+    groupValues: [{ label: "Monthly", id: "monthly" }],
+  }
 }
+
+// --- Basket ---
 
 export function useBasket() {
   return {
-    addOfferToBasket: (offer) => {
-      console.log("Added to basket:", offer.data?.attributes?.display_name__limio || offer.id)
-      alert(`Added "${offer.data?.attributes?.display_name__limio}" to basket`)
+    orderItems: [],
+    basketLoading: false,
+    formattedTotal: "$0.00",
+    pageOptions: { pushToCheckout: true },
+    expiresAt: null,
+    initiateCheckout: async ({ order }) => {
+      const name = order?.orderItems?.[0]?.offer?.data?.attributes?.display_name__limio || "offer"
+      console.log("[Storybook] initiateCheckout:", name)
     },
-    basket: [],
+    addOfferToBasket: async ({ offer }) => {
+      const name = offer?.data?.attributes?.display_name__limio || "offer"
+      console.log("[Storybook] addOfferToBasket:", name)
+    },
+    removeFromBasket: async ({ id }) => {
+      console.log("[Storybook] removeFromBasket:", id)
+    },
+    updateItemQuantity: async (itemId, quantity) => {
+      console.log("[Storybook] updateItemQuantity:", itemId, quantity)
+    },
+    swapOffer: async (itemId, offer) => {
+      console.log("[Storybook] swapOffer:", itemId)
+    },
+    clearOrderItems: async () => {
+      console.log("[Storybook] clearOrderItems")
+    },
+    navigateToCheckout: async () => {
+      console.log("[Storybook] navigateToCheckout")
+    },
+    redeemPromoCode: async (code) => {
+      console.log("[Storybook] redeemPromoCode:", code)
+    },
+    removePromoCode: async (code) => {
+      console.log("[Storybook] removePromoCode:", code)
+    },
+    updateCustomField: async (field, value) => {
+      console.log("[Storybook] updateCustomField:", field, value)
+    },
+    setCheckoutDisabled: (disabled) => {
+      console.log("[Storybook] setCheckoutDisabled:", disabled)
+    },
+    validateBasket: async () => {
+      console.log("[Storybook] validateBasket")
+      return true
+    },
+    updateBasketDetails: async (details) => {
+      console.log("[Storybook] updateBasketDetails:", details)
+    },
+    selectOfferForSubscriptionUpdate: async (offer) => {
+      console.log("[Storybook] selectOfferForSubscriptionUpdate")
+    },
   }
 }
+
+// --- User ---
+
+export function useUser() {
+  if (__mockConfig.userOverride) return __mockConfig.userOverride
+  return {
+    attributes: {
+      email: "demo@example.com",
+      firstName: "Demo",
+      lastName: "User",
+      sub: "user-123",
+    },
+    subscriptions: [],
+    loginStatus: "logged-in",
+    loaded: true,
+    token: "mock-token",
+  }
+}
+
+// --- Subscriptions ---
+
+export function useSubscriptions() {
+  if (__mockConfig.subscriptionsOverride) return __mockConfig.subscriptionsOverride
+  return { subscriptions: [] }
+}
+
+export function useSubInfo(subscription) {
+  return {
+    status: subscription?.status || "active",
+    isGift: false,
+    quantity: 1,
+    hasLapsed: false,
+    hasPendingChange: false,
+  }
+}
+
+export function useSchedule(subscription) {
+  return {
+    nextPaymentAmount: "$9.99",
+    renewalPrice: "$9.99",
+    termStartDate: "1 Jan 2025",
+    termEndDate: "1 Jan 2026",
+  }
+}
+
+// --- Context ---
+
+export function useLimioContext() {
+  if (__mockConfig.contextOverride) return __mockConfig.contextOverride
+  return { isInPageBuilder: false }
+}
+
+// --- Checkout ---
+
+export function useCheckout({ redirectOnFailure } = {}) {
+  return {
+    useCheckoutSelector: (selector) => {
+      const state = {
+        order: { orderItems: [] },
+        paidSchedule: [],
+        schedule: [],
+        locale: "en",
+        display: {
+          orderTotal: {
+            orderSubtotal: "$0.00",
+            orderTotal: "$0.00",
+            currency: "USD",
+            taxSummary: [],
+          },
+        },
+      }
+      return selector ? selector(state) : state
+    },
+  }
+}
+
+export function usePreview() {
+  return {
+    loadingPreview: false,
+    isTaxPreviewCountry: false,
+    taxCalculated: false,
+  }
+}
+
+// --- Utilities ---
 
 export function sanitiseHTML(html) {
   return html || ""
 }
 
+export function formatDate(dateStr, format) {
+  try {
+    const d = new Date(dateStr)
+    return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+  } catch {
+    return dateStr || ""
+  }
+}
+
+export function formatCurrency(amount, currencyCode) {
+  const symbols = { USD: "$", GBP: "\u00A3", EUR: "\u20AC" }
+  const symbol = symbols[currencyCode] || currencyCode
+  return `${symbol}${amount}`
+}
+
+export function formatCurrencyForCurrentLocale(amount, currencyCode) {
+  return formatCurrency(amount, currencyCode)
+}
+
+export function formatDisplayPrice(template, priceArray) {
+  if (!priceArray?.length) return template || ""
+  const price = priceArray[0]
+  return template
+    .replace("{{amount}}", price.value)
+    .replace("{{currencyCode}}", price.currencyCode)
+    .replace("{{currencySymbol}}", formatCurrency("", price.currencyCode))
+}
+
 export function groupOffers(offers, groupLabels = []) {
   const groups = {}
   ;(offers || []).forEach((offer) => {
-    const groupId = offer.data?.attributes?.group__limio || "other"
+    const groupId = offer?.data?.attributes?.group__limio || "other"
     if (!groups[groupId]) {
       const label = groupLabels.find((g) => g.id === groupId)
       groups[groupId] = {
@@ -137,4 +317,98 @@ export function groupOffers(offers, groupLabels = []) {
     groups[groupId].offers.push(offer)
   })
   return Object.values(groups)
+}
+
+export function useOfferInfo(offer) {
+  const attrs = offer?.data?.attributes || {}
+  return {
+    allowMultibuy: attrs.allow_multibuy__limio || false,
+    offerDescription: attrs.display_description__limio || "",
+    hasRecurringCharge: offer?.data?.price?.some((p) => p.type === "recurring") || false,
+    isDelivery: false,
+    productNames: (offer?.data?.products || []).map((p) => p.name),
+    isAutoRenew: attrs.autoRenew__limio || false,
+    offerImage: offer?.data?.attachments?.find((a) => a.type === "image")?.url || null,
+    usesExternalPrice: false,
+    isGift: false,
+    displayName: attrs.display_name__limio || offer?.name || "",
+  }
+}
+
+export function checkActiveOffers(offers, includeDiscounts = false) {
+  if (!Array.isArray(offers)) return []
+  const now = new Date()
+  return offers.filter((o) => {
+    const start = o?.data?.start ? new Date(o.data.start) : null
+    const end = o?.data?.end ? new Date(o.data.end) : null
+    if (!includeDiscounts && o?.data?.record_subtype === "discount") return false
+    if (start && start > now) return false
+    if (end && end < now) return false
+    return true
+  })
+}
+
+export function getCurrentOffer(subscription) {
+  const offers = subscription?.offers || []
+  const active = checkActiveOffers(offers, false)
+  return active[0]?.data?.offer || null
+}
+
+export function getPeriodForOffer(offer) {
+  const price = offer?.data?.price?.[0]
+  if (!price) return "N/A"
+  const interval = price.repeat_interval || 1
+  const type = price.repeat_interval_type || "months"
+  return `${interval} ${type.replace(/s$/, "")}`
+}
+
+// --- Components / Providers ---
+
+export const LimioProvider = ({ children }) => children
+
+export const ComponentContext = React.createContext({})
+
+export const ErrorBoundary = ({ children, ErrorUI }) => {
+  // Simple passthrough in Storybook — no error catching
+  return children
+}
+
+export function withErrorBoundary(Component, ErrorUI) {
+  return (props) => (
+    <ErrorBoundary ErrorUI={ErrorUI}>
+      <Component {...props} />
+    </ErrorBoundary>
+  )
+}
+
+// --- Address Utilities ---
+
+export function addressSummary(address) {
+  if (!address) return "N/A"
+  const parts = [address.line1, address.city, address.state, address.postalCode, address.country]
+  return parts.filter(Boolean).join(", ") || "N/A"
+}
+
+export function formatCountry(code) {
+  const countries = { US: "United States", GB: "United Kingdom", DE: "Germany", FR: "France" }
+  return countries[code] || code
+}
+
+// --- DateTime (Luxon stub) ---
+
+export const DateTime = {
+  fromISO: (iso) => ({
+    toLocaleString: () => new Date(iso).toLocaleDateString(),
+    toFormat: (fmt) => new Date(iso).toLocaleDateString(),
+  }),
+  now: () => ({
+    toISO: () => new Date().toISOString(),
+    toLocaleString: () => new Date().toLocaleDateString(),
+  }),
+}
+
+// --- App Settings ---
+
+export const LimioAppSettings = {
+  getDateFormat: () => "DATE_FULL",
 }

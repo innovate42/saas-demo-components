@@ -1,3 +1,9 @@
+.pricing-hero *,
+.pricing-hero *::before,
+.pricing-hero *::after {
+  box-sizing: border-box;
+}
+
 .pricing-hero {
   text-align: center;
   padding: 60px 24px 48px;

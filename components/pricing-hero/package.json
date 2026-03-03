@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Hero banner for pricing page with headline and subheadline",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

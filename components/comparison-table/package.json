@@ -3,9 +3,6 @@
   "version": "1.0.1",
   "description": "Feature comparison table across pricing tiers with checkmarks, x-marks, and text values",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

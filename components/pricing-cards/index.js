@@ -1,11 +1,11 @@
 import React from "react"
-import { useCampaign, useBasket, sanitiseHTML } from "@limio/sdk"
+import { useCampaign, useBasket, sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
 const PricingCard = ({ offer, primaryColor, highlightColor, selectOffer, basketLoading }) => {
-  const attrs = offer.data.attributes
+  const attrs = offer?.data?.attributes || {}
   const isHighlighted = attrs.best_value__limio
 
   const cardClass = `pricing-card${isHighlighted ? " pricing-card--highlighted" : ""}`
@@ -72,14 +72,22 @@ const PricingCard = ({ offer, primaryColor, highlightColor, selectOffer, basketL
 }
 
 const PricingCards = () => {
+  const props = useStaticProps() || {}
   const {
     primaryColor__limio_color: primaryColor,
     highlightColor__limio_color: highlightColor,
     componentId,
-  } = useStaticProps()
+  } = props
 
-  const { offers = [] } = useCampaign()
-  const { basketLoading, initiateCheckout, addOfferToBasket, navigateToCheckout, pageOptions } = useBasket()
+  const { isInPageBuilder } = useLimioContext() || {}
+  const { offers = [] } = useCampaign() || {}
+  const {
+    basketLoading,
+    initiateCheckout,
+    addOfferToBasket,
+    navigateToCheckout,
+    pageOptions,
+  } = useBasket() || {}
 
   async function selectOffer(offer) {
     const checkoutId = getCurrentBasketId()
@@ -88,7 +96,7 @@ const PricingCards = () => {
     } else {
       await addOfferToBasket({ offer })
     }
-    if (pageOptions.pushToCheckout) {
+    if (pageOptions?.pushToCheckout) {
       await navigateToCheckout()
     }
   }
@@ -98,7 +106,7 @@ const PricingCards = () => {
       <div className="pricing-cards__grid">
         {offers.map((offer) => (
           <PricingCard
-            key={offer.id}
+            key={offer?.id || offer?.path}
             offer={offer}
             primaryColor={primaryColor}
             highlightColor={highlightColor}

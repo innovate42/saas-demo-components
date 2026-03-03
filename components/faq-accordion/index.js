@@ -1,9 +1,7 @@
 import React, { useState } from "react"
+import { sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
-import xss from "xss"
 import "./index.css"
-
-const sanitize = (str) => xss(str || "")
 
 const ChevronIcon = ({ isOpen }) => (
   <svg
@@ -32,13 +30,13 @@ const FAQItem = ({ question, answerHtml, borderColor }) => {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
-        <span>{sanitize(question)}</span>
+        <span>{sanitiseHTML(question)}</span>
         <ChevronIcon isOpen={isOpen} />
       </button>
       <div className={`faq-accordion__answer${isOpen ? " faq-accordion__answer--open" : ""}`}>
         <div
           className="faq-accordion__answer-content"
-          dangerouslySetInnerHTML={{ __html: sanitize(answerHtml) }}
+          dangerouslySetInnerHTML={{ __html: sanitiseHTML(answerHtml) }}
         />
       </div>
     </div>
@@ -46,21 +44,24 @@ const FAQItem = ({ question, answerHtml, borderColor }) => {
 }
 
 const FAQAccordion = () => {
+  const props = useStaticProps() || {}
   const {
     headline,
     items = [],
     borderColor__limio_color: borderColor,
     componentId,
-  } = useStaticProps()
+  } = props
+
+  const { isInPageBuilder } = useLimioContext() || {}
 
   return (
     <section id={componentId} className="faq-accordion">
-      {headline && <h2 className="faq-accordion__headline">{sanitize(headline)}</h2>}
+      {headline && <h2 className="faq-accordion__headline">{sanitiseHTML(headline)}</h2>}
       {items.map((item, idx) => (
         <FAQItem
           key={idx}
-          question={item.question}
-          answerHtml={item["answer__limio_richtext"]}
+          question={item?.question}
+          answerHtml={item?.["answer__limio_richtext"]}
           borderColor={borderColor}
         />
       ))}

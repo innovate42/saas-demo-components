@@ -1,18 +1,19 @@
 import React from "react"
+import { sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
-import xss from "xss"
 import "./index.css"
 
-const sanitize = (str) => xss(str || "")
-
 const PricingHero = () => {
+  const props = useStaticProps() || {}
   const {
     headline,
     subheadline,
     backgroundColor__limio_color: bgColor,
     textColor__limio_color: textColor,
     componentId,
-  } = useStaticProps()
+  } = props
+
+  const { isInPageBuilder } = useLimioContext() || {}
 
   return (
     <section
@@ -20,8 +21,8 @@ const PricingHero = () => {
       className="pricing-hero"
       style={{ backgroundColor: bgColor, color: textColor }}
     >
-      <h1 className="pricing-hero__headline">{sanitize(headline)}</h1>
-      <p className="pricing-hero__subheadline">{sanitize(subheadline)}</p>
+      {headline && <h1 className="pricing-hero__headline">{sanitiseHTML(headline)}</h1>}
+      {subheadline && <p className="pricing-hero__subheadline">{sanitiseHTML(subheadline)}</p>}
     </section>
   )
 }

@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Call-to-action banner with headline, description and CTA button",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
   "peerDependencies": {
     "react": "*"
   },

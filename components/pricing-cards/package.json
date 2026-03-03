@@ -4,8 +4,7 @@
   "description": "Pricing tier cards driven by Limio offer data with add-to-basket checkout flow",
   "main": "./index.js",
   "peerDependencies": {
-    "react": "*",
-    "@limio/sdk": "*"
+    "react": "*"
   },
   "limioProps": [
     {

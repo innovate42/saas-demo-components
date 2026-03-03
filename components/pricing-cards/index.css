@@ -1,3 +1,9 @@
+.pricing-cards *,
+.pricing-cards *::before,
+.pricing-cards *::after {
+  box-sizing: border-box;
+}
+
 .pricing-cards {
   padding: 0 24px 48px;
   max-width: 1200px;
