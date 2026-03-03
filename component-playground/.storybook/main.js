@@ -18,7 +18,8 @@ const config = {
         getAbsolutePath("@storybook/addon-essentials"),
         getAbsolutePath("@chromatic-com/storybook"),
         getAbsolutePath("@storybook/addon-interactions"),
-        "@storybook/addon-styling-webpack"
+        "@storybook/addon-styling-webpack",
+        path.resolve(__dirname, "addon-prompt")
     ],
     framework: {
         name: getAbsolutePath("@storybook/react-webpack5"),
