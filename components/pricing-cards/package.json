@@ -1,6 +1,6 @@
 {
   "name": "@limio/pricing-cards",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Pricing tier cards driven by Limio offer data with add-to-basket checkout flow",
   "main": "./index.js",
   "peerDependencies": {
