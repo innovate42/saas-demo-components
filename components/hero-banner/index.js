@@ -34,12 +34,12 @@ const getOfferImage = (offer) => {
 
 const WireframeBackground = ({ primaryColor, secondaryColor }) => {
     const { nodes, edges } = useMemo(() => {
-        const cols = 8
-        const rows = 5
+        const cols = 6
+        const rows = 4
         const W = 1600
         const H = 900
-        const padX = 80
-        const padY = 80
+        const padX = 120
+        const padY = 100
         const spacingX = (W - padX * 2) / (cols - 1)
         const spacingY = (H - padY * 2) / (rows - 1)
         const seed = 42
@@ -54,11 +54,13 @@ const WireframeBackground = ({ primaryColor, secondaryColor }) => {
                 const idx = r * cols + c
                 const jitterX = (seededRandom(idx * 2) - 0.5) * spacingX * 0.45
                 const jitterY = (seededRandom(idx * 2 + 1) - 0.5) * spacingY * 0.45
+                const duration = 4 + seededRandom(idx * 11) * 6
                 nodeList.push({
                     x: padX + c * spacingX + jitterX,
                     y: padY + r * spacingY + jitterY,
-                    delay: seededRandom(idx * 3) * 8,
-                    size: seededRandom(idx * 7) > 0.7 ? 5 : 3,
+                    delay: seededRandom(idx * 3) * 10,
+                    duration,
+                    size: 1.5 + seededRandom(idx * 7) * 1.5,
                     isAccent: seededRandom(idx * 7) > 0.7,
                 })
             }
@@ -120,7 +122,7 @@ const WireframeBackground = ({ primaryColor, secondaryColor }) => {
                         r={node.size}
                         fill={node.isAccent ? secondaryColor : primaryColor}
                         filter="url(#hb-glow)"
-                        style={{ animationDelay: `${node.delay}s` }}
+                        style={{ animationDelay: `${node.delay}s`, animationDuration: `${node.duration}s` }}
                     />
                 ))}
             </svg>
