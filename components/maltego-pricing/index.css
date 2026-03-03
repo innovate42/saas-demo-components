@@ -38,7 +38,41 @@
     font-size: 18px;
     line-height: 1.6;
     color: var(--mp-muted);
-    margin: 0 0 32px;
+    margin: 0 0 24px;
+}
+
+.mp-hero__image-wrap {
+    margin: 0 auto 40px;
+    max-width: 760px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+}
+
+.mp-hero__image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.mp-hero__learnmore {
+    display: inline-block;
+    margin-bottom: 32px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: 2px solid;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mp-hero__learnmore:hover {
+    background: currentColor;
+}
+
+.mp-hero__learnmore:hover {
+    opacity: 0.85;
 }
 
 /* ─── Group Toggle ─── */

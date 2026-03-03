@@ -218,6 +218,12 @@ const MaltegoPricing = () => {
     const props = useStaticProps() || {}
 
     const {
+        showHero = true,
+        heroImage = "",
+        heroImageAlt = "Product preview",
+        showLearnMoreButton = true,
+        learnMoreText = "Learn more",
+        learnMoreUrl = "#",
         headline = "Explore plans that power your business",
         subheadline = "Choose the plan that fits your needs.",
         showComparisonTable = true,
@@ -298,18 +304,30 @@ const MaltegoPricing = () => {
             }}
         >
             {/* Hero */}
-            <div className="mp-hero">
-                <h1 className="mp-hero__title">{headline}</h1>
-                <p className="mp-hero__sub">{subheadline}</p>
-                {showGroupToggle && availableGroups.length > 1 && (
-                    <GroupToggle
-                        labels={availableGroups}
-                        selected={selectedGroup}
-                        onChange={setSelectedGroup}
-                        primaryColor={primaryColor}
-                    />
-                )}
-            </div>
+            {showHero && (
+                <div className="mp-hero">
+                    {heroImage && (
+                        <div className="mp-hero__image-wrap">
+                            <img src={heroImage} alt={heroImageAlt} className="mp-hero__image" />
+                        </div>
+                    )}
+                    <h1 className="mp-hero__title">{headline}</h1>
+                    <p className="mp-hero__sub">{subheadline}</p>
+                    {showLearnMoreButton && (
+                        <a href={learnMoreUrl} className="mp-hero__learnmore" style={{ color: primaryColor, borderColor: primaryColor }}>
+                            {learnMoreText}
+                        </a>
+                    )}
+                    {showGroupToggle && availableGroups.length > 1 && (
+                        <GroupToggle
+                            labels={availableGroups}
+                            selected={selectedGroup}
+                            onChange={setSelectedGroup}
+                            primaryColor={primaryColor}
+                        />
+                    )}
+                </div>
+            )}
 
             {/* Cards */}
             <div className="mp-cards" style={{ "--mp-card-count": displayOffers.length }}>

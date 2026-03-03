@@ -19,6 +19,12 @@ export default {
 
 export const Default = {
     args: {
+        showHero: true,
+        heroImage: "",
+        heroImageAlt: "Product preview",
+        showLearnMoreButton: true,
+        learnMoreText: "Learn more",
+        learnMoreUrl: "#",
         headline: "Explore plans that power all digital investigations",
         subheadline: "From individual researchers to enterprise teams — choose the plan that fits your needs.",
         showComparisonTable: true,
@@ -52,6 +58,17 @@ export const Default = {
             { id: "payment", label: "What payment methods do you accept?" },
             { id: "discount", label: "Do you offer discounts for annual billing?" },
         ],
+    },
+}
+
+export const WithHeroImage = {
+    args: {
+        ...Default.args,
+        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+        heroImageAlt: "Dashboard preview",
+        showLearnMoreButton: true,
+        learnMoreText: "See how it works",
+        learnMoreUrl: "#",
     },
 }
 
