@@ -1,0 +1,159 @@
+{
+  "name": "@limio/limio-component-via-new-app",
+  "version": "1.0.0",
+  "description": "Hero cards and offers component with Limio branding, featuring heading, offers display, company logos section, and CTA",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Main Headline",
+      "type": "string",
+      "default": "Subscription Commerce for Humans and Agents"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Self-service, sales-assisted, partner, and agent-led commerce - one platform, no engineering."
+    },
+    {
+      "id": "heroCtaText",
+      "label": "Hero CTA Text",
+      "type": "string",
+      "default": "Get Started Today"
+    },
+    {
+      "id": "heroCtaUrl",
+      "label": "Hero CTA URL",
+      "type": "string",
+      "default": "/contact"
+    },
+    {
+      "id": "learnMoreText",
+      "label": "Learn More Text",
+      "type": "string",
+      "default": "Learn more about our platform"
+    },
+    {
+      "id": "learnMoreUrl",
+      "label": "Learn More URL",
+      "type": "string",
+      "default": "/features"
+    },
+    {
+      "id": "offersHeadline",
+      "label": "Offers Section Headline",
+      "type": "string",
+      "default": "Choose Your Perfect Plan"
+    },
+    {
+      "id": "offersSubheadline",
+      "label": "Offers Section Subheadline",
+      "type": "string",
+      "default": "Flexible pricing options designed for every business need"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Brand Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#f47c24"
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group Labels",
+      "type": "list",
+      "fields": {
+        "id": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly" },
+        { "id": "annual", "label": "Annual" }
+      ]
+    },
+    {
+      "id": "showBillingToggle",
+      "label": "Show Billing Toggle",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "maxCards",
+      "label": "Maximum Cards to Display",
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "id": "ctaText",
+      "label": "Default CTA Text",
+      "type": "string",
+      "default": "Subscribe now"
+    },
+    {
+      "id": "featuredBadgeText",
+      "label": "Featured Badge Text",
+      "type": "string",
+      "default": "Most Popular"
+    },
+    {
+      "id": "loadingText",
+      "label": "Loading Text",
+      "type": "string",
+      "default": "Loading..."
+    },
+    {
+      "id": "companyLogosHeadline",
+      "label": "Company Logos Section Headline",
+      "type": "string",
+      "default": "Trusted by subscription leaders"
+    },
+    {
+      "id": "companyLogos",
+      "label": "Company Logos",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "name",
+          "label": "Company Name",
+          "type": "string"
+        },
+        "logo": {
+          "id": "logo",
+          "label": "Logo URL",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        },
+        "url": {
+          "id": "url",
+          "label": "Company URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        { "name": "Stripe", "logo": "", "url": "https://stripe.com" },
+        { "name": "Zuora", "logo": "", "url": "https://zuora.com" },
+        { "name": "Salesforce", "logo": "", "url": "https://salesforce.com" },
+        { "name": "OpenText", "logo": "", "url": "https://opentext.com" }
+      ]
+    }
+  ]
+}

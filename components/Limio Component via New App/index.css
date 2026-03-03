@@ -1,0 +1,704 @@
+.lc-wrapper {
+  /* Limio Brand Colors */
+  --lc-primary: #d14424;
+  --lc-accent: #f47c24;
+  --lc-primary-contrast: #ffffff;
+  --lc-accent-contrast: #ffffff;
+  --lc-primary-rgb: 209, 68, 36;
+  --lc-accent-rgb: 244, 124, 36;
+  
+  /* Consistent design tokens matching existing components */
+  --lc-text: #1e293b;
+  --lc-text-light: #475569;
+  --lc-text-muted: #64748b;
+  --lc-border: #e2e8f0;
+  --lc-bg: #fefefe;
+  --lc-card: #ffffff;
+  --lc-surface: #f8fafc;
+
+  position: relative;
+  background: var(--lc-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--lc-text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.lc-wrapper *,
+.lc-wrapper *::before,
+.lc-wrapper *::after {
+  box-sizing: border-box;
+}
+
+/* Text selection to match Limio brand */
+.lc-wrapper ::selection {
+  background: var(--lc-primary);
+  color: var(--lc-primary-contrast);
+}
+
+/* Hero Section */
+.lc-hero {
+  position: relative;
+  padding: 120px 24px 80px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--lc-bg) 0%, var(--lc-surface) 100%);
+  overflow: hidden;
+}
+
+.lc-hero-pattern {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 200px;
+  z-index: 1;
+}
+
+.lc-pattern-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(var(--lc-primary-rgb), 0.1), rgba(var(--lc-accent-rgb), 0.1));
+  animation: lc-float 8s ease-in-out infinite;
+}
+
+.lc-pattern-1 {
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.lc-pattern-2 {
+  width: 80px;
+  height: 80px;
+  top: 40px;
+  right: 20px;
+  animation-delay: 2s;
+}
+
+.lc-pattern-3 {
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 4s;
+}
+
+@keyframes lc-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.lc-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.lc-hero-headline {
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 24px 0;
+  background: linear-gradient(135deg, var(--lc-text), var(--lc-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: lc-slideUp 0.8s ease-out;
+}
+
+.lc-hero-subheadline {
+  font-size: 1.375rem;
+  line-height: 1.5;
+  color: var(--lc-text-light);
+  margin: 0 0 40px 0;
+  animation: lc-slideUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes lc-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lc-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  animation: lc-slideUp 0.8s ease-out 0.4s both;
+}
+
+.lc-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.lc-hero-cta--primary {
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: var(--lc-primary-contrast);
+  box-shadow: 0 8px 24px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+.lc-hero-cta--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(var(--lc-primary-rgb), 0.4);
+}
+
+.lc-hero-cta--secondary {
+  background: transparent;
+  color: var(--lc-text);
+  border: 2px solid var(--lc-border);
+}
+
+.lc-hero-cta--secondary:hover {
+  border-color: var(--lc-primary);
+  color: var(--lc-primary);
+  transform: translateY(-1px);
+}
+
+/* Company Logos Section */
+.lc-logos-section {
+  padding: 60px 24px 80px;
+  text-align: center;
+  background: var(--lc-surface);
+  border-top: 1px solid var(--lc-border);
+}
+
+.lc-logos-headline {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--lc-text-muted);
+  font-weight: 600;
+  margin: 0 0 40px 0;
+}
+
+.lc-logos-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.lc-logo-item {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.lc-logo-item:hover {
+  opacity: 1;
+}
+
+.lc-logo-link {
+  display: block;
+}
+
+.lc-logo-image {
+  height: 40px;
+  width: auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.lc-logo-image:hover {
+  filter: grayscale(0%);
+}
+
+.lc-logo-placeholder {
+  height: 40px;
+  padding: 8px 16px;
+  background: var(--lc-card);
+  border: 1px solid var(--lc-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lc-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Offers Section */
+.lc-offers-section {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lc-offers-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.lc-offers-headline {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 16px 0;
+  color: var(--lc-text);
+}
+
+.lc-offers-subheadline {
+  font-size: 1.25rem;
+  color: var(--lc-text-light);
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Toggle Section */
+.lc-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.lc-toggle {
+  display: inline-flex;
+  background: var(--lc-surface);
+  border: 2px solid var(--lc-border);
+  border-radius: 16px;
+  padding: 4px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.lc-toggle-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--lc-text-light);
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.lc-toggle-btn:hover {
+  color: var(--lc-text);
+  transform: translateY(-1px);
+}
+
+.lc-toggle-btn--active {
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: var(--lc-primary-contrast);
+  box-shadow: 0 8px 20px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+.lc-toggle-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.lc-toggle-savings {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.lc-toggle-btn--active .lc-toggle-savings {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Offers Grid */
+.lc-offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Offer Cards */
+.lc-offer-card {
+  position: relative;
+  background: var(--lc-card);
+  border: 2px solid var(--lc-border);
+  border-radius: 24px;
+  padding: 40px 32px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  animation: lc-cardSlide 0.6s ease-out both;
+  overflow: hidden;
+}
+
+@keyframes lc-cardSlide {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lc-offer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lc-primary), var(--lc-accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lc-offer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.lc-offer-card:hover::before {
+  opacity: 1;
+}
+
+/* Featured Card */
+.lc-offer-card--featured {
+  border-color: var(--lc-primary);
+  background: linear-gradient(135deg, var(--lc-card), rgba(var(--lc-primary-rgb), 0.02));
+  transform: scale(1.05);
+}
+
+.lc-offer-card--featured::before {
+  opacity: 1;
+  height: 6px;
+}
+
+.lc-offer-card--featured:hover {
+  transform: scale(1.05) translateY(-8px);
+  box-shadow: 0 25px 50px rgba(var(--lc-primary-rgb), 0.25);
+}
+
+/* Card Header */
+.lc-offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.lc-offer-badge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: var(--lc-primary-contrast);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+.lc-offer-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(var(--lc-primary-rgb), 0.1), rgba(var(--lc-accent-rgb), 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lc-primary);
+}
+
+.lc-offer-card--featured .lc-offer-icon {
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: white;
+  box-shadow: 0 4px 12px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+/* Card Content */
+.lc-offer-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 24px 0;
+  color: var(--lc-text);
+}
+
+.lc-offer-pricing {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.lc-offer-price {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--lc-text);
+  margin-bottom: 8px;
+}
+
+.lc-offer-card--featured .lc-offer-price {
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lc-offer-detail {
+  color: var(--lc-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Features */
+.lc-offer-features {
+  margin-bottom: 32px;
+}
+
+.lc-offer-features-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lc-offer-features-content li {
+  position: relative;
+  padding: 12px 0 12px 32px;
+  color: var(--lc-text-light);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--lc-border);
+}
+
+.lc-offer-features-content li:last-child {
+  border-bottom: none;
+}
+
+.lc-offer-features-content li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* CTA Button */
+.lc-offer-footer {
+  margin-top: auto;
+}
+
+.lc-offer-cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border: 2px solid var(--lc-primary);
+  border-radius: 16px;
+  background: transparent;
+  color: var(--lc-primary);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.lc-offer-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.lc-offer-cta:hover::before {
+  left: 0;
+}
+
+.lc-offer-cta:hover {
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+.lc-offer-cta:hover .lc-offer-cta-arrow {
+  transform: translateX(4px);
+}
+
+.lc-offer-cta--featured {
+  background: linear-gradient(135deg, var(--lc-primary), var(--lc-accent));
+  color: var(--lc-primary-contrast);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(var(--lc-primary-rgb), 0.3);
+}
+
+.lc-offer-cta--featured::before {
+  left: 0;
+  background: linear-gradient(135deg, var(--lc-accent), var(--lc-primary));
+}
+
+.lc-offer-cta--featured:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(var(--lc-primary-rgb), 0.4);
+}
+
+.lc-offer-cta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.lc-offer-cta-arrow {
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lc-hero {
+    padding: 80px 16px 60px;
+  }
+  
+  .lc-hero-headline {
+    font-size: 2.5rem;
+  }
+  
+  .lc-hero-subheadline {
+    font-size: 1.125rem;
+  }
+  
+  .lc-hero-actions {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .lc-hero-cta {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+  
+  .lc-logos-section {
+    padding: 40px 16px 60px;
+  }
+  
+  .lc-logos-grid {
+    gap: 24px;
+  }
+  
+  .lc-offers-section {
+    padding: 60px 16px;
+  }
+  
+  .lc-offers-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .lc-offer-card {
+    padding: 32px 24px;
+    transform: none;
+  }
+  
+  .lc-offer-card--featured {
+    transform: none;
+  }
+  
+  .lc-offer-card--featured:hover,
+  .lc-offer-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .lc-toggle-wrapper {
+    margin-bottom: 40px;
+  }
+  
+  .lc-toggle-btn {
+    padding: 12px 24px;
+    min-width: 100px;
+  }
+  
+  .lc-offer-price {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lc-hero {
+    padding: 60px 12px 40px;
+  }
+  
+  .lc-hero-headline {
+    font-size: 2rem;
+  }
+  
+  .lc-logos-section {
+    padding: 32px 12px 40px;
+  }
+  
+  .lc-offers-section {
+    padding: 40px 12px;
+  }
+  
+  .lc-toggle {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .lc-toggle-btn {
+    flex: 1;
+    padding: 12px 16px;
+    min-width: auto;
+  }
+  
+  .lc-offer-card {
+    padding: 24px 20px;
+  }
+  
+  .lc-offer-price {
+    font-size: 2.25rem;
+  }
+}
