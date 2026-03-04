@@ -1,28 +1,8 @@
-@font-face {
-  font-family: 'brandon-regular';
-  src: url(https://jazzhr-dev.prod.limio.com/public/549e7ce9-5ed1-4c10-9302-6105c1c879ec/HVD%20Fonts%20-%20BrandonText-Regular.otf) format('opentype');
-}
-
-body {
-  font-size: 1rem;
-  font-family: 'brandon-regular', sans-serif !important;
-}
-
 /* ─── Cart container ─── */
 
 .mci-container {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  background: #fff;
-  font-family: 'brandon-regular', sans-serif;
-}
-
-.mci-heading {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 1.25rem;
-  color: #1B2438;
+  padding: 1rem 0;
+  font-family: inherit;
 }
 
 /* ─── Cart item row ─── */
@@ -31,10 +11,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #E2E5EC;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
 }
 
 .mci-cart-item__name {
@@ -51,81 +29,12 @@ body {
   margin-left: 1rem;
 }
 
-/* ─── Divider ─── */
-
-.mci-divider {
-  border: none;
-  border-top: 1px solid #E2E5EC;
-  margin: 1.25rem 0;
-}
-
-/* ─── Totals ─── */
-
-.mci-totals {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.mci-total-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #5A6175;
-}
-
-.mci-total-row--total {
-  font-weight: 700;
-  font-size: 1rem;
-  color: #1B2438;
-}
-
-/* ─── Continue button ─── */
-
-.mci-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.mci-continue-btn {
-  background-color: #00addf;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.mci-continue-btn:hover {
-  background-color: #0099c7;
-}
-
-/* ─── Description ─── */
+/* ─── Empty state ─── */
 
 .mci-empty {
   color: #5A6175;
   font-size: 0.95rem;
   margin-bottom: 1rem;
-}
-
-.mci-desc {
-  font-size: 0.875rem;
-  color: #5A6175;
-  margin-bottom: 0.5rem;
-}
-
-/* ─── Section label ─── */
-
-.plan-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #92A0A8;
-  margin: 0 0 0.75rem;
-  text-transform: uppercase;
 }
 
 /* ─── Radio billing options ─── */
@@ -227,38 +136,3 @@ body {
 .mci-term-card--selected .mci-term-card__price {
   color: #1B2438;
 }
-
-/* ─── Add-ons ─── */
-
-.flex { display: flex; }
-.col { flex-direction: column; }
-.center { align-items: center; }
-.space-between { justify-content: space-between; }
-.bold { font-weight: 700; }
-.ml-2r { margin-left: 2rem; }
-.mb-20 { margin-bottom: 20px; }
-.w-6 { width: 5rem; }
-.w-full { width: 100%; }
-.grid-stretch { width: 100%; }
-.font-125 { font-size: 1rem; }
-
-.border-add-on {
-  border: 1px solid #E2E5EC;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.add-remove-btns {
-  border: none;
-  color: white;
-  text-align: center;
-  font-size: 0.875rem;
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 0.3rem 0.75rem;
-  font-family: inherit;
-}
-
-.add-btn { background-color: #00addf; }
-.remove-btn { background-color: #b13a4d; }
