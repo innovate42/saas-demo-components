@@ -1,0 +1,101 @@
+{
+  "name": "@limio/component-emma-gousto",
+  "version": "1.0.0",
+  "description": "Emma Gousto pricing card grid with monthly/annual toggle matching Gousto brand",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Main Headline",
+      "type": "string",
+      "default": "Choose Your Perfect Plan"
+    },
+    {
+      "id": "subheadline", 
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Select the subscription that works best for you"
+    },
+    {
+      "id": "toggleMonthlyLabel",
+      "label": "Monthly Toggle Label", 
+      "type": "string",
+      "default": "Monthly"
+    },
+    {
+      "id": "toggleAnnualLabel",
+      "label": "Annual Toggle Label",
+      "type": "string", 
+      "default": "Annual"
+    },
+    {
+      "id": "savingsLabel",
+      "label": "Savings Label",
+      "type": "string",
+      "default": "Save up to"
+    },
+    {
+      "id": "perPortionLabel",
+      "label": "Per Portion Label", 
+      "type": "string",
+      "default": "per portion"
+    },
+    {
+      "id": "bestValueLabel",
+      "label": "Best Value Badge Text",
+      "type": "string",
+      "default": "Best Value"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#412dee"
+    },
+    {
+      "id": "accentColor__limio_color", 
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#008610"
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Monthly/Annual Toggle",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Plan Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Group ID", 
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "monthly", 
+          "label": "Monthly"
+        },
+        {
+          "id": "yearly",
+          "label": "Annual"
+        }
+      ]
+    }
+  ]
+}
