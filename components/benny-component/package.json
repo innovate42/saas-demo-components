@@ -1,0 +1,102 @@
+{
+  "name": "@limio/benny-component",
+  "version": "1.0.0",
+  "description": "A stunning component for Benny's development platform with JetBrains-inspired design",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroHeadline",
+      "label": "Hero Headline",
+      "type": "string",
+      "default": "The Next-Gen Development Platform"
+    },
+    {
+      "id": "heroSubtitle",
+      "label": "Hero Subtitle", 
+      "type": "string",
+      "default": "Built for modern developers. Unlock productivity, ensure quality code, and accelerate your workflow with cutting-edge tools."
+    },
+    {
+      "id": "ctaText",
+      "label": "Primary CTA Text",
+      "type": "string",
+      "default": "Start Free Trial"
+    },
+    {
+      "id": "secondaryCta",
+      "label": "Secondary CTA Text", 
+      "type": "string",
+      "default": "View Pricing"
+    },
+    {
+      "id": "featuresHeadline",
+      "label": "Features Section Headline",
+      "type": "string",
+      "default": "Everything you need to build better software"
+    },
+    {
+      "id": "feature1Title",
+      "label": "Feature 1 Title",
+      "type": "string",
+      "default": "Smart Code Completion"
+    },
+    {
+      "id": "feature1Description",
+      "label": "Feature 1 Description",
+      "type": "string",
+      "default": "AI-powered suggestions that understand your codebase"
+    },
+    {
+      "id": "feature2Title",
+      "label": "Feature 2 Title", 
+      "type": "string",
+      "default": "Advanced Debugging"
+    },
+    {
+      "id": "feature2Description",
+      "label": "Feature 2 Description",
+      "type": "string",
+      "default": "Track down bugs faster with intelligent debugging tools"
+    },
+    {
+      "id": "feature3Title",
+      "label": "Feature 3 Title",
+      "type": "string",
+      "default": "Team Collaboration"
+    },
+    {
+      "id": "feature3Description",
+      "label": "Feature 3 Description",
+      "type": "string",
+      "default": "Built-in tools for seamless team development workflows"
+    },
+    {
+      "id": "pricingHeadline",
+      "label": "Pricing Section Headline",
+      "type": "string",
+      "default": "Choose your plan"
+    },
+    {
+      "id": "pricingSubtitle",
+      "label": "Pricing Section Subtitle",
+      "type": "string",
+      "default": "Start building with our powerful development tools today"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#6B57FF"
+    },
+    {
+      "id": "showWireframeBackground",
+      "label": "Show Wireframe Background",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

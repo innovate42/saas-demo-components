@@ -1,0 +1,62 @@
+{
+  "name": "@limio/emma-plans",
+  "version": "1.0.0",
+  "description": "Emma-style pricing plan cards driven by Limio offers",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "sectionHeading",
+      "label": "Section Heading",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "contractNote",
+      "label": "Contract Note",
+      "type": "string",
+      "default": "with annual contract"
+    },
+    {
+      "id": "contactUsLabel",
+      "label": "Contact Us Label",
+      "type": "string",
+      "default": "Contact us"
+    },
+    {
+      "id": "contactUsCtaText",
+      "label": "Contact Us CTA Text",
+      "type": "string",
+      "default": "Let's talk"
+    },
+    {
+      "id": "defaultCtaText",
+      "label": "Default CTA Text",
+      "type": "string",
+      "default": "Request a demo"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "ctaColor__limio_color",
+      "label": "CTA Button color",
+      "type": "color",
+      "default": "#053A5E"
+    },
+    {
+      "id": "highlightColor__limio_color",
+      "label": "Highlight/badge color",
+      "type": "color",
+      "default": "#B9D1FF"
+    }
+  ]
+}

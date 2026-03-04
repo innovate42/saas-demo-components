@@ -218,6 +218,13 @@ const MaltegoPricing = () => {
     const props = useStaticProps() || {}
 
     const {
+        darkMode = false,
+        showHero = true,
+        heroImage = "",
+        heroImageAlt = "Product preview",
+        showLearnMoreButton = true,
+        learnMoreText = "Learn more",
+        learnMoreUrl = "#",
         headline = "Explore plans that power your business",
         subheadline = "Choose the plan that fits your needs.",
         showComparisonTable = true,
@@ -227,18 +234,26 @@ const MaltegoPricing = () => {
         freeCta = "Use for free",
         enterpriseCta = "Book a demo",
         bestValueLabel = "Best Value",
-        primaryColor = "#EFBF04",
-        bestValueColor = "#EFBF04",
-        backgroundColor = "#FFFFFF",
-        cardColor = "#FFFFFF",
-        textColor = "#1B2438",
-        mutedTextColor = "#5A6175",
+        primaryColor: primaryColorProp = "#EFBF04",
+        bestValueColor: bestValueColorProp = "#EFBF04",
+        backgroundColor: backgroundColorProp = "#FFFFFF",
+        cardColor: cardColorProp = "#FFFFFF",
+        textColor: textColorProp = "#1B2438",
+        mutedTextColor: mutedTextColorProp = "#5A6175",
         faqHeadline = "Frequently asked questions",
         comparisonHeadline = "Compare all features",
         groupLabels = [],
         featureCategories = [],
         faqItems = [],
     } = props
+
+    // Apply dark mode overrides (Maltego yellow stays)
+    const primaryColor = darkMode ? "#EFBF04" : primaryColorProp
+    const bestValueColor = darkMode ? "#EFBF04" : bestValueColorProp
+    const backgroundColor = darkMode ? "#0E1117" : backgroundColorProp
+    const cardColor = darkMode ? "#161B27" : cardColorProp
+    const textColor = darkMode ? "#F0F2F7" : textColorProp
+    const mutedTextColor = darkMode ? "#8B92A5" : mutedTextColorProp
 
     // Group offers by group__limio
     const grouped = useMemo(() => {
@@ -287,7 +302,7 @@ const MaltegoPricing = () => {
 
     return (
         <section
-            className="mp"
+            className={`mp${darkMode ? " mp--dark" : ""}`}
             style={{
                 "--mp-primary": primaryColor,
                 "--mp-best-value": bestValueColor,
@@ -298,18 +313,30 @@ const MaltegoPricing = () => {
             }}
         >
             {/* Hero */}
-            <div className="mp-hero">
-                <h1 className="mp-hero__title">{headline}</h1>
-                <p className="mp-hero__sub">{subheadline}</p>
-                {showGroupToggle && availableGroups.length > 1 && (
-                    <GroupToggle
-                        labels={availableGroups}
-                        selected={selectedGroup}
-                        onChange={setSelectedGroup}
-                        primaryColor={primaryColor}
-                    />
-                )}
-            </div>
+            {showHero && (
+                <div className="mp-hero">
+                    {heroImage && (
+                        <div className="mp-hero__image-wrap">
+                            <img src={heroImage} alt={heroImageAlt} className="mp-hero__image" />
+                        </div>
+                    )}
+                    <h1 className="mp-hero__title">{headline}</h1>
+                    <p className="mp-hero__sub">{subheadline}</p>
+                    {showLearnMoreButton && (
+                        <a href={learnMoreUrl} className="mp-hero__learnmore" style={{ color: primaryColor, borderColor: primaryColor }}>
+                            {learnMoreText}
+                        </a>
+                    )}
+                    {showGroupToggle && availableGroups.length > 1 && (
+                        <GroupToggle
+                            labels={availableGroups}
+                            selected={selectedGroup}
+                            onChange={setSelectedGroup}
+                            primaryColor={primaryColor}
+                        />
+                    )}
+                </div>
+            )}
 
             {/* Cards */}
             <div className="mp-cards" style={{ "--mp-card-count": displayOffers.length }}>

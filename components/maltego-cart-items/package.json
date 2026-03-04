@@ -1,0 +1,113 @@
+{
+  "name": "@limio/component-maltego-cart-items",
+  "version": "1.0.0",
+  "description": "Maltego cart items checkout component with toggleable upsell layout",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "@limio/ui-preview-context": "*",
+    "@limio/swr": "*",
+    "@limio/design-system": "*",
+    "@limio/shop-redux": "*"
+  },
+  "devDependencies": {
+    "@limio/sdk": "*",
+    "@limio/swr": "*"
+  },
+  "limioProps": [
+    {
+      "id": "showOfferIcons",
+      "type": "boolean",
+      "default": true,
+      "label": "Show offer icons"
+    },
+    {
+      "id": "offerAdditionalInfo",
+      "type": "richtext",
+      "default": "{{data.attributes.checkout_description__limio}}",
+      "label": "Offer Additional Information"
+    },
+    {
+      "id": "addOnAdditionalInfo",
+      "type": "richtext",
+      "default": "{{data.attributes.description__limio}}",
+      "label": "AddOn Additional Information"
+    },
+    {
+      "id": "lineItemAdditionalInfo",
+      "type": "richtext",
+      "default": "",
+      "label": "Line Item Additional Information"
+    },
+    {
+      "id": "addOnAdditionalInfo2",
+      "type": "richtext",
+      "default": "{{data.attributes.description__limio}}",
+      "label": "AddOn Additional Information"
+    },
+    {
+      "id": "unitPriceLabel",
+      "type": "string",
+      "default": "{quantity} x {{formattedPrice}} each",
+      "label": "Unit price label when multibuy is available"
+    },
+    {
+      "id": "emptyCartMessage",
+      "type": "string",
+      "default": "Your cart is empty, view offers to go to offers",
+      "label": "Message when cart is empty"
+    },
+    {
+      "id": "emptyCTALabel",
+      "type": "string",
+      "default": "See offers",
+      "label": "CTA label when cart is empty"
+    },
+    {
+      "id": "emptyCartUrl",
+      "type": "string",
+      "default": "/default",
+      "label": "URL to direct users to when cart is empty"
+    },
+    {
+      "id": "displayUpsellOffers",
+      "type": "boolean",
+      "default": true,
+      "label": "Display upsell offers"
+    },
+    {
+      "id": "showPriceInUpsellOffers",
+      "type": "boolean",
+      "default": true,
+      "label": "Show price in upsell offers"
+    },
+    {
+      "id": "readOnly",
+      "type": "boolean",
+      "default": false,
+      "label": "Show component in read-only mode?"
+    },
+    {
+      "id": "showDiscountNote",
+      "type": "boolean",
+      "default": false,
+      "label": "Show discount note"
+    },
+    {
+      "id": "showAsCards",
+      "type": "boolean",
+      "default": false,
+      "label": "Show as cards?"
+    }
+  ]
+}

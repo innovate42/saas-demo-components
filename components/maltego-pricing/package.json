@@ -10,6 +10,13 @@
     "react": "*"
   },
   "limioProps": [
+    { "id": "darkMode", "label": "Dark mode", "type": "boolean", "default": false },
+    { "id": "showHero", "label": "Show hero section", "type": "boolean", "default": true },
+    { "id": "heroImage", "label": "Hero image URL", "type": "string", "default": "" },
+    { "id": "heroImageAlt", "label": "Hero image alt text", "type": "string", "default": "Product preview" },
+    { "id": "showLearnMoreButton", "label": "Show learn more button", "type": "boolean", "default": true },
+    { "id": "learnMoreText", "label": "Learn more button text", "type": "string", "default": "Learn more" },
+    { "id": "learnMoreUrl", "label": "Learn more button URL", "type": "string", "default": "#" },
     { "id": "headline", "label": "Headline", "type": "string", "default": "Explore plans that power your business" },
     { "id": "subheadline", "label": "Subheadline", "type": "string", "default": "Choose the plan that fits your needs. Upgrade or downgrade at any time." },
     { "id": "showComparisonTable", "label": "Show comparison table", "type": "boolean", "default": true },

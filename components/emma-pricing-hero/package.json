@@ -1,0 +1,37 @@
+{
+  "name": "component-emma-pricing-hero",
+  "version": "1.0.0",
+  "description": "Emma-style pricing page hero heading section",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Flexible plans for teams of all sizes."
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Prices starting at $99/month."
+    },
+    {
+      "id": "componentId",
+      "label": "Component ID",
+      "type": "string",
+      "default": "emma-pricing-hero"
+    }
+  ]
+}

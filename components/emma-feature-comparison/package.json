@@ -1,0 +1,31 @@
+{
+  "name": "component-emma-feature-comparison",
+  "version": "1.0.0",
+  "description": "Emma-style feature comparison table for pricing tiers",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Compare plans"
+    },
+    {
+      "id": "componentId",
+      "label": "Component ID",
+      "type": "string",
+      "default": "emma-feature-comparison"
+    }
+  ]
+}
