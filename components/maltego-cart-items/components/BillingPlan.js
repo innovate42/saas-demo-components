@@ -16,11 +16,15 @@ function BillingPlan({ selectedProduct, selectedTerm, handleTermChange, upsellLa
   const { offers = [] } = useCampaign()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
-  const possibleTerms = R.uniq(offerGroups[selectedProduct].map(offer => offer.data.attributes.term__limio))
+  const productOffers = offerGroups[selectedProduct] || []
+
+  if (!productOffers.length) return null
+
+  const possibleTerms = R.uniq(productOffers.map(offer => offer.data.attributes.term__limio))
   const sortedTerms = R.sort((a, b) => toDays(a) - toDays(b), possibleTerms)
 
   const getTermPrice = term => {
-    const offer = offerGroups[selectedProduct].find(o => R.equals(o.data.attributes.term__limio, term))
+    const offer = productOffers.find(o => R.equals(o.data.attributes.term__limio, term))
     const raw = offer?.data?.attributes?.display_price__limio || ""
     return raw ? stripHTMLtags(raw) : ""
   }
