@@ -24,8 +24,8 @@ export function useBasket() {
     if (context === undefined) {
         throw new Error("useBasket must be used within a LimioProvider");
     }
-    const {basketItems, addToBasket} = dummyContext.shop;
-    return {basketItems, addToBasket};
+    const {basketItems, addToBasket, swapOffer} = dummyContext.shop;
+    return {basketItems, addToBasket, swapOffer};
 }
 
 
@@ -127,6 +127,9 @@ const dummyContext = {
         basketItems: basketItems,
         addToBasket: (offer) => {
             console.log("Item added to basket:", offer);
+        },
+        swapOffer: (itemId, offer) => {
+            console.log("[Storybook] swapOffer called:", { itemId, offer });
         },
     },
     user: docUser

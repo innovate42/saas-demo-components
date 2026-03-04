@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useState } from "react"
+import * as R from "ramda"
 import { useBasket } from "@limio/sdk"
 import BillingPlan from "./components/BillingPlan"
 import "./index.css"
@@ -22,7 +23,7 @@ function MaltegoCartItems({
   readOnly,
   showDiscountNote,
 }) {
-  const { basketItems = [] } = useBasket()
+  const { basketItems = [], swapOffer } = useBasket()
 
   const currentBasketItem = basketItems[0]
   const currentOffer = currentBasketItem?.offer
@@ -41,6 +42,15 @@ function MaltegoCartItems({
   const displayPrice = currentBasketItem?.price
     ? formatCurrency(currentBasketItem.price.amount, currentBasketItem.price.currency)
     : ""
+
+  const handleTermChange = async (term) => {
+    setSelectedTerm(term)
+    // Find the upsell offer matching the selected term
+    const upsellOffer = upsellOffers.find(o => R.equals(o.data.attributes.term__limio, term))
+    if (upsellOffer && swapOffer && currentBasketItem?.id) {
+      await swapOffer(currentBasketItem.id, upsellOffer)
+    }
+  }
 
   if (!currentOffer) {
     return (
@@ -62,7 +72,7 @@ function MaltegoCartItems({
         <BillingPlan
           upsellOffers={upsellOffers}
           selectedTerm={selectedTerm}
-          handleTermChange={setSelectedTerm}
+          handleTermChange={handleTermChange}
           upsellLayout={showAsCards ? "card" : "radio"}
           showPrice={showPriceInUpsellOffers}
         />
