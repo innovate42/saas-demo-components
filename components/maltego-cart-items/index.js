@@ -26,6 +26,8 @@ function MaltegoCartItems({
   const { basketItems = [] } = useBasket()
   const { offers = [] } = useCampaign()
 
+  console.log('[MCI] basketItems:', JSON.stringify(basketItems?.length), 'offers:', JSON.stringify(offers?.length), 'offer keys:', offers?.[0] ? Object.keys(offers[0]?.data?.attributes || {}).slice(0, 5) : 'none')
+
   const currentBasketItem = basketItems[0]
   const currentOffer = currentBasketItem?.offer
 
