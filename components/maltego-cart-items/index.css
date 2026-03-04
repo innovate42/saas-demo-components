@@ -105,6 +105,12 @@ body {
 
 /* ─── Description ─── */
 
+.mci-empty {
+  color: #5A6175;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
 .mci-desc {
   font-size: 0.875rem;
   color: #5A6175;

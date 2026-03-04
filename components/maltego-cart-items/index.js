@@ -28,14 +28,28 @@ function MaltegoCartItems({
   const { addToBasket } = useBasket()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
-  const firstProduct = Object.keys(offerGroups)[0]
+  const firstProduct = Object.keys(offerGroups)[0] || null
+  const firstOffer = firstProduct ? offerGroups[firstProduct][0] : null
 
   const [selectedProduct] = useState(firstProduct)
-  const [selectedOffer, setSelectedOffer] = useState(offerGroups[firstProduct][0].id)
-  const [selectedTerm, setSelectedTerm] = useState(offerGroups[firstProduct][0].data.attributes.term__limio)
+  const [selectedOffer, setSelectedOffer] = useState(firstOffer?.id || null)
+  const [selectedTerm, setSelectedTerm] = useState(firstOffer?.data?.attributes?.term__limio || null)
   const [selectedAddOnProducts, setSelectedAddOnProducts] = useState([])
-  const [selectedBillingPlan, setSelectedBillingPlan] = useState(offerGroups[firstProduct][0].data.attributes.billing_plan[0])
+  const [selectedBillingPlan, setSelectedBillingPlan] = useState(firstOffer?.data?.attributes?.billing_plan?.[0] || null)
   const [quantity, setQuantity] = useState(1)
+
+  if (!firstProduct || !selectedOffer) {
+    return (
+      <div className="mci-container">
+        <p className="mci-empty">{emptyCartMessage}</p>
+        {emptyCTALabel && (
+          <div className="mci-actions">
+            <a className="mci-continue-btn" href={emptyCartUrl}>{emptyCTALabel}</a>
+          </div>
+        )}
+      </div>
+    )
+  }
 
   const selectedOfferObj = offers.find(o => o.id === selectedOffer)
   const displayName = stripPathToProductName(selectedProduct)
