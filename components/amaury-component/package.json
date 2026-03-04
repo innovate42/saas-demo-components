@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-limio-landing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Limio SaaS landing page with subscription tiers",
   "main": "./index.js",
   "dependencies": {
@@ -60,7 +60,7 @@
     },
     {
       "id": "secondaryColor__limio_color",
-      "label": "Secondary Color", 
+      "label": "Secondary Color",
       "type": "color",
       "default": "#f47c24"
     },
@@ -76,13 +76,13 @@
       "type": "list",
       "fields": {
         "name": {
-          "id": "id", 
+          "id": "id",
           "label": "Group ID",
           "type": "string"
         },
         "url": {
           "id": "label",
-          "label": "Display Label", 
+          "label": "Display Label",
           "type": "string"
         }
       },
@@ -92,7 +92,7 @@
           "label": "Monthly"
         },
         {
-          "id": "yearly", 
+          "id": "yearly",
           "label": "Annual"
         }
       ]
@@ -105,7 +105,7 @@
     },
     {
       "id": "featureSubheadline",
-      "label": "Features Section Subheadline", 
+      "label": "Features Section Subheadline",
       "type": "string",
       "default": "Self-service, sales-assisted, partner, and agent-led — every channel runs on the same pricing rules, offer logic, and checkout flows."
     },

@@ -1,3 +1,4 @@
+const React = require("react")
 const { useComponentProps, getPropsFromPackageJson, useCampaign, useBasket, useLimioContext, groupOffers } = require("@limio/sdk")
 const { getCurrentBasketId } = require("@limio/shop/src/shop/checkout/basket")
 const packageData = require("./package.json")
@@ -34,21 +35,31 @@ const LimioLanding = () => {
   const { addOfferToBasket, initiateCheckout, navigateToCheckout, basketLoading, pageOptions } = useBasket()
   const { isInPageBuilder } = useLimioContext()
   
-  const [activeGroup, setActiveGroup] = React.useState(groupLabels?.[0]?.id || 'monthly')
+  // Safe initialization of activeGroup
+  const safeGroupLabels = Array.isArray(groupLabels) ? groupLabels : []
+  const defaultGroupId = safeGroupLabels.length > 0 ? safeGroupLabels[0].id : 'monthly'
+  const [activeGroup, setActiveGroup] = React.useState(defaultGroupId)
   
-  const groupedOffers = groupOffers(offers || [], groupLabels || [])
-  const currentOffers = groupedOffers.find(g => g.groupId === activeGroup)?.offers || offers || []
+  // Safe grouping of offers
+  const safeOffers = Array.isArray(offers) ? offers : []
+  const groupedOffers = groupOffers(safeOffers, safeGroupLabels)
+  const currentOffers = groupedOffers.find(g => g.groupId === activeGroup)?.offers || safeOffers
   
   const handleAddToBasket = async (offer) => {
     if (basketLoading) return
-    const checkoutId = getCurrentBasketId()
-    if (!checkoutId) {
-      await initiateCheckout({ order: { orderItems: [{ offer }] } })
-    } else {
-      await addOfferToBasket({ offer })
-    }
-    if (pageOptions?.pushToCheckout) {
-      await navigateToCheckout()
+    
+    try {
+      const checkoutId = getCurrentBasketId()
+      if (!checkoutId) {
+        await initiateCheckout({ order: { orderItems: [{ offer }] } })
+      } else {
+        await addOfferToBasket({ offer })
+      }
+      if (pageOptions?.pushToCheckout) {
+        await navigateToCheckout()
+      }
+    } catch (error) {
+      console.error('Error adding to basket:', error)
     }
   }
 
@@ -117,7 +128,7 @@ const LimioLanding = () => {
           <div className="ll-hero-content">
             <h1 className="ll-hero-headline">{heroHeadline}</h1>
             <p className="ll-hero-subheadline">{heroSubheadline}</p>
-            <button className="ll-btn ll-btn-primary ll-hero-cta">
+            <button className="ll-btn ll-btn-primary ll-hero-cta" type="button">
               {heroCta}
             </button>
           </div>
@@ -155,11 +166,12 @@ const LimioLanding = () => {
             <p className="ll-section-subtitle">{pricingSubheadline}</p>
           </div>
           
-          {showGroupSwitcher && groupLabels && groupLabels.length > 1 && (
+          {showGroupSwitcher && safeGroupLabels.length > 1 && (
             <div className="ll-group-switcher">
-              {groupLabels.map(group => (
+              {safeGroupLabels.map(group => (
                 <button
                   key={group.id}
+                  type="button"
                   className={`ll-group-btn ${activeGroup === group.id ? 'll-group-btn-active' : ''}`}
                   onClick={() => setActiveGroup(group.id)}
                 >
@@ -175,7 +187,7 @@ const LimioLanding = () => {
               const isFeatured = attributes.best_value__limio
               
               return (
-                <div key={offer.id || index} className={`ll-pricing-card ${isFeatured ? 'll-pricing-card-featured' : ''}`}>
+                <div key={offer?.id || index} className={`ll-pricing-card ${isFeatured ? 'll-pricing-card-featured' : ''}`}>
                   {isFeatured && (
                     <div className="ll-pricing-badge">
                       {attributes.badge_text__limio || 'Most Popular'}
@@ -199,6 +211,7 @@ const LimioLanding = () => {
                   )}
 
                   <button
+                    type="button"
                     className={`ll-btn ${isFeatured ? 'll-btn-primary' : 'll-btn-secondary'} ll-pricing-cta`}
                     onClick={() => handleAddToBasket(offer)}
                     disabled={basketLoading}
