@@ -1,0 +1,144 @@
+{
+  "name": "@limio/subscription-overview",
+  "version": "1.0.0",
+  "description": "Enterprise subscription overview dashboard with payment methods, addresses, and subscription management for SaaS customers",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "pageHeadline",
+      "label": "Page Headline",
+      "type": "string",
+      "default": "Account Overview"
+    },
+    {
+      "id": "pageSubheadline",
+      "label": "Page Subheadline", 
+      "type": "string",
+      "default": "Manage all your subscriptions, payment methods, and billing information"
+    },
+    {
+      "id": "subscriptionsHeadline",
+      "label": "Subscriptions Section Headline",
+      "type": "string",
+      "default": "Subscriptions"
+    },
+    {
+      "id": "paymentMethodsHeadline",
+      "label": "Payment Methods Headline",
+      "type": "string",
+      "default": "Payment Methods"
+    },
+    {
+      "id": "addressesHeadline",
+      "label": "Addresses Headline",
+      "type": "string",
+      "default": "Addresses"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#f47c24"
+    },
+    {
+      "id": "manageSubscriptionText",
+      "label": "Manage Subscription Button Text",
+      "type": "string",
+      "default": "Manage"
+    },
+    {
+      "id": "viewDetailsText",
+      "label": "View Details Button Text",
+      "type": "string",
+      "default": "View Details"
+    },
+    {
+      "id": "editText",
+      "label": "Edit Button Text",
+      "type": "string",
+      "default": "Edit"
+    },
+    {
+      "id": "addPaymentMethodText",
+      "label": "Add Payment Method Text",
+      "type": "string",
+      "default": "Add payment method"
+    },
+    {
+      "id": "addAddressText",
+      "label": "Add Address Text",
+      "type": "string",
+      "default": "Add address"
+    },
+    {
+      "id": "noSubscriptionsText",
+      "label": "No Subscriptions Text",
+      "type": "string",
+      "default": "No active subscriptions"
+    },
+    {
+      "id": "noPaymentMethodsText",
+      "label": "No Payment Methods Text",
+      "type": "string",
+      "default": "No payment methods added"
+    },
+    {
+      "id": "noAddressesText",
+      "label": "No Addresses Text",
+      "type": "string",
+      "default": "No addresses added"
+    },
+    {
+      "id": "statusActiveText",
+      "label": "Status Active Text",
+      "type": "string",
+      "default": "Active"
+    },
+    {
+      "id": "statusPausedText",
+      "label": "Status Paused Text", 
+      "type": "string",
+      "default": "Paused"
+    },
+    {
+      "id": "statusCancelledText",
+      "label": "Status Cancelled Text",
+      "type": "string",
+      "default": "Cancelled"
+    },
+    {
+      "id": "nextPaymentText",
+      "label": "Next Payment Text",
+      "type": "string",
+      "default": "Next payment"
+    },
+    {
+      "id": "renewalDateText",
+      "label": "Renewal Date Text",
+      "type": "string",
+      "default": "Renews"
+    },
+    {
+      "id": "showQuickStats",
+      "label": "Show Quick Stats",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "enableCompactView",
+      "label": "Enable Compact View",
+      "type": "boolean",
+      "default": false
+    }
+  ]
+}
