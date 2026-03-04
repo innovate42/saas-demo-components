@@ -10,7 +10,9 @@ import {
   formatCurrency,
   getRenewalDateForUserSubscription,
   getPriceForUserSubscription,
-  getSubscriptionCurrency
+  getSubscriptionCurrency,
+  getNextSchedule,
+  getCurrentOffer
 } from "@limio/sdk"
 import { useLimioUserSubscriptionPaymentMethods, useLimioUserSubscriptionAddresses } from "@limio/internal-checkout-sdk"
 import packageData from "./package.json"
@@ -174,7 +176,47 @@ const SubscriptionOverview = () => {
     const status = subscription.status || "unknown"
     const renewalDate = getRenewalDateForUserSubscription(subscription)
     const price = getPriceForUserSubscription(subscription)
+    
+    // Fixed schedule data handling - get schedule data properly
     const schedule = useSchedule(subscription)
+    const nextPaymentAmount = schedule?.nextPaymentAmount
+    const nextScheduleEntry = schedule?.nextSchedule
+    
+    // Alternative approach for next payment info from schedule array
+    const nextPayment = useMemo(() => {
+      if (nextPaymentAmount) {
+        return formatCurrency(nextPaymentAmount, getSubscriptionCurrency(subscription))
+      }
+      
+      // Fallback to schedule array if available
+      if (subscription?.schedule?.length) {
+        const upcomingPayments = subscription.schedule
+          .filter(s => s?.status === 'scheduled' && s?.data?.date)
+          .sort((a, b) => new Date(a.data.date) - new Date(b.data.date))
+        
+        if (upcomingPayments.length > 0) {
+          const nextPaymentEntry = upcomingPayments[0]
+          if (nextPaymentEntry?.data?.amount && nextPaymentEntry?.data?.currency) {
+            return formatCurrency(nextPaymentEntry.data.amount, nextPaymentEntry.data.currency)
+          }
+        }
+      }
+      
+      return price // Fallback to subscription price
+    }, [schedule, subscription, nextPaymentAmount, price])
+
+    const nextPaymentDate = useMemo(() => {
+      if (nextScheduleEntry?.date) {
+        return formatDate(nextScheduleEntry.date, "DATE_SHORT")
+      }
+      
+      // Alternative: check for termEndDate or renewal date
+      if (schedule?.termEndDate) {
+        return formatDate(schedule.termEndDate, "DATE_SHORT")
+      }
+      
+      return renewalDate
+    }, [nextScheduleEntry, schedule, renewalDate])
 
     return (
       <div className="so-subscription-card">
@@ -215,7 +257,7 @@ const SubscriptionOverview = () => {
               </div>
               <div className="so-detail-content">
                 <span className="so-detail-label">{renewalDateText}</span>
-                <span className="so-detail-value">{renewalDate || "—"}</span>
+                <span className="so-detail-value">{nextPaymentDate || "—"}</span>
               </div>
             </div>
 
@@ -227,7 +269,7 @@ const SubscriptionOverview = () => {
               </div>
               <div className="so-detail-content">
                 <span className="so-detail-label">{nextPaymentText}</span>
-                <span className="so-detail-value">{price || "—"}</span>
+                <span className="so-detail-value">{nextPayment || "—"}</span>
               </div>
             </div>
           </div>

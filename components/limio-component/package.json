@@ -1,6 +1,6 @@
 {
   "name": "@limio/subscription-overview",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Enterprise subscription overview dashboard with payment methods, addresses, and subscription management for SaaS customers",
   "main": "./index.js",
   "dependencies": {},

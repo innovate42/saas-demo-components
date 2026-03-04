@@ -1,40 +1,45 @@
-/* Modern SaaS Dashboard Design System - Stripe-inspired */
+/* Limio Brand Design System - Matched from limio.com */
 .so-wrapper {
-  /* Color System */
+  /* Brand Colors from Limio.com */
   --so-primary: #d14424;
   --so-accent: #f47c24;
   --so-primary-contrast: #ffffff;
   --so-accent-contrast: #ffffff;
   
-  /* Neutral Palette */
-  --so-gray-50: #f8fafc;
-  --so-gray-100: #f1f5f9;
-  --so-gray-200: #e2e8f0;
-  --so-gray-300: #cbd5e1;
-  --so-gray-400: #94a3b8;
-  --so-gray-500: #64748b;
-  --so-gray-600: #475569;
-  --so-gray-700: #334155;
-  --so-gray-800: #1e293b;
-  --so-gray-900: #0f172a;
+  /* Extended Brand Palette */
+  --so-secondary: #3898ec;
+  --so-tertiary: #1a1a2e;
+  --so-neutral: #aaadb0;
+  
+  /* Neutral Palette - Updated for Limio style */
+  --so-gray-50: #fafafa;
+  --so-gray-100: #f3f3f3;
+  --so-gray-200: #eee;
+  --so-gray-300: #ddd;
+  --so-gray-400: #ccc;
+  --so-gray-500: #999;
+  --so-gray-600: #758696;
+  --so-gray-700: #333;
+  --so-gray-800: #1a1a2e;
+  --so-gray-900: #000;
   
   /* Semantic Colors */
   --so-success: #10b981;
   --so-success-light: #d1fae5;
   --so-warning: #f59e0b;
   --so-warning-light: #fef3c7;
-  --so-error: #ef4444;
-  --so-error-light: #fee2e2;
+  --so-error: #ea384c;
+  --so-error-light: #ffdede;
   
   /* Surface Colors */
   --so-bg: #ffffff;
   --so-surface: #ffffff;
-  --so-surface-hover: #f8fafc;
-  --so-border: #e2e8f0;
-  --so-border-hover: #cbd5e1;
+  --so-surface-hover: #fafafa;
+  --so-border: #e2e2e2;
+  --so-border-hover: #ddd;
   
-  /* Typography */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Typography - Limio uses Arial primarily */
+  font-family: Arial, "Helvetica Neue", Helvetica, Ubuntu, "Segoe UI", Verdana, sans-serif;
   color: var(--so-gray-900);
   background: var(--so-bg);
   line-height: 1.5;
@@ -55,9 +60,15 @@
   box-sizing: border-box;
 }
 
+/* Text selection matches Limio brand */
 .so-wrapper ::selection {
-  background: color-mix(in srgb, var(--so-primary) 20%, transparent);
-  color: var(--so-primary);
+  background: var(--so-primary);
+  color: #fff;
+}
+
+.so-wrapper ::-moz-selection {
+  background: var(--so-primary);
+  color: #fff;
 }
 
 /* Container */
@@ -99,6 +110,7 @@
   color: var(--so-gray-600);
   margin: 0;
   max-width: 480px;
+  line-height: 1.5;
 }
 
 .so-header-actions {
@@ -124,7 +136,7 @@
   border: 1px solid var(--so-border);
   border-radius: 8px;
   padding: 20px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
 .so-stat-card:hover {
@@ -148,26 +160,6 @@
   align-items: center;
   justify-content: center;
   color: var(--so-gray-600);
-}
-
-.so-trend {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.so-trend--positive {
-  background: var(--so-success-light);
-  color: var(--so-success);
-}
-
-.so-trend--negative {
-  background: var(--so-error-light);
-  color: var(--so-error);
 }
 
 .so-stat-content {
@@ -240,18 +232,18 @@
   gap: 48px;
 }
 
-/* Buttons */
+/* Buttons - Limio Style */
 .so-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.15s ease;
   border: none;
   font-family: inherit;
   white-space: nowrap;
@@ -265,12 +257,13 @@
 .so-btn--primary {
   background: var(--so-primary);
   color: var(--so-primary-contrast);
+  box-shadow: 0 1px 3px rgba(209, 68, 36, 0.2);
 }
 
 .so-btn--primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--so-primary) 90%, black);
+  background: #b73a20;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--so-primary) 25%, transparent);
+  box-shadow: 0 4px 12px rgba(209, 68, 36, 0.3);
 }
 
 .so-btn--secondary {
@@ -282,6 +275,7 @@
 .so-btn--secondary:hover:not(:disabled) {
   background: var(--so-surface-hover);
   border-color: var(--so-border-hover);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .so-btn--ghost {
@@ -317,12 +311,12 @@
   border: 1px solid var(--so-border);
   border-radius: 8px;
   padding: 24px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
 .so-subscription-card:hover {
-  border-color: var(--so-border-hover);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--so-primary);
+  box-shadow: 0 4px 12px rgba(209, 68, 36, 0.1);
 }
 
 .so-card-header {
@@ -363,13 +357,7 @@
 .so-subscription-reference {
   font-size: 13px;
   color: var(--so-gray-500);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
-}
-
-.so-subscription-price {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--so-gray-700);
+  font-family: ui-monospace, 'Courier New', monospace;
 }
 
 .so-card-actions {
@@ -497,17 +485,18 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
 .so-payment-card:hover {
-  border-color: var(--so-border-hover);
+  border-color: var(--so-accent);
   background: var(--so-surface-hover);
+  box-shadow: 0 2px 8px rgba(244, 124, 36, 0.1);
 }
 
 .so-payment-card--default {
   border-color: var(--so-primary);
-  background: color-mix(in srgb, var(--so-primary) 2%, var(--so-surface));
+  background: rgba(209, 68, 36, 0.02);
 }
 
 .so-payment-content {
@@ -550,7 +539,7 @@
 .so-payment-secondary {
   font-size: 13px;
   color: var(--so-gray-500);
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  font-family: ui-monospace, 'Courier New', monospace;
 }
 
 /* Addresses */
@@ -568,17 +557,18 @@
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
 .so-address-card:hover {
-  border-color: var(--so-border-hover);
+  border-color: var(--so-secondary);
   background: var(--so-surface-hover);
+  box-shadow: 0 2px 8px rgba(56, 152, 236, 0.1);
 }
 
 .so-address-card--default {
   border-color: var(--so-primary);
-  background: color-mix(in srgb, var(--so-primary) 2%, var(--so-surface));
+  background: rgba(209, 68, 36, 0.02);
 }
 
 .so-address-content {
@@ -623,12 +613,12 @@
 }
 
 .so-address-type--billing {
-  background: color-mix(in srgb, var(--so-primary) 12%, transparent);
+  background: rgba(209, 68, 36, 0.12);
   color: var(--so-primary);
 }
 
 .so-address-type--shipping {
-  background: color-mix(in srgb, var(--so-accent) 12%, transparent);
+  background: rgba(244, 124, 36, 0.12);
   color: var(--so-accent);
 }
 
@@ -662,9 +652,8 @@
   text-align: center;
   padding: 48px 24px;
   background: var(--so-surface);
-  border: 1px solid var(--so-border);
+  border: 1px dashed var(--so-border);
   border-radius: 8px;
-  border-style: dashed;
 }
 
 .so-empty-content {
@@ -792,27 +781,6 @@
   
   .so-empty-state {
     padding: 32px 16px;
-  }
-}
-
-/* Dark mode support (if needed) */
-@media (prefers-color-scheme: dark) {
-  .so-wrapper {
-    --so-bg: #0f172a;
-    --so-surface: #1e293b;
-    --so-surface-hover: #334155;
-    --so-border: #334155;
-    --so-border-hover: #475569;
-    --so-gray-50: #1e293b;
-    --so-gray-100: #334155;
-    --so-gray-200: #475569;
-    --so-gray-300: #64748b;
-    --so-gray-400: #94a3b8;
-    --so-gray-500: #cbd5e1;
-    --so-gray-600: #e2e8f0;
-    --so-gray-700: #f1f5f9;
-    --so-gray-800: #f8fafc;
-    --so-gray-900: #ffffff;
   }
 }
 
