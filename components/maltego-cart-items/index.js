@@ -27,13 +27,8 @@ function MaltegoCartItems({
   const currentBasketItem = basketItems[0]
   const currentOffer = currentBasketItem?.offer
 
-  // Debug: log full basket item so we can see the real data structure
-  console.log('[MCI] basketItem keys:', JSON.stringify(Object.keys(currentBasketItem || {})))
-  console.log('[MCI] offer attr keys:', JSON.stringify(Object.keys(currentOffer?.data?.attributes || {})))
-  console.log('[MCI] upsell_offers__limio:', JSON.stringify(currentOffer?.data?.attributes?.upsell_offers__limio))
-
-  // Upsell offers are embedded in the basket item's offer data
-  const upsellOffers = currentOffer?.data?.attributes?.upsell_offers__limio || []
+  // Upsell offers live at the top level of the basket item under "upsell"
+  const upsellOffers = currentBasketItem?.upsell || []
 
   // Selected term: the current basket item's term
   const initialTerm = currentOffer?.data?.attributes?.term__limio || null
