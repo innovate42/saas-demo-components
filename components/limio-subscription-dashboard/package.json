@@ -1,0 +1,99 @@
+{
+  "name": "@limio/subscription-dashboard",
+  "version": "1.0.0",
+  "description": "Comprehensive subscription dashboard for managing customer subscriptions, billing, and account information",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "dashboardTitle",
+      "label": "Dashboard Title",
+      "type": "string",
+      "default": "Subscription Dashboard"
+    },
+    {
+      "id": "welcomeMessage",
+      "label": "Welcome Message",
+      "type": "string",
+      "default": "Welcome back! Manage your subscriptions and account details."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "showCustomerInfo",
+      "label": "Show Customer Information",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showBillingInfo",
+      "label": "Show Billing Information",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showPaymentHistory",
+      "label": "Show Payment History",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showUsageMetrics",
+      "label": "Show Usage Metrics",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "enableFiltering",
+      "label": "Enable Filtering",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "supportEmail",
+      "label": "Support Email",
+      "type": "string",
+      "default": "support@company.com"
+    },
+    {
+      "id": "supportPhone",
+      "label": "Support Phone",
+      "type": "string",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "id": "manageSubscriptionText",
+      "label": "Manage Subscription Button Text",
+      "type": "string",
+      "default": "Manage Subscription"
+    },
+    {
+      "id": "upgradeText",
+      "label": "Upgrade Button Text",
+      "type": "string",
+      "default": "Upgrade Plan"
+    },
+    {
+      "id": "cancelText",
+      "label": "Cancel Button Text",
+      "type": "string",
+      "default": "Cancel Subscription"
+    },
+    {
+      "id": "downloadInvoiceText",
+      "label": "Download Invoice Text",
+      "type": "string",
+      "default": "Download Invoice"
+    }
+  ]
+}
