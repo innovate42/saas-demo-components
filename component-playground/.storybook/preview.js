@@ -1,15 +1,25 @@
-/** @type { import('@storybook/react').Preview } */
+import React from "react"
 import '../packages/design-system/default/style.css'
-const preview = {
-  parameters: {
-    layout: 'fullscreen',
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
-};
+import { ClaudeOverlay } from "./claude-overlay"
 
-export default preview;
+const preview = {
+    parameters: {
+        layout: 'fullscreen',
+        controls: {
+            matchers: {
+                color: /(background|color)$/i,
+                date: /Date$/i,
+            },
+        },
+    },
+    decorators: [
+        (Story) => (
+            <>
+                <Story />
+                <ClaudeOverlay />
+            </>
+        ),
+    ],
+}
+
+export default preview

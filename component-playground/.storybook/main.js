@@ -12,13 +12,13 @@ function getAbsolutePath(value) {
 const config = {
     stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
     addons: [
-        getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
         getAbsolutePath("@storybook/addon-onboarding"),
         getAbsolutePath("@storybook/addon-links"),
         getAbsolutePath("@storybook/addon-essentials"),
         getAbsolutePath("@chromatic-com/storybook"),
         getAbsolutePath("@storybook/addon-interactions"),
-        "@storybook/addon-styling-webpack"
+        "@storybook/addon-styling-webpack",
+        path.resolve(__dirname, "addon-prompt"),
     ],
     framework: {
         name: getAbsolutePath("@storybook/react-webpack5"),
@@ -28,6 +28,20 @@ const config = {
         autodocs: "tag",
     },
     webpackFinal: async (config) => {
+        // Ensure babel-loader handles JS/JSX with React preset
+        config.module.rules.push({
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            use: {
+                loader: require.resolve("babel-loader"),
+                options: {
+                    presets: [
+                        require.resolve("@babel/preset-react"),
+                    ],
+                },
+            },
+        })
+
         config.resolve.alias = {
             ...config.resolve.alias,
             "react-native": "react-native-web",
