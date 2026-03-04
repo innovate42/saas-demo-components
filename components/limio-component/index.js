@@ -1,11 +1,18 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { 
   useComponentProps, 
   getPropsFromPackageJson, 
   useSubscriptions, 
   useUser, 
-  useLimioContext
+  useLimioContext,
+  useSchedule,
+  formatDate,
+  formatCurrency,
+  getRenewalDateForUserSubscription,
+  getPriceForUserSubscription,
+  getSubscriptionCurrency
 } from "@limio/sdk"
+import { useLimioUserSubscriptionPaymentMethods, useLimioUserSubscriptionAddresses } from "@limio/internal-checkout-sdk"
 import packageData from "./package.json"
 import "./index.css"
 
@@ -41,6 +48,11 @@ const SubscriptionOverview = () => {
   const userId = attributes?.sub
   const { subscriptions } = useSubscriptions({ ownerId: userId }) || {}
 
+  // Get payment methods and addresses for the first subscription (if available)
+  const firstSubscriptionId = subscriptions?.[0]?.id
+  const { payment_methods: paymentMethods } = useLimioUserSubscriptionPaymentMethods(firstSubscriptionId) || {}
+  const { addresses } = useLimioUserSubscriptionAddresses(firstSubscriptionId) || {}
+
   const getContrastColor = (hex) => {
     if (!hex) return "#ffffff"
     const h = hex.replace("#", "")
@@ -68,24 +80,31 @@ const SubscriptionOverview = () => {
     }
   }
 
-  // Safe calculations with fallbacks
+  // Calculate stats from real data
   const activeSubscriptions = subscriptions?.filter(s => s?.status?.toLowerCase() === "active") || []
   
-  // Mock data for demo purposes (in production, these would come from SDK hooks)
-  const mockPaymentMethods = [
-    { id: 1, brand: "VISA", last4: "4242", isDefault: true },
-    { id: 2, brand: "MASTERCARD", last4: "5555", isDefault: false }
-  ]
-  
-  const mockAddresses = [
-    { 
-      id: 1, 
-      type: "billing", 
-      name: "John Smith", 
-      summary: "123 Main St, New York, NY 10001",
-      isDefault: true 
-    }
-  ]
+  const totalMonthlySpend = useMemo(() => {
+    if (!activeSubscriptions.length) return "$0.00"
+    
+    let total = 0
+    let currency = "USD"
+    
+    activeSubscriptions.forEach(subscription => {
+      const price = getPriceForUserSubscription(subscription)
+      const subscriptionCurrency = getSubscriptionCurrency(subscription)
+      
+      if (price && subscriptionCurrency) {
+        // Extract numeric value from formatted price
+        const numericValue = parseFloat(price.replace(/[^0-9.]/g, ''))
+        if (!isNaN(numericValue)) {
+          total += numericValue
+          currency = subscriptionCurrency
+        }
+      }
+    })
+    
+    return formatCurrency(total, currency) || "$0.00"
+  }, [activeSubscriptions])
 
   const QuickStatsCards = () => {
     if (!showQuickStats) return null
@@ -94,8 +113,6 @@ const SubscriptionOverview = () => {
       {
         label: "Active Subscriptions",
         value: activeSubscriptions.length,
-        trend: "+12%",
-        trendPositive: true,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="currentColor" strokeWidth="2" fill="none"/>
@@ -104,9 +121,7 @@ const SubscriptionOverview = () => {
       },
       {
         label: "Monthly Spend",
-        value: "$0.00",
-        trend: "-3%",
-        trendPositive: false,
+        value: totalMonthlySpend,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" strokeWidth="2"/>
@@ -115,7 +130,7 @@ const SubscriptionOverview = () => {
       },
       {
         label: "Payment Methods",
-        value: mockPaymentMethods.length,
+        value: paymentMethods?.length || 0,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2"/>
@@ -125,7 +140,7 @@ const SubscriptionOverview = () => {
       },
       {
         label: "Saved Addresses",
-        value: mockAddresses.length,
+        value: addresses?.length || 0,
         icon: (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
@@ -141,18 +156,6 @@ const SubscriptionOverview = () => {
           <div key={index} className="so-stat-card">
             <div className="so-stat-header">
               <div className="so-stat-icon">{stat.icon}</div>
-              {stat.trend && (
-                <div className={`so-trend ${stat.trendPositive ? 'so-trend--positive' : 'so-trend--negative'}`}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                    {stat.trendPositive ? (
-                      <path d="M7 14l5-5 5 5" stroke="currentColor" strokeWidth="2"/>
-                    ) : (
-                      <path d="M17 10l-5 5-5-5" stroke="currentColor" strokeWidth="2"/>
-                    )}
-                  </svg>
-                  {stat.trend}
-                </div>
-              )}
             </div>
             <div className="so-stat-content">
               <div className="so-stat-value">{stat.value}</div>
@@ -169,6 +172,9 @@ const SubscriptionOverview = () => {
 
     const displayName = subscription.name || "Subscription"
     const status = subscription.status || "unknown"
+    const renewalDate = getRenewalDateForUserSubscription(subscription)
+    const price = getPriceForUserSubscription(subscription)
+    const schedule = useSchedule(subscription)
 
     return (
       <div className="so-subscription-card">
@@ -209,7 +215,7 @@ const SubscriptionOverview = () => {
               </div>
               <div className="so-detail-content">
                 <span className="so-detail-label">{renewalDateText}</span>
-                <span className="so-detail-value">—</span>
+                <span className="so-detail-value">{renewalDate || "—"}</span>
               </div>
             </div>
 
@@ -221,7 +227,7 @@ const SubscriptionOverview = () => {
               </div>
               <div className="so-detail-content">
                 <span className="so-detail-label">{nextPaymentText}</span>
-                <span className="so-detail-value">—</span>
+                <span className="so-detail-value">{price || "—"}</span>
               </div>
             </div>
           </div>
@@ -230,66 +236,89 @@ const SubscriptionOverview = () => {
     )
   }
 
-  const PaymentMethodCard = ({ paymentMethod }) => (
-    <div className={`so-payment-card ${paymentMethod.isDefault ? "so-payment-card--default" : ""}`}>
-      <div className="so-payment-content">
-        <div className="so-payment-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2"/>
-            <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor" strokeWidth="2"/>
-          </svg>
-        </div>
-        <div className="so-payment-details">
-          <div className="so-payment-primary">
-            <span className="so-payment-brand">{paymentMethod.brand || "CARD"}</span>
-            {paymentMethod.isDefault && <span className="so-default-badge">Default</span>}
-          </div>
-          <div className="so-payment-secondary">
-            •••• {paymentMethod.last4 || "0000"}
-          </div>
-        </div>
-      </div>
-      <button className="so-btn so-btn--ghost so-btn--sm">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="2"/>
-          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      </button>
-    </div>
-  )
+  const PaymentMethodCard = ({ paymentMethod }) => {
+    if (!paymentMethod?.data) return null
 
-  const AddressCard = ({ address }) => (
-    <div className={`so-address-card ${address.isDefault ? "so-address-card--default" : ""}`}>
-      <div className="so-address-content">
-        <div className="so-address-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
-            <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+    const { method, last4, brand, isDefault } = paymentMethod.data
+
+    return (
+      <div className={`so-payment-card ${isDefault ? "so-payment-card--default" : ""}`}>
+        <div className="so-payment-content">
+          <div className="so-payment-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2"/>
+              <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="so-payment-details">
+            <div className="so-payment-primary">
+              <span className="so-payment-brand">{brand || method || "CARD"}</span>
+              {isDefault && <span className="so-default-badge">Default</span>}
+            </div>
+            <div className="so-payment-secondary">
+              •••• {last4 || "0000"}
+            </div>
+          </div>
+        </div>
+        <button className="so-btn so-btn--ghost so-btn--sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="2"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2"/>
           </svg>
-        </div>
-        <div className="so-address-details">
-          <div className="so-address-primary">
-            <span className={`so-address-type so-address-type--${address.type}`}>
-              {address.type === "billing" ? "Billing" : "Shipping"}
-            </span>
-            {address.isDefault && <span className="so-default-badge">Default</span>}
-          </div>
-          <div className="so-address-secondary">
-            {address.name}
-          </div>
-          <div className="so-address-summary">
-            {address.summary}
-          </div>
-        </div>
+        </button>
       </div>
-      <button className="so-btn so-btn--ghost so-btn--sm">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="2"/>
-          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      </button>
-    </div>
-  )
+    )
+  }
+
+  const AddressCard = ({ address }) => {
+    if (!address?.data) return null
+
+    const { firstName, lastName, address1, address2, city, state, postalCode, country } = address.data
+    const { relationship_type: type, status } = address
+    const isDefault = status === "active"
+    
+    const fullName = [firstName, lastName].filter(Boolean).join(" ")
+    const addressLine = [address1, address2].filter(Boolean).join(", ")
+    const locationLine = [city, state, postalCode, country].filter(Boolean).join(", ")
+    const summary = [addressLine, locationLine].filter(Boolean).join(", ")
+
+    return (
+      <div className={`so-address-card ${isDefault ? "so-address-card--default" : ""}`}>
+        <div className="so-address-content">
+          <div className="so-address-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
+              <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+          </div>
+          <div className="so-address-details">
+            <div className="so-address-primary">
+              <span className={`so-address-type so-address-type--${type}`}>
+                {type === "billing" ? "Billing" : "Shipping"}
+              </span>
+              {isDefault && <span className="so-default-badge">Default</span>}
+            </div>
+            {fullName && (
+              <div className="so-address-secondary">
+                {fullName}
+              </div>
+            )}
+            {summary && (
+              <div className="so-address-summary">
+                {summary}
+              </div>
+            )}
+          </div>
+        </div>
+        <button className="so-btn so-btn--ghost so-btn--sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="2"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2"/>
+          </svg>
+        </button>
+      </div>
+    )
+  }
 
   const EmptyState = ({ title, description, action }) => (
     <div className="so-empty-state">
@@ -369,7 +398,7 @@ const SubscriptionOverview = () => {
                 <div className="so-section-header">
                   <div className="so-section-title-group">
                     <h2 className="so-section-title">{paymentMethodsHeadline}</h2>
-                    <span className="so-section-count">{mockPaymentMethods.length}</span>
+                    <span className="so-section-count">{paymentMethods?.length || 0}</span>
                   </div>
                   <button className="so-btn so-btn--secondary so-btn--sm">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -379,9 +408,9 @@ const SubscriptionOverview = () => {
                   </button>
                 </div>
                 <div className="so-section-content">
-                  {mockPaymentMethods && mockPaymentMethods.length > 0 ? (
+                  {paymentMethods && paymentMethods.length > 0 ? (
                     <div className="so-payment-methods-grid">
-                      {mockPaymentMethods.map((paymentMethod) => (
+                      {paymentMethods.map((paymentMethod) => (
                         <PaymentMethodCard key={paymentMethod.id} paymentMethod={paymentMethod} />
                       ))}
                     </div>
@@ -404,7 +433,7 @@ const SubscriptionOverview = () => {
                 <div className="so-section-header">
                   <div className="so-section-title-group">
                     <h2 className="so-section-title">{addressesHeadline}</h2>
-                    <span className="so-section-count">{mockAddresses.length}</span>
+                    <span className="so-section-count">{addresses?.length || 0}</span>
                   </div>
                   <button className="so-btn so-btn--secondary so-btn--sm">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -414,9 +443,9 @@ const SubscriptionOverview = () => {
                   </button>
                 </div>
                 <div className="so-section-content">
-                  {mockAddresses && mockAddresses.length > 0 ? (
+                  {addresses && addresses.length > 0 ? (
                     <div className="so-addresses-grid">
-                      {mockAddresses.map((address) => (
+                      {addresses.map((address) => (
                         <AddressCard key={address.id} address={address} />
                       ))}
                     </div>

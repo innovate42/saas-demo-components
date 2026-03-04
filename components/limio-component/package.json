@@ -1,6 +1,6 @@
 {
   "name": "@limio/subscription-overview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enterprise subscription overview dashboard with payment methods, addresses, and subscription management for SaaS customers",
   "main": "./index.js",
   "dependencies": {},
@@ -16,7 +16,7 @@
     },
     {
       "id": "pageSubheadline",
-      "label": "Page Subheadline", 
+      "label": "Page Subheadline",
       "type": "string",
       "default": "Manage all your subscriptions, payment methods, and billing information"
     },
@@ -106,7 +106,7 @@
     },
     {
       "id": "statusPausedText",
-      "label": "Status Paused Text", 
+      "label": "Status Paused Text",
       "type": "string",
       "default": "Paused"
     },
