@@ -1,6 +1,6 @@
 {
   "name": "@limio/subscription-dashboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Comprehensive subscription dashboard for managing customer subscriptions, billing, and account information",
   "main": "./index.js",
   "dependencies": {
