@@ -1,0 +1,457 @@
+.sd-wrapper {
+  --sd-primary: #d14424;
+  --sd-secondary: #f47c24;
+  --sd-contrast: #ffffff;
+  --sd-text: #1a1a2e;
+  --sd-text-secondary: #4f566b;
+  --sd-text-muted: #697386;
+  --sd-border: #e3e8ee;
+  --sd-bg: #f6f9fc;
+  --sd-card: #ffffff;
+  --sd-success: #0d7d4d;
+  --sd-warning: #c27803;
+  --sd-error: #cd3d64;
+  --sd-radius-card: 12px;
+  --sd-radius-btn: 8px;
+  --sd-radius-badge: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--sd-text);
+  -webkit-font-smoothing: antialiased;
+  background: var(--sd-bg);
+  min-height: 100vh;
+}
+
+.sd-wrapper *, 
+.sd-wrapper *::before, 
+.sd-wrapper *::after { 
+  box-sizing: border-box; 
+}
+
+/* Selection color matching Limio brand */
+.sd-wrapper ::selection {
+  background: var(--sd-primary);
+  color: var(--sd-contrast);
+}
+
+.sd-wrapper ::-moz-selection {
+  background: var(--sd-primary);
+  color: var(--sd-contrast);
+}
+
+/* Container */
+.sd-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Header */
+.sd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.sd-welcome-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  color: var(--sd-text);
+}
+
+.sd-welcome-subtitle {
+  font-size: 18px;
+  color: var(--sd-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sd-user-avatar {
+  flex-shrink: 0;
+}
+
+.sd-avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--sd-primary);
+  color: var(--sd-contrast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Loading */
+.sd-loading {
+  text-align: center;
+  padding: 120px 0;
+}
+
+.sd-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--sd-border);
+  border-top: 4px solid var(--sd-primary);
+  border-radius: 50%;
+  animation: sd-spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes sd-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dashboard Grid */
+.sd-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+
+.sd-section {
+  background: var(--sd-card);
+  border-radius: var(--sd-radius-card);
+  border: 1px solid var(--sd-border);
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.sd-section-full {
+  grid-column: 1 / -1;
+}
+
+.sd-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.sd-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--sd-text);
+}
+
+/* Buttons */
+.sd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: var(--sd-radius-btn);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 6px;
+}
+
+.sd-btn:focus-visible {
+  outline: 2px solid var(--sd-primary);
+  outline-offset: 2px;
+}
+
+.sd-btn-primary {
+  background: var(--sd-primary);
+  color: var(--sd-contrast);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.sd-btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.sd-btn-secondary {
+  background: var(--sd-card);
+  color: var(--sd-text);
+  border: 1px solid var(--sd-border);
+}
+
+.sd-btn-secondary:hover {
+  border-color: var(--sd-primary);
+  transform: translateY(-1px);
+}
+
+.sd-btn-ghost {
+  background: transparent;
+  color: var(--sd-primary);
+  border: none;
+}
+
+.sd-btn-ghost:hover {
+  background: color-mix(in srgb, var(--sd-primary) 6%, white);
+}
+
+/* Subscriptions Grid */
+.sd-subscriptions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.sd-subscription-card {
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  padding: 24px;
+  background: var(--sd-card);
+  transition: all 0.2s ease;
+}
+
+.sd-subscription-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.sd-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sd-subscription-info {
+  flex: 1;
+}
+
+.sd-subscription-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--sd-text);
+}
+
+.sd-subscription-reference {
+  font-size: 13px;
+  color: var(--sd-text-muted);
+}
+
+.sd-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--sd-radius-badge);
+  font-size: 12px;
+  font-weight: 500;
+  background: color-mix(in srgb, currentColor 8%, white);
+  text-transform: capitalize;
+}
+
+.sd-subscription-details {
+  margin-bottom: 20px;
+}
+
+.sd-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--sd-border) 50%, transparent);
+}
+
+.sd-detail-row:last-child {
+  border-bottom: none;
+}
+
+.sd-detail-label {
+  font-size: 14px;
+  color: var(--sd-text-secondary);
+}
+
+.sd-detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sd-text);
+}
+
+.sd-card-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Payments */
+.sd-payments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sd-payment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-btn);
+  background: var(--sd-card);
+  transition: all 0.2s ease;
+}
+
+.sd-payment-card:hover {
+  border-color: var(--sd-primary);
+  transform: translateX(4px);
+}
+
+.sd-payment-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sd-payment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sd-secondary) 8%, white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sd-secondary);
+}
+
+.sd-payment-subscription {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sd-text);
+  margin-bottom: 2px;
+}
+
+.sd-payment-date {
+  font-size: 13px;
+  color: var(--sd-text-muted);
+}
+
+.sd-payment-amount {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sd-text);
+}
+
+/* Account Information */
+.sd-account-card {
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-card);
+  background: var(--sd-card);
+}
+
+.sd-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--sd-text);
+}
+
+.sd-account-details {
+  padding-top: 0;
+}
+
+.sd-verification-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.sd-verified {
+  color: var(--sd-success);
+}
+
+.sd-unverified {
+  color: var(--sd-warning);
+}
+
+/* Empty States */
+.sd-empty-state {
+  text-align: center;
+  padding: 64px 32px;
+  color: var(--sd-text-muted);
+}
+
+.sd-empty-state-small {
+  padding: 32px 24px;
+}
+
+.sd-empty-state svg {
+  margin-bottom: 16px;
+  color: var(--sd-text-muted);
+}
+
+.sd-empty-state p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .sd-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .sd-subscriptions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sd-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .sd-welcome-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sd-container {
+    padding: 24px 16px;
+  }
+  
+  .sd-section {
+    padding: 24px 20px;
+  }
+  
+  .sd-subscription-card {
+    padding: 20px;
+  }
+  
+  .sd-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .sd-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .sd-payment-card {
+    padding: 12px;
+  }
+  
+  .sd-payment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .sd-welcome-title {
+    font-size: 24px;
+  }
+}
