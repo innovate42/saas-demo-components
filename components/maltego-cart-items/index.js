@@ -24,21 +24,76 @@ function MaltegoCartItems({
   showDiscountNote = false,
   showAsCards = false,
 }) {
-  const { offers = [] } = useCampaign()
-  const { addToBasket } = useBasket()
+  // Basket items — what the user actually has in their cart
+  const { basketItems = [], addToBasket } = useBasket()
 
-  const offerGroups = R.groupBy(offer => groupPath(offer), offers)
+  // Campaign offers — used only for term upsell options (may be empty on checkout pages)
+  const { offers = [] } = useCampaign()
+
+  // Derive upsell term groups from campaign offers
+  const offerGroups = offers.length > 0 ? R.groupBy(offer => groupPath(offer), offers) : {}
   const firstProduct = Object.keys(offerGroups)[0] || null
   const firstOffer = firstProduct ? offerGroups[firstProduct][0] : null
 
-  const [selectedProduct] = useState(firstProduct)
+  // State for term upsell selection — safe defaults if no campaign offers
   const [selectedOffer, setSelectedOffer] = useState(firstOffer?.id || null)
   const [selectedTerm, setSelectedTerm] = useState(firstOffer?.data?.attributes?.term__limio || null)
   const [selectedAddOnProducts, setSelectedAddOnProducts] = useState([])
   const [selectedBillingPlan, setSelectedBillingPlan] = useState(firstOffer?.data?.attributes?.billing_plan?.[0] || null)
   const [quantity, setQuantity] = useState(1)
 
-  if (!firstProduct || !selectedOffer) {
+  // Current basket item — the offer the user added from the pricing page
+  const currentBasketItem = basketItems[0]
+  const currentOffer = currentBasketItem?.offer
+
+  // Display name + price: prefer basket item, fall back to campaign offer
+  const displayName = currentOffer?.data?.attributes?.display_name__limio
+    || (firstProduct ? stripPathToProductName(firstProduct) : "")
+  const displayPrice = stripHTMLtags(
+    currentOffer?.data?.attributes?.display_price__limio
+    || firstOffer?.data?.attributes?.display_price__limio
+    || ""
+  )
+
+  const hasContent = currentBasketItem || firstOffer
+
+  const handleOfferSelection = (ratePlan, term) => {
+    if (!firstProduct) return
+    const productOffers = offerGroups[firstProduct]
+    const offer = productOffers.find(o => {
+      const offerTerm = o.data.attributes.term__limio
+      const offerRatePlan = o.data.productBundles[0].rate_plan
+      return (
+        term.length === offerTerm.length &&
+        term.renewal_trigger === offerTerm.renewal_trigger &&
+        term.renewal_type === offerTerm.renewal_type &&
+        term.type === offerTerm.type &&
+        ratePlan === offerRatePlan
+      )
+    })
+    if (offer) setSelectedOffer(offer.id)
+  }
+
+  const handleTermChange = React.useCallback(
+    term => {
+      if (!firstProduct) return
+      const possibleOptions = offerGroups[firstProduct].filter(o => R.equals(o.data.attributes.term__limio, term))
+      setSelectedBillingPlan(possibleOptions[0].data.attributes.billing_plan[0])
+      setSelectedTerm(term)
+      handleOfferSelection(possibleOptions[0].data.productBundles[0].rate_plan, term)
+    },
+    [firstProduct]
+  )
+
+  const handleContinue = () => {
+    if (readOnly) return
+    const offerToAdd = offers.find(o => o.id === selectedOffer) || currentOffer
+    if (offerToAdd) addToBasket(offerToAdd, { quantity })
+  }
+
+  const upsellLayout = showAsCards ? "card" : "radio"
+
+  if (!hasContent) {
     return (
       <div className="mci-container">
         <p className="mci-empty">{emptyCartMessage}</p>
@@ -51,49 +106,6 @@ function MaltegoCartItems({
     )
   }
 
-  const selectedOfferObj = offers.find(o => o.id === selectedOffer)
-  const displayName = stripPathToProductName(selectedProduct)
-  const displayPrice = selectedOfferObj ? stripHTMLtags(selectedOfferObj.data?.attributes?.display_price__limio || "") : ""
-
-  const handleOfferSelection = (ratePlan, term) => {
-    const productOffers = offerGroups[selectedProduct]
-    const offer = productOffers.find(offer => {
-      const offerTerm = offer.data.attributes.term__limio
-      const offerRatePlan = offer.data.productBundles[0].rate_plan
-      return (
-        term.length === offerTerm.length &&
-        term.renewal_trigger === offerTerm.renewal_trigger &&
-        term.renewal_type === offerTerm.renewal_type &&
-        term.type === offerTerm.type &&
-        ratePlan === offerRatePlan
-      )
-    })
-    if (offer) {
-      setSelectedOffer(offer.id)
-    } else {
-      console.error("Offer not found", ratePlan, term)
-    }
-  }
-
-  const handleTermChange = React.useCallback(
-    term => {
-      const possibleOptions = offerGroups[selectedProduct].filter(offer => R.equals(offer.data.attributes.term__limio, term))
-      const ratePlan = possibleOptions[0].data.productBundles[0].rate_plan
-      setSelectedBillingPlan(possibleOptions[0].data.attributes.billing_plan[0])
-      setSelectedTerm(term)
-      handleOfferSelection(ratePlan, term)
-    },
-    [selectedProduct]
-  )
-
-  const handleContinue = () => {
-    if (selectedOfferObj && !readOnly) {
-      addToBasket(selectedOfferObj, { quantity })
-    }
-  }
-
-  const upsellLayout = showAsCards ? "card" : "radio"
-
   return (
     <div className="mci-container">
       <h2 className="mci-heading">Your Cart</h2>
@@ -105,29 +117,33 @@ function MaltegoCartItems({
 
       <div className="mci-divider" />
 
-      {displayUpsellOffers && (
+      {displayUpsellOffers && firstProduct && (
         <BillingPlan
           selectedTerm={selectedTerm}
           handleTermChange={handleTermChange}
-          selectedProduct={selectedProduct}
+          selectedProduct={firstProduct}
           upsellLayout={upsellLayout}
           showPrice={showPriceInUpsellOffers}
         />
       )}
 
-      <QuantityField
-        quantity={quantity}
-        setQuantity={setQuantity}
-        selectedOffer={selectedOffer}
-        unitPriceLabel={unitPriceLabel}
-      />
+      {firstProduct && (
+        <QuantityField
+          quantity={quantity}
+          setQuantity={setQuantity}
+          selectedOffer={selectedOffer}
+          unitPriceLabel={unitPriceLabel}
+        />
+      )}
 
-      <AddOnOptions
-        selectedAddOnProducts={selectedAddOnProducts}
-        setSelectedAddOnProducts={setSelectedAddOnProducts}
-        selectedProduct={selectedProduct}
-        selectedOffer={selectedOffer}
-      />
+      {firstProduct && (
+        <AddOnOptions
+          selectedAddOnProducts={selectedAddOnProducts}
+          setSelectedAddOnProducts={setSelectedAddOnProducts}
+          selectedProduct={firstProduct}
+          selectedOffer={selectedOffer}
+        />
+      )}
 
       <div className="mci-divider" />
 
