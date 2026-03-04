@@ -1,0 +1,34 @@
+{
+  "name": "@limio/component-test",
+  "version": "1.0.0",
+  "description": "Component Test: Pricing Cards with hero banner and features, matching Stripe's visual style",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": { "react": "*" },
+  "limioProps": [
+    { "id": "heroHeadline", "label": "Hero Headline", "type": "string", "default": "Financial infrastructure to grow your revenue" },
+    { "id": "heroSubheadline", "label": "Hero Subheadline", "type": "string", "default": "Accept payments, offer financial services and implement custom revenue models – from your first transaction to your billionth." },
+    { "id": "heroCta", "label": "Hero CTA Text", "type": "string", "default": "Get started" },
+    { "id": "heroCtaLink", "label": "Hero CTA Link", "type": "string", "default": "#pricing" },
+    { "id": "pricingHeadline", "label": "Pricing Section Headline", "type": "string", "default": "Simple, transparent pricing" },
+    { "id": "pricingSubheadline", "label": "Pricing Section Subheadline", "type": "string", "default": "Choose the plan that's right for you. All plans include a 14-day free trial." },
+    { "id": "featuresHeadline", "label": "Features Section Headline", "type": "string", "default": "The backbone of global commerce" },
+    { "id": "primaryColor__limio_color", "label": "Primary Color", "type": "color", "default": "#635BFF" },
+    { "id": "ctaLoadingText", "label": "CTA Loading Text", "type": "string", "default": "Processing..." },
+    { "id": "trustBadges", "label": "Trust Badges", "type": "list", "fields": { "name": { "id": "id", "label": "ID", "type": "string" }, "url": { "id": "label", "label": "Label", "type": "string" } }, "default": [
+      { "id": "currencies", "label": "135+ currencies supported" },
+      { "id": "volume", "label": "$1.4tn processed in 2024" },
+      { "id": "uptime", "label": "99.999% historical uptime" },
+      { "id": "subscriptions", "label": "200M+ active subscriptions" }
+    ]},
+    { "id": "features", "label": "Key Features", "type": "list", "fields": { "name": { "id": "id", "label": "ID", "type": "string" }, "url": { "id": "title", "label": "Title", "type": "string" }, "thumbnail": { "id": "description", "label": "Description", "type": "string" } }, "default": [
+      { "id": "payments", "title": "Accept payments globally", "description": "Online and in-person payments with 135+ currencies and payment methods" },
+      { "id": "billing", "title": "Flexible billing models", "description": "Subscriptions, usage-based pricing, and custom revenue models" },
+      { "id": "platform", "title": "Embed payments", "description": "White-label payment solutions for your marketplace or platform" },
+      { "id": "security", "title": "Enterprise security", "description": "Bank-level security with fraud protection and compliance" }
+    ]},
+    { "id": "enableAnimations", "label": "Enable Background Animations", "type": "boolean", "default": true }
+  ]
+}
