@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-limio-landing",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Limio SaaS landing page with subscription tiers",
   "main": "./index.js",
   "dependencies": {

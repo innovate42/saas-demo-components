@@ -1,7 +1,9 @@
-const React = require("react")
-const { useComponentProps, getPropsFromPackageJson, useCampaign, useBasket, useLimioContext, groupOffers } = require("@limio/sdk")
-const { getCurrentBasketId } = require("@limio/shop/src/shop/checkout/basket")
-const packageData = require("./package.json")
+import React from "react"
+import { useComponentProps, getPropsFromPackageJson, useCampaign, useBasket, useLimioContext, groupOffers } from "@limio/sdk"
+import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
+import packageData from "./package.json"
+import "./index.css"
+
 const defaultProps = getPropsFromPackageJson(packageData)
 
 const getContrastColor = (hex) => {
@@ -275,5 +277,4 @@ const LimioLanding = () => {
   )
 }
 
-module.exports = LimioLanding
-module.exports.default = LimioLanding
+export default LimioLanding
