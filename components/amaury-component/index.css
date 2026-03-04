@@ -309,7 +309,7 @@
 }
 
 .ll-pricing-features li:before {
-  content: "✓";
+  content: "â";
   color: var(--ll-primary);
   font-weight: 600;
   width: 16px;
