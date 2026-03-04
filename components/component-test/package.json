@@ -23,42 +23,6 @@
       "default": "PracticeTek is an innovative software and services company delivering solutions that foster exceptional patient experiences, attract new patients, and make the business of healthcare easier for clinicians."
     },
     {
-      "id": "standardTitle",
-      "label": "Standard Plan Title",
-      "type": "string",
-      "default": "Essential"
-    },
-    {
-      "id": "standardDescription",
-      "label": "Standard Plan Description",
-      "type": "string",
-      "default": "Everything you need to grow your healthcare practice with comprehensive patient management tools."
-    },
-    {
-      "id": "standardCta",
-      "label": "Standard Plan CTA",
-      "type": "string",
-      "default": "Get in Touch"
-    },
-    {
-      "id": "customTitle",
-      "label": "Custom Plan Title",
-      "type": "string",
-      "default": "Enterprise"
-    },
-    {
-      "id": "customDescription",
-      "label": "Custom Plan Description",
-      "type": "string",
-      "default": "Tailored solutions for large healthcare organizations with advanced integration needs."
-    },
-    {
-      "id": "customCta",
-      "label": "Custom Plan CTA",
-      "type": "string",
-      "default": "Partner With Us"
-    },
-    {
       "id": "featuresHeadline",
       "label": "Features Section Headline",
       "type": "string",

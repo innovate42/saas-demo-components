@@ -7,19 +7,11 @@ require("./index.css")
 const packageData = require("./package.json")
 const defaultProps = getPropsFromPackageJson(packageData)
 
-const sanitizeString = (str) => xss(str || "")
-
 const ComponentTest = () => {
   const props = useComponentProps(defaultProps)
   const { 
     heroHeadline, 
     heroSubheadline, 
-    standardTitle,
-    standardDescription,
-    standardCta,
-    customTitle,
-    customDescription,
-    customCta,
     featuresHeadline,
     primaryColor__limio_color: primaryColor,
     ctaLoadingText,
@@ -33,20 +25,20 @@ const ComponentTest = () => {
   
   const handleAddToBasket = async (offer) => {
     if (basketLoading) return
-    const checkoutId = getCurrentBasketId()
-    if (!checkoutId) {
-      await initiateCheckout({ order: { orderItems: [{ offer }] } })
-    } else {
-      await addOfferToBasket({ offer })
-    }
-    if (pageOptions?.pushToCheckout) {
-      await navigateToCheckout()
+    try {
+      const checkoutId = getCurrentBasketId()
+      if (!checkoutId) {
+        await initiateCheckout({ order: { orderItems: [{ offer }] } })
+      } else {
+        await addOfferToBasket({ offer })
+      }
+      if (pageOptions?.pushToCheckout) {
+        await navigateToCheckout()
+      }
+    } catch (error) {
+      console.error("Error adding to basket:", error)
     }
   }
-
-  // Split offers into standard and custom (or use first two offers)
-  const standardOffer = offers && offers.length > 0 ? offers[0] : null
-  const customOffer = offers && offers.length > 1 ? offers[1] : null
 
   const getContrastColor = (hex) => {
     if (!hex) return "#ffffff"
@@ -55,6 +47,48 @@ const ComponentTest = () => {
     const g = parseInt(h.substr(2, 2), 16) 
     const b = parseInt(h.substr(4, 2), 16)
     return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.5 ? "#000000" : "#ffffff"
+  }
+
+  // Safe HTML sanitization function
+  const sanitizeHTML = (html) => {
+    if (!html) return ""
+    if (typeof html !== 'string') return String(html)
+    return xss(html, {
+      whiteList: {
+        p: [],
+        div: ["class"],
+        span: ["class"],
+        strong: [],
+        b: [],
+        em: [],
+        i: [],
+        ul: [],
+        ol: [],
+        li: [],
+        br: [],
+        h1: [],
+        h2: [],
+        h3: [],
+        h4: [],
+        h5: [],
+        h6: [],
+        small: []
+      }
+    })
+  }
+
+  // Helper function to get offer data with fallbacks
+  const getOfferData = (offer) => {
+    const attrs = offer?.data?.attributes || {}
+    return {
+      title: attrs.display_name__limio || "Plan",
+      price: attrs.display_price__limio || "Contact for pricing",
+      detailsPrice: attrs.detailed_display_price__limio,
+      features: attrs.offer_features__limio,
+      ctaText: attrs.cta_text__limio || "Get Started",
+      badge: attrs.badge_text__limio,
+      isBestValue: attrs.best_value__limio || false
+    }
   }
 
   return (
@@ -78,75 +112,63 @@ const ComponentTest = () => {
       {/* Main Pricing Section */}
       <section className="ct-pricing">
         <div className="ct-container">
-          <div className="ct-pricing-grid">
-            {/* Standard Plan */}
-            <div className="ct-plan ct-plan--standard">
-              <div className="ct-plan-header">
-                <h2 className="ct-plan-title">{standardTitle}</h2>
-                <p className="ct-plan-description">{standardDescription}</p>
-                <button
-                  className="ct-plan-cta ct-plan-cta--primary"
-                  onClick={() => standardOffer && handleAddToBasket(standardOffer)}
-                  disabled={basketLoading}
-                >
-                  {basketLoading ? ctaLoadingText : standardCta}
-                </button>
-              </div>
+          {offers && offers.length > 0 ? (
+            <div className={`ct-pricing-grid ct-pricing-grid--${offers.length > 3 ? 'many' : offers.length}`}>
+              {offers.map((offer, index) => {
+                const offerData = getOfferData(offer)
+                const isRecommended = offerData.isBestValue || index === 0
+                
+                return (
+                  <div key={offer.id || index} className={`ct-plan ${isRecommended ? 'ct-plan--recommended' : ''}`}>
+                    {(offerData.badge || isRecommended) && (
+                      <div className="ct-plan-badge">
+                        {offerData.badge || "Recommended"}
+                      </div>
+                    )}
+                    
+                    <div className="ct-plan-header">
+                      <h2 className="ct-plan-title">{offerData.title}</h2>
+                      
+                      <div className="ct-plan-price-section">
+                        <div 
+                          className="ct-plan-price" 
+                          dangerouslySetInnerHTML={{ __html: sanitizeHTML(offerData.price) }} 
+                        />
+                        
+                        {offerData.detailsPrice && (
+                          <div 
+                            className="ct-plan-details" 
+                            dangerouslySetInnerHTML={{ __html: sanitizeHTML(offerData.detailsPrice) }} 
+                          />
+                        )}
+                      </div>
+                      
+                      <button
+                        className={`ct-plan-cta ${isRecommended ? 'ct-plan-cta--primary' : 'ct-plan-cta--secondary'}`}
+                        onClick={() => handleAddToBasket(offer)}
+                        disabled={basketLoading}
+                      >
+                        {basketLoading ? ctaLoadingText : offerData.ctaText}
+                      </button>
+                    </div>
 
-              {standardOffer && (
-                <div className="ct-plan-pricing">
-                  <div className="ct-plan-price" dangerouslySetInnerHTML={{ __html: sanitizeString(standardOffer.data?.attributes?.display_price__limio || "Contact for pricing") }} />
-                  
-                  {standardOffer.data?.attributes?.detailed_display_price__limio && (
-                    <div className="ct-plan-details" dangerouslySetInnerHTML={{ __html: sanitizeString(standardOffer.data.attributes.detailed_display_price__limio) }} />
-                  )}
-
-                  {standardOffer.data?.attributes?.offer_features__limio && (
-                    <div className="ct-plan-features" dangerouslySetInnerHTML={{ __html: sanitizeString(standardOffer.data.attributes.offer_features__limio) }} />
-                  )}
-                </div>
-              )}
+                    {offerData.features && (
+                      <div className="ct-plan-content">
+                        <div 
+                          className="ct-plan-features" 
+                          dangerouslySetInnerHTML={{ __html: sanitizeHTML(offerData.features) }} 
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
-
-            {/* Custom Plan */}
-            <div className="ct-plan ct-plan--custom">
-              <div className="ct-plan-header">
-                <h2 className="ct-plan-title">{customTitle}</h2>
-                <p className="ct-plan-description">{customDescription}</p>
-                <button
-                  className="ct-plan-cta ct-plan-cta--secondary"
-                  onClick={() => customOffer && handleAddToBasket(customOffer)}
-                  disabled={basketLoading}
-                >
-                  {basketLoading ? ctaLoadingText : customCta}
-                </button>
-              </div>
-
-              {customOffer ? (
-                <div className="ct-plan-pricing">
-                  <div className="ct-plan-price" dangerouslySetInnerHTML={{ __html: sanitizeString(customOffer.data?.attributes?.display_price__limio || "Contact for pricing") }} />
-                  
-                  {customOffer.data?.attributes?.detailed_display_price__limio && (
-                    <div className="ct-plan-details" dangerouslySetInnerHTML={{ __html: sanitizeString(customOffer.data.attributes.detailed_display_price__limio) }} />
-                  )}
-
-                  {customOffer.data?.attributes?.offer_features__limio && (
-                    <div className="ct-plan-features" dangerouslySetInnerHTML={{ __html: sanitizeString(customOffer.data.attributes.offer_features__limio) }} />
-                  )}
-                </div>
-              ) : (
-                <div className="ct-plan-pricing">
-                  <div className="ct-plan-price">Contact for pricing</div>
-                  <ul className="ct-plan-features">
-                    <li>Multi-location support</li>
-                    <li>Advanced analytics</li>
-                    <li>Custom integrations</li>
-                    <li>Dedicated support team</li>
-                  </ul>
-                </div>
-              )}
+          ) : (
+            <div className="ct-no-offers">
+              <p>No offers available at this time.</p>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
