@@ -16,7 +16,13 @@ function BillingPlan({ selectedProduct, selectedTerm, handleTermChange, upsellLa
   const { offers = [] } = useCampaign()
 
   const offerGroups = R.groupBy(offer => groupPath(offer), offers)
-  const productOffers = offerGroups[selectedProduct] || []
+
+  // Use exact product match, or fall back to first available group in the campaign
+  const resolvedProduct = offerGroups[selectedProduct]
+    ? selectedProduct
+    : Object.keys(offerGroups)[0] || null
+
+  const productOffers = (resolvedProduct && offerGroups[resolvedProduct]) || []
 
   if (!productOffers.length) return null
 
