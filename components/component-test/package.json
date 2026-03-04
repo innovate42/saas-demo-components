@@ -1,0 +1,30 @@
+{
+  "name": "@limio/component-test",
+  "version": "1.0.0",
+  "description": "Component Test: Pricing Cards with hero banner and features, matching PracticeTek's visual style",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": { "react": "*" },
+  "limioProps": [
+    { "id": "heroHeadline", "label": "Hero Headline", "type": "string", "default": "Revolutionizing healthcare practices effortlessly" },
+    { "id": "heroSubheadline", "label": "Hero Subheadline", "type": "string", "default": "PracticeTek is an innovative software and services company delivering solutions that foster exceptional patient experiences, attract new patients, and make the business of healthcare easier for clinicians." },
+    { "id": "standardTitle", "label": "Standard Plan Title", "type": "string", "default": "Essential" },
+    { "id": "standardDescription", "label": "Standard Plan Description", "type": "string", "default": "Everything you need to grow your healthcare practice with comprehensive patient management tools." },
+    { "id": "standardCta", "label": "Standard Plan CTA", "type": "string", "default": "Get in Touch" },
+    { "id": "customTitle", "label": "Custom Plan Title", "type": "string", "default": "Enterprise" },
+    { "id": "customDescription", "label": "Custom Plan Description", "type": "string", "default": "Tailored solutions for large healthcare organizations with advanced integration needs." },
+    { "id": "customCta", "label": "Custom Plan CTA", "type": "string", "default": "Partner With Us" },
+    { "id": "featuresHeadline", "label": "Features Section Headline", "type": "string", "default": "Grow faster, go further. Our solutions empower your practice to scale quicker than ever before." },
+    { "id": "primaryColor__limio_color", "label": "Primary Color", "type": "color", "default": "#20B2AA" },
+    { "id": "ctaLoadingText", "label": "CTA Loading Text", "type": "string", "default": "Processing..." },
+    { "id": "features", "label": "Key Features", "type": "list", "fields": { "name": { "id": "id", "label": "ID", "type": "string" }, "url": { "id": "title", "label": "Title", "type": "string" }, "thumbnail": { "id": "description", "label": "Description", "type": "string" } }, "default": [
+      { "id": "patient", "title": "Exceptional Patient Experiences", "description": "Foster meaningful connections between healthcare providers and patients through intuitive software solutions." },
+      { "id": "growth", "title": "Attract New Patients", "description": "Powerful marketing and patient acquisition tools to help grow your practice organically." },
+      { "id": "business", "title": "Streamline Business Operations", "description": "Make the business of healthcare easier with automated workflows and comprehensive practice management." },
+      { "id": "scale", "title": "Scale Your Practice", "description": "Solutions designed to help dental, orthodontics, optometry, chiropractic, and medical spa practices grow." }
+    ]},
+    { "id": "showAnimations", "label": "Show Background Animations", "type": "boolean", "default": false }
+  ]
+}
