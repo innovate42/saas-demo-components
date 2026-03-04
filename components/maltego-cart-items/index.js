@@ -1,10 +1,9 @@
 import * as React from "react"
 import { useState } from "react"
-import { useCampaign, useBasket } from "@limio/sdk"
+import { useBasket } from "@limio/sdk"
 import BillingPlan from "./components/BillingPlan"
 import "./index.css"
-import * as R from "ramda"
-import { groupPath, formatCurrency } from "./helpers"
+import { formatCurrency } from "./helpers"
 
 function MaltegoCartItems({
   emptyCartMessage = "Your cart is empty, view offers to go to offers",
@@ -24,36 +23,26 @@ function MaltegoCartItems({
   showDiscountNote,
 }) {
   const { basketItems = [] } = useBasket()
-  const { offers = [] } = useCampaign()
-
-  console.log('[MCI] basketItems:', JSON.stringify(basketItems?.length), 'offers:', JSON.stringify(offers?.length), 'offer keys:', offers?.[0] ? Object.keys(offers[0]?.data?.attributes || {}).slice(0, 5) : 'none')
 
   const currentBasketItem = basketItems[0]
   const currentOffer = currentBasketItem?.offer
 
-  // Campaign offers grouped by product — same as standard cart-items
-  const offerGroups = R.groupBy(offer => groupPath(offer), offers)
-  const firstProduct = Object.keys(offerGroups)[0] || null
-  const firstOffer = firstProduct ? offerGroups[firstProduct][0] : null
+  // Upsell offers are embedded in the basket item's offer data
+  const upsellOffers = currentOffer?.data?.attributes?.upsell_offers__limio || []
 
-  // Selected term: prefer basket item's current term, fall back to first campaign offer
-  const initialTerm = currentOffer?.data?.attributes?.term__limio
-    || firstOffer?.data?.attributes?.term__limio
-    || null
-
+  // Selected term: the current basket item's term
+  const initialTerm = currentOffer?.data?.attributes?.term__limio || null
   const [selectedTerm, setSelectedTerm] = useState(initialTerm)
 
   // Display name from offer attributes
-  const displayName = currentOffer?.data?.attributes?.display_name__limio
-    || firstOffer?.data?.attributes?.display_name__limio
-    || ""
+  const displayName = currentOffer?.data?.attributes?.display_name__limio || ""
 
   // Price from basket item's price object — gives correct currency format e.g. US$3,450.00
   const displayPrice = currentBasketItem?.price
     ? formatCurrency(currentBasketItem.price.amount, currentBasketItem.price.currency)
     : ""
 
-  if (!currentOffer && !firstOffer) {
+  if (!currentOffer) {
     return (
       <div className="mci-container">
         <p className="mci-empty">{emptyCartMessage}</p>
@@ -69,9 +58,9 @@ function MaltegoCartItems({
         <span className="mci-cart-item__price">{displayPrice}</span>
       </div>
 
-      {displayUpsellOffers && (
+      {displayUpsellOffers && upsellOffers.length > 0 && (
         <BillingPlan
-          selectedProduct={firstProduct}
+          upsellOffers={upsellOffers}
           selectedTerm={selectedTerm}
           handleTermChange={setSelectedTerm}
           upsellLayout={showAsCards ? "card" : "radio"}

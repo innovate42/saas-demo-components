@@ -112,7 +112,54 @@ export const basketItems = [
           "student__limio": true,
           "display_description__limio": "",
           "autoRenew__limio": false,
-          "offer_type__limio": "trial"
+          "offer_type__limio": "trial",
+          "upsell_offers__limio": [
+            {
+              "name": "1 Year",
+              "path": "/offers/Maltego/1 Year",
+              "id": "mock-upsell-1yr",
+              "type": "item",
+              "data": {
+                "record_type": "offer",
+                "attributes": {
+                  "display_name__limio": "1 Year",
+                  "term__limio": { "type": "years", "length": 1 },
+                  "display_price__limio": "<p>US$3,450.00/year</p>"
+                },
+                "products": [{ "path": "/products/Maltego/Maltego One" }]
+              }
+            },
+            {
+              "name": "2 Years",
+              "path": "/offers/Maltego/2 Years",
+              "id": "mock-upsell-2yr",
+              "type": "item",
+              "data": {
+                "record_type": "offer",
+                "attributes": {
+                  "display_name__limio": "2 Years",
+                  "term__limio": { "type": "years", "length": 2 },
+                  "display_price__limio": "<p>US$6,210.00 (save 10%)</p>"
+                },
+                "products": [{ "path": "/products/Maltego/Maltego One" }]
+              }
+            },
+            {
+              "name": "3 Years",
+              "path": "/offers/Maltego/3 Years",
+              "id": "mock-upsell-3yr",
+              "type": "item",
+              "data": {
+                "record_type": "offer",
+                "attributes": {
+                  "display_name__limio": "3 Years",
+                  "term__limio": { "type": "years", "length": 3 },
+                  "display_price__limio": "<p>US$8,625.00 (save 17%)</p>"
+                },
+                "products": [{ "path": "/products/Maltego/Maltego One" }]
+              }
+            }
+          ]
         },
         "parent_path": "/offers/Limio Student Subscription - UK",
         "validTo": "2019-07-31T12:30:00.000Z"

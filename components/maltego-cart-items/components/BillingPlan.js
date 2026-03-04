@@ -1,7 +1,6 @@
 import * as React from "react"
 import * as R from "ramda"
-import { useCampaign } from "@limio/sdk"
-import { groupPath, toDays, stripHTMLtags } from "../helpers"
+import { toDays, stripHTMLtags } from "../helpers"
 
 const formatTermLabel = term => {
   const { length, type } = term
@@ -12,25 +11,14 @@ const formatTermLabel = term => {
   return `${length} ${type}`
 }
 
-function BillingPlan({ selectedProduct, selectedTerm, handleTermChange, upsellLayout = "radio", showPrice = true }) {
-  const { offers = [] } = useCampaign()
+function BillingPlan({ upsellOffers = [], selectedTerm, handleTermChange, upsellLayout = "radio", showPrice = true }) {
+  if (!upsellOffers.length) return null
 
-  const offerGroups = R.groupBy(offer => groupPath(offer), offers)
-
-  // Use exact product match, or fall back to first available group in the campaign
-  const resolvedProduct = offerGroups[selectedProduct]
-    ? selectedProduct
-    : Object.keys(offerGroups)[0] || null
-
-  const productOffers = (resolvedProduct && offerGroups[resolvedProduct]) || []
-
-  if (!productOffers.length) return null
-
-  const possibleTerms = R.uniq(productOffers.map(offer => offer.data.attributes.term__limio))
+  const possibleTerms = R.uniq(upsellOffers.map(offer => offer.data.attributes.term__limio))
   const sortedTerms = R.sort((a, b) => toDays(a) - toDays(b), possibleTerms)
 
   const getTermPrice = term => {
-    const offer = productOffers.find(o => R.equals(o.data.attributes.term__limio, term))
+    const offer = upsellOffers.find(o => R.equals(o.data.attributes.term__limio, term))
     const raw = offer?.data?.attributes?.display_price__limio || ""
     return raw ? stripHTMLtags(raw) : ""
   }
