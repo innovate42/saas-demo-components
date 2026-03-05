@@ -21,6 +21,15 @@ const getContrastColor = (hex) => {
   return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.5 ? "#000000" : "#FFFFFF"
 }
 
+// Utility function to strip HTML tags from text
+const stripHtmlTags = (html) => {
+  if (!html) return ""
+  // Create a temporary div element to parse HTML
+  const temp = document.createElement("div")
+  temp.innerHTML = html
+  return temp.textContent || temp.innerText || ""
+}
+
 const HyundaiCart = () => {
   const props = useComponentProps(defaultProps)
   const { 
@@ -170,7 +179,7 @@ const HyundaiCart = () => {
       index === self.findIndex(o => o.id === offer.id)
     )
     
-    console.log(`Final upsell offers: ${uniqueUpsells.length}`, uniqueUpsells.map(o => ({ id: o.id, name: o.data?.attributes?.display_name__limio })))
+    console.log(`Final upsell offers: ${uniqueUpsells.length}`, uniqueUpsells.map(o => ({ id: o.id, name: stripHtmlTags(o.data?.attributes?.display_name__limio) })))
     
     return uniqueUpsells
   }
@@ -284,7 +293,7 @@ const HyundaiCart = () => {
         <div className="hc-cart-item-content">
           <div className="hc-cart-item-header">
             <h3 className="hc-cart-item-title">
-              {attributes.display_name__limio || offer.name}
+              {stripHtmlTags(attributes.display_name__limio) || offer.name}
             </h3>
             <button
               type="button"
@@ -327,7 +336,7 @@ const HyundaiCart = () => {
       <div key={offer.id} className="hc-upsell-card">
         <div className="hc-upsell-content">
           <h3 className="hc-upsell-title">
-            {attributes.upsell_display_name__limio || attributes.display_name__limio || offer.name}
+            {stripHtmlTags(attributes.upsell_display_name__limio || attributes.display_name__limio) || offer.name}
           </h3>
           
           {(attributes.upsell_display_description__limio || attributes.display_description__limio) && (
@@ -393,12 +402,9 @@ const HyundaiCart = () => {
                   <div className="hc-radio-content">
                     <div className="hc-radio-text">
                       {(attributes.upsell_display_name__limio || attributes.display_name__limio) && (
-                        <div 
-                          className="hc-radio-title"
-                          dangerouslySetInnerHTML={{ 
-                            __html: sanitiseHTML(attributes.upsell_display_name__limio || attributes.display_name__limio) 
-                          }} 
-                        />
+                        <div className="hc-radio-title">
+                          {stripHtmlTags(attributes.upsell_display_name__limio || attributes.display_name__limio)}
+                        </div>
                       )}
                       {(attributes.upsell_display_description__limio || attributes.display_description__limio) && (
                         <div 
@@ -457,7 +463,7 @@ const HyundaiCart = () => {
       <div key={addOn.id} className="hc-addon-card">
         <div className="hc-addon-content">
           <h3 className="hc-addon-title">
-            {attributes.display_name__limio || addOn.name}
+            {stripHtmlTags(attributes.display_name__limio) || addOn.name}
           </h3>
           
           {attributes.display_description__limio && (
