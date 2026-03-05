@@ -1,0 +1,123 @@
+{
+  "name": "@limio/component-bluelink",
+  "version": "1.0.0",
+  "description": "Hyundai Bluelink subscription landing page",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroHeadline",
+      "label": "Hero Headline",
+      "type": "string",
+      "default": "Bluelink subscriptions. Now you can choose your level of connectivity."
+    },
+    {
+      "id": "heroSubheadline",
+      "label": "Hero Subheadline", 
+      "type": "string",
+      "default": "With the introduction of all-new models in 2025, explore three new connectivity packages: LITE, PLUS, and PRO. Each package is designed to cater to your specific driving needs."
+    },
+    {
+      "id": "heroImage",
+      "label": "Hero Image URL",
+      "type": "string",
+      "default": "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"
+    },
+    {
+      "id": "heroCta",
+      "label": "Hero CTA Text",
+      "type": "string",
+      "default": "View Bluelink Packages"
+    },
+    {
+      "id": "pricingHeadline",
+      "label": "Pricing Section Headline",
+      "type": "string",
+      "default": "Bluelink Packages"
+    },
+    {
+      "id": "pricingSubheadline",
+      "label": "Pricing Section Subheadline",
+      "type": "string",
+      "default": "Choose the connectivity level that matches your driving lifestyle. Each package builds on the previous with additional features and services."
+    },
+    {
+      "id": "featuresHeadline",
+      "label": "Features Section Headline",
+      "type": "string",
+      "default": "Essential services. More convenience. Most connectivity."
+    },
+    {
+      "id": "featuresSubheadline",
+      "label": "Features Section Subheadline",
+      "type": "string",
+      "default": "Next to all the great features you already know, we are enhancing our Bluelink Connected Car Services through new capabilities."
+    },
+    {
+      "id": "storeHeadline",
+      "label": "Store Section Headline",
+      "type": "string",
+      "default": "Open now: the Bluelink Store"
+    },
+    {
+      "id": "storeSubheadline",
+      "label": "Store Section Subheadline",
+      "type": "string",
+      "default": "Launched in Spring 2025, a quick visit to the Bluelink Store will let you unlock the full potential of your Hyundai."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color", 
+      "default": "#0066cc"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#004499"
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Plan Switcher",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Plan Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Group ID", 
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "yearly",
+          "label": "Annual Plans"
+        },
+        {
+          "id": "monthly", 
+          "label": "Monthly Plans"
+        }
+      ]
+    },
+    {
+      "id": "showVehicleImages",
+      "label": "Show Vehicle Images",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
