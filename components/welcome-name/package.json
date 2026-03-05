@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-welcome-name",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Welcome back component displaying customer's first name from Limio SDK",
   "main": "./index.js",
   "dependencies": {},
