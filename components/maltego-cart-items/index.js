@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useState } from "react"
-import * as R from "ramda"
 import { useBasket } from "@limio/sdk"
 import BillingPlan from "./components/BillingPlan"
 import "./index.css"
@@ -31,9 +30,8 @@ function MaltegoCartItems({
   // Upsell offers live at the top level of the basket item under "upsell"
   const upsellOffers = currentBasketItem?.upsell || []
 
-  // Selected term: the current basket item's term
-  const initialTerm = currentOffer?.data?.attributes?.term__limio || null
-  const [selectedTerm, setSelectedTerm] = useState(initialTerm)
+  // Track selected offer by ID — initialise to the current offer in the basket
+  const [selectedOfferId, setSelectedOfferId] = useState(currentOffer?.id || null)
 
   // Display name from offer attributes
   const displayName = currentOffer?.data?.attributes?.display_name__limio || ""
@@ -43,11 +41,9 @@ function MaltegoCartItems({
     ? formatCurrency(currentBasketItem.price.amount, currentBasketItem.price.currency)
     : ""
 
-  const handleTermChange = async (term) => {
-    setSelectedTerm(term)
-    // Find the upsell offer matching the selected term
-    const upsellOffer = upsellOffers.find(o => R.equals(o.data.attributes.term__limio, term))
-    if (upsellOffer && swapOffer && currentBasketItem?.id) {
+  const handleOfferChange = async (upsellOffer) => {
+    setSelectedOfferId(upsellOffer.id)
+    if (swapOffer && currentBasketItem?.id) {
       await swapOffer(currentBasketItem.id, upsellOffer)
     }
   }
@@ -71,8 +67,8 @@ function MaltegoCartItems({
       {displayUpsellOffers && upsellOffers.length > 0 && (
         <BillingPlan
           upsellOffers={upsellOffers}
-          selectedTerm={selectedTerm}
-          handleTermChange={handleTermChange}
+          selectedOfferId={selectedOfferId}
+          handleOfferChange={handleOfferChange}
           upsellLayout={showAsCards ? "card" : "radio"}
           showPrice={showPriceInUpsellOffers}
         />

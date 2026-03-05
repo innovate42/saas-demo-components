@@ -2,7 +2,12 @@ import * as React from "react"
 import * as R from "ramda"
 import { toDays, stripHTMLtags } from "../helpers"
 
-const formatTermLabel = term => {
+const getOfferLabel = offer => {
+  const displayName = offer.data.attributes.upsell_display_name__limio
+  if (displayName) return stripHTMLtags(displayName)
+  // Fallback: derive from term
+  const term = offer.data.attributes.term__limio
+  if (!term) return offer.name || ""
   const { length, type } = term
   if (type === "months" && length === 1) return "Monthly"
   if (type === "months") return `${length} months`
@@ -11,34 +16,34 @@ const formatTermLabel = term => {
   return `${length} ${type}`
 }
 
-function BillingPlan({ upsellOffers = [], selectedTerm, handleTermChange, upsellLayout = "radio", showPrice = true }) {
+const getOfferPrice = offer => {
+  const raw = offer.data.attributes.display_price__limio || ""
+  return raw ? stripHTMLtags(raw) : ""
+}
+
+function BillingPlan({ upsellOffers = [], selectedOfferId, handleOfferChange, upsellLayout = "radio", showPrice = true }) {
   if (!upsellOffers.length) return null
 
-  const possibleTerms = R.uniq(upsellOffers.map(offer => offer.data.attributes.term__limio))
-  const sortedTerms = R.sort((a, b) => toDays(a) - toDays(b), possibleTerms)
-
-  const getTermPrice = term => {
-    const offer = upsellOffers.find(o => R.equals(o.data.attributes.term__limio, term))
-    const raw = offer?.data?.attributes?.display_price__limio || ""
-    return raw ? stripHTMLtags(raw) : ""
-  }
+  const sortedOffers = R.sort(
+    (a, b) => toDays(a.data.attributes.term__limio) - toDays(b.data.attributes.term__limio),
+    upsellOffers
+  )
 
   if (upsellLayout === "card") {
     return (
       <>
         <div className="mci-term-cards">
-          {sortedTerms.map(term => {
-            const isSelected = R.equals(term, selectedTerm)
-            const label = formatTermLabel(term)
-            const price = showPrice ? getTermPrice(term) : ""
+          {sortedOffers.map(offer => {
+            const isSelected = offer.id === selectedOfferId
+            const price = showPrice ? getOfferPrice(offer) : ""
             return (
               <button
-                key={JSON.stringify(term)}
+                key={offer.id}
                 className={`mci-term-card${isSelected ? " mci-term-card--selected" : ""}`}
-                onClick={() => handleTermChange(term)}
+                onClick={() => handleOfferChange(offer)}
                 type="button"
               >
-                <span className="mci-term-card__label">{label}</span>
+                <span className="mci-term-card__label">{getOfferLabel(offer)}</span>
                 {price && <span className="mci-term-card__price">{price}</span>}
               </button>
             )
@@ -53,20 +58,20 @@ function BillingPlan({ upsellOffers = [], selectedTerm, handleTermChange, upsell
   return (
     <>
       <div>
-        {sortedTerms.map(term => {
-          const isSelected = R.equals(term, selectedTerm)
-          const price = showPrice ? getTermPrice(term) : ""
+        {sortedOffers.map(offer => {
+          const isSelected = offer.id === selectedOfferId
+          const price = showPrice ? getOfferPrice(offer) : ""
           return (
-            <div className="billing-option" key={JSON.stringify(term)}>
+            <div className="billing-option" key={offer.id}>
               <label className={isSelected ? "billing-option-input--checked" : "billing-option-input"}>
                 <input
                   type="radio"
-                  value={JSON.stringify(term)}
-                  onChange={() => handleTermChange(term)}
+                  value={offer.id}
+                  onChange={() => handleOfferChange(offer)}
                   checked={isSelected}
                   className="gap"
                 />
-                <span className="billing-option-label-text">{formatTermLabel(term)}</span>
+                <span className="billing-option-label-text">{getOfferLabel(offer)}</span>
                 {price && <span className="billing-option-price">{price}</span>}
               </label>
             </div>
