@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-hyundai-cart",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hyundai-branded cart component with card-based upsells",
   "main": "./index.js",
   "dependencies": {},
@@ -67,6 +67,12 @@
       "label": "Show cart total",
       "type": "boolean",
       "default": true
+    },
+    {
+      "id": "showAllOffers",
+      "label": "Show all campaign offers as upsells",
+      "type": "boolean",
+      "default": false
     },
     {
       "id": "primaryColor__limio_color",
