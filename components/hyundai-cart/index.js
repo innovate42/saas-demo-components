@@ -5,7 +5,8 @@ import {
   useCampaign, 
   useBasket,
   sanitiseHTML,
-  useLimioContext
+  useLimioContext,
+  formatCurrency
 } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 import packageData from "./package.json"
@@ -34,6 +35,7 @@ const HyundaiCart = () => {
     showUpsells,
     showTotal,
     showAllOffers,
+    upsellMode,
     primaryColor__limio_color,
     accentColor__limio_color
   } = props
@@ -56,29 +58,42 @@ const HyundaiCart = () => {
   const currentCartItems = orderItems || []
   const currentOfferIds = currentCartItems.map(item => item.offer?.id).filter(Boolean)
 
-  // Enhanced upsell offers logic - fixed to handle correct data structure
+  // Enhanced upsell offers logic that matches core component behavior
   const getUpsellOffers = () => {
-    const upsellOffers = []
+    console.log('Getting upsell offers...')
     
     // If showAllOffers is enabled, show all campaign offers not in cart
     if (showAllOffers) {
       const availableOffers = offers?.filter(offer => !currentOfferIds.includes(offer.id)) || []
+      console.log('Show all offers mode:', availableOffers.length, 'available offers')
       return availableOffers
     }
     
-    // Method 1: Check for upsell_offers__limio on cart items (correct structure)
+    const upsellOffers = []
+    
+    // Method 1: Check for upsell_offers__limio on cart items (correct structure from your example)
     currentCartItems.forEach(cartItem => {
       const offer = cartItem.offer
       const attributes = offer?.data?.attributes || {}
       
+      console.log(`Checking cart item: ${offer?.id}`, {
+        hasUpsellOffers: !!attributes['upsell_offers__limio'],
+        upsellStructure: attributes['upsell_offers__limio']
+      })
+      
       // Handle the correct upsell structure: upsell_offers__limio.items[]
       const upsellData = attributes['upsell_offers__limio']
       if (upsellData && upsellData.items && Array.isArray(upsellData.items)) {
+        console.log(`Found ${upsellData.items.length} upsell items for offer ${offer.id}`)
+        
         upsellData.items.forEach(upsellRef => {
           // Find the offer by ID
           const upsellOffer = offers?.find(o => o.id === upsellRef.id)
           if (upsellOffer && !currentOfferIds.includes(upsellOffer.id)) {
+            console.log(`Adding upsell offer: ${upsellOffer.id}`)
             upsellOffers.push(upsellOffer)
+          } else {
+            console.log(`Upsell offer not found or already in cart: ${upsellRef.id}`)
           }
         })
       }
@@ -86,14 +101,13 @@ const HyundaiCart = () => {
       // Also check for other possible field names as fallbacks
       const upgradeFields = [
         'upgrade_offers__limio',
-        'related_offers__limio',
-        'upgrade_offers',
-        'upsell_offers'
+        'related_offers__limio'
       ]
       
       upgradeFields.forEach(fieldName => {
         const upgradeData = attributes[fieldName]
         if (upgradeData) {
+          console.log(`Found ${fieldName}:`, upgradeData)
           // Handle both array and object with items array
           const upgradeArray = Array.isArray(upgradeData) ? upgradeData : upgradeData.items || []
           
@@ -107,28 +121,38 @@ const HyundaiCart = () => {
       })
     })
     
-    // Method 2: Look for offers marked as upsells in campaign
+    // Method 2: Look for offers in campaign that have upsell display fields
     const campaignUpsells = offers?.filter(offer => {
+      if (currentOfferIds.includes(offer.id)) return false
+      
       const attributes = offer?.data?.attributes || {}
-      return (
-        !currentOfferIds.includes(offer.id) && 
-        (
-          attributes.is_upsell__limio === true ||
-          attributes.offer_type__limio === 'upsell' ||
-          attributes.upsell__limio === true
-        )
+      const hasUpsellFields = !!(
+        attributes.upsell_display_name__limio || 
+        attributes.upsell_display_description__limio ||
+        attributes.is_upsell__limio === true ||
+        attributes.offer_type__limio === 'upsell'
       )
+      
+      if (hasUpsellFields) {
+        console.log(`Found campaign upsell offer: ${offer.id}`)
+      }
+      
+      return hasUpsellFields
     }) || []
     
     upsellOffers.push(...campaignUpsells)
     
     // Method 3: Check for offers with higher prices (basic price comparison)
     if (upsellOffers.length === 0 && currentCartItems.length > 0) {
+      console.log('No specific upsells found, checking for higher-priced offers')
+      
       const currentPrices = currentCartItems.map(item => {
         const priceArray = item.offer?.data?.attributes?.price__limio || []
         return priceArray.length > 0 ? priceArray[0].value || 0 : 0
       })
       const maxCurrentPrice = Math.max(...currentPrices, 0)
+      
+      console.log('Current max price:', maxCurrentPrice)
       
       const higherPriceOffers = offers?.filter(offer => {
         if (currentOfferIds.includes(offer.id)) return false
@@ -137,13 +161,18 @@ const HyundaiCart = () => {
         return offerPrice > maxCurrentPrice
       }) || []
       
+      console.log(`Found ${higherPriceOffers.length} higher-priced offers`)
       upsellOffers.push(...higherPriceOffers)
     }
     
     // Remove duplicates
-    return upsellOffers.filter((offer, index, self) => 
+    const uniqueUpsells = upsellOffers.filter((offer, index, self) => 
       index === self.findIndex(o => o.id === offer.id)
     )
+    
+    console.log(`Final upsell offers: ${uniqueUpsells.length}`, uniqueUpsells.map(o => ({ id: o.id, name: o.data?.attributes?.display_name__limio })))
+    
+    return uniqueUpsells
   }
 
   // Enhanced cross-sell add-ons logic
@@ -165,28 +194,6 @@ const HyundaiCart = () => {
           }
         })
       }
-      
-      // Check other possible field names as fallbacks
-      const crossSellFields = [
-        'related_addons__limio',
-        'addon_offers__limio',
-        'cross_sell_addons',
-        'addons'
-      ]
-      
-      crossSellFields.forEach(fieldName => {
-        const addOnData = attributes[fieldName]
-        if (addOnData) {
-          const addOnArray = Array.isArray(addOnData) ? addOnData : addOnData.items || []
-          
-          addOnArray.forEach(addOnRef => {
-            const addOn = addOns?.find(a => a.id === addOnRef.id || a.id === addOnRef)
-            if (addOn) {
-              crossSellAddOns.push(addOn)
-            }
-          })
-        }
-      })
     })
     
     // Method 2: Show all addOns if none found
@@ -203,32 +210,15 @@ const HyundaiCart = () => {
   const upsellOffers = getUpsellOffers()
   const crossSellAddOns = getCrossSellAddOns()
 
-  // Enhanced debug logging
+  // State for radio selection in list mode
+  const [selectedUpsellId, setSelectedUpsellId] = React.useState(null)
+
   React.useEffect(() => {
-    console.log('Cart Debug Info:', {
-      currentCartItems: currentCartItems.length,
-      availableOffers: offers?.length || 0,
-      availableAddOns: addOns?.length || 0,
-      upsellOffers: upsellOffers.length,
-      crossSellAddOns: crossSellAddOns.length,
-      showUpsells,
-      showAllOffers,
-      cartItemUpsellData: currentCartItems.map(item => {
-        const upsellData = item.offer?.data?.attributes?.['upsell_offers__limio']
-        return {
-          offerId: item.offer?.id,
-          offerName: item.offer?.data?.attributes?.display_name__limio,
-          hasUpsellData: !!upsellData,
-          upsellStructure: upsellData ? {
-            item_label: upsellData.item_label,
-            item_type: upsellData.item_type,
-            itemsCount: upsellData.items?.length || 0,
-            items: upsellData.items?.map(item => ({ id: item.id, path: item.path })) || []
-          } : null
-        }
-      })
-    })
-  }, [currentCartItems, offers, addOns, upsellOffers, crossSellAddOns, showUpsells, showAllOffers])
+    // Set initial selection to first upsell offer
+    if (upsellOffers.length > 0 && !selectedUpsellId) {
+      setSelectedUpsellId(upsellOffers[0].id)
+    }
+  }, [upsellOffers, selectedUpsellId])
 
   const handleAddToBasket = async (offer) => {
     if (basketLoading) return
@@ -240,8 +230,24 @@ const HyundaiCart = () => {
       } else {
         await addOfferToBasket({ offer })
       }
+      
+      // Clear selection after adding
+      if (upsellMode === 'list') {
+        setSelectedUpsellId(null)
+      }
     } catch (error) {
       console.error('Error adding to basket:', error)
+    }
+  }
+
+  const handleSwapOffer = async (newOffer) => {
+    if (basketLoading || currentCartItems.length === 0) return
+    
+    try {
+      // For now, just add the new offer (you could implement swap logic here)
+      await handleAddToBasket(newOffer)
+    } catch (error) {
+      console.error('Error swapping offer:', error)
     }
   }
 
@@ -321,7 +327,7 @@ const HyundaiCart = () => {
       <div key={offer.id} className="hc-upsell-card">
         <div className="hc-upsell-content">
           <h3 className="hc-upsell-title">
-            {attributes.display_name__limio || offer.name}
+            {attributes.upsell_display_name__limio || attributes.display_name__limio || offer.name}
           </h3>
           
           {(attributes.upsell_display_description__limio || attributes.display_description__limio) && (
@@ -358,6 +364,88 @@ const HyundaiCart = () => {
             </button>
           </div>
         </div>
+      </div>
+    )
+  }
+
+  const renderUpsellList = () => {
+    if (upsellOffers.length === 0) return null
+
+    return (
+      <div className="hc-upsell-list">
+        <div className="hc-radio-group">
+          {upsellOffers.map(offer => {
+            const attributes = offer.data?.attributes || {}
+            const price = attributes.price__limio?.[0]
+            
+            return (
+              <div key={offer.id} className="hc-radio-item">
+                <input
+                  type="radio"
+                  id={`upsell-${offer.id}`}
+                  name="upsell-selection"
+                  value={offer.id}
+                  checked={selectedUpsellId === offer.id}
+                  onChange={(e) => setSelectedUpsellId(e.target.value)}
+                  className="hc-radio-input"
+                />
+                <label htmlFor={`upsell-${offer.id}`} className="hc-radio-label">
+                  <div className="hc-radio-content">
+                    <div className="hc-radio-text">
+                      {(attributes.upsell_display_name__limio || attributes.display_name__limio) && (
+                        <div 
+                          className="hc-radio-title"
+                          dangerouslySetInnerHTML={{ 
+                            __html: sanitiseHTML(attributes.upsell_display_name__limio || attributes.display_name__limio) 
+                          }} 
+                        />
+                      )}
+                      {(attributes.upsell_display_description__limio || attributes.display_description__limio) && (
+                        <div 
+                          className="hc-radio-description"
+                          dangerouslySetInnerHTML={{ 
+                            __html: sanitiseHTML(
+                              attributes.upsell_display_description__limio || 
+                              attributes.display_description__limio || 
+                              ''
+                            ) 
+                          }} 
+                        />
+                      )}
+                    </div>
+                    {price && (
+                      <div className="hc-radio-price">
+                        {formatCurrency(price.value, price.currencyCode)}
+                      </div>
+                    )}
+                  </div>
+                </label>
+              </div>
+            )
+          })}
+        </div>
+        
+        {selectedUpsellId && (
+          <div className="hc-upsell-actions">
+            <button
+              type="button"
+              className="hc-btn hc-btn-primary"
+              onClick={() => {
+                const selectedOffer = upsellOffers.find(o => o.id === selectedUpsellId)
+                if (selectedOffer) {
+                  if (currentCartItems.length > 0) {
+                    handleSwapOffer(selectedOffer)
+                  } else {
+                    handleAddToBasket(selectedOffer)
+                  }
+                }
+              }}
+              disabled={basketLoading}
+            >
+              {basketLoading ? 'Processing...' : (currentCartItems.length > 0 ? 'Switch to Selected' : 'Add Selected')}
+            </button>
+          </div>
+        )}
       </div>
     )
   }
@@ -453,15 +541,20 @@ const HyundaiCart = () => {
         </section>
 
         {/* Upsell Section */}
-        {showUpsells && upsellOffers.length > 0 && currentCartItems.length > 0 && (
+        {showUpsells && upsellOffers.length > 0 && (
           <section className="hc-upsell-section">
             <div className="hc-section-header">
               <h2 className="hc-section-title">{upsellHeadline}</h2>
               <p className="hc-section-subtitle">{upsellSubheadline}</p>
             </div>
-            <div className="hc-upsell-grid">
-              {upsellOffers.map(renderUpsellCard)}
-            </div>
+            
+            {upsellMode === 'list' ? (
+              renderUpsellList()
+            ) : (
+              <div className="hc-upsell-grid">
+                {upsellOffers.map(renderUpsellCard)}
+              </div>
+            )}
           </section>
         )}
 

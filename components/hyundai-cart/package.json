@@ -75,6 +75,24 @@
       "default": false
     },
     {
+      "id": "upsellMode",
+      "label": "Upsell Mode",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "cards",
+          "label": "Cards Layout",
+          "value": "cards"
+        },
+        {
+          "id": "list",
+          "label": "Radio List (like core)",
+          "value": "list"
+        }
+      ],
+      "default": "cards"
+    },
+    {
       "id": "primaryColor__limio_color",
       "label": "Primary Color",
       "type": "color",
