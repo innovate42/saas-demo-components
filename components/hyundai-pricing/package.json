@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-hyundai-pricing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hyundai-branded pricing component with hero banner, features, and FAQ",
   "main": "./index.js",
   "dependencies": {},
@@ -16,7 +16,7 @@
     },
     {
       "id": "heroSubtitle",
-      "label": "Hero Subtitle", 
+      "label": "Hero Subtitle",
       "type": "string",
       "default": "Now you can choose your level of connectivity."
     },
