@@ -1,0 +1,72 @@
+{
+  "name": "@limio/component-hyundai-cross-sell",
+  "version": "1.0.0",
+  "description": "Hyundai cross-sell component for Bluelink upgrades and add-ons",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "Enhance Your Bluelink Experience"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Upgrade your plan or add services to get more from your connected car"
+    },
+    {
+      "id": "upgradesSectionTitle",
+      "label": "Upgrades Section Title",
+      "type": "string",
+      "default": "Available Upgrades"
+    },
+    {
+      "id": "upgradesDescription",
+      "label": "Upgrades Description",
+      "type": "string",
+      "default": "Get more features with a higher-tier Bluelink plan"
+    },
+    {
+      "id": "addOnsSectionTitle",
+      "label": "Add-ons Section Title",
+      "type": "string",
+      "default": "Add-on Services"
+    },
+    {
+      "id": "addOnsDescription",
+      "label": "Add-ons Description",
+      "type": "string",
+      "default": "Enhance your current plan with additional connectivity services"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#0066CC"
+    },
+    {
+      "id": "showUpgrades",
+      "label": "Show Upgrades",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showAddOns",
+      "label": "Show Add-ons",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "maxItemsPerSection",
+      "label": "Max Items Per Section",
+      "type": "number",
+      "default": "3"
+    }
+  ]
+}
