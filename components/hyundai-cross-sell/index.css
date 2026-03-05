@@ -232,6 +232,7 @@
   background-color: var(--hcs-primary);
   mask: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"%3E%3Ccircle cx="12" cy="12" r="12" fill="currentColor"/%3E%3Cpath d="M7.5 12L10.5 15L16.5 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E') center/contain no-repeat;
   -webkit-mask: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"%3E%3Ccircle cx="12" cy="12" r="12" fill="currentColor"/%3E%3Cpath d="M7.5 12L10.5 15L16.5 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E') center/contain no-repeat;
+  -webkit-mask: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"%3E%3Ccircle cx="12" cy="12" r="12" fill="currentColor"/%3E%3Cpath d="M7.5 12L10.5 15L16.5 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E') center/contain no-repeat;
 }
 
 /* CTA Buttons */

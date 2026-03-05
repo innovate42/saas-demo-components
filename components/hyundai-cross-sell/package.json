@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-hyundai-cross-sell",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hyundai cross-sell component for Bluelink upgrades and add-ons",
   "main": "./index.js",
   "dependencies": {},

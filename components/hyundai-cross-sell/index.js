@@ -31,19 +31,25 @@ const HyundaiCrossSell = () => {
   const { offers, addOns } = useCampaign()
   const { addOfferToBasket, addToBasket, initiateCheckout, navigateToCheckout, basketLoading, pageOptions } = useBasket()
 
-  // Get cross-sell data from offers
+  // Get cross-sell upgrades from offers
   const crossSellUpgrades = React.useMemo(() => {
     if (!showUpgrades || !Array.isArray(offers)) return []
     
     const upgrades = []
     offers.forEach(offer => {
       const attributes = offer?.data?.attributes || {}
-      if (attributes.upgrade_offers__limio && Array.isArray(attributes.upgrade_offers__limio)) {
-        attributes.upgrade_offers__limio.forEach(upgrade => {
-          // Find the full offer data
-          const upgradeOffer = offers.find(o => o.id === upgrade.id)
-          if (upgradeOffer && !upgrades.find(u => u.id === upgrade.id)) {
-            upgrades.push(upgradeOffer)
+      
+      // Look for cross_sell_addons__limio with item_type "offer" for upgrades
+      if (attributes.cross_sell_addons__limio && Array.isArray(attributes.cross_sell_addons__limio)) {
+        attributes.cross_sell_addons__limio.forEach(crossSellGroup => {
+          if (crossSellGroup.item_type === "offer" && Array.isArray(crossSellGroup.items)) {
+            crossSellGroup.items.forEach(item => {
+              // Find the full offer data by ID
+              const upgradeOffer = offers.find(o => o.id === item.id)
+              if (upgradeOffer && !upgrades.find(u => u.id === item.id)) {
+                upgrades.push(upgradeOffer)
+              }
+            })
           }
         })
       }
@@ -52,12 +58,32 @@ const HyundaiCrossSell = () => {
     return upgrades.slice(0, parseInt(maxItemsPerSection) || 3)
   }, [offers, showUpgrades, maxItemsPerSection])
 
-  // Get cross-sell add-ons
+  // Get cross-sell add-ons from offers
   const crossSellAddOns = React.useMemo(() => {
-    if (!showAddOns || !Array.isArray(addOns)) return []
+    if (!showAddOns || !Array.isArray(offers)) return []
     
-    return addOns.slice(0, parseInt(maxItemsPerSection) || 3)
-  }, [addOns, showAddOns, maxItemsPerSection])
+    const crossSellAddOnItems = []
+    offers.forEach(offer => {
+      const attributes = offer?.data?.attributes || {}
+      
+      // Look for cross_sell_addons__limio with item_type "add_on"
+      if (attributes.cross_sell_addons__limio && Array.isArray(attributes.cross_sell_addons__limio)) {
+        attributes.cross_sell_addons__limio.forEach(crossSellGroup => {
+          if (crossSellGroup.item_type === "add_on" && Array.isArray(crossSellGroup.items)) {
+            crossSellGroup.items.forEach(item => {
+              // Find the add-on by ID
+              const addOn = addOns?.find(a => a.id === item.id)
+              if (addOn && !crossSellAddOnItems.find(c => c.id === item.id)) {
+                crossSellAddOnItems.push(addOn)
+              }
+            })
+          }
+        })
+      }
+    })
+    
+    return crossSellAddOnItems.slice(0, parseInt(maxItemsPerSection) || 3)
+  }, [offers, addOns, showAddOns, maxItemsPerSection])
 
   const handleAddToBasket = async (item, isAddOn = false) => {
     if (basketLoading) return
@@ -127,7 +153,8 @@ const HyundaiCrossSell = () => {
     const attributes = addOn?.data?.attributes || {}
     const displayName = attributes.display_name__limio || addOn?.name || 'Service'
     const displayPrice = attributes.display_price__limio
-    const description = attributes.description__limio
+    const description = attributes.description__limio || attributes.checkout_description__limio
+    const features = attributes.offer_features__limio
     const ctaText = attributes.cta_text__limio || 'Add Service'
 
     return (
@@ -141,6 +168,10 @@ const HyundaiCrossSell = () => {
         
         {description && (
           <div className="hcs-item-description" dangerouslySetInnerHTML={{ __html: sanitiseHTML(description) }} />
+        )}
+        
+        {features && (
+          <div className="hcs-item-features" dangerouslySetInnerHTML={{ __html: sanitiseHTML(features) }} />
         )}
         
         <button
