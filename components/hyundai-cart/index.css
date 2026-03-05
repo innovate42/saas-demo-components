@@ -80,6 +80,16 @@
   line-height: 1.5;
 }
 
+/* Error Banner */
+.hc-error-banner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 16px;
+  border-radius: var(--hc-radius-btn);
+  margin-bottom: 16px;
+}
+
 /* Buttons */
 .hc-btn {
   display: inline-flex;
@@ -159,15 +169,69 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.hc-cart-item-info {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.hc-cart-item-image {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--hc-radius-btn);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hc-cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hc-cart-item-details {
+  flex: 1;
 }
 
 .hc-cart-item-title {
   font-size: 20px;
   font-weight: 600;
   color: var(--hc-text);
-  margin: 0;
+  margin: 0 0 8px;
   line-height: 1.3;
+}
+
+.hc-cart-item-description {
+  color: var(--hc-text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.hc-cart-item-description p {
+  margin: 0;
+}
+
+.hc-cart-item-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hc-cart-item-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hc-primary);
+  text-align: right;
+}
+
+.hc-cart-item-price p {
+  margin: 0;
 }
 
 .hc-remove-btn {
@@ -178,6 +242,7 @@
   color: var(--hc-text-muted);
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .hc-remove-btn:hover:not(:disabled) {
@@ -185,212 +250,59 @@
   color: #dc2626;
 }
 
-.hc-cart-item-description {
-  margin-bottom: 16px;
-  color: var(--hc-text-secondary);
-}
-
-.hc-cart-item-description p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.hc-cart-item-price {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--hc-primary);
-}
-
-.hc-cart-item-price p {
-  margin: 0;
-}
-
-/* Cart Summary */
-.hc-cart-summary {
-  background: var(--hc-card);
-  border-radius: var(--hc-radius-card);
-  padding: 32px;
-  border: 1px solid var(--hc-border);
-  text-align: center;
-}
-
-.hc-total {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.hc-total-label {
-  color: var(--hc-text);
-}
-
-.hc-total-amount {
-  color: var(--hc-primary);
-}
-
-.hc-proceed-btn {
-  font-size: 16px;
-  padding: 16px 32px;
-  min-height: 56px;
-  min-width: 200px;
-}
-
-/* Empty Cart */
-.hc-empty-cart {
-  text-align: center;
-  padding: 64px 32px;
-  background: var(--hc-card);
-  border-radius: var(--hc-radius-card);
-  border: 1px solid var(--hc-border);
-}
-
-.hc-empty-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 24px;
-  color: var(--hc-text-muted);
-}
-
-.hc-empty-text {
-  font-size: 18px;
-  color: var(--hc-text-muted);
-  margin: 0;
-}
-
-/* Upsell Section */
-.hc-upsell-section,
-.hc-addons-section {
-  margin-bottom: 64px;
-}
-
-.hc-upsell-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 24px;
-}
-
-.hc-upsell-card {
-  background: var(--hc-card);
-  border-radius: var(--hc-radius-card);
-  padding: 32px;
-  border: 1px solid var(--hc-border);
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.hc-upsell-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-.hc-upsell-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--hc-primary) 0%, var(--hc-accent) 100%);
-  border-radius: var(--hc-radius-card) var(--hc-radius-card) 0 0;
-}
-
-.hc-upsell-title {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--hc-text);
-  margin: 0 0 16px;
-  line-height: 1.3;
-}
-
-.hc-upsell-description {
-  margin-bottom: 20px;
-  color: var(--hc-text-secondary);
-}
-
-.hc-upsell-description p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.hc-upsell-features {
-  margin-bottom: 24px;
-}
-
-.hc-upsell-features ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hc-upsell-features li {
-  padding: 6px 0;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--hc-text-secondary);
-}
-
-.hc-upsell-features li:before {
-  content: "✓";
-  color: var(--hc-primary);
-  font-weight: 600;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--hc-primary-tint);
-  flex-shrink: 0;
-  font-size: 12px;
-}
-
-.hc-upsell-footer {
+/* Add-on items within cart items */
+.hc-addon-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding-top: 16px;
+  padding: 12px 0;
+  margin-top: 12px;
   border-top: 1px solid var(--hc-border);
+  font-size: 14px;
 }
 
-.hc-upsell-price {
-  font-size: 20px;
-  font-weight: 600;
+.hc-addon-name {
+  color: var(--hc-text-secondary);
+}
+
+.hc-addon-price {
   color: var(--hc-primary);
+  font-weight: 500;
 }
 
-.hc-upsell-price p {
-  margin: 0;
+/* Upsell section within cart items */
+.hc-upsell-section {
+  margin-top: 20px;
 }
 
-/* Radio List Mode */
-.hc-upsell-list {
-  background: var(--hc-card);
-  border-radius: var(--hc-radius-card);
-  border: 1px solid var(--hc-border);
-  padding: 24px;
+.hc-separator {
+  height: 1px;
+  background: var(--hc-border);
+  margin: 16px 0;
+}
+
+.hc-upsell-options {
+  margin-top: 16px;
+}
+
+.hc-upsell-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hc-text);
+  margin: 0 0 16px;
 }
 
 .hc-radio-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 12px;
 }
 
 .hc-radio-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 16px;
+  padding: 12px;
   border-radius: var(--hc-radius-btn);
   transition: all 0.2s ease;
 }
@@ -449,13 +361,67 @@
   white-space: nowrap;
 }
 
-.hc-upsell-actions {
+/* Cart Summary */
+.hc-cart-summary {
+  background: var(--hc-card);
+  border-radius: var(--hc-radius-card);
+  padding: 32px;
+  border: 1px solid var(--hc-border);
   text-align: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--hc-border);
 }
 
-/* Add-ons */
+.hc-total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.hc-total-label {
+  color: var(--hc-text);
+}
+
+.hc-total-amount {
+  color: var(--hc-primary);
+}
+
+.hc-proceed-btn {
+  font-size: 16px;
+  padding: 16px 32px;
+  min-height: 56px;
+  min-width: 200px;
+}
+
+/* Empty Cart */
+.hc-empty-cart {
+  text-align: center;
+  padding: 64px 32px;
+  background: var(--hc-card);
+  border-radius: var(--hc-radius-card);
+  border: 1px solid var(--hc-border);
+}
+
+.hc-empty-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  color: var(--hc-text-muted);
+}
+
+.hc-empty-text {
+  font-size: 18px;
+  color: var(--hc-text-muted);
+  margin: 0;
+}
+
+/* Add-ons Section */
+.hc-addons-section {
+  margin-bottom: 64px;
+}
+
 .hc-addons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -513,10 +479,6 @@
 
 /* Responsive Design */
 @media (max-width: 900px) {
-  .hc-upsell-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
   .hc-addons-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -538,6 +500,16 @@
   .hc-radio-price {
     white-space: normal;
   }
+  
+  .hc-cart-item-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .hc-cart-item-actions {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
 }
 
 @media (max-width: 600px) {
@@ -547,9 +519,7 @@
   
   .hc-cart-item,
   .hc-cart-summary,
-  .hc-upsell-card,
-  .hc-addon-card,
-  .hc-upsell-list {
+  .hc-addon-card {
     padding: 20px;
   }
   
@@ -566,7 +536,6 @@
     font-size: 20px;
   }
   
-  .hc-upsell-footer,
   .hc-addon-footer {
     flex-direction: column;
     align-items: stretch;
@@ -579,14 +548,13 @@
     font-size: 20px;
   }
   
-  .hc-cart-item-header {
+  .hc-cart-item-info {
     flex-direction: column;
-    align-items: flex-start;
     gap: 12px;
   }
   
-  .hc-remove-btn {
-    align-self: flex-end;
+  .hc-cart-item-image {
+    align-self: flex-start;
   }
   
   .hc-radio-item {

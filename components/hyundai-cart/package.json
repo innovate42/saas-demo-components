@@ -21,18 +21,6 @@
       "default": "Review your connectivity package and explore upgrades"
     },
     {
-      "id": "upsellHeadline",
-      "label": "Upsell Section Headline",
-      "type": "string",
-      "default": "Upgrade Your Experience"
-    },
-    {
-      "id": "upsellSubheadline",
-      "label": "Upsell Section Subheadline",
-      "type": "string",
-      "default": "Get more connected features with our enhanced plans"
-    },
-    {
       "id": "addOnsHeadline",
       "label": "Add-ons Headline",
       "type": "string",
@@ -57,40 +45,10 @@
       "default": "Your cart is empty"
     },
     {
-      "id": "showUpsells",
-      "label": "Show upsell section",
-      "type": "boolean",
-      "default": true
-    },
-    {
       "id": "showTotal",
       "label": "Show cart total",
       "type": "boolean",
       "default": true
-    },
-    {
-      "id": "showAllOffers",
-      "label": "Show all campaign offers as upsells",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "id": "upsellMode",
-      "label": "Upsell Mode",
-      "type": "picklist",
-      "options": [
-        {
-          "id": "cards",
-          "label": "Cards Layout",
-          "value": "cards"
-        },
-        {
-          "id": "list",
-          "label": "Radio List (like core)",
-          "value": "list"
-        }
-      ],
-      "default": "cards"
     },
     {
       "id": "primaryColor__limio_color",
