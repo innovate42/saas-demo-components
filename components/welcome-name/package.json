@@ -1,0 +1,48 @@
+{
+  "name": "@limio/component-welcome-name",
+  "version": "1.0.0",
+  "description": "Welcome back component displaying customer's first name from Limio SDK",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "welcomeText",
+      "label": "Welcome Text",
+      "type": "string",
+      "default": "Welcome back"
+    },
+    {
+      "id": "fallbackText",
+      "label": "Fallback Text (when no name)",
+      "type": "string",
+      "default": "Welcome"
+    },
+    {
+      "id": "showSubtext",
+      "label": "Show subtext",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "subtextMessage",
+      "label": "Subtext Message",
+      "type": "string",
+      "default": "Manage your Bluelink subscriptions and services"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#0080ff"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background Color",
+      "type": "color",
+      "default": "#ffffff"
+    }
+  ]
+}
