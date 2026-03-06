@@ -21,10 +21,6 @@ export const Default = {
     args: {
         heading: "Here's what you'll lose",
         subheading: "If you cancel your subscription, you'll no longer have access to these features:",
-        ctaKeepLabel: "Keep my subscription",
-        ctaCancelLabel: "Continue with cancellation",
-        keepRedirectUrl: "/account",
-        cancelRedirectUrl: "/cancel-survey",
         primaryColor: "#002C5F",
         dangerColor: "#dc2626",
         fallbackFeatures__limio_richtext: "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
@@ -38,10 +34,7 @@ export const HyundaiBluelink = {
         ...Default.args,
         heading: "You'll lose these Bluelink features",
         subheading: "Cancelling your plan means you'll no longer have access to:",
-        primaryColor: "#002C5F",
         dangerColor: "#c41230",
-        ctaKeepLabel: "Keep Bluelink",
-        ctaCancelLabel: "I still want to cancel",
         fallbackFeatures__limio_richtext: "<ul><li>Connected Routing, Hyundai's cloud-based navigation</li><li>EV Routing & EV POI (point of interest)</li><li>Bluelink App status updates, vehicle information and send POI to car</li><li>Digital Key (optional)</li><li>Online Voice Recognition</li><li>Vehicle system OTA updates (if available for the vehicle)</li></ul>",
     },
 }
@@ -61,7 +54,5 @@ export const CustomBranding = {
         subheading: "Your Premium subscription includes all of these benefits:",
         primaryColor: "#635BFF",
         dangerColor: "#ef4444",
-        ctaKeepLabel: "Stay Premium",
-        ctaCancelLabel: "Cancel anyway",
     },
 }

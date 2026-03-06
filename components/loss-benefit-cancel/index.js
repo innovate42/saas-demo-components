@@ -65,10 +65,6 @@ function LossBenefitCancel() {
     const {
         heading = "Here's what you'll lose",
         subheading = "If you cancel your subscription, you'll no longer have access to these features:",
-        ctaKeepLabel = "Keep my subscription",
-        ctaCancelLabel = "Continue with cancellation",
-        keepRedirectUrl = "/account",
-        cancelRedirectUrl = "/cancel-survey",
         primaryColor = "#002C5F",
         dangerColor = "#dc2626",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
@@ -103,26 +99,6 @@ function LossBenefitCancel() {
     const featuresHtml = getOfferFeatures(subscription) || fallbackFeatures__limio_richtext
     const planName = getOfferDisplayName(subscription)
     const displayPrice = getOfferDisplayPrice(subscription)
-
-    // Build redirect URLs with subscription context
-    const buildUrl = (baseUrl) => {
-        if (!subscription || !baseUrl) return baseUrl || "#"
-        const separator = baseUrl.includes("?") ? "&" : "?"
-        const subParam = subscription.id ? `subId=${encodeURIComponent(subscription.id)}` : ""
-        return subParam ? `${baseUrl}${separator}${subParam}` : baseUrl
-    }
-
-    const handleKeep = () => {
-        if (typeof window !== "undefined") {
-            window.location.href = buildUrl(keepRedirectUrl)
-        }
-    }
-
-    const handleCancel = () => {
-        if (typeof window !== "undefined") {
-            window.location.href = buildUrl(cancelRedirectUrl)
-        }
-    }
 
     return (
         <section
@@ -162,15 +138,6 @@ function LossBenefitCancel() {
                         className="lbc-features-list"
                         dangerouslySetInnerHTML={{ __html: sanitize(featuresHtml) }}
                     />
-                </div>
-
-                <div className="lbc-actions">
-                    <button className="lbc-btn lbc-btn-keep" onClick={handleKeep}>
-                        {ctaKeepLabel}
-                    </button>
-                    <button className="lbc-btn lbc-btn-cancel" onClick={handleCancel}>
-                        {ctaCancelLabel}
-                    </button>
                 </div>
             </div>
         </section>

@@ -91,7 +91,6 @@
     border: 1px solid #fed7aa;
     border-radius: 10px;
     padding: 20px 24px;
-    margin-bottom: 28px;
     text-align: left;
 }
 
@@ -127,46 +126,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.lbc-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.lbc-btn {
-    padding: 14px 24px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: opacity 0.15s ease, transform 0.1s ease;
-    width: 100%;
-}
-
-.lbc-btn:hover {
-    opacity: 0.9;
-}
-
-.lbc-btn:active {
-    transform: scale(0.98);
-}
-
-.lbc-btn-keep {
-    background: var(--lbc-primary);
-    color: #ffffff;
-}
-
-.lbc-btn-cancel {
-    background: transparent;
-    color: var(--lbc-danger);
-    border: 1px solid var(--lbc-danger);
-}
-
-.lbc-btn-cancel:hover {
-    background: rgba(220, 38, 38, 0.05);
 }
 
 @media (max-width: 600px) {

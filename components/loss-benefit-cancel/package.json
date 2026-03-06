@@ -23,30 +23,6 @@
       "default": "If you cancel your subscription, you'll no longer have access to these features:"
     },
     {
-      "id": "ctaKeepLabel",
-      "label": "Keep subscription button label",
-      "type": "string",
-      "default": "Keep my subscription"
-    },
-    {
-      "id": "ctaCancelLabel",
-      "label": "Continue cancel button label",
-      "type": "string",
-      "default": "Continue with cancellation"
-    },
-    {
-      "id": "keepRedirectUrl",
-      "label": "Keep subscription redirect URL",
-      "type": "string",
-      "default": "/account"
-    },
-    {
-      "id": "cancelRedirectUrl",
-      "label": "Continue cancel redirect URL",
-      "type": "string",
-      "default": "/cancel-survey"
-    },
-    {
       "id": "primaryColor",
       "label": "Primary color",
       "type": "color",
@@ -54,7 +30,7 @@
     },
     {
       "id": "dangerColor",
-      "label": "Cancel button color",
+      "label": "Danger/accent color",
       "type": "color",
       "default": "#dc2626"
     },
