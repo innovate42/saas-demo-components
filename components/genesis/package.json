@@ -1,0 +1,123 @@
+{
+  "name": "@limio/component-genesis",
+  "version": "1.0.0",
+  "description": "Genesis Connected Services subscription landing page",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroHeadline",
+      "label": "Hero Headline",
+      "type": "string",
+      "default": "Genesis Connected Services. Luxury intelligence, always with you."
+    },
+    {
+      "id": "heroSubheadline",
+      "label": "Hero Subheadline",
+      "type": "string",
+      "default": "Stay connected to your Genesis with remote control, real-time navigation, safety features, and the My Genesis App. Choose the package that fits your lifestyle."
+    },
+    {
+      "id": "heroImage",
+      "label": "Hero Image URL",
+      "type": "string",
+      "default": "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"
+    },
+    {
+      "id": "heroCta",
+      "label": "Hero CTA Text",
+      "type": "string",
+      "default": "View Genesis Packages"
+    },
+    {
+      "id": "pricingHeadline",
+      "label": "Pricing Section Headline",
+      "type": "string",
+      "default": "Genesis Connected Services Packages"
+    },
+    {
+      "id": "pricingSubheadline",
+      "label": "Pricing Section Subheadline",
+      "type": "string",
+      "default": "Select the connected services tier that complements your Genesis ownership experience. Each package is designed for seamless luxury connectivity."
+    },
+    {
+      "id": "featuresHeadline",
+      "label": "Features Section Headline",
+      "type": "string",
+      "default": "Remote Control. Navigation. Safety & Security."
+    },
+    {
+      "id": "featuresSubheadline",
+      "label": "Features Section Subheadline",
+      "type": "string",
+      "default": "Genesis Connected Services keep you in command of your vehicle from anywhere, with intelligent navigation, proactive safety, and effortless vehicle management."
+    },
+    {
+      "id": "storeHeadline",
+      "label": "Store Section Headline",
+      "type": "string",
+      "default": "Download the My Genesis App"
+    },
+    {
+      "id": "storeSubheadline",
+      "label": "Store Section Subheadline",
+      "type": "string",
+      "default": "Control your Genesis from your smartphone. Check your vehicle status, manage climate, lock or unlock remotely, and access driving insights \u2014 all from the My Genesis App."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#AA8453"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#8B6914"
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Plan Switcher",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Plan Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "yearly",
+          "label": "Annual Plans"
+        },
+        {
+          "id": "monthly",
+          "label": "Monthly Plans"
+        }
+      ]
+    },
+    {
+      "id": "showVehicleImages",
+      "label": "Show Vehicle Images",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
