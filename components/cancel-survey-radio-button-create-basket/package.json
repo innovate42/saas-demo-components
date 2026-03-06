@@ -1,0 +1,171 @@
+{
+  "name": "@limio/component-cancel-survey-radio-button-create-basket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@limio/design-system": "workspace:^"
+  },
+  "peerDependencies": {
+    "@limio/sdk": "workspace:^",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "title",
+      "label": "Title",
+      "type": "string",
+      "default": "Before you go"
+    },
+    {
+      "id": "subtitle",
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Please tell us why you want to cancel your subscription"
+    },
+    {
+      "id": "reasonsHeading",
+      "label": "Reasons heading",
+      "type": "richtext",
+      "default": "Why would you like to cancel your subscription?"
+    },
+    {
+      "id": "reasons",
+      "label": "Reasons",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "value": {
+          "id": "value",
+          "label": "Value",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Url",
+          "type": "string"
+        },
+        "createBasket__limio_boolean": {
+          "id": "createBasket__limio_boolean",
+          "label": "Create update subscription basket",
+          "type": "boolean"
+        }
+      },
+      "default": [
+        {
+          "label": "expensive",
+          "value": "This subscription is too expensive",
+          "url": "/expensive",
+          "createBasket__limio_boolean": false
+        },
+        {
+          "label": "quantity",
+          "value": "I have too much",
+          "url": "/quantity",
+          "createBasket__limio_boolean": false
+        },
+        {
+          "label": "dislike",
+          "value": "I did not like the membership benefits",
+          "url": "/dislike",
+          "createBasket__limio_boolean": false
+        },
+        {
+          "label": "alternative",
+          "value": "I found an alternative",
+          "url": "/alternative",
+          "createBasket__limio_boolean": false
+        },
+        {
+          "label": "I'd rather not say",
+          "value": "Something else",
+          "url": "/help",
+          "createBasket__limio_boolean": false
+        }
+      ]
+    },
+    {
+      "id": "otherReasonLabel",
+      "label": "Other reason label",
+      "type": "string",
+      "default": "Other"
+    },
+    {
+      "id": "otherReasonValue",
+      "label": "Other reason value",
+      "type": "string",
+      "default": "Something else"
+    },
+    {
+      "id": "otherReasonUrl",
+      "label": "Other reason url",
+      "type": "string",
+      "default": "/other"
+    },
+    {
+      "id": "showOtherReason",
+      "label": "Show other reason",
+      "type": "boolean",
+      "default": "true"
+    },
+    {
+      "id": "captureOtherReasonText",
+      "label": "Capture other reason text",
+      "type": "boolean",
+      "default": "true"
+    },
+    {
+      "id": "otherReasonCaptureTextLabel",
+      "label": "Other reason capture text label",
+      "type": "string",
+      "default": "Add 'other' details below"
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": "true"
+    },
+    {
+      "id": "imageUrl",
+      "label": "Image Url",
+      "type": "string",
+      "default": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1156184/860406_495342.png"
+    },
+    {
+      "id": "cancelButtonText",
+      "label": "Cancel button text",
+      "type": "string",
+      "default": "Continue to cancel"
+    },
+    {
+      "id": "keepSubscriptionButtonText",
+      "label": "Keep subscription button text",
+      "type": "string",
+      "default": "Keep my subscription"
+    },
+    {
+      "id": "keepSubscriptionUrl",
+      "label": "Keep subscription url",
+      "type": "string",
+      "default": "https://limio.com"
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
+  ]
+}
