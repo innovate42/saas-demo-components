@@ -43,6 +43,7 @@
     "jest-resolve": "^29.2.1",
     "jest-watch-typeahead": "^2.2.0",
     "jwt-decode": "^2.2.0",
+    "luxon": "^3.7.2",
     "mini-css-extract-plugin": "^2.4.5",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.4",
@@ -72,7 +73,8 @@
     "webpack": "^5.69.1",
     "webpack-dev-server": "^4.7.4",
     "webpack-manifest-plugin": "^4.1.1",
-    "workbox-webpack-plugin": "^6.4.1"
+    "workbox-webpack-plugin": "^6.4.1",
+    "xss": "^1.0.15"
   },
   "scripts": {
     "test": "node scripts/test.js",
@@ -104,6 +106,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
+    "@babel/preset-flow": "^7.27.1",
     "@chromatic-com/storybook": "^1.2.18",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",

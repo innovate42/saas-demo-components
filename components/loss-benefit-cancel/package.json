@@ -1,0 +1,80 @@
+{
+  "name": "@limio/loss-benefit-cancel",
+  "version": "1.0.0",
+  "description": "Shows users the benefits they will lose if they cancel their subscription",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Here's what you'll lose"
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "If you cancel your subscription, you'll no longer have access to these features:"
+    },
+    {
+      "id": "ctaKeepLabel",
+      "label": "Keep subscription button label",
+      "type": "string",
+      "default": "Keep my subscription"
+    },
+    {
+      "id": "ctaCancelLabel",
+      "label": "Continue cancel button label",
+      "type": "string",
+      "default": "Continue with cancellation"
+    },
+    {
+      "id": "keepRedirectUrl",
+      "label": "Keep subscription redirect URL",
+      "type": "string",
+      "default": "/account"
+    },
+    {
+      "id": "cancelRedirectUrl",
+      "label": "Continue cancel redirect URL",
+      "type": "string",
+      "default": "/cancel-survey"
+    },
+    {
+      "id": "primaryColor",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#002C5F"
+    },
+    {
+      "id": "dangerColor",
+      "label": "Cancel button color",
+      "type": "color",
+      "default": "#dc2626"
+    },
+    {
+      "id": "fallbackFeatures__limio_richtext",
+      "label": "Fallback features (if offer has none)",
+      "type": "richText",
+      "default": "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>"
+    },
+    {
+      "id": "showPlanName",
+      "label": "Show plan name",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showPrice",
+      "label": "Show current price",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
