@@ -1,0 +1,175 @@
+{
+  "name": "@limio/component-sugarcrm-pricing2",
+  "version": "1.0.0",
+  "description": "SugarCRM-inspired pricing page with currency selection, testimonials, and FAQ",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headerHeadline",
+      "label": "Header Headline",
+      "type": "string",
+      "default": "SugarCRM Pricing and Packaging"
+    },
+    {
+      "id": "headerSubheadline", 
+      "label": "Header Subheadline",
+      "type": "string",
+      "default": "Accelerate your sales cycle and increase your win rate."
+    },
+    {
+      "id": "showCurrencySelector",
+      "label": "Show Currency Selector",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "defaultCurrency",
+      "label": "Default Currency",
+      "type": "picklist",
+      "options": [
+        { "id": "USD", "label": "USD", "value": "USD" },
+        { "id": "GBP", "label": "GBP", "value": "GBP" },
+        { "id": "EUR", "label": "EUR", "value": "EUR" }
+      ],
+      "default": "USD"
+    },
+    {
+      "id": "testimonialHeadline",
+      "label": "Testimonial Section Headline", 
+      "type": "string",
+      "default": "Trusted by 2 million+ users worldwide"
+    },
+    {
+      "id": "testimonialSubheadline",
+      "label": "Testimonial Section Subheadline",
+      "type": "string", 
+      "default": "See how leading organizations use SugarCRM to grow their business"
+    },
+    {
+      "id": "showTestimonials",
+      "label": "Show Testimonials Section",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "testimonials",
+      "label": "Testimonials",
+      "type": "list",
+      "fields": {
+        "quote": {
+          "id": "quote",
+          "label": "Quote",
+          "type": "string"
+        },
+        "name": {
+          "id": "name",
+          "label": "Person Name",
+          "type": "string"
+        },
+        "role": {
+          "id": "role",
+          "label": "Job Role",
+          "type": "string"
+        },
+        "company": {
+          "id": "company",
+          "label": "Company Name",
+          "type": "string"
+        },
+        "logo": {
+          "id": "logo",
+          "label": "Company Logo URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "quote": "SugarCRM has been instrumental in helping us scale our sales operations and improve customer relationships.",
+          "name": "Sarah Johnson",
+          "role": "VP of Sales",
+          "company": "TechCorp",
+          "logo": "https://via.placeholder.com/80x40/f5f5f5/999?text=TC"
+        },
+        {
+          "quote": "The analytics and pipeline management features have transformed how we forecast and manage our revenue.",
+          "name": "Michael Chen",
+          "role": "Revenue Operations", 
+          "company": "GrowthCo",
+          "logo": "https://via.placeholder.com/80x40/f5f5f5/999?text=GC"
+        },
+        {
+          "quote": "Implementation was seamless and the ROI was immediate. Our team adopted it within weeks.",
+          "name": "Lisa Rodriguez",
+          "role": "CTO",
+          "company": "ScaleUp Inc",
+          "logo": "https://via.placeholder.com/80x40/f5f5f5/999?text=SU"
+        }
+      ]
+    },
+    {
+      "id": "faqHeadline",
+      "label": "FAQ Section Headline",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "id": "faqSubheadline",
+      "label": "FAQ Section Subheadline", 
+      "type": "string",
+      "default": "Get answers to common questions about SugarCRM pricing and features"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#009cde"
+    },
+    {
+      "id": "secondaryColor__limio_color",
+      "label": "Secondary Color", 
+      "type": "color",
+      "default": "#16a7ff"
+    },
+    {
+      "id": "showLogos",
+      "label": "Show Customer Logos",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "customerLogos",
+      "label": "Customer Logos",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "name",
+          "label": "Company Name", 
+          "type": "string"
+        },
+        "url": {
+          "id": "logoUrl",
+          "label": "Logo URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "name": "Microsoft",
+          "logoUrl": "https://via.placeholder.com/120x60/e5e5e5/999999?text=Microsoft"
+        },
+        {
+          "name": "IBM", 
+          "logoUrl": "https://via.placeholder.com/120x60/e5e5e5/999999?text=IBM"
+        },
+        {
+          "name": "Samsung",
+          "logoUrl": "https://via.placeholder.com/120x60/e5e5e5/999999?text=Samsung"
+        }
+      ]
+    }
+  ]
+}
