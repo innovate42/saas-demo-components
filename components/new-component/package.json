@@ -1,7 +1,7 @@
 {
-  "name": "@limio/new-component",
-  "version": "1.0.0",
-  "description": "Spotify-inspired pricing page component",
+  "name": "@limio/component-new-component",
+  "version": "1.0.1",
+  "description": "Shows features you will lose if you cancel subscription",
   "main": "./index.js",
   "dependencies": {},
   "peerDependencies": {
@@ -10,90 +10,39 @@
   "limioProps": [
     {
       "id": "headline",
-      "label": "Main Headline",
+      "label": "Headline",
       "type": "string",
-      "default": "Choose your Premium plan"
+      "default": "What you'll lose if you cancel"
     },
     {
-      "id": "subheadline", 
+      "id": "subheadline",
       "label": "Subheadline",
       "type": "string",
-      "default": "Listen ad-free with Premium. Cancel anytime."
+      "default": "Keep these essential features by staying subscribed"
     },
     {
-      "id": "trialHeadline",
-      "label": "Trial Offer Headline",
+      "id": "ctaText",
+      "label": "CTA Button Text",
       "type": "string",
-      "default": "Try 3 months for £0"
-    },
-    {
-      "id": "trialSubheadline",
-      "label": "Trial Offer Subheadline", 
-      "type": "string",
-      "default": "Premium Individual only. Offer only available if you haven't tried Premium before."
-    },
-    {
-      "id": "featuresHeadline",
-      "label": "Features Section Headline",
-      "type": "string",
-      "default": "What you'll get"
-    },
-    {
-      "id": "plansHeadline",
-      "label": "Plans Section Headline",
-      "type": "string",
-      "default": "Affordable plans for any situation"
-    },
-    {
-      "id": "plansSubheadline",
-      "label": "Plans Section Subheadline",
-      "type": "string",
-      "default": "Choose a Premium plan and listen to ad-free music without limits on your phone, speaker and other devices."
+      "default": "Keep My Subscription"
     },
     {
       "id": "primaryColor__limio_color",
-      "label": "Primary Color (Spotify Green)",
+      "label": "Primary Color",
       "type": "color",
-      "default": "#1ed760"
+      "default": "#0080ff"
     },
     {
-      "id": "showTrialBanner",
-      "label": "Show Trial Banner",
+      "id": "showAlternativeCta",
+      "label": "Show Alternative CTA",
       "type": "boolean",
       "default": true
     },
     {
-      "id": "showFeatureComparison",
-      "label": "Show Feature Comparison",
-      "type": "boolean", 
-      "default": true
-    },
-    {
-      "id": "groupLabels",
-      "label": "Plan Groups",
-      "type": "list",
-      "fields": {
-        "name": {
-          "id": "id",
-          "label": "Group ID",
-          "type": "string"
-        },
-        "url": {
-          "id": "label",
-          "label": "Display Label",
-          "type": "string"
-        }
-      },
-      "default": [
-        {
-          "id": "monthly",
-          "label": "Monthly"
-        },
-        {
-          "id": "yearly", 
-          "label": "Annual"
-        }
-      ]
+      "id": "alternativeCtaText",
+      "label": "Alternative CTA Text",
+      "type": "string",
+      "default": "Explore Other Plans"
     }
   ]
 }
