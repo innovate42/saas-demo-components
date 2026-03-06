@@ -1,0 +1,246 @@
+{
+  "name": "@limio/component-cancel-save-offer-custom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fortawesome/pro-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@limio/components": "workspace:^",
+    "@limio/date": "workspace:^",
+    "@limio/internal-checkout-sdk": "workspace:^",
+    "@limio/old-shop-components": "workspace:^",
+    "@limio/shop": "workspace:^",
+    "@limio/test-data": "workspace:^",
+    "ramda": "^0.27.2"
+  },
+  "peerDependencies": {
+    "@limio/design-system": "workspace:^",
+    "@limio/sdk": "workspace:^",
+    "@sentry/browser": "*",
+    "react": "*"
+  },
+  "devDependencies": {
+    "@limio/msw": "workspace:^",
+    "@limio/test-harness-shop": "workspace:^"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Your cancel/save offer"
+    },
+    {
+      "id": "subheading__limio_richtext",
+      "label": "Subheading",
+      "type": "richtext",
+      "default": "Stay with us"
+    },
+    {
+      "id": "detailedSubheading",
+      "label": "Detailed Subheading",
+      "type": "string",
+      "default": "We won't charge you until your subscription renews."
+    },
+    {
+      "id": "discountDetails",
+      "label": "Provide more information about any discounts",
+      "type": "string",
+      "default": "Get {{discountRate}} off for the next {{discountPeriod}}."
+    },
+    {
+      "id": "nextPaymentDetails__limio__richtext",
+      "label": "Provide more information about next payment",
+      "type": "richtext",
+      "default": ""
+    },
+    {
+      "id": "imageUrl",
+      "label": "Image Url",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "imagePosition",
+      "label": "Image Position",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "top",
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "id": "right",
+          "label": "Right",
+          "value": "right"
+        },
+        {
+          "id": "left",
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "id": "bottom",
+          "label": "Bottom",
+          "value": "bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "id": "confirmOfferButtonLabel",
+      "label": "Change Subscription Confirmation Button Label",
+      "type": "string",
+      "default": "I'd like to change my subscription"
+    },
+    {
+      "id": "offerLineText",
+      "label": "Text to emphasise offer",
+      "type": "string",
+      "default": "Get this offer"
+    },
+    {
+      "id": "processChangeSub",
+      "label": "Change Subscription On This Page or Redirect For Confirmation",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "onPageWithModal",
+          "label": "Process On This Page via confirmation modal",
+          "value": "onPageWithModal"
+        },
+        {
+          "id": "onPageNoModal",
+          "label": "Process On This Page with no confirmation modal",
+          "value": "onPageNoModal"
+        },
+        {
+          "id": "redirect",
+          "label": "Redirect To Confirmation Page",
+          "value": "redirect"
+        }
+      ],
+      "default": "onPageNoModal"
+    },
+    {
+      "id": "redirectToConfirmationUrl",
+      "label": "Redirect Url to subscription change confirmation page",
+      "type": "string",
+      "default": "amend/change"
+    },
+    {
+      "id": "confirmHeading",
+      "label": "Confirm change modal heading",
+      "type": "string",
+      "default": "Are you sure you want to update your subscription?"
+    },
+    {
+      "id": "confirmSubheading",
+      "label": "Confirm change modal subheading",
+      "type": "richtext",
+      "default": "You will be switched over to this offer, starting on your next billing date"
+    },
+    {
+      "id": "confirmationOk",
+      "label": "Confirm change modal process button local",
+      "type": "string",
+      "default": "I want to change my subscription"
+    },
+    {
+      "id": "confirmationCancel",
+      "label": "Confirm cancel modal go back button label",
+      "type": "string",
+      "default": "Go back"
+    },
+    {
+      "id": "redirectUrl",
+      "label": "Redirect Url On Change Subscription Confirmation",
+      "type": "string",
+      "default": "cancel/save-confirm"
+    },
+    {
+      "id": "showPaymentMethod",
+      "label": "Show payment method?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "paymentMethodHeading",
+      "label": "Payment method heading",
+      "type": "string",
+      "default": "Payment Method"
+    },
+    {
+      "id": "paymentFrequencyLabel",
+      "label": "Payment frequency label",
+      "type": "string",
+      "default": "Payment Frequency"
+    },
+    {
+      "id": "paymentAmountLabel",
+      "label": "Payment amount label",
+      "type": "string",
+      "default": "Payment Amount"
+    },
+    {
+      "id": "paymentDateLabel",
+      "label": "Payment date label",
+      "type": "string",
+      "default": "Payment Date"
+    },
+    {
+      "id": "showAdditionalButtons",
+      "label": "Show additional buttons?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "additionalButtons",
+      "label": "Additional Buttons",
+      "type": "list",
+      "fields": {
+        "label": {
+          "id": "label",
+          "label": "Button label",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Button URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "label": "Continue",
+          "url": "/"
+        },
+        {
+          "label": "Go back",
+          "url": "/mma"
+        }
+      ]
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "cancel-save-offer-limio"
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
+  ]
+}
