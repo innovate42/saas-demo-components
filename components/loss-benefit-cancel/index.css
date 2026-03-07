@@ -1,13 +1,12 @@
 .lbc-container {
     --lbc-primary: #002C5F;
-    --lbc-danger: #dc2626;
     --lbc-text: #1a1f36;
     --lbc-text-muted: #697386;
     --lbc-border: #e3e8ee;
     --lbc-bg: #f6f9fc;
     --lbc-card: #ffffff;
     --lbc-warning-bg: #fff7ed;
-    --lbc-warning-icon: #f59e0b;
+    --lbc-warning-border: #fed7aa;
     --lbc-feature-icon: #ef4444;
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -36,13 +35,6 @@
     width: 100%;
     padding: 40px 32px;
     text-align: center;
-}
-
-.lbc-icon {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    color: var(--lbc-warning-icon);
 }
 
 .lbc-heading {
@@ -88,7 +80,7 @@
 
 .lbc-features {
     background: var(--lbc-warning-bg);
-    border: 1px solid #fed7aa;
+    border: 1px solid var(--lbc-warning-border);
     border-radius: 10px;
     padding: 20px 24px;
     text-align: left;
@@ -126,6 +118,70 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Add-ons section */
+.lbc-addons-section {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.lbc-addons-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--lbc-text);
+}
+
+.lbc-addons-description {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.lbc-addon-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--lbc-bg);
+    border: 1px solid var(--lbc-border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.lbc-addon-item:last-child {
+    margin-bottom: 0;
+}
+
+.lbc-addon-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--lbc-text);
+    flex: 1;
+}
+
+.lbc-addon-price {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+}
+
+.lbc-addon-price p {
+    margin: 0;
+    display: inline;
+}
+
+.lbc-addon-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--lbc-primary);
+    background: rgba(0, 44, 95, 0.08);
+    border-radius: 4px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 @media (max-width: 600px) {

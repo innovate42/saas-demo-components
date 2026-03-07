@@ -18,7 +18,7 @@
     },
     {
       "id": "subheading",
-      "label": "Subheading",
+      "label": "Card description text",
       "type": "string",
       "default": "If you cancel your subscription, you'll no longer have access to these features:"
     },
@@ -27,12 +27,6 @@
       "label": "Primary color",
       "type": "color",
       "default": "#002C5F"
-    },
-    {
-      "id": "dangerColor",
-      "label": "Danger/accent color",
-      "type": "color",
-      "default": "#dc2626"
     },
     {
       "id": "offerFeatures__limio_richtext",
@@ -57,6 +51,18 @@
       "label": "Fallback features (if offer has none)",
       "type": "richtext",
       "default": "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>"
+    },
+    {
+      "id": "addOnsHeading",
+      "label": "Add-ons section heading",
+      "type": "string",
+      "default": "You will also lose"
+    },
+    {
+      "id": "addOnDescription",
+      "label": "Add-on card description text",
+      "type": "string",
+      "default": "You'll also lose access to this add-on:"
     },
     {
       "id": "showPlanName",

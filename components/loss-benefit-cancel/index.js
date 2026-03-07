@@ -1,12 +1,26 @@
 import React from "react"
-import { useSubscriptions, useLimioContext } from "@limio/sdk"
+import { useSubscriptions, useLimioContext, sanitiseHTML } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
-import { getCurrentOffer } from "../source/utils/offers"
-import { parseString, encodeDates } from "../source/utils/string"
-import xss from "xss"
 import "./index.css"
 
-const sanitize = (str) => xss(str || "")
+function getActiveAddOns(subscription) {
+    const addOns = subscription?.addOns
+    if (!Array.isArray(addOns) || addOns.length === 0) return []
+
+    const now = new Date()
+    return addOns.filter(addOn => {
+        if (!["active", "pending", "pending-external"].includes(addOn.status)) return false
+        const end = addOn?.data?.end ? new Date(addOn.data.end) : null
+        const start = addOn?.data?.start ? new Date(addOn.data.start) : null
+        if (start && start > now) return false
+        if (end && end < now) return false
+        return true
+    })
+}
+
+function getAddOnAttributes(addOn) {
+    return addOn?.data?.add_on?.data?.attributes || {}
+}
 
 function LossBenefitCancel() {
     const { isInPageBuilder } = useLimioContext() || {}
@@ -16,15 +30,18 @@ function LossBenefitCancel() {
     const {
         heading = "Here's what you'll lose",
         subheading = "If you cancel your subscription, you'll no longer have access to these features:",
+        addOnsHeading = "You will also lose",
+        addOnDescription = "You'll also lose access to this add-on:",
         primaryColor = "#002C5F",
-        dangerColor = "#dc2626",
-        offerFeatures__limio_richtext: offerFeatures = "{{data.attributes.offer_features__limio}}",
-        planName = "{{data.attributes.display_name__limio}}",
-        displayPrice = "{{data.attributes.display_price__limio}}",
+        offerFeatures__limio_richtext = "",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
+        planName = "",
+        displayPrice = "",
         showPlanName = true,
         showPrice = true,
     } = props
+
+    const featuresHtml = offerFeatures__limio_richtext || fallbackFeatures__limio_richtext
 
     // Get subscription from URL param or use the first active one
     let subscription = null
@@ -44,59 +61,61 @@ function LossBenefitCancel() {
         }
     }
 
-    // Fallback to first active subscription
     if (!subscription && Array.isArray(subscriptions) && subscriptions.length > 0) {
         subscription = subscriptions.find(s => s?.status === "active") || subscriptions[0]
     }
 
-    // Get the current offer from the subscription
-    const offer = subscription ? getCurrentOffer(subscription) : null
-
-    // Resolve moustache templates against offer data
-    const resolvedFeatures = offer ? parseString(offerFeatures, offer, encodeDates) : ""
-    const featuresHtml = resolvedFeatures || fallbackFeatures__limio_richtext
-    const resolvedPlanName = offer ? parseString(planName, offer, encodeDates) : (subscription?.name || "")
-    const resolvedPrice = offer ? parseString(displayPrice, offer, encodeDates) : ""
+    const activeAddOns = getActiveAddOns(subscription)
 
     return (
-        <section
-            className="lbc-container"
-            style={{
-                "--lbc-primary": primaryColor,
-                "--lbc-danger": dangerColor,
-            }}
-        >
+        <section className="lbc-container" style={{ "--lbc-primary": primaryColor }}>
             <div className="lbc-card">
-                <div className="lbc-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                        <line x1="12" y1="9" x2="12" y2="13" />
-                        <line x1="12" y1="17" x2="12.01" y2="17" />
-                    </svg>
-                </div>
-
-                <h2 className="lbc-heading">{heading}</h2>
-
-                {showPlanName && resolvedPlanName && (
+                {showPlanName && planName && (
                     <div className="lbc-plan-badge">
-                        <span className="lbc-plan-name">{resolvedPlanName}</span>
-                        {showPrice && resolvedPrice && (
+                        <span className="lbc-plan-name">{planName}</span>
+                        {showPrice && displayPrice && (
                             <span
                                 className="lbc-plan-price"
-                                dangerouslySetInnerHTML={{ __html: sanitize(resolvedPrice) }}
+                                dangerouslySetInnerHTML={{ __html: sanitiseHTML(displayPrice) }}
                             />
                         )}
                     </div>
                 )}
 
+                <h2 className="lbc-heading">{heading}</h2>
                 <p className="lbc-subheading">{subheading}</p>
 
                 <div className="lbc-features">
                     <div
                         className="lbc-features-list"
-                        dangerouslySetInnerHTML={{ __html: sanitize(featuresHtml) }}
+                        dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
                     />
                 </div>
+
+                {activeAddOns.length > 0 && (
+                    <div className="lbc-addons-section">
+                        <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
+                        <p className="lbc-addons-description">{addOnDescription}</p>
+                        {activeAddOns.map((addOn, i) => {
+                            const attrs = getAddOnAttributes(addOn)
+                            const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
+                            const price = attrs.display_price__limio || ""
+
+                            return (
+                                <div key={i} className="lbc-addon-item">
+                                    <span className="lbc-addon-name">{name}</span>
+                                    {showPrice && price && (
+                                        <span
+                                            className="lbc-addon-price"
+                                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(price) }}
+                                        />
+                                    )}
+                                    <span className="lbc-addon-tag">Add-on</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
             </div>
         </section>
     )
