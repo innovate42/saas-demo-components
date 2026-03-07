@@ -31,16 +31,8 @@
 .lbc-heading {
     font-size: 24px;
     font-weight: 700;
-    margin: 0 0 8px;
-    color: var(--lbc-text);
-    text-align: center;
-}
-
-.lbc-subheading {
-    font-size: 15px;
-    color: var(--lbc-text-muted);
     margin: 0 0 24px;
-    line-height: 1.5;
+    color: var(--lbc-text);
     text-align: center;
 }
 
@@ -139,55 +131,33 @@
     justify-content: center;
 }
 
-/* Addons section */
-.lbc-addons {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--lbc-border);
-    text-align: left;
-}
-
-.lbc-addons-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--lbc-text-muted);
-    margin: 0 0 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-
-.lbc-addons-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.lbc-addon-item {
-    position: relative;
-    padding: 6px 0 6px 28px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--lbc-text);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.lbc-addon-item:last-child {
-    border-bottom: none;
-}
-
-.lbc-addon-item::before {
-    content: "✕";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    color: var(--lbc-feature-icon);
+/* Add-ons heading between offer cards and add-on cards */
+.lbc-addons-heading {
+    font-size: 20px;
     font-weight: 700;
-    font-size: 13px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 8px 0 0;
+    color: var(--lbc-text);
+    text-align: center;
+}
+
+/* Add-on tag in the plan badge */
+.lbc-addon-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--lbc-primary);
+    background: rgba(0, 44, 95, 0.08);
+    border-radius: 4px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Card description text */
+.lbc-card-description {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 16px;
+    line-height: 1.5;
 }
 
 @media (max-width: 600px) {

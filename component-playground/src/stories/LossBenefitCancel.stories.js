@@ -50,6 +50,8 @@ const addonDigitalKey = {
             data: {
                 attributes: {
                     display_name__limio: "Digital Key Access",
+                    display_price__limio: "<p>$4.99 per month</p>",
+                    offer_features__limio: "<ul><li>Unlock and lock your car remotely</li><li>Share digital keys with family</li><li>Temporary guest access</li></ul>",
                 }
             }
         }
@@ -66,10 +68,48 @@ const addonCloudStorage = {
             data: {
                 attributes: {
                     display_name__limio: "50GB Cloud Storage",
+                    display_price__limio: "<p>$2.99 per month</p>",
+                    offer_features__limio: "<ul><li>50GB cloud storage</li><li>Automatic backup</li><li>File sharing</li></ul>",
                 }
             }
         }
     }
+}
+
+const addonDemoProduct = {
+    name: "Demo Product",
+    status: "active",
+    data: {
+        start: "2022-06-09T12:44:38.771Z",
+        add_on: {
+            name: "Demo Product",
+            data: {
+                attributes: {
+                    display_name__limio: "Demo Product",
+                    display_price__limio: "<p>$199.99 per year</p>",
+                    offer_features__limio: "<ul><li>Premium demo access</li><li>Extended trial features</li><li>Priority onboarding</li></ul>",
+                }
+            }
+        }
+    }
+}
+
+const bluelinkPlusOffer = {
+    name: "Bluelink PLUS Annual Plan USD",
+    quantity: 1,
+    data: {
+        start: "2024-07-03T00:00:00.000Z",
+        record_subtype: "base",
+        offer: {
+            data: {
+                attributes: {
+                    display_name__limio: "Bluelink PLUS Annual Plan USD",
+                    display_price__limio: "<p>$29.99 per year</p>",
+                    offer_features__limio: "<ul><li>All Bluelink LITE features included</li><li>LIVE Traffic (visualisation)</li><li>LIVE Fuel price, LIVE Speedcam</li><li>LIVE Parking</li><li>Weather</li><li>Sports</li><li>Remote lock/unlock</li><li>Remote start/stop charging (Electric, Plug-in Hybrid Vehicle only)</li><li>Remote Climate control (Electric Vehicle only)</li><li>Remote Battery Pre-conditioning (for latest gen Electric Vehicle)</li></ul>",
+                },
+            }
+        }
+    },
 }
 
 function makeSubscription({ offers = [], addOns = [], status = "active" } = {}) {
@@ -100,7 +140,7 @@ function withSubscriptions(subscriptions) {
 
 const defaultArgs = {
     heading: "Here's what you'll lose",
-    subheading: "If you cancel your subscription, you'll no longer have access to these features:",
+    addOnsHeading: "You will also lose",
     primaryColor: "#002C5F",
     fallbackFeatures__limio_richtext: "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
     showPlanName: true,
@@ -150,8 +190,16 @@ export const HyundaiBluelink = {
     args: {
         ...defaultArgs,
         heading: "You'll lose these Bluelink features",
-        subheading: "Cancelling your plan means you'll no longer have access to:",
         fallbackFeatures__limio_richtext: "<ul><li>Connected Routing, Hyundai's cloud-based navigation</li><li>EV Routing & EV POI (point of interest)</li><li>Bluelink App status updates, vehicle information and send POI to car</li><li>Digital Key (optional)</li><li>Online Voice Recognition</li><li>Vehicle system OTA updates (if available for the vehicle)</li></ul>",
     },
     decorators: [withSubscriptions([makeSubscription({ offers: [baseOffer], addOns: [addonDigitalKey] })])],
+}
+
+export const BluelinkPlusWithDemoAddon = {
+    args: {
+        ...defaultArgs,
+        heading: "Here's what you'll lose",
+        addOnsHeading: "You will also lose",
+    },
+    decorators: [withSubscriptions([makeSubscription({ offers: [bluelinkPlusOffer], addOns: [addonDemoProduct] })])],
 }

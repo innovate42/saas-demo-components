@@ -15,12 +15,6 @@
       "default": "Here's what you'll lose"
     },
     {
-      "id": "subheading",
-      "label": "Subheading",
-      "type": "string",
-      "default": "If you cancel your subscription, you'll no longer have access to these features:"
-    },
-    {
       "id": "primaryColor",
       "label": "Primary color",
       "type": "color",
@@ -31,6 +25,12 @@
       "label": "Fallback features (if offer has none)",
       "type": "richText",
       "default": "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>"
+    },
+    {
+      "id": "addOnsHeading",
+      "label": "Add-ons section heading",
+      "type": "string",
+      "default": "You will also lose"
     },
     {
       "id": "showPlanName",

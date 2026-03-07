@@ -26,27 +26,29 @@ function getAddOnDisplayName(addOn) {
         || ""
 }
 
+function getAddOnPrice(addOn) {
+    return addOn?.data?.add_on?.data?.attributes?.display_price__limio
+        || addOn?.data?.display_price__limio
+        || ""
+}
+
+function getAddOnFeatures(addOn) {
+    return addOn?.data?.add_on?.data?.attributes?.offer_features__limio || ""
+}
+
 function getOfferAttributes(offer) {
     return offer?.data?.offer?.data?.attributes
         || offer?.data?.attributes
         || null
 }
 
-function OfferCard({ attrs, offerName, addOns, featuresField, fallbackFeaturesHtml, showPlanName, showPrice }) {
+function OfferCard({ attrs, offerName, featuresField, fallbackFeaturesHtml, showPlanName, showPrice }) {
     const featuresHtml = attrs?.[featuresField] || fallbackFeaturesHtml
     const planName = attrs?.display_name__limio || offerName || ""
     const displayPrice = attrs?.display_price__limio || ""
 
     return (
         <div className="lbc-card">
-            <div className="lbc-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                    <line x1="12" y1="9" x2="12" y2="13" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                </svg>
-            </div>
-
             {showPlanName && planName && (
                 <div className="lbc-plan-badge">
                     <span className="lbc-plan-name">{planName}</span>
@@ -59,25 +61,46 @@ function OfferCard({ attrs, offerName, addOns, featuresField, fallbackFeaturesHt
                 </div>
             )}
 
+            <p className="lbc-card-description">If you cancel your subscription, you'll no longer have access to these features:</p>
+
             <div className="lbc-features">
                 <div
                     className="lbc-features-list"
                     dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
                 />
             </div>
+        </div>
+    )
+}
 
-            {addOns.length > 0 && (
-                <div className="lbc-addons">
-                    <p className="lbc-addons-label">Add-ons you'll also lose:</p>
-                    <ul className="lbc-addons-list">
-                        {addOns.map((addOn, i) => (
-                            <li key={i} className="lbc-addon-item">
-                                {getAddOnDisplayName(addOn)}
-                            </li>
-                        ))}
-                    </ul>
+function AddOnCard({ addOn, featuresField, fallbackFeaturesHtml, showPlanName, showPrice }) {
+    const name = getAddOnDisplayName(addOn)
+    const price = getAddOnPrice(addOn)
+    const featuresHtml = getAddOnFeatures(addOn) || fallbackFeaturesHtml
+
+    return (
+        <div className="lbc-card">
+            {showPlanName && name && (
+                <div className="lbc-plan-badge">
+                    <span className="lbc-plan-name">{name}</span>
+                    <span className="lbc-addon-tag">Add-on</span>
+                    {showPrice && price && (
+                        <span
+                            className="lbc-plan-price"
+                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(price) }}
+                        />
+                    )}
                 </div>
             )}
+
+            <p className="lbc-card-description">You'll also lose access to this add-on:</p>
+
+            <div className="lbc-features">
+                <div
+                    className="lbc-features-list"
+                    dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
+                />
+            </div>
         </div>
     )
 }
@@ -89,7 +112,7 @@ function LossBenefitCancel() {
 
     const {
         heading = "Here's what you'll lose",
-        subheading = "If you cancel your subscription, you'll no longer have access to these features:",
+        addOnsHeading = "You will also lose",
         primaryColor = "#002C5F",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
         showPlanName = true,
@@ -132,27 +155,43 @@ function LossBenefitCancel() {
 
     const activeAddOns = getActiveAddOns(subscription)
 
+    const hasAddOns = activeAddOns.length > 0
+
     return (
         <section
             className="lbc-container"
             style={{ "--lbc-primary": primaryColor }}
         >
             <h2 className="lbc-heading">{heading}</h2>
-            <p className="lbc-subheading">{subheading}</p>
 
-            <div className={offers.length > 1 ? "lbc-cards-stack" : ""}>
+            <div className="lbc-cards-stack">
                 {offers.map((offer, i) => (
                     <OfferCard
                         key={i}
                         attrs={offer.attrs}
                         offerName={offer.name}
-                        addOns={i === 0 ? activeAddOns : []}
                         featuresField={offerFeaturesField}
                         fallbackFeaturesHtml={fallbackFeatures__limio_richtext}
                         showPlanName={showPlanName}
                         showPrice={showPrice}
                     />
                 ))}
+
+                {hasAddOns && (
+                    <>
+                        <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
+                        {activeAddOns.map((addOn, i) => (
+                            <AddOnCard
+                                key={i}
+                                addOn={addOn}
+                                featuresField={offerFeaturesField}
+                                fallbackFeaturesHtml={fallbackFeatures__limio_richtext}
+                                showPlanName={showPlanName}
+                                showPrice={showPrice}
+                            />
+                        ))}
+                    </>
+                )}
             </div>
         </section>
     )
