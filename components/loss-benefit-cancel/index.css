@@ -13,12 +13,10 @@
     color: var(--lbc-text);
     background: var(--lbc-bg);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 40px 16px;
     min-height: 100%;
-    max-width: 600px;
-    margin: 0 auto;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -28,30 +26,22 @@
     box-sizing: border-box;
 }
 
-.lbc-heading {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 24px;
-    color: var(--lbc-text);
-    text-align: center;
-}
-
-/* Single card or stacked cards */
 .lbc-card {
     background: var(--lbc-card);
     border: 1px solid var(--lbc-border);
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    max-width: 560px;
     width: 100%;
-    padding: 32px 24px;
+    padding: 40px 32px;
     text-align: center;
 }
 
-.lbc-cards-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
+.lbc-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: var(--lbc-text);
 }
 
 .lbc-plan-badge {
@@ -81,7 +71,13 @@
     display: inline;
 }
 
-/* Features section */
+.lbc-subheading {
+    font-size: 15px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 24px;
+    line-height: 1.5;
+}
+
 .lbc-features {
     background: var(--lbc-warning-bg);
     border: 1px solid var(--lbc-warning-border);
@@ -124,16 +120,59 @@
     justify-content: center;
 }
 
-/* Add-ons heading between offer cards and add-on cards */
-.lbc-addons-heading {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 8px 0 0;
-    color: var(--lbc-text);
+/* Add-ons section */
+.lbc-addons-section {
+    margin-top: 24px;
     text-align: center;
 }
 
-/* Add-on tag in the plan badge */
+.lbc-addons-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--lbc-text);
+}
+
+.lbc-addons-description {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.lbc-addon-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--lbc-bg);
+    border: 1px solid var(--lbc-border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.lbc-addon-item:last-child {
+    margin-bottom: 0;
+}
+
+.lbc-addon-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--lbc-text);
+    flex: 1;
+}
+
+.lbc-addon-price {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+}
+
+.lbc-addon-price p {
+    margin: 0;
+    display: inline;
+}
+
 .lbc-addon-tag {
     font-size: 11px;
     font-weight: 600;
@@ -145,21 +184,13 @@
     letter-spacing: 0.04em;
 }
 
-/* Card description text */
-.lbc-card-description {
-    font-size: 14px;
-    color: var(--lbc-text-muted);
-    margin: 0 0 16px;
-    line-height: 1.5;
-}
-
 @media (max-width: 600px) {
     .lbc-container {
         padding: 20px 12px;
     }
 
     .lbc-card {
-        padding: 24px 16px;
+        padding: 28px 20px;
     }
 
     .lbc-heading {

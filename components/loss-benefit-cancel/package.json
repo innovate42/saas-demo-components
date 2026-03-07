@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Shows users the benefits they will lose if they cancel their subscription",
   "main": "./index.js",
-  "dependencies": {},
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
   "peerDependencies": {
     "react": "*"
   },
@@ -27,9 +29,27 @@
       "default": "#002C5F"
     },
     {
+      "id": "offerFeatures__limio_richtext",
+      "label": "Offer features template",
+      "type": "richtext",
+      "default": "{{data.attributes.offer_features__limio}}"
+    },
+    {
+      "id": "planName",
+      "label": "Plan name template",
+      "type": "string",
+      "default": "{{data.attributes.display_name__limio}}"
+    },
+    {
+      "id": "displayPrice",
+      "label": "Display price template",
+      "type": "string",
+      "default": "{{data.attributes.display_price__limio}}"
+    },
+    {
       "id": "fallbackFeatures__limio_richtext",
       "label": "Fallback features (if offer has none)",
-      "type": "richText",
+      "type": "richtext",
       "default": "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>"
     },
     {
@@ -55,12 +75,6 @@
       "label": "Show current price",
       "type": "boolean",
       "default": true
-    },
-    {
-      "id": "offerFeaturesField",
-      "label": "Offer features attribute field",
-      "type": "string",
-      "default": "offer_features__limio"
     }
   ]
 }

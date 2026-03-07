@@ -1,6 +1,5 @@
 import React from "react"
-import { useSubscriptions, useLimioContext, getCurrentOffer, sanitiseHTML } from "@limio/sdk"
-import { checkActiveOffers } from "@limio/sdk/offers"
+import { useSubscriptions, useLimioContext, sanitiseHTML } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -23,34 +22,6 @@ function getAddOnAttributes(addOn) {
     return addOn?.data?.add_on?.data?.attributes || {}
 }
 
-function BenefitCard({ name, price, featuresHtml, description, badge, showPlanName, showPrice }) {
-    return (
-        <div className="lbc-card">
-            {showPlanName && name && (
-                <div className="lbc-plan-badge">
-                    <span className="lbc-plan-name">{name}</span>
-                    {badge && <span className="lbc-addon-tag">{badge}</span>}
-                    {showPrice && price && (
-                        <span
-                            className="lbc-plan-price"
-                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(price) }}
-                        />
-                    )}
-                </div>
-            )}
-
-            <p className="lbc-card-description">{description}</p>
-
-            <div className="lbc-features">
-                <div
-                    className="lbc-features-list"
-                    dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
-                />
-            </div>
-        </div>
-    )
-}
-
 function LossBenefitCancel() {
     const { isInPageBuilder } = useLimioContext() || {}
     const { subscriptions } = useSubscriptions() || {}
@@ -62,11 +33,15 @@ function LossBenefitCancel() {
         addOnsHeading = "You will also lose",
         addOnDescription = "You'll also lose access to this add-on:",
         primaryColor = "#002C5F",
+        offerFeatures__limio_richtext = "",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
+        planName = "",
+        displayPrice = "",
         showPlanName = true,
         showPrice = true,
-        offerFeaturesField = "offer_features__limio",
     } = props
+
+    const featuresHtml = offerFeatures__limio_richtext || fallbackFeatures__limio_richtext
 
     // Get subscription from URL param or use the first active one
     let subscription = null
@@ -86,77 +61,60 @@ function LossBenefitCancel() {
         }
     }
 
-    // Fallback to first active subscription
     if (!subscription && Array.isArray(subscriptions) && subscriptions.length > 0) {
         subscription = subscriptions.find(s => s?.status === "active") || subscriptions[0]
     }
 
-    // Get active non-discount offers from the subscription
-    const allActiveOffers = checkActiveOffers(subscription?.offers || [])
-        .filter(o => o.data?.record_subtype !== "discount")
-
-    // Build offer card data - use checkActiveOffers results, fall back to getCurrentOffer
-    const offers = allActiveOffers.length > 0
-        ? allActiveOffers.map(o => {
-            const attrs = o?.data?.offer?.data?.attributes || o?.data?.attributes || {}
-            return { attrs, name: o.name }
-        })
-        : [{
-            attrs: (getCurrentOffer(subscription) || {})?.data?.attributes || {},
-            name: subscription?.name,
-        }]
-
     const activeAddOns = getActiveAddOns(subscription)
 
     return (
-        <section
-            className="lbc-container"
-            style={{ "--lbc-primary": primaryColor }}
-        >
-            <h2 className="lbc-heading">{heading}</h2>
+        <section className="lbc-container" style={{ "--lbc-primary": primaryColor }}>
+            <div className="lbc-card">
+                {showPlanName && planName && (
+                    <div className="lbc-plan-badge">
+                        <span className="lbc-plan-name">{planName}</span>
+                        {showPrice && displayPrice && (
+                            <span
+                                className="lbc-plan-price"
+                                dangerouslySetInnerHTML={{ __html: sanitiseHTML(displayPrice) }}
+                            />
+                        )}
+                    </div>
+                )}
 
-            <div className="lbc-cards-stack">
-                {offers.map((offer, i) => {
-                    const featuresHtml = offer.attrs?.[offerFeaturesField] || fallbackFeatures__limio_richtext
-                    const planName = offer.attrs?.display_name__limio || offer.name || ""
-                    const displayPrice = offer.attrs?.display_price__limio || ""
+                <h2 className="lbc-heading">{heading}</h2>
+                <p className="lbc-subheading">{subheading}</p>
 
-                    return (
-                        <BenefitCard
-                            key={i}
-                            name={planName}
-                            price={displayPrice}
-                            featuresHtml={featuresHtml}
-                            description={subheading}
-                            showPlanName={showPlanName}
-                            showPrice={showPrice}
-                        />
-                    )
-                })}
+                <div className="lbc-features">
+                    <div
+                        className="lbc-features-list"
+                        dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
+                    />
+                </div>
 
                 {activeAddOns.length > 0 && (
-                    <>
+                    <div className="lbc-addons-section">
                         <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
+                        <p className="lbc-addons-description">{addOnDescription}</p>
                         {activeAddOns.map((addOn, i) => {
                             const attrs = getAddOnAttributes(addOn)
                             const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
                             const price = attrs.display_price__limio || ""
-                            const featuresHtml = attrs[offerFeaturesField] || fallbackFeatures__limio_richtext
 
                             return (
-                                <BenefitCard
-                                    key={i}
-                                    name={name}
-                                    price={price}
-                                    featuresHtml={featuresHtml}
-                                    description={addOnDescription}
-                                    badge="Add-on"
-                                    showPlanName={showPlanName}
-                                    showPrice={showPrice}
-                                />
+                                <div key={i} className="lbc-addon-item">
+                                    <span className="lbc-addon-name">{name}</span>
+                                    {showPrice && price && (
+                                        <span
+                                            className="lbc-addon-price"
+                                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(price) }}
+                                        />
+                                    )}
+                                    <span className="lbc-addon-tag">Add-on</span>
+                                </div>
                             )
                         })}
-                    </>
+                    </div>
                 )}
             </div>
         </section>
