@@ -19,71 +19,17 @@ function getActiveAddOns(subscription) {
     })
 }
 
-function getAddOnDisplayName(addOn) {
-    return addOn?.data?.add_on?.data?.attributes?.display_name__limio
-        || addOn?.data?.add_on?.name
-        || addOn?.name
-        || ""
+function getAddOnAttributes(addOn) {
+    return addOn?.data?.add_on?.data?.attributes || {}
 }
 
-function getAddOnPrice(addOn) {
-    return addOn?.data?.add_on?.data?.attributes?.display_price__limio
-        || addOn?.data?.display_price__limio
-        || ""
-}
-
-function getAddOnFeatures(addOn) {
-    return addOn?.data?.add_on?.data?.attributes?.offer_features__limio || ""
-}
-
-function getOfferAttributes(offer) {
-    return offer?.data?.offer?.data?.attributes
-        || offer?.data?.attributes
-        || null
-}
-
-function OfferCard({ attrs, offerName, featuresField, fallbackFeaturesHtml, showPlanName, showPrice }) {
-    const featuresHtml = attrs?.[featuresField] || fallbackFeaturesHtml
-    const planName = attrs?.display_name__limio || offerName || ""
-    const displayPrice = attrs?.display_price__limio || ""
-
-    return (
-        <div className="lbc-card">
-            {showPlanName && planName && (
-                <div className="lbc-plan-badge">
-                    <span className="lbc-plan-name">{planName}</span>
-                    {showPrice && displayPrice && (
-                        <span
-                            className="lbc-plan-price"
-                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(displayPrice) }}
-                        />
-                    )}
-                </div>
-            )}
-
-            <p className="lbc-card-description">If you cancel your subscription, you'll no longer have access to these features:</p>
-
-            <div className="lbc-features">
-                <div
-                    className="lbc-features-list"
-                    dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
-                />
-            </div>
-        </div>
-    )
-}
-
-function AddOnCard({ addOn, featuresField, fallbackFeaturesHtml, showPlanName, showPrice }) {
-    const name = getAddOnDisplayName(addOn)
-    const price = getAddOnPrice(addOn)
-    const featuresHtml = getAddOnFeatures(addOn) || fallbackFeaturesHtml
-
+function BenefitCard({ name, price, featuresHtml, description, badge, showPlanName, showPrice }) {
     return (
         <div className="lbc-card">
             {showPlanName && name && (
                 <div className="lbc-plan-badge">
                     <span className="lbc-plan-name">{name}</span>
-                    <span className="lbc-addon-tag">Add-on</span>
+                    {badge && <span className="lbc-addon-tag">{badge}</span>}
                     {showPrice && price && (
                         <span
                             className="lbc-plan-price"
@@ -93,7 +39,7 @@ function AddOnCard({ addOn, featuresField, fallbackFeaturesHtml, showPlanName, s
                 </div>
             )}
 
-            <p className="lbc-card-description">You'll also lose access to this add-on:</p>
+            <p className="lbc-card-description">{description}</p>
 
             <div className="lbc-features">
                 <div
@@ -112,7 +58,9 @@ function LossBenefitCancel() {
 
     const {
         heading = "Here's what you'll lose",
+        subheading = "If you cancel your subscription, you'll no longer have access to these features:",
         addOnsHeading = "You will also lose",
+        addOnDescription = "You'll also lose access to this add-on:",
         primaryColor = "#002C5F",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
         showPlanName = true,
@@ -147,15 +95,18 @@ function LossBenefitCancel() {
     const allActiveOffers = checkActiveOffers(subscription?.offers || [])
         .filter(o => o.data?.record_subtype !== "discount")
 
-    // For single-offer, use getCurrentOffer which unwraps to offer data directly
-    // For multi-offer, use the wrapped offers from checkActiveOffers
-    const offers = allActiveOffers.length > 1
-        ? allActiveOffers.map(o => ({ attrs: getOfferAttributes(o), name: o.name }))
-        : [{ attrs: getOfferAttributes(getCurrentOffer(subscription) || {}), name: subscription?.name }]
+    // Build offer card data - use checkActiveOffers results, fall back to getCurrentOffer
+    const offers = allActiveOffers.length > 0
+        ? allActiveOffers.map(o => {
+            const attrs = o?.data?.offer?.data?.attributes || o?.data?.attributes || {}
+            return { attrs, name: o.name }
+        })
+        : [{
+            attrs: (getCurrentOffer(subscription) || {})?.data?.attributes || {},
+            name: subscription?.name,
+        }]
 
     const activeAddOns = getActiveAddOns(subscription)
-
-    const hasAddOns = activeAddOns.length > 0
 
     return (
         <section
@@ -165,31 +116,46 @@ function LossBenefitCancel() {
             <h2 className="lbc-heading">{heading}</h2>
 
             <div className="lbc-cards-stack">
-                {offers.map((offer, i) => (
-                    <OfferCard
-                        key={i}
-                        attrs={offer.attrs}
-                        offerName={offer.name}
-                        featuresField={offerFeaturesField}
-                        fallbackFeaturesHtml={fallbackFeatures__limio_richtext}
-                        showPlanName={showPlanName}
-                        showPrice={showPrice}
-                    />
-                ))}
+                {offers.map((offer, i) => {
+                    const featuresHtml = offer.attrs?.[offerFeaturesField] || fallbackFeatures__limio_richtext
+                    const planName = offer.attrs?.display_name__limio || offer.name || ""
+                    const displayPrice = offer.attrs?.display_price__limio || ""
 
-                {hasAddOns && (
+                    return (
+                        <BenefitCard
+                            key={i}
+                            name={planName}
+                            price={displayPrice}
+                            featuresHtml={featuresHtml}
+                            description={subheading}
+                            showPlanName={showPlanName}
+                            showPrice={showPrice}
+                        />
+                    )
+                })}
+
+                {activeAddOns.length > 0 && (
                     <>
                         <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
-                        {activeAddOns.map((addOn, i) => (
-                            <AddOnCard
-                                key={i}
-                                addOn={addOn}
-                                featuresField={offerFeaturesField}
-                                fallbackFeaturesHtml={fallbackFeatures__limio_richtext}
-                                showPlanName={showPlanName}
-                                showPrice={showPrice}
-                            />
-                        ))}
+                        {activeAddOns.map((addOn, i) => {
+                            const attrs = getAddOnAttributes(addOn)
+                            const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
+                            const price = attrs.display_price__limio || ""
+                            const featuresHtml = attrs[offerFeaturesField] || fallbackFeatures__limio_richtext
+
+                            return (
+                                <BenefitCard
+                                    key={i}
+                                    name={name}
+                                    price={price}
+                                    featuresHtml={featuresHtml}
+                                    description={addOnDescription}
+                                    badge="Add-on"
+                                    showPlanName={showPlanName}
+                                    showPrice={showPrice}
+                                />
+                            )
+                        })}
                     </>
                 )}
             </div>

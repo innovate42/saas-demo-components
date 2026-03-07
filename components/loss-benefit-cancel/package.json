@@ -15,6 +15,12 @@
       "default": "Here's what you'll lose"
     },
     {
+      "id": "subheading",
+      "label": "Card description text",
+      "type": "string",
+      "default": "If you cancel your subscription, you'll no longer have access to these features:"
+    },
+    {
       "id": "primaryColor",
       "label": "Primary color",
       "type": "color",
@@ -31,6 +37,12 @@
       "label": "Add-ons section heading",
       "type": "string",
       "default": "You will also lose"
+    },
+    {
+      "id": "addOnDescription",
+      "label": "Add-on card description text",
+      "type": "string",
+      "default": "You'll also lose access to this add-on:"
     },
     {
       "id": "showPlanName",
