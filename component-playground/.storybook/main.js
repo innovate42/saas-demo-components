@@ -62,6 +62,14 @@ const config = {
                 __dirname,
                 path.join("..", "packages", "limio", "sdk")
             ),
+            "@limio/sdk/offers": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "sdk", "offers.js")
+            ),
+            "@limio/sdk/subscription": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "sdk", "subscription.js")
+            ),
             "@limio/sdk/components": path.resolve(
                 __dirname,
                 path.join("..", "packages", "limio", "sdk", "src", "components")

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loss Benefit Cancel - Mock Preview</title>
+<style>
+body { margin: 0; background: #e5e7eb; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.scenario { margin: 0 auto 40px; }
+.scenario-label { text-align: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin: 30px 0 10px; }
+
+/* Component CSS (verbatim from index.css) */
+.lbc-container {
+    --lbc-primary: #002C5F;
+    --lbc-text: #1a1f36;
+    --lbc-text-muted: #697386;
+    --lbc-border: #e3e8ee;
+    --lbc-bg: #f6f9fc;
+    --lbc-card: #ffffff;
+    --lbc-warning-bg: #fff7ed;
+    --lbc-warning-icon: #f59e0b;
+    --lbc-feature-icon: #ef4444;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--lbc-text);
+    background: var(--lbc-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px;
+    min-height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+}
+.lbc-container *, .lbc-container *::before, .lbc-container *::after { box-sizing: border-box; }
+.lbc-heading { font-size: 24px; font-weight: 700; margin: 0 0 8px; color: var(--lbc-text); text-align: center; }
+.lbc-subheading { font-size: 15px; color: var(--lbc-text-muted); margin: 0 0 24px; line-height: 1.5; text-align: center; }
+.lbc-card { background: var(--lbc-card); border: 1px solid var(--lbc-border); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04); width: 100%; padding: 32px 24px; text-align: center; }
+.lbc-cards-stack { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.lbc-icon { display: flex; justify-content: center; margin-bottom: 16px; color: var(--lbc-warning-icon); }
+.lbc-plan-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--lbc-bg); border: 1px solid var(--lbc-border); border-radius: 8px; padding: 8px 16px; margin-bottom: 16px; }
+.lbc-plan-name { font-weight: 600; font-size: 14px; color: var(--lbc-text); }
+.lbc-plan-price { font-size: 14px; color: var(--lbc-text-muted); }
+.lbc-plan-price p { margin: 0; display: inline; }
+.lbc-features { background: var(--lbc-warning-bg); border: 1px solid #fed7aa; border-radius: 10px; padding: 20px 24px; text-align: left; }
+.lbc-features-list ul { list-style: none; margin: 0; padding: 0; }
+.lbc-features-list li { position: relative; padding: 8px 0 8px 28px; font-size: 14px; line-height: 1.5; color: var(--lbc-text); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.lbc-features-list li:last-child { border-bottom: none; }
+.lbc-features-list li::before { content: "\2715"; position: absolute; left: 0; top: 8px; color: var(--lbc-feature-icon); font-weight: 700; font-size: 13px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.lbc-addons { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--lbc-border); text-align: left; }
+.lbc-addons-label { font-size: 13px; font-weight: 600; color: var(--lbc-text-muted); margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.03em; }
+.lbc-addons-list { list-style: none; margin: 0; padding: 0; }
+.lbc-addon-item { position: relative; padding: 6px 0 6px 28px; font-size: 14px; line-height: 1.5; color: var(--lbc-text); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.lbc-addon-item:last-child { border-bottom: none; }
+.lbc-addon-item::before { content: "\2715"; position: absolute; left: 0; top: 6px; color: var(--lbc-feature-icon); font-weight: 700; font-size: 13px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<!-- SCENARIO 1: Single Offer -->
+<p class="scenario-label">1. Single Offer</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">Here's what you'll lose</h2>
+    <p class="lbc-subheading">If you cancel your subscription, you'll no longer have access to these features:</p>
+    <div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Monthly</span>
+                <span class="lbc-plan-price"><p><strong>£20.00 per month</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Unlimited access to all content</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li><li>Community forum access</li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- SCENARIO 2: Single Offer + 1 Add-On -->
+<p class="scenario-label">2. Single Offer + 1 Add-On</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">Here's what you'll lose</h2>
+    <p class="lbc-subheading">If you cancel your subscription, you'll no longer have access to these features:</p>
+    <div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Monthly</span>
+                <span class="lbc-plan-price"><p><strong>£20.00 per month</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Unlimited access to all content</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li><li>Community forum access</li></ul>
+                </div>
+            </div>
+            <div class="lbc-addons">
+                <p class="lbc-addons-label">Add-ons you'll also lose:</p>
+                <ul class="lbc-addons-list">
+                    <li class="lbc-addon-item">Digital Key Access</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- SCENARIO 3: Single Offer + 2 Add-Ons -->
+<p class="scenario-label">3. Single Offer + 2 Add-Ons</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">Here's what you'll lose</h2>
+    <p class="lbc-subheading">If you cancel your subscription, you'll no longer have access to these features:</p>
+    <div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Monthly</span>
+                <span class="lbc-plan-price"><p><strong>£20.00 per month</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Unlimited access to all content</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li><li>Community forum access</li></ul>
+                </div>
+            </div>
+            <div class="lbc-addons">
+                <p class="lbc-addons-label">Add-ons you'll also lose:</p>
+                <ul class="lbc-addons-list">
+                    <li class="lbc-addon-item">Digital Key Access</li>
+                    <li class="lbc-addon-item">50GB Cloud Storage</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- SCENARIO 4: Two Offers -->
+<p class="scenario-label">4. Two Offers (stacked cards)</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">Here's what you'll lose</h2>
+    <p class="lbc-subheading">If you cancel your subscription, you'll no longer have access to these features:</p>
+    <div class="lbc-cards-stack">
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Monthly</span>
+                <span class="lbc-plan-price"><p><strong>£20.00 per month</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Unlimited access to all content</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li><li>Community forum access</li></ul>
+                </div>
+            </div>
+        </div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Premium Annual</span>
+                <span class="lbc-plan-price"><p><strong>£180.00 per year</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Everything in Monthly</li><li>Dedicated account manager</li><li>API access</li><li>Custom integrations</li><li>99.9% SLA guarantee</li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- SCENARIO 5: No Offers (fallback features) -->
+<p class="scenario-label">5. No Offers (shows fallback features)</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">Here's what you'll lose</h2>
+    <p class="lbc-subheading">If you cancel your subscription, you'll no longer have access to these features:</p>
+    <div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- SCENARIO 6: Hyundai Bluelink + Add-On -->
+<p class="scenario-label">6. Hyundai Bluelink + Add-On</p>
+<div class="scenario">
+<section class="lbc-container" style="--lbc-primary: #002C5F;">
+    <h2 class="lbc-heading">You'll lose these Bluelink features</h2>
+    <p class="lbc-subheading">Cancelling your plan means you'll no longer have access to:</p>
+    <div>
+        <div class="lbc-card">
+            <div class="lbc-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="lbc-plan-badge">
+                <span class="lbc-plan-name">Limio Monthly</span>
+                <span class="lbc-plan-price"><p><strong>£20.00 per month</strong></p></span>
+            </div>
+            <div class="lbc-features">
+                <div class="lbc-features-list">
+                    <ul><li>Connected Routing, Hyundai's cloud-based navigation</li><li>EV Routing & EV POI (point of interest)</li><li>Bluelink App status updates, vehicle information and send POI to car</li><li>Digital Key (optional)</li><li>Online Voice Recognition</li><li>Vehicle system OTA updates (if available for the vehicle)</li></ul>
+                </div>
+            </div>
+            <div class="lbc-addons">
+                <p class="lbc-addons-label">Add-ons you'll also lose:</p>
+                <ul class="lbc-addons-list">
+                    <li class="lbc-addon-item">Digital Key Access</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+</body>
+</html>

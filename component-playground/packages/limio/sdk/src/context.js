@@ -45,7 +45,7 @@ export function useSubscriptions() {
     if (context === undefined) {
         throw new Error("useSubscriptions must be used within a LimioProvider");
     }
-    return {subscriptions: docUser.subscriptions};
+    return {subscriptions: context?.subscriptions || docUser.subscriptions};
 }
 
 export function useUser() {
