@@ -10,3 +10,4 @@ storybook-static/
 *.jpeg
 *.png
 .limio.json
+coverage/
