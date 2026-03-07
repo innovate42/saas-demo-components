@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Shows users the benefits they will lose if they cancel their subscription",
   "main": "./index.js",
-  "dependencies": {},
+  "dependencies": {
+    "xss": "^1.0.15"
+  },
   "peerDependencies": {
     "react": "*"
   },
@@ -27,6 +29,12 @@
       "default": "#002C5F"
     },
     {
+      "id": "dangerColor",
+      "label": "Danger/accent color",
+      "type": "color",
+      "default": "#dc2626"
+    },
+    {
       "id": "fallbackFeatures__limio_richtext",
       "label": "Fallback features (if offer has none)",
       "type": "richText",
@@ -43,12 +51,6 @@
       "label": "Show current price",
       "type": "boolean",
       "default": true
-    },
-    {
-      "id": "offerFeaturesField",
-      "label": "Offer features attribute field",
-      "type": "string",
-      "default": "offer_features__limio"
     }
   ]
 }
