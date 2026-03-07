@@ -35,6 +35,24 @@
       "default": "#dc2626"
     },
     {
+      "id": "offerFeatures",
+      "label": "Offer features template",
+      "type": "richText",
+      "default": "{{data.attributes.offer_features__limio}}"
+    },
+    {
+      "id": "planName",
+      "label": "Plan name template",
+      "type": "string",
+      "default": "{{data.attributes.display_name__limio}}"
+    },
+    {
+      "id": "displayPrice",
+      "label": "Display price template",
+      "type": "string",
+      "default": "{{data.attributes.display_price__limio}}"
+    },
+    {
       "id": "fallbackFeatures__limio_richtext",
       "label": "Fallback features (if offer has none)",
       "type": "richText",

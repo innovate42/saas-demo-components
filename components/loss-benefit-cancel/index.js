@@ -1,61 +1,12 @@
 import React from "react"
 import { useSubscriptions, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
+import { getCurrentOffer } from "../source/utils/offers"
+import { parseString, encodeDates } from "../source/utils/string"
 import xss from "xss"
 import "./index.css"
 
 const sanitize = (str) => xss(str || "")
-
-/**
- * Extracts the current active standard offer from a subscription.
- * Filters out discount offers and picks the one without an end date (or latest start).
- */
-function getActiveOffer(subscription) {
-    const offers = subscription?.offers
-    if (!Array.isArray(offers) || offers.length === 0) return null
-
-    const now = new Date()
-    const standardOffers = offers.filter(o => {
-        const subtype = o?.data?.record_subtype
-        return subtype !== "discount"
-    })
-
-    // Find one that is currently active (started, not ended)
-    const active = standardOffers.find(o => {
-        const start = o?.data?.start ? new Date(o.data.start) : null
-        const end = o?.data?.end ? new Date(o.data.end) : null
-        if (!start) return false
-        return start <= now && (!end || end > now)
-    })
-
-    // Fallback: just use the first standard offer
-    return active || standardOffers[0] || offers[0] || null
-}
-
-/**
- * Gets offer_features__limio from the subscription's current offer.
- * Path: subscription.offers[].data.offer.data.attributes.offer_features__limio
- */
-function getOfferFeatures(subscription) {
-    const activeOffer = getActiveOffer(subscription)
-    return activeOffer?.data?.offer?.data?.attributes?.offer_features__limio || null
-}
-
-/**
- * Gets the display name from the subscription's current offer.
- */
-function getOfferDisplayName(subscription) {
-    const activeOffer = getActiveOffer(subscription)
-    return activeOffer?.data?.offer?.data?.attributes?.display_name__limio || subscription?.name || ""
-}
-
-/**
- * Gets the display price from the subscription's current offer.
- */
-function getOfferDisplayPrice(subscription) {
-    const activeOffer = getActiveOffer(subscription)
-    return activeOffer?.data?.offer?.data?.attributes?.display_price__limio || ""
-}
 
 function LossBenefitCancel() {
     const { isInPageBuilder } = useLimioContext() || {}
@@ -67,6 +18,9 @@ function LossBenefitCancel() {
         subheading = "If you cancel your subscription, you'll no longer have access to these features:",
         primaryColor = "#002C5F",
         dangerColor = "#dc2626",
+        offerFeatures = "{{data.attributes.offer_features__limio}}",
+        planName = "{{data.attributes.display_name__limio}}",
+        displayPrice = "{{data.attributes.display_price__limio}}",
         fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
         showPlanName = true,
         showPrice = true,
@@ -95,10 +49,14 @@ function LossBenefitCancel() {
         subscription = subscriptions.find(s => s?.status === "active") || subscriptions[0]
     }
 
-    // Extract data safely
-    const featuresHtml = getOfferFeatures(subscription) || fallbackFeatures__limio_richtext
-    const planName = getOfferDisplayName(subscription)
-    const displayPrice = getOfferDisplayPrice(subscription)
+    // Get the current offer from the subscription
+    const offer = subscription ? getCurrentOffer(subscription) : null
+
+    // Resolve moustache templates against offer data
+    const resolvedFeatures = offer ? parseString(offerFeatures, offer, encodeDates) : ""
+    const featuresHtml = resolvedFeatures || fallbackFeatures__limio_richtext
+    const resolvedPlanName = offer ? parseString(planName, offer, encodeDates) : (subscription?.name || "")
+    const resolvedPrice = offer ? parseString(displayPrice, offer, encodeDates) : ""
 
     return (
         <section
@@ -119,13 +77,13 @@ function LossBenefitCancel() {
 
                 <h2 className="lbc-heading">{heading}</h2>
 
-                {showPlanName && planName && (
+                {showPlanName && resolvedPlanName && (
                     <div className="lbc-plan-badge">
-                        <span className="lbc-plan-name">{planName}</span>
-                        {showPrice && displayPrice && (
+                        <span className="lbc-plan-name">{resolvedPlanName}</span>
+                        {showPrice && resolvedPrice && (
                             <span
                                 className="lbc-plan-price"
-                                dangerouslySetInnerHTML={{ __html: sanitize(displayPrice) }}
+                                dangerouslySetInnerHTML={{ __html: sanitize(resolvedPrice) }}
                             />
                         )}
                     </div>
