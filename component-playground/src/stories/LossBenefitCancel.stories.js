@@ -108,7 +108,7 @@ const defaultArgs = {
     subheading: "If you cancel your subscription, you'll no longer have access to these features:",
     primaryColor: "#002C5F",
     dangerColor: "#dc2626",
-    offerFeatures: "{{data.attributes.offer_features__limio}}",
+    offerFeatures__limio_richtext: "{{data.attributes.offer_features__limio}}",
     planName: "{{data.attributes.display_name__limio}}",
     displayPrice: "{{data.attributes.display_price__limio}}",
     fallbackFeatures__limio_richtext: "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
