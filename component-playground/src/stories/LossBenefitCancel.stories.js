@@ -73,9 +73,14 @@ const addonCloudStorage = {
 }
 
 function makeSubscription({ offers = [], addOns = [], status = "active" } = {}) {
+    // getCurrentOffer() falls back to subscription.data.offer when checkActiveOffers
+    // returns empty (which happens in Storybook due to date string vs Date object comparison).
+    const primaryOffer = offers.find(o => o.data?.record_subtype !== "discount")
     return {
         name: "Test Subscription",
-        data: {},
+        data: {
+            offer: primaryOffer?.data?.offer,
+        },
         status,
         id: "sub-test-001",
         reference: "TEST001",
@@ -102,10 +107,13 @@ const defaultArgs = {
     heading: "Here's what you'll lose",
     subheading: "If you cancel your subscription, you'll no longer have access to these features:",
     primaryColor: "#002C5F",
+    dangerColor: "#dc2626",
+    offerFeatures: "{{data.attributes.offer_features__limio}}",
+    planName: "{{data.attributes.display_name__limio}}",
+    displayPrice: "{{data.attributes.display_price__limio}}",
     fallbackFeatures__limio_richtext: "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
     showPlanName: true,
     showPrice: true,
-    offerFeaturesField: "offer_features__limio",
 }
 
 // -- Stories --
