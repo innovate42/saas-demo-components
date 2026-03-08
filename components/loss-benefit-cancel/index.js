@@ -1,5 +1,7 @@
-import React from "react"
-import { useSubscriptions, useLimioContext, sanitiseHTML } from "@limio/sdk"
+import React, { Suspense } from "react"
+import { useLimioContext, ErrorBoundary, sanitiseHTML } from "@limio/sdk"
+import { getCurrentOffer } from "@limio/shop/src/shop/helpers/checks"
+import { useLimioUserSubscription } from "@limio/internal-checkout-sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -8,7 +10,7 @@ const PAGE_BUILDER_PREVIEW = {
     planName: "Example Plan",
     displayPrice: "<p><strong>$9.99/month</strong></p>",
     featuresHtml: "<ul><li>Access to all plan features</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li></ul>",
-    addOns: [{ name: "example Add-On", price: "<p>$4.99/month</p>" }],
+    addOns: [{ name: "Example Add-On", price: "<p>$4.99/month</p>" }],
 }
 
 function isMoustache(val) {
@@ -34,56 +36,17 @@ function getAddOnAttributes(addOn) {
     return addOn?.data?.add_on?.data?.attributes || {}
 }
 
-function LossBenefitCancel() {
-    const { isInPageBuilder } = useLimioContext() || {}
-    const { subscriptions } = useSubscriptions() || {}
-    const props = useStaticProps() || {}
-
+// Renders the card UI — used by both live and page builder modes
+function LossBenefitCard({ resolvedPlanName, resolvedPrice, resolvedFeatures, activeAddOns, props }) {
     const {
         heading = "Here's what you'll lose",
         subheading = "If you cancel your subscription, you'll no longer have access to these features:",
         addOnsHeading = "You will also lose",
         addOnDescription = "You'll also lose access to this add-on:",
         primaryColor = "#002C5F",
-        offerFeatures__limio_richtext = "",
-        fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
-        planName = "",
-        displayPrice = "",
         showPlanName = true,
         showPrice = true,
     } = props
-
-    // In page builder, moustache templates aren't resolved — show preview data instead
-    const resolvedPlanName = (isInPageBuilder && isMoustache(planName)) ? PAGE_BUILDER_PREVIEW.planName : planName
-    const resolvedPrice = (isInPageBuilder && isMoustache(displayPrice)) ? PAGE_BUILDER_PREVIEW.displayPrice : displayPrice
-    const resolvedFeatures = (isInPageBuilder && isMoustache(offerFeatures__limio_richtext))
-        ? PAGE_BUILDER_PREVIEW.featuresHtml
-        : (offerFeatures__limio_richtext || fallbackFeatures__limio_richtext)
-
-    // Get subscription from URL param or use the first active one
-    let subscription = null
-    if (!isInPageBuilder && typeof window !== "undefined") {
-        try {
-            const params = new URL(window.location).searchParams
-            const subId = params.get("subId") || ""
-            const subRef = params.get("subRef") || ""
-            if (subId && Array.isArray(subscriptions)) {
-                subscription = subscriptions.find(s => s?.id === subId) || null
-            }
-            if (!subscription && subRef && Array.isArray(subscriptions)) {
-                subscription = subscriptions.find(s => s?.reference === subRef) || null
-            }
-        } catch (e) {
-            // window.location may not be available in some contexts
-        }
-    }
-
-    if (!subscription && Array.isArray(subscriptions) && subscriptions.length > 0) {
-        subscription = subscriptions.find(s => s?.status === "active") || subscriptions[0]
-    }
-
-    // In page builder, show example add-on so the section is visible for configuration
-    const activeAddOns = isInPageBuilder ? PAGE_BUILDER_PREVIEW.addOns : getActiveAddOns(subscription)
 
     return (
         <section className="lbc-container" style={{ "--lbc-primary": primaryColor }}>
@@ -115,7 +78,6 @@ function LossBenefitCancel() {
                         <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
                         <p className="lbc-addons-description">{addOnDescription}</p>
                         {activeAddOns.map((addOn, i) => {
-                            // Support both real add-on objects and page builder preview objects
                             const attrs = addOn?.data ? getAddOnAttributes(addOn) : {}
                             const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
                             const price = attrs.display_price__limio || addOn?.price || ""
@@ -137,6 +99,84 @@ function LossBenefitCancel() {
                 )}
             </div>
         </section>
+    )
+}
+
+// Live page version — fetches subscription data via Suspense hook
+function LossBenefitCancelLive() {
+    const props = useStaticProps() || {}
+    const {
+        offerFeatures__limio_richtext = "",
+        fallbackFeatures__limio_richtext = "<ul><li>Access to all plan features</li><li>Customer support</li><li>Regular updates</li></ul>",
+        planName = "",
+        displayPrice = "",
+    } = props
+
+    const params = new URL(window.location).searchParams
+    const subIdParam = params.get("subId") || ""
+
+    const { userSubscription } = useLimioUserSubscription(subIdParam)
+
+    // Get the current offer from the subscription
+    const offer = userSubscription ? getCurrentOffer(userSubscription) : null
+    const offerAttributes = offer?.data?.attributes || {}
+
+    // Subscription data is primary source, non-moustache props are overrides, fallback last
+    const resolvedPlanName = offerAttributes.display_name__limio || (!isMoustache(planName) && planName) || ""
+    const resolvedPrice = offerAttributes.display_price__limio || (!isMoustache(displayPrice) && displayPrice) || ""
+    const resolvedFeatures = offerAttributes.offer_features__limio || (!isMoustache(offerFeatures__limio_richtext) && offerFeatures__limio_richtext) || fallbackFeatures__limio_richtext
+
+    const activeAddOns = getActiveAddOns(userSubscription)
+
+    return (
+        <LossBenefitCard
+            resolvedPlanName={resolvedPlanName}
+            resolvedPrice={resolvedPrice}
+            resolvedFeatures={resolvedFeatures}
+            activeAddOns={activeAddOns}
+            props={props}
+        />
+    )
+}
+
+function LossBenefitCancel() {
+    const { isInPageBuilder } = useLimioContext() || {}
+    const props = useStaticProps() || {}
+
+    // Page builder: show preview data directly (no subscription fetch needed)
+    if (isInPageBuilder) {
+        return (
+            <LossBenefitCard
+                resolvedPlanName={PAGE_BUILDER_PREVIEW.planName}
+                resolvedPrice={PAGE_BUILDER_PREVIEW.displayPrice}
+                resolvedFeatures={PAGE_BUILDER_PREVIEW.featuresHtml}
+                activeAddOns={PAGE_BUILDER_PREVIEW.addOns}
+                props={props}
+            />
+        )
+    }
+
+    // Live page: fetch subscription data with Suspense
+    return (
+        <ErrorBoundary
+            fallback={
+                <div className="lbc-container">
+                    <p>Could not load subscription details.</p>
+                </div>
+            }
+        >
+            <Suspense
+                fallback={
+                    <div className="lbc-container">
+                        <div className="lbc-card">
+                            <p>Loading subscription details...</p>
+                        </div>
+                    </div>
+                }
+            >
+                <LossBenefitCancelLive />
+            </Suspense>
+        </ErrorBoundary>
     )
 }
 
