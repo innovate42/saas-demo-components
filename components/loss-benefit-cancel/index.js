@@ -2,6 +2,7 @@ import React, { Suspense } from "react"
 import { useLimioContext, ErrorBoundary, sanitiseHTML } from "@limio/sdk"
 import { getCurrentOffer } from "@limio/shop/src/shop/helpers/checks"
 import { useLimioUserSubscription } from "@limio/internal-checkout-sdk"
+import { useAuthModeFetch } from "@limio/shop/src/components/helpers.tsx"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -17,8 +18,7 @@ function isMoustache(val) {
     return typeof val === "string" && val.includes("{{")
 }
 
-function getActiveAddOns(subscription) {
-    const addOns = subscription?.addOns
+function getActiveAddOns(addOns) {
     if (!Array.isArray(addOns) || addOns.length === 0) return []
 
     const now = new Date()
@@ -33,7 +33,7 @@ function getActiveAddOns(subscription) {
 }
 
 function getAddOnAttributes(addOn) {
-    return addOn?.data?.add_on?.data?.attributes || {}
+    return addOn?.data?.offer?.data?.attributes || addOn?.data?.add_on?.data?.attributes || {}
 }
 
 // Renders the card UI — used by both live and page builder modes
@@ -117,6 +117,12 @@ function LossBenefitCancelLive() {
 
     const { userSubscription } = useLimioUserSubscription(subIdParam)
 
+    // Fetch add-ons via dedicated API endpoint (workaround: useLimioUserSubscription drops addOns)
+    const { data: addOnData } = useAuthModeFetch(
+        `/api/mma/subscriptions/${subIdParam}/related/subscription_add_on`,
+        { suspense: true }
+    )
+
     // Get the current offer from the subscription
     const offer = userSubscription ? getCurrentOffer(userSubscription) : null
     const offerAttributes = offer?.data?.attributes || {}
@@ -126,7 +132,7 @@ function LossBenefitCancelLive() {
     const resolvedPrice = offerAttributes.display_price__limio || (!isMoustache(displayPrice) && displayPrice) || ""
     const resolvedFeatures = offerAttributes.offer_features__limio || (!isMoustache(offerFeatures__limio_richtext) && offerFeatures__limio_richtext) || fallbackFeatures__limio_richtext
 
-    const activeAddOns = getActiveAddOns(userSubscription)
+    const activeAddOns = getActiveAddOns(addOnData?.items || [])
 
     return (
         <LossBenefitCard
