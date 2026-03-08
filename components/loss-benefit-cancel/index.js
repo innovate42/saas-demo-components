@@ -36,6 +36,12 @@ function getAddOnAttributes(addOn) {
     return addOn?.data?.offer?.data?.attributes || addOn?.data?.add_on?.data?.attributes || {}
 }
 
+function formatAddOnPrice(priceObj) {
+    if (!priceObj || typeof priceObj.amount !== "number") return ""
+    const currency = priceObj.currency || "USD"
+    return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(priceObj.amount)
+}
+
 // Renders the card UI — used by both live and page builder modes
 function LossBenefitCard({ resolvedPlanName, resolvedPrice, resolvedFeatures, activeAddOns, props }) {
     const {
@@ -79,8 +85,8 @@ function LossBenefitCard({ resolvedPlanName, resolvedPrice, resolvedFeatures, ac
                         <p className="lbc-addons-description">{addOnDescription}</p>
                         {activeAddOns.map((addOn, i) => {
                             const attrs = addOn?.data ? getAddOnAttributes(addOn) : {}
-                            const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
-                            const price = attrs.display_price__limio || addOn?.price || ""
+                            const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.data?.name || addOn?.name || ""
+                            const price = attrs.display_price__limio || formatAddOnPrice(addOn?.data?.price) || addOn?.price || ""
 
                             return (
                                 <div key={i} className="lbc-addon-item">
