@@ -3,6 +3,18 @@ import { useSubscriptions, useLimioContext, sanitiseHTML } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
+// Preview data shown in the Limio Page Builder when moustache templates are unresolved
+const PAGE_BUILDER_PREVIEW = {
+    planName: "Example Plan",
+    displayPrice: "<p><strong>$9.99/month</strong></p>",
+    featuresHtml: "<ul><li>Access to all plan features</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li></ul>",
+    addOns: [{ name: "example Add-On", price: "<p>$4.99/month</p>" }],
+}
+
+function isMoustache(val) {
+    return typeof val === "string" && val.includes("{{")
+}
+
 function getActiveAddOns(subscription) {
     const addOns = subscription?.addOns
     if (!Array.isArray(addOns) || addOns.length === 0) return []
@@ -41,7 +53,12 @@ function LossBenefitCancel() {
         showPrice = true,
     } = props
 
-    const featuresHtml = offerFeatures__limio_richtext || fallbackFeatures__limio_richtext
+    // In page builder, moustache templates aren't resolved — show preview data instead
+    const resolvedPlanName = (isInPageBuilder && isMoustache(planName)) ? PAGE_BUILDER_PREVIEW.planName : planName
+    const resolvedPrice = (isInPageBuilder && isMoustache(displayPrice)) ? PAGE_BUILDER_PREVIEW.displayPrice : displayPrice
+    const resolvedFeatures = (isInPageBuilder && isMoustache(offerFeatures__limio_richtext))
+        ? PAGE_BUILDER_PREVIEW.featuresHtml
+        : (offerFeatures__limio_richtext || fallbackFeatures__limio_richtext)
 
     // Get subscription from URL param or use the first active one
     let subscription = null
@@ -65,18 +82,19 @@ function LossBenefitCancel() {
         subscription = subscriptions.find(s => s?.status === "active") || subscriptions[0]
     }
 
-    const activeAddOns = getActiveAddOns(subscription)
+    // In page builder, show example add-on so the section is visible for configuration
+    const activeAddOns = isInPageBuilder ? PAGE_BUILDER_PREVIEW.addOns : getActiveAddOns(subscription)
 
     return (
         <section className="lbc-container" style={{ "--lbc-primary": primaryColor }}>
             <div className="lbc-card">
-                {showPlanName && planName && (
+                {showPlanName && resolvedPlanName && (
                     <div className="lbc-plan-badge">
-                        <span className="lbc-plan-name">{planName}</span>
-                        {showPrice && displayPrice && (
+                        <span className="lbc-plan-name">{resolvedPlanName}</span>
+                        {showPrice && resolvedPrice && (
                             <span
                                 className="lbc-plan-price"
-                                dangerouslySetInnerHTML={{ __html: sanitiseHTML(displayPrice) }}
+                                dangerouslySetInnerHTML={{ __html: sanitiseHTML(resolvedPrice) }}
                             />
                         )}
                     </div>
@@ -88,7 +106,7 @@ function LossBenefitCancel() {
                 <div className="lbc-features">
                     <div
                         className="lbc-features-list"
-                        dangerouslySetInnerHTML={{ __html: sanitiseHTML(featuresHtml) }}
+                        dangerouslySetInnerHTML={{ __html: sanitiseHTML(resolvedFeatures) }}
                     />
                 </div>
 
@@ -97,9 +115,10 @@ function LossBenefitCancel() {
                         <h3 className="lbc-addons-heading">{addOnsHeading}</h3>
                         <p className="lbc-addons-description">{addOnDescription}</p>
                         {activeAddOns.map((addOn, i) => {
-                            const attrs = getAddOnAttributes(addOn)
+                            // Support both real add-on objects and page builder preview objects
+                            const attrs = addOn?.data ? getAddOnAttributes(addOn) : {}
                             const name = attrs.display_name__limio || addOn?.data?.add_on?.name || addOn?.name || ""
-                            const price = attrs.display_price__limio || ""
+                            const price = attrs.display_price__limio || addOn?.price || ""
 
                             return (
                                 <div key={i} className="lbc-addon-item">
