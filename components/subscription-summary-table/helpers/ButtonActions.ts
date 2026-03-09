@@ -22,10 +22,10 @@ export function useButtonActions(subscription: Subscription, onToast: OnToast) {
         setCancelError(null)
         const noticeDays = getDaysNoticeGiven(subscription)
 
-        if (noticeDays > minimumDaysNotice) {
-          const cancelUrl = new URL(cancelButtonLink, window.location.origin)
         if (noticeDays >= minimumDaysNotice) {
-          window.location.href = `${cancelButtonLink}?subId=${subscription.id}`
+          const cancelUrl = new URL(cancelButtonLink, window.location.origin)
+          cancelUrl.searchParams.set("subId", String(subscription.id))
+          window.location.href = cancelUrl.toString()
         } else {
           setShowNoticeModal(true)
         }
