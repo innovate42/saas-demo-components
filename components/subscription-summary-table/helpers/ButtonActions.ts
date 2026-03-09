@@ -24,8 +24,8 @@ export function useButtonActions(subscription: Subscription, onToast: OnToast) {
 
         if (noticeDays > minimumDaysNotice) {
           const cancelUrl = new URL(cancelButtonLink, window.location.origin)
-          cancelUrl.searchParams.set("subId", String(subscription.id))
-          window.location.href = cancelUrl.toString()
+        if (noticeDays >= minimumDaysNotice) {
+          window.location.href = `${cancelButtonLink}?subId=${subscription.id}`
         } else {
           setShowNoticeModal(true)
         }
