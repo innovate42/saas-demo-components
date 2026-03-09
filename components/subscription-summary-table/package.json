@@ -1,0 +1,238 @@
+{
+  "name": "component-subscription-summary-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.17.1",
+    "@mui/material": "^5.17.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.27"
+  },
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "limioProps": [
+    {
+      "id": "notFoundText__limio_richtext",
+      "label": "Subscriptions not found text",
+      "type": "richtext",
+      "default": "Sorry! We couldn't find any subscription information linked to your account. Please contact our support team for more information."
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "subscriptions-summary-limio"
+    },
+    {
+      "id": "subscriptionIdLabel",
+      "label": "Label text for subscription ID",
+      "type": "string",
+      "default": "Subscription ID"
+    },
+    {
+      "id": "showCancelButton",
+      "label": "Show or hide cancel button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "cancelButtonText",
+      "label": "Cancel button text",
+      "type": "string",
+      "default": "Cancel"
+    },
+    {
+      "id": "cancelButtonLink",
+      "label": "Link to cancel page",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "minimumDaysNotice",
+      "label": "Minimum days notice required for cancellation",
+      "type": "number",
+      "default": 60
+    },
+    {
+      "id": "requestCancellationLink",
+      "label": "Link to cancellation request form (insufficient notice)",
+      "type": "string",
+      "default": "/request-cancellation"
+    },
+    {
+      "id": "insufficientNoticeModalTitle",
+      "label": "Modal title for insufficient notice",
+      "type": "string",
+      "default": "Cancellation Notice Period"
+    },
+    {
+      "id": "insufficientNoticeModalBody",
+      "label": "Modal body text for insufficient notice",
+      "type": "string",
+      "default": "Your notice period is less than the required minimum. You can submit a cancellation request that will take effect at the next billing cycle."
+    },
+    {
+      "id": "insufficientNoticeConfirmText",
+      "label": "Modal confirm button text",
+      "type": "string",
+      "default": "Submit Request"
+    },
+    {
+      "id": "insufficientNoticeCancelText",
+      "label": "Modal cancel button text",
+      "type": "string",
+      "default": "Go Back"
+    },
+    {
+      "id": "cancellationErrorMessage",
+      "label": "Error message when cancellation check fails",
+      "type": "string",
+      "default": "Unable to process your request. Please contact support."
+    },
+    {
+      "id": "showUpdateButton",
+      "label": "Show or hide update button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showCancellationModal",
+      "label": "Show or hide cancellation modal",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "updateButtonText",
+      "label": "Update button text",
+      "type": "string",
+      "default": "Renew"
+    },
+    {
+      "id": "updateButtonLink",
+      "label": "Link to update page",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "pageTitle",
+      "label": "Page title",
+      "type": "string",
+      "default": "Subscriptions"
+    },
+    {
+      "id": "pageSubtitle",
+      "label": "Page subtitle",
+      "type": "string",
+      "default": "View and manage active subscriptions."
+    },
+    {
+      "id": "billingPlanColumnLabel",
+      "label": "Billing Plan column header",
+      "type": "string",
+      "default": "Billing Plan"
+    },
+    {
+      "id": "unitPriceColumnLabel",
+      "label": "Unit Price column header",
+      "type": "string",
+      "default": "Unit Price"
+    },
+    {
+      "id": "existingQuantityColumnLabel",
+      "label": "Existing Quantity column header",
+      "type": "string",
+      "default": "Existing Quantity"
+    },
+    {
+      "id": "billThroughDateColumnLabel",
+      "label": "Bill Through Date column header",
+      "type": "string",
+      "default": "Bill Through Date"
+    },
+    {
+      "id": "showEditAddOnsButton",
+      "label": "Show Edit Add-Ons button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "editAddOnsButtonText",
+      "label": "Edit Add-Ons button text",
+      "type": "string",
+      "default": "Edit Add-Ons"
+    },
+    {
+      "id": "editAddOnsLink",
+      "label": "Link for Edit Add-Ons page",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "showAddNewSubscriptionButton",
+      "label": "Show Add New Subscription button",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "addNewSubscriptionButtonText",
+      "label": "Add New Subscription button text",
+      "type": "string",
+      "default": "Add New Subscription"
+    },
+    {
+      "id": "addNewSubscriptionLink",
+      "label": "Link for Add New Subscription page",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "offerRowColor",
+      "label": "Offer row background colour",
+      "type": "color",
+      "default": "#FEF0EA"
+    },
+    {
+      "id": "offerChipColor",
+      "label": "Offer chip colour",
+      "type": "color",
+      "default": "#F05A28"
+    },
+    {
+      "id": "addOnRowColor",
+      "label": "Add-on row background colour",
+      "type": "color",
+      "default": "#F1F2F3"
+    },
+    {
+      "id": "addOnChipColor",
+      "label": "Add-on chip colour",
+      "type": "color",
+      "default": "#4E545F"
+    },
+    {
+      "id": "primaryTextColor",
+      "label": "Primary text colour",
+      "type": "color",
+      "default": "#2D3135"
+    },
+    {
+      "id": "renewalDateLabel",
+      "label": "Renewal date chip label",
+      "type": "string",
+      "default": "Renewal Date"
+    }
+  ]
+}

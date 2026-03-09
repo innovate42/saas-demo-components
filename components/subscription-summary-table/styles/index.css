@@ -1,0 +1,96 @@
+.subscription-details-table td.cell-base {
+  font-size: 0.825rem;
+  border-bottom: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.subscription-details-table td.label-cell {
+  color: #6c757d;
+  font-weight: 500;
+  width: 15%;
+  white-space: nowrap;
+}
+
+.subscription-details-table td.label-cell-wide {
+  color: #6c757d;
+  font-weight: 500;
+  width: 40%;
+}
+
+.subscription-details-table td.value-cell {
+  color: #2d3135;
+  font-weight: 600;
+  width: 15%;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+
+.subscription-summary .btn-dark {
+  background-color: #1a1a1a;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.subscription-summary .btn-dark:hover {
+  background-color: var(--accent-color, #F05A28);
+}
+
+.subscription-summary .btn-cancel {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.subscription-summary .btn-cancel:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* ── Status chip ─────────────────────────────── */
+
+.subscription-summary .status-chip {
+  text-transform: capitalize;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.subscription-summary .status-chip-active {
+  color: #106617;
+  background-color: #e9feeb;
+}
+
+.subscription-summary .status-chip-cancelled {
+  color: #591414;
+  background-color: #fbeaea;
+}
+
+/* ── Cancellation notice modal ───────────────── */
+
+.subscription-modal .modal-title {
+  color: #2d3135;
+  font-weight: 600;
+}
+
+.subscription-modal .modal-actions {
+  padding: 16px 24px;
+}
+
+.subscription-modal .modal-btn-cancel {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.subscription-modal .modal-btn-cancel:hover {
+  background-color: #f5f5f5;
+}
+
+.subscription-modal .modal-btn-confirm {
+  background-color: var(--accent-color, #F05A28);
+  color: #fff;
+}
+
+.subscription-modal .modal-btn-confirm:hover {
+  filter: brightness(0.85);
+}
