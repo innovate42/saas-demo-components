@@ -6,9 +6,13 @@ export function calculateDaysUntilDate(futureDate: Date): number {
 }
 
 export function getDaysNoticeGiven(subscription: Subscription): number {
-  const termEndDate = subscription.data?.termEndDate
+  const termEndDate = subscription.data?.termEndDate || subscription?.termEndDate
   if (!termEndDate) {
     throw new Error("No term end date found for subscription")
   }
-  return calculateDaysUntilDate(new Date(termEndDate))
+  const date = new Date(termEndDate)
+  if (isNaN(date.getTime())) {
+    throw new Error(`Invalid termEndDate: ${termEndDate}`)
+  }
+  return calculateDaysUntilDate(date)
 }

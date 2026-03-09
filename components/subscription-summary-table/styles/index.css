@@ -34,7 +34,7 @@
 }
 
 .subscription-summary .btn-dark:hover {
-  background-color: var(--accent-color, #F05A28);
+  background-color: var(--accent-color-dark, #d24a1f);
 }
 
 .subscription-summary .btn-cancel {
@@ -87,7 +87,7 @@
 }
 
 .subscription-modal .modal-btn-confirm {
-  background-color: var(--accent-color, #F05A28);
+  background-color: var(--accent-color-dark, #d24a1f);
   color: #fff;
 }
 

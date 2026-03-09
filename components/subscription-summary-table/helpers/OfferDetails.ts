@@ -1,4 +1,3 @@
-import { DateTime } from "@limio/date"
 import type { LimioObject, SubscriptionOffer, AddOn } from "@limio/types"
 import { getOfferBillingLabel, getAddOnBillingLabel } from "./Schedule"
 
@@ -35,9 +34,9 @@ export function mapAddOnToRow(addOn: AddOn, formatPrice: FormatPrice): Subscript
 type WithDateRange = { data: { start: string; end?: string } }
 
 export function checkActiveOffersAndAddOns<T extends WithDateRange>(items: T[] = []): T[] {
-  const currentDate = DateTime.utc().toISO()
+  const currentDate = new Date().toISOString()
   return items
     .sort((a, b) => new Date(a.data.start).getTime() - new Date(b.data.start).getTime())
-    .filter((item) => !item.data?.end || DateTime.fromISO(item.data.end).toString() >= currentDate)
+    .filter((item) => !item.data?.end || item.data.end >= currentDate)
     .filter((item) => item.data.start <= currentDate) // Item might be future dated for next term etc.
 }

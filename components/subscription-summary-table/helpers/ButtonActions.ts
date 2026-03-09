@@ -23,7 +23,9 @@ export function useButtonActions(subscription: Subscription, onToast: OnToast) {
         const noticeDays = getDaysNoticeGiven(subscription)
 
         if (noticeDays > minimumDaysNotice) {
-          window.location.href = `${cancelButtonLink}?subId=${subscription.id}`
+          const cancelUrl = new URL(cancelButtonLink, window.location.origin)
+          cancelUrl.searchParams.set("subId", String(subscription.id))
+          window.location.href = cancelUrl.toString()
         } else {
           setShowNoticeModal(true)
         }
@@ -32,7 +34,9 @@ export function useButtonActions(subscription: Subscription, onToast: OnToast) {
         setCancelError(cancellationErrorMessage)
       }
     } else {
-      window.location.href = `${cancelButtonLink}?subId=${subscription.id}`
+      const cancelUrl = new URL(cancelButtonLink, window.location.origin)
+      cancelUrl.searchParams.set("subId", String(subscription.id))
+      window.location.href = cancelUrl.toString()
     }
   }
 
@@ -48,6 +52,9 @@ export function useButtonActions(subscription: Subscription, onToast: OnToast) {
       const checkoutId = basket?.order?.checkoutId
       if (checkoutId) {
         window.location.href = `${destinationLink}?basket=${checkoutId}`
+      } else {
+        console.error(errorLogMessage, "No checkoutId returned from initiateCheckout", basket)
+        onToast(errorToastKey, "Something went wrong. Please try again.", "error")
       }
     } catch (error) {
       console.error(errorLogMessage, error)

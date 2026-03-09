@@ -23,6 +23,24 @@ type Props = {
   componentId: string
 }
 
+type SubscriptionContentProps = {
+  ownerId: string | null
+  subRef: string | null
+  notFoundText: string
+  onToast: (key: string, message: string, variant?: "success" | "error" | "warning" | "info") => void
+}
+
+function SubscriptionContent({ ownerId, subRef, notFoundText, onToast }: SubscriptionContentProps): React.JSX.Element {
+  const { subscriptions: allSubscriptions } = useSubscriptions({ ownerId })
+  const subscriptions = subRef ? allSubscriptions.filter((sub: { name?: string }) => sub.name === subRef) : allSubscriptions
+
+  if (subscriptions.length < 1) {
+    return <ErrorMessage text={notFoundText} icon={<ErrorIcon style={{ height: "50px", width: "50px" }} />} />
+  }
+
+  return <Subscriptions subscriptions={subscriptions} onToast={onToast} />
+}
+
 export function SubscriptionSummaryTable({ componentId, notFoundText__limio_richtext }: Props): React.JSX.Element {
   const [toasts, setToasts] = useState<Record<string, Toast>>({})
   const { offerChipColor } = useComponentStaticProps()
@@ -33,13 +51,6 @@ export function SubscriptionSummaryTable({ componentId, notFoundText__limio_rich
   const params = new URLSearchParams(window.location.search)
   const ownerId = params.get("ownerId")
   const subRef = params.get("subRef")
-  const { subscriptions: allSubscriptions } = useSubscriptions({ ownerId })
-  const subscriptions = subRef ? allSubscriptions.filter((sub: { name?: string }) => sub.name === subRef) : allSubscriptions
-
-  //show error text if no subscription data is available
-  if (subscriptions.length < 1) {
-    return <ErrorMessage text={notFoundText__limio_richtext} icon={<ErrorIcon style={{ height: "50px", width: "50px" }} />} />
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,7 +83,7 @@ export function SubscriptionSummaryTable({ componentId, notFoundText__limio_rich
               </Box>
 
               {/* Subscriptions */}
-              <Subscriptions subscriptions={subscriptions} onToast={showToast} />
+              <SubscriptionContent ownerId={ownerId} subRef={subRef} notFoundText={notFoundText__limio_richtext} onToast={showToast} />
             </Suspense>
           </ErrorBoundary>
         </Container>

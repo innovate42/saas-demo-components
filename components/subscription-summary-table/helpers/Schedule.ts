@@ -28,7 +28,7 @@ export function getAddOnBillingLabel(offer: ElasticOffer): string {
 
 export function getBillThroughDate(schedules: Schedule[]): string {
   const currentDate = DateTime.utc().toISO()
-  const nextBillingSchedule = schedules
+  const nextBillingSchedule = (schedules ?? [])
     .filter(s => ["active", "pending", "pending-external"].includes(s.status))
     .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
     .find(s => s.data.date > currentDate)
