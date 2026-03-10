@@ -4,18 +4,19 @@
   --mt-primary: #ffd43b;
   --mt-accent: #ffed4a;
   --mt-primary-contrast: #000000;
-  --mt-text: #000000;
-  --mt-text-secondary: #4a5568;
-  --mt-text-muted: #718096;
-  --mt-border: #e2e8f0;
-  --mt-bg: #f7fafc;
-  --mt-card: #ffffff;
+  --mt-text: #ffffff;
+  --mt-text-secondary: #cbd5e0;
+  --mt-text-muted: #a0aec0;
+  --mt-border: #2d3748;
+  --mt-bg: #000000;
+  --mt-card: #1a202c;
   --mt-success: #48bb78;
   --mt-radius-card: 12px;
   --mt-radius-btn: 6px;
   --mt-radius-badge: 20px;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--mt-text);
+  background: var(--mt-bg);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
 }
@@ -36,7 +37,7 @@
 /* Hero Section */
 .mt-hero {
   padding: 60px 0 80px;
-  background: linear-gradient(135deg, #ffffff 0%, var(--mt-bg) 100%);
+  background: var(--mt-bg);
   text-align: center;
 }
 
@@ -144,7 +145,7 @@
 .mt-btn-secondary:hover {
   border-color: var(--mt-primary);
   color: var(--mt-text);
-  background: color-mix(in srgb, var(--mt-primary) 5%, white);
+  background: color-mix(in srgb, var(--mt-primary) 10%, var(--mt-card));
   transform: translateY(-1px);
 }
 
@@ -202,7 +203,7 @@
 /* Pricing Section */
 .mt-pricing {
   padding: 80px 0;
-  background: var(--mt-card);
+  background: var(--mt-bg);
 }
 
 .mt-pricing-grid {
@@ -227,7 +228,7 @@
 
 .mt-pricing-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
   border-color: var(--mt-accent);
 }
 
@@ -360,7 +361,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--mt-success) 20%, var(--mt-card));
+  background: color-mix(in srgb, var(--mt-success) 30%, var(--mt-card));
   flex-shrink: 0;
   font-size: 12px;
   margin-top: 2px;
@@ -387,7 +388,7 @@
 /* Info Section */
 .mt-info {
   padding: 80px 0;
-  background: var(--mt-bg);
+  background: #111111;
 }
 
 .mt-info-grid {
@@ -414,12 +415,12 @@
   width: 56px;
   height: 56px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--mt-primary) 15%, white);
+  background: color-mix(in srgb, var(--mt-primary) 20%, var(--mt-card));
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 24px;
-  color: var(--mt-text);
+  color: var(--mt-primary);
 }
 
 .mt-info-card h3 {
@@ -440,7 +441,7 @@
 /* Comparison Table Section */
 .mt-comparison {
   padding: 80px 0;
-  background: var(--mt-card);
+  background: var(--mt-bg);
 }
 
 .mt-comparison-table-wrapper {
@@ -454,7 +455,7 @@
   background: var(--mt-card);
   border-radius: var(--mt-radius-card);
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
 .mt-comparison-table th,
@@ -465,7 +466,7 @@
 }
 
 .mt-comparison-table th {
-  background: var(--mt-bg);
+  background: #111111;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 700;
   font-size: 16px;
@@ -482,7 +483,7 @@
 }
 
 .mt-featured {
-  background: color-mix(in srgb, var(--mt-primary) 8%, var(--mt-bg));
+  background: color-mix(in srgb, var(--mt-primary) 10%, #111111);
   position: relative;
 }
 
@@ -600,6 +601,287 @@
   
   .mt-plan-header {
     width: 15%;
+  }
+}
+
+/* Testimonials Section */
+.mt-testimonials {
+  padding: 80px 0;
+  background: var(--mt-card);
+}
+
+.mt-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.mt-testimonial-card {
+  background: var(--mt-bg);
+  border-radius: var(--mt-radius-card);
+  padding: 32px;
+  border: 1px solid var(--mt-border);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.mt-testimonial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.mt-testimonial-content {
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.mt-testimonial-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--mt-text);
+  margin: 0;
+  font-style: italic;
+}
+
+.mt-testimonial-footer {
+  margin-top: auto;
+}
+
+.mt-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mt-testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  background: color-mix(in srgb, var(--mt-primary) 15%, var(--mt-card));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mt-primary);
+}
+
+.mt-testimonial-name {
+  font-weight: 600;
+  color: var(--mt-text);
+  font-size: 14px;
+}
+
+.mt-testimonial-role {
+  font-size: 13px;
+  color: var(--mt-text-secondary);
+}
+
+/* Product Showcase Section */
+.mt-products {
+  padding: 80px 0;
+  background: var(--mt-bg);
+}
+
+.mt-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.mt-product-card {
+  background: var(--mt-card);
+  border-radius: var(--mt-radius-card);
+  overflow: hidden;
+  border: 1px solid var(--mt-border);
+  transition: all 0.2s ease;
+}
+
+.mt-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+  border-color: var(--mt-primary);
+}
+
+.mt-product-image {
+  padding: 24px 24px 0;
+  background: var(--mt-bg);
+}
+
+.mt-product-screenshot {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--mt-card);
+  border: 1px solid var(--mt-border);
+}
+
+.mt-product-content {
+  padding: 24px;
+}
+
+.mt-product-content h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--mt-text);
+}
+
+.mt-product-content p {
+  font-size: 14px;
+  color: var(--mt-text-muted);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.mt-product-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mt-product-features span {
+  background: color-mix(in srgb, var(--mt-primary) 10%, var(--mt-card));
+  color: var(--mt-primary);
+  padding: 4px 8px;
+  border-radius: var(--mt-radius-badge);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Enhanced Comparison Table */
+.mt-feature-category td {
+  background: color-mix(in srgb, var(--mt-primary) 5%, var(--mt-card)) !important;
+  font-weight: 600;
+  color: var(--mt-text) !important;
+  padding: 16px 20px !important;
+  border-bottom: 2px solid var(--mt-border) !important;
+}
+
+.mt-plan-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.mt-plan-price {
+  font-size: 12px;
+  color: var(--mt-text-muted);
+  font-weight: 400;
+}
+
+.mt-feature-value {
+  font-weight: 600;
+  color: var(--mt-text);
+  font-size: 14px;
+}
+
+/* FAQ Section */
+.mt-faq {
+  padding: 80px 0;
+  background: var(--mt-card);
+}
+
+.mt-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.mt-faq-item {
+  background: var(--mt-bg);
+  border-radius: var(--mt-radius-card);
+  padding: 28px;
+  border: 1px solid var(--mt-border);
+  transition: all 0.2s ease;
+}
+
+.mt-faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-color: var(--mt-primary);
+}
+
+.mt-faq-question {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--mt-text);
+  line-height: 1.3;
+}
+
+.mt-faq-answer {
+  font-size: 14px;
+  color: var(--mt-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.mt-faq-footer {
+  text-align: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--mt-border);
+}
+
+.mt-faq-footer p {
+  font-size: 16px;
+  color: var(--mt-text-secondary);
+  margin: 0;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 900px) {
+  .mt-testimonials-grid,
+  .mt-products-grid,
+  .mt-faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mt-testimonials,
+  .mt-products,
+  .mt-faq {
+    padding: 60px 0;
+  }
+  
+  .mt-testimonials-grid,
+  .mt-products-grid,
+  .mt-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .mt-testimonial-card,
+  .mt-product-card,
+  .mt-faq-item {
+    padding: 20px;
+  }
+  
+  .mt-testimonial-content p {
+    font-size: 15px;
+  }
+  
+  .mt-product-image {
+    padding: 16px 16px 0;
+  }
+  
+  .mt-product-content {
+    padding: 20px;
+  }
+  
+  .mt-feature-category td {
+    padding: 12px 8px !important;
+  }
+  
+  .mt-plan-name {
+    font-size: 14px;
+  }
+  
+  .mt-plan-price {
+    font-size: 11px;
   }
 }
 
