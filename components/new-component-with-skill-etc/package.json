@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-win-back",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Win-back component for tech customers that displays offers and greets logged-in users with their subscription history",
   "main": "./index.js",
   "dependencies": {
@@ -55,7 +55,7 @@
     },
     {
       "id": "secondaryColor__limio_color",
-      "label": "Secondary Color", 
+      "label": "Secondary Color",
       "type": "color",
       "default": "#f47c24"
     },
@@ -82,7 +82,7 @@
           "type": "string"
         },
         "url": {
-          "id": "label", 
+          "id": "label",
           "label": "Display Label",
           "type": "string"
         }
@@ -113,7 +113,7 @@
     {
       "id": "benefitsMessage__limio_richtext",
       "label": "Benefits Message",
-      "type": "richtext", 
+      "type": "richtext",
       "default": "<ul><li>Enhanced performance and reliability</li><li>New integrations and workflows</li><li>Priority customer support</li><li>Access to latest features</li></ul>"
     }
   ]

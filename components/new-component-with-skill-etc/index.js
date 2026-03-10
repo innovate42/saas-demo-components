@@ -42,6 +42,26 @@ const WinBackComponent = () => {
   const { subscriptions } = useSubscriptions()
   const { isInPageBuilder } = useLimioContext()
 
+  // Calculate user engagement metrics
+  const userMetrics = useMemo(() => {
+    if (!subscriptions || !Array.isArray(subscriptions)) return null
+    
+    const totalSubscriptions = subscriptions.length
+    const activeTime = subscriptions.reduce((total, sub) => {
+      if (sub.created_date && sub.end_date) {
+        const start = new Date(sub.created_date)
+        const end = new Date(sub.end_date)
+        return total + Math.max(0, end - start)
+      }
+      return total
+    }, 0)
+    
+    const totalDays = Math.floor(activeTime / (1000 * 60 * 60 * 24))
+    const totalMonths = Math.floor(totalDays / 30)
+    
+    return { totalSubscriptions, totalDays, totalMonths }
+  }, [subscriptions])
+
   // Safe initialization of activeGroup
   const safeGroupLabels = Array.isArray(groupLabels) ? groupLabels : []
   const defaultGroupId = safeGroupLabels.length > 0 ? safeGroupLabels[0].id : 'monthly'
@@ -52,17 +72,33 @@ const WinBackComponent = () => {
   const groupedOffers = groupOffers(safeOffers, safeGroupLabels)
   const currentOffers = groupedOffers.find(g => g.groupId === activeGroup)?.offers || safeOffers
 
-  // Get user's most recent subscription
-  const mostRecentSubscription = useMemo(() => {
-    if (!subscriptions || !Array.isArray(subscriptions)) return null
+  // Get user's most recent subscription and calculate usage patterns
+  const subscriptionAnalytics = useMemo(() => {
+    if (!subscriptions || !Array.isArray(subscriptions)) return { recent: null, usage: null }
     
-    return subscriptions
+    const recent = subscriptions
       .filter(sub => sub?.status && ['cancelled', 'expired', 'paused'].includes(sub.status.toLowerCase()))
       .sort((a, b) => {
         const dateA = new Date(a.end_date || a.created_date || 0)
         const dateB = new Date(b.end_date || b.created_date || 0)
         return dateB - dateA
       })[0] || null
+
+    // Calculate usage patterns
+    const usage = {
+      totalValue: subscriptions.reduce((sum, sub) => {
+        const offers = sub.offers || []
+        return sum + offers.reduce((offerSum, offer) => {
+          const price = offer?.data?.attributes?.price?.[0]?.value || 0
+          return offerSum + price
+        }, 0)
+      }, 0),
+      favoriteFeatures: recent?.offers?.filter(o => o.record_subtype !== "discount") || [],
+      daysSinceLastActive: recent?.end_date ? 
+        Math.floor((new Date() - new Date(recent.end_date)) / (1000 * 60 * 60 * 24)) : 0
+    }
+    
+    return { recent, usage }
   }, [subscriptions])
 
   const handleAddToBasket = async (offer) => {
@@ -132,51 +168,163 @@ const WinBackComponent = () => {
         </div>
       </section>
 
-      {/* Subscription History Section */}
-      {showSubscriptionHistory && isLoggedIn && mostRecentSubscription && (
+      {/* Enhanced Customer Analytics Section */}
+      {showSubscriptionHistory && isLoggedIn && (subscriptionAnalytics.recent || userMetrics) && (
         <section className="wb-history">
           <div className="wb-container">
             <h2 className="wb-section-title">{subscriptionHistoryHeadline}</h2>
-            <div className="wb-history-card">
-              <div className="wb-history-header">
-                <div className="wb-history-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+            
+            {/* Customer Journey Stats */}
+            {userMetrics && (
+              <div className="wb-customer-stats">
+                <div className="wb-stat-card">
+                  <div className="wb-stat-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </div>
+                  <div className="wb-stat-content">
+                    <span className="wb-stat-number">{userMetrics.totalMonths}</span>
+                    <span className="wb-stat-label">Months Active</span>
+                  </div>
                 </div>
-                <div className="wb-history-info">
-                  <h3 className="wb-history-name">
-                    {mostRecentSubscription.name || mostRecentSubscription.id || 'Your Subscription'}
-                  </h3>
-                  <div className="wb-history-details">
-                    <span className="wb-history-status">
-                      Status: <span className="wb-status-badge">{mostRecentSubscription.status}</span>
-                    </span>
-                    {mostRecentSubscription.end_date && (
-                      <span className="wb-history-date">
-                        Ended: {formatDate(mostRecentSubscription.end_date)}
+                
+                <div className="wb-stat-card">
+                  <div className="wb-stat-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </div>
+                  <div className="wb-stat-content">
+                    <span className="wb-stat-number">{userMetrics.totalSubscriptions}</span>
+                    <span className="wb-stat-label">Total Plans</span>
+                  </div>
+                </div>
+                
+                {subscriptionAnalytics.usage?.totalValue > 0 && (
+                  <div className="wb-stat-card">
+                    <div className="wb-stat-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2v20m8-10H4" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className="wb-stat-content">
+                      <span className="wb-stat-number">${Math.round(subscriptionAnalytics.usage.totalValue)}</span>
+                      <span className="wb-stat-label">Total Invested</span>
+                    </div>
+                  </div>
+                )}
+                
+                {subscriptionAnalytics.usage?.daysSinceLastActive > 0 && (
+                  <div className="wb-stat-card">
+                    <div className="wb-stat-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 17l4-4 4 4m-4-5v9" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
+                    <div className="wb-stat-content">
+                      <span className="wb-stat-number">{subscriptionAnalytics.usage.daysSinceLastActive}</span>
+                      <span className="wb-stat-label">Days Away</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {/* Recent Subscription Details */}
+            {subscriptionAnalytics.recent && (
+              <div className="wb-history-card">
+                <div className="wb-history-header">
+                  <div className="wb-history-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="wb-history-info">
+                    <h3 className="wb-history-name">
+                      {subscriptionAnalytics.recent.name || subscriptionAnalytics.recent.id || 'Your Last Subscription'}
+                    </h3>
+                    <div className="wb-history-details">
+                      <span className="wb-history-status">
+                        Status: <span className="wb-status-badge">{subscriptionAnalytics.recent.status}</span>
                       </span>
-                    )}
+                      {subscriptionAnalytics.recent.end_date && (
+                        <span className="wb-history-date">
+                          Ended: {formatDate(subscriptionAnalytics.recent.end_date)}
+                        </span>
+                      )}
+                      {subscriptionAnalytics.recent.created_date && (
+                        <span className="wb-history-date">
+                          Started: {formatDate(subscriptionAnalytics.recent.created_date)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Your Previous Plan Section - More Prominent */}
+                {subscriptionAnalytics.recent.offers && subscriptionAnalytics.recent.offers.length > 0 && (
+                  <div className="wb-previous-plan">
+                    <div className="wb-previous-plan-header">
+                      <span className="wb-previous-plan-icon">📋</span>
+                      <h4 className="wb-previous-plan-title">What You Had Access To</h4>
+                    </div>
+                    <div className="wb-previous-plan-content">
+                      {subscriptionAnalytics.recent.offers
+                        .filter(offer => offer.record_subtype !== "discount")
+                        .map((offer, index) => {
+                          const attributes = offer?.data?.attributes || {}
+                          return (
+                            <div key={index} className="wb-previous-plan-item">
+                              <div className="wb-previous-plan-meta">
+                                <h5 className="wb-previous-plan-name">
+                                  {attributes.display_name__limio || 'Your Plan'}
+                                </h5>
+                                {attributes.display_price__limio && (
+                                  <div className="wb-previous-plan-price" dangerouslySetInnerHTML={{ __html: sanitiseHTML(attributes.display_price__limio) }} />
+                                )}
+                              </div>
+                              {attributes.offer_features__limio && (
+                                <div className="wb-previous-plan-features" dangerouslySetInnerHTML={{ __html: sanitiseHTML(attributes.offer_features__limio) }} />
+                              )}
+                            </div>
+                          )
+                        })}
+                    </div>
+                    <div className="wb-plan-status">
+                      <div className="wb-plan-status-icon">⏰</div>
+                      <div className="wb-plan-status-text">
+                        <span className="wb-plan-status-label">Status:</span>
+                        <span className="wb-plan-status-value">Access Expired</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* What You're Missing Section */}
+                <div className="wb-missing-out">
+                  <h4 className="wb-missing-title">🚀 Plus New Features Since You Left</h4>
+                  <div className="wb-missing-grid">
+                    <div className="wb-missing-item">
+                      <span className="wb-missing-icon">📊</span>
+                      <span className="wb-missing-text">Enhanced Data Analysis</span>
+                    </div>
+                    <div className="wb-missing-item">
+                      <span className="wb-missing-icon">🔒</span>
+                      <span className="wb-missing-text">Advanced Security Updates</span>
+                    </div>
+                    <div className="wb-missing-item">
+                      <span className="wb-missing-icon">⚡</span>
+                      <span className="wb-missing-text">Faster Investigation Tools</span>
+                    </div>
+                    <div className="wb-missing-item">
+                      <span className="wb-missing-icon">🎯</span>
+                      <span className="wb-missing-text">AI-Powered Insights</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              {mostRecentSubscription.offers && mostRecentSubscription.offers.length > 0 && (
-                <div className="wb-history-offers">
-                  <h4 className="wb-history-offers-title">Previous Plan Features:</h4>
-                  {mostRecentSubscription.offers
-                    .filter(offer => offer.record_subtype !== "discount")
-                    .map((offer, index) => {
-                      const attributes = offer?.data?.attributes || {}
-                      if (attributes.offer_features__limio) {
-                        return (
-                          <div key={index} className="wb-previous-features" dangerouslySetInnerHTML={{ __html: sanitiseHTML(attributes.offer_features__limio) }} />
-                        )
-                      }
-                      return null
-                    })}
-                </div>
-              )}
-            </div>
+            )}
           </div>
         </section>
       )}
