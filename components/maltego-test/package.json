@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-maltego-test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complete Maltego pricing page recreation with brand yellow color and comparison table",
   "main": "./index.js",
   "dependencies": {
@@ -18,7 +18,7 @@
     },
     {
       "id": "heroSubheadline",
-      "label": "Hero Subheadline", 
+      "label": "Hero Subheadline",
       "type": "string",
       "default": "Explore plans that power all digital investigations. Get everything you need to speed up complex investigations from hours to minutes with access to all essential data in one place."
     },
@@ -43,7 +43,7 @@
     {
       "id": "accentColor__limio_color",
       "label": "Accent Color",
-      "type": "color", 
+      "type": "color",
       "default": "#ffed4a"
     },
     {
@@ -63,7 +63,7 @@
           "type": "string"
         },
         "url": {
-          "id": "label", 
+          "id": "label",
           "label": "Display Label",
           "type": "string"
         }

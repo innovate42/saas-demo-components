@@ -360,7 +360,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--mt-success) 10%, white);
+  background: color-mix(in srgb, var(--mt-success) 20%, var(--mt-card));
   flex-shrink: 0;
   font-size: 12px;
   margin-top: 2px;
