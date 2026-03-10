@@ -1,0 +1,95 @@
+{
+  "name": "@limio/component-maltego-test",
+  "version": "1.0.0",
+  "description": "Complete Maltego pricing page recreation with brand yellow color and comparison table",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroHeadline",
+      "label": "Hero Headline",
+      "type": "string",
+      "default": "Maltego Pricing"
+    },
+    {
+      "id": "heroSubheadline",
+      "label": "Hero Subheadline", 
+      "type": "string",
+      "default": "Explore plans that power all digital investigations. Get everything you need to speed up complex investigations from hours to minutes with access to all essential data in one place."
+    },
+    {
+      "id": "pricingHeadline",
+      "label": "Pricing Section Headline",
+      "type": "string",
+      "default": "Choose the plan that best suits your investigative needs!"
+    },
+    {
+      "id": "pricingSubheadline",
+      "label": "Pricing Section Subheadline",
+      "type": "string",
+      "default": "Professional plans designed for investigators, security teams, and law enforcement agencies worldwide."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color (Maltego Yellow)",
+      "type": "color",
+      "default": "#ffd43b"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color", 
+      "default": "#ffed4a"
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Currency Switcher",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Currency Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Currency ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label", 
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "usd",
+          "label": "USD"
+        },
+        {
+          "id": "eur",
+          "label": "EUR"
+        }
+      ]
+    },
+    {
+      "id": "showLogos",
+      "label": "Show Maltego Logo",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showComparison",
+      "label": "Show Comparison Table",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
