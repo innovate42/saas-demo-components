@@ -48,6 +48,11 @@
 .mt-logo {
   height: 48px;
   width: auto;
+  filter: brightness(0) invert(1); /* Convert to white for dark theme */
+}
+
+.mt-logo-text {
+  margin-bottom: 0;
 }
 
 .mt-hero-content {
@@ -906,6 +911,11 @@
 .mt-footer-logo {
   height: 40px;
   width: auto;
+  margin-bottom: 20px;
+  filter: brightness(0) invert(1); /* Convert to white for dark theme */
+}
+
+.mt-footer-logo-text {
   margin-bottom: 20px;
 }
 

@@ -16,8 +16,6 @@ const getContrastColor = (hex) => {
 const MaltegoTest = () => {
   const props = useComponentProps(defaultProps)
   const { 
-    heroHeadline,
-    heroSubheadline,
     pricingHeadline,
     pricingSubheadline,
     showGroupSwitcher,
@@ -100,16 +98,21 @@ const MaltegoTest = () => {
           {showLogos && (
             <div className="mt-logo-section">
               <img 
-                src="https://www.maltego.com/img/maltego-logo/Maltego-Logo-Compact-White.png" 
+                src="https://www.maltego.com/img/maltego-logo.svg" 
                 alt="Maltego" 
                 className="mt-logo"
+                onError={(e) => {
+                  // Fallback to text if logo fails to load
+                  e.target.style.display = 'none'
+                  e.target.nextSibling.style.display = 'block'
+                }}
               />
+              <div className="mt-logo-text" style={{display: 'none'}}>
+                <h1 style={{color: 'var(--mt-primary)', fontSize: '32px', fontFamily: 'var(--mt-font-brand, "Roboto Condensed")', margin: 0}}>MALTEGO</h1>
+              </div>
             </div>
           )}
-          <div className="mt-hero-content">
-            <h1 className="mt-hero-headline">{heroHeadline}</h1>
-            <p className="mt-hero-subheadline">{heroSubheadline}</p>
-          </div>
+          {/* Hero content removed - pricing section serves as main heading */}
         </div>
       </section>
 
@@ -718,10 +721,18 @@ const MaltegoTest = () => {
             <div className="mt-footer-content">
               <div className="mt-footer-brand">
                 <img 
-                  src="https://www.maltego.com/img/maltego-logo/Maltego-Logo-Compact-White.png" 
+                  src="https://www.maltego.com/img/maltego-logo.svg" 
                   alt={companyName || "Maltego"} 
                   className="mt-footer-logo"
+                  onError={(e) => {
+                    // Fallback to text if logo fails to load
+                    e.target.style.display = 'none'
+                    e.target.nextSibling.style.display = 'block'
+                  }}
                 />
+                <div className="mt-footer-logo-text" style={{display: 'none'}}>
+                  <h4 style={{color: 'var(--mt-primary)', fontSize: '24px', fontFamily: 'var(--mt-font-brand, "Roboto Condensed")', margin: 0}}>MALTEGO</h4>
+                </div>
                 <p className="mt-footer-description">
                   {footerText || "The all-in-one investigation platform that accelerates complex cyber investigations from hours to minutes."}
                 </p>
