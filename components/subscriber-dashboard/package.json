@@ -1,0 +1,150 @@
+{
+  "name": "@limio/component-subscriber-dashboard",
+  "version": "1.0.0",
+  "description": "Comprehensive subscriber dashboard with full Limio SDK functionality",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8",
+    "date-fns": "^2.29.3"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "dashboardTitle",
+      "label": "Dashboard Title",
+      "type": "string", 
+      "default": "My Account"
+    },
+    {
+      "id": "welcomeMessage__limio_richtext",
+      "label": "Welcome Message",
+      "type": "richtext",
+      "default": "<p>Welcome back! Manage your subscriptions and account settings below.</p>"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#424770"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color", 
+      "type": "color",
+      "default": "#635bff"
+    },
+    {
+      "id": "showPaymentMethods",
+      "label": "Show Payment Methods",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showBillingHistory",
+      "label": "Show Billing History",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showUsageMetrics",
+      "label": "Show Usage Metrics",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showNotifications",
+      "label": "Show Notifications",
+      "type": "boolean", 
+      "default": true
+    },
+    {
+      "id": "maxSubscriptions",
+      "label": "Max Subscriptions to Show",
+      "type": "number",
+      "default": "10"
+    },
+    {
+      "id": "dateFormat",
+      "label": "Date Format",
+      "type": "picklist",
+      "options": [
+        { "id": "short", "label": "Short (MM/DD/YYYY)", "value": "MM/dd/yyyy" },
+        { "id": "medium", "label": "Medium (MMM DD, YYYY)", "value": "MMM dd, yyyy" },
+        { "id": "long", "label": "Long (MMMM DD, YYYY)", "value": "MMMM dd, yyyy" }
+      ],
+      "default": "medium"
+    },
+    {
+      "id": "emptyStateMessage",
+      "label": "Empty State Message",
+      "type": "string",
+      "default": "No subscriptions found. Start exploring our plans!"
+    },
+    {
+      "id": "ctaText",
+      "label": "Explore Plans CTA",
+      "type": "string",
+      "default": "Explore Plans"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "Explore Plans URL", 
+      "type": "string",
+      "default": "/pricing"
+    },
+    {
+      "id": "supportEmail",
+      "label": "Support Email",
+      "type": "string",
+      "default": "support@example.com"
+    },
+    {
+      "id": "supportPhone",
+      "label": "Support Phone",
+      "type": "string",
+      "default": "(555) 123-4567"
+    },
+    {
+      "id": "quickActions",
+      "label": "Quick Actions",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Action ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label", 
+          "label": "Action Label",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "url",
+          "label": "Action URL",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "update-payment",
+          "label": "Update Payment Method",
+          "url": "/account/payment"
+        },
+        {
+          "id": "billing-history",
+          "label": "View Billing History", 
+          "url": "/account/billing"
+        },
+        {
+          "id": "contact-support",
+          "label": "Contact Support",
+          "url": "/support"
+        }
+      ]
+    }
+  ]
+}
