@@ -3,14 +3,14 @@ import { useComponentProps } from "@limio/sdk"
 const defaultComponentProps = {
   subcomponentMetadata: [],
   requiredLabel: "Required",
-  optionalLabel: "",
+  optionalLabel: "Optional",
   submitLabel: "Submit",
-  successFormMessage: "Thank you for submitting your information.",
+  successFormMessage: "Thank you! Your information has been submitted successfully.",
   successFormMessageFontColor: "#155724",
   successFormMessageBackgroundColor: "#d4edda",
-  invalidFormMessage: "We are sorry, but there was an error processing your order. Please try again later.",
-  invalidFormMessageFontColor: "#856404",
-  invalidFormMessageBackgroundColor: "#fff3cd",
+  invalidFormMessage: "Please correct the errors below and try again.",
+  invalidFormMessageFontColor: "#721c24",
+  invalidFormMessageBackgroundColor: "#f8d7da",
   redirectUrl: ""
 }
 

@@ -1,9 +1,10 @@
 import * as React from "react"
 import { Form, SubmitButton } from "@limio/ui-form"
-import { LimioFieldContext, sanitiseHTML } from "@limio/sdk"
+import { LimioFieldContext } from "@limio/sdk"
 import { useComponentStaticProps } from "./componentStaticProps"
+import { sanitiseHTML } from "@limio/sdk"
 import { TooltipProvider } from "@limio/component-library"
-import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests"
+import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.js"
 
 function MaltegoDataCaptureForm({ children }) {
   const {
@@ -37,8 +38,8 @@ function MaltegoDataCaptureForm({ children }) {
       if (redirectUrl) {
         window.location.href = redirectUrl
       }
-    } catch (err) {
-      setError(err)
+    } catch (error) {
+      setError(error)
     }
   }
 
@@ -48,13 +49,13 @@ function MaltegoDataCaptureForm({ children }) {
         <Form
           ref={formRef}
           name="maltego-data-capture-form"
-          onSubmitError={(error) => { setError(error) }}
+          onSubmitError={(error) => {
+            setError(error)
+          }}
           onSubmit={onSubmit}
         >
           <fieldset disabled={success}>{children}</fieldset>
-          {!success && (
-            <SubmitButton submitLabel={submitLabel} className={"py-2 col-12"} />
-          )}
+          {!success && <SubmitButton submitLabel={submitLabel} className={"py-2 col-12"} />}
         </Form>
         {success ? (
           <div className="alert alert-success" role="alert" style={{ color: successFormMessageFontColor, backgroundColor: successFormMessageBackgroundColor }}>
