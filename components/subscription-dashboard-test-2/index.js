@@ -100,9 +100,6 @@ const SubscriptionDashboard = () => {
     // Get upgrade offer references from current offer
     const upgradeOfferRefs = currentOffer.data?.attributes?.upgrade_offers__limio || []
     
-    console.log('Current offer upgrade refs:', upgradeOfferRefs)
-    console.log('Available offers:', offers.map(o => ({ id: o.id, path: o.path, name: o.name })))
-    
     // Match offers by ID or path
     const matchedOffers = offers.filter(offer => 
       upgradeOfferRefs.some(upgrade => 
@@ -111,8 +108,6 @@ const SubscriptionDashboard = () => {
         upgrade.path === offer.data?.path
       )
     )
-    
-    console.log('Matched upgrade offers:', matchedOffers.map(o => ({ id: o.id, name: o.name })))
     
     return matchedOffers.slice(0, 3) // Show max 3 upgrade options
   }, [currentOffer, offers])
@@ -202,10 +197,6 @@ const SubscriptionDashboard = () => {
 
   const selectedSubInfo = useSubInfo(selectedSubscription)
   const scheduleInfo = useSchedule(selectedSubscription)
-  
-  // Debug schedule output
-  console.log('Schedule info result:', scheduleInfo)
-  console.log('Sub info result:', selectedSubInfo)
 
   return (
     <div 
@@ -349,7 +340,6 @@ const SubscriptionDashboard = () => {
                       </span>
                     </div>
                     
-                    {/* Try multiple schedule data sources */}
                     {(scheduleInfo?.termEndDate || selectedSubscription?.schedule?.[0]?.end) && (
                       <div className="sdt-meta-row">
                         <span className="sdt-meta-label">Next Billing</span>
@@ -372,16 +362,6 @@ const SubscriptionDashboard = () => {
                             formatCurrency(selectedSubscription.schedule[0].amount, selectedSubscription.schedule[0].currency) :
                             `${selectedSubscription?.schedule?.[0]?.currency || ''} ${selectedSubscription?.schedule?.[0]?.amount || ''}`
                            )}
-                        </span>
-                      </div>
-                    )}
-                    
-                    {/* Debug info - remove after testing */}
-                    {selectedSubscription?.schedule && (
-                      <div className="sdt-meta-row" style={{ fontSize: '12px', opacity: 0.7 }}>
-                        <span className="sdt-meta-label">Schedule Debug</span>
-                        <span className="sdt-meta-value">
-                          {selectedSubscription.schedule.length} schedule items
                         </span>
                       </div>
                     )}
@@ -472,12 +452,6 @@ const SubscriptionDashboard = () => {
               <div className="sdt-section-header">
                 <h2>Upgrade Your Plan</h2>
                 <p>Choose a plan that better fits your needs</p>
-                {/* Debug info */}
-                <div style={{ fontSize: '12px', opacity: 0.7, marginTop: '8px' }}>
-                  Current offer has {currentOffer?.data?.attributes?.upgrade_offers__limio?.length || 0} upgrade options.
-                  Campaign has {offers?.length || 0} total offers.
-                  Found {upgradeOffers.length} matching upgrade offers.
-                </div>
               </div>
               
               <div className="sdt-upgrade-grid">
@@ -520,14 +494,6 @@ const SubscriptionDashboard = () => {
                   <div className="sdt-card">
                     <div style={{ padding: '24px', textAlign: 'center', color: 'var(--sdt-text-secondary)' }}>
                       <p>No upgrade options found.</p>
-                      {currentOffer?.data?.attributes?.upgrade_offers__limio && (
-                        <details style={{ marginTop: '16px', textAlign: 'left', fontSize: '12px' }}>
-                          <summary>Debug: Upgrade References</summary>
-                          <pre style={{ marginTop: '8px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
-                            {JSON.stringify(currentOffer.data.attributes.upgrade_offers__limio, null, 2)}
-                          </pre>
-                        </details>
-                      )}
                     </div>
                   </div>
                 )}
