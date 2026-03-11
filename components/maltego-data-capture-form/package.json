@@ -10,12 +10,21 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "uuid": "^9.0.0"
+    "@limio/component-library": "workspace:^",
+    "@limio/shop": "workspace:^"
   },
   "peerDependencies": {
+    "@limio/sdk": "*",
+    "@limio/ui-form": "*",
     "react": "*"
   },
   "limioProps": [
+    {
+      "id": "subcomponentMetadata",
+      "type": "subcomponentMetadata",
+      "label": "Subcomponent Metadata",
+      "default": []
+    },
     {
       "id": "requiredLabel",
       "label": "Required field label",
@@ -30,45 +39,45 @@
     },
     {
       "id": "submitLabel",
-      "label": "Submit button label",
       "type": "string",
+      "label": "Submit button label",
       "default": "Submit"
     },
     {
-      "id": "successFormMessage__limio_richtext",
+      "id": "successFormMessage",
       "label": "Success form message",
       "type": "richtext",
       "default": "Thank you for submitting your information."
     },
     {
-      "id": "successFormMessageFontColor__limio_color",
+      "id": "successFormMessageFontColor",
       "label": "Success form message font color",
       "type": "color",
-      "default": ""
+      "default": "#155724"
     },
     {
-      "id": "successFormMessageBackgroundColor__limio_color",
-      "label": "Success form message background color",
+      "id": "successFormMessageBackgroundColor",
+      "label": "Success message background color",
       "type": "color",
-      "default": ""
+      "default": "#d4edda"
     },
     {
-      "id": "invalidFormMessage__limio_richtext",
+      "id": "invalidFormMessage",
       "label": "Invalid form message",
       "type": "richtext",
-      "default": "Your information could not be submitted. Please check your answers and try again."
+      "default": "We are sorry, but there was an error processing your order. Please try again later."
     },
     {
-      "id": "invalidFormMessageFontColor__limio_color",
+      "id": "invalidFormMessageFontColor",
       "label": "Invalid form message font color",
       "type": "color",
-      "default": ""
+      "default": "#856404"
     },
     {
-      "id": "invalidFormMessageBackgroundColor__limio_color",
-      "label": "Invalid form message background color",
+      "id": "invalidFormMessageBackgroundColor",
+      "label": "Invalid message background color",
       "type": "color",
-      "default": ""
+      "default": "#fff3cd"
     },
     {
       "id": "redirectUrl",
@@ -76,5 +85,12 @@
       "type": "string",
       "default": ""
     }
+  ],
+  "limioSubcomponents": [
+    "/limio-components/field",
+    "/limio-components/display-text"
+  ],
+  "limioCapabilities": [
+    "googleCaptcha"
   ]
 }
