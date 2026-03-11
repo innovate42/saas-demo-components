@@ -3,7 +3,7 @@ import { Form, SubmitButton } from "@limio/ui-form"
 import { LimioFieldContext, sanitiseHTML } from "@limio/sdk"
 import { useComponentStaticProps } from "./componentStaticProps"
 import { TooltipProvider } from "@limio/component-library"
-import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.js"
+import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests"
 
 function MaltegoDataCaptureForm({ children }) {
   const {
