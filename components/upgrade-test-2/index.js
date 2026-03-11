@@ -49,7 +49,7 @@ const UpgradeTest2 = () => {
     upgradeSuccessText
   } = props;
 
-  const { userSubscriptions, loading: subscriptionsLoading } = useSubscriptions();
+  const { subscriptions, loading: subscriptionsLoading } = useSubscriptions();
   const { isInPageBuilder } = useLimioContext();
   const { basketLoading, selectOfferForSubscriptionUpdate, navigateToCheckout, initiateCheckout } = useBasket();
   
@@ -247,14 +247,14 @@ const UpgradeTest2 = () => {
             <div className="ut-loading-spinner"></div>
             {loadingText}
           </div>
-        ) : !userSubscriptions || userSubscriptions.length === 0 ? (
+        ) : !subscriptions || subscriptions.length === 0 ? (
           <div className="ut-empty">
             {noSubscriptionsText}
           </div>
         ) : (
           <>
             <div className="ut-subscriptions">
-              {userSubscriptions.map(renderSubscriptionCard)}
+              {subscriptions.map(renderSubscriptionCard)}
             </div>
 
             {selectedSubscription && (

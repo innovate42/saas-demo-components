@@ -1,6 +1,6 @@
 {
   "name": "upgrade-test-2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "End-to-end subscription upgrade component showing customer subscriptions and available upgrades",
   "main": "./index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     },
     {
       "id": "noUpgradesText",
-      "label": "No Upgrades Available Message", 
+      "label": "No Upgrades Available Message",
       "type": "string",
       "default": "No upgrades available for this subscription."
     },
