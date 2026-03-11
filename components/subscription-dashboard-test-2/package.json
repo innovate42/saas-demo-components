@@ -1,0 +1,94 @@
+{
+  "name": "subscription-dashboard-test-2",
+  "version": "1.0.0",
+  "description": "A fully-featured subscription dashboard using the full power of the Limio SDK",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "xss": "^1.0.14"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "dashboardTitle",
+      "label": "Dashboard Title",
+      "type": "string",
+      "default": "Subscription Dashboard"
+    },
+    {
+      "id": "welcomeMessage",
+      "label": "Welcome Message",
+      "type": "string",
+      "default": "Manage your subscription and billing details"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#424770"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color", 
+      "type": "color",
+      "default": "#635BFF"
+    },
+    {
+      "id": "showUpgradeOptions",
+      "label": "Show Upgrade Options",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showInvoiceHistory",
+      "label": "Show Invoice History",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showPaymentMethods",
+      "label": "Show Payment Methods",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showUsageMetrics",
+      "label": "Show Usage Metrics",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "upgradeCtaText",
+      "label": "Upgrade CTA Text",
+      "type": "string",
+      "default": "Upgrade Plan"
+    },
+    {
+      "id": "cancelCtaText",
+      "label": "Cancel CTA Text",
+      "type": "string", 
+      "default": "Cancel Subscription"
+    },
+    {
+      "id": "emptyStateText",
+      "label": "Empty State Text",
+      "type": "string",
+      "default": "No active subscriptions found"
+    },
+    {
+      "id": "loadingText",
+      "label": "Loading Text",
+      "type": "string",
+      "default": "Loading your subscription details..."
+    }
+  ]
+}
