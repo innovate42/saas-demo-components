@@ -102,6 +102,45 @@
   line-height: 1.2;
 }
 
+/* Subscription Selector */
+.sdt-subscription-selector {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sdt-selector-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sdt-text);
+  white-space: nowrap;
+}
+
+.sdt-selector {
+  padding: 8px 12px;
+  border: 1px solid var(--sdt-border);
+  border-radius: var(--sdt-radius-btn);
+  background: var(--sdt-card);
+  color: var(--sdt-text);
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sdt-selector:hover {
+  border-color: var(--sdt-primary);
+}
+
+.sdt-selector:focus {
+  outline: 2px solid var(--sdt-accent);
+  outline-offset: 2px;
+  border-color: var(--sdt-primary);
+}
+
 /* Navigation */
 .sdt-nav {
   display: flex;
@@ -720,6 +759,18 @@
   
   .sdt-user-info {
     width: 100%;
+  }
+
+  .sdt-subscription-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .sdt-selector {
+    width: 100%;
+    min-width: auto;
   }
   
   .sdt-nav {

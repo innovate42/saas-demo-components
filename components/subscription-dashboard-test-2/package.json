@@ -1,6 +1,6 @@
 {
   "name": "subscription-dashboard-test-2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A fully-featured subscription dashboard using the full power of the Limio SDK",
   "main": "./index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     },
     {
       "id": "accentColor__limio_color",
-      "label": "Accent Color", 
+      "label": "Accent Color",
       "type": "color",
       "default": "#635BFF"
     },
@@ -75,7 +75,7 @@
     {
       "id": "cancelCtaText",
       "label": "Cancel CTA Text",
-      "type": "string", 
+      "type": "string",
       "default": "Cancel Subscription"
     },
     {

@@ -61,6 +61,7 @@ const SubscriptionDashboard = () => {
   const { isInPageBuilder } = useLimioContext() || {}
 
   const [selectedTab, setSelectedTab] = useState('overview')
+  const [selectedSubscriptionId, setSelectedSubscriptionId] = useState(null)
   const [expandedInvoice, setExpandedInvoice] = useState(null)
 
   // Process subscriptions
@@ -69,46 +70,87 @@ const SubscriptionDashboard = () => {
     return subscriptions.filter(sub => sub.status === 'active')
   }, [subscriptions])
 
-  const primarySubscription = activeSubscriptions[0]
+  // Auto-select first subscription if none selected
+  const selectedSubscription = useMemo(() => {
+    if (!activeSubscriptions.length) return null
+    
+    // If no subscription selected, select the first one
+    if (!selectedSubscriptionId) {
+      const firstSub = activeSubscriptions[0]
+      setSelectedSubscriptionId(firstSub.id)
+      return firstSub
+    }
+    
+    // Find selected subscription
+    const found = activeSubscriptions.find(sub => sub.id === selectedSubscriptionId)
+    return found || activeSubscriptions[0]
+  }, [activeSubscriptions, selectedSubscriptionId])
 
-  // Get current offer for primary subscription
+  // Get current offer for selected subscription
   const currentOffer = useMemo(() => {
-    if (!primarySubscription?.offers) return null
-    const activeOffers = checkActiveOffers(primarySubscription.offers, false)
+    if (!selectedSubscription?.offers) return null
+    const activeOffers = checkActiveOffers(selectedSubscription.offers, false)
     return activeOffers.find(offer => offer.data?.record_subtype !== 'discount')?.data?.offer || null
-  }, [primarySubscription])
+  }, [selectedSubscription])
 
-  // Get upgrade offers
+  // Get upgrade offers for selected subscription
   const upgradeOffers = useMemo(() => {
     if (!currentOffer || !offers) return []
-    const upgradeIds = currentOffer.data?.attributes?.upgrade_offers__limio || []
-    return offers.filter(offer => 
-      upgradeIds.some(upgrade => upgrade.id === offer.id)
-    ).slice(0, 3) // Show max 3 upgrade options
+    
+    // Get upgrade offer references from current offer
+    const upgradeOfferRefs = currentOffer.data?.attributes?.upgrade_offers__limio || []
+    
+    console.log('Current offer upgrade refs:', upgradeOfferRefs)
+    console.log('Available offers:', offers.map(o => ({ id: o.id, path: o.path, name: o.name })))
+    
+    // Match offers by ID or path
+    const matchedOffers = offers.filter(offer => 
+      upgradeOfferRefs.some(upgrade => 
+        upgrade.id === offer.id || 
+        upgrade.path === offer.path ||
+        upgrade.path === offer.data?.path
+      )
+    )
+    
+    console.log('Matched upgrade offers:', matchedOffers.map(o => ({ id: o.id, name: o.name })))
+    
+    return matchedOffers.slice(0, 3) // Show max 3 upgrade options
   }, [currentOffer, offers])
 
-  // Process invoices
-  const sortedInvoices = useMemo(() => {
-    if (!invoices) return []
+  // Get invoices for selected subscription
+  const subscriptionInvoices = useMemo(() => {
+    if (!invoices || !selectedSubscription) return []
     return invoices
+      .filter(invoice => 
+        invoice.subscription_id === selectedSubscription.id || 
+        invoice.subscription_reference === selectedSubscription.reference
+      )
       .sort((a, b) => new Date(b.created) - new Date(a.created))
-      .slice(0, 10) // Show last 10 invoices
-  }, [invoices])
+      .slice(0, 10)
+  }, [invoices, selectedSubscription])
 
   // Handle upgrade selection
   const handleUpgrade = async (offer) => {
-    if (basketLoading) return
+    if (basketLoading || !selectedSubscription) return
     
     try {
       const checkoutId = getCurrentBasketId()
       if (!checkoutId) {
         await initiateCheckout({ 
           order: { 
-            orderItems: [{ offer, type: 'update_subscription' }] 
+            orderItems: [{ 
+              offer, 
+              type: 'update_subscription',
+              subscription: selectedSubscription 
+            }] 
           } 
         })
       } else {
-        await addOfferToBasket({ offer, type: 'update_subscription' })
+        await addOfferToBasket({ 
+          offer, 
+          type: 'update_subscription',
+          subscription: selectedSubscription 
+        })
       }
       
       if (pageOptions?.pushToCheckout) {
@@ -117,6 +159,12 @@ const SubscriptionDashboard = () => {
     } catch (error) {
       console.error('Failed to initiate upgrade:', error)
     }
+  }
+
+  // Handle subscription selection
+  const handleSubscriptionChange = (subscriptionId) => {
+    setSelectedSubscriptionId(subscriptionId)
+    setExpandedInvoice(null) // Reset expanded invoice when changing subscription
   }
 
   // Loading state
@@ -152,8 +200,12 @@ const SubscriptionDashboard = () => {
     )
   }
 
-  const primarySubInfo = useSubInfo(primarySubscription)
-  const scheduleInfo = useSchedule(primarySubscription)
+  const selectedSubInfo = useSubInfo(selectedSubscription)
+  const scheduleInfo = useSchedule(selectedSubscription)
+  
+  // Debug schedule output
+  console.log('Schedule info result:', scheduleInfo)
+  console.log('Sub info result:', selectedSubInfo)
 
   return (
     <div 
@@ -185,6 +237,35 @@ const SubscriptionDashboard = () => {
           )}
         </div>
 
+        {/* Subscription Selector */}
+        {activeSubscriptions.length > 1 && (
+          <div className="sdt-subscription-selector">
+            <label htmlFor="subscription-select" className="sdt-selector-label">
+              Select Subscription:
+            </label>
+            <select 
+              id="subscription-select"
+              className="sdt-selector"
+              value={selectedSubscription?.id || ''}
+              onChange={(e) => handleSubscriptionChange(e.target.value)}
+            >
+              {activeSubscriptions.map((sub) => {
+                const subOffer = (() => {
+                  if (!sub?.offers) return null
+                  const activeOffers = checkActiveOffers(sub.offers, false)
+                  return activeOffers.find(offer => offer.data?.record_subtype !== 'discount')?.data?.offer || null
+                })()
+                
+                return (
+                  <option key={sub.id} value={sub.id}>
+                    {subOffer?.data?.attributes?.display_name__limio || `Subscription ${sub.reference || sub.id}`}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+        )}
+
         {/* Navigation */}
         <nav className="sdt-nav">
           <button 
@@ -203,7 +284,7 @@ const SubscriptionDashboard = () => {
               Upgrade
             </button>
           )}
-          {showInvoiceHistory && sortedInvoices.length > 0 && (
+          {showInvoiceHistory && subscriptionInvoices.length > 0 && (
             <button 
               className={`sdt-nav-item ${selectedTab === 'billing' ? 'sdt-nav-item-active' : ''}`}
               onClick={() => setSelectedTab('billing')}
@@ -228,9 +309,11 @@ const SubscriptionDashboard = () => {
               {/* Current Subscription Card */}
               <div className="sdt-card sdt-subscription-card">
                 <div className="sdt-card-header">
-                  <h2>Current Subscription</h2>
-                  <div className={`sdt-status sdt-status-${primarySubscription.status}`}>
-                    {primarySubscription.status}
+                  <h2>
+                    {activeSubscriptions.length > 1 ? 'Selected Subscription' : 'Current Subscription'}
+                  </h2>
+                  <div className={`sdt-status sdt-status-${selectedSubscription.status}`}>
+                    {selectedSubscription.status}
                   </div>
                 </div>
                 
@@ -261,29 +344,52 @@ const SubscriptionDashboard = () => {
                     <div className="sdt-meta-row">
                       <span className="sdt-meta-label">Started</span>
                       <span className="sdt-meta-value">
-                        {formatDate ? formatDate(primarySubscription.created, "DATE_MED") : 
-                         format(parseISO(primarySubscription.created), "MMM d, yyyy")}
+                        {formatDate ? formatDate(selectedSubscription.created, "DATE_MED") : 
+                         format(parseISO(selectedSubscription.created), "MMM d, yyyy")}
                       </span>
                     </div>
                     
-                    {scheduleInfo?.termEndDate && (
+                    {/* Try multiple schedule data sources */}
+                    {(scheduleInfo?.termEndDate || selectedSubscription?.schedule?.[0]?.end) && (
                       <div className="sdt-meta-row">
                         <span className="sdt-meta-label">Next Billing</span>
-                        <span className="sdt-meta-value">{scheduleInfo.termEndDate}</span>
+                        <span className="sdt-meta-value">
+                          {scheduleInfo?.termEndDate || 
+                           (selectedSubscription?.schedule?.[0]?.end && 
+                            (formatDate ? formatDate(selectedSubscription.schedule[0].end, "DATE_MED") : 
+                             format(parseISO(selectedSubscription.schedule[0].end), "MMM d, yyyy"))
+                           )}
+                        </span>
                       </div>
                     )}
                     
-                    {scheduleInfo?.nextPaymentAmount && (
+                    {(scheduleInfo?.nextPaymentAmount || selectedSubscription?.schedule?.[0]?.amount) && (
                       <div className="sdt-meta-row">
-                        <span className="sdt-meta-label">Amount</span>
-                        <span className="sdt-meta-value">{scheduleInfo.nextPaymentAmount}</span>
+                        <span className="sdt-meta-label">Next Amount</span>
+                        <span className="sdt-meta-value">
+                          {scheduleInfo?.nextPaymentAmount || 
+                           (selectedSubscription?.schedule?.[0] && formatCurrency ? 
+                            formatCurrency(selectedSubscription.schedule[0].amount, selectedSubscription.schedule[0].currency) :
+                            `${selectedSubscription?.schedule?.[0]?.currency || ''} ${selectedSubscription?.schedule?.[0]?.amount || ''}`
+                           )}
+                        </span>
+                      </div>
+                    )}
+                    
+                    {/* Debug info - remove after testing */}
+                    {selectedSubscription?.schedule && (
+                      <div className="sdt-meta-row" style={{ fontSize: '12px', opacity: 0.7 }}>
+                        <span className="sdt-meta-label">Schedule Debug</span>
+                        <span className="sdt-meta-value">
+                          {selectedSubscription.schedule.length} schedule items
+                        </span>
                       </div>
                     )}
                     
                     <div className="sdt-meta-row">
                       <span className="sdt-meta-label">Reference</span>
                       <span className="sdt-meta-value sdt-reference">
-                        {primarySubscription.reference || primarySubscription.id}
+                        {selectedSubscription.reference || selectedSubscription.id}
                       </span>
                     </div>
                   </div>
@@ -366,10 +472,16 @@ const SubscriptionDashboard = () => {
               <div className="sdt-section-header">
                 <h2>Upgrade Your Plan</h2>
                 <p>Choose a plan that better fits your needs</p>
+                {/* Debug info */}
+                <div style={{ fontSize: '12px', opacity: 0.7, marginTop: '8px' }}>
+                  Current offer has {currentOffer?.data?.attributes?.upgrade_offers__limio?.length || 0} upgrade options.
+                  Campaign has {offers?.length || 0} total offers.
+                  Found {upgradeOffers.length} matching upgrade offers.
+                </div>
               </div>
               
               <div className="sdt-upgrade-grid">
-                {upgradeOffers.map((offer) => {
+                {upgradeOffers.length > 0 ? upgradeOffers.map((offer) => {
                   const attributes = offer?.data?.attributes || {}
                   return (
                     <div key={offer.id} className="sdt-card sdt-upgrade-card">
@@ -404,7 +516,21 @@ const SubscriptionDashboard = () => {
                       </button>
                     </div>
                   )
-                })}
+                }) : (
+                  <div className="sdt-card">
+                    <div style={{ padding: '24px', textAlign: 'center', color: 'var(--sdt-text-secondary)' }}>
+                      <p>No upgrade options found.</p>
+                      {currentOffer?.data?.attributes?.upgrade_offers__limio && (
+                        <details style={{ marginTop: '16px', textAlign: 'left', fontSize: '12px' }}>
+                          <summary>Debug: Upgrade References</summary>
+                          <pre style={{ marginTop: '8px', background: '#f5f5f5', padding: '8px', borderRadius: '4px', overflow: 'auto' }}>
+                            {JSON.stringify(currentOffer.data.attributes.upgrade_offers__limio, null, 2)}
+                          </pre>
+                        </details>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -416,10 +542,10 @@ const SubscriptionDashboard = () => {
                 <p>View and download your invoices</p>
               </div>
               
-              {sortedInvoices.length > 0 ? (
+              {subscriptionInvoices.length > 0 ? (
                 <div className="sdt-card sdt-invoices-card">
                   <div className="sdt-invoices-list">
-                    {sortedInvoices.map((invoice, index) => (
+                    {subscriptionInvoices.map((invoice, index) => (
                       <div key={invoice.id || index} className="sdt-invoice-item">
                         <div className="sdt-invoice-main">
                           <div className="sdt-invoice-info">
@@ -509,7 +635,7 @@ const SubscriptionDashboard = () => {
                     <div className="sdt-meta-row">
                       <span className="sdt-meta-label">Subscription ID</span>
                       <span className="sdt-meta-value sdt-reference">
-                        {primarySubscription.reference || primarySubscription.id}
+                        {selectedSubscription.reference || selectedSubscription.id}
                       </span>
                     </div>
                   </div>
@@ -522,20 +648,20 @@ const SubscriptionDashboard = () => {
                   <div className="sdt-settings-content">
                     <div className="sdt-meta-row">
                       <span className="sdt-meta-label">Status</span>
-                      <span className={`sdt-status sdt-status-${primarySubscription.status}`}>
-                        {primarySubscription.status}
+                      <span className={`sdt-status sdt-status-${selectedSubscription.status}`}>
+                        {selectedSubscription.status}
                       </span>
                     </div>
-                    {primarySubInfo?.isGift && (
+                    {selectedSubInfo?.isGift && (
                       <div className="sdt-meta-row">
                         <span className="sdt-meta-label">Type</span>
                         <span className="sdt-meta-value">Gift Subscription</span>
                       </div>
                     )}
-                    {primarySubscription?.mode && (
+                    {selectedSubscription?.mode && (
                       <div className="sdt-meta-row">
                         <span className="sdt-meta-label">Environment</span>
-                        <span className="sdt-meta-value">{primarySubscription.mode}</span>
+                        <span className="sdt-meta-value">{selectedSubscription.mode}</span>
                       </div>
                     )}
                   </div>
