@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Form, SubmitButton } from "@limio/ui-form"
 import { LimioFieldContext, sanitiseHTML } from "@limio/sdk"
 import { useComponentStaticProps } from "./componentStaticProps"
 import { TooltipProvider } from "@limio/component-library"
@@ -25,37 +24,45 @@ function MaltegoDataCaptureForm({ children }) {
   const formRef = React.useRef(null)
 
   const onSubmit = async (event) => {
-    const formData = event.value.formData
+    event.preventDefault()
     setError(null)
+
+    const form = formRef.current
+    const formDataObj = {}
+    const formData = new FormData(form)
+    for (const [key, value] of formData.entries()) {
+      formDataObj[key] = value
+    }
 
     const unverifiedRecaptchaToken = await getRecaptchaToken("dataCaptureForm")
 
     try {
-      await sendOrder({ order_type: "data_capture", data: formData }, { "x-limio-recaptcha": unverifiedRecaptchaToken })
+      await sendOrder({ order_type: "data_capture", data: formDataObj }, { "x-limio-recaptcha": unverifiedRecaptchaToken })
       setSuccess(true)
 
       if (redirectUrl) {
         window.location.href = redirectUrl
       }
-    } catch (error) {
-      setError(error)
+    } catch (err) {
+      setError(err)
     }
   }
 
   return (
     <TooltipProvider>
       <LimioFieldContext.Provider value={{ optionalLabel, requiredLabel }}>
-        <Form
+        <form
           ref={formRef}
           name="maltego-data-capture-form"
-          onSubmitError={(error) => {
-            setError(error)
-          }}
           onSubmit={onSubmit}
         >
           <fieldset disabled={success}>{children}</fieldset>
-          {!success && <SubmitButton submitLabel={submitLabel} className={"py-2 col-12"} />}
-        </Form>
+          {!success && (
+            <button type="submit" className="btn btn-primary py-2 col-12">
+              {submitLabel}
+            </button>
+          )}
+        </form>
         {success ? (
           <div className="alert alert-success" role="alert" style={{ color: successFormMessageFontColor, backgroundColor: successFormMessageBackgroundColor }}>
             {successFormMessage && <p dangerouslySetInnerHTML={{ __html: sanitiseHTML(successFormMessage) }} />}
