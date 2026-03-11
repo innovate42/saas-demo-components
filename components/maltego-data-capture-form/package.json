@@ -12,6 +12,7 @@
   "dependencies": {},
   "peerDependencies": {
     "@limio/sdk": "*",
+    "@limio/ui-form": "*",
     "react": "*"
   },
   "limioProps": [
