@@ -9,10 +9,7 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {
-    "@limio/component-library": "workspace:^",
-    "@limio/shop": "workspace:^"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@limio/sdk": "*",
     "@limio/ui-form": "*",
