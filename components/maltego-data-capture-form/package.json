@@ -9,11 +9,12 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "@limio/component-library": "workspace:^",
+    "@limio/ui-form": "workspace:^"
+  },
   "peerDependencies": {
     "@limio/sdk": "*",
-    "@limio/ui-form": "*",
     "react": "*"
   },
   "limioProps": [
