@@ -10,8 +10,8 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@limio/component-library": "workspace:^",
-    "@limio/ui-form": "workspace:^"
+    "@limio/component-library": "*",
+    "@limio/ui-form": "*"
   },
   "peerDependencies": {
     "@limio/sdk": "*",
