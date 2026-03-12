@@ -10,8 +10,7 @@ const defaultComponentProps = {
   successFormMessageBackgroundColor: "#d4edda",
   invalidFormMessage: "Please correct the errors below and try again.",
   invalidFormMessageFontColor: "#721c24",
-  invalidFormMessageBackgroundColor: "#f8d7da",
-  redirectUrl: ""
+  invalidFormMessageBackgroundColor: "#f8d7da"
 }
 
 export function useComponentStaticProps() {

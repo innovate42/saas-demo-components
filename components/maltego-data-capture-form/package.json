@@ -1,7 +1,7 @@
 {
-  "name": "@limio/maltego-data-capture-form",
+  "name": "@limio/component-maltego-data-capture-form",
   "version": "1.0.0",
-  "description": "Maltego Data Capture Form - collects customer information and sends to Salesforce via platform event, with optional redirect on success",
+  "description": "",
   "main": "./index.js",
   "scripts": {
     "build": "yarn component:webpack",
@@ -9,7 +9,13 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {},
+  "dependencies": {
+    "@limio/component-library": "workspace:^",
+    "@limio/shop": "workspace:^"
+  },
+  "devDependencies": {
+    "@limio/test-harness-shop": "workspace:^"
+  },
   "peerDependencies": {
     "@limio/sdk": "*",
     "@limio/ui-form": "*",
@@ -75,12 +81,6 @@
       "label": "Invalid message background color",
       "type": "color",
       "default": "#fff3cd"
-    },
-    {
-      "id": "redirectUrl",
-      "label": "Redirect URL",
-      "type": "string",
-      "default": ""
     }
   ],
   "limioSubcomponents": [
@@ -89,5 +89,12 @@
   ],
   "limioCapabilities": [
     "googleCaptcha"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
   ]
 }

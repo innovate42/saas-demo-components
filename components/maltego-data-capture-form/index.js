@@ -4,7 +4,7 @@ import { LimioFieldContext } from "@limio/sdk"
 import { useComponentStaticProps } from "./componentStaticProps"
 import { sanitiseHTML } from "@limio/sdk"
 import { TooltipProvider } from "@limio/component-library"
-import { sendOrder, getRecaptchaToken } from "./helpers"
+import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.ts"
 
 function MaltegoDataCaptureForm({ children }) {
   const {
@@ -16,8 +16,7 @@ function MaltegoDataCaptureForm({ children }) {
     successFormMessageBackgroundColor,
     invalidFormMessage,
     invalidFormMessageFontColor,
-    invalidFormMessageBackgroundColor,
-    redirectUrl
+    invalidFormMessageBackgroundColor
   } = useComponentStaticProps()
 
   const [error, setError] = React.useState(null)
@@ -34,10 +33,6 @@ function MaltegoDataCaptureForm({ children }) {
     try {
       await sendOrder({ order_type: "data_capture", data: formData }, { "x-limio-recaptcha": unverifiedRecaptchaToken })
       setSuccess(true)
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl
-      }
     } catch (error) {
       setError(error)
     }
@@ -48,7 +43,7 @@ function MaltegoDataCaptureForm({ children }) {
       <LimioFieldContext.Provider value={{ optionalLabel, requiredLabel }}>
         <Form
           ref={formRef}
-          name="maltego-data-capture-form"
+          name="data-capture-form"
           onSubmitError={(error) => {
             setError(error)
           }}
