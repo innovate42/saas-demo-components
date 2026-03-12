@@ -4,7 +4,7 @@ import { LimioFieldContext } from "@limio/sdk"
 import { useComponentStaticProps } from "./componentStaticProps"
 import { sanitiseHTML } from "@limio/sdk"
 import { TooltipProvider } from "@limio/component-library"
-import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.ts"
+import { sendOrder, getRecaptchaToken } from "./helpers"
 
 function MaltegoDataCaptureForm({ children }) {
   const {

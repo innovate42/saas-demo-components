@@ -9,13 +9,8 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {
-    "@limio/component-library": "workspace:^",
-    "@limio/shop": "workspace:^"
-  },
-  "devDependencies": {
-    "@limio/test-harness-shop": "workspace:^"
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "peerDependencies": {
     "@limio/sdk": "*",
     "@limio/ui-form": "*",
@@ -89,12 +84,5 @@
   ],
   "limioCapabilities": [
     "googleCaptcha"
-  ],
-  "type": "module",
-  "sideEffects": [
-    "*.css",
-    "*.scss",
-    "*.sass",
-    "*.less"
   ]
 }
