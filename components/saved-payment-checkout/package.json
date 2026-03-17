@@ -1,0 +1,43 @@
+{
+  "name": "component-saved-payment-checkout",
+  "version": "1.0.0",
+  "description": "Condensed saved payment method display for checkout",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading above payment card",
+      "type": "string",
+      "default": "Payment method"
+    },
+    {
+      "id": "noPaymentMessage",
+      "label": "Message when no payment method is found",
+      "type": "string",
+      "default": "No saved payment method found."
+    },
+    {
+      "id": "changePaymentLabel",
+      "label": "Change payment link label",
+      "type": "string",
+      "default": "Change"
+    },
+    {
+      "id": "changePaymentLink",
+      "label": "URL to change payment method",
+      "type": "string",
+      "default": ""
+    }
+  ]
+}

@@ -80,4 +80,32 @@ function useCheckout() {
   return { useCheckoutSelector }
 }
 
-export { useCheckout }
+function useLimioUserSubscriptionPaymentMethods(subscriptionId) {
+  return {
+    payment_methods: [
+      {
+        type: "zuora",
+        status: "active",
+        start: "2023-06-09T12:44:38.771Z",
+        data: {
+          zuora: {
+            result: {
+              Type: "CreditCard",
+              CreditCardType: "Visa",
+              CreditCardMaskNumber: "************1234"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+function useLimioUserSubscriptionAddresses(subscriptionId) {
+  return {
+    addresses: [],
+    revalidate: () => {}
+  }
+}
+
+export { useCheckout, useLimioUserSubscriptionPaymentMethods, useLimioUserSubscriptionAddresses }
