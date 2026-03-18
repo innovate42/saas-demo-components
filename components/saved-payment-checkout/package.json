@@ -61,12 +61,6 @@
       "label": "Change payment URL",
       "type": "string",
       "default": ""
-    },
-    {
-      "id": "columnSize",
-      "label": "Column Size",
-      "type": "string",
-      "default": "12"
     }
   ],
   "type": "module",

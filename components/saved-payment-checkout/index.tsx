@@ -16,8 +16,6 @@ type SavedPaymentCheckoutProps = {
     expiredPaymentMethodLabel?: string
     changePaymentLabel?: string
     changePaymentUrl?: string
-    columnSize?: string | number
-    className?: string
 }
 
 // Safe wrapper — usePaymentManagerContext throws if rendered outside a PaymentManager provider.
@@ -38,8 +36,6 @@ function SavedPaymentCheckout({
     expiredPaymentMethodLabel = "Expired {{expiryDate}}",
     changePaymentLabel = "Change",
     changePaymentUrl = "",
-    columnSize = "12",
-    className = "",
 }: SavedPaymentCheckoutProps) {
     const { form, store } = useSafePaymentManagerContext()
 
@@ -127,22 +123,17 @@ function SavedPaymentCheckout({
         }
     }, [form, store, selectedPaymentMethod])
 
-    const wrapperClass = `col-12 tw-pt-4 col-${columnSize} form-group ${className}`.trim()
-
     if (!paymentMethods || paymentMethods.length === 0) {
         return (
-            <div className={wrapperClass}>
-                <div style={s.container}>
-                    <div style={s.warning}>{noPaymentMethodMessage}</div>
-                </div>
+            <div style={s.container}>
+                <div style={s.warning}>{noPaymentMethodMessage}</div>
             </div>
         )
     }
 
     return (
-        <div className={wrapperClass}>
-            <div style={s.container}>
-                {heading && <h4 style={s.heading}>{heading}</h4>}
+        <div style={s.container}>
+            {heading && <h4 style={s.heading}>{heading}</h4>}
             <fieldset style={s.fieldset}>
                 <legend style={s.legend}>Select payment method</legend>
                 <div style={s.cardList}>
@@ -166,7 +157,6 @@ function SavedPaymentCheckout({
                     </a>
                 )}
             </fieldset>
-            </div>
         </div>
     )
 }
