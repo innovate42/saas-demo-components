@@ -17,15 +17,22 @@ function SavedPaymentCheckout() {
     })
 
     const defaultPaymentMethodId = customer?.data?.defaultPaymentMethodId
-    const defaultPaymentMethod: PaymentMethod | undefined =
-        paymentMethods?.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
-        || paymentMethods?.[0]
+    const initialSelectedId = defaultPaymentMethodId || paymentMethods?.[0]?.id
+    const [selectedPaymentMethodId, setSelectedPaymentMethodId] = React.useState<string | undefined>(initialSelectedId)
 
     React.useEffect(() => {
-        if (!defaultPaymentMethod || !form || !store) return
+        if (initialSelectedId && !selectedPaymentMethodId) {
+            setSelectedPaymentMethodId(initialSelectedId)
+        }
+    }, [initialSelectedId])
+
+    const selectedPaymentMethod = paymentMethods?.find((pm: PaymentMethod) => pm.id === selectedPaymentMethodId)
+
+    React.useEffect(() => {
+        if (!selectedPaymentMethod || !form || !store) return
 
         async function handleSubmitPayment() {
-            const paymentData = defaultPaymentMethod!.data
+            const paymentData = selectedPaymentMethod!.data
 
             if (paymentData.type === "zuora" || paymentData.zuora) {
                 store.dispatch(updatePaymentAction({
@@ -45,7 +52,7 @@ function SavedPaymentCheckout() {
         return () => {
             form.removeAsyncEventListener("submit", handleSubmitPayment)
         }
-    }, [form, store, defaultPaymentMethod])
+    }, [form, store, selectedPaymentMethod])
 
     if (!paymentMethods || paymentMethods.length === 0) {
         return (
@@ -58,18 +65,29 @@ function SavedPaymentCheckout() {
     return (
         <div className="spc-container">
             {props.heading && <h4 className="spc-heading">{props.heading}</h4>}
-            {defaultPaymentMethod && (
-                <CheckoutPaymentCard
-                    paymentMethod={defaultPaymentMethod}
-                    changePaymentLabel={props.changePaymentLabel}
-                    changePaymentUrl={props.changePaymentUrl}
-                    labels={{
-                        expiryDateLabel: props.expiryDateLabel,
-                        expiresSoonLabel: props.expiresSoonLabel,
-                        expiredPaymentMethodLabel: props.expiredPaymentMethodLabel
-                    }}
-                />
-            )}
+            <fieldset className="spc-fieldset">
+                <legend className="spc-legend">Select payment method</legend>
+                <div className="spc-card-list">
+                    {paymentMethods.map((pm: PaymentMethod) => (
+                        <CheckoutPaymentCard
+                            key={pm.id}
+                            paymentMethod={pm}
+                            isSelected={pm.id === selectedPaymentMethodId}
+                            onSelect={() => setSelectedPaymentMethodId(pm.id)}
+                            labels={{
+                                expiryDateLabel: props.expiryDateLabel,
+                                expiresSoonLabel: props.expiresSoonLabel,
+                                expiredPaymentMethodLabel: props.expiredPaymentMethodLabel
+                            }}
+                        />
+                    ))}
+                </div>
+                {props.changePaymentUrl && (
+                    <a href={props.changePaymentUrl} className="spc-add-method-link">
+                        {props.changePaymentLabel}
+                    </a>
+                )}
+            </fieldset>
         </div>
     )
 }

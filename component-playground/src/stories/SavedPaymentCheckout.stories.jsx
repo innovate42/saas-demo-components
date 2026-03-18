@@ -34,6 +34,7 @@ export const Default = {
 export const WithChangeLink = {
     args: {
         ...Default.args,
+        changePaymentLabel: "Use a different card",
         changePaymentUrl: "/account/payment-methods"
     }
 }

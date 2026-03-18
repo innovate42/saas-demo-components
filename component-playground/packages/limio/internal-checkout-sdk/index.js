@@ -123,6 +123,46 @@ export function useLimioUserPaymentMethods() {
             }
           }
         }
+      },
+      {
+        id: "pm-mock-789",
+        type: "zuora",
+        data: {
+          type: "zuora",
+          method: "CreditCard",
+          brand: "MasterCard",
+          last4: "5678",
+          expirationMonth: "03",
+          expirationYear: "2026",
+          holderName: "Test User",
+          email: "test@example.com",
+          zuora: {
+            refId: "mock-zuora-ref-mc",
+            result: {
+              PaymentGateway: "Test Gateway",
+              Type: "CreditCard",
+              CreditCardType: "MasterCard",
+              CreditCardMaskNumber: "************5678"
+            }
+          }
+        }
+      },
+      {
+        id: "pm-mock-paypal",
+        type: "zuora",
+        data: {
+          type: "zuora",
+          method: "PayPal",
+          brand: "PayPal",
+          email: "test@example.com",
+          zuora: {
+            refId: "mock-zuora-ref-pp",
+            result: {
+              PaymentGateway: "Test Gateway",
+              Type: "PayPal"
+            }
+          }
+        }
       }
     ],
     revalidate: () => {},

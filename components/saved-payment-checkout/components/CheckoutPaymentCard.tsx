@@ -34,8 +34,8 @@ type Labels = {
 
 type Props = {
     paymentMethod: PaymentMethod
-    changePaymentLabel: string
-    changePaymentUrl: string
+    isSelected: boolean
+    onSelect: () => void
     labels: Labels
 }
 
@@ -88,7 +88,7 @@ function formatExpiryLabel(template: string, month: string, year: string): strin
     return template.replace("{{expiryDate}}", expiryDate)
 }
 
-function CheckoutPaymentCard({ paymentMethod, changePaymentLabel, changePaymentUrl, labels }: Props) {
+function CheckoutPaymentCard({ paymentMethod, isSelected, onSelect, labels }: Props) {
     const label = getCardLabel(paymentMethod)
     const last4 = getLast4(paymentMethod)
     const expirationMonth = paymentMethod.data?.expirationMonth || ""
@@ -113,34 +113,57 @@ function CheckoutPaymentCard({ paymentMethod, changePaymentLabel, changePaymentU
               ? "spc-expiry spc-expiry--expiring-soon"
               : "spc-expiry"
 
-    return (
-        <div className="spc-card">
-            <div className="spc-card-header">
-                <div className="spc-card-info">
-                    <div className="spc-card-top-row">
-                        <span className="spc-card-label">{label}</span>
-                        {last4 && <span className="spc-card-number">**** {last4}</span>}
-                    </div>
-                    {expirationMonth && expirationYear && (
-                        <span className={expiryClassName}>
-                            {formatExpiryLabel(expiryLabel, expirationMonth, expirationYear)}
-                        </span>
-                    )}
-                </div>
-                <div className="spc-icon">{icon}</div>
-            </div>
+    const cardClassName = `spc-card${isSelected ? " spc-card--selected" : ""}`
+    const radioId = `spc-radio-${paymentMethod.id}`
+    const accessibleLabel = `${label}${last4 ? ` ending in ${last4}` : ""}${holderName ? `, ${holderName}` : ""}`
 
-            {(holderName || email || changePaymentUrl) && (
-                <div className="spc-card-footer">
-                    <span className="spc-holder">{holderName || email}</span>
-                    {changePaymentUrl && (
-                        <a href={changePaymentUrl} className="spc-change-link">
-                            {changePaymentLabel}
-                        </a>
-                    )}
+    return (
+        <label htmlFor={radioId} className={cardClassName}>
+            <input
+                type="radio"
+                id={radioId}
+                name="saved-payment-method"
+                className="spc-radio-input"
+                checked={isSelected}
+                onChange={onSelect}
+                aria-label={accessibleLabel}
+            />
+            <div className="spc-card-body">
+                <div className="spc-card-header">
+                    <div className="spc-card-info">
+                        <div className="spc-card-top-row">
+                            <span className="spc-card-label">{label}</span>
+                            {last4 && <span className="spc-card-number">**** {last4}</span>}
+                        </div>
+                        {expirationMonth && expirationYear && (
+                            <span className={expiryClassName}>
+                                {formatExpiryLabel(expiryLabel, expirationMonth, expirationYear)}
+                            </span>
+                        )}
+                    </div>
+                    <div className="spc-icon">{icon}</div>
                 </div>
-            )}
-        </div>
+
+                {(holderName || email) && (
+                    <div className="spc-card-footer">
+                        <span className="spc-holder">{holderName || email}</span>
+                    </div>
+                )}
+            </div>
+            <div className="spc-check-indicator" aria-hidden="true">
+                {isSelected && (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="10" fill="currentColor" />
+                        <path d="M6 10l3 3 5-5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                )}
+                {!isSelected && (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="2" />
+                    </svg>
+                )}
+            </div>
+        </label>
     )
 }
 
