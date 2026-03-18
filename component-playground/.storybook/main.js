@@ -15,7 +15,6 @@ const config = {
         getAbsolutePath("@storybook/addon-onboarding"),
         getAbsolutePath("@storybook/addon-links"),
         getAbsolutePath("@storybook/addon-essentials"),
-        getAbsolutePath("@chromatic-com/storybook"),
         getAbsolutePath("@storybook/addon-interactions"),
         "@storybook/addon-styling-webpack",
         path.resolve(__dirname, "addon-prompt"),
@@ -28,19 +27,19 @@ const config = {
         autodocs: "tag",
     },
     webpackFinal: async (config) => {
-        // Ensure babel-loader handles JS/JSX with React preset
         config.module.rules.push({
-            test: /\.(js|jsx)$/,
+            test: /\.(js|jsx|ts|tsx)$/,
             exclude: /node_modules/,
             use: {
-                loader: require.resolve("babel-loader"),
+                loader: require.resolve("swc-loader"),
                 options: {
-                    presets: [
-                        require.resolve("@babel/preset-react"),
-                    ],
-                },
-            },
-        })
+                    jsc: {
+                        parser: { syntax: "typescript", tsx: true },
+                        transform: { react: { runtime: "automatic" } }
+                    }
+                }
+            }
+        });
 
         config.resolve.alias = {
             ...config.resolve.alias,
@@ -90,7 +89,17 @@ const config = {
                 __dirname,
                 path.join("..", "packages", "limio", "ui")
             ),
+            "@limio/shop-payment-manager": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "shop-payment-manager")
+            ),
+            "@limio/shop-redux": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "shop-redux")
+            ),
         };
+
+        config.resolve.extensions = [...(config.resolve.extensions || []), ".ts", ".tsx"];
 
         return config;
     }

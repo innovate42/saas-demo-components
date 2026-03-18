@@ -1,0 +1,70 @@
+{
+  "name": "@limio/component-saved-payment-checkout",
+  "version": "0.0.1",
+  "description": "Displays a saved payment method and integrates with checkout form submission",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "isCustomSubcomponent": true,
+  "dependencies": {
+    "@limio/internal-checkout-sdk": "workspace:^",
+    "@limio/shop": "workspace:^",
+    "@limio/shop-payment-manager": "workspace:^",
+    "@limio/shop-redux": "workspace:^"
+  },
+  "peerDependencies": {
+    "@limio/sdk": "workspace:^",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Payment method"
+    },
+    {
+      "id": "noPaymentMethodMessage",
+      "label": "No payment method message",
+      "type": "string",
+      "default": "No saved payment method found."
+    },
+    {
+      "id": "expiryDateLabel",
+      "label": "Expiry date label",
+      "type": "string",
+      "default": "Expires {{expiryDate}}"
+    },
+    {
+      "id": "expiresSoonLabel",
+      "label": "Expires soon label",
+      "type": "string",
+      "default": "Expires {{expiryDate}}"
+    },
+    {
+      "id": "expiredPaymentMethodLabel",
+      "label": "Expired label",
+      "type": "string",
+      "default": "Expired {{expiryDate}}"
+    },
+    {
+      "id": "changePaymentLabel",
+      "label": "Change payment link text",
+      "type": "string",
+      "default": "Change"
+    },
+    {
+      "id": "changePaymentUrl",
+      "label": "Change payment URL",
+      "type": "string",
+      "default": ""
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ]
+}

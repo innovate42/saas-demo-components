@@ -81,3 +81,91 @@ function useCheckout() {
 }
 
 export { useCheckout }
+
+export function useLimioUserCustomer() {
+  return {
+    customer: {
+      id: "cus-mock-123",
+      data: {
+        email: "test@example.com",
+        firstName: "Test",
+        lastName: "User",
+        defaultPaymentMethodId: "pm-mock-456"
+      }
+    },
+    revalidate: () => {},
+    mutate: () => {}
+  }
+}
+
+export function useLimioUserPaymentMethods() {
+  return {
+    paymentMethods: [
+      {
+        id: "pm-mock-456",
+        type: "zuora",
+        data: {
+          type: "zuora",
+          method: "CreditCard",
+          brand: "Visa",
+          last4: "1234",
+          expirationMonth: "12",
+          expirationYear: "2027",
+          holderName: "Test User",
+          email: "test@example.com",
+          zuora: {
+            refId: "mock-zuora-ref-id",
+            result: {
+              PaymentGateway: "Test Gateway",
+              Type: "CreditCard",
+              CreditCardType: "Visa",
+              CreditCardMaskNumber: "************1234"
+            }
+          }
+        }
+      },
+      {
+        id: "pm-mock-789",
+        type: "zuora",
+        data: {
+          type: "zuora",
+          method: "CreditCard",
+          brand: "MasterCard",
+          last4: "5678",
+          expirationMonth: "03",
+          expirationYear: "2026",
+          holderName: "Test User",
+          email: "test@example.com",
+          zuora: {
+            refId: "mock-zuora-ref-mc",
+            result: {
+              PaymentGateway: "Test Gateway",
+              Type: "CreditCard",
+              CreditCardType: "MasterCard",
+              CreditCardMaskNumber: "************5678"
+            }
+          }
+        }
+      },
+      {
+        id: "pm-mock-paypal",
+        type: "zuora",
+        data: {
+          type: "zuora",
+          method: "PayPal",
+          brand: "PayPal",
+          email: "test@example.com",
+          zuora: {
+            refId: "mock-zuora-ref-pp",
+            result: {
+              PaymentGateway: "Test Gateway",
+              Type: "PayPal"
+            }
+          }
+        }
+      }
+    ],
+    revalidate: () => {},
+    mutate: () => {}
+  }
+}

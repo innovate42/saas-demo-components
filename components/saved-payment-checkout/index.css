@@ -1,0 +1,267 @@
+.spc-container {
+    --spc-text: #1a1f36;
+    --spc-text-muted: #697386;
+    --spc-border: #e3e8ee;
+    --spc-bg: transparent;
+    --spc-card: #ffffff;
+    --spc-warning-bg: #fff7ed;
+    --spc-warning-border: #fed7aa;
+    --spc-warning-text: #9a3412;
+    --spc-expired: #dc2626;
+    --spc-expiring: #ea580c;
+    --spc-selected: #16a34a;
+    --spc-selected-bg: #f0fdf4;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--spc-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+.spc-container *,
+.spc-container *::before,
+.spc-container *::after {
+    box-sizing: border-box;
+}
+
+.spc-heading {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: var(--spc-text);
+}
+
+/* Fieldset & legend — visually clean, semantically correct */
+.spc-fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.spc-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Card list */
+.spc-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Card — now a <label> wrapping a radio input */
+.spc-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--spc-card);
+    border: 2px solid var(--spc-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+.spc-card:hover {
+    border-color: #c5cad3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.spc-card--selected {
+    border-color: var(--spc-selected);
+    background-color: var(--spc-selected-bg);
+    box-shadow: 0 0 0 1px var(--spc-selected);
+}
+
+.spc-card--selected:hover {
+    border-color: var(--spc-selected);
+    box-shadow: 0 0 0 1px var(--spc-selected);
+}
+
+/* Visually hidden radio input */
+.spc-radio-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible ring on the card when radio is focused via keyboard */
+.spc-radio-input:focus-visible + .spc-card-body {
+    outline: none;
+}
+
+.spc-card:has(.spc-radio-input:focus-visible) {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Card body takes remaining space */
+.spc-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.spc-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.spc-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.spc-card-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spc-card-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--spc-text);
+}
+
+.spc-card-number {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--spc-text-muted);
+    letter-spacing: 0.02em;
+}
+
+.spc-icon {
+    width: 40px;
+    height: 28px;
+    color: var(--spc-text-muted);
+    flex-shrink: 0;
+}
+
+.spc-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.spc-expiry {
+    font-size: 13px;
+    color: var(--spc-text-muted);
+    margin-top: 2px;
+}
+
+.spc-expiry--expired {
+    color: var(--spc-expired);
+    font-weight: 500;
+}
+
+.spc-expiry--expiring-soon {
+    color: var(--spc-expiring);
+    font-weight: 500;
+}
+
+.spc-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--spc-border);
+}
+
+.spc-holder {
+    font-size: 13px;
+    color: var(--spc-text-muted);
+}
+
+/* Check indicator (right side of card) */
+.spc-check-indicator {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--spc-border);
+    transition: color 0.15s;
+}
+
+.spc-card--selected .spc-check-indicator {
+    color: var(--spc-selected);
+}
+
+/* "Use a different card" link at bottom of list */
+.spc-add-method-link {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--spc-text-muted);
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    border: 1px dashed var(--spc-border);
+    border-radius: 8px;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.spc-add-method-link:hover {
+    color: var(--spc-text);
+    border-color: #c5cad3;
+}
+
+.spc-warning {
+    background: var(--spc-warning-bg);
+    border: 1px solid var(--spc-warning-border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 14px;
+    color: var(--spc-warning-text);
+    line-height: 1.5;
+}
+
+.spc-skeleton {
+    padding: 16px 20px;
+    background: var(--spc-card);
+    border: 1px solid var(--spc-border);
+    border-radius: 10px;
+}
+
+.spc-skeleton-line {
+    height: 14px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    animation: spc-pulse 1.5s ease-in-out infinite;
+}
+
+.spc-skeleton-line--short {
+    width: 40%;
+}
+
+.spc-skeleton-line--medium {
+    width: 60%;
+    margin-top: 10px;
+}
+
+@keyframes spc-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+@media (max-width: 600px) {
+    .spc-card {
+        padding: 14px 16px;
+    }
+}
