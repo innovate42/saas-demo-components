@@ -146,23 +146,6 @@ export function useLimioUserPaymentMethods() {
             }
           }
         }
-      },
-      {
-        id: "pm-mock-paypal",
-        type: "zuora",
-        data: {
-          type: "zuora",
-          method: "PayPal",
-          brand: "PayPal",
-          email: "test@example.com",
-          zuora: {
-            refId: "mock-zuora-ref-pp",
-            result: {
-              PaymentGateway: "Test Gateway",
-              Type: "PayPal"
-            }
-          }
-        }
       }
     ],
     revalidate: () => {},
