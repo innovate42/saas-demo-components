@@ -12,13 +12,10 @@ function getAbsolutePath(value) {
 const config = {
     stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
     addons: [
-        getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
         getAbsolutePath("@storybook/addon-onboarding"),
         getAbsolutePath("@storybook/addon-links"),
         getAbsolutePath("@storybook/addon-essentials"),
-        getAbsolutePath("@chromatic-com/storybook"),
         getAbsolutePath("@storybook/addon-interactions"),
-        "@storybook/addon-styling-webpack"
     ],
     framework: {
         name: getAbsolutePath("@storybook/react-webpack5"),
@@ -28,6 +25,20 @@ const config = {
         autodocs: "tag",
     },
     webpackFinal: async (config) => {
+        config.module.rules.push({
+            test: /\.(js|jsx|ts|tsx)$/,
+            exclude: /node_modules/,
+            use: {
+                loader: require.resolve("swc-loader"),
+                options: {
+                    jsc: {
+                        parser: { syntax: "typescript", tsx: true },
+                        transform: { react: { runtime: "automatic" } }
+                    }
+                }
+            }
+        });
+
         config.resolve.alias = {
             ...config.resolve.alias,
             "react-native": "react-native-web",
@@ -68,7 +79,17 @@ const config = {
                 __dirname,
                 path.join("..", "packages", "limio", "ui")
             ),
+            "@limio/shop-payment-manager": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "shop-payment-manager")
+            ),
+            "@limio/shop-redux": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "shop-redux")
+            ),
         };
+
+        config.resolve.extensions = [...(config.resolve.extensions || []), ".ts", ".tsx"];
 
         return config;
     }
