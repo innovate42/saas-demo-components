@@ -1,6 +1,6 @@
 {
   "name": "@limio/faq-accordion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Frequently Asked Questions accordion component with expandable items",
   "main": "./index.js",
   "peerDependencies": {

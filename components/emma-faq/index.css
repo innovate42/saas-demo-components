@@ -1,0 +1,214 @@
+.ef-faq {
+    --ef-primary: #053A5E;
+    --ef-text: #1a1f36;
+    --ef-text-muted: #6b7280;
+    --ef-border: #e5e7eb;
+    --ef-bg: #ffffff;
+    --ef-hover-bg: #f9fafb;
+    --ef-services-bg: #f3f4f6;
+    --ef-cta-bg: #f9fafb;
+
+    background-color: var(--ef-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ef-faq *,
+.ef-faq *::before,
+.ef-faq *::after {
+    box-sizing: border-box;
+}
+
+.ef-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+}
+
+.ef-heading {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--ef-text);
+    text-align: center;
+    margin: 0 0 40px;
+}
+
+/* Accordion */
+.ef-accordion {
+    max-width: 800px;
+    margin: 0 auto 48px;
+    border: 1px solid var(--ef-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ef-accordion-item {
+    border-bottom: 1px solid var(--ef-border);
+}
+
+.ef-accordion-item:last-child {
+    border-bottom: none;
+}
+
+.ef-accordion-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ef-text);
+    background: var(--ef-bg);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.4;
+    transition: background-color 0.15s ease;
+    gap: 16px;
+}
+
+.ef-accordion-button:hover {
+    background-color: var(--ef-hover-bg);
+}
+
+.ef-accordion-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--ef-text-muted);
+    transition: transform 0.2s ease;
+}
+
+.ef-accordion-icon--open {
+    transform: rotate(180deg);
+}
+
+.ef-accordion-content {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    color: var(--ef-text-muted);
+    line-height: 1.7;
+}
+
+.ef-accordion-content p {
+    margin: 0;
+}
+
+/* Professional Services */
+.ef-services {
+    max-width: 800px;
+    margin: 0 auto 48px;
+    background: var(--ef-services-bg);
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.ef-services-heading {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ef-text);
+    margin: 0 0 16px;
+}
+
+.ef-services-description {
+    font-size: 15px;
+    color: var(--ef-text-muted);
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.ef-services-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--ef-primary);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.ef-services-cta:hover {
+    opacity: 0.9;
+}
+
+/* CTA Banner */
+.ef-cta-banner {
+    background: var(--ef-primary);
+    border-radius: 16px;
+    padding: 48px 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ef-cta-heading {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px;
+}
+
+.ef-cta-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 28px;
+    line-height: 1.6;
+}
+
+.ef-cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ef-primary);
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ef-cta-button:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .ef-container {
+        padding: 32px 16px 48px;
+    }
+
+    .ef-heading {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .ef-accordion-button {
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+
+    .ef-accordion-content {
+        padding: 0 20px 16px;
+    }
+
+    .ef-services {
+        padding: 24px;
+    }
+
+    .ef-cta-banner {
+        padding: 32px 24px;
+    }
+
+    .ef-cta-heading {
+        font-size: 22px;
+    }
+}

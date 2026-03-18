@@ -1,0 +1,120 @@
+{
+  "name": "@limio/component-win-back",
+  "version": "1.0.1",
+  "description": "Win-back component for tech customers that displays offers and greets logged-in users with their subscription history",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8",
+    "date-fns": "^2.30.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Main Headline",
+      "type": "string",
+      "default": "Welcome back, we've missed you"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Your subscription has expired, but we've got some great new offers to get you back up and running."
+    },
+    {
+      "id": "ctaText",
+      "label": "Main CTA Text",
+      "type": "string",
+      "default": "Reactivate Now"
+    },
+    {
+      "id": "subscriptionHistoryHeadline",
+      "label": "Subscription History Headline",
+      "type": "string",
+      "default": "Your Previous Subscription"
+    },
+    {
+      "id": "offersHeadline",
+      "label": "Offers Section Headline",
+      "type": "string",
+      "default": "Choose Your Plan"
+    },
+    {
+      "id": "offersSubheadline",
+      "label": "Offers Section Subheadline",
+      "type": "string",
+      "default": "Pick up where you left off with these exclusive offers"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "secondaryColor__limio_color",
+      "label": "Secondary Color",
+      "type": "color",
+      "default": "#f47c24"
+    },
+    {
+      "id": "showUserGreeting",
+      "label": "Show Personal Greeting",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showSubscriptionHistory",
+      "label": "Show Subscription History",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Offer Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "id": "yearly",
+          "label": "Annual"
+        }
+      ]
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Group Switcher",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "welcomeBackMessage__limio_richtext",
+      "label": "Welcome Back Message",
+      "type": "richtext",
+      "default": "<p>We've been working hard to bring you new features and improvements. Here's what you've been missing:</p>"
+    },
+    {
+      "id": "benefitsMessage__limio_richtext",
+      "label": "Benefits Message",
+      "type": "richtext",
+      "default": "<ul><li>Enhanced performance and reliability</li><li>New integrations and workflows</li><li>Priority customer support</li><li>Access to latest features</li></ul>"
+    }
+  ]
+}

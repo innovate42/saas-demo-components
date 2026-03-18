@@ -1,0 +1,198 @@
+{
+  "name": "@limio/component-saas-orders-table-material",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "dependencies": {
+    "luxon": "^1.25.0",
+    "ramda": "^0.28.0",
+    "@mui/material": "5.16.7",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "5.16.7",
+    "prop-types": "^15.8.1"
+},
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*"
+  },
+  "scripts": {
+    "build": "yarn component:webpack"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "limioProps": [
+    {
+      "id": "showGoBackButton",
+      "label": "Show go back button?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showNewSubscriptionButton",
+      "label": "Show new subscritpion button?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showCancelButton",
+      "label": "Show cancel button?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "cancelLink",
+      "label": "Link to cancel page",
+      "type": "string",
+      "default": "/cancel"
+    },
+    {
+      "id": "cancelHeading",
+      "label": "Cancel button label",
+      "type": "string",
+      "default": "Cancel my subscription"
+    },
+    {
+      "id": "switchLink",
+      "label": "Link to switch page",
+      "type": "string",
+      "default": "/switch"
+    },
+    {
+      "id": "switchHeading",
+      "label": "Edit Add-Ons button label",
+      "type": "string",
+      "default": "Edit Add-Ons"
+    },
+    {
+      "id": "changePaymentLink",
+      "label": "Link to change payment page",
+      "type": "string",
+      "default": "/change-payment"
+    },
+    {
+      "id": "reactivateCancelledSubUrl",
+      "label": "Link to re-activate page",
+      "type": "string",
+      "default": "/reactivate"
+    },
+    {
+      "id": "changePaymentHeading",
+      "label": "Change payment button label",
+      "type": "string",
+      "default": "Change Payment"
+    },
+    {
+      "id": "goBackLink",
+      "label": "Link to go back",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "goBackHeading",
+      "label": "Go back label",
+      "type": "string",
+      "default": "Return"
+    },
+    {
+      "id": "newSubscriptionLink",
+      "label": "Link to buy new subscription",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "newSubscriptionHeading",
+      "label": "New subscription label",
+      "type": "string",
+      "default": "New Subscription"
+    },
+    {
+      "id": "subscriptionsHeading",
+      "label": "Subscription section heading",
+      "type": "string",
+      "default": "Subscriptions"
+    },
+    {
+      "id": "subscriptionsSubheading",
+      "label": "Subscription section subheading",
+      "type": "string",
+      "default": "View and manage active customer subscriptions."
+    },
+    {
+      "id": "productName",
+      "label": "Product Name",
+      "type": "string",
+      "default": "limio"
+    },
+    {
+      "id": "notFoundText__limio_richtext",
+      "label": "Not found text",
+      "type": "richtext",
+      "default": "Sorry! We couldn't find any subscription information. Contact our support team for more information."
+    },
+    {
+      "id": "pendingChangeMessage",
+      "label": "Pending change message",
+      "type": "string",
+      "default": "You have a pending change to your subscription. To change something else, please contact us."
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "orders-table-limio"
+    },
+    {
+      "id": "noAddOnsText",
+      "label": "No add-ons text",
+      "type": "string",
+      "default": "No add-ons"
+    },
+    {
+      "id": "editAddOnsLink",
+      "label": "Edit add-ons link",
+      "type": "string",
+      "default": "/editAddOns"
+    },
+    {
+      "id": "editBasePlanLink",
+      "label": "Edit base plan link",
+      "type": "string",
+      "default": "/editBasePlan"
+    },
+    {
+      "id": "basePlanSwitchHeading",
+      "label": "Base plan switch heading",
+      "type": "string",
+      "default": "Edit Base Plan"
+    },
+    {
+      "id": "showQuantity",
+      "label": "Show quantity?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "shopUpdateSubscription",
+      "label": "Show Update Subscription button?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "updateSubscriptionLink",
+      "label": "Update subscription link",
+      "type": "string",
+      "default": "/updateSubscription"
+    },
+    {
+      "id": "updateSubscriptionHeading",
+      "label": "Update subscription heading",
+      "type": "string",
+      "default": "Update Subscription"
+    },
+    {
+      "id": "pendingChangeTooltip",
+      "label": "Pending change tooltip",
+      "type": "string",
+      "default": "You have a pending change to your subscription. Please contact us to make further changes."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@limio/component-hyundai-cart",
+  "version": "1.0.2",
+  "description": "Hyundai-branded cart component with card-based upsells",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "cartHeadline",
+      "label": "Cart Headline",
+      "type": "string",
+      "default": "Your Bluelink Selection"
+    },
+    {
+      "id": "cartSubheadline",
+      "label": "Cart Subheadline",
+      "type": "string",
+      "default": "Review your connectivity package and explore upgrades"
+    },
+    {
+      "id": "addOnsHeadline",
+      "label": "Add-ons Headline",
+      "type": "string",
+      "default": "Enhance Your Plan"
+    },
+    {
+      "id": "addOnsSubheadline",
+      "label": "Add-ons Subheadline",
+      "type": "string",
+      "default": "Additional services to complete your connected experience"
+    },
+    {
+      "id": "proceedCta",
+      "label": "Proceed Button Text",
+      "type": "string",
+      "default": "Continue to Checkout"
+    },
+    {
+      "id": "emptyCartText",
+      "label": "Empty Cart Text",
+      "type": "string",
+      "default": "Your cart is empty"
+    },
+    {
+      "id": "showTotal",
+      "label": "Show cart total",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#004d9a"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#0080ff"
+    }
+  ]
+}

@@ -16,6 +16,8 @@ const config = {
         getAbsolutePath("@storybook/addon-links"),
         getAbsolutePath("@storybook/addon-essentials"),
         getAbsolutePath("@storybook/addon-interactions"),
+        "@storybook/addon-styling-webpack",
+        path.resolve(__dirname, "addon-prompt"),
     ],
     framework: {
         name: getAbsolutePath("@storybook/react-webpack5"),
@@ -58,6 +60,14 @@ const config = {
             "@limio/sdk": path.resolve(
                 __dirname,
                 path.join("..", "packages", "limio", "sdk")
+            ),
+            "@limio/sdk/offers": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "sdk", "offers.js")
+            ),
+            "@limio/sdk/subscription": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "sdk", "subscription.js")
             ),
             "@limio/sdk/components": path.resolve(
                 __dirname,

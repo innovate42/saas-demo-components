@@ -1,0 +1,234 @@
+{
+  "name": "@limio/component-maltego-test",
+  "version": "1.0.4",
+  "description": "Complete Maltego pricing page recreation with brand yellow color and comparison table",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "pricingHeadline",
+      "label": "Pricing Section Headline",
+      "type": "string",
+      "default": "Choose the plan that best suits your investigative needs!"
+    },
+    {
+      "id": "pricingSubheadline",
+      "label": "Pricing Section Subheadline",
+      "type": "string",
+      "default": "Professional plans designed for investigators, security teams, and law enforcement agencies worldwide."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color (Maltego Yellow)",
+      "type": "color",
+      "default": "#ffd43b"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#ffed4a"
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Currency Switcher",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Currency Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Currency ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "usd",
+          "label": "USD"
+        },
+        {
+          "id": "eur",
+          "label": "EUR"
+        }
+      ]
+    },
+    {
+      "id": "showLogos",
+      "label": "Show Maltego Logo",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showComparison",
+      "label": "Show Comparison Table",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showTestimonials",
+      "label": "Show Customer Testimonials",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showProducts",
+      "label": "Show Product Showcase",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showFAQ",
+      "label": "Show FAQ Section",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showFooter",
+      "label": "Show Footer",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "footerText",
+      "label": "Footer Description",
+      "type": "string",
+      "default": "The all-in-one investigation platform that accelerates complex cyber investigations from hours to minutes."
+    },
+    {
+      "id": "companyName",
+      "label": "Company Name",
+      "type": "string",
+      "default": "Maltego Technologies GmbH"
+    },
+    {
+      "id": "footerLinks",
+      "label": "Footer Link Sections",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "title",
+          "label": "Section Title",
+          "type": "string"
+        },
+        "url": {
+          "id": "links",
+          "label": "Links",
+          "type": "list",
+          "fields": {
+            "name": {
+              "id": "label",
+              "label": "Link Label",
+              "type": "string"
+            },
+            "url": {
+              "id": "url",
+              "label": "Link URL",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "default": [
+        {
+          "title": "Product",
+          "links": [
+            {
+              "label": "Maltego Graph",
+              "url": "#"
+            },
+            {
+              "label": "Maltego Search",
+              "url": "#"
+            },
+            {
+              "label": "Maltego Monitor",
+              "url": "#"
+            },
+            {
+              "label": "Maltego Evidence",
+              "url": "#"
+            }
+          ]
+        },
+        {
+          "title": "Resources",
+          "links": [
+            {
+              "label": "Academy",
+              "url": "#"
+            },
+            {
+              "label": "Documentation",
+              "url": "#"
+            },
+            {
+              "label": "Community",
+              "url": "#"
+            },
+            {
+              "label": "Blog",
+              "url": "#"
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            {
+              "label": "About Us",
+              "url": "#"
+            },
+            {
+              "label": "Careers",
+              "url": "#"
+            },
+            {
+              "label": "Contact",
+              "url": "#"
+            },
+            {
+              "label": "Support",
+              "url": "#"
+            }
+          ]
+        },
+        {
+          "title": "Legal",
+          "links": [
+            {
+              "label": "Privacy Policy",
+              "url": "#"
+            },
+            {
+              "label": "Terms of Service",
+              "url": "#"
+            },
+            {
+              "label": "Cookie Policy",
+              "url": "#"
+            },
+            {
+              "label": "GDPR",
+              "url": "#"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -32,12 +32,29 @@ export const docUser = {
         {
           name: "Limio Monthly",
           quantity: 1,
+          data: {
+            start: "2022-06-09T12:44:38.771Z",
+            record_subtype: "base",
+            offer: {
+              data: {
+                attributes: {
+                  display_name__limio: "Limio Monthly",
+                  display_price__limio: "<p><strong>£20.00 per month</strong></p>",
+                  offer_features__limio: "<ul><li>Unlimited access to all content</li><li>Priority customer support</li><li>Monthly newsletter</li><li>Early access to new features</li><li>Community forum access</li></ul>",
+                  price__limio: [{ type: "recurring", value: "20.00", currencyCode: "GBP" }],
+                  term__limio: { type: "months", length: 1, renewal_trigger: "auto", renewal_type: "term" },
+                  autoRenew__limio: true,
+                },
+                products: [{ name: "Limio Access", attributes: { display_name__limio: "Limio Access", product_code__limio: "LIMIO-001" } }]
+              }
+            }
+          },
           price: {
             summary: {
               headline: "£20/month"
             },
             currency: "GBP",
-            amount: 1
+            amount: 20
           },
           products: [],
           termEndDate: "2022-09-02T10:25:01.000Z",

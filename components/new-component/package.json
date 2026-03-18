@@ -1,0 +1,48 @@
+{
+  "name": "@limio/component-new-component",
+  "version": "1.0.1",
+  "description": "Shows features you will lose if you cancel subscription",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "What you'll lose if you cancel"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Keep these essential features by staying subscribed"
+    },
+    {
+      "id": "ctaText",
+      "label": "CTA Button Text",
+      "type": "string",
+      "default": "Keep My Subscription"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#0080ff"
+    },
+    {
+      "id": "showAlternativeCta",
+      "label": "Show Alternative CTA",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "alternativeCtaText",
+      "label": "Alternative CTA Text",
+      "type": "string",
+      "default": "Explore Other Plans"
+    }
+  ]
+}

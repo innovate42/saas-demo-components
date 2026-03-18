@@ -1,0 +1,60 @@
+{
+  "name": "upgrade-test-2",
+  "version": "1.0.1",
+  "description": "End-to-end subscription upgrade component showing customer subscriptions and available upgrades",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Main Heading",
+      "type": "string",
+      "default": "Manage Your Subscriptions"
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "View your current plans and explore available upgrades"
+    },
+    {
+      "id": "noSubscriptionsText",
+      "label": "No Subscriptions Message",
+      "type": "string",
+      "default": "You don't have any active subscriptions yet."
+    },
+    {
+      "id": "noUpgradesText",
+      "label": "No Upgrades Available Message",
+      "type": "string",
+      "default": "No upgrades available for this subscription."
+    },
+    {
+      "id": "loadingText",
+      "label": "Loading Text",
+      "type": "string",
+      "default": "Loading your subscriptions..."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#424770"
+    },
+    {
+      "id": "upgradeSuccessText",
+      "label": "Upgrade Success Message",
+      "type": "string",
+      "default": "Redirecting to checkout..."
+    }
+  ]
+}

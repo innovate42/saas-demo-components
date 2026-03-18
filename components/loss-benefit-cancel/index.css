@@ -1,0 +1,203 @@
+.lbc-container {
+    --lbc-primary: #002C5F;
+    --lbc-text: #1a1f36;
+    --lbc-text-muted: #697386;
+    --lbc-border: #e3e8ee;
+    --lbc-bg: #f6f9fc;
+    --lbc-card: #ffffff;
+    --lbc-warning-bg: #fff7ed;
+    --lbc-warning-border: #fed7aa;
+    --lbc-feature-icon: #ef4444;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--lbc-text);
+    background: var(--lbc-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 16px;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+.lbc-container *,
+.lbc-container *::before,
+.lbc-container *::after {
+    box-sizing: border-box;
+}
+
+.lbc-card {
+    background: var(--lbc-card);
+    border: 1px solid var(--lbc-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    max-width: 560px;
+    width: 100%;
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.lbc-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: var(--lbc-text);
+}
+
+.lbc-plan-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--lbc-bg);
+    border: 1px solid var(--lbc-border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+}
+
+.lbc-plan-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--lbc-text);
+}
+
+.lbc-plan-price {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+}
+
+.lbc-plan-price p {
+    margin: 0;
+    display: inline;
+}
+
+.lbc-subheading {
+    font-size: 15px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 24px;
+    line-height: 1.5;
+}
+
+.lbc-features {
+    background: var(--lbc-warning-bg);
+    border: 1px solid var(--lbc-warning-border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-align: left;
+}
+
+.lbc-features-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lbc-features-list li {
+    position: relative;
+    padding: 8px 0 8px 28px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--lbc-text);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lbc-features-list li:last-child {
+    border-bottom: none;
+}
+
+.lbc-features-list li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: var(--lbc-feature-icon);
+    font-weight: 700;
+    font-size: 13px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add-ons section */
+.lbc-addons-section {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.lbc-addons-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--lbc-text);
+}
+
+.lbc-addons-description {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.lbc-addon-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: var(--lbc-bg);
+    border: 1px solid var(--lbc-border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.lbc-addon-item:last-child {
+    margin-bottom: 0;
+}
+
+.lbc-addon-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--lbc-text);
+    flex: 1;
+}
+
+.lbc-addon-price {
+    font-size: 14px;
+    color: var(--lbc-text-muted);
+}
+
+.lbc-addon-price p {
+    margin: 0;
+    display: inline;
+}
+
+.lbc-addon-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--lbc-primary);
+    background: rgba(0, 44, 95, 0.08);
+    border-radius: 4px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+    .lbc-container {
+        padding: 20px 12px;
+    }
+
+    .lbc-card {
+        padding: 28px 20px;
+    }
+
+    .lbc-heading {
+        font-size: 20px;
+    }
+
+    .lbc-features {
+        padding: 16px 18px;
+    }
+}

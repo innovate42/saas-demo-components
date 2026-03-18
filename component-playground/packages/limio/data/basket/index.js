@@ -154,6 +154,54 @@ export const basketItems = [
         "type": "item",
         "record_type": "product"
       }
-    ]
+    ],
+    "upsell": [
+      {
+        "path": "/offers/Maltego/1 Year",
+        "id": "mock-upsell-1yr",
+        "type": "item",
+        "data": {
+          "record_type": "offer",
+          "attributes": {
+            "display_name__limio": "Maltego - Entry",
+            "upsell_display_name__limio": "<p><strong>1 year</strong></p>",
+            "term__limio": { "type": "years", "length": 1 },
+            "display_price__limio": "<p><strong>$3450</strong> / year</p>"
+          },
+          "products": [{ "path": "/products/Maltego" }]
+        }
+      },
+      {
+        "path": "/offers/Maltego/2 Years",
+        "id": "mock-upsell-2yr",
+        "type": "item",
+        "data": {
+          "record_type": "offer",
+          "attributes": {
+            "display_name__limio": "Maltego - Entry",
+            "upsell_display_name__limio": "<p><strong>2 years</strong></p>",
+            "term__limio": { "type": "years", "length": 2 },
+            "display_price__limio": "<p><strong>$3450</strong> / year</p>"
+          },
+          "products": [{ "path": "/products/Maltego" }]
+        }
+      },
+      {
+        "path": "/offers/Maltego/3 Years",
+        "id": "mock-upsell-3yr",
+        "type": "item",
+        "data": {
+          "record_type": "offer",
+          "attributes": {
+            "display_name__limio": "Maltego - Entry",
+            "upsell_display_name__limio": "<p><strong>3 years</strong></p>",
+            "term__limio": { "type": "years", "length": 3 },
+            "display_price__limio": "<p><strong>$3450</strong> / year</p>"
+          },
+          "products": [{ "path": "/products/Maltego" }]
+        }
+      }
+    ],
+    "crossSell": []
   }
 ]

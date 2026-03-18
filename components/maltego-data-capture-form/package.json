@@ -1,0 +1,88 @@
+{
+  "name": "@limio/component-maltego-data-capture-form",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "peerDependencies": {
+    "@limio/sdk": "*",
+    "@limio/ui-form": "*",
+    "@limio/component-library": "*",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "subcomponentMetadata",
+      "type": "subcomponentMetadata",
+      "label": "Subcomponent Metadata",
+      "default": []
+    },
+    {
+      "id": "requiredLabel",
+      "label": "Required field label",
+      "type": "string",
+      "default": "Required"
+    },
+    {
+      "id": "optionalLabel",
+      "label": "Optional field label",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "submitLabel",
+      "type": "string",
+      "label": "Submit button label",
+      "default": "Submit"
+    },
+    {
+      "id": "successFormMessage",
+      "label": "Success form message",
+      "type": "richtext",
+      "default": "Thank you for submitting your information."
+    },
+    {
+      "id": "successFormMessageFontColor",
+      "label": "Success form message font color",
+      "type": "color",
+      "default": "#155724"
+    },
+    {
+      "id": "successFormMessageBackgroundColor",
+      "label": "Success message background color",
+      "type": "color",
+      "default": "#d4edda"
+    },
+    {
+      "id": "invalidFormMessage",
+      "label": "Invalid form message",
+      "type": "richtext",
+      "default": "We are sorry, but there was an error processing your order. Please try again later."
+    },
+    {
+      "id": "invalidFormMessageFontColor",
+      "label": "Invalid form message font color",
+      "type": "color",
+      "default": "#856404"
+    },
+    {
+      "id": "invalidFormMessageBackgroundColor",
+      "label": "Invalid message background color",
+      "type": "color",
+      "default": "#fff3cd"
+    }
+  ],
+  "limioSubcomponents": [
+    "/limio-components/field",
+    "/limio-components/display-text"
+  ],
+  "limioCapabilities": [
+    "googleCaptcha"
+  ]
+}

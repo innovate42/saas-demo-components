@@ -1,0 +1,582 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.scp-wrapper {
+  --scp-primary: #009cde;
+  --scp-secondary: #16a7ff;
+  --scp-primary-contrast: #ffffff;
+  --scp-text: #101820;
+  --scp-text-secondary: #333f48;
+  --scp-text-muted: #abb8c3;
+  --scp-border: #f5f5f5;
+  --scp-bg: #f6f5f3;
+  --scp-card: #ffffff;
+  --scp-radius-card: 8px;
+  --scp-radius-btn: 6px;
+  --scp-radius-badge: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--scp-text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+.scp-wrapper *, 
+.scp-wrapper *::before, 
+.scp-wrapper *::after { 
+  box-sizing: border-box; 
+}
+
+/* Container */
+.scp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Section Headers */
+.scp-section-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 64px;
+}
+
+.scp-section-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  color: var(--scp-text);
+}
+
+.scp-section-subtitle {
+  font-size: 18px;
+  color: var(--scp-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* No Offers Message */
+.scp-no-offers {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.scp-no-offers p {
+  font-size: 18px;
+  color: var(--scp-text-muted);
+  margin: 0;
+}
+
+/* Buttons */
+.scp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: var(--scp-radius-btn);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scp-btn:focus-visible {
+  outline: 2px solid var(--scp-primary);
+  outline-offset: 2px;
+}
+
+.scp-btn-primary {
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+  box-shadow: 0 2px 4px rgba(0,156,222,0.2);
+}
+
+.scp-btn-primary:hover {
+  background: var(--scp-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,156,222,0.3);
+}
+
+.scp-btn-secondary {
+  background: var(--scp-card);
+  color: var(--scp-primary);
+  border: 2px solid var(--scp-primary);
+}
+
+.scp-btn-secondary:hover {
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+  transform: translateY(-1px);
+}
+
+.scp-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Header Section */
+.scp-header {
+  padding: 80px 0 60px;
+  background: var(--scp-card);
+  text-align: center;
+}
+
+.scp-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.scp-header-headline {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  color: var(--scp-text);
+}
+
+.scp-header-subheadline {
+  font-size: 20px;
+  color: var(--scp-text-muted);
+  margin: 0 0 48px;
+  line-height: 1.5;
+}
+
+/* Currency Selector */
+.scp-currency-selector {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.scp-currency-btn {
+  padding: 10px 20px;
+  border: 2px solid var(--scp-border);
+  background: var(--scp-card);
+  color: var(--scp-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--scp-radius-btn);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scp-currency-btn:hover:not(.scp-currency-btn-disabled) {
+  border-color: var(--scp-primary);
+  color: var(--scp-primary);
+}
+
+.scp-currency-btn-active {
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+  border-color: var(--scp-primary);
+}
+
+.scp-currency-btn-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--scp-bg);
+  color: var(--scp-text-muted);
+  border-color: var(--scp-border);
+}
+
+/* Pricing Section */
+.scp-pricing {
+  padding: 80px 0;
+  background: var(--scp-bg);
+}
+
+.scp-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.scp-pricing-card {
+  background: var(--scp-card);
+  border-radius: var(--scp-radius-card);
+  padding: 32px;
+  border: 2px solid var(--scp-border);
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.scp-pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(16,24,32,0.1);
+}
+
+.scp-pricing-card-featured {
+  border-color: var(--scp-primary);
+  transform: scale(1.05);
+}
+
+.scp-pricing-card-featured:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.scp-pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+  padding: 8px 16px;
+  border-radius: var(--scp-radius-badge);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scp-pricing-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.scp-pricing-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  color: var(--scp-text);
+}
+
+.scp-pricing-price {
+  margin-bottom: 16px;
+}
+
+.scp-pricing-price > div {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--scp-text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.scp-pricing-detail {
+  font-size: 14px;
+  color: var(--scp-text-muted);
+  margin-bottom: 16px;
+}
+
+.scp-pricing-features {
+  flex: 1;
+  margin-bottom: 32px;
+}
+
+.scp-pricing-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scp-pricing-features li {
+  padding: 8px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.scp-pricing-features li:before {
+  content: "✓";
+  color: var(--scp-primary);
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--scp-primary) 10%, white);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.scp-pricing-footer {
+  margin-top: auto;
+}
+
+.scp-pricing-cta {
+  width: 100%;
+}
+
+/* Customer Logos */
+.scp-logos {
+  padding: 60px 0;
+  background: var(--scp-card);
+  border-top: 1px solid var(--scp-border);
+}
+
+.scp-logos-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  opacity: 0.6;
+}
+
+.scp-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scp-logo-image {
+  max-width: 120px;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.scp-logo-image:hover {
+  filter: grayscale(0%);
+}
+
+/* Testimonials */
+.scp-testimonials {
+  padding: 100px 0;
+  background: var(--scp-bg);
+}
+
+.scp-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+}
+
+.scp-testimonial-card {
+  background: var(--scp-card);
+  border-radius: var(--scp-radius-card);
+  padding: 32px;
+  border: 1px solid var(--scp-border);
+  transition: transform 0.2s ease;
+}
+
+.scp-testimonial-card:hover {
+  transform: translateY(-2px);
+}
+
+.scp-testimonial-quote {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--scp-text);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.scp-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.scp-testimonial-logo {
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: var(--scp-bg);
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.scp-testimonial-name {
+  font-weight: 600;
+  color: var(--scp-text);
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.scp-testimonial-role {
+  font-size: 14px;
+  color: var(--scp-text-secondary);
+  margin-bottom: 2px;
+}
+
+.scp-testimonial-company {
+  font-size: 14px;
+  color: var(--scp-text-muted);
+}
+
+/* FAQ Section */
+.scp-faq {
+  padding: 100px 0;
+  background: var(--scp-card);
+}
+
+.scp-faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.scp-faq-item {
+  border-bottom: 1px solid var(--scp-border);
+}
+
+.scp-faq-question {
+  width: 100%;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--scp-text);
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.scp-faq-question:hover {
+  color: var(--scp-primary);
+}
+
+.scp-faq-icon {
+  transition: transform 0.3s ease;
+  color: var(--scp-text-muted);
+}
+
+.scp-faq-icon-open {
+  transform: rotate(180deg);
+}
+
+.scp-faq-answer {
+  padding: 0 0 24px;
+  color: var(--scp-text-secondary);
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+.scp-faq-answer p {
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .scp-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .scp-testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .scp-header-headline {
+    font-size: 36px;
+  }
+  
+  .scp-section-title {
+    font-size: 28px;
+  }
+  
+  .scp-logos-grid {
+    gap: 32px;
+  }
+  
+  .scp-currency-selector {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .scp-container {
+    padding: 0 16px;
+  }
+  
+  .scp-header {
+    padding: 60px 0 40px;
+  }
+  
+  .scp-pricing,
+  .scp-testimonials,
+  .scp-faq {
+    padding: 60px 0;
+  }
+  
+  .scp-logos {
+    padding: 40px 0;
+  }
+  
+  .scp-pricing-grid,
+  .scp-testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .scp-pricing-card {
+    padding: 24px;
+  }
+  
+  .scp-pricing-card-featured {
+    transform: none;
+  }
+  
+  .scp-pricing-card-featured:hover {
+    transform: translateY(-4px);
+  }
+  
+  .scp-header-headline {
+    font-size: 28px;
+  }
+  
+  .scp-header-subheadline {
+    font-size: 18px;
+  }
+  
+  .scp-section-title {
+    font-size: 24px;
+  }
+  
+  .scp-section-header {
+    margin-bottom: 48px;
+  }
+  
+  .scp-testimonial-card {
+    padding: 24px;
+  }
+  
+  .scp-logos-grid {
+    gap: 24px;
+  }
+  
+  .scp-logo-image {
+    max-width: 100px;
+    max-height: 50px;
+  }
+}
+
+/* Selection styling */
+.scp-wrapper ::selection {
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+}
+
+.scp-wrapper ::-moz-selection {
+  background: var(--scp-primary);
+  color: var(--scp-primary-contrast);
+}

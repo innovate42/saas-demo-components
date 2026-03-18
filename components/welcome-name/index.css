@@ -1,0 +1,143 @@
+.wn-wrapper {
+  --wn-primary: #0080ff;
+  --wn-bg: #ffffff;
+  --wn-contrast: #000000;
+  --wn-text: #1a1a1a;
+  --wn-text-secondary: #4f566b;
+  --wn-text-muted: #a1a1aa;
+  --wn-border: #e5e7eb;
+  --wn-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--wn-text);
+  -webkit-font-smoothing: antialiased;
+  background: var(--wn-bg);
+}
+
+.wn-wrapper *, 
+.wn-wrapper *::before, 
+.wn-wrapper *::after { 
+  box-sizing: border-box; 
+}
+
+/* Container */
+.wn-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Content */
+.wn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Welcome Message */
+.wn-welcome-message {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--wn-text);
+}
+
+/* Subtext */
+.wn-subtext {
+  font-size: 16px;
+  color: var(--wn-text-muted);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+/* Loading State */
+.wn-loading .wn-content {
+  gap: 12px;
+}
+
+.wn-skeleton-text {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: wn-skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  height: 20px;
+}
+
+.wn-skeleton-main {
+  width: 280px;
+  height: 36px;
+}
+
+.wn-skeleton-sub {
+  width: 360px;
+  height: 20px;
+}
+
+@keyframes wn-skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Accent Styling */
+.wn-welcome-message::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--wn-primary);
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .wn-container {
+    padding: 24px 16px;
+  }
+  
+  .wn-welcome-message {
+    font-size: 24px;
+  }
+  
+  .wn-subtext {
+    font-size: 15px;
+  }
+  
+  .wn-skeleton-main {
+    width: 200px;
+    height: 28px;
+  }
+  
+  .wn-skeleton-sub {
+    width: 280px;
+  }
+}
+
+/* Focus and Selection */
+.wn-wrapper ::selection {
+  background: var(--wn-primary);
+  color: var(--wn-contrast);
+}
+
+.wn-wrapper ::-moz-selection {
+  background: var(--wn-primary);
+  color: var(--wn-contrast);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .wn-wrapper {
+    --wn-text: #000000;
+    --wn-text-muted: #666666;
+    --wn-border: #000000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wn-skeleton-text {
+    animation: none;
+  }
+}

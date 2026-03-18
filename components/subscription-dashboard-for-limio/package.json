@@ -1,0 +1,72 @@
+{
+  "name": "@limio/component-subscription-dashboard",
+  "version": "1.0.0",
+  "description": "Enterprise subscription dashboard for Limio subscribers",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "welcomeHeadline",
+      "label": "Welcome Headline",
+      "type": "string",
+      "default": "Welcome back"
+    },
+    {
+      "id": "dashboardTitle",
+      "label": "Dashboard Title", 
+      "type": "string",
+      "default": "Your Subscription Dashboard"
+    },
+    {
+      "id": "subscriptionsHeadline",
+      "label": "Subscriptions Section Title",
+      "type": "string",
+      "default": "Active Subscriptions"
+    },
+    {
+      "id": "paymentsHeadline", 
+      "label": "Payments Section Title",
+      "type": "string",
+      "default": "Upcoming Payments"
+    },
+    {
+      "id": "accountHeadline",
+      "label": "Account Section Title",
+      "type": "string", 
+      "default": "Account Information"
+    },
+    {
+      "id": "editButtonText",
+      "label": "Edit Button Text",
+      "type": "string",
+      "default": "Edit"
+    },
+    {
+      "id": "viewAllText",
+      "label": "View All Link Text",
+      "type": "string",
+      "default": "View All"
+    },
+    {
+      "id": "noDataText",
+      "label": "No Data Message",
+      "type": "string",
+      "default": "No information available"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "secondaryColor__limio_color",
+      "label": "Secondary Color", 
+      "type": "color",
+      "default": "#f47c24"
+    }
+  ]
+}

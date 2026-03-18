@@ -1,0 +1,37 @@
+import React from "react"
+import { useCampaign } from "@limio/sdk"
+
+function QuantityField({ quantity, setQuantity, selectedOffer }) {
+  const { offers = [] } = useCampaign()
+
+  const [localQuantity, setLocalQuantity] = React.useState(quantity.toString())
+  const selectedMultiBuy = offers.find(offer => offer.id === selectedOffer).data.attributes.allow_multibuy__limio
+
+  const handleChange = e => {
+    const inputValue = e.target.value
+    setLocalQuantity(inputValue)
+
+    const numericValue = parseInt(inputValue, 10)
+    if (!isNaN(numericValue)) {
+      setQuantity(numericValue)
+    }
+  }
+
+  if (!selectedMultiBuy) return null
+
+  return (
+    <>
+      <p className="plan-title">QUANTITY</p>
+      <div>
+        <div className="billing-option">
+          <label className="billing-option-label" htmlFor="quantity">
+            <input type="number" id="quantity" value={localQuantity} onInput={handleChange} className="billing-option-input gap" />
+          </label>
+        </div>
+      </div>
+      <div className="row-border" />
+    </>
+  )
+}
+
+export default QuantityField

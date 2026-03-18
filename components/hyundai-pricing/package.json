@@ -1,0 +1,169 @@
+{
+  "name": "@limio/component-hyundai-pricing",
+  "version": "1.0.1",
+  "description": "Hyundai-branded pricing component with hero banner, features, and FAQ",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heroTitle",
+      "label": "Hero Title",
+      "type": "string",
+      "default": "Bluelink subscriptions."
+    },
+    {
+      "id": "heroSubtitle",
+      "label": "Hero Subtitle",
+      "type": "string",
+      "default": "Now you can choose your level of connectivity."
+    },
+    {
+      "id": "heroImage",
+      "label": "Hero Background Image",
+      "type": "string",
+      "default": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      "id": "sectionTitle",
+      "label": "Section Title",
+      "type": "string",
+      "default": "Convenience at your fingertips: the new Bluelink packages"
+    },
+    {
+      "id": "sectionSubtitle",
+      "label": "Section Subtitle",
+      "type": "string",
+      "default": "Each package is designed to cater to your specific driving needs, ensuring a personalised experience."
+    },
+    {
+      "id": "showGroupSwitcher",
+      "label": "Show Plan Toggle",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "groupLabels",
+      "label": "Plan Groups",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "Group ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Display Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "id": "yearly",
+          "label": "Annual"
+        }
+      ]
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Brand Color",
+      "type": "color",
+      "default": "#002c5f"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent Color",
+      "type": "color",
+      "default": "#0080ff"
+    },
+    {
+      "id": "ctaText",
+      "label": "Default CTA Text",
+      "type": "string",
+      "default": "Get Started"
+    },
+    {
+      "id": "features",
+      "label": "Key Features",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "title",
+          "label": "Feature Title",
+          "type": "string"
+        },
+        "url": {
+          "id": "description",
+          "label": "Feature Description",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "title": "Connected Routing",
+          "description": "Hyundai's cloud-based navigation with real-time traffic updates"
+        },
+        {
+          "title": "Remote Services",
+          "description": "Control your vehicle remotely with the Bluelink app"
+        },
+        {
+          "title": "LIVE Updates",
+          "description": "Real-time information for traffic, fuel prices, and parking"
+        },
+        {
+          "title": "Music Streaming",
+          "description": "Access to premium music streaming services in your vehicle"
+        }
+      ]
+    },
+    {
+      "id": "faqTitle",
+      "label": "FAQ Section Title",
+      "type": "string",
+      "default": "Bluelink Packages FAQ"
+    },
+    {
+      "id": "faqItems",
+      "label": "FAQ Items",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "question",
+          "label": "Question",
+          "type": "string"
+        },
+        "url": {
+          "id": "answer",
+          "label": "Answer",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "question": "What is included in Bluelink LITE?",
+          "answer": "Bluelink LITE includes Connected Routing, EV Route Planner, vehicle system updates, and basic app connectivity. It's free for 10 years on all new vehicles."
+        },
+        {
+          "question": "Can I upgrade my Bluelink package?",
+          "answer": "Yes, you can easily upgrade your Bluelink package through the Bluelink Store or your Hyundai dealer at any time."
+        },
+        {
+          "question": "Do I need to install any additional hardware?",
+          "answer": "No additional hardware is required. All Bluelink services work through your vehicle's existing connectivity features."
+        },
+        {
+          "question": "What happens after my free trial period ends?",
+          "answer": "After your free trial period, you can choose to continue with a monthly or annual subscription, or downgrade to a different package."
+        }
+      ]
+    }
+  ]
+}

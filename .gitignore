@@ -9,3 +9,4 @@ storybook-static/
 .playwright-mcp/
 *.jpeg
 *.png
+.limio.json

@@ -1,0 +1,71 @@
+{
+  "name": "@limio/component-loss-benefits-cancel",
+  "version": "1.0.0",
+  "description": "Shows features that users will lose if they cancel their subscription",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Headline",
+      "type": "string",
+      "default": "You'll lose access to these features"
+    },
+    {
+      "id": "subheadline",
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Here's what you won't be able to use after cancellation"
+    },
+    {
+      "id": "showUserPlan",
+      "label": "Show user's current plan",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary color",
+      "type": "color",
+      "default": "#007CB0"
+    },
+    {
+      "id": "warningColor__limio_color",
+      "label": "Warning color",
+      "type": "color",
+      "default": "#ef4444"
+    },
+    {
+      "id": "emptyText",
+      "label": "No features text",
+      "type": "string",
+      "default": "No subscription features found"
+    },
+    {
+      "id": "loadingText",
+      "label": "Loading text",
+      "type": "string",
+      "default": "Loading your subscription details..."
+    },
+    {
+      "id": "fallbackFeatures",
+      "label": "Fallback features list",
+      "type": "list",
+      "default": [
+        { "id": "1", "label": "Premium content access" },
+        { "id": "2", "label": "Ad-free experience" },
+        { "id": "3", "label": "Priority customer support" },
+        { "id": "4", "label": "Advanced features" }
+      ]
+    },
+    {
+      "id": "useFallbackFeatures",
+      "label": "Show fallback features if no subscription data",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "limio-cart-page", 
+  "version": "1.0.0",
+  "description": "Complete cart page with order summary, upsells, and cross-sells",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "pageHeading",
+      "label": "Page Heading",
+      "type": "string",
+      "default": "Your Cart"
+    },
+    {
+      "id": "pageSubheading", 
+      "label": "Page Subheading",
+      "type": "string",
+      "default": "Review your order and continue to checkout"
+    },
+    {
+      "id": "checkoutButtonText",
+      "label": "Checkout Button Text", 
+      "type": "string",
+      "default": "Continue to Checkout"
+    },
+    {
+      "id": "checkoutUrl",
+      "label": "Checkout URL",
+      "type": "string", 
+      "default": "/checkout"
+    },
+    {
+      "id": "upsellHeading",
+      "label": "Upsell Section Heading",
+      "type": "string",
+      "default": "Upgrade Your Experience"
+    },
+    {
+      "id": "upsellSubheading",
+      "label": "Upsell Section Subheading", 
+      "type": "string",
+      "default": "Get more value with these premium options"
+    },
+    {
+      "id": "crossSellHeading",
+      "label": "Cross-Sell Section Heading",
+      "type": "string",
+      "default": "Complete Your Setup"
+    },
+    {
+      "id": "crossSellSubheading",
+      "label": "Cross-Sell Section Subheading",
+      "type": "string", 
+      "default": "Add these popular add-ons to enhance your experience"
+    },
+    {
+      "id": "emptyCartText",
+      "label": "Empty Cart Text",
+      "type": "string",
+      "default": "Your cart is empty"
+    },
+    {
+      "id": "continueShopping",
+      "label": "Continue Shopping Text",
+      "type": "string",
+      "default": "Continue Shopping"
+    },
+    {
+      "id": "continueShoppingUrl",
+      "label": "Continue Shopping URL", 
+      "type": "string",
+      "default": "/plans"
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#d14424"
+    },
+    {
+      "id": "secondaryColor__limio_color",
+      "label": "Secondary Color", 
+      "type": "color",
+      "default": "#f47c24"
+    }
+  ]
+}
