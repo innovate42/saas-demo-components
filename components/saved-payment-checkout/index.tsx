@@ -134,6 +134,18 @@ function SavedPaymentCheckout({
     return (
         <div style={s.container}>
             {heading && <h4 style={s.heading}>{heading}</h4>}
+            {selectedPaymentMethodId && (
+                <input
+                    type="radio"
+                    name="paymentType"
+                    value={PAYMENT_TYPE}
+                    checked
+                    readOnly
+                    style={s.radioInput}
+                    aria-hidden="true"
+                    tabIndex={-1}
+                />
+            )}
             <fieldset style={s.fieldset}>
                 <legend style={s.legend}>Select payment method</legend>
                 <div style={s.cardList}>
