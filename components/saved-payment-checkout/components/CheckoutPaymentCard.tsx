@@ -83,8 +83,8 @@ function getExpiryStatus(month: string, year: string): ExpiryStatus {
     return "valid"
 }
 
-function formatExpiryLabel(template: string, month: string, year: string): string {
-    const expiryDate = `${month.padStart(2, "0")}/${year}`
+function formatExpiryLabel(template: string, month: string | number, year: string | number): string {
+    const expiryDate = `${String(month).padStart(2, "0")}/${year}`
     return template.replace("{{expiryDate}}", expiryDate)
 }
 
