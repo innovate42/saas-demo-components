@@ -12,33 +12,39 @@
     --spc-selected: #16a34a;
     --spc-selected-bg: #f0fdf4;
 
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--spc-text);
     -webkit-font-smoothing: antialiased;
-    max-width: 100%;
 }
 
 .spc-container *,
 .spc-container *::before,
 .spc-container *::after {
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 .spc-container .spc-heading {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 0 0 12px;
-    padding: 0;
-    color: var(--spc-text);
-    line-height: 1.4;
+    display: block !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    color: var(--spc-text) !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
 }
 
-/* Fieldset & legend — visually clean, semantically correct */
+/* Fieldset & legend */
 .spc-container .spc-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-    min-width: 0;
+    display: block !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    width: 100% !important;
 }
 
 .spc-container .spc-legend {
@@ -49,50 +55,56 @@
     margin: -1px !important;
     overflow: hidden !important;
     clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
     white-space: nowrap !important;
     border: 0 !important;
+    font-size: 1px !important;
 }
 
-/* Card list */
+/* Card list — MUST stack vertically */
 .spc-container .spc-card-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    width: 100% !important;
 }
 
 /* Card — a <label> wrapping a radio input */
 .spc-container .spc-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--spc-card);
-    border: 2px solid var(--spc-border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    cursor: pointer;
-    transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
-    width: 100%;
-    text-align: left;
-    line-height: 1.4;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: var(--spc-card) !important;
+    border: 2px solid var(--spc-border) !important;
+    border-radius: 10px !important;
+    padding: 16px 20px !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    text-align: left !important;
+    line-height: 1.4 !important;
+    float: none !important;
+    position: relative !important;
 }
 
 .spc-container .spc-card:hover {
-    border-color: #c5cad3;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-color: #c5cad3 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
 }
 
-.spc-container .spc-card--selected {
-    border-color: var(--spc-selected);
-    background-color: var(--spc-selected-bg);
-    box-shadow: 0 0 0 1px var(--spc-selected);
+.spc-container .spc-card.spc-card--selected {
+    border-color: var(--spc-selected) !important;
+    background-color: var(--spc-selected-bg) !important;
+    box-shadow: 0 0 0 1px var(--spc-selected) !important;
 }
 
-.spc-container .spc-card--selected:hover {
-    border-color: var(--spc-selected);
-    box-shadow: 0 0 0 1px var(--spc-selected);
+.spc-container .spc-card.spc-card--selected:hover {
+    border-color: var(--spc-selected) !important;
+    box-shadow: 0 0 0 1px var(--spc-selected) !important;
 }
 
 /* Visually hidden radio input */
@@ -104,67 +116,75 @@
     margin: -1px !important;
     overflow: hidden !important;
     clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
     white-space: nowrap !important;
     border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
-/* Focus visible ring on the card when radio is focused via keyboard */
+/* Focus visible ring */
 .spc-container .spc-card:has(.spc-radio-input:focus-visible) {
-    outline: 2px solid #2563eb;
-    outline-offset: 2px;
+    outline: 2px solid #2563eb !important;
+    outline-offset: 2px !important;
 }
 
-/* Card body takes remaining space */
+/* Card body */
 .spc-container .spc-card-body {
-    flex: 1;
-    min-width: 0;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    display: block !important;
 }
 
 .spc-container .spc-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
 }
 
 .spc-container .spc-card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
 }
 
 .spc-container .spc-card-top-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
 }
 
 .spc-container .spc-card-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--spc-text);
-    display: inline;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--spc-text) !important;
+    display: inline !important;
 }
 
 .spc-container .spc-card-number {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--spc-text-muted);
-    letter-spacing: 0.02em;
-    display: inline;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--spc-text-muted) !important;
+    letter-spacing: 0.02em !important;
+    display: inline !important;
 }
 
-/* Icon — must constrain SVG size explicitly */
+/* Icon — hard constrain SVG size */
 .spc-container .spc-icon {
-    width: 40px;
-    height: 28px;
-    min-width: 40px;
-    max-width: 40px;
-    min-height: 28px;
-    max-height: 28px;
-    color: var(--spc-text-muted);
-    flex-shrink: 0;
-    overflow: hidden;
+    width: 40px !important;
+    height: 28px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    color: var(--spc-text-muted) !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
 }
 
 .spc-container .spc-icon svg {
@@ -172,110 +192,120 @@
     height: 28px !important;
     max-width: 40px !important;
     max-height: 28px !important;
-    display: block;
+    min-width: 40px !important;
+    min-height: 28px !important;
+    display: block !important;
 }
 
 .spc-container .spc-expiry {
-    font-size: 13px;
-    color: var(--spc-text-muted);
-    margin-top: 2px;
+    font-size: 13px !important;
+    color: var(--spc-text-muted) !important;
+    margin-top: 2px !important;
+    display: block !important;
 }
 
 .spc-container .spc-expiry--expired {
-    color: var(--spc-expired);
-    font-weight: 500;
+    color: var(--spc-expired) !important;
+    font-weight: 500 !important;
 }
 
 .spc-container .spc-expiry--expiring-soon {
-    color: var(--spc-expiring);
-    font-weight: 500;
+    color: var(--spc-expiring) !important;
+    font-weight: 500 !important;
 }
 
 .spc-container .spc-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--spc-border);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-top: 12px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid var(--spc-border) !important;
 }
 
 .spc-container .spc-holder {
-    font-size: 13px;
-    color: var(--spc-text-muted);
+    font-size: 13px !important;
+    color: var(--spc-text-muted) !important;
 }
 
-/* Check indicator (right side of card) */
+/* Check indicator */
 .spc-container .spc-check-indicator {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
-    color: var(--spc-border);
-    transition: color 0.15s;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    max-width: 20px !important;
+    min-height: 20px !important;
+    max-height: 20px !important;
+    color: var(--spc-border) !important;
+    display: block !important;
+    overflow: hidden !important;
 }
 
 .spc-container .spc-check-indicator svg {
     width: 20px !important;
     height: 20px !important;
-    display: block;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    display: block !important;
 }
 
-.spc-container .spc-card--selected .spc-check-indicator {
-    color: var(--spc-selected);
+.spc-container .spc-card.spc-card--selected .spc-check-indicator {
+    color: var(--spc-selected) !important;
 }
 
-/* "Use a different card" link at bottom of list */
+/* "Use a different card" link */
 .spc-container .spc-add-method-link {
-    display: block;
-    margin-top: 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--spc-text-muted);
-    text-decoration: none;
-    text-align: center;
-    padding: 10px;
-    border: 1px dashed var(--spc-border);
-    border-radius: 8px;
-    transition: color 0.15s, border-color 0.15s;
+    display: block !important;
+    margin-top: 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: var(--spc-text-muted) !important;
+    text-decoration: none !important;
+    text-align: center !important;
+    padding: 10px !important;
+    border: 1px dashed var(--spc-border) !important;
+    border-radius: 8px !important;
+    width: 100% !important;
 }
 
 .spc-container .spc-add-method-link:hover {
-    color: var(--spc-text);
-    border-color: #c5cad3;
+    color: var(--spc-text) !important;
+    border-color: #c5cad3 !important;
 }
 
 .spc-container .spc-warning {
-    background: var(--spc-warning-bg);
-    border: 1px solid var(--spc-warning-border);
-    border-radius: 10px;
-    padding: 14px 20px;
-    font-size: 14px;
-    color: var(--spc-warning-text);
-    line-height: 1.5;
+    background: var(--spc-warning-bg) !important;
+    border: 1px solid var(--spc-warning-border) !important;
+    border-radius: 10px !important;
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    color: var(--spc-warning-text) !important;
+    line-height: 1.5 !important;
 }
 
 .spc-container .spc-skeleton {
-    padding: 16px 20px;
-    background: var(--spc-card);
-    border: 1px solid var(--spc-border);
-    border-radius: 10px;
+    padding: 16px 20px !important;
+    background: var(--spc-card) !important;
+    border: 1px solid var(--spc-border) !important;
+    border-radius: 10px !important;
 }
 
 .spc-container .spc-skeleton-line {
-    height: 14px;
-    background: #e5e7eb;
-    border-radius: 4px;
-    animation: spc-pulse 1.5s ease-in-out infinite;
+    height: 14px !important;
+    background: #e5e7eb !important;
+    border-radius: 4px !important;
+    animation: spc-pulse 1.5s ease-in-out infinite !important;
 }
 
 .spc-container .spc-skeleton-line--short {
-    width: 40%;
+    width: 40% !important;
 }
 
 .spc-container .spc-skeleton-line--medium {
-    width: 60%;
-    margin-top: 10px;
+    width: 60% !important;
+    margin-top: 10px !important;
 }
 
 @keyframes spc-pulse {
@@ -285,6 +315,6 @@
 
 @media (max-width: 600px) {
     .spc-container .spc-card {
-        padding: 14px 16px;
+        padding: 14px 16px !important;
     }
 }
