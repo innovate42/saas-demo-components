@@ -2,6 +2,7 @@ import React from "react"
 import { useLimioUserCustomer, useLimioUserPaymentMethods } from "@limio/internal-checkout-sdk"
 import { usePaymentManagerContext } from "@limio/shop-payment-manager/src/usePaymentManagerContext"
 import { updatePaymentAction, setOrderPaymentTypeAction } from "@limio/shop-redux/src/shop/redux"
+import { FormLiteGroup } from "@limio/form-lite"
 import CheckoutPaymentCard from "./components/CheckoutPaymentCard"
 import type { PaymentMethod } from "./components/CheckoutPaymentCard"
 import { s } from "./styles"
@@ -16,6 +17,7 @@ type SavedPaymentCheckoutProps = {
     expiredPaymentMethodLabel?: string
     changePaymentLabel?: string
     changePaymentUrl?: string
+    fieldClassName?: string
 }
 
 // Safe wrapper — usePaymentManagerContext throws if rendered outside a PaymentManager provider.
@@ -36,6 +38,7 @@ function SavedPaymentCheckout({
     expiredPaymentMethodLabel = "Expired {{expiryDate}}",
     changePaymentLabel = "Change",
     changePaymentUrl = "",
+    fieldClassName = "",
 }: SavedPaymentCheckoutProps) {
     const { form, store } = useSafePaymentManagerContext()
 
@@ -125,51 +128,55 @@ function SavedPaymentCheckout({
 
     if (!paymentMethods || paymentMethods.length === 0) {
         return (
-            <div style={s.container}>
-                <div style={s.warning}>{noPaymentMethodMessage}</div>
-            </div>
+            <FormLiteGroup className={`col-12 ${fieldClassName}`}>
+                <div style={s.container}>
+                    <div style={s.warning}>{noPaymentMethodMessage}</div>
+                </div>
+            </FormLiteGroup>
         )
     }
 
     return (
-        <div style={s.container}>
-            {heading && <h4 style={s.heading}>{heading}</h4>}
-            {selectedPaymentMethodId && (
-                <input
-                    type="radio"
-                    name="paymentType"
-                    value={PAYMENT_TYPE}
-                    checked
-                    readOnly
-                    style={s.radioInput}
-                    aria-hidden="true"
-                    tabIndex={-1}
-                />
-            )}
-            <fieldset style={s.fieldset}>
-                <legend style={s.legend}>Select payment method</legend>
-                <div style={s.cardList}>
-                    {paymentMethods.map((pm: PaymentMethod) => (
-                        <CheckoutPaymentCard
-                            key={pm.id}
-                            paymentMethod={pm}
-                            isSelected={pm.id === selectedPaymentMethodId}
-                            onSelect={() => handleSelectCard(pm.id)}
-                            labels={{
-                                expiryDateLabel: expiryDateLabel,
-                                expiresSoonLabel: expiresSoonLabel,
-                                expiredPaymentMethodLabel: expiredPaymentMethodLabel
-                            }}
-                        />
-                    ))}
-                </div>
-                {changePaymentUrl && (
-                    <a href={changePaymentUrl} style={s.addMethodLink}>
-                        {changePaymentLabel}
-                    </a>
+        <FormLiteGroup className={`col-12 ${fieldClassName}`}>
+            <div style={s.container}>
+                {heading && <h4 style={s.heading}>{heading}</h4>}
+                {selectedPaymentMethodId && (
+                    <input
+                        type="radio"
+                        name="paymentType"
+                        value={PAYMENT_TYPE}
+                        checked
+                        readOnly
+                        style={s.radioInput}
+                        aria-hidden="true"
+                        tabIndex={-1}
+                    />
                 )}
-            </fieldset>
-        </div>
+                <fieldset style={s.fieldset}>
+                    <legend style={s.legend}>Select payment method</legend>
+                    <div style={s.cardList}>
+                        {paymentMethods.map((pm: PaymentMethod) => (
+                            <CheckoutPaymentCard
+                                key={pm.id}
+                                paymentMethod={pm}
+                                isSelected={pm.id === selectedPaymentMethodId}
+                                onSelect={() => handleSelectCard(pm.id)}
+                                labels={{
+                                    expiryDateLabel: expiryDateLabel,
+                                    expiresSoonLabel: expiresSoonLabel,
+                                    expiredPaymentMethodLabel: expiredPaymentMethodLabel
+                                }}
+                            />
+                        ))}
+                    </div>
+                    {changePaymentUrl && (
+                        <a href={changePaymentUrl} style={s.addMethodLink}>
+                            {changePaymentLabel}
+                        </a>
+                    )}
+                </fieldset>
+            </div>
+        </FormLiteGroup>
     )
 }
 
