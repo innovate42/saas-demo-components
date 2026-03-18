@@ -1,5 +1,6 @@
 import React from "react"
 import { getPaymentIcon } from "./paymentIcons"
+import { s } from "../styles"
 
 type PaymentMethod = {
     id: string
@@ -72,7 +73,7 @@ function getExpiryStatus(month: string, year: string): ExpiryStatus {
     if (!month || !year) return "valid"
 
     const now = new Date()
-    const expiryDate = new Date(parseInt(year), parseInt(month), 0) // last day of expiry month
+    const expiryDate = new Date(parseInt(year), parseInt(month), 0)
 
     if (expiryDate < now) return "expired"
 
@@ -106,59 +107,51 @@ function CheckoutPaymentCard({ paymentMethod, isSelected, onSelect, labels }: Pr
               ? labels.expiresSoonLabel
               : labels.expiryDateLabel
 
-    const expiryClassName =
-        expiryStatus === "expired"
-            ? "spc-expiry spc-expiry--expired"
-            : expiryStatus === "expiring-soon"
-              ? "spc-expiry spc-expiry--expiring-soon"
-              : "spc-expiry"
-
-    const cardClassName = `spc-card${isSelected ? " spc-card--selected" : ""}`
     const radioId = `spc-radio-${paymentMethod.id}`
     const accessibleLabel = `${label}${last4 ? ` ending in ${last4}` : ""}${holderName ? `, ${holderName}` : ""}`
 
     return (
-        <label htmlFor={radioId} className={cardClassName}>
+        <label htmlFor={radioId} style={s.card(isSelected)}>
             <input
                 type="radio"
                 id={radioId}
                 name="saved-payment-method"
-                className="spc-radio-input"
+                style={s.radioInput}
                 checked={isSelected}
                 onChange={onSelect}
                 aria-label={accessibleLabel}
             />
-            <div className="spc-card-body">
-                <div className="spc-card-header">
-                    <div className="spc-card-info">
-                        <div className="spc-card-top-row">
-                            <span className="spc-card-label">{label}</span>
-                            {last4 && <span className="spc-card-number">**** {last4}</span>}
+            <div style={s.cardBody}>
+                <div style={s.cardHeader}>
+                    <div style={s.cardInfo}>
+                        <div style={s.cardTopRow}>
+                            <span style={s.cardLabel}>{label}</span>
+                            {last4 && <span style={s.cardNumber}>**** {last4}</span>}
                         </div>
                         {expirationMonth && expirationYear && (
-                            <span className={expiryClassName}>
+                            <span style={s.expiry(expiryStatus)}>
                                 {formatExpiryLabel(expiryLabel, expirationMonth, expirationYear)}
                             </span>
                         )}
                     </div>
-                    <div className="spc-icon">{icon}</div>
+                    <div style={s.icon}>{icon}</div>
                 </div>
 
                 {(holderName || email) && (
-                    <div className="spc-card-footer">
-                        <span className="spc-holder">{holderName || email}</span>
+                    <div style={s.cardFooter}>
+                        <span style={s.holder}>{holderName || email}</span>
                     </div>
                 )}
             </div>
-            <div className="spc-check-indicator" aria-hidden="true">
+            <div style={s.checkIndicator(isSelected)} aria-hidden="true">
                 {isSelected && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <svg style={s.checkSvg} viewBox="0 0 20 20" fill="none">
                         <circle cx="10" cy="10" r="10" fill="currentColor" />
                         <path d="M6 10l3 3 5-5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 )}
                 {!isSelected && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <svg style={s.checkSvg} viewBox="0 0 20 20" fill="none">
                         <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="2" />
                     </svg>
                 )}

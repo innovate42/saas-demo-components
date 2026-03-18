@@ -5,7 +5,7 @@ import { updatePaymentAction, setOrderPaymentTypeAction } from "@limio/shop-redu
 import { useStaticProps } from "./componentStaticProps"
 import CheckoutPaymentCard from "./components/CheckoutPaymentCard"
 import type { PaymentMethod } from "./components/CheckoutPaymentCard"
-import "./index.css"
+import { s } from "./styles"
 
 const PAYMENT_TYPE = "saved_payment"
 
@@ -109,18 +109,18 @@ function SavedPaymentCheckout() {
 
     if (!paymentMethods || paymentMethods.length === 0) {
         return (
-            <div className="spc-container">
-                <div className="spc-warning">{props.noPaymentMethodMessage}</div>
+            <div style={s.container}>
+                <div style={s.warning}>{props.noPaymentMethodMessage}</div>
             </div>
         )
     }
 
     return (
-        <div className="spc-container">
-            {props.heading && <h4 className="spc-heading">{props.heading}</h4>}
-            <fieldset className="spc-fieldset">
-                <legend className="spc-legend">Select payment method</legend>
-                <div className="spc-card-list">
+        <div style={s.container}>
+            {props.heading && <h4 style={s.heading}>{props.heading}</h4>}
+            <fieldset style={s.fieldset}>
+                <legend style={s.legend}>Select payment method</legend>
+                <div style={s.cardList}>
                     {paymentMethods.map((pm: PaymentMethod) => (
                         <CheckoutPaymentCard
                             key={pm.id}
@@ -136,7 +136,7 @@ function SavedPaymentCheckout() {
                     ))}
                 </div>
                 {props.changePaymentUrl && (
-                    <a href={props.changePaymentUrl} className="spc-add-method-link">
+                    <a href={props.changePaymentUrl} style={s.addMethodLink}>
                         {props.changePaymentLabel}
                     </a>
                 )}
@@ -147,10 +147,10 @@ function SavedPaymentCheckout() {
 
 SavedPaymentCheckout.Skeleton = function SavedPaymentCheckoutSkeleton() {
     return (
-        <div className="spc-container">
-            <div className="spc-skeleton">
-                <div className="spc-skeleton-line spc-skeleton-line--short" />
-                <div className="spc-skeleton-line spc-skeleton-line--medium" />
+        <div style={s.container}>
+            <div style={s.skeleton}>
+                <div style={s.skeletonLine("40%")} />
+                <div style={{ ...s.skeletonLine("60%"), marginTop: 10 }} />
             </div>
         </div>
     )
@@ -158,8 +158,8 @@ SavedPaymentCheckout.Skeleton = function SavedPaymentCheckoutSkeleton() {
 
 SavedPaymentCheckout.Error = function SavedPaymentCheckoutError({ errorText = "Unable to load payment method." }: { errorText?: string }) {
     return (
-        <div className="spc-container">
-            <div className="spc-warning">{errorText}</div>
+        <div style={s.container}>
+            <div style={s.warning}>{errorText}</div>
         </div>
     )
 }
