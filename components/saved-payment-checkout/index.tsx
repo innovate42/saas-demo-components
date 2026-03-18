@@ -134,22 +134,6 @@ function SavedPaymentCheckout({
     return (
         <div style={s.container}>
             {heading && <h4 style={s.heading}>{heading}</h4>}
-            {/* Hidden radio satisfies the core payment-method-selector-field's
-                required validation on name="paymentType". When a saved card is
-                selected this is checked, so the form can submit without forcing
-                the user to also pick Card/DD/Invoice. */}
-            {selectedPaymentMethodId && (
-                <input
-                    type="radio"
-                    name="paymentType"
-                    value={PAYMENT_TYPE}
-                    checked
-                    readOnly
-                    style={s.radioInput}
-                    aria-hidden="true"
-                    tabIndex={-1}
-                />
-            )}
             <fieldset style={s.fieldset}>
                 <legend style={s.legend}>Select payment method</legend>
                 <div style={s.cardList}>
