@@ -7,6 +7,8 @@ import CheckoutPaymentCard from "./components/CheckoutPaymentCard"
 import type { PaymentMethod } from "./components/CheckoutPaymentCard"
 import "./index.css"
 
+const PAYMENT_TYPE = "saved_payment"
+
 function SavedPaymentCheckout() {
     const props = useStaticProps()
     const { form, store } = usePaymentManagerContext()
@@ -20,19 +22,60 @@ function SavedPaymentCheckout() {
     const initialSelectedId = defaultPaymentMethodId || paymentMethods?.[0]?.id
     const [selectedPaymentMethodId, setSelectedPaymentMethodId] = React.useState<string | undefined>(initialSelectedId)
 
+    // Sync initial selection when payment methods load async
     React.useEffect(() => {
         if (initialSelectedId && !selectedPaymentMethodId) {
             setSelectedPaymentMethodId(initialSelectedId)
         }
     }, [initialSelectedId])
 
+    // Dispatch saved_payment type on mount if a method is pre-selected
+    React.useEffect(() => {
+        if (selectedPaymentMethodId && store) {
+            store.dispatch(setOrderPaymentTypeAction(PAYMENT_TYPE))
+        }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+    // Listen to Redux store for paymentType changes from sibling subcomponents.
+    // When another subcomponent (e.g. Card/Direct Debit/Invoice) sets a different
+    // paymentType, deselect our saved payment cards.
+    React.useEffect(() => {
+        if (!store?.subscribe) return
+
+        const unsubscribe = store.subscribe(() => {
+            const state = store.getState()
+            const currentPaymentType = state?.order?.paymentType
+
+            if (currentPaymentType && currentPaymentType !== PAYMENT_TYPE) {
+                setSelectedPaymentMethodId(undefined)
+            }
+        })
+
+        return unsubscribe
+    }, [store])
+
+    // When a saved card is selected, dispatch the payment type immediately
+    // so sibling subcomponents can deselect themselves
+    function handleSelectCard(pmId: string) {
+        setSelectedPaymentMethodId(pmId)
+        if (store) {
+            store.dispatch(setOrderPaymentTypeAction(PAYMENT_TYPE))
+        }
+    }
+
     const selectedPaymentMethod = paymentMethods?.find((pm: PaymentMethod) => pm.id === selectedPaymentMethodId)
 
+    // Register submit handler — only processes payment if we're the active type
     React.useEffect(() => {
-        if (!selectedPaymentMethod || !form || !store) return
+        if (!form || !store) return
 
         async function handleSubmitPayment() {
-            const paymentData = selectedPaymentMethod!.data
+            const state = store.getState()
+            if (state?.order?.paymentType !== PAYMENT_TYPE) return
+
+            if (!selectedPaymentMethod) return
+
+            const paymentData = selectedPaymentMethod.data
 
             if (paymentData.type === "zuora" || paymentData.zuora) {
                 store.dispatch(updatePaymentAction({
@@ -45,7 +88,7 @@ function SavedPaymentCheckout() {
                 }))
             }
 
-            store.dispatch(setOrderPaymentTypeAction("saved_payment"))
+            store.dispatch(setOrderPaymentTypeAction(PAYMENT_TYPE))
         }
 
         form.addAsyncEventListener("submit", handleSubmitPayment)
@@ -73,7 +116,7 @@ function SavedPaymentCheckout() {
                             key={pm.id}
                             paymentMethod={pm}
                             isSelected={pm.id === selectedPaymentMethodId}
-                            onSelect={() => setSelectedPaymentMethodId(pm.id)}
+                            onSelect={() => handleSelectCard(pm.id)}
                             labels={{
                                 expiryDateLabel: props.expiryDateLabel,
                                 expiresSoonLabel: props.expiresSoonLabel,
