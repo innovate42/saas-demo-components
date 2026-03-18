@@ -9,9 +9,19 @@ import "./index.css"
 
 const PAYMENT_TYPE = "saved_payment"
 
+// Safe wrapper — usePaymentManagerContext throws if rendered outside a PaymentManager provider.
+// This can happen in page builder preview or when the component is placed outside the form.
+function useSafePaymentManagerContext() {
+    try {
+        return usePaymentManagerContext()
+    } catch {
+        return { form: null, store: null }
+    }
+}
+
 function SavedPaymentCheckout() {
     const props = useStaticProps()
-    const { form, store } = usePaymentManagerContext()
+    const { form, store } = useSafePaymentManagerContext()
 
     const { customer } = useLimioUserCustomer()
     const { paymentMethods } = useLimioUserPaymentMethods(customer?.id, {
