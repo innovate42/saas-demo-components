@@ -2,12 +2,21 @@ import React from "react"
 import { useLimioUserCustomer, useLimioUserPaymentMethods } from "@limio/internal-checkout-sdk"
 import { usePaymentManagerContext } from "@limio/shop-payment-manager/src/usePaymentManagerContext"
 import { updatePaymentAction, setOrderPaymentTypeAction } from "@limio/shop-redux/src/shop/redux"
-import { useStaticProps } from "./componentStaticProps"
 import CheckoutPaymentCard from "./components/CheckoutPaymentCard"
 import type { PaymentMethod } from "./components/CheckoutPaymentCard"
 import { s } from "./styles"
 
 const PAYMENT_TYPE = "saved_payment"
+
+type SavedPaymentCheckoutProps = {
+    heading?: string
+    noPaymentMethodMessage?: string
+    expiryDateLabel?: string
+    expiresSoonLabel?: string
+    expiredPaymentMethodLabel?: string
+    changePaymentLabel?: string
+    changePaymentUrl?: string
+}
 
 // Safe wrapper — usePaymentManagerContext throws if rendered outside a PaymentManager provider.
 // This can happen in page builder preview or when the component is placed outside the form.
@@ -19,8 +28,15 @@ function useSafePaymentManagerContext() {
     }
 }
 
-function SavedPaymentCheckout() {
-    const props = useStaticProps()
+function SavedPaymentCheckout({
+    heading = "Payment method",
+    noPaymentMethodMessage = "No saved payment method found.",
+    expiryDateLabel = "Expires {{expiryDate}}",
+    expiresSoonLabel = "Expires {{expiryDate}}",
+    expiredPaymentMethodLabel = "Expired {{expiryDate}}",
+    changePaymentLabel = "Change",
+    changePaymentUrl = "",
+}: SavedPaymentCheckoutProps) {
     const { form, store } = useSafePaymentManagerContext()
 
     const { customer } = useLimioUserCustomer()
@@ -110,14 +126,14 @@ function SavedPaymentCheckout() {
     if (!paymentMethods || paymentMethods.length === 0) {
         return (
             <div style={s.container}>
-                <div style={s.warning}>{props.noPaymentMethodMessage}</div>
+                <div style={s.warning}>{noPaymentMethodMessage}</div>
             </div>
         )
     }
 
     return (
         <div style={s.container}>
-            {props.heading && <h4 style={s.heading}>{props.heading}</h4>}
+            {heading && <h4 style={s.heading}>{heading}</h4>}
             <fieldset style={s.fieldset}>
                 <legend style={s.legend}>Select payment method</legend>
                 <div style={s.cardList}>
@@ -128,16 +144,16 @@ function SavedPaymentCheckout() {
                             isSelected={pm.id === selectedPaymentMethodId}
                             onSelect={() => handleSelectCard(pm.id)}
                             labels={{
-                                expiryDateLabel: props.expiryDateLabel,
-                                expiresSoonLabel: props.expiresSoonLabel,
-                                expiredPaymentMethodLabel: props.expiredPaymentMethodLabel
+                                expiryDateLabel: expiryDateLabel,
+                                expiresSoonLabel: expiresSoonLabel,
+                                expiredPaymentMethodLabel: expiredPaymentMethodLabel
                             }}
                         />
                     ))}
                 </div>
-                {props.changePaymentUrl && (
-                    <a href={props.changePaymentUrl} style={s.addMethodLink}>
-                        {props.changePaymentLabel}
+                {changePaymentUrl && (
+                    <a href={changePaymentUrl} style={s.addMethodLink}>
+                        {changePaymentLabel}
                     </a>
                 )}
             </fieldset>
