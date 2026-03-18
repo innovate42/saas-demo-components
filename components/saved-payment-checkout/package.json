@@ -61,6 +61,12 @@
       "label": "Change payment URL",
       "type": "string",
       "default": ""
+    },
+    {
+      "id": "fieldClassName",
+      "label": "Class Name",
+      "type": "string",
+      "default": ""
     }
   ],
   "type": "module",
