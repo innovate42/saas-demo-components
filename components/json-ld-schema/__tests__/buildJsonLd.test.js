@@ -166,10 +166,67 @@ describe("buildOfferSchema", () => {
     expect(result.isRelatedTo[1]).toEqual({ "@type": "Offer", name: "Premium Plan" })
   })
 
+  test("7b. Upsell mapping — filters out entries with empty names", () => {
+    const offer = makeOffer({
+      attributes: {
+        display_name__limio: "Pro Plan",
+        upsell_offers__limio: {
+          items: [
+            { label: "" },
+            { label: "Enterprise Plan" },
+            { name: "" },
+          ],
+        },
+      },
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.isRelatedTo).toHaveLength(1)
+    expect(result.isRelatedTo[0].name).toBe("Enterprise Plan")
+  })
+
+  test("7c. Upsell mapping — omits isRelatedTo when all names empty", () => {
+    const offer = makeOffer({
+      attributes: {
+        display_name__limio: "Pro Plan",
+        upsell_offers__limio: {
+          items: [{ label: "" }, { name: "" }],
+        },
+      },
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.isRelatedTo).toBeUndefined()
+  })
+
   test("8. No upsells — omits isRelatedTo when no upsell data", () => {
     const offer = makeOffer()
     const result = buildOfferSchema(offer, "Subscription")
     expect(result.isRelatedTo).toBeUndefined()
+  })
+
+  test("price fallback — uses price__limio when data.price is empty", () => {
+    const offer = makeOffer({
+      price: [],
+      attributes: {
+        display_name__limio: "Fallback Plan",
+        price__limio: [{ value: 49.99, currencyCode: "EUR", repeat_interval: 1, repeat_interval_type: "months" }],
+      },
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.price).toBe("49.99")
+    expect(result.priceCurrency).toBe("EUR")
+    expect(result.priceSpecification.unitCode).toBe("MON")
+  })
+
+  test("empty description — omits description field when empty", () => {
+    const offer = makeOffer({
+      attributes: {
+        display_name__limio: "No Desc Plan",
+        offer_features__limio: undefined,
+        checkout_description__limio: undefined,
+      },
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.description).toBeUndefined()
   })
 
   test("12. Image attachment — maps attachments[0].url to image", () => {

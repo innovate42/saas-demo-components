@@ -56,14 +56,21 @@ export function extractFeatureList(html) {
  */
 export function buildOfferSchema(offer, category) {
   const attrs = offer?.data?.attributes || {}
-  const priceData = offer?.data?.price?.[0]
+  // Price lives at offer.data.price[0] in mock SDK but at
+  // offer.data.attributes.price__limio[0] in real Limio tenants — try both
+  const priceData = offer?.data?.price?.[0] || attrs.price__limio?.[0]
   const imageUrl = offer?.data?.attachments?.[0]?.url
 
   const schema = {
     "@type": "Offer",
     name: attrs.display_name__limio || offer?.name || "",
-    description: stripHtml(attrs.checkout_description__limio || attrs.offer_features__limio),
     category: category || "Subscription",
+  }
+
+  // Only include description if non-empty
+  const desc = stripHtml(attrs.checkout_description__limio || attrs.offer_features__limio)
+  if (desc) {
+    schema.description = desc
   }
 
   // Price fields — omit entirely for "contact sales" offers with no price
@@ -87,18 +94,27 @@ export function buildOfferSchema(offer, category) {
     }
   }
 
-  // Upsell offers → isRelatedTo
+  // Upsell offers → isRelatedTo (filter out entries with empty names)
   const upsellItems = attrs.upsell_offers__limio?.items
   if (upsellItems && upsellItems.length > 0) {
-    schema.isRelatedTo = upsellItems.map((item) => ({
-      "@type": "Offer",
-      name: item.label || item.name || "",
-    }))
+    const validUpsells = upsellItems
+      .filter((item) => item.label || item.name)
+      .map((item) => ({
+        "@type": "Offer",
+        name: item.label || item.name,
+      }))
+    if (validUpsells.length > 0) {
+      schema.isRelatedTo = validUpsells
+    }
   }
 
-  // Image attachment
+  // Image attachment — ensure absolute URL
   if (imageUrl) {
-    schema.image = imageUrl
+    if (imageUrl.startsWith("http")) {
+      schema.image = imageUrl
+    } else if (typeof window !== "undefined" && window.location?.origin) {
+      schema.image = window.location.origin + imageUrl
+    }
   }
 
   // Features as itemOffered Service with OfferCatalog
