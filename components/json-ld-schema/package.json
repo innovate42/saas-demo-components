@@ -1,0 +1,60 @@
+{
+  "name": "component-json-ld-schema",
+  "version": "1.0.0",
+  "description": "Auto-generates JSON-LD schema.org structured data from Limio offer data",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "schemaType",
+      "label": "Schema type for the main entity",
+      "type": "picklist",
+      "options": [
+        { "id": "SoftwareApplication", "label": "Software Application", "value": "SoftwareApplication" },
+        { "id": "Product", "label": "Product", "value": "Product" },
+        { "id": "Service", "label": "Service", "value": "Service" }
+      ],
+      "default": "SoftwareApplication"
+    },
+    {
+      "id": "applicationName",
+      "label": "Product / Application name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "applicationUrl",
+      "label": "Product / Application URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "applicationCategory",
+      "label": "Application category (e.g. BusinessApplication)",
+      "type": "string",
+      "default": "BusinessApplication"
+    },
+    {
+      "id": "pageDescription",
+      "label": "Page description for schema",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "includeAddOns",
+      "label": "Include cross-sell add-ons in schema?",
+      "type": "boolean",
+      "default": false
+    }
+  ]
+}
