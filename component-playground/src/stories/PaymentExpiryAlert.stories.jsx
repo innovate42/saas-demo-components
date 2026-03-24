@@ -41,6 +41,32 @@ export const Resolved = {
     }
 }
 
+// Expired state — card already expired
+export const Expired = {
+    args: {
+        heading: "Your payment method has expired",
+        subline: "<p>Your Visa ending in 4242 has expired. Update your payment method to avoid service interruptions.</p>",
+        ctaLabel: "Update payment method",
+        ctaUrl: "/add-payment-method",
+        backgroundColor: "#fef2f2",
+        borderColor: "#fecaca",
+        textColor: "#991b1b",
+    }
+}
+
+// Expired state with mustache
+export const ExpiredMustache = {
+    args: {
+        heading: "Your payment method has expired",
+        subline: "<p>Your {{brand}} ending in {{last4}} has expired. Update your payment method to avoid service interruptions.</p>",
+        ctaLabel: "Update payment method",
+        ctaUrl: "/add-payment-method",
+        backgroundColor: "#fef2f2",
+        borderColor: "#fecaca",
+        textColor: "#991b1b",
+    }
+}
+
 export const ExpiringIn7Days = {
     args: {
         heading: "Your payment method expires very soon",

@@ -1,7 +1,7 @@
 {
   "name": "@limio/component-payment-expiry-alert",
-  "version": "0.0.1",
-  "description": "Alert banner shown when the default payment method is close to expiry",
+  "version": "0.0.2",
+  "description": "Alert banner shown when the default payment method is expiring soon or has expired",
   "main": "./index.tsx",
   "scripts": {
     "build": "yarn component:webpack"
@@ -18,15 +18,27 @@
   "limioProps": [
     {
       "id": "heading",
-      "label": "Heading",
+      "label": "Expiring soon heading",
       "type": "string",
       "default": "Your payment method is expiring soon"
     },
     {
       "id": "subline__limio_richtext",
-      "label": "Description",
+      "label": "Expiring soon description",
       "type": "richtext",
       "default": "<p>Your {{brand}} ending in {{last4}} expires in {{daysUntilExpiry}} days. Update your payment method to avoid interruptions.</p>"
+    },
+    {
+      "id": "expiredHeading",
+      "label": "Expired heading",
+      "type": "string",
+      "default": "Your payment method has expired"
+    },
+    {
+      "id": "expiredSubline__limio_richtext",
+      "label": "Expired description",
+      "type": "richtext",
+      "default": "<p>Your {{brand}} ending in {{last4}} has expired. Update your payment method to avoid service interruptions.</p>"
     },
     {
       "id": "ctaLabel",
@@ -45,6 +57,16 @@
       "label": "Expiry threshold (days)",
       "type": "string",
       "default": "90"
+    },
+    {
+      "id": "showWhenBackupExists",
+      "label": "Show when backup payment exists",
+      "type": "picklist",
+      "options": [
+        { "id": "true", "label": "Yes - always show", "value": "true" },
+        { "id": "false", "label": "No - hide if backup exists", "value": "false" }
+      ],
+      "default": "true"
     },
     {
       "id": "backgroundColor__limio_color",

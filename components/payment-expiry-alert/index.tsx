@@ -100,9 +100,12 @@ function PaymentExpiryAlert() {
     const {
         heading,
         "subline__limio_richtext": sublineTemplate,
+        expiredHeading,
+        "expiredSubline__limio_richtext": expiredSublineTemplate,
         ctaLabel,
         ctaUrl,
         expiryThresholdDays,
+        showWhenBackupExists,
         "backgroundColor__limio_color": backgroundColor,
         "borderColor__limio_color": borderColor,
         "textColor__limio_color": textColor,
@@ -110,11 +113,21 @@ function PaymentExpiryAlert() {
 
     const { isInPageBuilder } = useLimioContext() || {}
     const threshold = parseInt(expiryThresholdDays) || 90
+    const shouldShowWhenBackupExists = showWhenBackupExists !== "false"
 
     const { customer } = useLimioUserCustomer()
     const { paymentMethods } = useLimioUserPaymentMethods(customer?.id, {
         filterType: ["invoice"],
     })
+
+    // Determine default payment and its status
+    const defaultPayment = paymentMethods?.find((pm: PaymentMethod) => pm.id === customer?.data?.defaultPaymentMethodId)
+    const defaultIsExpired = defaultPayment ? isPaymentMethodExpired(defaultPayment) : false
+    const defaultIsExpiring = defaultPayment ? isExpiringWithinDays(
+        defaultPayment.data?.expirationMonth,
+        defaultPayment.data?.expirationYear,
+        threshold
+    ) : false
 
     // In page builder, always show with preview placeholder values
     if (!isInPageBuilder) {
@@ -122,43 +135,40 @@ function PaymentExpiryAlert() {
 
         // No default payment → hide
         if (!defaultPaymentMethodId || !paymentMethods?.length) return null
-
-        const defaultPayment = paymentMethods.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
         if (!defaultPayment) return null
 
-        // Default not expiring within threshold → hide
-        const defaultIsExpiring = isExpiringWithinDays(
-            defaultPayment.data?.expirationMonth,
-            defaultPayment.data?.expirationYear,
-            threshold
-        )
-        if (!defaultIsExpiring) return null
+        // Default neither expired nor expiring within threshold → hide
+        if (!defaultIsExpired && !defaultIsExpiring) return null
 
-        // Check if there's a valid non-expiring backup
-        const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
-        const hasValidNonExpiringBackup = backupMethods.some((pm: PaymentMethod) => {
-            if (isPaymentMethodExpired(pm)) return false
-            const month = pm.data?.expirationMonth
-            const year = pm.data?.expirationYear
-            if (!month || !year) return true // no expiry data = valid (e.g. direct debit)
-            return !isExpiringWithinDays(month, year, threshold)
-        })
-
-        // Valid non-expiring backup exists → user is covered → hide
-        if (hasValidNonExpiringBackup) return null
+        // Check backup visibility setting
+        if (!shouldShowWhenBackupExists) {
+            const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
+            const hasValidNonExpiringBackup = backupMethods.some((pm: PaymentMethod) => {
+                if (isPaymentMethodExpired(pm)) return false
+                const month = pm.data?.expirationMonth
+                const year = pm.data?.expirationYear
+                if (!month || !year) return true // no expiry data = valid (e.g. direct debit)
+                return !isExpiringWithinDays(month, year, threshold)
+            })
+            if (hasValidNonExpiringBackup) return null
+        }
     }
 
+    // Determine which state we are in: expired vs expiring soon
+    const isExpired = isInPageBuilder ? false : defaultIsExpired
+    const activeHeading = isExpired ? expiredHeading : heading
+    const activeSublineTemplate = isExpired ? expiredSublineTemplate : sublineTemplate
+
     // Build subline with template replacements (use preview values in page builder)
-    const defaultPayment = paymentMethods?.find((pm: PaymentMethod) => pm.id === customer?.data?.defaultPaymentMethodId)
     const brand = defaultPayment ? getCardBrand(defaultPayment) : "Visa"
     const last4 = defaultPayment ? getLast4(defaultPayment) : "4242"
     const daysUntilExpiry = defaultPayment
         ? getDaysUntilExpiry(defaultPayment.data?.expirationMonth!, defaultPayment.data?.expirationYear!)
         : 45
 
-    const subline = isMoustache(sublineTemplate)
-        ? resolveTemplate(sublineTemplate, { brand, last4, daysUntilExpiry: String(daysUntilExpiry) })
-        : sublineTemplate
+    const subline = isMoustache(activeSublineTemplate)
+        ? resolveTemplate(activeSublineTemplate, { brand, last4, daysUntilExpiry: String(daysUntilExpiry) })
+        : activeSublineTemplate
 
     return (
         <div style={s.centerWrapper}>
@@ -169,7 +179,7 @@ function PaymentExpiryAlert() {
                     <ClockWarningIcon />
                 </div>
                 <div style={s.contentArea}>
-                    {heading && <h4 style={s.heading}>{heading}</h4>}
+                    {activeHeading && <h4 style={s.heading}>{activeHeading}</h4>}
                     {subline && (
                         <div
                             style={s.subline}
