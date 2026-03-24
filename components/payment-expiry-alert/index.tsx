@@ -157,7 +157,8 @@ function PaymentExpiryAlert() {
         : sublineTemplate
 
     return (
-        <div style={s.container}>
+        <div className="expiry-alert-container" style={s.container}>
+            <style dangerouslySetInnerHTML={{ __html: s.responsiveCss }} />
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
                     <ClockWarningIcon />

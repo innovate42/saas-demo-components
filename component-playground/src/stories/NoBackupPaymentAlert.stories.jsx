@@ -7,14 +7,29 @@ export default {
     parameters: { layout: "centered" },
     decorators: [
         (Story) => (
-            <div style={{ width: 480, padding: 24 }}>
+            <div style={{ width: 350, padding: 24 }}>
                 <Story />
             </div>
         )
     ]
 }
 
+// Default shows mustache variables as they appear in the limioProps default.
+// At runtime, the real component resolves {{brand}} and {{last4}} from the default payment method.
 export const Default = {
+    args: {
+        heading: "No backup payment method",
+        subline: "<p>Your {{brand}} ending in {{last4}} has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>",
+        ctaLabel: "Add backup method",
+        ctaUrl: "/add-payment-method",
+        backgroundColor: "#fff7ed",
+        borderColor: "#fed7aa",
+        textColor: "#9a3412",
+    }
+}
+
+// Shows what it looks like at runtime once mustache variables are resolved
+export const Resolved = {
     args: {
         heading: "No backup payment method",
         subline: "<p>Your Visa ending in 4242 has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>",
@@ -41,7 +56,7 @@ export const CustomCopy = {
 export const CustomColors = {
     args: {
         heading: "No backup payment method",
-        subline: "<p>Your Visa ending in 4242 has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>",
+        subline: "<p>Your {{brand}} ending in {{last4}} has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>",
         ctaLabel: "Add backup method",
         ctaUrl: "/add-payment-method",
         backgroundColor: "#eff6ff",

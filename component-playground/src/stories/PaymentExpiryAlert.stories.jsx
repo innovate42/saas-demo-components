@@ -7,14 +7,29 @@ export default {
     parameters: { layout: "centered" },
     decorators: [
         (Story) => (
-            <div style={{ width: 480, padding: 24 }}>
+            <div style={{ width: 350, padding: 24 }}>
                 <Story />
             </div>
         )
     ]
 }
 
+// Default shows mustache variables as they appear in the limioProps default.
+// At runtime, the real component resolves {{brand}}, {{last4}}, and {{daysUntilExpiry}}.
 export const Default = {
+    args: {
+        heading: "Your payment method is expiring soon",
+        subline: "<p>Your {{brand}} ending in {{last4}} expires in {{daysUntilExpiry}} days. Update your payment method to avoid interruptions.</p>",
+        ctaLabel: "Update payment method",
+        ctaUrl: "/add-payment-method",
+        backgroundColor: "#fff7ed",
+        borderColor: "#fed7aa",
+        textColor: "#9a3412",
+    }
+}
+
+// Shows what it looks like at runtime once mustache variables are resolved
+export const Resolved = {
     args: {
         heading: "Your payment method is expiring soon",
         subline: "<p>Your Visa ending in 4242 expires in 45 days. Update your payment method to avoid interruptions.</p>",
@@ -53,7 +68,7 @@ export const CustomCopy = {
 export const CustomColors = {
     args: {
         heading: "Your payment method is expiring soon",
-        subline: "<p>Your Visa ending in 4242 expires in 45 days. Update your payment method to avoid interruptions.</p>",
+        subline: "<p>Your {{brand}} ending in {{last4}} expires in {{daysUntilExpiry}} days. Update your payment method to avoid interruptions.</p>",
         ctaLabel: "Update payment method",
         ctaUrl: "/add-payment-method",
         backgroundColor: "#eff6ff",
@@ -65,7 +80,7 @@ export const CustomColors = {
 export const NoCTA = {
     args: {
         heading: "Your payment method is expiring soon",
-        subline: "<p>Your Visa ending in 4242 expires in 45 days. Please visit your account settings to update it.</p>",
+        subline: "<p>Your {{brand}} ending in {{last4}} expires in {{daysUntilExpiry}} days. Please visit your account settings to update it.</p>",
         ctaLabel: "",
         ctaUrl: "",
         backgroundColor: "#fff7ed",

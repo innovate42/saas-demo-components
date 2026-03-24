@@ -111,7 +111,8 @@ function NoBackupPaymentAlert() {
         : subline
 
     return (
-        <div style={s.container}>
+        <div className="no-backup-alert-container" style={s.container}>
+            <style dangerouslySetInnerHTML={{ __html: s.responsiveCss }} />
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
                     <WarningShieldIcon />
