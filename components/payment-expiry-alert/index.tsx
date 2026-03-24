@@ -29,6 +29,18 @@ type PaymentMethod = {
     }
 }
 
+function isMoustache(val: string | undefined): boolean {
+    return typeof val === "string" && val.includes("{{")
+}
+
+function resolveTemplate(template: string, vars: Record<string, string>): string {
+    let result = template
+    for (const [key, value] of Object.entries(vars)) {
+        result = result.replace(new RegExp(`\\{\\{${key}\\}\\}`, "g"), value)
+    }
+    return result
+}
+
 function isExpiringWithinDays(month: string | number | undefined, year: string | number | undefined, days: number): boolean {
     if (!month || !year) return false
     const expiryDate = new Date(parseInt(String(year)), parseInt(String(month)), 0)
@@ -140,10 +152,9 @@ function PaymentExpiryAlert() {
         defaultPayment.data?.expirationYear!
     )
 
-    const subline = sublineTemplate
-        .replace(/\{\{brand\}\}/g, brand)
-        .replace(/\{\{last4\}\}/g, last4)
-        .replace(/\{\{daysUntilExpiry\}\}/g, String(daysUntilExpiry))
+    const subline = isMoustache(sublineTemplate)
+        ? resolveTemplate(sublineTemplate, { brand, last4, daysUntilExpiry: String(daysUntilExpiry) })
+        : sublineTemplate
 
     return (
         <div style={s.container}>
@@ -207,7 +218,7 @@ export function ExpiryAlertBanner({
     heading = "Your payment method is expiring soon",
     subline = "<p>Your Visa ending in 4242 expires in 45 days. Update your payment method to avoid interruptions.</p>",
     ctaLabel = "Update payment method",
-    ctaUrl = "/account/payment-methods",
+    ctaUrl = "/add-payment-method",
     backgroundColor = "#fff7ed",
     borderColor = "#fed7aa",
     textColor = "#9a3412",

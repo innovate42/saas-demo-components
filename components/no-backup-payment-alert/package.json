@@ -27,7 +27,7 @@
       "id": "subline__limio_richtext",
       "label": "Description",
       "type": "richtext",
-      "default": "<p>If your primary payment fails, there's no backup. Add a second method to avoid interruptions.</p>"
+      "default": "<p>Your {{brand}} ending in {{last4}} has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>"
     },
     {
       "id": "ctaLabel",
@@ -39,7 +39,7 @@
       "id": "ctaUrl",
       "label": "CTA button URL",
       "type": "string",
-      "default": ""
+      "default": "/add-payment-method"
     },
     {
       "id": "backgroundColor__limio_color",
