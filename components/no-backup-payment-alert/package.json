@@ -26,7 +26,7 @@
       "id": "subline__limio_richtext",
       "label": "Description",
       "type": "richtext",
-      "default": "<p>Your {{brand}} ending in {{last4}} has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>"
+      "default": "<p>Your {{brand}} ending in {{last4}} has no backup. If it fails, there is no fallback. Add a second payment method to avoid interruptions.</p>"
     },
     {
       "id": "ctaLabel",
