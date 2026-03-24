@@ -418,7 +418,7 @@ describe("buildJsonLd", () => {
     expect(result.mainEntity.offers[2].name).toBe("Plan C")
   })
 
-  test("9. Add-ons included — appends add-ons with category Add-On when enabled", () => {
+  test("9. Add-ons included — attaches add-ons via schema.org addOn property on each offer", () => {
     const offers = [makeOffer()]
     const addOns = [
       makeOffer({ attributes: { display_name__limio: "Mobile Add-On" } }),
@@ -426,18 +426,38 @@ describe("buildJsonLd", () => {
     ]
     const config = { ...defaultConfig, includeAddOns: true }
     const result = buildJsonLd(offers, addOns, config)
-    expect(result.mainEntity.offers).toHaveLength(3)
-    expect(result.mainEntity.offers[1].name).toBe("Mobile Add-On")
-    expect(result.mainEntity.offers[1].category).toBe("Add-On")
-    expect(result.mainEntity.offers[2].name).toBe("VR Add-On")
-    expect(result.mainEntity.offers[2].category).toBe("Add-On")
+    // Add-ons are NOT in the top-level offers array
+    expect(result.mainEntity.offers).toHaveLength(1)
+    // They're nested under each offer's addOn property
+    const mainOffer = result.mainEntity.offers[0]
+    expect(mainOffer.addOn).toHaveLength(2)
+    expect(mainOffer.addOn[0].name).toBe("Mobile Add-On")
+    expect(mainOffer.addOn[0].category).toBe("Add-On")
+    expect(mainOffer.addOn[1].name).toBe("VR Add-On")
+    expect(mainOffer.addOn[1].category).toBe("Add-On")
   })
 
-  test("add-ons excluded by default", () => {
+  test("9b. Add-ons on multiple offers — each subscription offer gets the same addOn array", () => {
+    const offers = [
+      makeOffer({ attributes: { display_name__limio: "Plan A" } }),
+      makeOffer({ attributes: { display_name__limio: "Plan B" } }),
+    ]
+    const addOns = [makeOffer({ attributes: { display_name__limio: "Mobile Add-On" } })]
+    const config = { ...defaultConfig, includeAddOns: true }
+    const result = buildJsonLd(offers, addOns, config)
+    expect(result.mainEntity.offers).toHaveLength(2)
+    expect(result.mainEntity.offers[0].addOn).toHaveLength(1)
+    expect(result.mainEntity.offers[1].addOn).toHaveLength(1)
+    expect(result.mainEntity.offers[0].addOn[0].name).toBe("Mobile Add-On")
+    expect(result.mainEntity.offers[1].addOn[0].name).toBe("Mobile Add-On")
+  })
+
+  test("add-ons excluded by default — no addOn property", () => {
     const offers = [makeOffer()]
     const addOns = [makeOffer({ attributes: { display_name__limio: "Mobile Add-On" } })]
     const result = buildJsonLd(offers, addOns, defaultConfig)
     expect(result.mainEntity.offers).toHaveLength(1)
+    expect(result.mainEntity.offers[0].addOn).toBeUndefined()
   })
 
   test("handles empty offers array", () => {
@@ -474,7 +494,7 @@ describe("buildJsonLd", () => {
     expect(result.mainEntity.offers[0].checkoutPageURLTemplate).toBeUndefined()
   })
 
-  test("purchase links work for add-ons too", () => {
+  test("purchase links work for add-ons nested via addOn property", () => {
     const offers = [makeOffer()]
     const addOns = [makeOffer({ path: "/offers2/mobile-addon", attributes: { display_name__limio: "Mobile Add-On" } })]
     const config = {
@@ -486,7 +506,7 @@ describe("buildJsonLd", () => {
       utmCampaign: "pricing",
     }
     const result = buildJsonLd(offers, addOns, config)
-    const addOnOffer = result.mainEntity.offers[1]
+    const addOnOffer = result.mainEntity.offers[0].addOn[0]
     expect(addOnOffer.checkoutPageURLTemplate).toContain("/offers2/mobile-addon")
     expect(addOnOffer.checkoutPageURLTemplate).toContain("utm_source=ai")
   })
