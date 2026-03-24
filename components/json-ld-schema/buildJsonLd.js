@@ -214,13 +214,11 @@ export function buildJsonLd(offers, addOns, config) {
     })
   }
 
-  const allOffers = mappedOffers
-
   const mainEntity = {
     "@type": schemaType,
     name: applicationName,
     url: applicationUrl,
-    offers: allOffers,
+    offers: mappedOffers,
   }
 
   // SoftwareApplication-specific fields
