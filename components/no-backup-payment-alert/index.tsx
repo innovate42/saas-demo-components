@@ -1,6 +1,6 @@
 import React from "react"
 import { useLimioUserCustomer, useLimioUserPaymentMethods } from "@limio/internal-checkout-sdk"
-import { sanitiseHTML } from "@limio/sdk"
+import { sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import { s } from "./styles"
 
@@ -84,28 +84,34 @@ function NoBackupPaymentAlert() {
         "textColor__limio_color": textColor,
     } = props
 
+    const { isInPageBuilder } = useLimioContext() || {}
+
     const { customer } = useLimioUserCustomer()
     const { paymentMethods } = useLimioUserPaymentMethods(customer?.id, {
         filterType: ["invoice"],
     })
 
-    const defaultPaymentMethodId = customer?.data?.defaultPaymentMethodId
+    // In page builder, always show with preview placeholder values
+    if (!isInPageBuilder) {
+        const defaultPaymentMethodId = customer?.data?.defaultPaymentMethodId
 
-    // No default payment → nothing to protect → hide
-    if (!defaultPaymentMethodId || !paymentMethods?.length) return null
+        // No default payment → nothing to protect → hide
+        if (!defaultPaymentMethodId || !paymentMethods?.length) return null
 
-    const defaultPayment = paymentMethods.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
-    if (!defaultPayment) return null
+        const defaultPayment = paymentMethods.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
+        if (!defaultPayment) return null
 
-    const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
-    const hasValidBackup = backupMethods.some((pm: PaymentMethod) => isPaymentMethodValid(pm))
+        const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
+        const hasValidBackup = backupMethods.some((pm: PaymentMethod) => isPaymentMethodValid(pm))
 
-    // Valid backup exists → user is covered → hide
-    if (hasValidBackup) return null
+        // Valid backup exists → user is covered → hide
+        if (hasValidBackup) return null
+    }
 
     // Resolve mustache template variables in subline
-    const brand = getCardBrand(defaultPayment)
-    const last4 = getLast4(defaultPayment)
+    const defaultPayment = paymentMethods?.find((pm: PaymentMethod) => pm.id === customer?.data?.defaultPaymentMethodId)
+    const brand = defaultPayment ? getCardBrand(defaultPayment) : "Visa"
+    const last4 = defaultPayment ? getLast4(defaultPayment) : "4242"
     const resolvedSubline = isMoustache(subline)
         ? resolveTemplate(subline, { brand, last4 })
         : subline

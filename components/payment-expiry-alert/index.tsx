@@ -1,6 +1,6 @@
 import React from "react"
 import { useLimioUserCustomer, useLimioUserPaymentMethods } from "@limio/internal-checkout-sdk"
-import { sanitiseHTML } from "@limio/sdk"
+import { sanitiseHTML, useLimioContext } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import { s } from "./styles"
 
@@ -108,6 +108,7 @@ function PaymentExpiryAlert() {
         "textColor__limio_color": textColor,
     } = props
 
+    const { isInPageBuilder } = useLimioContext() || {}
     const threshold = parseInt(expiryThresholdDays) || 90
 
     const { customer } = useLimioUserCustomer()
@@ -115,42 +116,45 @@ function PaymentExpiryAlert() {
         filterType: ["invoice"],
     })
 
-    const defaultPaymentMethodId = customer?.data?.defaultPaymentMethodId
+    // In page builder, always show with preview placeholder values
+    if (!isInPageBuilder) {
+        const defaultPaymentMethodId = customer?.data?.defaultPaymentMethodId
 
-    // No default payment → hide
-    if (!defaultPaymentMethodId || !paymentMethods?.length) return null
+        // No default payment → hide
+        if (!defaultPaymentMethodId || !paymentMethods?.length) return null
 
-    const defaultPayment = paymentMethods.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
-    if (!defaultPayment) return null
+        const defaultPayment = paymentMethods.find((pm: PaymentMethod) => pm.id === defaultPaymentMethodId)
+        if (!defaultPayment) return null
 
-    // Default not expiring within threshold → hide
-    const defaultIsExpiring = isExpiringWithinDays(
-        defaultPayment.data?.expirationMonth,
-        defaultPayment.data?.expirationYear,
-        threshold
-    )
-    if (!defaultIsExpiring) return null
+        // Default not expiring within threshold → hide
+        const defaultIsExpiring = isExpiringWithinDays(
+            defaultPayment.data?.expirationMonth,
+            defaultPayment.data?.expirationYear,
+            threshold
+        )
+        if (!defaultIsExpiring) return null
 
-    // Check if there's a valid non-expiring backup
-    const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
-    const hasValidNonExpiringBackup = backupMethods.some((pm: PaymentMethod) => {
-        if (isPaymentMethodExpired(pm)) return false
-        const month = pm.data?.expirationMonth
-        const year = pm.data?.expirationYear
-        if (!month || !year) return true // no expiry data = valid (e.g. direct debit)
-        return !isExpiringWithinDays(month, year, threshold)
-    })
+        // Check if there's a valid non-expiring backup
+        const backupMethods = paymentMethods.filter((pm: PaymentMethod) => pm.id !== defaultPaymentMethodId)
+        const hasValidNonExpiringBackup = backupMethods.some((pm: PaymentMethod) => {
+            if (isPaymentMethodExpired(pm)) return false
+            const month = pm.data?.expirationMonth
+            const year = pm.data?.expirationYear
+            if (!month || !year) return true // no expiry data = valid (e.g. direct debit)
+            return !isExpiringWithinDays(month, year, threshold)
+        })
 
-    // Valid non-expiring backup exists → user is covered → hide
-    if (hasValidNonExpiringBackup) return null
+        // Valid non-expiring backup exists → user is covered → hide
+        if (hasValidNonExpiringBackup) return null
+    }
 
-    // Build subline with template replacements
-    const brand = getCardBrand(defaultPayment)
-    const last4 = getLast4(defaultPayment)
-    const daysUntilExpiry = getDaysUntilExpiry(
-        defaultPayment.data?.expirationMonth!,
-        defaultPayment.data?.expirationYear!
-    )
+    // Build subline with template replacements (use preview values in page builder)
+    const defaultPayment = paymentMethods?.find((pm: PaymentMethod) => pm.id === customer?.data?.defaultPaymentMethodId)
+    const brand = defaultPayment ? getCardBrand(defaultPayment) : "Visa"
+    const last4 = defaultPayment ? getLast4(defaultPayment) : "4242"
+    const daysUntilExpiry = defaultPayment
+        ? getDaysUntilExpiry(defaultPayment.data?.expirationMonth!, defaultPayment.data?.expirationYear!)
+        : 45
 
     const subline = isMoustache(sublineTemplate)
         ? resolveTemplate(sublineTemplate, { brand, last4, daysUntilExpiry: String(daysUntilExpiry) })
