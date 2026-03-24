@@ -23,6 +23,37 @@ type PaymentMethod = {
     }
 }
 
+function isMoustache(val: string | undefined): boolean {
+    return typeof val === "string" && val.includes("{{")
+}
+
+function getCardBrand(pm: PaymentMethod): string {
+    const zuoraResult = pm.data?.zuora?.result
+    if (zuoraResult?.CreditCardType) {
+        const types: Record<string, string> = {
+            AmericanExpress: "American Express",
+            Visa: "Visa",
+            MasterCard: "MasterCard",
+        }
+        return types[zuoraResult.CreditCardType] || zuoraResult.CreditCardType
+    }
+    return pm.data?.brand || "Card"
+}
+
+function getLast4(pm: PaymentMethod): string {
+    const mask = pm.data?.zuora?.result?.CreditCardMaskNumber
+    if (mask) return mask.slice(-4)
+    return pm.data?.last4 || ""
+}
+
+function resolveTemplate(template: string, vars: Record<string, string>): string {
+    let result = template
+    for (const [key, value] of Object.entries(vars)) {
+        result = result.replace(new RegExp(`\\{\\{${key}\\}\\}`, "g"), value)
+    }
+    return result
+}
+
 function isPaymentMethodValid(pm: PaymentMethod): boolean {
     const month = pm.data?.expirationMonth
     const year = pm.data?.expirationYear
@@ -72,6 +103,13 @@ function NoBackupPaymentAlert() {
     // Valid backup exists → user is covered → hide
     if (hasValidBackup) return null
 
+    // Resolve mustache template variables in subline
+    const brand = getCardBrand(defaultPayment)
+    const last4 = getLast4(defaultPayment)
+    const resolvedSubline = isMoustache(subline)
+        ? resolveTemplate(subline, { brand, last4 })
+        : subline
+
     return (
         <div style={s.container}>
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
@@ -80,10 +118,10 @@ function NoBackupPaymentAlert() {
                 </div>
                 <div style={s.contentArea}>
                     {heading && <h4 style={s.heading}>{heading}</h4>}
-                    {subline && (
+                    {resolvedSubline && (
                         <div
                             style={s.subline}
-                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(subline) }}
+                            dangerouslySetInnerHTML={{ __html: sanitiseHTML(resolvedSubline) }}
                         />
                     )}
                     {ctaUrl && ctaLabel && (
@@ -132,9 +170,9 @@ export default NoBackupPaymentAlert
 // Pure presentational export for Storybook mockups
 export function AlertBanner({
     heading = "No backup payment method",
-    subline = "<p>If your primary payment fails, there's no backup. Add a second method to avoid interruptions.</p>",
+    subline = "<p>Your Visa ending in 4242 has no backup. If it fails, there's no fallback. Add a second payment method to avoid interruptions.</p>",
     ctaLabel = "Add backup method",
-    ctaUrl = "/account/payment-methods",
+    ctaUrl = "/add-payment-method",
     backgroundColor = "#fff7ed",
     borderColor = "#fed7aa",
     textColor = "#9a3412",
