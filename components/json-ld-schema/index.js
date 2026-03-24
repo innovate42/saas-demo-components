@@ -9,6 +9,11 @@ function JsonLdSchema({
   applicationCategory = "BusinessApplication",
   pageDescription = "",
   includeAddOns = false,
+  shopDomain = "",
+  checkoutBasePath = "/checkout",
+  utmSource = "ai",
+  utmMedium = "llm",
+  utmCampaign = "limio-pricing-page",
 }) {
   const { offers = [], addOns = [] } = useCampaign() || {}
 
@@ -21,6 +26,11 @@ function JsonLdSchema({
     applicationCategory,
     pageDescription,
     includeAddOns,
+    shopDomain,
+    checkoutBasePath,
+    utmSource,
+    utmMedium,
+    utmCampaign,
   })
 
   return (

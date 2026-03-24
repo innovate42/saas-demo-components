@@ -50,11 +50,46 @@ export function extractFeatureList(html) {
 }
 
 /**
+ * Build the checkout purchase URL for an offer with optional UTM tracking.
+ * Uses Limio purchase link format: /checkout?purchase=/offers2/offerName
+ * @param {object} offer - Limio offer object
+ * @param {object} purchaseConfig - Purchase link configuration
+ * @returns {string|null} Full checkout URL or null if not enough data
+ */
+export function buildPurchaseUrl(offer, purchaseConfig) {
+  const { shopDomain = "", checkoutBasePath = "/checkout", utmSource = "", utmMedium = "", utmCampaign = "" } = purchaseConfig || {}
+
+  if (!shopDomain) return null
+
+  // Derive offer path from offer.path (Limio standard) or offer.id
+  const offerPath = offer?.path || offer?.id
+  if (!offerPath) return null
+
+  const baseUrl = shopDomain.replace(/\/+$/, "")
+  const checkoutPath = checkoutBasePath.startsWith("/") ? checkoutBasePath : "/" + checkoutBasePath
+
+  let url = `${baseUrl}${checkoutPath}?purchase=${offerPath}`
+
+  // Append UTM parameters if any are set
+  const utmParams = []
+  if (utmSource) utmParams.push(`utm_source=${encodeURIComponent(utmSource)}`)
+  if (utmMedium) utmParams.push(`utm_medium=${encodeURIComponent(utmMedium)}`)
+  if (utmCampaign) utmParams.push(`utm_campaign=${encodeURIComponent(utmCampaign)}`)
+
+  if (utmParams.length > 0) {
+    url += "&" + utmParams.join("&")
+  }
+
+  return url
+}
+
+/**
  * Map a single Limio offer to a schema.org Offer object.
  * @param {object} offer - Limio offer object
  * @param {string} category - "Subscription" or "Add-On"
+ * @param {object} purchaseConfig - Purchase link configuration for checkoutPageURLTemplate
  */
-export function buildOfferSchema(offer, category) {
+export function buildOfferSchema(offer, category, purchaseConfig) {
   const attrs = offer?.data?.attributes || {}
   // Price lives at offer.data.price[0] in mock SDK but at
   // offer.data.attributes.price__limio[0] in real Limio tenants — try both
@@ -92,6 +127,13 @@ export function buildOfferSchema(offer, category) {
         },
       }
     }
+  }
+
+  // Purchase / checkout link with UTM tracking
+  const purchaseUrl = buildPurchaseUrl(offer, purchaseConfig)
+  if (purchaseUrl) {
+    schema.url = purchaseUrl
+    schema.checkoutPageURLTemplate = purchaseUrl
   }
 
   // Upsell offers → isRelatedTo (filter out entries with empty names)
@@ -153,13 +195,20 @@ export function buildJsonLd(offers, addOns, config) {
     applicationCategory = "BusinessApplication",
     pageDescription = "",
     includeAddOns = false,
+    shopDomain = "",
+    checkoutBasePath = "/checkout",
+    utmSource = "ai",
+    utmMedium = "llm",
+    utmCampaign = "limio-pricing-page",
   } = config || {}
 
-  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription"))
+  const purchaseConfig = { shopDomain, checkoutBasePath, utmSource, utmMedium, utmCampaign }
+
+  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
 
   const mappedAddOns =
     includeAddOns && addOns?.length
-      ? addOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
+      ? addOns.map((addOn) => buildOfferSchema(addOn, "Add-On", purchaseConfig))
       : []
 
   const allOffers = [...mappedOffers, ...mappedAddOns]
