@@ -5,7 +5,14 @@ import type { CSSProperties } from "react"
 // Mobile: tw-grid-cols-1 tw-w-full tw-p-6
 
 export const s = {
-    // Outer wrapper matches the saved-payment-methods grid container
+    // Centering wrapper — matches saved-payment-methods: tw-flex tw-justify-center tw-w-full
+    centerWrapper: {
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+    } as CSSProperties,
+
+    // Grid container matches saved-payment-methods:
     // tw-grid tw-grid-cols-1 md:tw-grid-cols-[350px_350px] tw-w-full md:tw-w-auto tw-gap-6 tw-p-6
     outerGrid: {
         display: "grid",

@@ -161,6 +161,7 @@ function PaymentExpiryAlert() {
         : sublineTemplate
 
     return (
+        <div style={s.centerWrapper}>
         <div className="expiry-alert-grid" style={s.outerGrid}>
             <style dangerouslySetInnerHTML={{ __html: s.responsiveCss }} />
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
@@ -183,11 +184,13 @@ function PaymentExpiryAlert() {
                 </div>
             </div>
         </div>
+        </div>
     )
 }
 
 PaymentExpiryAlert.Skeleton = function PaymentExpiryAlertSkeleton() {
     return (
+        <div style={s.centerWrapper}>
         <div className="expiry-alert-grid" style={s.outerGrid}>
             <div style={s.skeleton}>
                 <div style={s.skeletonLine("50%")} />
@@ -195,11 +198,13 @@ PaymentExpiryAlert.Skeleton = function PaymentExpiryAlertSkeleton() {
                 <div style={{ ...s.skeletonLine("30%"), marginTop: 16 }} />
             </div>
         </div>
+        </div>
     )
 }
 
 PaymentExpiryAlert.Error = function PaymentExpiryAlertError({ errorText = "Unable to load payment information." }: { errorText?: string }) {
     return (
+        <div style={s.centerWrapper}>
         <div className="expiry-alert-grid" style={s.outerGrid}>
             <div style={{
                 background: "#fff7ed",
@@ -212,6 +217,7 @@ PaymentExpiryAlert.Error = function PaymentExpiryAlertError({ errorText = "Unabl
             }}>
                 {errorText}
             </div>
+        </div>
         </div>
     )
 }
@@ -237,6 +243,7 @@ export function ExpiryAlertBanner({
     textColor?: string
 }) {
     return (
+        <div style={s.centerWrapper}>
         <div className="expiry-alert-grid" style={s.outerGrid}>
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
@@ -257,6 +264,7 @@ export function ExpiryAlertBanner({
                     )}
                 </div>
             </div>
+        </div>
         </div>
     )
 }

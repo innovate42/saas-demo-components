@@ -117,6 +117,7 @@ function NoBackupPaymentAlert() {
         : subline
 
     return (
+        <div style={s.centerWrapper}>
         <div className="no-backup-alert-grid" style={s.outerGrid}>
             <style dangerouslySetInnerHTML={{ __html: s.responsiveCss }} />
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
@@ -139,11 +140,13 @@ function NoBackupPaymentAlert() {
                 </div>
             </div>
         </div>
+        </div>
     )
 }
 
 NoBackupPaymentAlert.Skeleton = function NoBackupPaymentAlertSkeleton() {
     return (
+        <div style={s.centerWrapper}>
         <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={s.skeleton}>
                 <div style={s.skeletonLine("40%")} />
@@ -151,11 +154,13 @@ NoBackupPaymentAlert.Skeleton = function NoBackupPaymentAlertSkeleton() {
                 <div style={{ ...s.skeletonLine("30%"), marginTop: 16 }} />
             </div>
         </div>
+        </div>
     )
 }
 
 NoBackupPaymentAlert.Error = function NoBackupPaymentAlertError({ errorText = "Unable to load payment information." }: { errorText?: string }) {
     return (
+        <div style={s.centerWrapper}>
         <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={{
                 background: "#fff7ed",
@@ -168,6 +173,7 @@ NoBackupPaymentAlert.Error = function NoBackupPaymentAlertError({ errorText = "U
             }}>
                 {errorText}
             </div>
+        </div>
         </div>
     )
 }
@@ -195,6 +201,7 @@ export function AlertBanner({
     icon?: React.ReactNode
 }) {
     return (
+        <div style={s.centerWrapper}>
         <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
@@ -215,6 +222,7 @@ export function AlertBanner({
                     )}
                 </div>
             </div>
+        </div>
         </div>
     )
 }
