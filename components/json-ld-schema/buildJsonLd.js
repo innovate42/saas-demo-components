@@ -207,9 +207,8 @@ export function buildJsonLd(offers, addOns, config) {
   const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
 
   // Add-ons use schema.org's addOn property on each subscription offer
-  // rather than being listed as separate top-level offers
   if (includeAddOns && addOns?.length) {
-    const mappedAddOns = addOns.map((addOn) => buildOfferSchema(addOn, "Add-On", purchaseConfig))
+    const mappedAddOns = addOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
     mappedOffers.forEach((offer) => {
       offer.addOn = mappedAddOns
     })
