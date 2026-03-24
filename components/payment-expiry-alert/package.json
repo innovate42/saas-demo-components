@@ -1,0 +1,70 @@
+{
+  "name": "@limio/component-payment-expiry-alert",
+  "version": "0.0.1",
+  "description": "Alert banner shown when the default payment method is close to expiry",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "isCustomSubcomponent": true,
+  "dependencies": {
+    "@limio/internal-checkout-sdk": "workspace:^"
+  },
+  "peerDependencies": {
+    "@limio/sdk": "workspace:^",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Your payment method is expiring soon"
+    },
+    {
+      "id": "subline__limio_richtext",
+      "label": "Description",
+      "type": "richtext",
+      "default": "<p>Your {{brand}} ending in {{last4}} expires in {{daysUntilExpiry}} days. Update your payment method to avoid interruptions.</p>"
+    },
+    {
+      "id": "ctaLabel",
+      "label": "CTA button text",
+      "type": "string",
+      "default": "Update payment method"
+    },
+    {
+      "id": "ctaUrl",
+      "label": "CTA button URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "expiryThresholdDays",
+      "label": "Expiry threshold (days)",
+      "type": "string",
+      "default": "90"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Background color",
+      "type": "color",
+      "default": "#fff7ed"
+    },
+    {
+      "id": "borderColor__limio_color",
+      "label": "Border color",
+      "type": "color",
+      "default": "#fed7aa"
+    },
+    {
+      "id": "textColor__limio_color",
+      "label": "Text color",
+      "type": "color",
+      "default": "#9a3412"
+    }
+  ],
+  "type": "module"
+}
