@@ -1,10 +1,16 @@
 import type { CSSProperties } from "react"
 
+// Match saved-payment-methods card dimensions: 350px wide on desktop, full width on mobile
+// Breakpoint at 768px matches the md: Tailwind breakpoint used by saved-payment-methods
+const CARD_WIDTH = 350
+const BREAKPOINT = 768
+
 export const s = {
     container: {
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         WebkitFontSmoothing: "antialiased",
         width: "100%",
+        maxWidth: CARD_WIDTH,
         boxSizing: "border-box",
     } as CSSProperties,
 
@@ -72,11 +78,23 @@ export const s = {
         lineHeight: 1.4,
     } as CSSProperties,
 
+    // Responsive style tag injected once to handle mobile full-width
+    responsiveCss: `
+        @media (max-width: ${BREAKPOINT - 1}px) {
+            .expiry-alert-container {
+                max-width: 100% !important;
+            }
+        }
+    `,
+
     skeleton: {
         padding: "20px 24px",
         background: "#f9fafb",
         border: "1px solid #e3e8ee",
         borderRadius: 10,
+        width: "100%",
+        maxWidth: CARD_WIDTH,
+        boxSizing: "border-box",
     } as CSSProperties,
 
     skeletonLine: (width: string): CSSProperties => ({
