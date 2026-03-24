@@ -206,12 +206,15 @@ export function buildJsonLd(offers, addOns, config) {
 
   const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
 
-  const mappedAddOns =
-    includeAddOns && addOns?.length
-      ? addOns.map((addOn) => buildOfferSchema(addOn, "Add-On", purchaseConfig))
-      : []
+  // Add-ons use schema.org's addOn property on each subscription offer
+  if (includeAddOns && addOns?.length) {
+    const mappedAddOns = addOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
+    mappedOffers.forEach((offer) => {
+      offer.addOn = mappedAddOns
+    })
+  }
 
-  const allOffers = [...mappedOffers, ...mappedAddOns]
+  const allOffers = mappedOffers
 
   const mainEntity = {
     "@type": schemaType,
