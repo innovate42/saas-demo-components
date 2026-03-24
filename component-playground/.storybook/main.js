@@ -97,6 +97,10 @@ const config = {
                 __dirname,
                 path.join("..", "packages", "limio", "shop-redux")
             ),
+            "@limio/form-lite": path.resolve(
+                __dirname,
+                path.join("..", "packages", "limio", "form-lite")
+            ),
         };
 
         config.resolve.extensions = [...(config.resolve.extensions || []), ".ts", ".tsx"];
