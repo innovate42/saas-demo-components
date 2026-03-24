@@ -7,7 +7,7 @@ export default {
     parameters: { layout: "centered" },
     decorators: [
         (Story) => (
-            <div style={{ width: 350, padding: 24 }}>
+            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
                 <Story />
             </div>
         )

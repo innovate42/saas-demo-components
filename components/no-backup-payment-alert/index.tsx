@@ -111,7 +111,7 @@ function NoBackupPaymentAlert() {
         : subline
 
     return (
-        <div className="no-backup-alert-container" style={s.container}>
+        <div className="no-backup-alert-grid" style={s.outerGrid}>
             <style dangerouslySetInnerHTML={{ __html: s.responsiveCss }} />
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
@@ -138,7 +138,7 @@ function NoBackupPaymentAlert() {
 
 NoBackupPaymentAlert.Skeleton = function NoBackupPaymentAlertSkeleton() {
     return (
-        <div style={s.container}>
+        <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={s.skeleton}>
                 <div style={s.skeletonLine("40%")} />
                 <div style={{ ...s.skeletonLine("70%"), marginTop: 10 }} />
@@ -150,7 +150,7 @@ NoBackupPaymentAlert.Skeleton = function NoBackupPaymentAlertSkeleton() {
 
 NoBackupPaymentAlert.Error = function NoBackupPaymentAlertError({ errorText = "Unable to load payment information." }: { errorText?: string }) {
     return (
-        <div style={s.container}>
+        <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={{
                 background: "#fff7ed",
                 border: "1px solid #fed7aa",
@@ -189,7 +189,7 @@ export function AlertBanner({
     icon?: React.ReactNode
 }) {
     return (
-        <div style={s.container}>
+        <div className="no-backup-alert-grid" style={s.outerGrid}>
             <div style={s.alertCard(backgroundColor, borderColor, textColor)}>
                 <div style={s.iconContainer}>
                     {icon || <WarningShieldIcon />}

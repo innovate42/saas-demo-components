@@ -1,19 +1,22 @@
 import type { CSSProperties } from "react"
 
-// Match saved-payment-methods card dimensions: 350px wide on desktop, full width on mobile
-// Breakpoint at 768px matches the md: Tailwind breakpoint used by saved-payment-methods
-const CARD_WIDTH = 350
-const BREAKPOINT = 768
+// Match saved-payment-methods grid layout:
+// Desktop: tw-grid-cols-[350px_350px] tw-gap-6 tw-p-6 tw-w-auto
+// Mobile: tw-grid-cols-1 tw-w-full tw-p-6
 
 export const s = {
-    container: {
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-        WebkitFontSmoothing: "antialiased",
+    // Outer wrapper matches the saved-payment-methods grid container
+    // tw-grid tw-grid-cols-1 md:tw-grid-cols-[350px_350px] tw-w-full md:tw-w-auto tw-gap-6 tw-p-6
+    outerGrid: {
+        display: "grid",
+        gridTemplateColumns: "1fr",
         width: "100%",
-        maxWidth: CARD_WIDTH,
+        gap: 24,
+        padding: 24,
         boxSizing: "border-box",
     } as CSSProperties,
 
+    // The alert card spans the full grid width (both columns on desktop)
     alertCard: (bgColor: string, borderColor: string, textColor: string): CSSProperties => ({
         display: "flex",
         flexDirection: "row",
@@ -24,8 +27,11 @@ export const s = {
         borderRadius: 10,
         padding: "20px 24px",
         color: textColor,
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+        WebkitFontSmoothing: "antialiased",
         width: "100%",
         boxSizing: "border-box",
+        gridColumn: "1 / -1",
     }),
 
     iconContainer: {
@@ -78,11 +84,14 @@ export const s = {
         lineHeight: 1.4,
     } as CSSProperties,
 
-    // Responsive style tag injected once to handle mobile full-width
+    // Responsive CSS matching saved-payment-methods breakpoint
+    // Desktop: 2-column grid (350px 350px), auto width, centered
+    // Mobile: 1-column, full width
     responsiveCss: `
-        @media (max-width: ${BREAKPOINT - 1}px) {
-            .no-backup-alert-container {
-                max-width: 100% !important;
+        @media (min-width: 768px) {
+            .no-backup-alert-grid {
+                grid-template-columns: 350px 350px !important;
+                width: auto !important;
             }
         }
     `,
@@ -93,7 +102,6 @@ export const s = {
         border: "1px solid #e3e8ee",
         borderRadius: 10,
         width: "100%",
-        maxWidth: CARD_WIDTH,
         boxSizing: "border-box",
     } as CSSProperties,
 
