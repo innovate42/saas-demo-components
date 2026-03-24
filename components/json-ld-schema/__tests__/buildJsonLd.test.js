@@ -1,6 +1,7 @@
 import {
   buildJsonLd,
   buildOfferSchema,
+  buildPurchaseUrl,
   stripHtml,
   extractFeatureList,
   mapBillingInterval,
@@ -11,6 +12,7 @@ import {
 function makeOffer(overrides = {}) {
   return {
     id: "offer-test",
+    path: overrides.path || "/offers2/test-offer",
     name: "Test Offer",
     data: {
       attributes: {
@@ -115,6 +117,101 @@ describe("extractFeatureList", () => {
     const result = extractFeatureList(html)
     expect(result).toHaveLength(1)
     expect(result[0].itemOffered.name).toBe("Valid")
+  })
+})
+
+describe("buildPurchaseUrl", () => {
+  test("builds full purchase URL with UTM params", () => {
+    const offer = makeOffer()
+    const config = {
+      shopDomain: "https://shop.example.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "ai",
+      utmMedium: "llm",
+      utmCampaign: "limio-pricing-page",
+    }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toBe(
+      "https://shop.example.com/checkout?purchase=/offers2/test-offer&utm_source=ai&utm_medium=llm&utm_campaign=limio-pricing-page"
+    )
+  })
+
+  test("returns null when shopDomain is empty", () => {
+    const offer = makeOffer()
+    expect(buildPurchaseUrl(offer, { shopDomain: "" })).toBeNull()
+    expect(buildPurchaseUrl(offer, {})).toBeNull()
+    expect(buildPurchaseUrl(offer, null)).toBeNull()
+  })
+
+  test("returns null when offer has no path or id", () => {
+    const offer = { name: "No Path" }
+    const config = { shopDomain: "https://shop.example.com" }
+    expect(buildPurchaseUrl(offer, config)).toBeNull()
+  })
+
+  test("falls back to offer.id when path is missing", () => {
+    const offer = { id: "/offers2/fallback-offer", name: "Fallback" }
+    const config = { shopDomain: "https://shop.example.com", checkoutBasePath: "/checkout" }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toBe("https://shop.example.com/checkout?purchase=/offers2/fallback-offer")
+  })
+
+  test("omits UTM params when all empty", () => {
+    const offer = makeOffer()
+    const config = {
+      shopDomain: "https://shop.example.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "",
+      utmMedium: "",
+      utmCampaign: "",
+    }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toBe("https://shop.example.com/checkout?purchase=/offers2/test-offer")
+    expect(result).not.toContain("utm_")
+  })
+
+  test("includes only provided UTM params", () => {
+    const offer = makeOffer()
+    const config = {
+      shopDomain: "https://shop.example.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "google",
+      utmMedium: "",
+      utmCampaign: "",
+    }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toContain("utm_source=google")
+    expect(result).not.toContain("utm_medium")
+    expect(result).not.toContain("utm_campaign")
+  })
+
+  test("strips trailing slash from shopDomain", () => {
+    const offer = makeOffer()
+    const config = { shopDomain: "https://shop.example.com/", checkoutBasePath: "/checkout" }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toContain("https://shop.example.com/checkout")
+    expect(result).not.toContain("//checkout")
+  })
+
+  test("handles custom checkout path", () => {
+    const offer = makeOffer()
+    const config = { shopDomain: "https://shop.example.com", checkoutBasePath: "/custom-cart" }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toContain("/custom-cart?purchase=")
+  })
+
+  test("encodes special characters in UTM values", () => {
+    const offer = makeOffer()
+    const config = {
+      shopDomain: "https://shop.example.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "ai bot",
+      utmMedium: "",
+      utmCampaign: "test&value",
+    }
+    const result = buildPurchaseUrl(offer, config)
+    expect(result).toContain("utm_source=ai%20bot")
+    expect(result).toContain("utm_campaign=test%26value")
   })
 })
 
@@ -249,6 +346,29 @@ describe("buildOfferSchema", () => {
     const result = buildOfferSchema(offer, "Subscription")
     expect(result.name).toBe("Fallback Name")
   })
+
+  test("includes checkoutPageURLTemplate when purchaseConfig has shopDomain", () => {
+    const offer = makeOffer()
+    const purchaseConfig = {
+      shopDomain: "https://shop.example.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "ai",
+      utmMedium: "llm",
+      utmCampaign: "pricing",
+    }
+    const result = buildOfferSchema(offer, "Subscription", purchaseConfig)
+    expect(result.checkoutPageURLTemplate).toBe(
+      "https://shop.example.com/checkout?purchase=/offers2/test-offer&utm_source=ai&utm_medium=llm&utm_campaign=pricing"
+    )
+    expect(result.url).toBe(result.checkoutPageURLTemplate)
+  })
+
+  test("omits checkoutPageURLTemplate when no shopDomain", () => {
+    const offer = makeOffer()
+    const result = buildOfferSchema(offer, "Subscription", {})
+    expect(result.checkoutPageURLTemplate).toBeUndefined()
+    expect(result.url).toBeUndefined()
+  })
 })
 
 describe("buildJsonLd", () => {
@@ -328,5 +448,46 @@ describe("buildJsonLd", () => {
   test("handles null/undefined offers gracefully", () => {
     const result = buildJsonLd(null, null, defaultConfig)
     expect(result.mainEntity.offers).toHaveLength(0)
+  })
+
+  test("includes checkoutPageURLTemplate on offers when shopDomain is set", () => {
+    const offers = [makeOffer()]
+    const config = {
+      ...defaultConfig,
+      shopDomain: "https://saas-dev-shop.prod.limio.com",
+      checkoutBasePath: "/checkout",
+      utmSource: "ai",
+      utmMedium: "llm",
+      utmCampaign: "limio-pricing-page",
+    }
+    const result = buildJsonLd(offers, [], config)
+    const offer = result.mainEntity.offers[0]
+    expect(offer.checkoutPageURLTemplate).toBe(
+      "https://saas-dev-shop.prod.limio.com/checkout?purchase=/offers2/test-offer&utm_source=ai&utm_medium=llm&utm_campaign=limio-pricing-page"
+    )
+    expect(offer.url).toBe(offer.checkoutPageURLTemplate)
+  })
+
+  test("omits checkoutPageURLTemplate when shopDomain not configured", () => {
+    const offers = [makeOffer()]
+    const result = buildJsonLd(offers, [], defaultConfig)
+    expect(result.mainEntity.offers[0].checkoutPageURLTemplate).toBeUndefined()
+  })
+
+  test("purchase links work for add-ons too", () => {
+    const offers = [makeOffer()]
+    const addOns = [makeOffer({ path: "/offers2/mobile-addon", attributes: { display_name__limio: "Mobile Add-On" } })]
+    const config = {
+      ...defaultConfig,
+      includeAddOns: true,
+      shopDomain: "https://shop.example.com",
+      utmSource: "ai",
+      utmMedium: "llm",
+      utmCampaign: "pricing",
+    }
+    const result = buildJsonLd(offers, addOns, config)
+    const addOnOffer = result.mainEntity.offers[1]
+    expect(addOnOffer.checkoutPageURLTemplate).toContain("/offers2/mobile-addon")
+    expect(addOnOffer.checkoutPageURLTemplate).toContain("utm_source=ai")
   })
 })

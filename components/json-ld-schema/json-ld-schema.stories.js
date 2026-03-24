@@ -47,6 +47,11 @@ export default {
     applicationCategory: { control: "text" },
     pageDescription: { control: "text" },
     includeAddOns: { control: "boolean" },
+    shopDomain: { control: "text" },
+    checkoutBasePath: { control: "text" },
+    utmSource: { control: "text" },
+    utmMedium: { control: "text" },
+    utmCampaign: { control: "text" },
   },
 }
 
@@ -91,5 +96,37 @@ export const ServiceType = {
     applicationCategory: "",
     pageDescription: "Professional email marketing consulting services",
     includeAddOns: false,
+  },
+}
+
+export const WithPurchaseLinks = {
+  args: {
+    schemaType: "SoftwareApplication",
+    applicationName: "Emma by Marigold",
+    applicationUrl: "https://myemma.com",
+    applicationCategory: "BusinessApplication",
+    pageDescription: "Email marketing pricing plans with purchase links",
+    includeAddOns: true,
+    shopDomain: "https://saas-dev-shop.prod.limio.com",
+    checkoutBasePath: "/checkout",
+    utmSource: "ai",
+    utmMedium: "llm",
+    utmCampaign: "limio-pricing-page",
+  },
+}
+
+export const CustomUtmParams = {
+  args: {
+    schemaType: "SoftwareApplication",
+    applicationName: "Emma by Marigold",
+    applicationUrl: "https://myemma.com",
+    applicationCategory: "BusinessApplication",
+    pageDescription: "Custom UTM attribution example",
+    includeAddOns: false,
+    shopDomain: "https://myemma-shop.prod.limio.com",
+    checkoutBasePath: "/checkout",
+    utmSource: "google",
+    utmMedium: "organic",
+    utmCampaign: "emma-pricing-2026",
   },
 }

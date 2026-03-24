@@ -55,6 +55,36 @@
       "label": "Include cross-sell add-ons in schema?",
       "type": "boolean",
       "default": false
+    },
+    {
+      "id": "shopDomain",
+      "label": "Shop domain for purchase links (e.g. https://shop.example.com)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "checkoutBasePath",
+      "label": "Checkout page path (e.g. /checkout)",
+      "type": "string",
+      "default": "/checkout"
+    },
+    {
+      "id": "utmSource",
+      "label": "UTM source for purchase link attribution",
+      "type": "string",
+      "default": "ai"
+    },
+    {
+      "id": "utmMedium",
+      "label": "UTM medium for purchase link attribution",
+      "type": "string",
+      "default": "llm"
+    },
+    {
+      "id": "utmCampaign",
+      "label": "UTM campaign for purchase link attribution",
+      "type": "string",
+      "default": "limio-pricing-page"
     }
   ]
 }
