@@ -30,19 +30,21 @@ export function mapBillingInterval(type) {
 
 /**
  * Extract individual features from offer_features__limio HTML.
- * Parses each <li> into an OfferCatalog entry for search engine indexing.
+ * Parses each <li> into a ListItem for search engine indexing.
  */
 export function extractFeatureList(html) {
   if (!html) return []
   const liRegex = /<li[^>]*>(.*?)<\/li>/gi
   const features = []
   let match
+  let position = 1
   while ((match = liRegex.exec(html)) !== null) {
     const text = match[1].replace(/<[^>]*>/g, "").trim()
     if (text) {
       features.push({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: text },
+        "@type": "ListItem",
+        position: position++,
+        name: text,
       })
     }
   }
@@ -113,7 +115,10 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     schema.price = parseFloat(priceData.value).toFixed(2)
     schema.priceCurrency = priceData.currencyCode
 
+    // Always add priceSpecification for recurring subscriptions.
+    // Infer MON when repeat_interval_type is missing but interval is 1 (monthly default).
     const unitCode = mapBillingInterval(priceData.repeat_interval_type)
+      || (priceData.repeat_interval === 1 || !priceData.repeat_interval ? "MON" : null)
     if (unitCode) {
       schema.priceSpecification = {
         "@type": "UnitPriceSpecification",
@@ -159,7 +164,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     }
   }
 
-  // Features as itemOffered Service with OfferCatalog
+  // Features as itemOffered Service with ItemList of features
   const featuresHtml = attrs.offer_features__limio
   if (featuresHtml) {
     const featureList = extractFeatureList(featuresHtml)
@@ -170,7 +175,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     }
     if (featureList.length > 0) {
       itemOffered.hasOfferCatalog = {
-        "@type": "OfferCatalog",
+        "@type": "ItemList",
         name: "Features",
         itemListElement: featureList,
       }
@@ -207,8 +212,16 @@ export function buildJsonLd(offers, addOns, config) {
   const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
 
   // Add-ons use schema.org's addOn property on each subscription offer
+  // Deduplicate by offer path (or name as fallback) to avoid duplicate entries
   if (includeAddOns && addOns?.length) {
-    const mappedAddOns = addOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
+    const seen = new Set()
+    const uniqueAddOns = addOns.filter((addOn) => {
+      const key = addOn?.path || addOn?.data?.attributes?.display_name__limio || addOn?.name
+      if (!key || seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+    const mappedAddOns = uniqueAddOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
     mappedOffers.forEach((offer) => {
       offer.addOn = mappedAddOns
     })

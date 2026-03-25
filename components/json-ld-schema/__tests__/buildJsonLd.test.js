@@ -75,12 +75,12 @@ describe("stripHtml", () => {
 })
 
 describe("extractFeatureList", () => {
-  test("parses li items into OfferCatalog entries", () => {
+  test("parses li items into ListItem entries with position", () => {
     const html = "<ul><li>Feature A</li><li><strong>Bold</strong> text</li></ul>"
     const result = extractFeatureList(html)
     expect(result).toHaveLength(2)
-    expect(result[0].itemOffered.name).toBe("Feature A")
-    expect(result[1].itemOffered.name).toBe("Bold text")
+    expect(result[0]).toEqual({ "@type": "ListItem", position: 1, name: "Feature A" })
+    expect(result[1]).toEqual({ "@type": "ListItem", position: 2, name: "Bold text" })
   })
 
   test("returns empty array for null/undefined and skips empty items", () => {
@@ -149,6 +149,17 @@ describe("buildOfferSchema", () => {
     expect(result.priceCurrency).toBe("USD")
     expect(result.priceSpecification.unitCode).toBe("ANN")
     expect(result.priceSpecification.billingDuration).toEqual({ "@type": "QuantitativeValue", value: 1, unitCode: "ANN" })
+  })
+
+  test("defaults to MON priceSpecification when repeat_interval_type is missing", () => {
+    const offer = makeOffer({
+      price: [{ value: 24.50, currencyCode: "USD", repeat_interval: 1 }],
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.price).toBe("24.50")
+    expect(result.priceSpecification).toBeDefined()
+    expect(result.priceSpecification.unitCode).toBe("MON")
+    expect(result.priceSpecification.billingDuration).toEqual({ "@type": "QuantitativeValue", value: 1, unitCode: "MON" })
   })
 
   test("omits price fields when no price data", () => {
@@ -246,8 +257,8 @@ describe("buildJsonLd", () => {
 
   test("attaches add-ons via schema.org addOn property on each offer", () => {
     const addOns = [
-      makeOffer({ attributes: { display_name__limio: "Mobile Add-On" } }),
-      makeOffer({ attributes: { display_name__limio: "VR Add-On" } }),
+      makeOffer({ path: "/offers2/mobile-addon", attributes: { display_name__limio: "Mobile Add-On" } }),
+      makeOffer({ path: "/offers2/vr-addon", attributes: { display_name__limio: "VR Add-On" } }),
     ]
     const result = buildJsonLd([makeOffer()], addOns, { ...defaultConfig, includeAddOns: true })
     expect(result.mainEntity.offers).toHaveLength(1)
@@ -259,6 +270,18 @@ describe("buildJsonLd", () => {
   test("add-ons excluded by default", () => {
     const result = buildJsonLd([makeOffer()], [makeOffer()], defaultConfig)
     expect(result.mainEntity.offers[0].addOn).toBeUndefined()
+  })
+
+  test("deduplicates add-ons by path", () => {
+    const addOns = [
+      makeOffer({ path: "/offers2/mobile", attributes: { display_name__limio: "Mobile Add-On" } }),
+      makeOffer({ path: "/offers2/mobile", attributes: { display_name__limio: "Mobile Add-On" } }),
+      makeOffer({ path: "/offers2/vr", attributes: { display_name__limio: "VR Add-On" } }),
+    ]
+    const result = buildJsonLd([makeOffer()], addOns, { ...defaultConfig, includeAddOns: true })
+    expect(result.mainEntity.offers[0].addOn).toHaveLength(2)
+    expect(result.mainEntity.offers[0].addOn[0].name).toBe("Mobile Add-On")
+    expect(result.mainEntity.offers[0].addOn[1].name).toBe("VR Add-On")
   })
 
   test("add-ons do not get purchase links", () => {
