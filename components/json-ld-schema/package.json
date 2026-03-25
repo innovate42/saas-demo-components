@@ -51,6 +51,12 @@
       "default": ""
     },
     {
+      "id": "offerDetailsField",
+      "label": "Offer attribute for description and features (e.g. offer_features__limio)",
+      "type": "string",
+      "default": "offer_features__limio"
+    },
+    {
       "id": "includeAddOns",
       "label": "Include cross-sell add-ons in schema?",
       "type": "boolean",
