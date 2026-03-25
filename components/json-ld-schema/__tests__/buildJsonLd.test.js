@@ -232,6 +232,19 @@ describe("buildOfferSchema", () => {
     expect(result.checkoutPageURLTemplate).toBeUndefined()
     expect(result.url).toBeUndefined()
   })
+
+  test("uses configurable offerDetailsField for description and features", () => {
+    const offer = makeOffer({
+      attributes: {
+        display_name__limio: "Custom Field Plan",
+        custom_details__limio: "<ul><li>Custom Feature A</li><li>Custom Feature B</li></ul>",
+      },
+    })
+    const result = buildOfferSchema(offer, "Subscription", null, "custom_details__limio")
+    expect(result.description).toBe("Custom Feature A, Custom Feature B")
+    expect(result.itemOffered.hasOfferCatalog.itemListElement).toHaveLength(2)
+    expect(result.itemOffered.hasOfferCatalog.itemListElement[0].name).toBe("Custom Feature A")
+  })
 })
 
 describe("buildJsonLd", () => {

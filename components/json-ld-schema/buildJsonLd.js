@@ -90,8 +90,9 @@ export function buildPurchaseUrl(offer, purchaseConfig) {
  * @param {object} offer - Limio offer object
  * @param {string} category - "Subscription" or "Add-On"
  * @param {object} purchaseConfig - Purchase link configuration for checkoutPageURLTemplate
+ * @param {string} offerDetailsField - Attribute key for offer description/features (default: "offer_features__limio")
  */
-export function buildOfferSchema(offer, category, purchaseConfig) {
+export function buildOfferSchema(offer, category, purchaseConfig, offerDetailsField = "offer_features__limio") {
   const attrs = offer?.data?.attributes || {}
   // Price lives at offer.data.price[0] in mock SDK but at
   // offer.data.attributes.price__limio[0] in real Limio tenants — try both
@@ -105,7 +106,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
   }
 
   // Only include description if non-empty
-  const desc = stripHtml(attrs.checkout_description__limio || attrs.offer_features__limio)
+  const desc = stripHtml(attrs.checkout_description__limio || attrs[offerDetailsField])
   if (desc) {
     schema.description = desc
   }
@@ -162,7 +163,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
   }
 
   // Features as itemOffered Service with ItemList of features
-  const featuresHtml = attrs.offer_features__limio
+  const featuresHtml = attrs[offerDetailsField]
   if (featuresHtml) {
     const featureList = extractFeatureList(featuresHtml)
     const itemOffered = {
@@ -196,6 +197,7 @@ export function buildJsonLd(offers, addOns, config) {
     applicationUrl = "",
     applicationCategory = "BusinessApplication",
     pageDescription = "",
+    offerDetailsField = "offer_features__limio",
     includeAddOns = false,
     shopDomain = "",
     checkoutBasePath = "/checkout",
@@ -206,7 +208,7 @@ export function buildJsonLd(offers, addOns, config) {
 
   const purchaseConfig = { shopDomain, checkoutBasePath, utmSource, utmMedium, utmCampaign }
 
-  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
+  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig, offerDetailsField))
 
   // Add-ons use schema.org's addOn property on each subscription offer
   // Deduplicate by offer path (or name as fallback) to avoid duplicate entries
@@ -218,7 +220,7 @@ export function buildJsonLd(offers, addOns, config) {
       seen.add(key)
       return true
     })
-    const mappedAddOns = uniqueAddOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
+    const mappedAddOns = uniqueAddOns.map((addOn) => buildOfferSchema(addOn, "Add-On", null, offerDetailsField))
     mappedOffers.forEach((offer) => {
       offer.addOn = mappedAddOns
     })
