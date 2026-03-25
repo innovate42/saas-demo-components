@@ -48,10 +48,10 @@ const defaultConfig = {
 
 describe("mapBillingInterval", () => {
   test.each([
-    ["years", "ANN"],
-    ["months", "MON"],
-    ["weeks", "WK"],
-    ["days", "DAY"],
+    ["years", "ANN"], ["year", "ANN"],
+    ["months", "MON"], ["month", "MON"],
+    ["weeks", "WK"], ["week", "WK"],
+    ["days", "DAY"], ["day", "DAY"],
   ])("%s maps to %s", (input, expected) => {
     expect(mapBillingInterval(input)).toBe(expected)
   })
@@ -151,15 +151,25 @@ describe("buildOfferSchema", () => {
     expect(result.priceSpecification.billingDuration).toEqual({ "@type": "QuantitativeValue", value: 1, unitCode: "ANN" })
   })
 
-  test("defaults to MON priceSpecification when repeat_interval_type is missing", () => {
+  test("handles singular interval types from Limio (month, year)", () => {
+    const monthly = makeOffer({
+      price: [{ value: 24.50, currencyCode: "USD", repeat_interval: 1, repeat_interval_type: "month" }],
+    })
+    expect(buildOfferSchema(monthly, "Subscription").priceSpecification.unitCode).toBe("MON")
+
+    const yearly = makeOffer({
+      price: [{ value: 259.50, currencyCode: "USD", repeat_interval: 1, repeat_interval_type: "year" }],
+    })
+    expect(buildOfferSchema(yearly, "Subscription").priceSpecification.unitCode).toBe("ANN")
+  })
+
+  test("omits priceSpecification when repeat_interval_type is missing", () => {
     const offer = makeOffer({
       price: [{ value: 24.50, currencyCode: "USD", repeat_interval: 1 }],
     })
     const result = buildOfferSchema(offer, "Subscription")
     expect(result.price).toBe("24.50")
-    expect(result.priceSpecification).toBeDefined()
-    expect(result.priceSpecification.unitCode).toBe("MON")
-    expect(result.priceSpecification.billingDuration).toEqual({ "@type": "QuantitativeValue", value: 1, unitCode: "MON" })
+    expect(result.priceSpecification).toBeUndefined()
   })
 
   test("omits price fields when no price data", () => {
