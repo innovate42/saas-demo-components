@@ -20,29 +20,31 @@ export function stripHtml(html) {
  */
 export function mapBillingInterval(type) {
   const map = {
-    years: "ANN",
-    months: "MON",
-    weeks: "WK",
-    days: "DAY",
+    years: "ANN", year: "ANN",
+    months: "MON", month: "MON",
+    weeks: "WK", week: "WK",
+    days: "DAY", day: "DAY",
   }
   return map[type] || null
 }
 
 /**
  * Extract individual features from offer_features__limio HTML.
- * Parses each <li> into an OfferCatalog entry for search engine indexing.
+ * Parses each <li> into a ListItem for search engine indexing.
  */
 export function extractFeatureList(html) {
   if (!html) return []
   const liRegex = /<li[^>]*>(.*?)<\/li>/gi
   const features = []
   let match
+  let position = 1
   while ((match = liRegex.exec(html)) !== null) {
     const text = match[1].replace(/<[^>]*>/g, "").trim()
     if (text) {
       features.push({
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: text },
+        "@type": "ListItem",
+        position: position++,
+        name: text,
       })
     }
   }
@@ -88,8 +90,9 @@ export function buildPurchaseUrl(offer, purchaseConfig) {
  * @param {object} offer - Limio offer object
  * @param {string} category - "Subscription" or "Add-On"
  * @param {object} purchaseConfig - Purchase link configuration for checkoutPageURLTemplate
+ * @param {string} offerDetailsField - Attribute key for offer description/features (default: "offer_features__limio")
  */
-export function buildOfferSchema(offer, category, purchaseConfig) {
+export function buildOfferSchema(offer, category, purchaseConfig, offerDetailsField = "offer_features__limio") {
   const attrs = offer?.data?.attributes || {}
   // Price lives at offer.data.price[0] in mock SDK but at
   // offer.data.attributes.price__limio[0] in real Limio tenants — try both
@@ -103,7 +106,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
   }
 
   // Only include description if non-empty
-  const desc = stripHtml(attrs.checkout_description__limio || attrs.offer_features__limio)
+  const desc = stripHtml(attrs.checkout_description__limio || attrs[offerDetailsField])
   if (desc) {
     schema.description = desc
   }
@@ -159,8 +162,8 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     }
   }
 
-  // Features as itemOffered Service with OfferCatalog
-  const featuresHtml = attrs.offer_features__limio
+  // Features as itemOffered Service with ItemList of features
+  const featuresHtml = attrs[offerDetailsField]
   if (featuresHtml) {
     const featureList = extractFeatureList(featuresHtml)
     const itemOffered = {
@@ -170,7 +173,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     }
     if (featureList.length > 0) {
       itemOffered.hasOfferCatalog = {
-        "@type": "OfferCatalog",
+        "@type": "ItemList",
         name: "Features",
         itemListElement: featureList,
       }
@@ -194,6 +197,7 @@ export function buildJsonLd(offers, addOns, config) {
     applicationUrl = "",
     applicationCategory = "BusinessApplication",
     pageDescription = "",
+    offerDetailsField = "offer_features__limio",
     includeAddOns = false,
     shopDomain = "",
     checkoutBasePath = "/checkout",
@@ -204,11 +208,19 @@ export function buildJsonLd(offers, addOns, config) {
 
   const purchaseConfig = { shopDomain, checkoutBasePath, utmSource, utmMedium, utmCampaign }
 
-  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig))
+  const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig, offerDetailsField))
 
   // Add-ons use schema.org's addOn property on each subscription offer
+  // Deduplicate by offer path (or name as fallback) to avoid duplicate entries
   if (includeAddOns && addOns?.length) {
-    const mappedAddOns = addOns.map((addOn) => buildOfferSchema(addOn, "Add-On"))
+    const seen = new Set()
+    const uniqueAddOns = addOns.filter((addOn) => {
+      const key = addOn?.path || addOn?.data?.attributes?.display_name__limio || addOn?.name
+      if (!key || seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+    const mappedAddOns = uniqueAddOns.map((addOn) => buildOfferSchema(addOn, "Add-On", null, offerDetailsField))
     mappedOffers.forEach((offer) => {
       offer.addOn = mappedAddOns
     })
