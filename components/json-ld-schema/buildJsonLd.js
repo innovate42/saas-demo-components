@@ -20,10 +20,10 @@ export function stripHtml(html) {
  */
 export function mapBillingInterval(type) {
   const map = {
-    years: "ANN",
-    months: "MON",
-    weeks: "WK",
-    days: "DAY",
+    years: "ANN", year: "ANN",
+    months: "MON", month: "MON",
+    weeks: "WK", week: "WK",
+    days: "DAY", day: "DAY",
   }
   return map[type] || null
 }
@@ -115,10 +115,7 @@ export function buildOfferSchema(offer, category, purchaseConfig) {
     schema.price = parseFloat(priceData.value).toFixed(2)
     schema.priceCurrency = priceData.currencyCode
 
-    // Always add priceSpecification for recurring subscriptions.
-    // Infer MON when repeat_interval_type is missing but interval is 1 (monthly default).
     const unitCode = mapBillingInterval(priceData.repeat_interval_type)
-      || (priceData.repeat_interval === 1 || !priceData.repeat_interval ? "MON" : null)
     if (unitCode) {
       schema.priceSpecification = {
         "@type": "UnitPriceSpecification",
