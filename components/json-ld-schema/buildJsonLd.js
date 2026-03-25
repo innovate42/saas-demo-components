@@ -70,7 +70,9 @@ export function buildPurchaseUrl(offer, purchaseConfig) {
   const baseUrl = shopDomain.replace(/\/+$/, "")
   const checkoutPath = checkoutBasePath.startsWith("/") ? checkoutBasePath : "/" + checkoutBasePath
 
-  let url = `${baseUrl}${checkoutPath}?purchase=${offerPath}`
+  // Safely encode offer path — handles both pre-encoded (%20) and raw spaces
+  const encodedPath = encodeURIComponent(decodeURIComponent(offerPath))
+  let url = `${baseUrl}${checkoutPath}?purchase=${encodedPath}`
 
   // Append UTM parameters if any are set
   const utmParams = []
@@ -211,12 +213,15 @@ export function buildJsonLd(offers, addOns, config) {
   const mappedOffers = (offers || []).map((offer) => buildOfferSchema(offer, "Subscription", purchaseConfig, offerDetailsField))
 
   // Add-ons use schema.org's addOn property on each subscription offer
-  // Deduplicate by offer path (or name as fallback) to avoid duplicate entries
+  // Deduplicate by composite key (name + price + currency) to catch same-name different-path dupes
   if (includeAddOns && addOns?.length) {
     const seen = new Set()
     const uniqueAddOns = addOns.filter((addOn) => {
-      const key = addOn?.path || addOn?.data?.attributes?.display_name__limio || addOn?.name
-      if (!key || seen.has(key)) return false
+      const attrs = addOn?.data?.attributes || {}
+      const priceData = addOn?.data?.price?.[0] || attrs.price__limio?.[0]
+      const name = attrs.display_name__limio || addOn?.name
+      const key = `${name}|${priceData?.value || ""}|${priceData?.currencyCode || ""}`
+      if (!name || seen.has(key)) return false
       seen.add(key)
       return true
     })
