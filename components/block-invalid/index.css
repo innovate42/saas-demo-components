@@ -1,0 +1,77 @@
+.block-invalid-container {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  left: 0;
+  top: 0;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+
+.block-invalid-container.show {
+  display: flex;
+}
+
+.block-invalid-container .block-invalid-modal {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 3em;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 0.25em;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.block-invalid-container .block-invalid-modal .block-invalid-heading {
+  font-family: var(--ds-type-system-serif), Charter, "Bitstream Charter", "Iowan Old Style", "Calisto MT", serif;
+  font-size: 2em;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: #121212;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+}
+
+.block-invalid-container .block-invalid-modal .block-invalid-body {
+  font-family: var(--ds-type-system-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  flex-direction: column;
+  color: #383e42;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+.block-invalid-modal button {
+  background: #3d50a9;
+  color: #ffffff;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: none;
+}
+
+.block-invalid-link-container {
+  padding-top: 1em;
+}
+
+@media only screen and (min-width:600px) {
+  .block-invalid-container .block-invalid-modal {
+    min-width: 500px;
+    max-width: 750px;
+  }
+}

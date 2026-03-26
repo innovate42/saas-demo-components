@@ -1,0 +1,70 @@
+{
+  "name": "@limio/component-block-invalid",
+  "version": "1.0.0",
+  "description": "Blocks checkout when an offer's valid_date_range__limio has expired or not yet started",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@limio/internal-checkout-sdk": "workspace:^",
+    "@limio/shop": "workspace:^"
+  },
+  "peerDependencies": {
+    "@limio/design-system": "workspace:^",
+    "@limio/sdk": "workspace:^",
+    "@limio/shop-redux": "workspace:^",
+    "react": "*"
+  },
+  "devDependencies": {
+    "@limio/test-harness-shop": "workspace:^"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "This offer is no longer available"
+    },
+    {
+      "id": "body",
+      "label": "Body",
+      "type": "richtext",
+      "default": "Sorry, this offer has expired or is not yet available for purchase."
+    },
+    {
+      "id": "showButton",
+      "label": "Show a button?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "buttonLabel",
+      "label": "Button label",
+      "type": "string",
+      "default": "Browse available offers"
+    },
+    {
+      "id": "buttonUrl",
+      "label": "Redirect Destination",
+      "type": "string",
+      "default": "/"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "block-invalid-limio"
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
+  ]
+}
