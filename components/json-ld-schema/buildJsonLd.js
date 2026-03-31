@@ -11,6 +11,7 @@ export function stripHtml(html) {
   if (!html) return ""
   return html
     .replace(/<\/li>\s*<li[^>]*>/gi, ", ")
+    .replace(/<br\s*\/?>/gi, " ")
     .replace(/<[^>]*>/g, "")
     .trim()
 }
@@ -70,8 +71,8 @@ export function buildPurchaseUrl(offer, purchaseConfig) {
   const baseUrl = shopDomain.replace(/\/+$/, "")
   const checkoutPath = checkoutBasePath.startsWith("/") ? checkoutBasePath : "/" + checkoutBasePath
 
-  // Safely encode offer path — handles both pre-encoded (%20) and raw spaces
-  const encodedPath = encodeURIComponent(decodeURIComponent(offerPath))
+  // Encode each path segment individually to preserve slashes
+  const encodedPath = offerPath.split("/").map(segment => encodeURIComponent(segment)).join("/")
   let url = `${baseUrl}${checkoutPath}?purchase=${encodedPath}`
 
   // Append UTM parameters if any are set
@@ -113,9 +114,10 @@ export function buildOfferSchema(offer, category, purchaseConfig, offerDetailsFi
     schema.description = desc
   }
 
-  // Price fields — omit entirely for "contact sales" offers with no price
-  if (priceData && priceData.value != null) {
-    schema.price = parseFloat(priceData.value).toFixed(2)
+  // Price fields — omit entirely for free/contact-sales offers (value "-" or non-numeric)
+  const parsedPrice = priceData ? parseFloat(priceData.value) : NaN
+  if (!isNaN(parsedPrice)) {
+    schema.price = parsedPrice.toFixed(2)
     schema.priceCurrency = priceData.currencyCode
 
     const unitCode = mapBillingInterval(priceData.repeat_interval_type)
