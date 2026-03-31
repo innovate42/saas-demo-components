@@ -67,6 +67,11 @@ describe("stripHtml", () => {
     expect(stripHtml("<ul><li>A</li><li>B</li><li>C</li></ul>")).toBe("A, B, C")
   })
 
+  test("replaces <br> tags with space", () => {
+    expect(stripHtml("anstatt CHF 176.60<br>nach Ablauf")).toBe("anstatt CHF 176.60 nach Ablauf")
+    expect(stripHtml("line1<br/>line2<br />line3")).toBe("line1 line2 line3")
+  })
+
   test("returns empty string for null/undefined/empty", () => {
     expect(stripHtml(null)).toBe("")
     expect(stripHtml(undefined)).toBe("")
@@ -91,7 +96,7 @@ describe("extractFeatureList", () => {
 })
 
 describe("buildPurchaseUrl", () => {
-  test("builds full purchase URL with encoded path and UTM params", () => {
+  test("builds full purchase URL preserving slashes and encoding segments", () => {
     const result = buildPurchaseUrl(makeOffer(), {
       shopDomain: "https://shop.example.com",
       checkoutBasePath: "/checkout",
@@ -100,22 +105,24 @@ describe("buildPurchaseUrl", () => {
       utmCampaign: "limio-pricing-page",
     })
     expect(result).toBe(
-      "https://shop.example.com/checkout?purchase=%2Foffers2%2Ftest-offer&utm_source=ai&utm_medium=llm&utm_campaign=limio-pricing-page"
+      "https://shop.example.com/checkout?purchase=/offers2/test-offer&utm_source=ai&utm_medium=llm&utm_campaign=limio-pricing-page"
     )
   })
 
-  test("encodes raw spaces in offer path", () => {
-    const offer = { path: "/offers2/Leemeeo Studio Student Monthly Plan USD", name: "Test" }
+  test("encodes spaces in path segments but preserves slashes", () => {
+    const offer = { path: "/offers2/Luzerner Zeitung Digital Jahresabo 120.-", name: "Test" }
     const result = buildPurchaseUrl(offer, { shopDomain: "https://shop.example.com", checkoutBasePath: "/checkout" })
-    expect(result).toContain("purchase=%2Foffers2%2FLeemeeo%20Studio%20Student%20Monthly%20Plan%20USD")
+    expect(result).toContain("purchase=/offers2/Luzerner%20Zeitung%20Digital%20Jahresabo%20120.-")
     expect(result).not.toContain(" ")
+    expect(result).not.toContain("%2F")
   })
 
-  test("handles pre-encoded paths without double-encoding", () => {
-    const offer = { path: "/offers2/Hero%20Plan%20-%20Annual", name: "Test" }
+  test("encodes unicode chars in path segments", () => {
+    const offer = { path: "/offers2/Aargauer Zeitung Digital Monatsabo 3 für 1", name: "Test" }
     const result = buildPurchaseUrl(offer, { shopDomain: "https://shop.example.com", checkoutBasePath: "/checkout" })
-    expect(result).toContain("purchase=%2Foffers2%2FHero%20Plan%20-%20Annual")
-    expect(result).not.toContain("%2520")
+    expect(result).toContain("purchase=/offers2/")
+    expect(result).toContain("f%C3%BCr")
+    expect(result).not.toContain("für")
   })
 
   test("returns null when shopDomain empty or offer has no path", () => {
@@ -129,7 +136,7 @@ describe("buildPurchaseUrl", () => {
       { id: "/offers2/fallback-offer", name: "Fallback" },
       { shopDomain: "https://shop.example.com", checkoutBasePath: "/checkout" }
     )
-    expect(result).toBe("https://shop.example.com/checkout?purchase=%2Foffers2%2Ffallback-offer")
+    expect(result).toBe("https://shop.example.com/checkout?purchase=/offers2/fallback-offer")
   })
 
   test("omits UTM params when all empty", () => {
@@ -193,6 +200,14 @@ describe("buildOfferSchema", () => {
     expect(result.priceSpecification).toBeUndefined()
   })
 
+  test("omits price fields when value is non-numeric (dash or text)", () => {
+    const dashPrice = makeOffer({ price: [{ value: "-", currencyCode: "CHF", repeat_interval_type: "month" }] })
+    const result = buildOfferSchema(dashPrice, "Subscription")
+    expect(result.price).toBeUndefined()
+    expect(result.priceCurrency).toBeUndefined()
+    expect(result.priceSpecification).toBeUndefined()
+  })
+
   test("uses price__limio fallback when data.price is empty", () => {
     const offer = makeOffer({
       price: [],
@@ -236,7 +251,7 @@ describe("buildOfferSchema", () => {
       utmSource: "ai", utmMedium: "llm", utmCampaign: "pricing",
     })
     expect(result.checkoutPageURLTemplate).toBe(
-      "https://shop.example.com/checkout?purchase=%2Foffers2%2Ftest-offer&utm_source=ai&utm_medium=llm&utm_campaign=pricing"
+      "https://shop.example.com/checkout?purchase=/offers2/test-offer&utm_source=ai&utm_medium=llm&utm_campaign=pricing"
     )
     expect(result.url).toBe(result.checkoutPageURLTemplate)
   })
@@ -338,7 +353,7 @@ describe("buildJsonLd", () => {
     }
     const result = buildJsonLd([makeOffer()], [], config)
     const offer = result.mainEntity.offers[0]
-    expect(offer.checkoutPageURLTemplate).toContain("%2Foffers2%2Ftest-offer")
+    expect(offer.checkoutPageURLTemplate).toContain("/offers2/test-offer")
     expect(offer.checkoutPageURLTemplate).toContain("utm_source=ai")
     expect(offer.url).toBe(offer.checkoutPageURLTemplate)
   })
