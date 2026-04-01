@@ -177,7 +177,7 @@ export function buildOfferSchema(offer, category, purchaseConfig, offerDetailsFi
     }
     if (featureList.length > 0) {
       itemOffered.hasOfferCatalog = {
-        "@type": "ItemList",
+        "@type": "OfferCatalog",
         name: "Features",
         itemListElement: featureList,
       }
