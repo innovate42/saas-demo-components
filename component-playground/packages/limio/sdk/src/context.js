@@ -24,8 +24,15 @@ export function useBasket() {
     if (context === undefined) {
         throw new Error("useBasket must be used within a LimioProvider");
     }
-    const {basketItems, addToBasket, swapOffer} = dummyContext.shop;
-    return {basketItems, addToBasket, swapOffer};
+    const shop = (context && context.shop) || dummyContext.shop;
+    return {
+        basketItems: shop.basketItems,
+        addToBasket: shop.addToBasket || ((offer) => console.log("[Storybook] addToBasket", offer)),
+        swapOffer: shop.swapOffer || ((itemId, offer) => console.log("[Storybook] swapOffer", itemId, offer)),
+        removeFromBasket: shop.removeFromBasket || (({id} = {}) => console.log("[Storybook] removeFromBasket", id)),
+        updateItemQuantity: shop.updateItemQuantity || ((id, q) => console.log("[Storybook] updateItemQuantity", id, q)),
+        basketLoading: Boolean(shop.basketLoading),
+    };
 }
 
 
