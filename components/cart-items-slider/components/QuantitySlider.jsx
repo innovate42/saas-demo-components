@@ -1,101 +1,95 @@
 import * as React from "react"
 import {
   getTierStopsForOffer,
-  findTierStopForQuantity,
+  getOfferQuantityMinMax,
   offerHasVolumePricing,
   offerHasMultibuy,
-  getOfferQuantityMinMax,
   formatNumber,
   parseTemplate
 } from "../helpers"
 
-// Slider replacement for the upstream QuantityControl dropdown.
-// - If the offer has volume-pricing tiers, stops snap to each tier's max (ending_unit)
-//   (or starting_unit for an open-ended final tier).
-// - If the offer has multibuy but no tiers, stops run min..max in increments of 1.
-// - Otherwise the slider does not render.
+// Continuous slider quantity picker.
+// - Value can land on any integer between the offer's min and max.
+// - Tier boundaries (ending_unit of each recurringVolume tier) are rendered as
+//   visual tick marks along the track, but the slider does not snap to them.
+// - onChange fires with the raw quantity on release (mouse/touch/keyboard),
+//   so Limio's volume-pricing engine picks the right tier for that value.
 function QuantitySlider({ offer, quantity, onChange, disabled, tierLabelTemplate, tierUnit }) {
   const hasVolume = offerHasVolumePricing(offer)
   const hasMultibuy = offerHasMultibuy(offer)
 
-  const stops = React.useMemo(() => {
-    if (hasVolume) return getTierStopsForOffer(offer)
-    if (hasMultibuy) {
-      const { min, max } = getOfferQuantityMinMax(offer)
-      const length = Math.max(1, (max || 1) - (min || 1) + 1)
-      return Array.from({ length }, (_, i) => {
-        const value = (min || 1) + i
-        return {
-          id: value,
-          label: formatNumber(value),
-          startingUnit: value,
-          endingUnit: value,
-          isOpenEnded: false
-        }
-      })
-    }
-    return []
+  const { min, max } = React.useMemo(() => {
+    if (hasVolume || hasMultibuy) return getOfferQuantityMinMax(offer)
+    return { min: 1, max: 1 }
   }, [offer, hasVolume, hasMultibuy])
 
-  const currentIndex = React.useMemo(
-    () => (stops.length ? findTierStopForQuantity(stops, quantity) : -1),
-    [stops, quantity]
+  const tierStops = React.useMemo(
+    () => (hasVolume ? getTierStopsForOffer(offer) : []),
+    [offer, hasVolume]
   )
 
-  // Local index so dragging feels responsive; commit to parent on release.
-  const [localIndex, setLocalIndex] = React.useState(currentIndex)
+  const safeMin = Number.isFinite(min) ? min : 1
+  const safeMax = Number.isFinite(max) && max > safeMin ? max : safeMin + 1
+
+  const [localValue, setLocalValue] = React.useState(() =>
+    Math.max(safeMin, Math.min(safeMax, Number(quantity) || safeMin))
+  )
   React.useEffect(() => {
-    setLocalIndex(currentIndex)
-  }, [currentIndex])
+    setLocalValue(Math.max(safeMin, Math.min(safeMax, Number(quantity) || safeMin)))
+  }, [quantity, safeMin, safeMax])
 
-  if (!stops.length) return null
+  if (!hasVolume && !hasMultibuy) return null
 
-  const activeStop = stops[Math.max(0, localIndex)] || stops[0]
+  const commit = (raw) => {
+    const clamped = Math.max(safeMin, Math.min(safeMax, Number(raw)))
+    if (clamped !== quantity) onChange(clamped)
+  }
+
   const activeLabel = parseTemplate(tierLabelTemplate || "{quantity} {unit}", {
-    quantity: activeStop.label,
+    quantity: formatNumber(localValue),
     unit: tierUnit || ""
   }).trim()
 
-  const commit = (index) => {
-    const stop = stops[index]
-    if (!stop) return
-    if (stop.id !== quantity) onChange(stop.id)
-  }
+  const range = safeMax - safeMin || 1
 
   return (
     <div className="cis-slider" data-testid="item-quantity">
       <div className="cis-slider__track-wrapper">
         <input
           type="range"
-          min="0"
-          max={stops.length - 1}
+          min={safeMin}
+          max={safeMax}
           step="1"
-          value={Math.max(0, localIndex)}
+          value={localValue}
           disabled={disabled}
-          onChange={(e) => setLocalIndex(Number(e.target.value))}
+          onChange={(e) => setLocalValue(Number(e.target.value))}
           onMouseUp={(e) => commit(Number(e.currentTarget.value))}
           onTouchEnd={(e) => commit(Number(e.currentTarget.value))}
           onKeyUp={(e) => commit(Number(e.currentTarget.value))}
           className="cis-slider__input"
-          aria-label="Quantity tier"
-          list={`cis-slider-ticks-${stops.length}`}
+          aria-label="Quantity"
+          aria-valuetext={activeLabel || String(localValue)}
         />
-        <datalist id={`cis-slider-ticks-${stops.length}`}>
-          {stops.map((stop, i) => (
-            <option key={stop.id} value={i} label={stop.label} />
-          ))}
-        </datalist>
-        <div className="cis-slider__ticks" aria-hidden="true">
-          {stops.map((stop, i) => (
-            <span
-              key={stop.id}
-              className={`cis-slider__tick${i === localIndex ? " cis-slider__tick--active" : ""}`}
-            />
-          ))}
-        </div>
+        {tierStops.length > 0 && (
+          <div className="cis-slider__ticks" aria-hidden="true">
+            {tierStops.map((stop) => {
+              const markValue = stop.isOpenEnded ? stop.startingUnit : stop.endingUnit
+              const percent = Math.max(0, Math.min(100, ((markValue - safeMin) / range) * 100))
+              const reached = localValue >= markValue
+              return (
+                <span
+                  key={stop.id}
+                  className={`cis-slider__tick${reached ? " cis-slider__tick--active" : ""}`}
+                  style={{ left: `${percent}%` }}
+                  title={stop.label}
+                />
+              )
+            })}
+          </div>
+        )}
       </div>
       <div className="cis-slider__label" data-testid="item-quantity-label">
-        {activeLabel || activeStop.label}
+        {activeLabel || formatNumber(localValue)}
       </div>
     </div>
   )
