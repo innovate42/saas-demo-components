@@ -18,7 +18,7 @@ import {
 // correct tier for that number.
 const SEGMENT_STEPS = 1000
 
-function QuantitySlider({ offer, quantity, onChange, disabled, tierUnit }) {
+function QuantitySlider({ offer, quantity, onChange, disabled, tierPrefix, tierUnit }) {
   const hasVolume = offerHasVolumePricing(offer)
   const hasMultibuy = offerHasMultibuy(offer)
 
@@ -84,7 +84,7 @@ function QuantitySlider({ offer, quantity, onChange, disabled, tierUnit }) {
   if (!hasVolume && !hasMultibuy) return null
 
   const currentQty = sliderToQuantity(sliderVal)
-  const labelText = `${formatNumber(currentQty)}${tierUnit ? ` ${tierUnit}` : ""}`
+  const labelText = `${tierPrefix || ""}${formatNumber(currentQty)}${tierUnit ? ` ${tierUnit}` : ""}`
 
   const commit = (s) => {
     const qty = sliderToQuantity(Number(s))

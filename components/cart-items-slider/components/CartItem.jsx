@@ -22,6 +22,7 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
     showUpsellPrice,
     readOnly,
     showDiscountNote,
+    tierPrefix,
     tierUnit
   } = componentProps
 
@@ -107,15 +108,6 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
           )}
         </div>
         <div className="cis-item__controls">
-          {!readOnly && (
-            <QuantitySlider
-              offer={offer}
-              quantity={quantity}
-              onChange={onQuantityChange}
-              disabled={basketLoading}
-              tierUnit={tierUnit}
-            />
-          )}
           <div className="cis-price-block">
             {discountInfo && (
               <span className={`cis-price-block__discount ${discountInfo.className || ""}`} data-testid="discount-note">
@@ -141,6 +133,18 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
           )}
         </div>
       </div>
+      {!readOnly && (
+        <div className="cis-item__slider-row">
+          <QuantitySlider
+            offer={offer}
+            quantity={quantity}
+            onChange={onQuantityChange}
+            disabled={basketLoading}
+            tierPrefix={tierPrefix}
+            tierUnit={tierUnit}
+          />
+        </div>
+      )}
       {addOnItems.map((addOnItem) => (
         <div
           key={addOnItem.id}
@@ -152,6 +156,7 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
             addOnInformation={addOnInformation}
             perUnitLabel={perUnitLabel}
             readOnly={readOnly}
+            tierPrefix={tierPrefix}
             tierUnit={tierUnit}
           />
         </div>

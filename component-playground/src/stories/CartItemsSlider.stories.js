@@ -87,6 +87,7 @@ const baseArgs = {
   lineItemInformation: "",
   addOnInformation: "{{data.attributes.description__limio}}",
   perUnitLabel: "{quantity} x {formattedPrice} each",
+  tierPrefix: "$",
   tierUnit: "in monthly expenses",
   emptyText: "Your cart is empty",
   emptyCta: "See offers",

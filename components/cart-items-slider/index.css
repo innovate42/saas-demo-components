@@ -257,7 +257,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  min-width: 16rem;
+  width: 100%;
+}
+
+.cis-item__slider-row {
+  width: 100%;
+  padding: 0.5rem 0 0.25rem;
 }
 
 .cis-slider__track-wrapper {
