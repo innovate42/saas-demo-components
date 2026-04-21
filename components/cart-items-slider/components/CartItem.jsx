@@ -22,7 +22,6 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
     showUpsellPrice,
     readOnly,
     showDiscountNote,
-    tierLabelTemplate,
     tierUnit
   } = componentProps
 
@@ -114,7 +113,6 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
               quantity={quantity}
               onChange={onQuantityChange}
               disabled={basketLoading}
-              tierLabelTemplate={tierLabelTemplate}
               tierUnit={tierUnit}
             />
           )}
@@ -154,7 +152,6 @@ function CartItem({ orderItem, componentProps, addOnItems = [] }) {
             addOnInformation={addOnInformation}
             perUnitLabel={perUnitLabel}
             readOnly={readOnly}
-            tierLabelTemplate={tierLabelTemplate}
             tierUnit={tierUnit}
           />
         </div>
