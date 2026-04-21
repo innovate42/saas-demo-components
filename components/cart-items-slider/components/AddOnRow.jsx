@@ -7,7 +7,7 @@ import {
   parseTemplate
 } from "../helpers"
 
-function AddOnRow({ addOnItem, addOnInformation, perUnitLabel, readOnly, tierLabelTemplate, tierUnit }) {
+function AddOnRow({ addOnItem, addOnInformation, perUnitLabel, readOnly, tierUnit }) {
   const { offer: addOn, quantity = 1, id } = addOnItem
   const basket = useBasket() || {}
   const { removeFromBasket, updateItemQuantity, basketLoading } = basket
@@ -53,7 +53,6 @@ function AddOnRow({ addOnItem, addOnInformation, perUnitLabel, readOnly, tierLab
             quantity={quantity}
             onChange={onQuantityChange}
             disabled={basketLoading}
-            tierLabelTemplate={tierLabelTemplate}
             tierUnit={tierUnit}
           />
         )}
