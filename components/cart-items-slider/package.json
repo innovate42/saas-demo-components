@@ -46,6 +46,12 @@
       "default": "{quantity} x {formattedPrice} each"
     },
     {
+      "id": "tierPrefix",
+      "label": "Text shown before the quantity under the slider (e.g. \"$\")",
+      "type": "string",
+      "default": ""
+    },
+    {
       "id": "tierUnit",
       "label": "Text shown after the quantity under the slider (e.g. \"in monthly expenses\", \"users\")",
       "type": "string",
