@@ -1,0 +1,103 @@
+{
+  "name": "component-cart-items-slider",
+  "version": "1.0.0",
+  "description": "Cart Items with a volume-tier slider quantity picker",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "showIcons",
+      "label": "Show offer icons",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "offerInformation",
+      "label": "Offer Additional Information",
+      "type": "richtext",
+      "default": "{{data.attributes.display_description__limio}}"
+    },
+    {
+      "id": "lineItemInformation",
+      "label": "Line Item Additional Information",
+      "type": "richtext",
+      "default": ""
+    },
+    {
+      "id": "addOnInformation",
+      "label": "AddOn Additional Information",
+      "type": "richtext",
+      "default": "{{data.attributes.description__limio}}"
+    },
+    {
+      "id": "perUnitLabel",
+      "label": "Unit price label when multibuy is available",
+      "type": "string",
+      "default": "{quantity} x {formattedPrice} each"
+    },
+    {
+      "id": "tierLabelTemplate",
+      "label": "Slider tier label (supports {quantity} and {unit})",
+      "type": "string",
+      "default": "{quantity} {unit}"
+    },
+    {
+      "id": "tierUnit",
+      "label": "Unit of measurement shown under the slider",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "emptyText",
+      "label": "Message when cart is empty",
+      "type": "string",
+      "default": "Your cart is empty, view offers to get started"
+    },
+    {
+      "id": "emptyCta",
+      "label": "CTA label when cart is empty",
+      "type": "string",
+      "default": "See offers"
+    },
+    {
+      "id": "emptyUrl",
+      "label": "URL to direct users to when cart is empty",
+      "type": "string",
+      "default": "/default"
+    },
+    {
+      "id": "displayUpsellOffers",
+      "label": "Display upsell offers",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showUpsellPrice",
+      "label": "Show price in upsell offers",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "readOnly",
+      "label": "Show component in read-only mode?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showDiscountNote",
+      "label": "Show discount note",
+      "type": "boolean",
+      "default": false
+    }
+  ]
+}
