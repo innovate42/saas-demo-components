@@ -317,18 +317,20 @@
   left: 10px;
   right: 10px;
   top: calc(0.25rem + 1px);
-  display: flex;
-  justify-content: space-between;
+  height: 10px;
   pointer-events: none;
   z-index: 1;
 }
 
 .cis-slider__tick {
-  width: 10px;
-  height: 10px;
+  position: absolute;
+  transform: translate(-50%, 0);
+  width: 8px;
+  height: 8px;
   border-radius: 9999px;
   background: #fff;
   border: 2px solid #c7d2fe;
+  box-sizing: content-box;
 }
 
 .cis-slider__tick--active {
