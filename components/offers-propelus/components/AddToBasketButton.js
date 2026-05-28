@@ -7,11 +7,17 @@ export const AddToBasketButton = ({ offer, primaryColor }) => {
     const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = useBasket()
 
     async function addSelectionToBasket() {
-        const checkoutId = getCurrentBasketId()
-        if (!checkoutId) {
+        try {
+            const checkoutId = getCurrentBasketId()
+            if (!checkoutId) {
+                await initiateCheckout({ order: { orderItems: [{ offer }] } })
+            } else {
+                await addOfferToBasket({ offer })
+            }
+        } catch (e) {
+            // addOfferToBasket failed — basket is likely completed/closed.
+            // Start a fresh checkout instead.
             await initiateCheckout({ order: { orderItems: [{ offer }] } })
-        } else {
-            await addOfferToBasket({ offer })
         }
         if (pageOptions?.pushToCheckout) {
             await navigateToCheckout()
