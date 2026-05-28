@@ -205,6 +205,12 @@ export const OffersPropelus = () => {
         setGatingMode(false)
     }
 
+    const handleReset = () => {
+        setPendingRole(activeRole)
+        setPendingState(activeState)
+        setGatingMode(true)
+    }
+
     const selectSx = {
         backgroundColor: "#FFFFFF",
         borderRadius: "8px",
@@ -393,10 +399,35 @@ export const OffersPropelus = () => {
                                         fontFamily: "Inter, sans-serif",
                                         lineHeight: 1.6,
                                         m: 0,
+<<<<<<< HEAD
+                                        mb: 2,
+=======
+>>>>>>> origin/saas-dev
                                     }}
                                 >
                                     {subheading}
                                 </Box>
+<<<<<<< HEAD
+                                <Box
+                                    component="button"
+                                    onClick={handleReset}
+                                    sx={{
+                                        background: "none",
+                                        border: "none",
+                                        cursor: "pointer",
+                                        color: themeSet.primary,
+                                        fontFamily: "Inter, sans-serif",
+                                        fontSize: "14px",
+                                        fontWeight: 500,
+                                        textDecoration: "underline",
+                                        p: 0,
+                                        "&:hover": { opacity: 0.75 },
+                                    }}
+                                >
+                                    Choose a different state or profession
+                                </Box>
+=======
+>>>>>>> origin/saas-dev
                             </Box>
 
                             {showGroupedOffers ? (
