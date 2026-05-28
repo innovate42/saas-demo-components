@@ -1,0 +1,160 @@
+{
+  "name": "@limio/offers-propelus",
+  "version": "1.0.0",
+  "description": "Offer cards with role/state gating screen (Propelus / CeBroker-style).",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8",
+    "@mui/material": "5.17.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "5.17.1",
+    "@fontsource/inter": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Propelus Plans and Packages"
+    },
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Find the best course or subscription for you"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "offers-propelus"
+    },
+    {
+      "id": "showImage",
+      "label": "Show offer image",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "offerWidth",
+      "label": "Offer card width",
+      "type": "number",
+      "default": "2"
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme color",
+      "type": "picklist",
+      "options": [
+        { "id": "orange", "label": "Orange", "value": "orange" },
+        { "id": "blue", "label": "Blue", "value": "blue" },
+        { "id": "red", "label": "Red", "value": "red" },
+        { "id": "green", "label": "Green", "value": "green" },
+        { "id": "black", "label": "Black", "value": "black" },
+        { "id": "grey", "label": "Grey", "value": "grey" }
+      ],
+      "default": "blue"
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Group offers by tab",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "ID", "type": "string" },
+        "url": { "id": "label", "label": "Label", "type": "string" }
+      },
+      "default": [
+        { "id": "yearly", "label": "Annual" },
+        { "id": "monthly", "label": "Monthly" }
+      ]
+    },
+    {
+      "id": "freeTrialLink",
+      "label": "Free trial link",
+      "type": "richText",
+      "default": "Start a free trial"
+    },
+    {
+      "id": "gatingHeading",
+      "label": "Gating screen heading",
+      "type": "string",
+      "default": "Select your location and profession"
+    },
+    {
+      "id": "gatingSubheading",
+      "label": "Gating screen subheading",
+      "type": "string",
+      "default": "Please select the state or country where you are licensed/certified."
+    },
+    {
+      "id": "gatingPrefixLabel",
+      "label": "Gating row prefix label",
+      "type": "string",
+      "default": "I'm a"
+    },
+    {
+      "id": "gatingStateLabel",
+      "label": "State dropdown placeholder",
+      "type": "string",
+      "default": "Pick your location"
+    },
+    {
+      "id": "gatingRoleLabel",
+      "label": "Role dropdown placeholder",
+      "type": "string",
+      "default": "Pick your profession"
+    },
+    {
+      "id": "continueButtonText",
+      "label": "Continue button text",
+      "type": "string",
+      "default": "Continue"
+    },
+    {
+      "id": "roleLabels",
+      "label": "Role labels",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "ID (matches offer role value)", "type": "string" },
+        "url": { "id": "label", "label": "Display label", "type": "string" }
+      },
+      "default": [
+        { "id": "vet", "label": "Veterinarian" },
+        { "id": "nurse", "label": "Nurse" },
+        { "id": "reg", "label": "Registered Professional" }
+      ]
+    },
+    {
+      "id": "stateLabels",
+      "label": "State labels",
+      "type": "list",
+      "fields": {
+        "name": { "id": "id", "label": "ID (matches offer state value)", "type": "string" },
+        "url": { "id": "label", "label": "Display label", "type": "string" }
+      },
+      "default": [
+        { "id": "CA", "label": "California" },
+        { "id": "FL", "label": "Florida" },
+        { "id": "CO", "label": "Colorado" }
+      ]
+    }
+  ]
+}

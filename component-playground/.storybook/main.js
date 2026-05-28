@@ -105,6 +105,13 @@ const config = {
 
         config.resolve.extensions = [...(config.resolve.extensions || []), ".ts", ".tsx"];
 
+        // Ensure workspace root node_modules are resolvable for components
+        // that declare external deps (e.g. @mui/material installed at workspace root)
+        config.resolve.modules = [
+            ...(config.resolve.modules || ["node_modules"]),
+            path.resolve(__dirname, "..", "..", "node_modules"),
+        ];
+
         return config;
     }
 };
