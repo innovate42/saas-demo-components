@@ -11,6 +11,9 @@ function formatBillingLabel(interval = 1, unit = "months") {
 }
 
 export function getOfferBillingLabel(offer: ElasticOffer): string {
+  const prices = offer?.data?.attributes?.price__limio
+  if (prices?.[0]?.type === "onetime") return ""
+
   const term = offer?.data?.attributes?.term__limio
   if (!term) return "N/A"
 
