@@ -30,11 +30,11 @@ function formatPrice(offer) {
     const first = priceList[0];
 
     if (first && first.value != null && first.value !== "") {
-        const symbol = first.currency?.symbol || "";
+        const symbol = first.currency?.symbol || "$";
         const numeric = Number(first.value);
         const display = Number.isFinite(numeric)
             ? numeric.toLocaleString(undefined, {
-                  minimumFractionDigits: numeric % 1 === 0 ? 0 : 2,
+                  minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
               })
             : first.value;
@@ -142,9 +142,11 @@ export const CeBrokerOfferCards = () => {
 
     const roleFilteredOffers = useMemo(() => {
         if (!selectedRole) return offers || [];
-        return (offers || []).filter(
-            (o) => o?.data?.attributes?.role__limio === selectedRole
-        );
+        return (offers || []).filter((o) => {
+            const role = o?.data?.attributes?.role;
+            if (Array.isArray(role)) return role.includes(selectedRole);
+            return role === selectedRole;
+        });
     }, [offers, selectedRole]);
 
     const offerGroups = useMemo(
