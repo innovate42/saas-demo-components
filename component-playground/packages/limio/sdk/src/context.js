@@ -12,9 +12,10 @@ export const ComponentContext = React.createContext({});
 export function useCampaign() {
     const context = React.useContext(LimioContext);
     if (context === undefined) {
-        throw new Error("useBasket must be used within a LimioProvider");
+        throw new Error("useCampaign must be used within a LimioProvider");
     }
-    const {campaign, offers, addOns} = dummyContext.shop;
+    const shop = (context && context.shop) || dummyContext.shop;
+    const {campaign, offers, addOns} = shop;
     return {campaign, offers, addOns};
 }
 
@@ -26,12 +27,18 @@ export function useBasket() {
     }
     const shop = (context && context.shop) || dummyContext.shop;
     return {
-        basketItems: shop.basketItems,
-        addToBasket: shop.addToBasket || ((offer) => console.log("[Storybook] addToBasket", offer)),
-        swapOffer: shop.swapOffer || ((itemId, offer) => console.log("[Storybook] swapOffer", itemId, offer)),
-        removeFromBasket: shop.removeFromBasket || (({id} = {}) => console.log("[Storybook] removeFromBasket", id)),
-        updateItemQuantity: shop.updateItemQuantity || ((id, q) => console.log("[Storybook] updateItemQuantity", id, q)),
+        orderItems: shop.basketItems || [],
+        basketItems: shop.basketItems || [],
         basketLoading: Boolean(shop.basketLoading),
+        pageOptions: shop.campaign?.attributes || { pushToCheckout: false },
+        addToBasket: shop.addToBasket || ((offer) => console.log("[Storybook] addToBasket", offer)),
+        addOfferToBasket: shop.addOfferToBasket || (async (data) => console.log("[Storybook] addOfferToBasket", data)),
+        initiateCheckout: shop.initiateCheckout || (async (data) => console.log("[Storybook] initiateCheckout", data)),
+        navigateToCheckout: shop.navigateToCheckout || (async () => console.log("[Storybook] navigateToCheckout")),
+        removeFromBasket: shop.removeFromBasket || (({id} = {}) => console.log("[Storybook] removeFromBasket", id)),
+        swapOffer: shop.swapOffer || ((itemId, offer) => console.log("[Storybook] swapOffer", itemId, offer)),
+        updateItemQuantity: shop.updateItemQuantity || ((id, q) => console.log("[Storybook] updateItemQuantity", id, q)),
+        clearOrderItems: shop.clearOrderItems || (() => console.log("[Storybook] clearOrderItems")),
     };
 }
 
