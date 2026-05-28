@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useCampaign, useBasket } from "@limio/sdk";
-import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket";
 import { useStaticProps } from "./componentStaticProps";
 import xss from "xss";
 import "./index.css";
@@ -140,7 +139,7 @@ export const CeBrokerOfferCards = () => {
 
     const { offers } = useCampaign();
     const basket = useBasket() || {};
-    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = basket;
+    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions, orderItems } = basket;
 
     const [selectedRole, setSelectedRole] = useState("");
     const [selectedState, setSelectedState] = useState("");
@@ -191,16 +190,12 @@ export const CeBrokerOfferCards = () => {
         (showGroupedOffers && offerGroups.length > 0) || showKeywordSearch;
 
     const handleAdd = async (offer) => {
-        try {
-            const checkoutId = getCurrentBasketId && getCurrentBasketId();
-            if (!checkoutId) {
-                await initiateCheckout({ order: { orderItems: [{ offer }] } });
-            } else {
-                await addOfferToBasket({ offer });
-            }
-        } catch (e) {
-            // addOfferToBasket failed — basket is likely completed/closed.
-            // Start a fresh checkout instead.
+        // Use orderItems from the SDK to detect an active in-progress basket.
+        // The SDK clears orderItems when a checkout completes, so returning
+        // customers with a stale basket ID correctly get a fresh checkout.
+        if (orderItems?.length > 0) {
+            await addOfferToBasket({ offer });
+        } else {
             await initiateCheckout({ order: { orderItems: [{ offer }] } });
         }
         if (pageOptions?.pushToCheckout && navigateToCheckout) {
