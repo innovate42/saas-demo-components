@@ -40,6 +40,16 @@ export const Default = {
             { id: "pharmacist", label: "Pharmacist" },
             { id: "physician", label: "Physician" },
         ],
+        showStateFilter: true,
+        stateFilterLabel: "in",
+        stateFilterAllLabel: "All states",
+        stateLabels: [
+            { id: "AK", label: "Alaska" },
+            { id: "CA", label: "California" },
+            { id: "FL", label: "Florida" },
+            { id: "NY", label: "New York" },
+            { id: "TX", label: "Texas" },
+        ],
         groupLabels: [
             { id: "monthly", label: "One Time Courses" },
             { id: "yearly", label: "Subscriptions" },

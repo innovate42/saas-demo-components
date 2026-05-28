@@ -103,6 +103,63 @@
       ]
     },
     {
+      "id": "showStateFilter",
+      "label": "Show state filter",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "stateFilterLabel",
+      "label": "State filter label",
+      "type": "string",
+      "default": "in"
+    },
+    {
+      "id": "stateFilterAllLabel",
+      "label": "State filter 'all' option label",
+      "type": "string",
+      "default": "All states"
+    },
+    {
+      "id": "stateLabels",
+      "label": "State options",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        }
+      },
+      "default": [
+        {
+          "id": "AK",
+          "label": "Alaska"
+        },
+        {
+          "id": "CA",
+          "label": "California"
+        },
+        {
+          "id": "FL",
+          "label": "Florida"
+        },
+        {
+          "id": "NY",
+          "label": "New York"
+        },
+        {
+          "id": "TX",
+          "label": "Texas"
+        }
+      ]
+    },
+    {
       "id": "groupLabels",
       "label": "Group options",
       "type": "list",

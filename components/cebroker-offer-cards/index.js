@@ -127,6 +127,10 @@ export const CeBrokerOfferCards = () => {
         roleFilterLabel = "I'm a",
         roleFilterAllLabel = "All roles",
         roleLabels = [],
+        showStateFilter = true,
+        stateFilterLabel = "in",
+        stateFilterAllLabel = "All states",
+        stateLabels = [],
         groupLabels = [],
         showGroupedOffers = true,
         showKeywordSearch = true,
@@ -139,21 +143,27 @@ export const CeBrokerOfferCards = () => {
     const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = basket;
 
     const [selectedRole, setSelectedRole] = useState("");
+    const [selectedState, setSelectedState] = useState("");
     const [selectedGroup, setSelectedGroup] = useState();
     const [keyword, setKeyword] = useState("");
 
-    const roleFilteredOffers = useMemo(() => {
-        if (!selectedRole) return offers || [];
+    const matchesAttribute = (value, selected) => {
+        if (Array.isArray(value)) return value.includes(selected);
+        return value === selected;
+    };
+
+    const topFilteredOffers = useMemo(() => {
         return (offers || []).filter((o) => {
-            const role = o?.data?.attributes?.role;
-            if (Array.isArray(role)) return role.includes(selectedRole);
-            return role === selectedRole;
+            const attrs = o?.data?.attributes || {};
+            if (selectedRole && !matchesAttribute(attrs.role, selectedRole)) return false;
+            if (selectedState && !matchesAttribute(attrs.state, selectedState)) return false;
+            return true;
         });
-    }, [offers, selectedRole]);
+    }, [offers, selectedRole, selectedState]);
 
     const offerGroups = useMemo(
-        () => groupOffers(roleFilteredOffers, groupLabels),
-        [roleFilteredOffers, groupLabels]
+        () => groupOffers(topFilteredOffers, groupLabels),
+        [topFilteredOffers, groupLabels]
     );
 
     useEffect(() => {
@@ -165,7 +175,7 @@ export const CeBrokerOfferCards = () => {
 
     const groupFilteredOffers = showGroupedOffers
         ? offerGroups.find((g) => g.id === selectedGroup)?.offers || []
-        : roleFilteredOffers;
+        : topFilteredOffers;
 
     const visibleOffers = useMemo(() => {
         const q = keyword.trim().toLowerCase();
@@ -208,24 +218,55 @@ export const CeBrokerOfferCards = () => {
                     {subheading && <p className="cb-subheading">{subheading}</p>}
                 </header>
 
-                {showRoleFilter && roleLabels.length > 0 && (
-                    <div className="cb-role-bar">
-                        <label className="cb-role-label" htmlFor={`${componentId}-role`}>
-                            {roleFilterLabel}
-                        </label>
-                        <select
-                            id={`${componentId}-role`}
-                            className="cb-role-select"
-                            value={selectedRole}
-                            onChange={(e) => setSelectedRole(e.target.value)}
-                        >
-                            <option value="">{roleFilterAllLabel}</option>
-                            {roleLabels.map((r) => (
-                                <option key={r.id} value={r.id}>
-                                    {r.label}
-                                </option>
-                            ))}
-                        </select>
+                {((showRoleFilter && roleLabels.length > 0) ||
+                    (showStateFilter && stateLabels.length > 0)) && (
+                    <div className="cb-top-bar">
+                        {showRoleFilter && roleLabels.length > 0 && (
+                            <>
+                                <label
+                                    className="cb-top-bar-label"
+                                    htmlFor={`${componentId}-role`}
+                                >
+                                    {roleFilterLabel}
+                                </label>
+                                <select
+                                    id={`${componentId}-role`}
+                                    className="cb-top-bar-select"
+                                    value={selectedRole}
+                                    onChange={(e) => setSelectedRole(e.target.value)}
+                                >
+                                    <option value="">{roleFilterAllLabel}</option>
+                                    {roleLabels.map((r) => (
+                                        <option key={r.id} value={r.id}>
+                                            {r.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </>
+                        )}
+                        {showStateFilter && stateLabels.length > 0 && (
+                            <>
+                                <label
+                                    className="cb-top-bar-label"
+                                    htmlFor={`${componentId}-state`}
+                                >
+                                    {stateFilterLabel}
+                                </label>
+                                <select
+                                    id={`${componentId}-state`}
+                                    className="cb-top-bar-select"
+                                    value={selectedState}
+                                    onChange={(e) => setSelectedState(e.target.value)}
+                                >
+                                    <option value="">{stateFilterAllLabel}</option>
+                                    {stateLabels.map((s) => (
+                                        <option key={s.id} value={s.id}>
+                                            {s.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </>
+                        )}
                     </div>
                 )}
 

@@ -37,7 +37,7 @@
     margin: 0;
 }
 
-.cebroker-offer-cards .cb-role-bar {
+.cebroker-offer-cards .cb-top-bar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,12 +46,12 @@
     flex-wrap: wrap;
 }
 
-.cebroker-offer-cards .cb-role-label {
+.cebroker-offer-cards .cb-top-bar-label {
     font-size: 15px;
     color: #5A6175;
 }
 
-.cebroker-offer-cards .cb-role-select {
+.cebroker-offer-cards .cb-top-bar-select {
     appearance: none;
     -webkit-appearance: none;
     background-color: #FFFFFF;
@@ -67,15 +67,15 @@
     font-weight: 500;
     color: #0E1F33;
     cursor: pointer;
-    min-width: 200px;
+    min-width: 160px;
     transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.cebroker-offer-cards .cb-role-select:hover {
+.cebroker-offer-cards .cb-top-bar-select:hover {
     border-color: #9CA3AF;
 }
 
-.cebroker-offer-cards .cb-role-select:focus {
+.cebroker-offer-cards .cb-top-bar-select:focus {
     outline: none;
     border-color: var(--cb-primary);
     box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.15);
