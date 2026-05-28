@@ -1,0 +1,360 @@
+.cebroker-offer-cards {
+    --cb-primary: #0B5394;
+    font-family: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    color: #0E1F33;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #F7F8FA;
+}
+
+.cebroker-offer-cards * {
+    box-sizing: border-box;
+}
+
+.cebroker-offer-cards .cb-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 24px;
+}
+
+.cebroker-offer-cards .cb-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.cebroker-offer-cards .cb-heading {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #0E1F33;
+    margin: 0 0 8px;
+    line-height: 1.2;
+}
+
+.cebroker-offer-cards .cb-subheading {
+    font-size: 17px;
+    color: #5A6175;
+    margin: 0;
+}
+
+.cebroker-offer-cards .cb-role-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 32px;
+    flex-wrap: wrap;
+}
+
+.cebroker-offer-cards .cb-role-label {
+    font-size: 15px;
+    color: #5A6175;
+}
+
+.cebroker-offer-cards .cb-role-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #FFFFFF;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%236B7280' d='M6 7.5a.75.75 0 0 1-.53-.22l-5-5A.75.75 0 1 1 1.53 1.22L6 5.69l4.47-4.47a.75.75 0 1 1 1.06 1.06l-5 5A.75.75 0 0 1 6 7.5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 8px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    padding: 8px 36px 8px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E1F33;
+    cursor: pointer;
+    min-width: 200px;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.cebroker-offer-cards .cb-role-select:hover {
+    border-color: #9CA3AF;
+}
+
+.cebroker-offer-cards .cb-role-select:focus {
+    outline: none;
+    border-color: var(--cb-primary);
+    box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.15);
+}
+
+.cebroker-offer-cards .cb-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+@media (max-width: 880px) {
+    .cebroker-offer-cards .cb-layout {
+        flex-direction: column;
+    }
+}
+
+.cebroker-offer-cards .cb-filter {
+    width: 260px;
+    flex-shrink: 0;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 24px;
+}
+
+@media (max-width: 880px) {
+    .cebroker-offer-cards .cb-filter {
+        width: 100%;
+        position: static;
+    }
+}
+
+.cebroker-offer-cards .cb-filter-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6B7280;
+    margin-bottom: 12px;
+}
+
+.cebroker-offer-cards .cb-filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cebroker-offer-cards .cb-filter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.cebroker-offer-cards .cb-filter-item:hover {
+    background: rgba(11, 83, 148, 0.06);
+    color: var(--cb-primary);
+}
+
+.cebroker-offer-cards .cb-filter-item.is-selected {
+    background: rgba(11, 83, 148, 0.08);
+    border-left-color: var(--cb-primary);
+    color: var(--cb-primary);
+    font-weight: 600;
+}
+
+.cebroker-offer-cards .cb-filter-count {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+.cebroker-offer-cards .cb-filter-item.is-selected .cb-filter-count {
+    color: var(--cb-primary);
+}
+
+.cebroker-offer-cards .cb-results {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cebroker-offer-cards .cb-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.cebroker-offer-cards .cb-card:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 6px 16px rgba(16, 24, 40, 0.06);
+}
+
+@media (max-width: 720px) {
+    .cebroker-offer-cards .cb-card {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+.cebroker-offer-cards .cb-card-image {
+    width: 140px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #F1F2F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cebroker-offer-cards .cb-card-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 720px) {
+    .cebroker-offer-cards .cb-card-image {
+        width: 100%;
+        max-height: 180px;
+    }
+}
+
+.cebroker-offer-cards .cb-card-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cebroker-offer-cards .cb-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0E1F33;
+    margin: 0 0 6px;
+    line-height: 1.3;
+}
+
+.cebroker-offer-cards .cb-subtle {
+    font-size: 14px;
+    color: #5A6175;
+    line-height: 1.5;
+}
+
+.cebroker-offer-cards .cb-subtle p {
+    margin: 0;
+}
+
+.cebroker-offer-cards .cb-card-side {
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+    border-left: 1px solid #F1F2F4;
+    padding-left: 20px;
+}
+
+@media (max-width: 720px) {
+    .cebroker-offer-cards .cb-card-side {
+        width: 100%;
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid #F1F2F4;
+        padding-top: 16px;
+    }
+}
+
+.cebroker-offer-cards .cb-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0E1F33;
+    line-height: 1.1;
+    text-align: right;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 720px) {
+    .cebroker-offer-cards .cb-price {
+        text-align: left;
+    }
+}
+
+.cebroker-offer-cards .cb-price p {
+    margin: 0;
+}
+
+.cebroker-offer-cards .cb-price strong {
+    font-weight: 700;
+}
+
+.cebroker-offer-cards .cb-cta {
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--cb-primary);
+    transition: filter 150ms ease, box-shadow 150ms ease;
+}
+
+.cebroker-offer-cards .cb-cta:hover {
+    filter: brightness(0.95);
+    box-shadow: 0 4px 10px rgba(16, 24, 40, 0.1);
+}
+
+.cebroker-offer-cards .cb-cta-secondary {
+    width: 100%;
+    padding: 8px 16px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    color: #0E1F33;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.cebroker-offer-cards .cb-cta-secondary:hover {
+    background: #F9FAFB;
+    border-color: #9CA3AF;
+}
+
+.cebroker-offer-cards .cb-free-trial {
+    font-size: 12px;
+    color: #9CA3AF;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.cebroker-offer-cards .cb-free-trial a {
+    color: var(--cb-primary);
+    text-decoration: underline;
+}
+
+.cebroker-offer-cards .cb-empty {
+    padding: 32px;
+    border: 1px dashed #E5E7EB;
+    border-radius: 12px;
+    color: #6B7280;
+    text-align: center;
+}
