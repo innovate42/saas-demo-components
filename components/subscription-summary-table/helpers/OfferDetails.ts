@@ -31,6 +31,11 @@ export function mapAddOnToRow(addOn: AddOn, formatPrice: FormatPrice): Subscript
   }
 }
 
+export function isOneTimePriceOffer(subscriptionOffer: LimioObject<SubscriptionOffer>): boolean {
+  const prices = subscriptionOffer?.data?.offer?.data?.attributes?.price__limio
+  return prices?.[0]?.type === "onetime"
+}
+
 type WithDateRange = { data: { start: string; end?: string } }
 
 export function checkActiveOffersAndAddOns<T extends WithDateRange>(items: T[] = []): T[] {

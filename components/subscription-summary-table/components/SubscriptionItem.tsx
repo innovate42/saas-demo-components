@@ -15,7 +15,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { checkActiveOffersAndAddOns } from "../helpers/OfferDetails";
+import { checkActiveOffersAndAddOns, isOneTimePriceOffer } from "../helpers/OfferDetails";
 import { CancellationNoticeModal } from "./CancellationNoticeModal";
 import { useButtonActions } from "../helpers/ButtonActions";
 import type { Subscription } from "@limio/types";
@@ -69,6 +69,7 @@ export function SubscriptionItem({
 
   const currentOffers = checkActiveOffersAndAddOns(subscription.offers);
   const currentAddOns = checkActiveOffersAndAddOns(subscription.addOns);
+  const isOneTimeSubscription = currentOffers.length > 0 && currentOffers.every(isOneTimePriceOffer);
 
   return (
     <Card variant="outlined" sx={{ borderRadius: 1, p: 0.75, width: "100%" }}>
@@ -155,7 +156,7 @@ export function SubscriptionItem({
         justifyContent="flex-end"
         sx={{ flexWrap: "wrap", px: 1.5, py: 1 }}
       >
-        {showUpdateButton && (
+        {showUpdateButton && !isOneTimeSubscription && (
           <Button
             variant="contained"
             size="small"
@@ -167,7 +168,7 @@ export function SubscriptionItem({
             {updateButtonText}
           </Button>
         )}
-        {showEditAddOnsButton && (
+        {showEditAddOnsButton && !isOneTimeSubscription && (
           <Button
             variant="contained"
             size="small"
@@ -179,7 +180,7 @@ export function SubscriptionItem({
             {editAddOnsButtonText}
           </Button>
         )}
-        {showCancelButton && (
+        {showCancelButton && !isOneTimeSubscription && (
           <>
             <Button
               variant="outlined"
