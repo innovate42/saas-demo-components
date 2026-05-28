@@ -239,7 +239,11 @@ export const OffersPropelus = () => {
                         <Box
                             sx={{
                                 backgroundColor: themeSet.gatingBg,
-                                py: { xs: 8, md: 12 },
+                                minHeight: "calc(100vh - 60px)",
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
                                 px: { xs: 3, md: 4 },
                                 textAlign: "center",
                             }}
@@ -399,15 +403,11 @@ export const OffersPropelus = () => {
                                         fontFamily: "Inter, sans-serif",
                                         lineHeight: 1.6,
                                         m: 0,
-<<<<<<< HEAD
                                         mb: 2,
-=======
->>>>>>> origin/saas-dev
                                     }}
                                 >
                                     {subheading}
                                 </Box>
-<<<<<<< HEAD
                                 <Box
                                     component="button"
                                     onClick={handleReset}
@@ -426,8 +426,6 @@ export const OffersPropelus = () => {
                                 >
                                     Choose a different state or profession
                                 </Box>
-=======
->>>>>>> origin/saas-dev
                             </Box>
 
                             {showGroupedOffers ? (
