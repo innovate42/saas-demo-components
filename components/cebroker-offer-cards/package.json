@@ -136,6 +136,12 @@
       "default": true
     },
     {
+      "id": "showKeywordSearch",
+      "label": "Show keyword search",
+      "type": "boolean",
+      "default": true
+    },
+    {
       "id": "showFreeTrialLink",
       "label": "Show free trial link",
       "type": "boolean",

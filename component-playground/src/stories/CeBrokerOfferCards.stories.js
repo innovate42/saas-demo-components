@@ -29,6 +29,7 @@ export const Default = {
         primaryColor: "#0B5394",
         showImage: true,
         showGroupedOffers: true,
+        showKeywordSearch: true,
         showFreeTrialLink: true,
         freeTrialLink: "Start a free trial",
         showRoleFilter: true,

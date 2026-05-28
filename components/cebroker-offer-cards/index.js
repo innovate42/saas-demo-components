@@ -129,6 +129,7 @@ export const CeBrokerOfferCards = () => {
         roleLabels = [],
         groupLabels = [],
         showGroupedOffers = true,
+        showKeywordSearch = true,
         showFreeTrialLink = true,
         freeTrialLink,
     } = props;
@@ -139,6 +140,7 @@ export const CeBrokerOfferCards = () => {
 
     const [selectedRole, setSelectedRole] = useState("");
     const [selectedGroup, setSelectedGroup] = useState();
+    const [keyword, setKeyword] = useState("");
 
     const roleFilteredOffers = useMemo(() => {
         if (!selectedRole) return offers || [];
@@ -161,9 +163,22 @@ export const CeBrokerOfferCards = () => {
         }
     }, [offerGroups, selectedGroup]);
 
-    const visibleOffers = showGroupedOffers
+    const groupFilteredOffers = showGroupedOffers
         ? offerGroups.find((g) => g.id === selectedGroup)?.offers || []
         : roleFilteredOffers;
+
+    const visibleOffers = useMemo(() => {
+        const q = keyword.trim().toLowerCase();
+        if (!q) return groupFilteredOffers;
+        return groupFilteredOffers.filter((o) =>
+            (o?.data?.attributes?.display_name__limio || "")
+                .toLowerCase()
+                .includes(q)
+        );
+    }, [groupFilteredOffers, keyword]);
+
+    const showSidebar =
+        (showGroupedOffers && offerGroups.length > 0) || showKeywordSearch;
 
     const handleAdd = async (offer) => {
         try {
@@ -215,27 +230,58 @@ export const CeBrokerOfferCards = () => {
                 )}
 
                 <div className="cb-layout">
-                    {showGroupedOffers && offerGroups.length > 0 && (
+                    {showSidebar && (
                         <aside className="cb-filter">
-                            <div className="cb-filter-label">{filterLabel}</div>
-                            <div className="cb-filter-list">
-                                {offerGroups.map((group) => {
-                                    const selected = selectedGroup === group.id;
-                                    return (
-                                        <button
-                                            key={group.id}
-                                            type="button"
-                                            className={`cb-filter-item ${selected ? "is-selected" : ""}`}
-                                            onClick={() => setSelectedGroup(group.id)}
+                            {showGroupedOffers && offerGroups.length > 0 && (
+                                <div className="cb-filter-section">
+                                    <div className="cb-filter-label">{filterLabel}</div>
+                                    <div className="cb-filter-list">
+                                        {offerGroups.map((group) => {
+                                            const selected = selectedGroup === group.id;
+                                            return (
+                                                <button
+                                                    key={group.id}
+                                                    type="button"
+                                                    className={`cb-filter-item ${selected ? "is-selected" : ""}`}
+                                                    onClick={() => setSelectedGroup(group.id)}
+                                                >
+                                                    <span>{group.label}</span>
+                                                    <span className="cb-filter-count">
+                                                        {group.offers.length}
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
+                            {showKeywordSearch && (
+                                <div className="cb-filter-section cb-filter-section--search">
+                                    <div className="cb-filter-label">Keyword Search</div>
+                                    <div className="cb-search">
+                                        <svg
+                                            className="cb-search-icon"
+                                            viewBox="0 0 20 20"
+                                            width="16"
+                                            height="16"
+                                            aria-hidden="true"
                                         >
-                                            <span>{group.label}</span>
-                                            <span className="cb-filter-count">
-                                                {group.offers.length}
-                                            </span>
-                                        </button>
-                                    );
-                                })}
-                            </div>
+                                            <path
+                                                fill="currentColor"
+                                                d="M9 3a6 6 0 1 1-3.78 10.67l-3.6 3.6a1 1 0 1 1-1.41-1.41l3.6-3.6A6 6 0 0 1 9 3Zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"
+                                            />
+                                        </svg>
+                                        <input
+                                            type="search"
+                                            className="cb-search-input"
+                                            value={keyword}
+                                            onChange={(e) => setKeyword(e.target.value)}
+                                            aria-label="Keyword search"
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </aside>
                     )}
 

@@ -112,6 +112,12 @@
     }
 }
 
+.cebroker-offer-cards .cb-filter-section + .cb-filter-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #EEF0F3;
+}
+
 .cebroker-offer-cards .cb-filter-label {
     font-size: 11px;
     font-weight: 700;
@@ -119,6 +125,48 @@
     text-transform: uppercase;
     color: #6B7280;
     margin-bottom: 12px;
+}
+
+.cebroker-offer-cards .cb-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cebroker-offer-cards .cb-search-icon {
+    position: absolute;
+    left: 10px;
+    color: #9CA3AF;
+    pointer-events: none;
+}
+
+.cebroker-offer-cards .cb-search-input {
+    width: 100%;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    background: #FFFFFF;
+    font-family: inherit;
+    font-size: 14px;
+    color: #0E1F33;
+    padding: 8px 12px 8px 32px;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.cebroker-offer-cards .cb-search-input:hover {
+    border-color: #9CA3AF;
+}
+
+.cebroker-offer-cards .cb-search-input:focus {
+    outline: none;
+    border-color: var(--cb-primary);
+    box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.12);
+}
+
+.cebroker-offer-cards .cb-search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .cebroker-offer-cards .cb-filter-list {
