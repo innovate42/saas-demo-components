@@ -399,11 +399,15 @@ export const OffersPropelus = () => {
                                         fontFamily: "Inter, sans-serif",
                                         lineHeight: 1.6,
                                         m: 0,
+<<<<<<< HEAD
                                         mb: 2,
+=======
+>>>>>>> origin/saas-dev
                                     }}
                                 >
                                     {subheading}
                                 </Box>
+<<<<<<< HEAD
                                 <Box
                                     component="button"
                                     onClick={handleReset}
@@ -422,6 +426,8 @@ export const OffersPropelus = () => {
                                 >
                                     Choose a different state or profession
                                 </Box>
+=======
+>>>>>>> origin/saas-dev
                             </Box>
 
                             {showGroupedOffers ? (
