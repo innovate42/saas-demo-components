@@ -1,22 +1,17 @@
 import React from "react"
 import { Button } from "@mui/material"
 import { useBasket } from "@limio/sdk"
-import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket"
 
 export const AddToBasketButton = ({ offer, primaryColor }) => {
-    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = useBasket()
+    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions, orderItems } = useBasket()
 
     async function addSelectionToBasket() {
-        try {
-            const checkoutId = getCurrentBasketId()
-            if (!checkoutId) {
-                await initiateCheckout({ order: { orderItems: [{ offer }] } })
-            } else {
-                await addOfferToBasket({ offer })
-            }
-        } catch (e) {
-            // addOfferToBasket failed — basket is likely completed/closed.
-            // Start a fresh checkout instead.
+        // orderItems is populated by the SDK for the current active basket only.
+        // It's empty when there's no basket or the previous checkout completed,
+        // so returning customers correctly get a fresh checkout.
+        if (orderItems?.length > 0) {
+            await addOfferToBasket({ offer })
+        } else {
             await initiateCheckout({ order: { orderItems: [{ offer }] } })
         }
         if (pageOptions?.pushToCheckout) {
