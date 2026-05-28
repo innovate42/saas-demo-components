@@ -106,7 +106,7 @@ export function SubscriptionItem({
               size="small"
               className={`status-chip ${status.toLowerCase() === "active" ? "status-chip-active" : "status-chip-cancelled"}`}
             />
-            {termEndDate && (
+            {termEndDate && !isOneTimeSubscription && (
               <Chip
                 icon={
                   <CalendarTodayIcon
