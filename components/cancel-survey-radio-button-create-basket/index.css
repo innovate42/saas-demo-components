@@ -1,5 +1,15 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+
 :root {
-  --color-black: #121212;
+  --font-family: 'Inter', 'system-ui', 'Helvetica Neue', Arial, sans-serif;
+  --color-heading: #111827;
+  --color-body: #6B7280;
+  --color-text: #374151;
+  --color-divider: #E5E7EB;
 }
 
 em {
@@ -10,6 +20,9 @@ em {
   padding: 3rem 1rem;
   margin: 0 auto;
   max-width: 900px;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .contentWrapper {
@@ -22,42 +35,49 @@ em {
 }
 
 .contentWrapperRight {
-  padding-left: 1rem;
+  padding-left: 2rem;
 }
 
+/* h1 — matches offer-cards-material main heading */
 .heading {
-  padding-bottom: 1.5rem;
-  font-size: 1.8rem;
+  margin: 0 0 1.25rem 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--color-heading);
+  font-family: var(--font-family);
+  text-align: left;
 }
 
-.heading,
+/* subtitle — matches offer-cards-material subheading */
 .paragraph {
-  margin: 0 auto;
-  color: var(--color-black);
-  text-align: center;
-}
-
-.paragraph {
-  padding-bottom: 2.5rem;
-  font-size: 1.2rem;
-  line-height: 1.39;
+  margin: 0 0 2.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--color-body);
+  line-height: 1.6;
+  font-family: var(--font-family);
+  text-align: left;
 }
 
 .reasonList {
   padding-bottom: 1.1rem;
 }
 
+/* h2 — section heading */
 .reasonListHeading {
-  margin: 0;
-  padding-bottom: 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.39;
-  color: var(--color-black);
+  margin: 0 0 1.25rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-heading);
+  font-family: var(--font-family);
 }
 
 .reasonListItem {
   display: flex;
-  padding-bottom: 1rem;
+  margin-bottom: 0.875rem;
   align-items: center;
 }
 
@@ -65,10 +85,13 @@ em {
   display: block;
   width: 100%;
   margin: 0;
-  padding-left: 1rem;
-  font-size: 1rem;
-  color: var(--color-black);
+  padding-left: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-text);
+  font-family: var(--font-family);
   cursor: pointer;
+  line-height: 1.5;
 }
 
 .reasonImage {
@@ -76,69 +99,60 @@ em {
   margin: 0;
   padding: 0;
   max-width: 350px;
+  border-radius: 8px;
 }
 
-.textboxLabel {
-  padding-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.textbox,
 .textboxLabel {
   display: block;
-  color: var(--color-black);
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-heading);
+  font-family: var(--font-family);
+}
+
+.textbox {
+  display: block;
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  color: var(--color-text);
 }
 
 .divider {
-  margin: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-top: 1px solid #d7d7d7 !important;
+  margin: 1rem 0;
   border: none;
+  border-top: 1px solid var(--color-divider);
 }
 
 .list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .listItem {
   display: block;
-  padding-right: 1rem;
 }
 
-.button {
-  display: block;
-  width: 100%;
-}
-
-@media (min-width: 30rem) {
+@media (max-width: 640px) {
   .heading {
-    font-size: 2.5rem;
+    font-size: 1.75rem;
   }
 
-  .heading,
-  .paragraph {
-    margin: 0;
-    text-align: left;
+  .contentWrapper {
+    flex-wrap: wrap;
   }
-}
 
-@media (max-width: 30rem) {
+  .contentWrapperRight {
+    display: none;
+  }
+
   .list {
     flex-direction: column;
   }
 
   .listItem {
     width: 100%;
-    padding-bottom: 1rem;
-    padding-right: 0;
-  }
-}
-
-@media (max-width: 50rem) {
-  .hide {
-    display: none;
   }
 }
