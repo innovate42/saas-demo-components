@@ -193,16 +193,18 @@ export const CeBrokerOfferCards = () => {
     const handleAdd = async (offer) => {
         try {
             const checkoutId = getCurrentBasketId && getCurrentBasketId();
-            if (!checkoutId && initiateCheckout) {
+            if (!checkoutId) {
                 await initiateCheckout({ order: { orderItems: [{ offer }] } });
-            } else if (addOfferToBasket) {
+            } else {
                 await addOfferToBasket({ offer });
             }
-            if (pageOptions?.pushToCheckout && navigateToCheckout) {
-                await navigateToCheckout();
-            }
         } catch (e) {
-            console.warn("[cebroker-offer-cards] add to basket failed", e);
+            // addOfferToBasket failed — basket is likely completed/closed.
+            // Start a fresh checkout instead.
+            await initiateCheckout({ order: { orderItems: [{ offer }] } });
+        }
+        if (pageOptions?.pushToCheckout && navigateToCheckout) {
+            await navigateToCheckout();
         }
     };
 
