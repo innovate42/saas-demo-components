@@ -140,7 +140,7 @@ export const CeBrokerOfferCards = () => {
 
     const { offers } = useCampaign();
     const basket = useBasket() || {};
-    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = basket;
+    const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions, orderItems } = basket;
 
     const [selectedRole, setSelectedRole] = useState("");
     const [selectedState, setSelectedState] = useState("");
@@ -193,10 +193,14 @@ export const CeBrokerOfferCards = () => {
     const handleAdd = async (offer) => {
         try {
             const checkoutId = getCurrentBasketId && getCurrentBasketId();
-            if (!checkoutId && initiateCheckout) {
-                await initiateCheckout({ order: { orderItems: [{ offer }] } });
-            } else if (addOfferToBasket) {
+            // Only reuse the existing basket if it's still active (has items in the
+            // current session). A basket ID with no active orderItems means the
+            // previous checkout was completed/closed — start a fresh one instead.
+            const hasActiveBasket = checkoutId && orderItems && orderItems.length > 0;
+            if (hasActiveBasket && addOfferToBasket) {
                 await addOfferToBasket({ offer });
+            } else if (initiateCheckout) {
+                await initiateCheckout({ order: { orderItems: [{ offer }] } });
             }
             if (pageOptions?.pushToCheckout && navigateToCheckout) {
                 await navigateToCheckout();
