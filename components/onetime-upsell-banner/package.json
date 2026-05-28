@@ -1,0 +1,69 @@
+{
+  "name": "@limio/onetime-upsell-banner",
+  "version": "1.0.0",
+  "description": "Horizontal upsell banner shown to customers whose subscriptions are all one-time purchases, nudging them toward a recurring subscription.",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xss": "^1.0.8",
+    "@mui/material": "5.17.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/inter": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headingTemplate",
+      "label": "Heading (use {count} for the purchase count)",
+      "type": "string",
+      "default": "You have {count} courses so far. You could save money by buying a subscription."
+    },
+    {
+      "id": "subheading__limio_richtext",
+      "label": "Subheading",
+      "type": "richText",
+      "default": ""
+    },
+    {
+      "id": "ctaLabel",
+      "label": "CTA label",
+      "type": "string",
+      "default": "Learn more"
+    },
+    {
+      "id": "learnMoreUrl",
+      "label": "Learn more URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "themeColor",
+      "label": "Theme color",
+      "type": "picklist",
+      "options": [
+        { "id": "orange", "label": "Orange", "value": "orange" },
+        { "id": "blue", "label": "Blue", "value": "blue" },
+        { "id": "red", "label": "Red", "value": "red" },
+        { "id": "green", "label": "Green", "value": "green" },
+        { "id": "black", "label": "Black", "value": "black" },
+        { "id": "grey", "label": "Grey", "value": "grey" }
+      ],
+      "default": "orange"
+    },
+    {
+      "id": "minCourses",
+      "label": "Minimum one-time purchases before banner shows",
+      "type": "number",
+      "default": 1
+    }
+  ]
+}

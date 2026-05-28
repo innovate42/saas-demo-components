@@ -1,0 +1,12 @@
+/* Fallback / non-MUI styling. Most layout lives in the MUI sx props in index.js. */
+.oub-banner {
+    font-family: 'Inter', 'system-ui', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.oub-banner .oub-subheading p {
+    margin: 0;
+}
+
+.oub-banner .oub-subheading p + p {
+    margin-top: 4px;
+}
