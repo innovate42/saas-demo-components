@@ -13,10 +13,10 @@
   "dependencies": {
     "ramda": "^0.28.0",
     "xss": "^1.0.8",
-    "@mui/material": "5.16.7",
+    "@mui/material": "5.17.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "5.16.7",
+    "@mui/icons-material": "5.17.1",
     "@fontsource/inter": "^4.5.0"
   },
   "peerDependencies": {
@@ -63,8 +63,7 @@
         { "id": "red", "label": "Red", "value": "red" },
         { "id": "green", "label": "Green", "value": "green" },
         { "id": "black", "label": "Black", "value": "black" },
-        { "id": "grey", "label": "Grey", "value": "grey" },
-        { "id": "jazzHR", "label": "JazzHR", "value": "jazzHR" }
+        { "id": "grey", "label": "Grey", "value": "grey" }
       ],
       "default": "orange"
     },
@@ -113,12 +112,6 @@
       "label": "Free trial link",
       "type": "richText",
       "default": "Start a free trial"
-    },
-    {
-      "id": "initiateCheckoutPartner",
-      "label": "Initiate Checkout as Partner Organisation",
-      "type": "boolean",
-      "default": false
     }
     
   ]

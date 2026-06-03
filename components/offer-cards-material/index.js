@@ -25,82 +25,59 @@ type Props = {
 
 // Define theme styles for each color
 const themeStyles = {
-    jazzHR: {
-        primary: "#8F3DB8",
-        background: "#F1D9FB",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#F1D9FB",
-        pillText: "#8F3DB8",
-        bestValuePillBackground: "#8F3DB8",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#B477D2",
-        text: "#8F3DB8"
-    },
     orange: {
-        primary: "#E57C23",
-        background: "#FFF7ED",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#FFF7ED",
-        pillText: "#E57C23",
-        bestValuePillBackground: "#E57C23",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#FDBA74",
-        text: "#1F1F1F"
+        primary: "#E16A00",
+        background: "#FEF1E9",            // Best value card
+        cardBackground: "#FFFBF7",        // Non-best-value card
+        pillBackground: "#FBE9D8",
+        pillText: "#B84C00",
+        borderColor: "#E16A00",
+        text: "#6B3E26"
     },
     blue: {
-        primary: "#2563EB",
-        background: "#EFF6FF",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#EFF6FF",
-        pillText: "#2563EB",
-        bestValuePillBackground: "#2563EB",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#93C5FD",
-        text: "#1F1F1F"
+        primary: "#005C99",
+        background: "#EAF3FB",
+        cardBackground: "#F4F9FD",
+        pillBackground: "#D0E7F8",
+        pillText: "#004A80",
+        borderColor: "#0073C2",
+        text: "#003355"
     },
     red: {
-        primary: "#DC2626",
-        background: "#FEF2F2",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#FEF2F2",
-        pillText: "#DC2626",
-        bestValuePillBackground: "#DC2626",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#FCA5A5",
-        text: "#1F1F1F"
+        primary: "#C62828",
+        background: "#FDECEA",
+        cardBackground: "#FEF6F6",
+        pillBackground: "#F9D3D3",
+        pillText: "#8B0000",
+        borderColor: "#B71C1C",
+        text: "#5C1C1C"
     },
     green: {
-        primary: "#059669",
-        background: "#ECFDF5",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#ECFDF5",
-        pillText: "#059669",
-        bestValuePillBackground: "#059669",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#6EE7B7",
-        text: "#1F1F1F"
+        primary: "#2E7D32",
+        background: "#E7F5EC",
+        cardBackground: "#F3FAF5",
+        pillBackground: "#D2EBDD",
+        pillText: "#1B5E20",
+        borderColor: "#388E3C",
+        text: "#1B3D1B"
     },
     black: {
-        primary: "#18181B",
-        background: "#F4F4F5",
-        cardBackground: "#FFFFFF",
-        pillBackground: "#F4F4F5",
-        pillText: "#18181B",
-        bestValuePillBackground: "#18181B",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#A1A1AA",
-        text: "#1F1F1F"
+        primary: "#333333",
+        background: "#F6F6F6",
+        cardBackground: "#FDFDFD",
+        pillBackground: "#DCDCDC",
+        pillText: "#111111",
+        borderColor: "#222222",
+        text: "#111111"
     },
     grey: {
-        primary: "#6B7280",
-        background: "#F9FAFB",
+        primary: "#6E6E6E",
+        background: "#FAFAFA",
         cardBackground: "#FFFFFF",
-        pillBackground: "#F9FAFB",
-        pillText: "#6B7280",
-        bestValuePillBackground: "#6B7280",
-        bestValuePillText: "#FFFFFF",
-        borderColor: "#D1D5DB",
-        text: "#1F1F1F"
+        pillBackground: "#ECECEC",
+        pillText: "#5C5C5C",
+        borderColor: "#BBBBBB",
+        text: "#3C3C3C"
     }
 };
 
@@ -319,8 +296,8 @@ export const OfferCards = ({
                                             freeTrialLink={freeTrialLink}
                                             bestValueColor={themeSet.primary}
                                             backgroundColor={themeSet.background}
-                                            pillColor={themeSet.bestValuePillBackground}
-                                            pillTextColor={themeSet.bestValuePillText}
+                                            pillColor={themeSet.pillBackground}
+                                            pillTextColor={themeSet.pillText}
                                             borderColor={themeSet.borderColor}
                                             textColor={themeSet.text}
                                         />
@@ -352,8 +329,8 @@ export const OfferCards = ({
                                         freeTrialLink={freeTrialLink}
                                         bestValueColor={themeSet.primary}
                                         backgroundColor={themeSet.background}
-                                        pillColor={themeSet.bestValuePillBackground}
-                                        pillTextColor={themeSet.bestValuePillText}
+                                        pillColor={themeSet.pillBackground}
+                                        pillTextColor={themeSet.pillText}
                                         borderColor={themeSet.borderColor}
                                         textColor={themeSet.text}
                                         cardBackground={themeSet.cardBackground}

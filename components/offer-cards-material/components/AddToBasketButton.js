@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { useBasket } from "@limio/sdk";
+import { useBasket } from "@limio/sdk"
 import { getCurrentBasketId } from "@limio/shop/src/shop/checkout/basket";
 
 export const AddToBasketButton = ({ offer, primaryColor }) => {
+
+
     const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = useBasket()
 
     async function addSelectionToBasket() {

@@ -40,6 +40,55 @@ const Offer = ({
 
     const bestValueText = display_description__limio || "Most popular";
 
+    const formatFeatures = () => {
+        if (!offer_features__limio) return null;
+
+        const sanitized = sanitizeString(offer_features__limio);
+        const container = document.createElement("div");
+        container.innerHTML = sanitized;
+
+        const listItems = Array.from(container.querySelectorAll("li")).map(
+            (li, i) => (
+                <Box
+                    component="li"
+                    key={i}
+                    display="flex"
+                    alignItems="flex-start"
+                    gap={1.5}
+                    sx={{
+                        fontSize: "14px",
+                        color: "#1F1F1F",
+                        mb: 1.25,
+                        lineHeight: 1.6,
+                        fontFamily: "Inter, sans-serif",
+                    }}
+                >
+                    <CheckIcon sx={{ fontSize: 18, color: primaryColor, mt: "2px" }} />
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            fontSize: "14px",
+                            color: "#1F1F1F",
+                            fontWeight: 400,
+                            fontFamily: "Inter, sans-serif",
+                        }}
+                    >
+                        {li.innerText}
+                    </Typography>
+                </Box>
+            )
+        );
+
+        return (
+            <>
+                <Divider sx={{ my: 3, borderColor: "#EFE2D9" }} />
+                <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
+                    {listItems}
+                </Box>
+            </>
+        );
+    };
+
     console.log(offer.data.attributes);
 
     return (
@@ -152,6 +201,37 @@ const Offer = ({
                         offer={offer}
                         primaryColor={primaryColor}
                     />
+                    <Button
+                        variant="outlined"
+                        fullWidth
+                        sx={{
+                            backgroundColor: '#FFFFFF !important',
+                            border: '1px solid #D9D5CE !important',
+                            color: `${textColor} !important`,
+                            fontWeight: '500 !important',
+                            fontSize: '14px !important',
+                            fontFamily: `'Inter', sans-serif !important`,
+                            textTransform: 'none !important',
+                            borderRadius: '8px !important',
+                            padding: '6px 16px !important',
+                            lineHeight: '1.75 !important',
+                            boxShadow: 'none !important',
+                            minWidth: '64px !important',
+                            transition: 'background-color 250ms, box-shadow 250ms, border-color 250ms, color 250ms !important',
+                            '&:hover': {
+                                backgroundColor: '#F8F8F8 !important',
+                                borderColor: '#C7C3BB !important',
+                            },
+                            '&:disabled': {
+                                backgroundColor: '#f0f0f0 !important',
+                                color: '#c0c0c0 !important',
+                                borderColor: '#e0e0e0 !important',
+                                cursor: 'not-allowed !important',
+                            },
+                        }}
+                    >
+                        More Info
+                    </Button>
 
                 </Box>
 
@@ -171,19 +251,8 @@ const Offer = ({
                         }}
                     />
                 )}
-                <Typography
-                    variant="caption"
-                    display="block"
-                    sx={{
-                        color: "#1F1F1F",
-                        fontSize: "14px",
-                        mt: 2,
-                        fontFamily: "Inter, sans-serif",
-                    }}
-                    dangerouslySetInnerHTML={{
-                        __html: sanitizeString(offer_features__limio),
-                    }}
-                />
+
+                {formatFeatures()}
             </CardContent>
         </Card>
     );
