@@ -1,0 +1,171 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+
+:root {
+  --font-family: 'Inter', 'system-ui', 'Helvetica Neue', Arial, sans-serif;
+  --color-heading: #1A1A1A;
+  --color-body: #6B7280;
+  --color-text: #374151;
+  --color-divider: #E5E7EB;
+  /* Allwyn brand */
+  --color-primary: #6C2D91;
+}
+
+em {
+  font-style: italic;
+}
+
+.container {
+  padding: 3rem 1rem;
+  margin: 0 auto;
+  max-width: 900px;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.contentWrapperLeft {
+  flex-grow: 1;
+}
+
+.contentWrapperRight {
+  padding-left: 2rem;
+}
+
+/* h1 — matches offer-cards-material main heading */
+.heading {
+  margin: 0 0 1.25rem 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--color-heading);
+  font-family: var(--font-family);
+  text-align: left;
+}
+
+/* subtitle — matches offer-cards-material subheading */
+.paragraph {
+  margin: 0 0 2.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--color-body);
+  line-height: 1.6;
+  font-family: var(--font-family);
+  text-align: left;
+}
+
+.reasonList {
+  padding-bottom: 1.1rem;
+}
+
+/* h2 — section heading */
+.reasonListHeading {
+  margin: 0 0 1.25rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-heading);
+  font-family: var(--font-family);
+}
+
+.reasonListItem {
+  display: flex;
+  margin-bottom: 0.875rem;
+  align-items: center;
+}
+
+/* Allwyn-branded radio accent */
+.radioButton {
+  accent-color: var(--color-primary);
+}
+
+.reasonListItemLabel {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding-left: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--color-text);
+  font-family: var(--font-family);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.reasonImage {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 350px;
+  border-radius: 8px;
+}
+
+.textboxLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-heading);
+  font-family: var(--font-family);
+}
+
+.textbox {
+  display: block;
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.textbox:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(108, 45, 145, 0.2);
+}
+
+.divider {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid var(--color-divider);
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.listItem {
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 1.75rem;
+  }
+
+  .contentWrapper {
+    flex-wrap: wrap;
+  }
+
+  .contentWrapperRight {
+    display: none;
+  }
+
+  .list {
+    flex-direction: column;
+  }
+
+  .listItem {
+    width: 100%;
+  }
+}
