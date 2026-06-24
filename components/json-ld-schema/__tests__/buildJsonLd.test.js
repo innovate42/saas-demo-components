@@ -5,6 +5,7 @@ import {
   stripHtml,
   extractFeatureList,
   mapBillingInterval,
+  mapEligibleRegion,
 } from "../buildJsonLd"
 
 // --- Helpers ---
@@ -366,5 +367,76 @@ describe("buildJsonLd", () => {
   test("handles empty/null offers gracefully", () => {
     expect(buildJsonLd([], [], defaultConfig).mainEntity.offers).toHaveLength(0)
     expect(buildJsonLd(null, null, defaultConfig).mainEntity.offers).toHaveLength(0)
+  })
+})
+
+// --- LI-10719: regional availability (eligibleRegion) ---
+
+describe("mapEligibleRegion", () => {
+  test("maps allowed_countries__limio to an array of ISO codes", () => {
+    expect(mapEligibleRegion({ allowed_countries__limio: ["BD", "BT", "ID"] })).toEqual([
+      "BD",
+      "BT",
+      "ID",
+    ])
+  })
+
+  test("returns null when allowed_countries__limio is empty or absent", () => {
+    expect(mapEligibleRegion({ allowed_countries__limio: [] })).toBeNull()
+    expect(mapEligibleRegion({})).toBeNull()
+    expect(mapEligibleRegion(null)).toBeNull()
+  })
+})
+
+describe("buildOfferSchema — eligibleRegion / areaServed", () => {
+  test("adds both eligibleRegion and areaServed from allowed_countries__limio", () => {
+    const offer = makeOffer({
+      attributes: { display_name__limio: "Annual", allowed_countries__limio: ["US", "CA"] },
+    })
+    const result = buildOfferSchema(offer, "Subscription")
+    expect(result.eligibleRegion).toEqual(["US", "CA"])
+    expect(result.areaServed).toEqual(["US", "CA"])
+  })
+
+  test("omits both eligibleRegion and areaServed when the offer has no allowed countries", () => {
+    const result = buildOfferSchema(makeOffer(), "Subscription")
+    expect(result.eligibleRegion).toBeUndefined()
+    expect(result.areaServed).toBeUndefined()
+  })
+})
+
+describe("buildJsonLd — eligibleRegion", () => {
+  function zoneOffer(zone, countries, value, currency) {
+    return makeOffer({
+      path: `/offers2/${zone}`,
+      price: [{ value, currencyCode: currency, repeat_interval: 1, repeat_interval_type: "years" }],
+      attributes: { display_name__limio: "Annual", allowed_countries__limio: countries },
+    })
+  }
+
+  const offers = [
+    zoneOffer("zone-us", ["US"], 299, "USD"),
+    zoneOffer("zone-gb", ["GB"], 229, "GBP"),
+    zoneOffer("zone-eu", ["FR", "DE"], 249, "EUR"),
+  ]
+
+  function byRegion(result, code) {
+    return result.mainEntity.offers.find((o) => (o.eligibleRegion || []).includes(code))
+  }
+
+  test("each zone's offer carries its own eligibleRegion alongside its price/currency", () => {
+    const result = buildJsonLd(offers, [], defaultConfig)
+    expect(result.mainEntity.offers).toHaveLength(3)
+    expect(byRegion(result, "US").priceCurrency).toBe("USD")
+    expect(byRegion(result, "GB").priceCurrency).toBe("GBP")
+    expect(byRegion(result, "FR").eligibleRegion).toEqual(["FR", "DE"])
+    expect(byRegion(result, "FR").priceCurrency).toBe("EUR")
+  })
+
+  test("offers with no allowed_countries__limio simply omit region fields (treated as global)", () => {
+    const global = zoneOffer("zone-global", [], 199, "USD")
+    const result = buildJsonLd([global], [], defaultConfig)
+    expect(result.mainEntity.offers[0].eligibleRegion).toBeUndefined()
+    expect(result.mainEntity.offers[0].areaServed).toBeUndefined()
   })
 })

@@ -30,6 +30,18 @@ export function mapBillingInterval(type) {
 }
 
 /**
+ * Map an offer's allowed_countries__limio to schema.org eligibleRegion.
+ * @param {object} attrs - offer.data.attributes
+ * @returns {string[]|null} ISO 3166-1 alpha-2 codes, or null when empty/absent (offer is global)
+ */
+export function mapEligibleRegion(attrs) {
+  const countries = attrs?.allowed_countries__limio
+  if (!Array.isArray(countries) || countries.length === 0) return null
+  const cleaned = countries.filter((code) => typeof code === "string" && code.trim() !== "")
+  return cleaned.length > 0 ? cleaned : null
+}
+
+/**
  * Extract individual features from offer_features__limio HTML.
  * Parses each <li> into a ListItem for search engine indexing.
  */
@@ -134,6 +146,16 @@ export function buildOfferSchema(offer, category, purchaseConfig, offerDetailsFi
         },
       }
     }
+  }
+
+  // Regional availability — which countries this offer applies to. Emitted as both
+  // eligibleRegion (precise: the region the offer is valid for) and areaServed (the
+  // far more widely-recognised general property) so more consumers pick it up.
+  // Omitted entirely when the offer has no allowed_countries__limio (available everywhere).
+  const eligibleRegion = mapEligibleRegion(attrs)
+  if (eligibleRegion) {
+    schema.eligibleRegion = eligibleRegion
+    schema.areaServed = eligibleRegion
   }
 
   // Purchase / checkout link with UTM tracking
