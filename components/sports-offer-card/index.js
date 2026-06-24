@@ -5,32 +5,12 @@ import * as R from "ramda";
 import Offer from "./components/Offer.js";
 import GiftSection from "./components/GiftSection.js";
 import { capitaliseFirstLetter } from "../source/utils/string";
+import { useStaticProps } from "./componentStaticProps";
 import "./fonts.css";
 import "./index.css";
 
-type Props = {
-  subheading: string,
-  componentId: string,
-  accentColor: string,
-  showSideImage: boolean,
-  sideImageUrl: string,
-  backLinkUrl: string,
-  backLinkText: string,
-  showPromoCode: boolean,
-  promoAppliedText: string,
-  showGiftSection: boolean,
-  showGiftToggle: boolean,
-  giftSectionHeading: string,
-  giftModalHeading: string,
-  giftLinkUrl: string,
-  giftConfirmButtonUrl: string,
-  showDisclaimer: boolean,
-  disclaimerText: string,
-  moreInfoText: string,
-};
-
 // Build the membership-type tabs from the offers' group__limio attribute
-// (e.g. "adult" / "junior"). Offers without a group fall under "All".
+// (e.g. "adult" / "junior"). Offers without a group fall under "Memberships".
 function groupOffersByType(offers) {
   const byGroup = R.groupBy((offer) => {
     const group = R.path(["data", "attributes", "group__limio"], offer);
@@ -44,26 +24,28 @@ function groupOffersByType(offers) {
   }));
 }
 
-const SportsOfferCard = ({
-  subheading = "Select a membership type and the number of memberships you'd like.",
-  componentId = "sports-offers",
-  accentColor = "#132257",
-  showSideImage = true,
-  sideImageUrl = "",
-  backLinkUrl = "",
-  backLinkText = "Back",
-  showPromoCode = true,
-  promoAppliedText = "Promo code applied. You saved {{discountAmount}}.",
-  showGiftSection = false,
-  showGiftToggle = false,
-  giftSectionHeading = "Buying as a gift?",
-  giftModalHeading = "Enter your gift code",
-  giftLinkUrl = "/checkout-redeem",
-  giftConfirmButtonUrl = "/checkout-redeem",
-  showDisclaimer = true,
-  disclaimerText = "",
-  moreInfoText = "Membership details",
-}: Props) => {
+const SportsOfferCard = () => {
+  const {
+    subheading = "Select a membership type and the number of memberships you'd like.",
+    componentId = "sports-offers",
+    accentColor = "#132257",
+    showSideImage = true,
+    sideImageUrl = "",
+    backLinkUrl = "",
+    backLinkText = "Back",
+    showPromoCode = true,
+    promoAppliedText = "Promo code applied. You saved {{discountAmount}}.",
+    showGiftSection = false,
+    showGiftToggle = false,
+    giftSectionHeading = "Buying as a gift?",
+    giftModalHeading = "Enter your gift code",
+    giftLinkUrl = "/checkout-redeem",
+    giftConfirmButtonUrl = "/checkout-redeem",
+    showDisclaimer = true,
+    disclaimerText = "",
+    moreInfoText = "Membership details",
+  } = useStaticProps();
+
   const { offers } = useCampaign();
 
   const groups = useMemo(() => groupOffersByType(offers), [offers]);
@@ -84,11 +66,7 @@ const SportsOfferCard = ({
   const accentStyle = { ["--soc2-accent"]: accentColor };
 
   return (
-    <section
-      id={componentId}
-      className="soc2"
-      style={accentStyle}
-    >
+    <section id={componentId} className="soc2" style={accentStyle}>
       <div className="soc2-layout">
         {showSideImage && sideImageUrl ? (
           <div
