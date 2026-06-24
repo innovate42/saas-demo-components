@@ -1,0 +1,4 @@
+/* Outfit is the typeface used on the Spurs pricing page. Loaded as a
+   best-effort progressive enhancement; falls back to the page font / system
+   sans where the import is unavailable. */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");

@@ -1,0 +1,132 @@
+{
+  "name": "@limio/sports-offer-card",
+  "version": "1.0.0",
+  "description": "Sports membership offer cards (generalised from Spurs One Hotspur pricing). Side marketing image, membership-type tabs, expandable benefit drawers, quantity selection, gift-code redemption and promo support.",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "subheading",
+      "label": "Subheading",
+      "type": "string",
+      "default": "Select a membership type and the number of memberships you'd like."
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "sports-offers"
+    },
+    {
+      "id": "accentColor",
+      "label": "Accent colour (hex)",
+      "type": "string",
+      "default": "#132257"
+    },
+    {
+      "id": "showSideImage",
+      "label": "Show side image",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "sideImageUrl",
+      "label": "Side image URL",
+      "type": "string",
+      "format": "uri",
+      "purpose": "image",
+      "default": ""
+    },
+    {
+      "id": "backLinkUrl",
+      "label": "Back link URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "backLinkText",
+      "label": "Back link text",
+      "type": "string",
+      "default": "Back"
+    },
+    {
+      "id": "showPromoCode",
+      "label": "Show promo code",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "promoAppliedText",
+      "label": "Promo applied text",
+      "type": "string",
+      "default": "Promo code applied. You saved {{discountAmount}}."
+    },
+    {
+      "id": "showGiftSection",
+      "label": "Show gift section",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showGiftToggle",
+      "label": "Show gift toggle",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "giftSectionHeading",
+      "label": "Gift section heading",
+      "type": "string",
+      "default": "Buying as a gift?"
+    },
+    {
+      "id": "giftModalHeading",
+      "label": "Gift modal heading",
+      "type": "string",
+      "default": "Enter your gift code"
+    },
+    {
+      "id": "giftLinkUrl",
+      "label": "Gift redeem link URL",
+      "type": "string",
+      "default": "/checkout-redeem"
+    },
+    {
+      "id": "giftConfirmButtonUrl",
+      "label": "Gift confirm URL",
+      "type": "string",
+      "default": "/checkout-redeem"
+    },
+    {
+      "id": "showDisclaimer",
+      "label": "Show disclaimer",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "disclaimerText",
+      "label": "Disclaimer text",
+      "type": "richText",
+      "default": "<p>All memberships expire at the end of the current season. Prices include VAT where applicable.</p>"
+    },
+    {
+      "id": "moreInfoText",
+      "label": "More info link text",
+      "type": "string",
+      "default": "Membership details"
+    }
+  ]
+}
