@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Sports membership offer cards (generalised from Spurs One Hotspur pricing). Side marketing image, membership-type tabs, expandable benefit drawers, quantity selection, gift-code redemption and promo support.",
   "main": "./index.js",
-  "dependencies": {
-    "ramda": "^0.28.0",
-    "xss": "^1.0.15"
-  },
   "peerDependencies": {
     "react": "*"
   },

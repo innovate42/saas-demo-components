@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from "react";
-import { sanitizeString } from "../../source/utils/string";
+import { sanitiseHTML } from "@limio/sdk";
 import { AddToBasketButton } from "./AddToBasketButton.js";
 
 // Spurs feature lists come through as a series of block elements (<p> or <li>).
@@ -9,7 +9,7 @@ function renderFeatures(featuresHtml) {
   if (!featuresHtml || typeof document === "undefined") return null;
 
   const container = document.createElement("div");
-  container.innerHTML = sanitizeString(featuresHtml);
+  container.innerHTML = sanitiseHTML(featuresHtml);
 
   const nodes = Array.from(container.children).filter(
     (el) => el.innerText && el.innerText.trim().length
@@ -67,7 +67,7 @@ const Offer = ({ offer, moreInfoText = "Membership details" }) => {
         <div
           className="soc2-eligibility"
           dangerouslySetInnerHTML={{
-            __html: sanitizeString(detailed_display_price__limio),
+            __html: sanitiseHTML(detailed_display_price__limio),
           }}
         />
       ) : null}
@@ -76,7 +76,7 @@ const Offer = ({ offer, moreInfoText = "Membership details" }) => {
         <div
           className="soc2-price"
           dangerouslySetInnerHTML={{
-            __html: sanitizeString(display_price__limio),
+            __html: sanitiseHTML(display_price__limio),
           }}
         />
       ) : null}
@@ -127,7 +127,7 @@ const Offer = ({ offer, moreInfoText = "Membership details" }) => {
               <div
                 className="soc2-drawer-section-content"
                 dangerouslySetInnerHTML={{
-                  __html: sanitizeString(offer_learn_more_detail),
+                  __html: sanitiseHTML(offer_learn_more_detail),
                 }}
               />
             </div>

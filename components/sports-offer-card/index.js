@@ -1,25 +1,27 @@
 // @flow
 import React, { useEffect, useMemo, useState } from "react";
 import { useCampaign } from "@limio/sdk";
-import * as R from "ramda";
 import Offer from "./components/Offer.js";
 import GiftSection from "./components/GiftSection.js";
-import { capitaliseFirstLetter } from "../source/utils/string";
 import { useStaticProps } from "./componentStaticProps";
 import "./fonts.css";
 import "./index.css";
 
+const capitalise = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : "");
+
 // Build the membership-type tabs from the offers' group__limio attribute
 // (e.g. "adult" / "junior"). Offers without a group fall under "Memberships".
 function groupOffersByType(offers) {
-  const byGroup = R.groupBy((offer) => {
-    const group = R.path(["data", "attributes", "group__limio"], offer);
-    return group && group.length ? group : "all";
-  }, offers || []);
+  const byGroup = {};
+  (offers || []).forEach((offer) => {
+    const attrs = offer && offer.data && offer.data.attributes;
+    const group = (attrs && attrs.group__limio) || "all";
+    (byGroup[group] = byGroup[group] || []).push(offer);
+  });
 
   return Object.keys(byGroup).map((groupId) => ({
     id: groupId,
-    label: groupId === "all" ? "Memberships" : capitaliseFirstLetter(groupId),
+    label: groupId === "all" ? "Memberships" : capitalise(groupId),
     offers: byGroup[groupId],
   }));
 }
