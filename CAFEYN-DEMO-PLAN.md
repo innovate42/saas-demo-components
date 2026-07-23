@@ -214,7 +214,7 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
    - **After each order/upgrade/cancel, check process events** at [saas-dev.prod.limio.com/objects/events/limio](https://saas-dev.prod.limio.com/objects/events/limio) for failures — how-to: [How to see order failures with process events](https://docs.limio.com/support/troubleshooting/how-to-see-order-failures-with-process-events#through-events). An order that "worked" in the UI can still have a failed downstream event.
    - Check every screen along the way is German.
    - **If you hit a blocker, stop and tell Amaury** rather than working around it.
-8. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, checkout customizability, invoicing, B2C conversion, phase-2 expansion story).
+8. **Demo script**: `CAFEYN-DEMO-SCRIPT.md` already exists in this repo — after publishing, replace every `[FILL]` placeholder with the live URLs (shop routes, Salesforce org/opportunity) and do one full dry-run following it verbatim.
 
 ## 8. Acceptance checklist
 
