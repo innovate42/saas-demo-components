@@ -130,6 +130,7 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 - Confirmation email verified working.
 - Cafeyn equivalents to configure: `companySize` (dropdown, label `Unternehmensgröße`), `sector` (label `Branche`: Medien/Bibliothek/Hochschule/Hotellerie/Sonstiges), `existingCafeynUser` (label `Bereits Cafeyn-Nutzer?`, Ja/Nein dropdown — German labels, per the language requirement).
 - Taras is the go-to for the SF-side custom fields/permissions; note there was a one-time SF permissions fix needed before fields appeared on the opportunity.
+- **Closed Won on payment (demo-critical):** configure the Salesforce integration so a completed order sets the linked opportunity to **Closed Won** with the order amount — both for the sales-assisted link (§3.6) and for new self-serve orders (create the opportunity as Closed Won). The demo script shows this moment twice; verify it during the dry-run.
 - Next iteration in progress (for their Aug 31 demo): **updating an existing sub via Limio CPQ** — if ready in time, it doubles as the Cafeyn upsell-via-sales story.
 
 ---
@@ -229,6 +230,8 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 - [ ] Invoice/payment history visible in My Account (§6.3).
 - [ ] B2C Premium → Team switch offer works (B2C→B2B conversion story, §6.5).
 - [ ] Sales-assisted offer reachable via direct link with pre-set negotiated pricing and German locked-down fields (Salesforce story demoable).
+- [ ] Completed orders show as **Closed Won** opportunities in Salesforce (self-serve and sales-assisted).
+- [ ] Checkout upsell renders name + description ("Upgrade auf Business …"), not a bare price.
 - [ ] Self-serve flow is ~3 clicks from landing to paid (Economist benchmark, §6.7).
 - [ ] Process events clean after test order, upgrade, and cancel ([events console](https://saas-dev.prod.limio.com/objects/events/limio)).
 - [ ] All pages on `ca-*` tags with anonymous auth; publish verified (nothing in `ommitedWithError`).
