@@ -17,6 +17,8 @@ From the intro call with Cafeyn (2026-07-20):
 
 **Demo must show:** self-serve B2B catalog + pricing page → multi-quantity (per-seat) checkout → self-service account with seat upsell, tier upgrade/downgrade, cross-sell add-ons → promo codes → sales-assisted offer via Salesforce payment link. All wrapped in Cafeyn's look and feel.
 
+**Language requirement: EVERYTHING customer-facing is in German.** Alexandre (an evaluator) is personally building Cafeyn's new German pricing model this summer, and Germany is their strongest new market post-Readly. So: all pages, offer display names/prices/features, CTAs, checkout labels, custom-field labels, validation messages, order confirmation, My Account, cancel journey, and confirmation emails — in German (formal *Sie*, currency €, German number/date formats: `12,00 €`, `pro Nutzer/Monat`). German copy is the default text in components' `limioProps` and in offer attributes, not an afterthought. Internal things (component/code names, offer paths, commit messages, this repo) stay in English.
+
 ---
 
 ## 2. Brand kit (Cafeyn look & feel)
@@ -74,7 +76,7 @@ Made-up but anchored on reality: Cafeyn's consumer tiers are Premium €12.99/mo
 
 Offer attributes that matter:
 - `allow_multibuy__limio: true` + per-seat rate plan so the quantity selector multiplies price (see `plan-selection`/`saas-pricing-page` components for how quantity is consumed).
-- `display_name__limio`, `display_price__limio` (e.g. "€8 /user /month"), `detailed_display_price__limio` (e.g. "Billed annually · min 2 seats"), `offer_features__limio`, `cta_text__limio` ("Start with Team" / "Choose Business" / "Talk to sales"), `best_value__limio`.
+- `display_name__limio`, `display_price__limio`, `detailed_display_price__limio`, `offer_features__limio`, `cta_text__limio`, `best_value__limio` — **all in German**, e.g. display price `10 € pro Nutzer/Monat`, detailed price `Jährliche Abrechnung · ab 2 Lizenzen`, CTAs `Mit Team starten` / `Business wählen` / `Vertrieb kontaktieren`, best-value badge `Beliebteste Wahl`. Plan names "Team" / "Business" / "Enterprise" work as-is in German.
 - `group__limio` to group monthly vs annual variants of the same plan for the term toggle.
 - Label e.g. `cafeyn-b2b` on all offers + a campaign/page referencing that label.
 
@@ -94,7 +96,7 @@ Tag them per Limio switch-offer convention (check an existing switch offer in th
 
 ### 3.5 Promo code
 
-Create one promo code offer/discount: **`CAFEYN20`** — 20% off first year, applied at checkout. Demo line: "launch promo for the DACH rollout".
+Create one promo code offer/discount: **`CAFEYN20`** — 20% off first year, applied at checkout (display: `20 % Rabatt im ersten Jahr`). Demo line: "launch promo for the DACH rollout".
 
 ### 3.6 Sales-assisted offers (Salesforce)
 
@@ -108,7 +110,7 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 - **Fields prefilled from the SF account/contact and locked down** on the checkout.
 - **Custom fields on the SF contact/opportunity passed through the checkout link** and surfaced in the Limio cart — their examples: `churchSize`, `existingCustomer`, `productInterest`, `Phone`. Gotcha (cost them an hour): on the Limio checkout field config, the `limioField` path must be `customFields.<name>` (e.g. `customFields.churchSize`), **not** `customerDetails.<name>`. Dropdowns read better than booleans in the cart (they switched `existingCustomer` from true/false to Yes/No).
 - Confirmation email verified working.
-- Cafeyn equivalents to configure: `companySize` (dropdown), `sector` (Media/CSE/Library/University/Hospitality), `existingCafeynUser` (Yes/No).
+- Cafeyn equivalents to configure: `companySize` (dropdown, label `Unternehmensgröße`), `sector` (label `Branche`: Medien/Bibliothek/Hochschule/Hotellerie/Sonstiges), `existingCafeynUser` (label `Bereits Cafeyn-Nutzer?`, Ja/Nein dropdown — German labels, per the language requirement).
 - Taras is the go-to for the SF-side custom fields/permissions; note there was a one-time SF permissions fix needed before fields appeared on the opportunity.
 - Next iteration in progress (for their Aug 31 demo): **updating an existing sub via Limio CPQ** — if ready in time, it doubles as the Cafeyn upsell-via-sales story.
 
@@ -118,7 +120,7 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 
 1. **B2B landing / pricing page** (`cafeyn-business` campaign): Cafeyn header → hero → seat-quantity pricing cards → comparison table → logo/covers band → FAQ → CTA banner → footer.
 2. **Checkout**: standard Limio checkout, Cafeyn-styled (colors/fonts via page builder theme), quantity + add-ons + promo code field visible.
-3. **Order confirmation**: branded confirmation ("Your team now has access to 1,500+ titles").
+3. **Order confirmation**: branded confirmation (e.g. `Willkommen bei Cafeyn for Business — Ihr Team hat jetzt Zugriff auf über 2.500 Titel`).
 4. **My Account (self-service)**: order table + "manage plan" — change seats (`edit-base-plan-new`), upgrade/downgrade (`switch-subscription-tailwind`), add-ons (`edit-add-ons`), cancel journey with save offer (`cancel-survey-tailwind` + `cancel-save-offer-tailwind`).
 
 ---
@@ -135,7 +137,7 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 Scaffold each with `yarn limio:create <dir> <Name>`; CSS files only; expose colors/copy as `limioProps` with Cafeyn defaults; keep `"react": "*"`.
 
 1. `cafeyn-header` — logo, nav (Catalogue, Business, Pricing), "Log in" + CTA button.
-2. `cafeyn-hero` — B2B hero: headline ("Give your team the world's press"), subcopy, CTA, magazine-cover collage imagery.
+2. `cafeyn-hero` — B2B hero: German headline (e.g. `Die ganze Presse für Ihr Team`), subcopy, CTA, magazine-cover collage imagery.
 3. `cafeyn-offers` — pricing cards fork of `practicetek-offers`/`b2b-offer-cards` with **seat quantity stepper on the card**, per-seat price × quantity total, monthly/annual toggle, best-value badge — Cafeyn styling baked in as defaults.
 4. `cafeyn-footer` — Cafeyn footer with markets/social links.
 5. (Optional) `cafeyn-covers-band` — scrolling strip of publication covers ("Le Monde, ELLE, L'Équipe, The Independent…") for authenticity.
@@ -147,22 +149,41 @@ CI (`.github/workflows/main.yml`) mirrors only `saas-dev` and `stripe` branches 
 
 ---
 
-## 6. Build order for the executing agent
+## 6. Demo emphasis — what to make unmissable
+
+These come from what Juliette & Alexandre explicitly raised on the call (or from their competitive context vs Chargebee). Each has a concrete build task:
+
+1. **Checkout customizability is the real battleground.** Their literal evaluation question was *"how customisable is the checkout?"* (they're weighing Chargebee's checkout for B2B). Make it obvious: B2B fields at checkout — `Firmenname` (company name), `USt-IdNr.` (VAT ID), `Branche` (sector dropdown) — quantity editable in the cart, everything Cafeyn-branded, all German. Enable `request_company_info__limio` on the offers and add the custom checkout fields.
+2. **Chargebee coexistence, not replacement.** They evaluate Limio *alongside* Chargebee. Be ready to show the order events/webhooks flowing outward (the same pattern that feeds Salesforce) and narrate: "Limio industrialises your B2B on top of the billing you already run." No build task beyond having an order's event payload ready to show in the Limio admin.
+3. **Invoicing pain.** Invoices are hand-made in Salesforce today ("tout est très manuel"). Show payment/invoice history in My Account — wire up `payments-table-tailwind` (German labels: `Rechnungen`, `Zahlungsverlauf`) and mention automated invoice generation post-checkout.
+4. **Germany is the wedge.** The whole demo being in German (§1) *is* this point — Alexandre is building the German pricing model right now. In the walkthrough, also mention that cloning the catalog for FR/UK markets is config, not a project.
+5. **B2C→B2B conversion story.** Their biggest latent opportunity: thousands of businesses on B2C subs. Create one **B2C "Premium" subscription** (a €12,99 individual plan) plus a **switch offer B2C Premium → Team**, and demo an existing individual user upgrading their company onto a business plan. Turns the demo into a revenue story.
+6. **Agentic teaser (optional, 2 min).** The three-pathway pitch included an AI agent that qualifies and routes to checkout — the Limio agent with `build_checkout_link` already runs on sprint-chat. If time allows, show it (German prompt/replies if feasible). Chargebee can't match this.
+7. **Click count.** Juliette benchmarked The Economist for ease of purchase. Count the self-serve clicks and keep landing → paid at ~3 steps; rehearse it that way.
+
+**Deliberately out of scope** (not raised on the call): trials; deep admin/team-seat management (seat expansion is their phase 2 — show the seat change in My Account exists, move on).
+
+## 7. Build order for the executing agent
 
 1. **Recon**: `limio_get_offers` (catalog) + `limio_get_pages` on saas-dev; copy attribute/tag conventions from the existing SaaS demo offers. Confirm how quantity/per-seat rate plans and switch offers are modelled on this tenant.
-2. **Catalog**: create products → self-serve offers (3 plans × monthly/annual) → add-ons → switch offers → promo code → sales-assisted offers (§3).
-3. **Components**: build `cafeyn-*` components (§5), verify in Storybook, commit + push branch.
-4. **Pages/campaign**: build the 4 pages (§4), attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder.
+2. **Catalog**: create products → self-serve offers (3 plans × monthly/annual) → add-ons → switch offers → promo code → sales-assisted offers (§3) → B2C Premium plan + B2C→Team switch offer (§6.5). All display attributes in German.
+3. **Components**: build `cafeyn-*` components (§5) with German default copy, verify in Storybook, commit + push branch.
+4. **Pages/campaign**: build the 4 pages (§4) in German, attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder; set checkout localisation to `de` and configure the B2B checkout fields (§6.1).
 5. **Salesforce**: wire or narrate the sales-assisted payment-link flow (§3.6).
-6. **End-to-end test**: purchase Team ×5 annual with `CAFEYN20` → confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → start cancel, accept save offer.
-7. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, phase-2 expansion story).
+6. **End-to-end test**: purchase Team ×5 annual with `CAFEYN20` → confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → view invoices/payments → start cancel, accept save offer. Also test the B2C→Team switch. Check every screen along the way is German.
+7. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, checkout customizability, invoicing, B2C conversion, phase-2 expansion story).
 
-## 7. Acceptance checklist
+## 8. Acceptance checklist
 
+- [ ] **Every customer-facing screen, label, price, email is in German** (formal Sie, `12,00 €` formats) — pricing page, checkout, confirmation, My Account, cancel journey.
 - [ ] Pricing page looks unmistakably Cafeyn (colors, font, logo, imagery) on desktop + mobile.
 - [ ] Quantity selector: price updates as seats change; 1–10 seats self-serve; total lands in €500–2,000/yr band for typical picks.
 - [ ] Monthly ↔ annual toggle works; annual shows savings.
+- [ ] Checkout shows B2B fields (Firmenname, USt-IdNr., Branche) and editable quantity — the checkout-customizability proof (§6.1).
 - [ ] `CAFEYN20` promo applies at checkout.
 - [ ] Post-purchase: seat count change, Team↔Business upgrade/downgrade, add-on cross-sell all work from My Account.
-- [ ] Sales-assisted offer reachable via direct link with pre-set negotiated pricing (Salesforce story demoable).
+- [ ] Invoice/payment history visible in My Account (§6.3).
+- [ ] B2C Premium → Team switch offer works (B2C→B2B conversion story, §6.5).
+- [ ] Sales-assisted offer reachable via direct link with pre-set negotiated pricing and German locked-down fields (Salesforce story demoable).
+- [ ] Self-serve flow is ~3 clicks from landing to paid (Economist benchmark, §6.7).
 - [ ] Storybook builds clean; components pushed on `claude/caffeine-b2b-demo-apm0py`.
