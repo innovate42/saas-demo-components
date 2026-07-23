@@ -28,7 +28,7 @@ From the intro call with Cafeyn (2026-07-20):
 - **Target self-serve segment: companies of 1–10 users, €500–2,000/year.** These buyers know the product and "just want to pay €500 and buy" — friction kills conversion.
 - **Salesforce is central** (~8–9 B2B reps on it since early 2026) — a sales-assisted flow that generates a payment link from Salesforce is a key requirement ("100 clicks → 3 clicks").
 - Upsell/expansion (seats, volume tiers, contract length) is their phase 2 — but we show it in the demo to sell the vision.
-- Evaluators: Juliette & Alexandre. Competitor context: Chargebee checkout customization. Demo in English.
+- Evaluators: Juliette & Alexandre. Competitor context: Chargebee checkout customization. The demo *call* is conducted in English — but the demo *content* is German (see below).
 
 **Demo must show:** self-serve B2B catalog + pricing page → multi-quantity (per-seat) checkout → self-service account with seat upsell, tier upgrade/downgrade, cross-sell add-ons → promo codes → sales-assisted offer via Salesforce payment link. All wrapped in Cafeyn's look and feel.
 
@@ -78,7 +78,7 @@ Magazine/newspaper cover thumbnails (subtle shadow, small radius) as the dominan
 
 ### 3.1 Products
 
-One base product, per-seat licensed: **Cafeyn for Business** — access to 1,500+ newspapers & magazines for every employee. Plus add-on products for cross-sell.
+One base product, per-seat licensed: **Cafeyn for Business** — access to 2,500+ newspapers & magazines for every employee (use 2,500+, the current catalog size, in customer-facing copy). Plus add-on products for cross-sell.
 
 ### 3.2 Self-serve plans (the pricing page)
 
@@ -124,7 +124,7 @@ Create 1–2 **non-published / direct-link** offers for the sales-assisted path:
 Demo the Limio Salesforce flow: opportunity → generate offer/payment link → customer pays → order back on the Salesforce account.
 
 **Reuse Sam's tested CPQ setup on saas-dev (do NOT rebuild from scratch).** Sam + Taras configured and demo-tested a full sales-assisted CPQ flow on this exact tenant for the Amazing Life demo (2026-07-17 → 07-21, Slack #sales-demo). What exists and works:
-- Salesforce → Limio **checkout link from an opportunity**, landing on a client-branded checkout page — theirs is `/al-checkout` (renamed from the default `/lm-quote-checkout`). Create a `/cafeyn-checkout` equivalent the same way.
+- Salesforce → Limio **checkout link from an opportunity**, landing on a client-branded checkout page — theirs is `/al-checkout` (renamed from the default `/lm-quote-checkout`). Create a `/ca-quote-checkout` equivalent the same way (see the `ca-` tag convention in §4).
 - **Fields prefilled from the SF account/contact and locked down** on the checkout.
 - **Custom fields on the SF contact/opportunity passed through the checkout link** and surfaced in the Limio cart — their examples: `churchSize`, `existingCustomer`, `productInterest`, `Phone`. Gotcha (cost them an hour): on the Limio checkout field config, the `limioField` path must be `customFields.<name>` (e.g. `customFields.churchSize`), **not** `customerDetails.<name>`. Dropdowns read better than booleans in the cart (they switched `existingCustomer` from true/false to Yes/No).
 - Confirmation email verified working.
@@ -135,6 +135,10 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 ---
 
 ## 4. Pages to build in Limio
+
+**Tag/URL naming convention: `ca-` prefix** (ca = Cafeyn). Tags `/tags/ca-pricing`, `/tags/ca-checkout`, `/tags/ca-confirm`, `/tags/ca-account`, `/tags/ca-invoices`, `/tags/ca-cancel`, `/tags/ca-add-payment-method`, `/tags/ca-direct-update`, `/tags/ca-direct-update-sub`, `/tags/ca-quote-checkout` (sales-assisted) → URLs `/ca-pricing`, `/ca-checkout`, etc. Page catalog paths stay flat and readable (`/pages2/CA Pricing` style, matching tenant convention).
+
+**Publish & test freely.** Amaury has authorized publishing and testing on saas-dev. Set every customer-facing page to **anonymous auth** (`isAuthenticated: false`) so the full journey is testable without login.
 
 **How to build them: follow the Landing-Page Factory workflow** — [docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages](https://docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages) (internal-only doc; this is the pipeline that migrated all 27 limio.com pages). It covers creating/updating/publishing pages programmatically: page records + `assets[]` via creation jobs (`POST /limio/jobs`), shop builds, and publish. Non-negotiables from that doc:
 - **OAuth client credentials only** (`POST /oauth2/token`, auto-refresh) — never hand-copied bearer tokens.
@@ -147,7 +151,10 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 1. **B2B landing / pricing page** (`cafeyn-business` campaign): Cafeyn header → hero → seat-quantity pricing cards → comparison table → logo/covers band → FAQ → CTA banner → footer.
 2. **Checkout**: standard Limio checkout, Cafeyn-styled (colors/fonts via page builder theme), quantity + add-ons + promo code field visible — **plus in-checkout cross-sell and upsell**: offer the add-ons (§3.3) as one-click additions in the basket (`quick-add-on` pattern) and an upsell nudge on the Team plan ("Upgrade auf Business — Audio-Artikel & Lese-Analysen für 5 € mehr pro Nutzer") that swaps the basket item to the Business offer.
 3. **Order confirmation**: branded confirmation (e.g. `Willkommen bei Cafeyn for Business — Ihr Team hat jetzt Zugriff auf über 2.500 Titel`). Base it on [`stripe-components/components/order-confirmation`](https://github.com/innovate42/stripe-components/tree/develop/components/order-confirmation) (develop branch) — port it into this repo as a **new `cafeyn-order-confirmation` variant** restyled with the Cafeyn design-language tokens and German copy, and adapt its features to this demo (seats purchased, plan, add-ons, next steps for inviting the team). Don't modify the stripe-components original.
-4. **My Account (self-service)**: order table + "manage plan" — change seats (`edit-base-plan-new`), upgrade/downgrade (`switch-subscription-tailwind`), add-ons (`edit-add-ons`), cancel journey with save offer (`cancel-survey-tailwind` + `cancel-save-offer-tailwind`).
+4. **My Account (self-service)**: do **not** assemble a bespoke My Account. Copy the proven saas-dev pages:
+   - **Landing/"dropping point"**: model it on the **Avalara Billing** page — [saas-dev.prod.limio.com/catalog/pages2/Avalara Billing](https://saas-dev.prod.limio.com/catalog/pages2/Avalara%20Billing).
+   - **Journeys**: clone the **Leemeeo** pages one-for-one as templates — `/leemeeo-add-payment-method`, `/leemeeo-cancel`, `/leemeeo-direct-update`, `/leemeeo-direct-update-sub`, `/leemeeo-invoices`, plus the cancel-save page [Leemeeo Cancel Save Discount](https://saas-dev.prod.limio.com/catalog/pages2/Leemeeo%20Cancel%20Save%20Discount).
+   - Create `ca-*` copies (tag convention above) that keep the **same existing components** those pages already use — restyle Cafeyn (theme/pageStyle) and translate all copy to German. No new components here.
 
 ---
 
@@ -159,17 +166,18 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 - `comparison-table`, `faq-accordion`, `cta-banner`, `init-checkout-button-saas-demo`.
 - Self-service: `order-table-tailwind`, `payments-table-tailwind`, `edit-base-plan-new`, `edit-add-ons`, `switch-subscription-tailwind`, `cancel-survey-tailwind`, `cancel-save-offer-tailwind`. (Order confirmation is a new variant — see §4.3 and the build list below.)
 
-### Build new (follow the `practicetek-*` pattern — that's the house style for client-branded demos)
-Use the **`limio-component` skill** ([limio-skills](https://github.com/innovate42/limio-skills)) to scaffold each component (fallback: `yarn limio:create <dir> <Name>`); CSS files only; expose colors/copy as `limioProps` with Cafeyn (German) defaults; keep `"react": "*"`. Run **`limio-sdk-verify`** over the finished components, and use **`limio-story`** for the Storybook stories.
+### Build new — **minimal custom components** (Amaury's rule)
+**Custom components ONLY for the pricing page, or where custom is genuinely faster than configuring an existing component.** Everything else — header, footer, checkout, self-service, cancel journey — is existing components restyled Cafeyn via the page-builder theme (colors/fonts) and `pageStyle`. Header/footer: reuse `nav-header-tailwind` / `footer-tailwind` with Cafeyn logo + colors via their props.
+
+For the components that ARE custom, use the **`limio-component` skill** ([limio-skills](https://github.com/innovate42/limio-skills)) to scaffold (fallback: `yarn limio:create <dir> <Name>`); CSS files only; expose colors/copy as `limioProps` with Cafeyn (German) defaults; keep `"react": "*"`. Run **`limio-sdk-verify`** over the finished components, and use **`limio-story`** for the Storybook stories. Follow the `practicetek-*` components in this repo as the house pattern for client-branded demos.
 
 **Prior art — study [innovate42/limio-custom-components](https://github.com/innovate42/limio-custom-components)** (the limio.com production component library) before writing code. Beyond the design-language method (§2), its hard-won conventions apply directly here: component CSS is scoped to the component's own subtree (page-level styling belongs in the page item's `pageStyle`); the SDK treats `""` as unset — pass `" "` to suppress a defaulted prop, and trim optional string props; declare **every** import in the component's `package.json` `dependencies` (an undeclared dep works in Storybook then crashes the published page's SSR); guard `window`/`document` for server rendering; one rich-text prop beats an array of item props; buttons are `label`+`href` prop pairs; layout choices are picklist props implemented as CSS classes, never inline styles; prop ids are a contract — renaming one orphans content on every existing page.
 
-1. `cafeyn-header` — logo, nav (Catalogue, Business, Pricing), "Log in" + CTA button.
-2. `cafeyn-hero` — B2B hero: German headline (e.g. `Die ganze Presse für Ihr Team`), subcopy, CTA, magazine-cover collage imagery.
-3. `cafeyn-offers` — pricing cards fork of `practicetek-offers`/`b2b-offer-cards` with **seat quantity stepper on the card**, per-seat price × quantity total, monthly/annual toggle, best-value badge — Cafeyn styling baked in as defaults.
-4. `cafeyn-footer` — Cafeyn footer with markets/social links.
-5. `cafeyn-order-confirmation` — port of `stripe-components/components/order-confirmation` (see §4.3), Cafeyn tokens + German copy, showing plan, seat count, add-ons, and invite-your-team next steps.
-6. (Optional) `cafeyn-covers-band` — scrolling strip of publication covers (for a German demo, lead with German titles: "Der Spiegel, Stern, Focus, 11FREUNDE, Le Monde, The Independent…") for authenticity.
+The custom list (pricing page + the explicitly requested order-confirmation variant):
+1. `cafeyn-hero` — pricing-page hero: German headline (e.g. `Die ganze Presse für Ihr Team`), subcopy, CTA, magazine-cover collage imagery.
+2. `cafeyn-offers` — pricing cards fork of `practicetek-offers`/`b2b-offer-cards` with **seat quantity stepper on the card**, per-seat price × quantity total, monthly/annual toggle, best-value badge — Cafeyn styling baked in as defaults. (Study `saas-pricing-page` first: it already has the quantity input; fork it if that's faster.)
+3. `cafeyn-order-confirmation` — port of `stripe-components/components/order-confirmation` (see §4.3), Cafeyn tokens + German copy, showing plan, seat count, add-ons, and invite-your-team next steps.
+4. (Only if trivially fast) `cafeyn-covers-band` — scrolling strip of publication covers (lead with German titles: "Der Spiegel, Stern, Focus, 11FREUNDE, Le Monde, The Independent…"). Skip if it slows anything down.
 
 Register stories in `component-playground/src/stories/` and verify in Storybook (`yarn` at repo root, then playground storybook) before pushing.
 
@@ -184,7 +192,7 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 
 1. **Checkout customizability is the real battleground.** Their literal evaluation question was *"how customisable is the checkout?"* (they're weighing Chargebee's checkout for B2B). Make it obvious: B2B fields at checkout — `Firmenname` (company name), `USt-IdNr.` (VAT ID), `Branche` (sector dropdown) — quantity editable in the cart, everything Cafeyn-branded, all German. Enable `request_company_info__limio` on the offers and add the custom checkout fields.
 2. **Chargebee coexistence, not replacement.** They evaluate Limio *alongside* Chargebee. Be ready to show the order events/webhooks flowing outward (the same pattern that feeds Salesforce) and narrate: "Limio industrialises your B2B on top of the billing you already run." No build task beyond having an order's event payload ready to show in the Limio admin.
-3. **Invoicing pain.** Invoices are hand-made in Salesforce today ("tout est très manuel"). Show payment/invoice history in My Account — wire up `payments-table-tailwind` (German labels: `Rechnungen`, `Zahlungsverlauf`) and mention automated invoice generation post-checkout.
+3. **Invoicing pain.** Invoices are hand-made in Salesforce today ("tout est très manuel"). Show payment/invoice history in My Account — the `/ca-invoices` clone of `/leemeeo-invoices` (§4.4) with German labels (`Rechnungen`, `Zahlungsverlauf`) — and mention automated invoice generation post-checkout.
 4. **Germany is the wedge.** The whole demo being in German (§1) *is* this point — Alexandre is building the German pricing model right now. In the walkthrough, also mention that cloning the catalog for FR/UK markets is config, not a project.
 5. **B2C→B2B conversion story.** Their biggest latent opportunity: thousands of businesses on B2C subs. Create one **B2C "Premium" subscription** (a €12,99 individual plan) plus a **switch offer B2C Premium → Team**, and demo an existing individual user upgrading their company onto a business plan. Turns the demo into a revenue story.
 6. **Agentic teaser (optional, 2 min).** The three-pathway pitch included an AI agent that qualifies and routes to checkout — the Limio agent with `build_checkout_link` already runs on sprint-chat. If time allows, show it (German prompt/replies if feasible). Chargebee can't match this.
@@ -198,9 +206,14 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 2. **Catalog**: create products → self-serve offers (3 plans × monthly/annual) → add-ons → switch offers → promo code → sales-assisted offers (§3) → B2C Premium plan + B2C→Team switch offer (§6.5). All display attributes in German.
 3. **Design language**: write `references/CAFEYN-DESIGN-LANGUAGE.md` (§2) — tokens, primitives, section patterns, page recipes — before any component code.
 4. **Components**: build `cafeyn-*` components (§5) with German default copy and the shared token block from the design-language doc, verify in Storybook, commit + push branch.
-5. **Pages/campaign**: build the 4 pages (§4) in German via the Landing-Page Factory workflow (creation jobs → shop build → publish; remember the one-time Page Builder bulk publish for new routes), attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder; set checkout localisation to `de` and configure the B2B checkout fields + in-checkout cross-sell/upsell (§6.1, §4.2).
+5. **Pages/campaign**: build the pages (§4) in German via the Landing-Page Factory workflow (creation jobs → shop build → publish; remember the one-time Page Builder bulk publish for new routes), on `ca-*` tags, **all anonymous auth** (`isAuthenticated: false`), attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder; set checkout localisation to `de` and configure the B2B checkout fields + in-checkout cross-sell/upsell (§6.1, §4.2). Publishing and testing on saas-dev is pre-authorized — don't ask, publish.
 6. **Salesforce**: wire or narrate the sales-assisted payment-link flow (§3.6).
-7. **End-to-end test**: purchase Team ×5 annual with `CAFEYN20` (adding an add-on and seeing the Business upsell nudge in the checkout) → confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → view invoices/payments → start cancel, accept save offer. Also test the B2C→Team switch. Check every screen along the way is German.
+7. **End-to-end test on the published pages** (test card: `4242 4242 4242 4242`, any future expiry/CVC):
+   - Purchase Team ×5 annual with `CAFEYN20`, adding an add-on and taking the Business upsell nudge path at least once.
+   - Confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → view invoices/payments → start cancel, accept save offer. Also test the B2C→Team switch.
+   - **After each order/upgrade/cancel, check process events** at [saas-dev.prod.limio.com/objects/events/limio](https://saas-dev.prod.limio.com/objects/events/limio) for failures — how-to: [How to see order failures with process events](https://docs.limio.com/support/troubleshooting/how-to-see-order-failures-with-process-events#through-events). An order that "worked" in the UI can still have a failed downstream event.
+   - Check every screen along the way is German.
+   - **If you hit a blocker, stop and tell Amaury** rather than working around it.
 8. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, checkout customizability, invoicing, B2C conversion, phase-2 expansion story).
 
 ## 8. Acceptance checklist
@@ -217,4 +230,35 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 - [ ] B2C Premium → Team switch offer works (B2C→B2B conversion story, §6.5).
 - [ ] Sales-assisted offer reachable via direct link with pre-set negotiated pricing and German locked-down fields (Salesforce story demoable).
 - [ ] Self-serve flow is ~3 clicks from landing to paid (Economist benchmark, §6.7).
+- [ ] Process events clean after test order, upgrade, and cancel ([events console](https://saas-dev.prod.limio.com/objects/events/limio)).
+- [ ] All pages on `ca-*` tags with anonymous auth; publish verified (nothing in `ommitedWithError`).
 - [ ] Storybook builds clean; components pushed on `claude/caffeine-b2b-demo-apm0py`.
+
+---
+
+## 9. Reference index (everything the agent might need)
+
+**Repos**
+- This repo (`innovate42/saas-demo-components`): reusable components in `components/`, playground + Storybook in `component-playground/` (see `component-playground/src/stories/GettingStarted.mdx` for the component DX, limioProps types, and the standard component catalog). CI note: `.github/workflows/main.yml` mirrors only `saas-dev`/`stripe` branches to CodeCommit — merging to `saas-dev` is the human deploy step.
+- [innovate42/limio-skills](https://github.com/innovate42/limio-skills) — Claude Code plugin: `limio-component`, `limio-sdk-verify`, `limio-story`, `limio-storybook`, `limio-setup` (tenant connection/credentials/deploy).
+- [innovate42/limio-custom-components](https://github.com/innovate42/limio-custom-components) — limio.com production library. Key files: [`references/DESIGN-LANGUAGE.md`](https://github.com/innovate42/limio-custom-components/blob/production/references/DESIGN-LANGUAGE.md) (the design-system method to replicate), `references/PAGE-COMPOSITIONS.md` (per-page component stacks), `references/WEBFLOW-SPEC.md` (raw measurements).
+- [innovate42/stripe-components](https://github.com/innovate42/stripe-components/tree/develop/components/order-confirmation) — order-confirmation base (develop branch).
+
+**Docs**
+- [Landing-Page Factory: Pages via the API](https://docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages) (internal-only) — the create/build/publish workflow, worked example script, pitfalls checklist.
+- [Custom components development guidelines](https://docs.limio.com/developers/custom-components/development-guidelines) (public docs).
+- [How to see order failures with process events](https://docs.limio.com/support/troubleshooting/how-to-see-order-failures-with-process-events#through-events) — the post-test verification loop; events console: [/objects/events/limio](https://saas-dev.prod.limio.com/objects/events/limio).
+
+**saas-dev catalog examples to copy from**
+- Self-service dropping point: [`/pages2/Avalara Billing`](https://saas-dev.prod.limio.com/catalog/pages2/Avalara%20Billing).
+- Self-service journeys: `/leemeeo-add-payment-method`, `/leemeeo-cancel`, `/leemeeo-direct-update`, `/leemeeo-direct-update-sub`, `/leemeeo-invoices`, [`/pages2/Leemeeo Cancel Save Discount`](https://saas-dev.prod.limio.com/catalog/pages2/Leemeeo%20Cancel%20Save%20Discount).
+- Sales-assisted CPQ (Sam + Taras's tested Amazing Life setup, §3.6): the `/al-checkout` page + its checkout-field config; Slack context in [#sales-demo (17 Jul)](https://limio.slack.com/archives/C0222K1GGUF/p1784271603017069) and [#sales-demo (21 Jul)](https://limio.slack.com/archives/C0222K1GGUF/p1784633913654769) — prefill/lockdown, `customFields.<name>` path gotcha, Yes/No dropdowns.
+
+**Context**
+- Cafeyn intro call notes (20 Jul 2026, Granola): [meeting link](https://notes.granola.ai/t/c54bcfb9-164b-44d9-9110-d29895983b2f) — pain points, €500–2,000/yr self-serve target, Salesforce centrality, three-pathway model.
+- People: **Taras** — Salesforce-side custom fields/permissions for CPQ links; **Sam** — ran the Amazing Life CPQ demo this pattern copies; **Amaury** — sign-off, blockers.
+
+**Testing**
+- Card: `4242 4242 4242 4242`, any future expiry, any CVC.
+- Publish/test on saas-dev is pre-authorized; anonymous auth on all customer-facing pages.
+- Note: the OAuth client-credentials flow from the Landing-Page Factory doc is the sanctioned auth for scripts — mint tokens programmatically, never hand-paste bearer tokens into committed code.
