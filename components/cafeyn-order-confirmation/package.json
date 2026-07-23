@@ -1,0 +1,60 @@
+{
+  "name": "@limio/cafeyn-order-confirmation",
+  "version": "1.0.0",
+  "description": "Cafeyn for Business order confirmation — success hero, order summary (plan, seats, add-ons, payment, next charge), invite-your-team next steps. Ported from stripe-components/order-confirmation, Cafeyn design language, German copy.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "eyebrow", "label": "Eyebrow", "type": "string", "default": "Bestellung bestätigt" },
+    { "id": "heading", "label": "Heading (supports {firstName})", "type": "string", "default": "Willkommen bei Cafeyn for Business, {firstName}." },
+    { "id": "subheading", "label": "Subheading", "type": "string", "default": "Ihr Team hat jetzt Zugriff auf über 2.500 Titel. Eine Bestellbestätigung ist unterwegs an Ihre E-Mail-Adresse." },
+    { "id": "planLabel", "label": "Row label: plan", "type": "string", "default": "Plan" },
+    { "id": "seatsLabel", "label": "Row label: seats", "type": "string", "default": "Lizenzen" },
+    { "id": "addOnsLabel", "label": "Row label: add-ons", "type": "string", "default": "Add-ons" },
+    { "id": "nameLabel", "label": "Row label: name", "type": "string", "default": "Name" },
+    { "id": "emailLabel", "label": "Row label: receipt email", "type": "string", "default": "Beleg an" },
+    { "id": "referenceLabel", "label": "Row label: reference", "type": "string", "default": "Referenz" },
+    { "id": "paymentLabel", "label": "Row label: payment", "type": "string", "default": "Zahlungsmittel" },
+    { "id": "paymentEndingText", "label": "Card 'ending in' text", "type": "string", "default": "endet auf" },
+    { "id": "nextChargeLabel", "label": "Row label: next charge", "type": "string", "default": "Nächste Abbuchung" },
+    { "id": "nextChargeJoiner", "label": "Word between amount and date", "type": "string", "default": "am" },
+    { "id": "stepsHeading", "label": "Next steps heading", "type": "string", "default": "So starten Sie mit Ihrem Team" },
+    {
+      "id": "steps",
+      "label": "Next steps",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "description": { "id": "description", "label": "Description", "type": "string" },
+        "icon": { "id": "icon", "label": "Icon key", "type": "string" }
+      },
+      "default": [
+        { "id": "invite", "label": "Team einladen", "description": "Fügen Sie Ihre Mitarbeitenden mit wenigen Klicks hinzu — jede Lizenz ist sofort aktiv.", "icon": "seat" },
+        { "id": "apps", "label": "Apps installieren", "description": "Cafeyn für iOS, Android und Web — offline lesen inklusive.", "icon": "book" },
+        { "id": "manage", "label": "Abo jederzeit anpassen", "description": "Lizenzen, Plan und Add-ons verwalten Sie im Self-Service-Bereich.", "icon": "sparkle" }
+      ]
+    },
+    { "id": "primaryCta", "label": "Primary CTA", "type": "string", "default": "Zum Kundenkonto" },
+    { "id": "primaryHref", "label": "Primary link", "type": "string", "default": "/ca-account" },
+    { "id": "secondaryCta", "label": "Secondary CTA", "type": "string", "default": "Weitere Titel entdecken" },
+    { "id": "secondaryHref", "label": "Secondary link", "type": "string", "default": "https://www.cafeyn.co/de" },
+    {
+      "id": "footerLinks",
+      "label": "Footer helper links",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "href": { "id": "href", "label": "Link", "type": "string" }
+      },
+      "default": [
+        { "id": "faq", "label": "Häufige Fragen", "href": "/ca-pricing#faq" },
+        { "id": "contact", "label": "Support kontaktieren", "href": "mailto:business@cafeyn.co" }
+      ]
+    },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "cafeyn-order-confirmation" }
+  ]
+}

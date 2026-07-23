@@ -1,0 +1,53 @@
+{
+  "name": "@limio/cafeyn-offers",
+  "version": "1.0.0",
+  "description": "Cafeyn B2B pricing cards — monthly/annual toggle, per-seat quantity stepper with live totals, best-value badge, static Enterprise contact card. German copy by default.",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "headline", "label": "Section headline", "type": "string", "default": "Wählen Sie Ihren Plan" },
+    { "id": "subheadline", "label": "Section subheadline", "type": "string", "default": "Pro Nutzer, transparent, jederzeit anpassbar. 1–10 Lizenzen im Self-Service." },
+    {
+      "id": "groupLabels",
+      "label": "Term toggle labels (id = group__limio)",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "Group ID", "type": "string" },
+        "label": { "id": "label", "label": "Display label", "type": "string" }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monatlich" },
+        { "id": "yearly", "label": "Jährlich" }
+      ]
+    },
+    { "id": "annualSavingsLabel", "label": "Savings chip on annual toggle", "type": "string", "default": "−17 %" },
+    { "id": "quantityLabel", "label": "Quantity stepper label", "type": "string", "default": "Anzahl Lizenzen" },
+    { "id": "quantityHint", "label": "Quantity hint", "type": "string", "default": "Mehr als 10 Lizenzen? Sprechen Sie mit unserem Vertrieb." },
+    { "id": "minQuantity", "label": "Min licenses", "type": "number", "default": 1 },
+    { "id": "maxQuantity", "label": "Max licenses", "type": "number", "default": 10 },
+    { "id": "defaultQuantity", "label": "Default licenses", "type": "number", "default": 5 },
+    { "id": "bestValueLabel", "label": "Best-value badge text", "type": "string", "default": "Beliebteste Wahl" },
+    { "id": "perSeatSuffixMonthly", "label": "Per-seat suffix (monthly)", "type": "string", "default": "pro Nutzer/Monat" },
+    { "id": "perSeatSuffixYearly", "label": "Per-seat suffix (annual)", "type": "string", "default": "pro Nutzer/Monat" },
+    { "id": "totalTemplateMonthly", "label": "Total line (monthly) — {total}, {count}", "type": "string", "default": "{total} pro Monat für {count} Nutzer" },
+    { "id": "totalTemplateYearly", "label": "Total line (annual) — {total}, {count}", "type": "string", "default": "{total} pro Jahr für {count} Nutzer" },
+    { "id": "showEnterpriseCard", "label": "Show Enterprise contact card", "type": "boolean", "default": true },
+    { "id": "enterpriseName", "label": "Enterprise card name", "type": "string", "default": "Enterprise" },
+    { "id": "enterprisePrice", "label": "Enterprise price line", "type": "string", "default": "Individuelles Angebot" },
+    {
+      "id": "enterpriseFeatures",
+      "label": "Enterprise features (rich text)",
+      "type": "richtext",
+      "default": "<ul><li>Ab 50 Lizenzen</li><li>SSO &amp; individueller Katalog</li><li>Für Betriebsräte, Bibliotheken &amp; Hochschulen</li><li>Persönlicher Account Manager</li></ul>"
+    },
+    { "id": "enterpriseCta", "label": "Enterprise CTA", "type": "string", "default": "Vertrieb kontaktieren" },
+    { "id": "enterpriseCtaHref", "label": "Enterprise CTA link", "type": "string", "default": "mailto:business@cafeyn.co" },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "plaene" }
+  ]
+}

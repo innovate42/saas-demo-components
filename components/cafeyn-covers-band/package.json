@@ -1,0 +1,36 @@
+{
+  "name": "@limio/cafeyn-covers-band",
+  "version": "1.0.0",
+  "description": "Scrolling marquee strip of publication covers on a Cafeyn surface band — leads with German titles. Styled placeholders when no cover images are set.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "heading", "label": "Band heading", "type": "string", "default": "Über 2.500 Titel — von 500+ Verlagen" },
+    {
+      "id": "titles",
+      "label": "Publication covers (image optional)",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Title", "type": "string" },
+        "image": { "id": "image", "label": "Cover image URL", "type": "string", "format": "uri", "purpose": "image" }
+      },
+      "default": [
+        { "id": "spiegel", "label": "DER SPIEGEL", "image": "" },
+        { "id": "stern", "label": "stern", "image": "" },
+        { "id": "focus", "label": "FOCUS", "image": "" },
+        { "id": "elffreunde", "label": "11FREUNDE", "image": "" },
+        { "id": "brigitte", "label": "BRIGITTE", "image": "" },
+        { "id": "geo", "label": "GEO", "image": "" },
+        { "id": "capital", "label": "CAPITAL", "image": "" },
+        { "id": "lemonde", "label": "Le Monde", "image": "" },
+        { "id": "independent", "label": "The Independent", "image": "" },
+        { "id": "autobild", "label": "AUTO BILD", "image": "" }
+      ]
+    },
+    { "id": "scrollSeconds", "label": "Marquee loop duration (seconds)", "type": "number", "default": 35 },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "cafeyn-covers-band" }
+  ]
+}

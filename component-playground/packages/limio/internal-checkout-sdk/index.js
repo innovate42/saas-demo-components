@@ -152,3 +152,53 @@ export function useLimioUserPaymentMethods() {
     mutate: () => {}
   }
 }
+
+// Mirrors the shop's completed-checkout session hook: same selector interface
+// as useCheckout, but for the order that was just placed (order-confirmation
+// components read customer, items and references from here).
+export function useCompleteCheckoutSession() {
+  const order = {
+    order_reference: "ORD-2026-000123",
+    sub_reference: "SUB-2026-000456",
+    currency: "EUR",
+    customerDetails: {
+      firstName: "Julia",
+      lastName: "Schneider",
+      email: "julia.schneider@example.de",
+      companyName: "Schneider & Partner GmbH"
+    },
+    orderItems: [
+      {
+        id: "item-1",
+        quantity: 5,
+        offer: {
+          data: {
+            attributes: {
+              display_name__limio: "Team",
+              display_price__limio: "<p>10 € pro Nutzer/Monat</p>"
+            }
+          }
+        },
+        crossSell: [
+          {
+            offer: {
+              data: {
+                attributes: { display_name__limio: "Audio & Podcasts" }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+
+  function useCheckoutSelector(callback) {
+    return callback({ order, completed: true })
+  }
+
+  return { useCheckoutSelector }
+}
+
+export function useLimioUserSubscriptionPaymentMethods() {
+  return useLimioUserPaymentMethods()
+}

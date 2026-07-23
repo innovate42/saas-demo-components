@@ -1,0 +1,237 @@
+.cafeyn-hero {
+  --cafeyn-oil: #211712;
+  --cafeyn-cream: #FFFDF9;
+  --cafeyn-surface: #F2ECE2;
+  --cafeyn-bone: #DED0B9;
+  --cafeyn-caramel: #885F46;
+  --cafeyn-latte: #D2BD9F;
+  --cafeyn-muted: #5C4F45;
+  --cafeyn-white: #FFFFFF;
+  --cafeyn-line: #E7DFD2;
+  --cafeyn-font-serif: "Newsreader", Georgia, serif;
+  --cafeyn-font-sans: "Source Sans 3", "Source Sans Pro", -apple-system, sans-serif;
+  --cafeyn-radius-btn: 8px;
+  --cafeyn-radius-card: 16px;
+  --cafeyn-radius-pill: 9999px;
+  --cafeyn-shadow-rest: 0 1px 3px rgba(33, 23, 18, 0.06);
+  --cafeyn-shadow-lift: 0 12px 32px rgba(33, 23, 18, 0.12);
+  font-family: var(--cafeyn-font-sans);
+  color: var(--cafeyn-oil);
+  background: var(--cafeyn-cream);
+}
+
+.cafeyn-hero *,
+.cafeyn-hero *::before,
+.cafeyn-hero *::after {
+  box-sizing: border-box;
+}
+
+.cafeyn-hero__inner {
+  width: 90%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 0 4rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.cafeyn-hero__copy {
+  flex: 1 1 55%;
+  min-width: 0;
+}
+
+.cafeyn-hero__kicker {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cafeyn-caramel);
+  margin-bottom: 1rem;
+}
+
+.cafeyn-hero__heading {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 500;
+  margin: 0 0 1.25rem;
+  color: var(--cafeyn-oil);
+}
+
+.cafeyn-hero__sub {
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  color: var(--cafeyn-muted);
+  max-width: 34rem;
+}
+
+.cafeyn-hero__sub p {
+  margin: 0 0 0.75rem;
+}
+
+.cafeyn-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.cafeyn-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--cafeyn-radius-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cafeyn-hero__btn--primary {
+  background: var(--cafeyn-oil);
+  color: var(--cafeyn-white);
+}
+
+.cafeyn-hero__btn--primary:hover {
+  background: #3a2b22;
+}
+
+.cafeyn-hero__btn--secondary {
+  background: var(--cafeyn-white);
+  color: var(--cafeyn-oil);
+  border: 1px solid var(--cafeyn-oil);
+}
+
+.cafeyn-hero__btn--secondary:hover {
+  background: var(--cafeyn-surface);
+}
+
+.cafeyn-hero__fine {
+  margin: 1.25rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--cafeyn-muted);
+}
+
+/* Cover collage */
+.cafeyn-hero__collage {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  padding: 1rem 0;
+}
+
+.cafeyn-hero__cover {
+  width: 8.5rem;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(33, 23, 18, 0.15);
+  transform: rotate(var(--tilt, 0deg));
+  margin-left: -1.5rem;
+  background: var(--cafeyn-surface);
+  transition: transform 0.2s ease;
+}
+
+.cafeyn-hero__cover:first-child {
+  margin-left: 0;
+}
+
+.cafeyn-hero__cover:hover {
+  transform: rotate(var(--tilt, 0deg)) translateY(-6px);
+}
+
+.cafeyn-hero__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cafeyn-hero__cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  gap: 0.6rem;
+}
+
+.cafeyn-hero__cover-masthead {
+  font-family: var(--cafeyn-font-serif);
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+
+.cafeyn-hero__cover-lines {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cafeyn-hero__cover-lines i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.cafeyn-hero__cover-lines i:nth-child(2) {
+  width: 75%;
+}
+
+.cafeyn-hero__cover-lines i:nth-child(3) {
+  width: 50%;
+}
+
+/* Skeleton */
+.cafeyn-hero__skl {
+  background: var(--cafeyn-surface);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  animation: cafeyn-hero-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cafeyn-hero-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@media (max-width: 991px) {
+  .cafeyn-hero__heading {
+    font-size: 2.75rem;
+  }
+
+  .cafeyn-hero__cover {
+    width: 7rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .cafeyn-hero__inner {
+    flex-direction: column;
+    padding: 2.5rem 0;
+    gap: 2rem;
+  }
+
+  .cafeyn-hero__heading {
+    font-size: 2.25rem;
+  }
+
+  .cafeyn-hero__collage {
+    width: 100%;
+  }
+
+  .cafeyn-hero__cover {
+    width: 6rem;
+    margin-left: -1.25rem;
+  }
+}
