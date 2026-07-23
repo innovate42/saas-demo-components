@@ -2,6 +2,21 @@
 
 Plan for an agent (with Limio API key access + this repo) to build a Cafeyn-branded B2B demo on the `saas-dev` Limio environment. Develop on branch `claude/caffeine-b2b-demo-apm0py`.
 
+**Required tooling — install the Limio skills plugin first:** [innovate42/limio-skills](https://github.com/innovate42/limio-skills) packages five Claude Code skills for exactly this work — `limio-component` (scaffold custom components with `@limio/sdk` conventions), `limio-sdk-verify` (audit components for deprecated methods/anti-patterns), `limio-story` (Storybook stories), `limio-storybook` (playground with mocked SDK), `limio-setup` (tenant connection, credentials, deploy with build tracking). Install before starting:
+
+```
+/plugin marketplace add innovate42/limio-skills
+/plugin install limio-skills@limio-skills
+/reload-plugins
+```
+
+The components in this repo were last aligned to Limio Component Skill v5.0.0 (commit `550d990`) — follow the skill's current conventions rather than copying older patterns.
+
+**Reference material the agent needs access to** (read-only; add to session/clone as needed):
+- [innovate42/limio-custom-components](https://github.com/innovate42/limio-custom-components) — the limio.com production component library; design-language method (§2) and component conventions (§5).
+- [innovate42/stripe-components](https://github.com/innovate42/stripe-components) (`develop` branch) — base for the order-confirmation variant (§4.3).
+- [Landing-Page Factory internal doc](https://docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages) — the page create/build/publish workflow (§4). Internal-only; don't share externally.
+
 ---
 
 ## 1. Context — why this demo
@@ -41,6 +56,9 @@ From the intro call with Cafeyn (2026-07-20):
 | Muted text | `#5C4F45` | Secondary copy |
 
 CTA style: dark Oil button with cream text, pill-shaped (~24px radius); cards soft-rounded (12–16px). Generous whitespace; let magazine covers provide the color.
+
+### Deliverable: `references/CAFEYN-DESIGN-LANGUAGE.md`
+Before building components, write a Cafeyn design-language doc in this repo, modeled on [`limio-custom-components/references/DESIGN-LANGUAGE.md`](https://github.com/innovate42/limio-custom-components/blob/production/references/DESIGN-LANGUAGE.md) — that's the house approach for keeping a multi-component site coherent, and it worked for the limio.com rebuild. Same structure, Cafeyn values: **(1) Tokens** — named color scale as CSS custom properties, typography roles table (h1/h2/h3/kicker/body/UI with sizes/weights/tracking), spacing scale + breakpoints, radius grammar (interactive vs content vs architectural bands), shadow scale; **(2) Primitives** — buttons, cards, badges, check rows, icon rules; **(3) Section patterns** — which component implements each band; **(4) Page recipes** — the band stack per page type; **(5) Rules of thumb** — e.g. one accent per element, when to use Bone vs cream bands. Every `cafeyn-*` component copies the same token block verbatim into its CSS (the `limio-custom-components` convention) so the system stays consistent. Don't copy Limio's values (Manrope/orange/purple) — only the method.
 
 ### Typography (approximation — exact 2024 typeface is unpublished)
 - Headlines: warm soft serif — **Fraunces** (Google Fonts, 500–600).
@@ -118,9 +136,17 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 
 ## 4. Pages to build in Limio
 
+**How to build them: follow the Landing-Page Factory workflow** — [docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages](https://docs.internal.limio.com/solutions/landing-page-factory-limio-+-claude/landing-pages) (internal-only doc; this is the pipeline that migrated all 27 limio.com pages). It covers creating/updating/publishing pages programmatically: page records + `assets[]` via creation jobs (`POST /limio/jobs`), shop builds, and publish. Non-negotiables from that doc:
+- **OAuth client credentials only** (`POST /oauth2/token`, auto-refresh) — never hand-copied bearer tokens.
+- **Learn the page-record shape from a real page first**: build one in the Page Builder, then `GET /api/pages?path=...` and copy `.items[0].data`. Never guess schema.
+- **URLs come from tags, not page paths**: nested tag `/tags/cafeyn/business` → URL `/cafeyn/business`; page `path`s stay flat (`/pages/cafeyn-business`) or creation fails with `ENOTDIR`.
+- **The new-route trap**: a never-before-published route silently lands in `ommitedWithError.pages` and 404s — a one-time **Page Builder bulk publish** registers it; API publishes work from then on.
+- **Update = delete + recreate** (idempotent scripts); **human review before publish** — publish is live immediately.
+- Content models are data: keep one assembler (`model → assets[]`) and feed it JSON per page — which is also how the German copy stays reviewable in one place.
+
 1. **B2B landing / pricing page** (`cafeyn-business` campaign): Cafeyn header → hero → seat-quantity pricing cards → comparison table → logo/covers band → FAQ → CTA banner → footer.
-2. **Checkout**: standard Limio checkout, Cafeyn-styled (colors/fonts via page builder theme), quantity + add-ons + promo code field visible.
-3. **Order confirmation**: branded confirmation (e.g. `Willkommen bei Cafeyn for Business — Ihr Team hat jetzt Zugriff auf über 2.500 Titel`).
+2. **Checkout**: standard Limio checkout, Cafeyn-styled (colors/fonts via page builder theme), quantity + add-ons + promo code field visible — **plus in-checkout cross-sell and upsell**: offer the add-ons (§3.3) as one-click additions in the basket (`quick-add-on` pattern) and an upsell nudge on the Team plan ("Upgrade auf Business — Audio-Artikel & Lese-Analysen für 5 € mehr pro Nutzer") that swaps the basket item to the Business offer.
+3. **Order confirmation**: branded confirmation (e.g. `Willkommen bei Cafeyn for Business — Ihr Team hat jetzt Zugriff auf über 2.500 Titel`). Base it on [`stripe-components/components/order-confirmation`](https://github.com/innovate42/stripe-components/tree/develop/components/order-confirmation) (develop branch) — port it into this repo as a **new `cafeyn-order-confirmation` variant** restyled with the Cafeyn design-language tokens and German copy, and adapt its features to this demo (seats purchased, plan, add-ons, next steps for inviting the team). Don't modify the stripe-components original.
 4. **My Account (self-service)**: order table + "manage plan" — change seats (`edit-base-plan-new`), upgrade/downgrade (`switch-subscription-tailwind`), add-ons (`edit-add-ons`), cancel journey with save offer (`cancel-survey-tailwind` + `cancel-save-offer-tailwind`).
 
 ---
@@ -131,16 +157,19 @@ Demo the Limio Salesforce flow: opportunity → generate offer/payment link → 
 - `saas-pricing-page` — already does term picker + **quantity ("Number of Licenses")** + highlight color prop. Strong candidate for the core pricing block.
 - `plan-selection` (product/term/billing/quantity/add-ons + preview basket) if a fuller configurator is wanted.
 - `comparison-table`, `faq-accordion`, `cta-banner`, `init-checkout-button-saas-demo`.
-- Self-service: `order-table-tailwind`, `payments-table-tailwind`, `edit-base-plan-new`, `edit-add-ons`, `switch-subscription-tailwind`, `cancel-survey-tailwind`, `cancel-save-offer-tailwind`, `order-confirmation-tailwind`.
+- Self-service: `order-table-tailwind`, `payments-table-tailwind`, `edit-base-plan-new`, `edit-add-ons`, `switch-subscription-tailwind`, `cancel-survey-tailwind`, `cancel-save-offer-tailwind`. (Order confirmation is a new variant — see §4.3 and the build list below.)
 
 ### Build new (follow the `practicetek-*` pattern — that's the house style for client-branded demos)
-Scaffold each with `yarn limio:create <dir> <Name>`; CSS files only; expose colors/copy as `limioProps` with Cafeyn defaults; keep `"react": "*"`.
+Use the **`limio-component` skill** ([limio-skills](https://github.com/innovate42/limio-skills)) to scaffold each component (fallback: `yarn limio:create <dir> <Name>`); CSS files only; expose colors/copy as `limioProps` with Cafeyn (German) defaults; keep `"react": "*"`. Run **`limio-sdk-verify`** over the finished components, and use **`limio-story`** for the Storybook stories.
+
+**Prior art — study [innovate42/limio-custom-components](https://github.com/innovate42/limio-custom-components)** (the limio.com production component library) before writing code. Beyond the design-language method (§2), its hard-won conventions apply directly here: component CSS is scoped to the component's own subtree (page-level styling belongs in the page item's `pageStyle`); the SDK treats `""` as unset — pass `" "` to suppress a defaulted prop, and trim optional string props; declare **every** import in the component's `package.json` `dependencies` (an undeclared dep works in Storybook then crashes the published page's SSR); guard `window`/`document` for server rendering; one rich-text prop beats an array of item props; buttons are `label`+`href` prop pairs; layout choices are picklist props implemented as CSS classes, never inline styles; prop ids are a contract — renaming one orphans content on every existing page.
 
 1. `cafeyn-header` — logo, nav (Catalogue, Business, Pricing), "Log in" + CTA button.
 2. `cafeyn-hero` — B2B hero: German headline (e.g. `Die ganze Presse für Ihr Team`), subcopy, CTA, magazine-cover collage imagery.
 3. `cafeyn-offers` — pricing cards fork of `practicetek-offers`/`b2b-offer-cards` with **seat quantity stepper on the card**, per-seat price × quantity total, monthly/annual toggle, best-value badge — Cafeyn styling baked in as defaults.
 4. `cafeyn-footer` — Cafeyn footer with markets/social links.
-5. (Optional) `cafeyn-covers-band` — scrolling strip of publication covers ("Le Monde, ELLE, L'Équipe, The Independent…") for authenticity.
+5. `cafeyn-order-confirmation` — port of `stripe-components/components/order-confirmation` (see §4.3), Cafeyn tokens + German copy, showing plan, seat count, add-ons, and invite-your-team next steps.
+6. (Optional) `cafeyn-covers-band` — scrolling strip of publication covers (for a German demo, lead with German titles: "Der Spiegel, Stern, Focus, 11FREUNDE, Le Monde, The Independent…") for authenticity.
 
 Register stories in `component-playground/src/stories/` and verify in Storybook (`yarn` at repo root, then playground storybook) before pushing.
 
@@ -167,11 +196,12 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 
 1. **Recon**: `limio_get_offers` (catalog) + `limio_get_pages` on saas-dev; copy attribute/tag conventions from the existing SaaS demo offers. Confirm how quantity/per-seat rate plans and switch offers are modelled on this tenant.
 2. **Catalog**: create products → self-serve offers (3 plans × monthly/annual) → add-ons → switch offers → promo code → sales-assisted offers (§3) → B2C Premium plan + B2C→Team switch offer (§6.5). All display attributes in German.
-3. **Components**: build `cafeyn-*` components (§5) with German default copy, verify in Storybook, commit + push branch.
-4. **Pages/campaign**: build the 4 pages (§4) in German, attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder; set checkout localisation to `de` and configure the B2B checkout fields (§6.1).
-5. **Salesforce**: wire or narrate the sales-assisted payment-link flow (§3.6).
-6. **End-to-end test**: purchase Team ×5 annual with `CAFEYN20` → confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → view invoices/payments → start cancel, accept save offer. Also test the B2C→Team switch. Check every screen along the way is German.
-7. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, checkout customizability, invoicing, B2C conversion, phase-2 expansion story).
+3. **Design language**: write `references/CAFEYN-DESIGN-LANGUAGE.md` (§2) — tokens, primitives, section patterns, page recipes — before any component code.
+4. **Components**: build `cafeyn-*` components (§5) with German default copy and the shared token block from the design-language doc, verify in Storybook, commit + push branch.
+5. **Pages/campaign**: build the 4 pages (§4) in German via the Landing-Page Factory workflow (creation jobs → shop build → publish; remember the one-time Page Builder bulk publish for new routes), attach `cafeyn-b2b` label offers, apply brand theme (colors/fonts from §2) in the page builder; set checkout localisation to `de` and configure the B2B checkout fields + in-checkout cross-sell/upsell (§6.1, §4.2).
+6. **Salesforce**: wire or narrate the sales-assisted payment-link flow (§3.6).
+7. **End-to-end test**: purchase Team ×5 annual with `CAFEYN20` (adding an add-on and seeing the Business upsell nudge in the checkout) → confirm order → My Account → add 3 seats → upgrade to Business → add Audio add-on → view invoices/payments → start cancel, accept save offer. Also test the B2C→Team switch. Check every screen along the way is German.
+8. Write a short **demo script** (README section or `CAFEYN-DEMO-SCRIPT.md`) mapping each click to the meeting pain points (self-serve €500 purchase, 3-click sales link, checkout customizability, invoicing, B2C conversion, phase-2 expansion story).
 
 ## 8. Acceptance checklist
 
@@ -179,7 +209,8 @@ These come from what Juliette & Alexandre explicitly raised on the call (or from
 - [ ] Pricing page looks unmistakably Cafeyn (colors, font, logo, imagery) on desktop + mobile.
 - [ ] Quantity selector: price updates as seats change; 1–10 seats self-serve; total lands in €500–2,000/yr band for typical picks.
 - [ ] Monthly ↔ annual toggle works; annual shows savings.
-- [ ] Checkout shows B2B fields (Firmenname, USt-IdNr., Branche) and editable quantity — the checkout-customizability proof (§6.1).
+- [ ] Checkout shows B2B fields (Firmenname, USt-IdNr., Branche), editable quantity, add-on cross-sell, and a Team→Business upsell nudge — the checkout-customizability proof (§4.2, §6.1).
+- [ ] `references/CAFEYN-DESIGN-LANGUAGE.md` exists and every `cafeyn-*` component uses its token block (§2).
 - [ ] `CAFEYN20` promo applies at checkout.
 - [ ] Post-purchase: seat count change, Team↔Business upgrade/downgrade, add-on cross-sell all work from My Account.
 - [ ] Invoice/payment history visible in My Account (§6.3).
