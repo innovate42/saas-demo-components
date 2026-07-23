@@ -21,9 +21,34 @@ From the intro call with Cafeyn (2026-07-20):
 
 ## 2. Brand kit (Cafeyn look & feel)
 
-> Verified from cafeyn.co on 2026-07-23. Use these as CSS variables in every custom component.
+> Researched 2026-07-23. Cafeyn ran a full rebrand in **September 2024** ("Read as you like" / "Lisez comme vous aimez"): warm, neutral, high-contrast, editorial — a "café crème" identity, brown ink on cream, NOT the old coral-red LeKiosk-era accent and not tech-blue SaaS. Direct scraping of cafeyn.co was blocked by this environment's egress policy, so: the three hex codes below are Brandfetch-verified; derived tokens and fonts are faithful approximations, marked as such. **If the executing agent's environment can fetch cafeyn.co, verify the live CSS (custom properties, @font-face, border radii) first and replace the approximations.**
 
-_TO BE FILLED FROM BRANDING RESEARCH_
+### Verified colors (Brandfetch, cafeyn.co)
+| Token | Hex | Use |
+|---|---|---|
+| Oil (espresso brown, near-black) | `#211712` | Primary text, logo, dark surfaces, **primary CTA background** |
+| Bone (warm beige/latte) | `#DED0B9` | Signature secondary/surface tone |
+| White | `#FFFFFF` | Base background |
+
+### Derived tokens (approximations consistent with the 2024 identity)
+| Token | Hex | Use |
+|---|---|---|
+| Background cream | `#F7F2E9` | Page background |
+| Surface tint | `#EFE6D5` | Card/section alt background (Bone low tint) |
+| Accent caramel | `#8A6D4E` | Sparing accent (badges, links, highlights) |
+| Muted text | `#5C4F45` | Secondary copy |
+
+CTA style: dark Oil button with cream text, pill-shaped (~24px radius); cards soft-rounded (12–16px). Generous whitespace; let magazine covers provide the color.
+
+### Typography (approximation — exact 2024 typeface is unpublished)
+- Headlines: warm soft serif — **Fraunces** (Google Fonts, 500–600).
+- Body/UI: clean sans — **Inter** or **Poppins** (Poppins matches the pre-2024 Cafeyn web app).
+
+### Logo
+Lowercase **"cafeyn"** wordmark, rendered Oil-brown on cream in the current identity. Sources: https://brandfetch.com/cafeyn.co (SVG/PNG), https://seeklogo.com/vector-logo/605179/cafeyn, FR Wikipedia "Fichier:Cafeyn-logo.svg". ⚠️ Older files are the 2019 coral-red era — check the color before using.
+
+### Imagery & voice
+Magazine/newspaper cover thumbnails (subtle shadow, small radius) as the dominant imagery; warm, cozy editorial photography ("intimacy, rest, protection"). Calm, premium-editorial tone. Product facts to use in copy: **~2,500 titles, 500+ publishers** (institutional pages cite 1,600+), offline reading, audio articles, Smart Reader article mode, personalized recommendations, multiprofile. Markets: FR, UK, DE, NL, BE, IT, ES, CH, AT, IE, CA.
 
 ---
 
@@ -39,11 +64,13 @@ One base product, per-seat licensed: **Cafeyn for Business** — access to 1,500
 
 Per-seat pricing, quantity 1–10 seats self-serve (fits their €500–2,000/yr target band). Monthly and annual terms to demo term upgrade:
 
+Made-up but anchored on reality: Cafeyn's consumer tiers are Premium €12.99/mo, Duo €15.99, Famille €20.99, and their real B2B pricing is quote-only today — so a per-seat B2B price near the consumer anchor with a volume/annual discount is credible:
+
 | Plan | Positioning | Price (annual term) | Price (monthly term) | Notes |
 |---|---|---|---|---|
-| **Team** | Core press catalog, up to 10 seats | €96/user/yr (€8/user/mo) | €10/user/mo | 5 seats annual = €480 → the "just let me pay €500" story |
-| **Business** (Best value) | Everything in Team + premium titles, audio, reading analytics, priority support | €144/user/yr (€12/user/mo) | €15/user/mo | `best_value__limio: true` |
-| **Enterprise** | 50+ seats, SSO, custom catalog, account manager | "Contact sales" | — | CTA routes to sales-assisted flow, no checkout |
+| **Team** | Full press catalog for your team, up to 10 seats | €120/user/yr (€10/user/mo) | €12/user/mo | 5 seats annual = €600 → the "just let me pay ~€500 and go" story |
+| **Business** (Best value) | Everything in Team + audio articles, reading analytics, priority support | €180/user/yr (€15/user/mo) | €18/user/mo | `best_value__limio: true`; 10 seats annual = €1,800 (top of their stated band) |
+| **Enterprise** | 50+ seats, SSO, custom catalog (CSEs, libraries, universities), account manager | "Contact sales" | — | CTA routes to sales-assisted flow, no checkout |
 
 Offer attributes that matter:
 - `allow_multibuy__limio: true` + per-seat rate plan so the quantity selector multiplies price (see `plan-selection`/`saas-pricing-page` components for how quantity is consumed).
@@ -73,7 +100,7 @@ Create one promo code offer/discount: **`CAFEYN20`** — 20% off first year, app
 
 Create 1–2 **non-published / direct-link** offers for the sales-assisted path:
 - **Business 25 seats — negotiated** (e.g. €10/user/mo annual, custom terms) — the offer a rep attaches to a Salesforce opportunity and sends as a payment link; buyer lands directly on a pre-filled checkout.
-- Optionally a **Library/CSE** variant to nod at their vertical pricing (libraries, CSEs, hospitality).
+- Optionally a **CSE** variant (French works councils — their flagship B2B vertical, typically employer-funded 1-year unlimited access) to nod at their vertical pricing (CSEs, libraries, universities, hospitality).
 Demo the Limio Salesforce flow: opportunity → generate offer/payment link → customer pays → order back on the Salesforce account. If the saas-dev tenant already has the Salesforce package connected, reuse it; otherwise show the link-generation from Limio and narrate the Salesforce sync.
 
 ---
