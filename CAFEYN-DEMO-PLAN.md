@@ -101,7 +101,16 @@ Create one promo code offer/discount: **`CAFEYN20`** — 20% off first year, app
 Create 1–2 **non-published / direct-link** offers for the sales-assisted path:
 - **Business 25 seats — negotiated** (e.g. €10/user/mo annual, custom terms) — the offer a rep attaches to a Salesforce opportunity and sends as a payment link; buyer lands directly on a pre-filled checkout.
 - Optionally a **CSE** variant (French works councils — their flagship B2B vertical, typically employer-funded 1-year unlimited access) to nod at their vertical pricing (CSEs, libraries, universities, hospitality).
-Demo the Limio Salesforce flow: opportunity → generate offer/payment link → customer pays → order back on the Salesforce account. If the saas-dev tenant already has the Salesforce package connected, reuse it; otherwise show the link-generation from Limio and narrate the Salesforce sync.
+Demo the Limio Salesforce flow: opportunity → generate offer/payment link → customer pays → order back on the Salesforce account.
+
+**Reuse Sam's tested CPQ setup on saas-dev (do NOT rebuild from scratch).** Sam + Taras configured and demo-tested a full sales-assisted CPQ flow on this exact tenant for the Amazing Life demo (2026-07-17 → 07-21, Slack #sales-demo). What exists and works:
+- Salesforce → Limio **checkout link from an opportunity**, landing on a client-branded checkout page — theirs is `/al-checkout` (renamed from the default `/lm-quote-checkout`). Create a `/cafeyn-checkout` equivalent the same way.
+- **Fields prefilled from the SF account/contact and locked down** on the checkout.
+- **Custom fields on the SF contact/opportunity passed through the checkout link** and surfaced in the Limio cart — their examples: `churchSize`, `existingCustomer`, `productInterest`, `Phone`. Gotcha (cost them an hour): on the Limio checkout field config, the `limioField` path must be `customFields.<name>` (e.g. `customFields.churchSize`), **not** `customerDetails.<name>`. Dropdowns read better than booleans in the cart (they switched `existingCustomer` from true/false to Yes/No).
+- Confirmation email verified working.
+- Cafeyn equivalents to configure: `companySize` (dropdown), `sector` (Media/CSE/Library/University/Hospitality), `existingCafeynUser` (Yes/No).
+- Taras is the go-to for the SF-side custom fields/permissions; note there was a one-time SF permissions fix needed before fields appeared on the opportunity.
+- Next iteration in progress (for their Aug 31 demo): **updating an existing sub via Limio CPQ** — if ready in time, it doubles as the Cafeyn upsell-via-sales story.
 
 ---
 
