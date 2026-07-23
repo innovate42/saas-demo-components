@@ -1,0 +1,343 @@
+.cafeyn-offers {
+  --cafeyn-oil: #211712;
+  --cafeyn-cream: #FFFDF9;
+  --cafeyn-surface: #F2ECE2;
+  --cafeyn-bone: #DED0B9;
+  --cafeyn-caramel: #885F46;
+  --cafeyn-latte: #D2BD9F;
+  --cafeyn-muted: #5C4F45;
+  --cafeyn-white: #FFFFFF;
+  --cafeyn-line: #E7DFD2;
+  --cafeyn-font-serif: "Newsreader", Georgia, serif;
+  --cafeyn-font-sans: "Source Sans 3", "Source Sans Pro", -apple-system, sans-serif;
+  --cafeyn-radius-btn: 8px;
+  --cafeyn-radius-card: 16px;
+  --cafeyn-radius-pill: 9999px;
+  --cafeyn-shadow-rest: 0 1px 3px rgba(33, 23, 18, 0.06);
+  --cafeyn-shadow-lift: 0 12px 32px rgba(33, 23, 18, 0.12);
+  font-family: var(--cafeyn-font-sans);
+  color: var(--cafeyn-oil);
+  background: var(--cafeyn-cream);
+}
+
+.cafeyn-offers *,
+.cafeyn-offers *::before,
+.cafeyn-offers *::after {
+  box-sizing: border-box;
+}
+
+.cafeyn-offers__inner {
+  width: 90%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 0;
+}
+
+.cafeyn-offers__headline {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 2.5rem;
+  line-height: 1.15;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 0.75rem;
+}
+
+.cafeyn-offers__subheadline {
+  text-align: center;
+  color: var(--cafeyn-muted);
+  font-size: 1.0625rem;
+  margin: 0 0 2rem;
+}
+
+/* Toolbar: term toggle + seat stepper */
+.cafeyn-offers__toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.cafeyn-offers__toggle {
+  display: inline-flex;
+  background: var(--cafeyn-surface);
+  border: 1px solid var(--cafeyn-line);
+  border-radius: var(--cafeyn-radius-pill);
+  padding: 0.25rem;
+}
+
+.cafeyn-offers__toggle-btn {
+  border: 0;
+  background: transparent;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--cafeyn-radius-pill);
+  font-family: var(--cafeyn-font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cafeyn-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cafeyn-offers__toggle-btn--active {
+  background: var(--cafeyn-oil);
+  color: var(--cafeyn-white);
+}
+
+.cafeyn-offers__savings {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--cafeyn-bone);
+  color: var(--cafeyn-oil);
+  border-radius: var(--cafeyn-radius-pill);
+  padding: 0.1rem 0.5rem;
+}
+
+.cafeyn-offers__stepper-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cafeyn-offers__stepper-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cafeyn-muted);
+}
+
+.cafeyn-offers__stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--cafeyn-surface);
+  border: 1px solid var(--cafeyn-line);
+  border-radius: var(--cafeyn-radius-pill);
+  padding: 0.25rem;
+}
+
+.cafeyn-offers__stepper button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--cafeyn-white);
+  color: var(--cafeyn-oil);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--cafeyn-shadow-rest);
+}
+
+.cafeyn-offers__stepper button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.cafeyn-offers__stepper-count {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  min-width: 2rem;
+  text-align: center;
+}
+
+/* Cards */
+.cafeyn-offers__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.cafeyn-offers__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--cafeyn-white);
+  border: 1px solid var(--cafeyn-line);
+  border-radius: var(--cafeyn-radius-card);
+  padding: 2rem 1.75rem 1.75rem;
+  box-shadow: var(--cafeyn-shadow-rest);
+}
+
+.cafeyn-offers__card--featured {
+  border: 2px solid var(--cafeyn-oil);
+  box-shadow: var(--cafeyn-shadow-lift);
+}
+
+.cafeyn-offers__card--enterprise {
+  background: var(--cafeyn-surface);
+  border-style: dashed;
+}
+
+.cafeyn-offers__badge {
+  position: absolute;
+  top: -0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cafeyn-bone);
+  color: var(--cafeyn-oil);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--cafeyn-radius-pill);
+  padding: 0.2rem 0.9rem;
+  white-space: nowrap;
+}
+
+.cafeyn-offers__plan {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+}
+
+.cafeyn-offers__price {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+
+.cafeyn-offers__price p,
+.cafeyn-offers__price-detail p {
+  margin: 0;
+}
+
+.cafeyn-offers__price-detail {
+  color: var(--cafeyn-muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.cafeyn-offers__total {
+  margin-top: 0.75rem;
+  background: rgba(222, 208, 185, 0.35);
+  border-radius: var(--cafeyn-radius-btn);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.cafeyn-offers__features {
+  margin: 1.25rem 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--cafeyn-muted);
+  flex: 1 1 auto;
+}
+
+.cafeyn-offers__features ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cafeyn-offers__features li {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.cafeyn-offers__features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: rgba(222, 208, 185, 0.5);
+}
+
+.cafeyn-offers__features li::after {
+  content: "";
+  position: absolute;
+  left: 0.28rem;
+  top: 0.48rem;
+  width: 0.5rem;
+  height: 0.28rem;
+  border-left: 2px solid var(--cafeyn-caramel);
+  border-bottom: 2px solid var(--cafeyn-caramel);
+  transform: rotate(-45deg);
+}
+
+.cafeyn-offers__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: var(--cafeyn-radius-btn);
+  background: var(--cafeyn-oil);
+  color: var(--cafeyn-white);
+  font-family: var(--cafeyn-font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.cafeyn-offers__cta:hover {
+  background: #3a2b22;
+}
+
+.cafeyn-offers__cta:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.cafeyn-offers__cta--secondary {
+  background: var(--cafeyn-white);
+  color: var(--cafeyn-oil);
+  border: 1px solid var(--cafeyn-oil);
+}
+
+.cafeyn-offers__cta--secondary:hover {
+  background: var(--cafeyn-cream);
+}
+
+.cafeyn-offers__hint {
+  text-align: center;
+  color: var(--cafeyn-muted);
+  font-size: 0.8125rem;
+  margin: 1.5rem 0 0;
+}
+
+.cafeyn-offers__card--skeleton {
+  min-height: 22rem;
+  background: var(--cafeyn-surface);
+  border: 0;
+  animation: cafeyn-offers-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cafeyn-offers-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@media (max-width: 767px) {
+  .cafeyn-offers__inner {
+    padding: 2.5rem 0;
+  }
+
+  .cafeyn-offers__headline {
+    font-size: 2rem;
+  }
+
+  .cafeyn-offers__toolbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cafeyn-offers__grid {
+    grid-template-columns: 1fr;
+  }
+}

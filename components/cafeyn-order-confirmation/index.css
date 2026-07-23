@@ -1,0 +1,254 @@
+.cafeyn-oc {
+  --cafeyn-oil: #211712;
+  --cafeyn-cream: #FFFDF9;
+  --cafeyn-surface: #F2ECE2;
+  --cafeyn-bone: #DED0B9;
+  --cafeyn-caramel: #885F46;
+  --cafeyn-latte: #D2BD9F;
+  --cafeyn-muted: #5C4F45;
+  --cafeyn-white: #FFFFFF;
+  --cafeyn-line: #E7DFD2;
+  --cafeyn-font-serif: "Newsreader", Georgia, serif;
+  --cafeyn-font-sans: "Source Sans 3", "Source Sans Pro", -apple-system, sans-serif;
+  --cafeyn-radius-btn: 8px;
+  --cafeyn-radius-card: 16px;
+  --cafeyn-radius-pill: 9999px;
+  --cafeyn-shadow-rest: 0 1px 3px rgba(33, 23, 18, 0.06);
+  --cafeyn-shadow-lift: 0 12px 32px rgba(33, 23, 18, 0.12);
+  font-family: var(--cafeyn-font-sans);
+  color: var(--cafeyn-oil);
+  background: var(--cafeyn-cream);
+  display: block;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+.cafeyn-oc *,
+.cafeyn-oc *::before,
+.cafeyn-oc *::after {
+  box-sizing: border-box;
+}
+
+/* Hero */
+.cafeyn-oc__hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cafeyn-oc__check {
+  display: inline-flex;
+  color: var(--cafeyn-caramel);
+  margin-bottom: 1rem;
+}
+
+.cafeyn-oc__check-ring {
+  stroke: var(--cafeyn-bone);
+}
+
+.cafeyn-oc__check-tick {
+  stroke: var(--cafeyn-caramel);
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: cafeyn-oc-tick 0.6s ease-out 0.2s forwards;
+}
+
+@keyframes cafeyn-oc-tick {
+  to { stroke-dashoffset: 0; }
+}
+
+.cafeyn-oc__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cafeyn-caramel);
+  margin-bottom: 0.75rem;
+}
+
+.cafeyn-oc__heading {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 2.25rem;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+}
+
+.cafeyn-oc__sub {
+  color: var(--cafeyn-muted);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 32rem;
+}
+
+/* Summary card */
+.cafeyn-oc__summary {
+  background: var(--cafeyn-white);
+  border: 1px solid var(--cafeyn-line);
+  border-radius: var(--cafeyn-radius-card);
+  box-shadow: var(--cafeyn-shadow-rest);
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cafeyn-oc__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--cafeyn-line);
+  font-size: 0.9375rem;
+}
+
+.cafeyn-oc__summary-row:last-child {
+  border-bottom: 0;
+}
+
+.cafeyn-oc__summary-label {
+  color: var(--cafeyn-muted);
+  flex-shrink: 0;
+}
+
+.cafeyn-oc__summary-value {
+  text-align: right;
+}
+
+.cafeyn-oc__summary-value code {
+  font-size: 0.8125rem;
+  background: var(--cafeyn-surface);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+}
+
+/* Next steps */
+.cafeyn-oc__steps {
+  margin-bottom: 2rem;
+}
+
+.cafeyn-oc__steps-heading {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.cafeyn-oc__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cafeyn-oc__item {
+  display: flex;
+  gap: 0.9rem;
+  background: var(--cafeyn-surface);
+  border-radius: var(--cafeyn-radius-card);
+  padding: 1rem 1.25rem;
+}
+
+.cafeyn-oc__icon {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--cafeyn-bone);
+  color: var(--cafeyn-oil);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cafeyn-oc__item-label {
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.cafeyn-oc__item-desc {
+  color: var(--cafeyn-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* CTAs */
+.cafeyn-oc__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.cafeyn-oc__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--cafeyn-radius-btn);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.cafeyn-oc__cta--primary {
+  background: var(--cafeyn-oil);
+  color: var(--cafeyn-white);
+}
+
+.cafeyn-oc__cta--primary:hover {
+  background: #3a2b22;
+}
+
+.cafeyn-oc__cta--ghost {
+  background: var(--cafeyn-white);
+  color: var(--cafeyn-oil);
+  border: 1px solid var(--cafeyn-oil);
+}
+
+.cafeyn-oc__cta--ghost:hover {
+  background: var(--cafeyn-surface);
+}
+
+/* Footer links */
+.cafeyn-oc__footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--cafeyn-muted);
+}
+
+.cafeyn-oc__footer-link {
+  color: var(--cafeyn-caramel);
+  text-decoration: none;
+}
+
+.cafeyn-oc__footer-link:hover {
+  text-decoration: underline;
+}
+
+.cafeyn-oc__footer-sep {
+  margin: 0 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .cafeyn-oc {
+    padding: 2.5rem 1rem 3rem;
+  }
+
+  .cafeyn-oc__heading {
+    font-size: 1.75rem;
+  }
+
+  .cafeyn-oc__summary-row {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .cafeyn-oc__summary-value {
+    text-align: left;
+  }
+}

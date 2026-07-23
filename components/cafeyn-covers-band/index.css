@@ -1,0 +1,122 @@
+.cafeyn-covers {
+  --cafeyn-oil: #211712;
+  --cafeyn-cream: #FFFDF9;
+  --cafeyn-surface: #F2ECE2;
+  --cafeyn-bone: #DED0B9;
+  --cafeyn-caramel: #885F46;
+  --cafeyn-latte: #D2BD9F;
+  --cafeyn-muted: #5C4F45;
+  --cafeyn-white: #FFFFFF;
+  --cafeyn-line: #E7DFD2;
+  --cafeyn-font-serif: "Newsreader", Georgia, serif;
+  --cafeyn-font-sans: "Source Sans 3", "Source Sans Pro", -apple-system, sans-serif;
+  font-family: var(--cafeyn-font-sans);
+  color: var(--cafeyn-oil);
+  background: var(--cafeyn-surface);
+  padding: 3.5rem 0;
+  overflow: hidden;
+}
+
+.cafeyn-covers *,
+.cafeyn-covers *::before,
+.cafeyn-covers *::after {
+  box-sizing: border-box;
+}
+
+.cafeyn-covers__heading {
+  font-family: var(--cafeyn-font-serif);
+  font-size: 1.75rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 2rem;
+}
+
+.cafeyn-covers__viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.cafeyn-covers__track {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: cafeyn-covers-scroll var(--duration, 35s) linear infinite;
+}
+
+.cafeyn-covers__viewport:hover .cafeyn-covers__track {
+  animation-play-state: paused;
+}
+
+@keyframes cafeyn-covers-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cafeyn-covers__track {
+    animation: none;
+  }
+}
+
+.cafeyn-covers__cover {
+  width: 8rem;
+  aspect-ratio: 2 / 3;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(33, 23, 18, 0.15);
+  background: var(--cafeyn-white);
+}
+
+.cafeyn-covers__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cafeyn-covers__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.7rem;
+  gap: 0.5rem;
+}
+
+.cafeyn-covers__masthead {
+  font-family: var(--cafeyn-font-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.cafeyn-covers__lines {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cafeyn-covers__lines i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.cafeyn-covers__lines i:nth-child(2) { width: 70%; }
+.cafeyn-covers__lines i:nth-child(3) { width: 45%; }
+
+@media (max-width: 767px) {
+  .cafeyn-covers {
+    padding: 2.5rem 0;
+  }
+
+  .cafeyn-covers__cover {
+    width: 6.5rem;
+  }
+}

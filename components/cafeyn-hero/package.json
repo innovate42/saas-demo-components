@@ -1,0 +1,46 @@
+{
+  "name": "@limio/cafeyn-hero",
+  "version": "1.0.0",
+  "description": "Cafeyn for Business pricing-page hero — Newsreader headline, subcopy, CTAs, magazine-cover collage. German copy by default.",
+  "main": "./index.js",
+  "dependencies": {
+    "xss": "^1.0.8"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "Cafeyn for Business" },
+    { "id": "heading", "label": "Heading", "type": "string", "default": "Die ganze Presse für Ihr Team" },
+    {
+      "id": "subheading",
+      "label": "Subheading (rich text)",
+      "type": "richtext",
+      "default": "<p>Über 2.500 Zeitungen und Magazine für jede Mitarbeiterin und jeden Mitarbeiter — ein Abo, alle Titel, jederzeit kündbar.</p>"
+    },
+    { "id": "primaryCta", "label": "Primary CTA", "type": "string", "default": "Pläne ansehen" },
+    { "id": "primaryCtaHref", "label": "Primary CTA link", "type": "string", "default": "#plaene" },
+    { "id": "secondaryCta", "label": "Secondary CTA", "type": "string", "default": "Vertrieb kontaktieren" },
+    { "id": "secondaryCtaHref", "label": "Secondary CTA link", "type": "string", "default": "mailto:business@cafeyn.co" },
+    { "id": "finePrint", "label": "Fine print under CTAs", "type": "string", "default": "1–10 Lizenzen im Self-Service · Rechnung & Kartenzahlung · DSGVO-konform" },
+    { "id": "showCovers", "label": "Show cover collage", "type": "boolean", "default": true },
+    {
+      "id": "covers",
+      "label": "Magazine covers (image optional — styled placeholder used when empty)",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Title", "type": "string" },
+        "image": { "id": "image", "label": "Cover image URL", "type": "string", "format": "uri", "purpose": "image" }
+      },
+      "default": [
+        { "id": "spiegel", "label": "DER SPIEGEL", "image": "" },
+        { "id": "stern", "label": "stern", "image": "" },
+        { "id": "focus", "label": "FOCUS", "image": "" },
+        { "id": "elffreunde", "label": "11FREUNDE", "image": "" },
+        { "id": "lemonde", "label": "Le Monde", "image": "" }
+      ]
+    },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "cafeyn-hero" }
+  ]
+}
