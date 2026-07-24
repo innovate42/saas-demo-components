@@ -5,8 +5,8 @@ import { useSubscriptions } from "@limio/sdk"
 import { ErrorBoundary } from "@limio/sdk"
 import { ErrorMessage } from "./helpers/ErrorMessage"
 import { useComponentStaticProps } from "./componentStaticProps"
-import { Box, Snackbar, Alert, Container, createTheme, ThemeProvider } from "@mui/material"
-import ErrorIcon from "@mui/icons-material/Error"
+import { Box, Snackbar, Alert, Container, createTheme, ThemeProvider } from "./mui"
+import { ErrorIcon } from "./mui-icons"
 import "./styles/index.css"
 
 const theme = createTheme({
