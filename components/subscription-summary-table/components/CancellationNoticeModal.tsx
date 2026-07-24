@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from "@mui/material"
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from "../mui"
 import "../styles/index.css"
 
 type CancellationNoticeModalProps = {

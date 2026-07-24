@@ -12,7 +12,7 @@ import {
   Box,
   Typography,
   Chip,
-} from "@mui/material";
+} from "../mui";
 import type {
   Subscription,
   LimioObject,

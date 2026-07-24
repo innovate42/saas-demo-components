@@ -1,10 +1,7 @@
 import * as React from "react";
 import { SubscriptionDetails } from "./SubscriptionDetails";
 import { useComponentStaticProps } from "../componentStaticProps";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
-import ExtensionIcon from "@mui/icons-material/Extension";
-import CancelIcon from "@mui/icons-material/Cancel";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { AutorenewIcon, ExtensionIcon, CancelIcon, CalendarTodayIcon } from "../mui-icons";
 import {
   Box,
   Stack,
@@ -14,7 +11,7 @@ import {
   Chip,
   Typography,
   Button,
-} from "@mui/material";
+} from "../mui";
 import { checkActiveOffersAndAddOns } from "../helpers/OfferDetails";
 import { CancellationNoticeModal } from "./CancellationNoticeModal";
 import { useButtonActions } from "../helpers/ButtonActions";

@@ -1,6 +1,6 @@
 {
   "name": "component-subscription-summary-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -9,12 +9,7 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.17.1",
-    "@mui/material": "^5.17.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/react": "^18.3.27"
   },
