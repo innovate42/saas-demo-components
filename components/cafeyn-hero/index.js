@@ -1,10 +1,9 @@
 import React from "react"
-import { ErrorBoundary } from "@limio/sdk"
-import xss from "xss"
+import { ErrorBoundary, sanitiseHTML } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
-const sanitize = (str) => xss(str || "")
+const sanitize = (str) => sanitiseHTML(str || "")
 
 // Styled placeholder palette for covers without an image — warm editorial
 // tones so the collage carries color the way real covers would.

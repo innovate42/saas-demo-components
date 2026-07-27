@@ -1,11 +1,10 @@
 {
   "name": "@limio/cafeyn-offers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cafeyn B2B pricing cards — monthly/annual toggle, per-seat quantity stepper with live totals, best-value badge, static Enterprise contact card. German copy by default.",
   "main": "./index.js",
   "dependencies": {
-    "ramda": "^0.28.0",
-    "xss": "^1.0.8"
+    "ramda": "^0.28.0"
   },
   "peerDependencies": {
     "react": "*"

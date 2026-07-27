@@ -1,11 +1,9 @@
 {
   "name": "@limio/cafeyn-hero",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cafeyn for Business pricing-page hero — Newsreader headline, subcopy, CTAs, magazine-cover collage. German copy by default.",
   "main": "./index.js",
-  "dependencies": {
-    "xss": "^1.0.8"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },
