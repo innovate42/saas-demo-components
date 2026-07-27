@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from "react"
-import { ErrorBoundary, useBasket, useCampaign, useLimioContext } from "@limio/sdk"
+import { ErrorBoundary, useBasket, useCampaign, useLimioContext, sanitiseHTML } from "@limio/sdk"
 import { groupBy, prop } from "ramda"
-import xss from "xss"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
-const sanitize = (str) => xss(str || "")
+const sanitize = (str) => sanitiseHTML(str || "")
 
 const fillTemplate = (tpl, vars) => String(tpl || "").replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ""))
 
