@@ -1,0 +1,64 @@
+{
+  "name": "@limio/component-limio-chat-side-panel",
+  "version": "1.0.0",
+  "description": "Switches the @limio/chat widget from its default floating bubble to a desktop side-panel dock (right rail that pushes the page). Styling is left to the widget's defaults — this component only changes layout. No brand theme, no teaser/questions popup.",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*"
+  },
+  "limioProps": [
+    {
+      "id": "layout",
+      "label": "Chat layout",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "side-panel",
+          "label": "Side panel (desktop right rail, pushes the page)",
+          "value": "side-panel"
+        },
+        {
+          "id": "floating",
+          "label": "Floating (bubble, bottom-right — the widget default)",
+          "value": "floating"
+        }
+      ],
+      "default": "side-panel"
+    },
+    {
+      "id": "panelWidth",
+      "label": "Side panel width (desktop, e.g. 400px)",
+      "type": "string",
+      "default": "400px"
+    },
+    {
+      "id": "autoOpen",
+      "label": "Side panel: open automatically on load (desktop, once per session)",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "autoOpenDelay",
+      "label": "Side panel: auto-open delay (seconds)",
+      "type": "number",
+      "default": 2
+    },
+    {
+      "id": "contentSelector",
+      "label": "Page container to push when the panel opens (CSS selector)",
+      "type": "string",
+      "default": "#root"
+    }
+  ]
+}
