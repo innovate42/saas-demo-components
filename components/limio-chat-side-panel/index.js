@@ -40,7 +40,7 @@ const DOCK_DISMISS_KEY = "limio-chat-dock-dismissed"
 // Light-DOM page push. The rail is fixed to the right edge; this shifts the
 // page's content container left by the panel width while the panel is open,
 // so nothing sits under the rail. `contentSelector` is a prop (defaults to
-// the Limio shop's mount point, #root) so it can be pointed at whatever
+// the Limio shop's mount point, #___gatsby) so it can be pointed at whatever
 // wraps the page. --lmo-dock-w is set on :root and inherited across the
 // shadow boundary into the rail rule above.
 function dockPushCss(contentSelector) {
@@ -149,11 +149,11 @@ const LimioChatSidePanel = () => {
     panelWidth = "400px",
     autoOpen = true,
     autoOpenDelay = 2,
-    contentSelector = "#root",
+    contentSelector = "#___gatsby",
   } = useStaticProps() || {}
   // prop is in seconds; guard against blank/negative/NaN
   const autoOpenMs = Number(autoOpenDelay) >= 0 ? Number(autoOpenDelay) * 1000 : DOCK_AUTOOPEN_DEFAULT_MS
-  const pushSelector = (contentSelector || "").trim() || "#root"
+  const pushSelector = (contentSelector || "").trim() || "#___gatsby"
 
   // Side-panel dock: set up (and torn down) whenever the layout props change.
   // "floating" (or anything other than "side-panel") leaves the widget in its

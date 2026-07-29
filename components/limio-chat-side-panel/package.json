@@ -58,7 +58,7 @@
       "id": "contentSelector",
       "label": "Page container to push when the panel opens (CSS selector)",
       "type": "string",
-      "default": "#root"
+      "default": "#___gatsby"
     }
   ]
 }
