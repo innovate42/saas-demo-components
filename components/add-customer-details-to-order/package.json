@@ -1,0 +1,63 @@
+{
+  "name": "@limio/component-add-customer-details-to-order",
+  "version": "1.0.0",
+  "description": "A component to update customer details and custom fields on the order from query parameters. Automatically routes fields to customerDetails or customFields based on field name.",
+  "main": "./index.tsx",
+  "isCustomSubcomponent": true,
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "fieldMappings",
+      "label": "Field Mappings: Maps URL query parameters to order fields. Standard customer fields (firstName, lastName, email, phone, companyName) go to customerDetails. All other fields go to customFields.",
+      "type": "list",
+      "fields": {
+        "targetField": {
+          "id": "targetField",
+          "label": "Target Field",
+          "type": "string",
+          "placeholder": "e.g., email, entityType, incorporationDate",
+          "description": "Field name to update. Standard fields (firstName, lastName, email, phone, companyName) go to customerDetails. All others go to customFields."
+        },
+        "queryParamName": {
+          "id": "queryParamName",
+          "label": "Query Parameter Name",
+          "type": "string",
+          "placeholder": "e.g., email, entity_type",
+          "description": "URL query parameter name to read the value from"
+        }
+      },
+      "default": [
+        {
+          "targetField": "firstName",
+          "queryParamName": "first_name"
+        },
+        {
+          "targetField": "lastName",
+          "queryParamName": "last_name"
+        },
+        {
+          "targetField": "email",
+          "queryParamName": "email"
+        },
+        {
+          "targetField": "phone",
+          "queryParamName": "phone"
+        },
+        {
+          "targetField": "companyName",
+          "queryParamName": "company_name"
+        }
+      ]
+    }
+  ]
+}
