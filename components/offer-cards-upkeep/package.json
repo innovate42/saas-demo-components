@@ -105,7 +105,12 @@
       "label": "Best value color",
       "type": "color",
       "default": "#F47C24"
+    },
+    {
+      "id": "groupByAttribute",
+      "label": "Group offers by this offer attribute (default group__limio; e.g. church_size)",
+      "type": "string",
+      "default": "group__limio"
     }
-    
   ]
 }

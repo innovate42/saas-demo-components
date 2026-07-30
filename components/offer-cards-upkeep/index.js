@@ -14,12 +14,14 @@ type Props = {
 
 function groupOffers(
     offers,
-    groupLabels
+    groupLabels,
+    groupByAttribute = "group__limio"
 ) {
 
-    // Take current offers and split them array groups
+    // Take current offers and split them array groups by the chosen attribute
+    // (defaults to group__limio; e.g. church_size for church-size tiers)
     const groups = R.groupBy(
-        R.path(["data", "attributes", "group__limio"]),
+        R.path(["data", "attributes", groupByAttribute]),
         offers
     );
 
@@ -73,15 +75,14 @@ export const OfferCardsUpkeep= ({
                                groupLabels,
                                showGroupedOffers,
                                freeTrialLink,
-                               best_value_color__limio_color
+                               best_value_color__limio_color,
+                               groupByAttribute = "group__limio"
                            }: Props) => {
     const {offers} = useCampaign()
 
-    console.log(offers)
-
     const offerGroups = useMemo(() => {
-        return groupOffers(offers, groupLabels).filter(group => group !== undefined);
-    }, [offers, groupLabels])
+        return groupOffers(offers, groupLabels, groupByAttribute).filter(group => group !== undefined);
+    }, [offers, groupLabels, groupByAttribute])
 
     const [selectedGroup, setSelectedGroup] = useState()
     const selectedGroupItem = offerGroups.find(offerGroup => offerGroup.id === selectedGroup)
