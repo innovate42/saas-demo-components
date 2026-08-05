@@ -1,0 +1,307 @@
+{
+  "name": "@limio/component-extended-invoice-table",
+  "version": "1.0.0",
+  "main": "./index.ts",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "peerDependencies": {
+    "@sentry/browser": "*",
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "dateHeader",
+      "label": "Invoice Date Header",
+      "type": "string",
+      "default": "Invoice date"
+    },
+    {
+      "id": "dueDateHeader",
+      "label": "Due Date Header",
+      "type": "string",
+      "default": "Due date"
+    },
+    {
+      "id": "referenceHeader",
+      "label": "Reference Header",
+      "type": "string",
+      "default": "Reference"
+    },
+    {
+      "id": "priceHeader",
+      "label": "Price Header",
+      "type": "string",
+      "default": "Price"
+    },
+    {
+      "id": "balanceHeader",
+      "label": "Balance Header",
+      "type": "string",
+      "default": "Balance"
+    },
+    {
+      "id": "downloadInvoiceHeader",
+      "label": "Download invoice header",
+      "type": "string",
+      "default": "Export"
+    },
+    {
+      "id": "payInvoiceHeader",
+      "label": "Pay invoice header",
+      "type": "string",
+      "default": "Pay"
+    },
+    {
+      "id": "downloadInvoiceTooltipText",
+      "label": "Download Invoice Tooltip Text",
+      "type": "string",
+      "default": "Download invoice"
+    },
+    {
+      "id": "payInvoiceTooltipText",
+      "label": "Pay Invoice Tooltip Text",
+      "type": "string",
+      "default": "Pay invoice"
+    },
+    {
+      "id": "showDueDate",
+      "label": "Show Due Date?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showPrice",
+      "label": "Show price?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showBalance",
+      "label": "Show balance?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "allowDownload",
+      "label": "Allow the users to download invoices?",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "allowPay",
+      "label": "Allow the users to pay invoices?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "filtersButtonText",
+      "label": "Filters Button Text",
+      "type": "string",
+      "default": "Filters"
+    },
+    {
+      "id": "filtersBalancePaidText",
+      "label": "Filters: Balance Paid Text",
+      "type": "string",
+      "default": "Paid"
+    },
+    {
+      "id": "filtersBalanceUnpaidText",
+      "label": "Filters: Balance Unpaid Text",
+      "type": "string",
+      "default": "Unpaid"
+    },
+    {
+      "id": "resultsPerPageText",
+      "label": "Results Per Page Text",
+      "type": "string",
+      "default": "Results per page"
+    },
+    {
+      "id": "noInvoicesText",
+      "label": "No Invoices Text",
+      "type": "string",
+      "default": "There are no invoices associated with your account."
+    },
+    {
+      "id": "errorText",
+      "label": "Error Text",
+      "type": "string",
+      "default": "There was a problem retrieving your invoices."
+    },
+    {
+      "id": "confirmPayHeading",
+      "label": "Confirm invoice payment modal: Heading",
+      "type": "string",
+      "default": "Confirm payment"
+    },
+    {
+      "id": "confirmPayText",
+      "label": "Confirm invoice payment modal: Text",
+      "type": "string",
+      "default": "This invoice will be paid with your default payment method:"
+    },
+    {
+      "id": "confirmSuccessHeading",
+      "label": "Confirm invoice payment modal: Success Payment Heading",
+      "type": "string",
+      "default": "Payment Successful"
+    },
+    {
+      "id": "confirmSuccessText",
+      "label": "Confirm invoice payment modal: Success Payment Text",
+      "type": "string",
+      "default": "Your payment has been successfully processed."
+    },
+    {
+      "id": "confirmErrorHeading",
+      "label": "Confirm invoice payment modal: Failed Payment Heading",
+      "type": "string",
+      "default": "Payment Failed"
+    },
+    {
+      "id": "confirmErrorText",
+      "label": "Confirm invoice payment modal: Failed Payment Text",
+      "type": "string",
+      "default": "Unfortunately, your payment could not be processed at this time. Please try again or contact support"
+    },
+    {
+      "id": "changePayURL",
+      "label": "Confirm invoice payment modal: Change payment button URL",
+      "type": "string",
+      "default": "/payment-methods"
+    },
+    {
+      "id": "totalAmountToPayLabel",
+      "label": "Confirm invoice payment modal: Total amount to pay label",
+      "type": "string",
+      "default": "Amount due:"
+    },
+    {
+      "id": "allowPartialPayment",
+      "label": "Confirm invoice payment modal: Allow users to pay partial invoices?",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "minimumPaymentAmount",
+      "label": "Confirm invoice payment modal: Minimum payment amount",
+      "type": "number",
+      "default": 0.01
+    },
+    {
+      "id": "partialPaymentText",
+      "label": "Confirm invoice payment modal: Price input guidance text",
+      "type": "text",
+      "default": "Enter payment amount (min: {{minAmount}}, max: {{invoiceBalance}})"
+    },
+    {
+      "id": "noDefaultHeading",
+      "label": "No default payment method modal: Heading",
+      "type": "string",
+      "default": "No default payment method set"
+    },
+    {
+      "id": "noDefaultText",
+      "label": "No default payment method modal: Text",
+      "type": "string",
+      "default": "You must have a default payment method set before you can proceed with this payment."
+    },
+    {
+      "id": "noDefaultButtonLabel",
+      "label": "No default payment method modal: Set payment method button label",
+      "type": "string",
+      "default": "Go to payment methods"
+    },
+    {
+      "id": "noDefaultButtonURL",
+      "label": "No default payment method modal: Set payment method button URL",
+      "type": "string",
+      "default": "/payment-methods"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "invoice-table-limio"
+    },
+    {
+      "id": "selectAllText",
+      "label": "Select all checkbox label",
+      "type": "string",
+      "default": "Select all unpaid"
+    },
+    {
+      "id": "selectedCountText",
+      "label": "Selected invoices count text (use {{count}} and {{total}} placeholders)",
+      "type": "string",
+      "default": "{{count}} invoice(s) selected"
+    },
+    {
+      "id": "paySelectedText",
+      "label": "Pay selected invoices button text",
+      "type": "string",
+      "default": "Pay Selected"
+    },
+    {
+      "id": "multiPayProgressText",
+      "label": "Multi-pay progress text (use {{current}} and {{total}} placeholders)",
+      "type": "string",
+      "default": "Processing payment {{current}} of {{total}}..."
+    },
+    {
+      "id": "multiPaySuccessHeading",
+      "label": "Multi-pay: All payments succeeded heading",
+      "type": "string",
+      "default": "All Payments Successful"
+    },
+    {
+      "id": "multiPaySuccessText",
+      "label": "Multi-pay: All payments succeeded text",
+      "type": "string",
+      "default": "All selected invoices have been successfully paid."
+    },
+    {
+      "id": "multiPayPartialHeading",
+      "label": "Multi-pay: Some payments failed heading",
+      "type": "string",
+      "default": "Some Payments Failed"
+    },
+    {
+      "id": "multiPayPartialText",
+      "label": "Multi-pay: Some payments failed text (use {{succeeded}} and {{failed}} placeholders)",
+      "type": "string",
+      "default": "{{succeeded}} payment(s) succeeded, {{failed}} payment(s) failed."
+    },
+    {
+      "id": "multiPayErrorHeading",
+      "label": "Multi-pay: All payments failed heading",
+      "type": "string",
+      "default": "Payments Failed"
+    },
+    {
+      "id": "multiPayErrorText",
+      "label": "Multi-pay: All payments failed text",
+      "type": "string",
+      "default": "Unfortunately, none of the payments could be processed. Please try again or contact support."
+    },
+    {
+      "id": "retryFailedText",
+      "label": "Retry failed payments button text",
+      "type": "string",
+      "default": "Retry Failed"
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass",
+    "*.less"
+  ]
+}
