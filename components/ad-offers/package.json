@@ -1,0 +1,45 @@
+{
+  "name": "@limio/ad-offers",
+  "version": "1.0.0",
+  "description": "ALLDATA pricing cards — discrete access-point pack cards (not a seat stepper), monthly/annual term toggle, INCLUDED badges for free product inclusions, and currency/locale formatting driven by the offer's own currencyCode so one component serves the USD, GBP and EUR shops.",
+  "main": "./index.js",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "headline", "label": "Section headline", "type": "string", "default": "Choose your plan" },
+    { "id": "subheadline", "label": "Section subheadline", "type": "string", "default": "Licensed by access point. Change plan any time — we prorate the difference." },
+    {
+      "id": "groupLabels",
+      "label": "Term toggle labels (id = group__limio)",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "Group ID", "type": "string" },
+        "label": { "id": "label", "label": "Display label", "type": "string" }
+      },
+      "default": [
+        { "id": "monthly", "label": "Monthly" },
+        { "id": "yearly", "label": "Annual" }
+      ]
+    },
+    { "id": "annualSavingsLabel", "label": "Savings chip on the annual toggle", "type": "string", "default": "Save 17%" },
+    { "id": "bestValueLabel", "label": "Featured badge text", "type": "string", "default": "Most popular" },
+    { "id": "accessPointsLabel", "label": "Access-point chip template — {count}", "type": "string", "default": "{count} access points" },
+    { "id": "showAccessPoints", "label": "Show the access-point chip", "type": "boolean", "default": true },
+    { "id": "includedBadgeLabel", "label": "Inclusion badge text", "type": "string", "default": "Included" },
+    { "id": "includedPattern", "label": "Feature text that marks a free inclusion (regex, case-insensitive)", "type": "string", "default": "included|inklusive|inbegriffen" },
+    { "id": "locale", "label": "Locale override for price formatting (blank = derive from currency)", "type": "string", "default": "" },
+    { "id": "emptyMessage", "label": "Message when no offers match", "type": "string", "default": "No plans are available for this region yet." },
+    { "id": "footnote", "label": "Footnote under the cards", "type": "richtext", "default": "<p>All plans are digital, subscription only. Prices exclude tax, which is calculated at checkout.</p>" },
+    { "id": "showContactCard", "label": "Show the enterprise contact card", "type": "boolean", "default": false },
+    { "id": "contactName", "label": "Contact card name", "type": "string", "default": "Enterprise" },
+    { "id": "contactPrice", "label": "Contact card price line", "type": "string", "default": "Let's talk" },
+    { "id": "contactFeatures", "label": "Contact card features", "type": "richtext", "default": "<ul><li>Unlimited access points</li><li>Multi-location rollout</li><li>Named account manager</li></ul>" },
+    { "id": "contactCta", "label": "Contact card CTA", "type": "string", "default": "Contact sales" },
+    { "id": "contactCtaHref", "label": "Contact card CTA link", "type": "string", "default": "mailto:sales@alldata.com" },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "plans" }
+  ]
+}

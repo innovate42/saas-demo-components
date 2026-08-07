@@ -1,0 +1,61 @@
+{
+  "name": "@limio/ad-hero",
+  "version": "1.0.0",
+  "description": "ALLDATA pricing hero — navy headline, OEM trust line, and region/language pills that make 'one catalog, many markets' visible. Copy and pills are fully prop-driven so the same component serves the US, UK and EU shops.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "OEM-accurate repair information" },
+    { "id": "headline", "label": "Headline", "type": "string", "default": "Every procedure, straight from the manufacturer." },
+    { "id": "subheadline", "label": "Subheadline", "type": "richtext", "default": "<p>Repair data, wiring diagrams and technical service bulletins for the vehicles in your bays today &mdash; licensed by access point, billed the way you want.</p>" },
+    { "id": "trustLine", "label": "Trust line", "type": "string", "default": "Trusted by more than 400,000 technicians in over 115,000 shops worldwide." },
+    { "id": "ctaText", "label": "Primary CTA text", "type": "string", "default": "See plans" },
+    { "id": "ctaHref", "label": "Primary CTA anchor", "type": "string", "default": "#plans" },
+    { "id": "secondaryCtaText", "label": "Secondary CTA text", "type": "string", "default": "" },
+    { "id": "secondaryCtaHref", "label": "Secondary CTA link", "type": "string", "default": "" },
+    {
+      "id": "regionLabel",
+      "label": "Region switcher label",
+      "type": "string",
+      "default": "Region"
+    },
+    {
+      "id": "regions",
+      "label": "Region pills",
+      "type": "list",
+      "fields": {
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "href": { "id": "href", "label": "Link", "type": "string" },
+        "active": { "id": "active", "label": "Active", "type": "boolean" }
+      },
+      "default": [
+        { "label": "United States (USD)", "href": "/ad-us-pro", "active": true },
+        { "label": "United Kingdom (GBP)", "href": "/ad-uk-diy", "active": false },
+        { "label": "Europe (EUR)", "href": "/ad-eu-diy", "active": false }
+      ]
+    },
+    {
+      "id": "journeyLabel",
+      "label": "Journey switcher label",
+      "type": "string",
+      "default": "I am a"
+    },
+    {
+      "id": "journeys",
+      "label": "Journey pills",
+      "type": "list",
+      "fields": {
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "href": { "id": "href", "label": "Link", "type": "string" },
+        "active": { "id": "active", "label": "Active", "type": "boolean" }
+      },
+      "default": [
+        { "label": "Professional shop", "href": "/ad-us-pro", "active": true },
+        { "label": "DIY / home mechanic", "href": "/ad-uk-diy", "active": false }
+      ]
+    },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "hero" }
+  ]
+}
