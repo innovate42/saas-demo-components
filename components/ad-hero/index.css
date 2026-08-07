@@ -1,0 +1,187 @@
+.ad-hero {
+    --ad-navy: #1b3d6e;
+    --ad-navy-dark: #1d3359;
+    --ad-navy-light: #004987;
+    --ad-orange: #f16824;
+    --ad-ink: #35363a;
+    --ad-steel: #54565a;
+    --ad-line: #dce1e8;
+    --ad-mist: #f4f6f9;
+    --ad-paper: #f8f9fa;
+    --ad-white: #ffffff;
+    --ad-font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --ad-radius-btn: 4px;
+    --ad-radius-pill: 9999px;
+
+    font-family: var(--ad-font);
+    color: var(--ad-ink);
+    background: var(--ad-paper);
+    padding: 4rem 0 3rem;
+}
+
+.ad-hero__inner {
+    width: 90%;
+    max-width: 75rem;
+    margin: 0 auto;
+}
+
+/* --- region / journey pills --- */
+.ad-hero__switchers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.ad-hero__pill-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.ad-hero__pill-label {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ad-steel);
+}
+
+.ad-hero__pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.ad-hero__pill {
+    display: inline-block;
+    padding: 0.4375rem 0.875rem;
+    border-radius: var(--ad-radius-pill);
+    background: var(--ad-mist);
+    border: 1px solid var(--ad-line);
+    color: var(--ad-steel);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.ad-hero__pill:hover {
+    border-color: var(--ad-navy);
+    color: var(--ad-navy);
+}
+
+.ad-hero__pill--active,
+.ad-hero__pill--active:hover {
+    background: var(--ad-navy);
+    border-color: var(--ad-navy);
+    color: var(--ad-white);
+}
+
+/* --- copy --- */
+.ad-hero__kicker {
+    margin: 0 0 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ad-orange);
+}
+
+.ad-hero__headline {
+    margin: 0 0 1rem;
+    font-size: 3rem;
+    line-height: 1.12;
+    font-weight: 700;
+    color: var(--ad-navy);
+    max-width: 20ch;
+}
+
+.ad-hero__subheadline {
+    max-width: 60ch;
+    color: var(--ad-steel);
+}
+
+.ad-hero__subheadline p {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+}
+
+/* --- actions --- */
+.ad-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.ad-hero__cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--ad-radius-btn);
+    background: var(--ad-navy);
+    border: 1px solid var(--ad-navy);
+    color: var(--ad-white);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ad-hero__cta:hover {
+    background: var(--ad-navy-dark);
+    border-color: var(--ad-navy-dark);
+    color: var(--ad-white);
+}
+
+.ad-hero__cta--secondary {
+    background: var(--ad-white);
+    color: var(--ad-navy);
+}
+
+.ad-hero__cta--secondary:hover {
+    background: var(--ad-mist);
+    color: var(--ad-navy);
+}
+
+/* --- trust line --- */
+.ad-hero__trust {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--ad-steel);
+}
+
+.ad-hero__trust-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    color: var(--ad-navy-light);
+}
+
+@media (max-width: 767px) {
+    .ad-hero {
+        padding: 2.25rem 0 1.75rem;
+    }
+
+    .ad-hero__headline {
+        font-size: 2rem;
+        max-width: none;
+    }
+
+    .ad-hero__switchers {
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .ad-hero__pill-group {
+        width: 100%;
+    }
+}

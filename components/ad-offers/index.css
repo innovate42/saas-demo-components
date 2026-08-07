@@ -1,0 +1,367 @@
+.ad-offers {
+    --ad-navy: #1b3d6e;
+    --ad-navy-dark: #1d3359;
+    --ad-navy-light: #004987;
+    --ad-orange: #f16824;
+    --ad-ink: #35363a;
+    --ad-steel: #54565a;
+    --ad-line: #dce1e8;
+    --ad-mist: #f4f6f9;
+    --ad-paper: #f8f9fa;
+    --ad-white: #ffffff;
+    --ad-success: #28a745;
+    --ad-font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --ad-radius-btn: 4px;
+    --ad-radius-card: 8px;
+    --ad-radius-pill: 9999px;
+    --ad-shadow-rest: 0 1px 2px rgba(27, 61, 110, 0.08);
+    --ad-shadow-lift: 0 8px 24px rgba(27, 61, 110, 0.14);
+
+    font-family: var(--ad-font);
+    color: var(--ad-ink);
+    background: var(--ad-paper);
+    padding: 4rem 0;
+}
+
+.ad-offers__inner {
+    width: 90%;
+    max-width: 75rem;
+    margin: 0 auto;
+}
+
+.ad-offers__headline {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--ad-navy);
+    text-align: center;
+}
+
+.ad-offers__subheadline {
+    margin: 0 auto 2rem;
+    max-width: 56ch;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ad-steel);
+    text-align: center;
+}
+
+/* --- term toggle --- */
+.ad-offers__toggle {
+    display: inline-flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    margin: 0 auto 2.5rem;
+    background: var(--ad-mist);
+    border: 1px solid var(--ad-line);
+    border-radius: var(--ad-radius-pill);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ad-offers__toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border: 0;
+    border-radius: var(--ad-radius-pill);
+    background: transparent;
+    color: var(--ad-steel);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ad-offers__toggle-btn:hover {
+    color: var(--ad-navy);
+}
+
+.ad-offers__toggle-btn--active,
+.ad-offers__toggle-btn--active:hover {
+    background: var(--ad-navy);
+    color: var(--ad-white);
+}
+
+.ad-offers__savings {
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--ad-radius-pill);
+    background: rgba(241, 104, 36, 0.14);
+    color: var(--ad-orange);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.ad-offers__toggle-btn--active .ad-offers__savings {
+    background: var(--ad-orange);
+    color: var(--ad-white);
+}
+
+/* --- grid + cards --- */
+.ad-offers__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.ad-offers__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.5rem 1.5rem;
+    background: var(--ad-white);
+    border: 1px solid var(--ad-line);
+    border-radius: var(--ad-radius-card);
+    box-shadow: var(--ad-shadow-rest);
+}
+
+.ad-offers__card--featured {
+    border: 2px solid var(--ad-orange);
+    box-shadow: var(--ad-shadow-lift);
+}
+
+.ad-offers__card--skeleton {
+    min-height: 24rem;
+    background: var(--ad-mist);
+    border-style: dashed;
+    box-shadow: none;
+}
+
+.ad-offers__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--ad-radius-pill);
+    background: var(--ad-orange);
+    color: var(--ad-white);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ad-offers__card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.375rem;
+}
+
+.ad-offers__plan {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--ad-navy);
+}
+
+/* The access-point pack chip — ALLDATA's model is batches, not seats. */
+.ad-offers__ap-chip {
+    padding: 0.1875rem 0.625rem;
+    border-radius: var(--ad-radius-pill);
+    background: rgba(27, 61, 110, 0.08);
+    color: var(--ad-navy);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ad-offers__description p {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--ad-steel);
+}
+
+.ad-offers__price {
+    margin-top: auto;
+}
+
+.ad-offers__price p {
+    margin: 0;
+}
+
+.ad-offers__price strong {
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--ad-navy);
+}
+
+.ad-offers__price-detail p {
+    margin: 0.5rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--ad-steel);
+}
+
+/* --- feature rows --- */
+.ad-offers__features {
+    list-style: none;
+    margin: 1.5rem 0 1.75rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ad-offers__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--ad-ink);
+}
+
+.ad-offers__check {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: none;
+    margin-top: 0.125rem;
+    color: var(--ad-navy-light);
+}
+
+.ad-offers__check--included {
+    color: var(--ad-success);
+}
+
+.ad-offers__feature-text {
+    flex: 1;
+}
+
+/* A free product inclusion is a rule, not a bundle line — it reads
+   differently on purpose. */
+.ad-offers__included-badge {
+    flex: none;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--ad-radius-pill);
+    background: rgba(40, 167, 69, 0.12);
+    color: var(--ad-success);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ad-offers__features-html ul {
+    list-style: none;
+    margin: 1.5rem 0 1.75rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ad-offers__features-html li {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--ad-ink);
+}
+
+/* --- CTA --- */
+.ad-offers__cta {
+    display: inline-block;
+    margin-top: auto;
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    border: 1px solid var(--ad-navy);
+    border-radius: var(--ad-radius-btn);
+    background: var(--ad-navy);
+    color: var(--ad-white);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ad-offers__cta:hover:not(:disabled) {
+    background: var(--ad-navy-dark);
+    border-color: var(--ad-navy-dark);
+    color: var(--ad-white);
+}
+
+.ad-offers__card--featured .ad-offers__cta {
+    background: var(--ad-orange);
+    border-color: var(--ad-orange);
+}
+
+.ad-offers__card--featured .ad-offers__cta:hover:not(:disabled) {
+    background: #d4551a;
+    border-color: #d4551a;
+}
+
+.ad-offers__cta:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.ad-offers__cta--secondary {
+    background: var(--ad-white);
+    color: var(--ad-navy);
+}
+
+.ad-offers__cta--secondary:hover {
+    background: var(--ad-mist);
+    color: var(--ad-navy);
+}
+
+/* --- misc --- */
+.ad-offers__empty {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--ad-steel);
+}
+
+.ad-offers__footnote {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.ad-offers__footnote p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--ad-steel);
+}
+
+@media (max-width: 767px) {
+    .ad-offers {
+        padding: 2.25rem 0;
+    }
+
+    .ad-offers__headline {
+        font-size: 1.5rem;
+    }
+
+    .ad-offers__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ad-offers__toggle {
+        left: 0;
+        transform: none;
+        display: flex;
+        width: 100%;
+    }
+
+    .ad-offers__toggle-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
