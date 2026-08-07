@@ -47,6 +47,38 @@ const getUnitPrice = (offer) => {
 
 const groupOffersByTerm = groupBy(prop("group__limio"))
 
+const ENTITIES = {
+    amp: "&",
+    lt: "<",
+    gt: ">",
+    quot: '"',
+    apos: "'",
+    nbsp: " ",
+    mdash: "—",
+    ndash: "–",
+    middot: "·",
+    euro: "€",
+    pound: "£",
+    hellip: "…",
+    uuml: "ü",
+    auml: "ä",
+    ouml: "ö",
+    szlig: "ß",
+    Uuml: "Ü",
+    Auml: "Ä",
+    Ouml: "Ö",
+}
+
+// Feature text arrives as rich text, so entities have to be decoded before it
+// is rendered as a plain string — otherwise "&amp;" shows up literally.
+const decodeEntities = (str) =>
+    String(str || "")
+        .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+        .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)))
+        .replace(/&([a-z]+);/gi, (m, name) =>
+            Object.prototype.hasOwnProperty.call(ENTITIES, name) ? ENTITIES[name] : m
+        )
+
 // Splits the offer's rich-text feature list into rows, flagging the ones the
 // catalog marks as a free inclusion so they can render as INCLUDED rather than
 // as an ordinary bundle line. The distinction is ALLDATA's, so we keep it.
@@ -60,10 +92,22 @@ const parseFeatures = (html, includedPattern) => {
     }
     const rows = String(html)
         .split(/<\/li>/i)
-        .map((chunk) => chunk.replace(/<[^>]*>/g, "").trim())
+        .map((chunk) => decodeEntities(chunk.replace(/<[^>]*>/g, "")).trim())
         .filter(Boolean)
     if (rows.length === 0) return []
     return rows.map((text) => ({ text, included: re ? re.test(text) : false }))
+}
+
+// Cards read left-to-right in ascending commitment. Sort by the offer's own
+// access-point count, then price, so a new market's offers land in a sensible
+// order without anyone hand-ordering the page.
+const cardOrder = (a, b) => {
+    const ap = (o) => Number(o?.data?.attributes?.access_points__limio) || 0
+    const price = (o) => {
+        const c = o?.data?.attributes?.price__limio?.[0]
+        return Number(c?.value) || 0
+    }
+    return ap(a) - ap(b) || price(a) - price(b)
 }
 
 const CheckIcon = ({ included }) => (
@@ -236,7 +280,10 @@ const AdOffers = () => {
 
     const [selectedGroup, setSelectedGroup] = useState("")
     const activeGroup = selectedGroup || validLabels[0]?.id || ""
-    const displayedOffers = grouped[activeGroup] || []
+    const displayedOffers = useMemo(
+        () => [...(grouped[activeGroup] || [])].sort(cardOrder),
+        [grouped, activeGroup]
+    )
 
     const handleBuy = async (offer) => {
         try {
