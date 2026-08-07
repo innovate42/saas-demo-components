@@ -1,0 +1,33 @@
+{
+  "name": "@limio/ad-geo-route",
+  "version": "1.0.0",
+  "description": "Country-based shop router. Detects the visitor's country and sends them to the right regional shop — one entry URL, many markets, routing as configuration rather than a deployment per region. Supports a ?country=XX override so a specific market can be forced during a demo.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "headline", "label": "Headline while routing", "type": "string", "default": "Finding your region…" },
+    { "id": "subheadline", "label": "Subheadline while routing", "type": "string", "default": "One catalog. We are sending you to the shop for your market." },
+    { "id": "manualPrompt", "label": "Prompt above the manual choices", "type": "string", "default": "Not your region? Choose one:" },
+    { "id": "redirectDelayMs", "label": "Delay before redirecting (ms)", "type": "number", "default": 900 },
+    { "id": "autoRedirect", "label": "Redirect automatically", "type": "boolean", "default": true },
+    { "id": "fallbackUrl", "label": "Fallback shop when the country is unknown", "type": "string", "default": "/ad-us-pro" },
+    {
+      "id": "routes",
+      "label": "Country routing rules — one row per shop",
+      "type": "list",
+      "fields": {
+        "label": { "id": "label", "label": "Shop name", "type": "string" },
+        "url": { "id": "url", "label": "Shop URL", "type": "string" },
+        "countries": { "id": "countries", "label": "ISO country codes, comma separated", "type": "string" }
+      },
+      "default": [
+        { "label": "United Kingdom (GBP)", "url": "/ad-uk-diy", "countries": "GB,IE" },
+        { "label": "United States (USD)", "url": "/ad-us-pro", "countries": "US,CA" },
+        { "label": "Europe (EUR)", "url": "/ad-eu-diy", "countries": "DE,AT,CH,BE,NL,FR,IT,ES,PL,CZ,DK,SE,FI,NO,PT,LU,HU,RO,SK,GR,HR,SI,BG,EE,LV,LT" }
+      ]
+    },
+    { "id": "componentId", "label": "Component Id", "type": "string", "default": "geo-route" }
+  ]
+}

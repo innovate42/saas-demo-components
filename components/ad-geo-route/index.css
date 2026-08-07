@@ -1,0 +1,137 @@
+.ad-geo-route {
+    --ad-navy: #1b3d6e;
+    --ad-navy-dark: #1d3359;
+    --ad-orange: #f16824;
+    --ad-ink: #35363a;
+    --ad-steel: #54565a;
+    --ad-line: #dce1e8;
+    --ad-mist: #f4f6f9;
+    --ad-paper: #f8f9fa;
+    --ad-white: #ffffff;
+    --ad-font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    --ad-radius-btn: 4px;
+    --ad-radius-pill: 9999px;
+
+    font-family: var(--ad-font);
+    color: var(--ad-ink);
+    background: var(--ad-paper);
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.ad-geo-route__inner {
+    width: 90%;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.ad-geo-route__spinner {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--ad-line);
+    border-top-color: var(--ad-navy);
+    border-radius: 50%;
+    animation: ad-geo-route-spin 0.8s linear infinite;
+}
+
+@keyframes ad-geo-route-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ad-geo-route__spinner {
+        animation: none;
+    }
+}
+
+.ad-geo-route__headline {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--ad-navy);
+}
+
+.ad-geo-route__subheadline {
+    margin: 0 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ad-steel);
+}
+
+.ad-geo-route__detected {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 0 0 2rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--ad-white);
+    border: 1px solid var(--ad-line);
+    border-radius: var(--ad-radius-pill);
+    font-size: 0.875rem;
+    color: var(--ad-steel);
+}
+
+.ad-geo-route__code {
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--ad-radius-pill);
+    background: var(--ad-navy);
+    color: var(--ad-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.ad-geo-route__source {
+    color: var(--ad-orange);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.ad-geo-route__prompt {
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    color: var(--ad-steel);
+}
+
+.ad-geo-route__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.ad-geo-route__link {
+    display: inline-block;
+    padding: 0.625rem 1.125rem;
+    border: 1px solid var(--ad-navy);
+    border-radius: var(--ad-radius-btn);
+    background: var(--ad-white);
+    color: var(--ad-navy);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ad-geo-route__link:hover {
+    background: var(--ad-navy);
+    color: var(--ad-white);
+}
+
+@media (max-width: 767px) {
+    .ad-geo-route {
+        padding: 3rem 0;
+    }
+
+    .ad-geo-route__headline {
+        font-size: 1.375rem;
+    }
+}
