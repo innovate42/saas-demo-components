@@ -1,7 +1,7 @@
 {
   "name": "@limio/component-cancel-survey-radio-button-create-basket",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Cancel reasons survey with radio buttons; routes to save/downgrade/edit-add-ons and can create an update-subscription basket.",
   "main": "./index.js",
   "scripts": {
     "build": "yarn component:webpack",
