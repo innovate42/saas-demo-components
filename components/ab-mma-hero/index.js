@@ -209,6 +209,16 @@ const AbMmaHero = () => {
 
   const firstName = attributes?.firstName || attributes?.given_name || ""
 
+  /* The self-service pages resolve which subscription they are acting on from
+     ?subId — without it they render "problem retrieving your subscription
+     offers". Carry it through on every action link. */
+  const withSubId = (url) => {
+    const id = subscription?.id
+    if (!url || !id) return url || "#"
+    if (url.indexOf("subId=") !== -1) return url
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "subId=" + encodeURIComponent(id)
+  }
+
   const styleVars = {
     "--abh-accent": accentColor,
     "--abh-accent-soft": accentSoft,
@@ -330,7 +340,7 @@ const AbMmaHero = () => {
               <a
                 key={action.id || i}
                 className={`abh-action ${action.icon === "cancel" ? "is-quiet" : ""}`}
-                href={action.url || "#"}
+                href={withSubId(action.url)}
               >
                 <span className="abh-action-icon">
                   <Icon name={action.icon} />
