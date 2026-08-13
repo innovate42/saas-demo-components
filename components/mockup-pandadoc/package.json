@@ -1,0 +1,19 @@
+{
+  "name": "component-mockup-pandadoc",
+  "version": "1.0.0",
+  "description": "PandaDoc homepage look-alike mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "headline",
+      "label": "Hero headline",
+      "type": "string",
+      "default": "Make proposals that make impressions"
+    }
+  ]
+}
