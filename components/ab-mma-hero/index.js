@@ -59,6 +59,16 @@ const getNextPayment = (subscription) => {
   return upcoming[0] || null
 }
 
+/** term__limio is an object ({length, type, renewal_type…}) — never renderable. */
+const formatTerm = (term) => {
+  if (!term) return ""
+  if (typeof term === "string") return term
+  const length = term.length || 1
+  const unit = String(term.type || "months").replace(/s$/, "")
+  const period = length === 1 ? `Every ${unit}` : `Every ${length} ${unit}s`
+  return term.renewal_type === "TERMED" ? `${period}, renews automatically` : period
+}
+
 const GeneratedCover = ({ brandName, issueLabel, lines }) => (
   <div className="abh-cover-art" role="img" aria-label={`${brandName} cover, ${issueLabel}`}>
     <div className="abh-cover-masthead">{brandName}</div>
@@ -122,7 +132,7 @@ const AbMmaHero = () => {
     return {
       planName:
         offerAttributes.display_name__limio || offer?.data?.name || subscription.name || "Subscription",
-      term: offerAttributes.term__limio || "",
+      term: formatTerm(offerAttributes.term__limio),
       status: subscription.status || "active",
       reference: subscription.reference || subscription.id || "",
       nextAmount: formatMoney(paymentData.amount, paymentData.currency),
