@@ -1,0 +1,19 @@
+{
+  "name": "component-mockup-xcures",
+  "version": "1.0.0",
+  "description": "xCures Decision-Ready Checklists page replica (prospect mockup)",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "text",
+      "default": "Answers, not summaries."
+    }
+  ]
+}
