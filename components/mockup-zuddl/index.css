@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
+
+/* ===== Zuddl replica — captured palette =====
+   hero bg        #1C0540
+   primary purple #843DF5
+   wordmark fill  #320972
+   light purple   #F7F3FF
+   cream/grey     #F9FAFB
+   body ink       #333333
+*/
+
+.mz-root {
+  --mz-purple: #843df5;
+  --mz-purple-dark: #320972;
+  --mz-hero-bg: #1c0540;
+  --mz-light-purple: #f7f3ff;
+  --mz-grey: #f9fafb;
+  --mz-ink: #1a1130;
+  --mz-ink-soft: #4a4667;
+  --mz-teal: #22d3b8;
+  --mz-border: #e7e3f2;
+  --mz-container: 1180px;
+
+  font-family: "Inter", Arial, sans-serif;
+  color: var(--mz-ink);
+  background: #ffffff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+}
+
+.mz-root *,
+.mz-root *::before,
+.mz-root *::after {
+  box-sizing: border-box;
+}
+
+.mz-container {
+  max-width: var(--mz-container);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ===== Buttons ===== */
+.mz-btn {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.mz-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+.mz-btn-primary { background: var(--mz-purple); color: #fff; }
+.mz-btn-teal { background: var(--mz-teal); color: #06232b; }
+.mz-btn-outline { background: transparent; color: var(--mz-purple); border: 1.5px solid var(--mz-purple); }
+.mz-btn-sm { padding: 10px 16px; font-size: 14px; }
+.mz-btn-lg { padding: 14px 24px; font-size: 16px; }
+.mz-arrow { font-size: 1.1em; line-height: 1; }
+
+/* ===== Nav ===== */
+.mz-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--mz-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.mz-nav-inner {
+  max-width: var(--mz-container);
+  margin: 0 auto;
+  height: 71px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.mz-wordmark { display: block; }
+.mz-nav-links { display: flex; gap: 28px; flex: 1; }
+.mz-nav-link {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #2b2440;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.mz-nav-link:hover { color: var(--mz-purple); }
+.mz-caret { font-size: 10px; color: #8a86a0; }
+.mz-nav-actions { display: flex; align-items: center; gap: 20px; }
+.mz-login {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: #2b2440;
+  cursor: pointer;
+}
+
+/* ===== Hero ===== */
+.mz-hero {
+  background: var(--mz-hero-bg);
+  color: #fff;
+  padding: 80px 0 96px;
+  text-align: center;
+}
+.mz-hero-inner { display: flex; flex-direction: column; align-items: center; }
+.mz-eyebrow {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: #b79dff;
+  margin: 0 0 18px;
+}
+.mz-hero-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 auto 22px;
+  max-width: 15ch;
+  color: #fff;
+}
+.mz-hero-sub {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #cfc7e6;
+  max-width: 60ch;
+  margin: 0 auto 32px;
+}
+.mz-hero-cta { margin-bottom: 56px; }
+.mz-hero-widget {
+  width: 100%;
+  max-width: 820px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 18px 22px;
+}
+.mz-widget-tabs { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.mz-widget-brand {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+}
+.mz-widget-nav { font-size: 14px; color: #cfc7e6; }
+.mz-widget-tabs .mz-btn { margin-left: auto; }
+
+/* ===== Logo strip ===== */
+.mz-logos { background: var(--mz-light-purple); padding: 44px 0; }
+.mz-logos-title {
+  text-align: center;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6b6390;
+  margin: 0 0 26px;
+}
+.mz-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+.mz-logo-img { height: 26px; width: auto; opacity: 0.72; filter: grayscale(1); }
+
+/* ===== Section headers ===== */
+.mz-section-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--mz-ink);
+  margin: 0 auto 16px;
+  max-width: 22ch;
+}
+.mz-section-sub {
+  text-align: center;
+  font-size: 18px;
+  color: var(--mz-ink-soft);
+  max-width: 60ch;
+  margin: 0 auto 48px;
+}
+
+/* ===== Features ===== */
+.mz-features { padding: 88px 0; background: #fff; }
+.mz-feature-grid { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: stretch; }
+.mz-feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.mz-feature-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--mz-ink-soft);
+  padding: 16px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.mz-feature-item:hover { background: var(--mz-grey); }
+.mz-feature-item.is-active {
+  background: var(--mz-light-purple);
+  color: var(--mz-purple-dark);
+  border-color: var(--mz-border);
+}
+.mz-feature-panel {
+  background: linear-gradient(160deg, #f4efff 0%, #ede6ff 100%);
+  border-radius: 18px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+}
+.mz-feature-panel-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--mz-ink);
+  margin: 0 0 14px;
+}
+.mz-feature-panel-text { font-size: 17px; color: var(--mz-ink-soft); max-width: 46ch; margin: 0 0 24px; }
+
+/* ===== Testimonials ===== */
+.mz-testimonials { padding: 88px 0; background: #fff; }
+.mz-testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.mz-testimonial-card {
+  margin: 0;
+  border: 1px solid var(--mz-border);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.mz-testimonial-quote {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--mz-ink);
+  margin: 0 0 16px;
+}
+.mz-testimonial-body { font-size: 15px; color: var(--mz-ink-soft); margin: 0 0 24px; flex: 1; }
+.mz-testimonial-stat { display: flex; flex-direction: column; gap: 4px; padding: 20px 0; border-top: 1px solid var(--mz-border); }
+.mz-stat-num {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  color: var(--mz-purple);
+  line-height: 1;
+}
+.mz-stat-label { font-size: 13px; color: var(--mz-ink-soft); }
+.mz-testimonial-author { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
+.mz-author-name { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 15px; color: var(--mz-ink); }
+.mz-author-title { font-size: 13px; color: var(--mz-ink-soft); }
+.mz-read-case { margin-top: 16px; font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; font-size: 14px; color: var(--mz-purple); cursor: pointer; }
+
+/* ===== CTA ===== */
+.mz-cta { background: var(--mz-grey); padding: 72px 0; }
+.mz-cta-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.mz-cta-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--mz-ink);
+  margin: 0;
+  text-align: center;
+}
+
+/* ===== Footer ===== */
+.mz-footer { background: #1c0540; padding: 32px 0; }
+.mz-footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.mz-footer .mz-wordmark path { fill: #fff; }
+.mz-footer-copy { font-size: 13px; color: #a99fd0; }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .mz-hero-title { font-size: 40px; }
+  .mz-section-title, .mz-cta-title { font-size: 30px; }
+  .mz-feature-grid { grid-template-columns: 1fr; }
+  .mz-testimonial-grid { grid-template-columns: 1fr; }
+  .mz-nav-links { display: none; }
+}

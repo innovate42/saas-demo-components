@@ -1,0 +1,28 @@
+{
+  "name": "@limio/component-mockup-zuddl",
+  "version": "1.0.0",
+  "description": "Prospect mockup: visual replica of the Zuddl event-registration & ticketing page",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "mockup-zuddl-limio"
+    }
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ]
+}
