@@ -1,5 +1,5 @@
 {
-  "name": "@limio/component-mockup-zuddl",
+  "name": "component-mockup-zuddl",
   "version": "1.0.0",
   "description": "Prospect mockup: visual replica of the Zuddl event-registration & ticketing page",
   "main": "./index.tsx",
