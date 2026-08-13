@@ -1,0 +1,129 @@
+{
+  "name": "@limio/ab-mma-hero",
+  "version": "1.0.0",
+  "description": "Subscriber self-service hero: current subscription, next issue, delivery status and quick actions. Brand-driven for publisher titles.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "brandName",
+      "label": "Brand / title name",
+      "type": "string",
+      "default": "Today's Golfer"
+    },
+    {
+      "id": "brandTagline",
+      "label": "Brand tagline",
+      "type": "string",
+      "default": "Play better golf"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent colour",
+      "type": "color",
+      "default": "#0B5D33"
+    },
+    {
+      "id": "accentSoftColor__limio_color",
+      "label": "Accent tint (backgrounds)",
+      "type": "color",
+      "default": "#EAF3ED"
+    },
+    {
+      "id": "inkColor__limio_color",
+      "label": "Ink / text colour",
+      "type": "color",
+      "default": "#10221A"
+    },
+    {
+      "id": "highlightColor__limio_color",
+      "label": "Highlight colour",
+      "type": "color",
+      "default": "#D8A32B"
+    },
+    {
+      "id": "headingFont",
+      "label": "Heading font stack",
+      "type": "string",
+      "default": "\"Georgia\", \"Times New Roman\", serif"
+    },
+    {
+      "id": "coverImage",
+      "label": "Cover image URL (blank = generated cover)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "coverLines",
+      "label": "Generated cover lines",
+      "type": "list",
+      "default": [
+        { "id": "l1", "label": "THE BIG INTERVIEW" },
+        { "id": "l2", "label": "50 BEST DRIVERS TESTED" },
+        { "id": "l3", "label": "FIX YOUR SLICE IN 10 MINS" }
+      ]
+    },
+    {
+      "id": "issueLabel",
+      "label": "Current issue label",
+      "type": "string",
+      "default": "September 2026"
+    },
+    {
+      "id": "greeting",
+      "label": "Greeting",
+      "type": "string",
+      "default": "Welcome back"
+    },
+    {
+      "id": "membershipLabel",
+      "label": "Membership number label",
+      "type": "string",
+      "default": "Subscriber number"
+    },
+    {
+      "id": "deliveryHeading",
+      "label": "Delivery panel heading",
+      "type": "string",
+      "default": "Your next issue"
+    },
+    {
+      "id": "deliveryStatusText",
+      "label": "Delivery status text",
+      "type": "string",
+      "default": "Packed and handed to Royal Mail"
+    },
+    {
+      "id": "deliveryEtaText",
+      "label": "Delivery ETA text",
+      "type": "string",
+      "default": "Arriving Tue 18 Aug"
+    },
+    {
+      "id": "fulfilmentPartner",
+      "label": "Fulfilment partner name",
+      "type": "string",
+      "default": "Air Business"
+    },
+    {
+      "id": "showFulfilmentPartner",
+      "label": "Show fulfilment tracking panel",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "actions",
+      "label": "Quick actions (label|url|icon)",
+      "type": "list",
+      "default": [
+        { "id": "plan", "label": "Change plan", "url": "/tg-change-plan", "icon": "plan" },
+        { "id": "delivery", "label": "Delivery & address", "url": "/tg-delivery", "icon": "delivery" },
+        { "id": "billing", "label": "Payment & invoices", "url": "/tg-billing", "icon": "billing" },
+        { "id": "cancel", "label": "Cancel subscription", "url": "/tg-cancel", "icon": "cancel" }
+      ]
+    }
+  ]
+}
