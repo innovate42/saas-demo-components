@@ -34,7 +34,9 @@ const AbCancel = () => {
     accentSoftColor__limio_color: accentSoft = "#EAF3ED",
     inkColor__limio_color: ink = "#10221A",
     paperColor__limio_color: paper = "#F6F5F1",
-    headingFont = "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+    bodyFont = "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    monoFont = "'Roboto Mono', ui-monospace, Menlo, Consolas, monospace",
+    headingFont = "'Roboto Condensed', 'Helvetica Neue', Arial, sans-serif",
   } = props
 
   const { subscriptions } = useSubscriptions() || {}
@@ -74,6 +76,8 @@ const AbCancel = () => {
     "--abc-ink": ink,
     "--abc-paper": paper,
     "--abc-heading-font": headingFont,
+    "--abc-body-font": bodyFont,
+    "--abc-mono": monoFont,
   }
 
   return (

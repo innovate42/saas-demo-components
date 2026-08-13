@@ -6,8 +6,8 @@
     --abh-accent-soft: #EAF3ED;
     --abh-ink: #10221A;
     --abh-highlight: #D8A32B;
-    --abh-heading-font: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
-    --abh-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --abh-heading-font: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+    --abh-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
 
     --abh-paper: #F2F3F0;
     --abh-rule: rgba(16, 34, 26, 0.16);
@@ -16,7 +16,7 @@
 
     background: var(--abh-paper);
     color: var(--abh-ink);
-    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--abh-body-font, "Helvetica Neue", Helvetica, Arial, sans-serif);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     padding: 0 0 96px;
@@ -413,7 +413,7 @@
 }
 
 .abh-action.is-quiet .abh-action-label {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--abh-body-font, "Helvetica Neue", Helvetica, Arial, sans-serif);
     font-size: 15px;
     font-weight: 400;
     text-transform: none;

@@ -5,15 +5,15 @@
     --abc-accent-soft: #EAF3ED;
     --abc-ink: #10221A;
     --abc-paper: #F2F3F0;
-    --abc-heading-font: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
-    --abc-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --abc-heading-font: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+    --abc-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
     --abc-rule: rgba(16,34,26,.16);
     --abc-hair: rgba(16,34,26,.09);
     --abc-muted: rgba(16,34,26,.54);
 
     background: var(--abc-paper);
     color: var(--abc-ink);
-    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--abc-body-font, "Helvetica Neue", Helvetica, Arial, sans-serif);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     padding: 0 0 96px;

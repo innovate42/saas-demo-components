@@ -89,7 +89,9 @@ const AbMmaHero = () => {
     accentSoftColor__limio_color: accentSoft = "#EAF3ED",
     inkColor__limio_color: ink = "#10221A",
     highlightColor__limio_color: highlight = "#D8A32B",
-    headingFont = '"IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif',
+    bodyFont = "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    monoFont = "'Roboto Mono', ui-monospace, Menlo, Consolas, monospace",
+    headingFont = "'Roboto Condensed', 'Helvetica Neue', Arial, sans-serif",
     paperColor__limio_color: paper = "#F2F3F0",
     coverImage = "",
     coverLines = [],
@@ -138,6 +140,8 @@ const AbMmaHero = () => {
     "--abh-ink": ink,
     "--abh-highlight": highlight,
     "--abh-heading-font": headingFont,
+    "--abh-body-font": bodyFont,
+    "--abh-mono": monoFont,
     "--abh-paper": paper,
   }
 

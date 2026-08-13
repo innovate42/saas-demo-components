@@ -57,6 +57,18 @@
       "default": "'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"
     },
     {
+      "id": "bodyFont",
+      "label": "Body font stack",
+      "type": "string",
+      "default": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    {
+      "id": "monoFont",
+      "label": "Mono / metadata font stack",
+      "type": "string",
+      "default": "'Roboto Mono', ui-monospace, Menlo, Consolas, monospace"
+    },
+    {
       "id": "coverImage",
       "label": "Cover image URL (blank = generated cover)",
       "type": "string",

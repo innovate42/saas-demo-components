@@ -54,61 +54,73 @@
       "id": "bestValueLabel",
       "label": "Best value badge",
       "type": "string",
-      "default": "Most popular"
+      "default": "Best value"
     },
     {
       "id": "ctaFallback",
       "label": "Fallback CTA text",
       "type": "string",
-      "default": "Subscribe"
+      "default": "Continue to checkout"
     },
     {
       "id": "accentColor__limio_color",
       "label": "Accent colour",
       "type": "color",
-      "default": "#0B5D33"
+      "default": "#2667A7"
     },
     {
       "id": "accentDarkColor__limio_color",
       "label": "Accent (dark)",
       "type": "color",
-      "default": "#073B20"
+      "default": "#1B4A7A"
     },
     {
       "id": "accentSoftColor__limio_color",
       "label": "Accent tint",
       "type": "color",
-      "default": "#EAF3ED"
+      "default": "#E7EFF7"
     },
     {
       "id": "inkColor__limio_color",
       "label": "Ink / text colour",
       "type": "color",
-      "default": "#10221A"
+      "default": "#222222"
     },
     {
       "id": "highlightColor__limio_color",
       "label": "Highlight colour",
       "type": "color",
-      "default": "#D8A32B"
+      "default": "#F2C300"
     },
     {
       "id": "highlightInkColor__limio_color",
       "label": "Text on highlight",
       "type": "color",
-      "default": "#16240B"
+      "default": "#222222"
     },
     {
       "id": "paperColor__limio_color",
       "label": "Page background",
       "type": "color",
-      "default": "#F6F5F1"
+      "default": "#F1F2F4"
     },
     {
       "id": "headingFont",
       "label": "Heading font stack",
       "type": "string",
-      "default": "'Archivo', 'Helvetica Neue', Arial, sans-serif"
+      "default": "'Roboto Condensed', 'Helvetica Neue', Arial, sans-serif"
+    },
+    {
+      "id": "bodyFont",
+      "label": "Body font stack",
+      "type": "string",
+      "default": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    {
+      "id": "monoFont",
+      "label": "Mono / metadata font stack",
+      "type": "string",
+      "default": "'Roboto Mono', ui-monospace, Menlo, Consolas, monospace"
     },
     {
       "id": "trustPoints",
@@ -140,6 +152,12 @@
           "label": "Instant digital access from the moment you subscribe"
         }
       ]
+    },
+    {
+      "id": "footnote",
+      "label": "Footnote under the CTA",
+      "type": "string",
+      "default": "Cancel or change your plan any time from your account."
     }
   ]
 }

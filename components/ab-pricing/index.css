@@ -1,27 +1,28 @@
-/* Subscription rate card set as printed matter: masthead, standfirst, one
-   image, and the plans as ruled columns. No gradient hero, no rounded cards. */
+/* Subscribe page after the pattern premium publishers actually use: choose on
+   the left as compact rows, the magazine on the right, one decision, one CTA. */
 
 .abp {
-    --abp-accent: #0B5D33;
-    --abp-accent-dark: #073B20;
-    --abp-accent-soft: #EAF3ED;
-    --abp-ink: #10221A;
-    --abp-highlight: #D8A32B;
-    --abp-highlight-ink: #16240B;
-    --abp-paper: #F2F3F0;
-    --abp-heading-font: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
-    --abp-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --abp-accent: #2667A7;
+    --abp-accent-dark: #1B4A7A;
+    --abp-accent-soft: #E7EFF7;
+    --abp-ink: #222222;
+    --abp-highlight: #F2C300;
+    --abp-highlight-ink: #222222;
+    --abp-paper: #F1F2F4;
+    --abp-heading-font: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+    --abp-body-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --abp-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
 
-    --abp-rule: rgba(16, 34, 26, 0.16);
-    --abp-hair: rgba(16, 34, 26, 0.09);
-    --abp-muted: rgba(16, 34, 26, 0.54);
+    --abp-rule: rgba(34, 34, 34, 0.16);
+    --abp-hair: rgba(34, 34, 34, 0.1);
+    --abp-muted: rgba(34, 34, 34, 0.58);
 
-    background: var(--abp-paper);
+    background: #fff;
     color: var(--abp-ink);
-    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--abp-body-font);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    padding-bottom: 96px;
+    padding: 0 0 88px;
 }
 
 .abp *,
@@ -30,289 +31,202 @@
     box-sizing: border-box;
 }
 
-/* ---------------- Masthead ---------------- */
-
-.abp-hero {
+.abp-inner {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 64px 28px 0;
+    padding: 56px 28px 0;
 }
 
-.abp-hero-inner {
+.abp-cols {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 268px;
-    gap: 56px;
-    align-items: end;
-    padding-bottom: 30px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    gap: 64px;
+    align-items: start;
 }
+
+/* ---------------- Choose ---------------- */
 
 .abp-eyebrow {
-    margin: 0 0 18px;
+    margin: 0 0 12px;
     font-family: var(--abp-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--abp-muted);
+    color: var(--abp-accent);
 }
 
 .abp-headline {
     margin: 0;
     font-family: var(--abp-heading-font);
-    font-size: clamp(42px, 7.2vw, 86px);
-    line-height: 0.92;
-    letter-spacing: -0.032em;
+    font-size: clamp(34px, 4.6vw, 52px);
+    line-height: 1;
+    letter-spacing: -0.02em;
     font-weight: 700;
-    text-transform: uppercase;
     text-wrap: balance;
 }
 
 .abp-sub {
-    margin: 20px 0 0;
-    font-size: 17.5px;
-    line-height: 1.55;
+    margin: 14px 0 0;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--abp-muted);
     max-width: 46ch;
-    color: var(--abp-muted);
-}
-
-.abp-trust {
-    list-style: none;
-    margin: 26px 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 28px;
-}
-
-.abp-trust li {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    font-family: var(--abp-mono);
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    color: var(--abp-muted);
-}
-
-.abp-trust-tick {
-    color: var(--abp-accent);
-    font-weight: 600;
-}
-
-.abp-trust-tick .abp-tick {
-    display: none;
-}
-
-/* Cover — the single image, unframed */
-.abp-hero-art {
-    position: relative;
-}
-
-.abp-cover {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    box-shadow: 0 22px 48px -28px rgba(16, 34, 26, 0.7);
-}
-
-.abp-issue {
-    display: block;
-    margin-top: 12px;
-    font-family: var(--abp-mono);
-    font-size: 11px;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--abp-muted);
-}
-
-/* ---------------- Plans as ruled columns ---------------- */
-
-.abp-plans {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 28px;
 }
 
 .abp-plans-heading {
-    margin: 0;
-    padding: 14px 0;
-    border-top: 1px solid var(--abp-ink);
-    border-bottom: 1px solid var(--abp-ink);
+    margin: 34px 0 12px;
     font-family: var(--abp-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--abp-muted);
 }
 
-.abp-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0;
-}
-
-.abp-card {
-    position: relative;
+.abp-plans {
     display: flex;
     flex-direction: column;
-    padding: 30px 28px 34px;
-    border-right: 1px solid var(--abp-hair);
-    border-bottom: 1px solid var(--abp-ink);
+    gap: 10px;
 }
 
-.abp-card:last-child {
-    border-right: 0;
+.abp-plan {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    padding: 17px 18px;
+    border: 1.5px solid var(--abp-hair);
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.14s ease, background 0.14s ease;
 }
 
-.abp-card.is-best {
-    background: rgba(255, 255, 255, 0.66);
-    border-bottom-color: var(--abp-accent);
-    border-bottom-width: 3px;
+.abp-plan:hover {
+    border-color: var(--abp-accent);
 }
 
-/* A margin note, not a floating pill */
-.abp-badge {
-    display: block;
-    font-family: var(--abp-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--abp-accent);
-    margin-bottom: 10px;
+.abp-plan.is-selected {
+    border-color: var(--abp-accent);
+    border-width: 2px;
+    background: var(--abp-accent-soft);
+    padding: 16.5px 17.5px;
 }
 
-.abp-card:not(.is-best) .abp-badge {
-    visibility: hidden;
+.abp-plan input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.abp-card-name {
-    margin: 0;
-    font-family: var(--abp-heading-font);
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.018em;
-    text-transform: uppercase;
-    line-height: 1.05;
+.abp-radio {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    border: 1.5px solid rgba(34, 34, 34, 0.34);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.abp-price {
-    margin: 18px 0 0;
+.abp-plan.is-selected .abp-radio {
+    border-color: var(--abp-accent);
+    border-width: 2px;
+}
+
+.abp-plan.is-selected .abp-radio::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--abp-accent);
+}
+
+.abp-plan input:focus-visible + .abp-radio {
+    outline: 2px solid var(--abp-accent);
+    outline-offset: 3px;
+}
+
+.abp-plan-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.abp-plan-top {
     display: flex;
     align-items: baseline;
-    gap: 9px;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.abp-plan-name {
+    font-family: var(--abp-heading-font);
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.008em;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-.abp-price-value {
+/* A flag, set in the metadata voice — not a floating pill */
+.abp-flag {
+    font-family: var(--abp-mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    background: var(--abp-highlight);
+    color: var(--abp-highlight-ink);
+    padding: 3px 7px;
+}
+
+.abp-plan-price {
     font-family: var(--abp-heading-font);
-    font-size: 52px;
+    font-size: 25px;
     font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
     font-variant-numeric: tabular-nums;
 }
 
-.abp-price-cadence {
-    font-family: var(--abp-mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--abp-muted);
-}
-
-.abp-blurb {
-    margin-top: 14px;
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--abp-muted);
-}
-
-.abp-blurb p {
-    margin: 0;
-}
-
-.abp-features {
-    list-style: none;
-    margin: 22px 0 30px;
-    padding: 18px 0 0;
-    border-top: 1px solid var(--abp-hair);
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-    flex: 1;
-}
-
-.abp-features li {
-    display: grid;
-    grid-template-columns: 16px minmax(0, 1fr);
-    gap: 10px;
-    font-size: 15px;
-    line-height: 1.45;
-}
-
-.abp-features li.is-off {
-    color: rgba(16, 34, 26, 0.38);
-}
-
-.abp-features li.is-off s,
-.abp-features li.is-off del {
-    text-decoration: none;
-}
-
-.abp-feature-tick {
-    font-family: var(--abp-mono);
+.abp-per {
+    font-family: var(--abp-body-font);
     font-size: 13px;
-    color: var(--abp-accent);
-    line-height: 1.5;
+    font-weight: 400;
+    color: var(--abp-muted);
+    margin-left: 2px;
 }
 
-.abp-features li.is-off .abp-feature-tick {
-    color: rgba(16, 34, 26, 0.3);
+.abp-plan-note {
+    font-size: 14px;
+    color: var(--abp-muted);
+    font-variant-numeric: tabular-nums;
 }
 
-.abp-feature-tick .abp-tick {
-    display: none;
-}
-
-.abp-features p {
-    margin: 0;
-}
-
-/* Button reads as a decisive block, not a rounded pill */
+/* One decision, one button */
 .abp-cta {
-    margin-top: auto;
+    margin-top: 18px;
     width: 100%;
-    border: 1.5px solid var(--abp-ink);
-    border-radius: 0;
-    background: transparent;
-    color: var(--abp-ink);
+    border: 0;
+    border-radius: 2px;
+    background: var(--abp-accent);
+    color: #fff;
     font-family: var(--abp-heading-font);
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-    padding: 15px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    padding: 16px 20px;
     cursor: pointer;
-    transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
+    transition: background 0.14s ease;
 }
 
 .abp-cta:hover:not(:disabled) {
-    background: var(--abp-ink);
-    color: var(--abp-paper);
-}
-
-.abp-card.is-best .abp-cta {
-    background: var(--abp-accent);
-    border-color: var(--abp-accent);
-    color: #fff;
-}
-
-.abp-card.is-best .abp-cta:hover:not(:disabled) {
     background: var(--abp-accent-dark);
-    border-color: var(--abp-accent-dark);
 }
 
 .abp-cta:disabled {
@@ -320,43 +234,136 @@
     cursor: progress;
 }
 
+.abp-footnote {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--abp-muted);
+}
+
+/* ---------------- The magazine ---------------- */
+
+.abp-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.abp-cover {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.62);
+}
+
+.abp-issue {
+    margin-top: 14px;
+    font-family: var(--abp-mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--abp-muted);
+}
+
+/* ---------------- What's included ---------------- */
+
+.abp-included {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid var(--abp-ink);
+}
+
+.abp-included-head {
+    margin: 0 0 18px;
+    font-family: var(--abp-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--abp-muted);
+}
+
+.abp-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px 40px;
+}
+
+.abp-features li {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.abp-features li.is-off {
+    color: rgba(34, 34, 34, 0.4);
+}
+
+.abp-features li.is-off s,
+.abp-features li.is-off del {
+    text-decoration: none;
+}
+
+.abp-mark {
+    color: var(--abp-accent);
+    font-weight: 700;
+}
+
+.abp-features li.is-off .abp-mark {
+    color: rgba(34, 34, 34, 0.32);
+}
+
+.abp-features p {
+    margin: 0;
+}
+
+/* ---------------- Trust line ---------------- */
+
+.abp-trust {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--abp-hair);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 36px;
+    font-family: var(--abp-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--abp-muted);
+}
+
 /* ---------------- Responsive ---------------- */
 
 @media (max-width: 900px) {
-    .abp-hero-inner {
+    .abp-cols {
         grid-template-columns: 1fr;
-        gap: 34px;
-        align-items: start;
+        gap: 36px;
     }
 
-    .abp-hero-art {
-        max-width: 214px;
+    .abp-aside {
+        order: -1;
+        align-items: flex-start;
     }
 
-    .abp-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .abp-card {
-        border-right: 0;
-        border-bottom: 1px solid var(--abp-hair);
-    }
-
-    .abp-card:last-child {
-        border-bottom: 1px solid var(--abp-ink);
+    .abp-cover {
+        max-width: 208px;
     }
 }
 
 @media (max-width: 600px) {
-    .abp-hero {
-        padding: 40px 18px 0;
+    .abp-inner {
+        padding: 36px 18px 0;
     }
 
-    .abp-plans {
-        padding: 0 18px;
-    }
-
-    .abp-card {
-        padding: 26px 0 30px;
+    .abp-plan-top {
+        flex-direction: column;
+        gap: 2px;
     }
 }
