@@ -25,21 +25,8 @@ const cadenceOf = (offer) => {
   return `every ${length} ${unit}s`
 }
 
-const Tick = ({ struck }) => (
-  <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" className="abp-tick">
-    {struck ? (
-      <path d="M5 10h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-    ) : (
-      <path
-        d="M4 10.5l4 4 8-9"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    )}
-  </svg>
+const Mark = ({ struck }) => (
+  <span className="abp-feature-tick" aria-hidden="true">{struck ? "—" : "✓"}</span>
 )
 
 /** Pull <li> text out of the offer's rich-text feature list. */
@@ -138,9 +125,7 @@ const AbPricing = () => {
               <ul className="abp-trust">
                 {trustPoints.map((point, i) => (
                   <li key={point.id || i}>
-                    <span className="abp-trust-tick">
-                      <Tick />
-                    </span>
+                    <span className="abp-trust-tick" aria-hidden="true">✓</span>
                     {point.label}
                   </li>
                 ))}
@@ -175,9 +160,7 @@ const AbPricing = () => {
                 key={offer?.id || offer?.path || i}
                 className={`abp-card ${best ? "is-best" : ""}`}
               >
-                {best && bestValueLabel ? (
-                  <span className="abp-badge">{bestValueLabel}</span>
-                ) : null}
+                <span className="abp-badge">{best ? bestValueLabel : " "}</span>
 
                 <h3 className="abp-card-name">
                   {attributes.display_name__limio || offer?.data?.name || "Subscription"}
@@ -204,9 +187,7 @@ const AbPricing = () => {
                   <ul className="abp-features">
                     {features.map((feature, index) => (
                       <li key={index} className={feature.struck ? "is-off" : ""}>
-                        <span className="abp-feature-tick">
-                          <Tick struck={feature.struck} />
-                        </span>
+                        <Mark struck={feature.struck} />
                         <span dangerouslySetInnerHTML={{ __html: feature.html }} />
                       </li>
                     ))}

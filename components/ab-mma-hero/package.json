@@ -45,10 +45,16 @@
       "default": "#D8A32B"
     },
     {
+      "id": "paperColor__limio_color",
+      "label": "Page background",
+      "type": "color",
+      "default": "#F2F3F0"
+    },
+    {
       "id": "headingFont",
       "label": "Heading font stack",
       "type": "string",
-      "default": "\"Georgia\", \"Times New Roman\", serif"
+      "default": "'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"
     },
     {
       "id": "coverImage",
@@ -61,13 +67,30 @@
       "label": "Generated cover lines",
       "type": "list",
       "fields": {
-        "id": { "id": "id", "label": "ID", "type": "string" },
-        "label": { "id": "label", "label": "Cover line", "type": "string" }
+        "id": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Cover line",
+          "type": "string"
+        }
       },
       "default": [
-        { "id": "l1", "label": "THE BIG INTERVIEW" },
-        { "id": "l2", "label": "50 BEST DRIVERS TESTED" },
-        { "id": "l3", "label": "FIX YOUR SLICE IN 10 MINS" }
+        {
+          "id": "l1",
+          "label": "THE BIG INTERVIEW"
+        },
+        {
+          "id": "l2",
+          "label": "50 BEST DRIVERS TESTED"
+        },
+        {
+          "id": "l3",
+          "label": "FIX YOUR SLICE IN 10 MINS"
+        }
       ]
     },
     {
@@ -86,7 +109,7 @@
       "id": "membershipLabel",
       "label": "Membership number label",
       "type": "string",
-      "default": "Subscriber number"
+      "default": "Subscriber no."
     },
     {
       "id": "deliveryHeading",
@@ -123,16 +146,61 @@
       "label": "Quick actions",
       "type": "list",
       "fields": {
-        "id": { "id": "id", "label": "ID", "type": "string" },
-        "label": { "id": "label", "label": "Label", "type": "string" },
-        "url": { "id": "url", "label": "Link URL", "type": "string" },
-        "icon": { "id": "icon", "label": "Icon (plan|delivery|billing|cancel|gift)", "type": "string" }
+        "id": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "label": {
+          "id": "label",
+          "label": "Label",
+          "type": "string"
+        },
+        "url": {
+          "id": "url",
+          "label": "Link URL",
+          "type": "string"
+        },
+        "icon": {
+          "id": "icon",
+          "label": "Icon (plan|delivery|billing|cancel|gift)",
+          "type": "string"
+        },
+        "note": {
+          "id": "note",
+          "label": "Right-hand note",
+          "type": "string"
+        }
       },
       "default": [
-        { "id": "plan", "label": "Change plan", "url": "/tg-change-plan", "icon": "plan" },
-        { "id": "delivery", "label": "Delivery & address", "url": "/tg-delivery", "icon": "delivery" },
-        { "id": "billing", "label": "Payment & invoices", "url": "/tg-billing", "icon": "billing" },
-        { "id": "cancel", "label": "Cancel subscription", "url": "/tg-cancel", "icon": "cancel" }
+        {
+          "id": "plan",
+          "label": "Change plan",
+          "url": "/tg-direct-update-sub",
+          "icon": "plan",
+          "note": "Upgrade, downgrade or switch term"
+        },
+        {
+          "id": "billing",
+          "label": "Billing history",
+          "url": "/tg-invoices",
+          "icon": "billing",
+          "note": "Invoices and payments"
+        },
+        {
+          "id": "payment",
+          "label": "Payment method",
+          "url": "/tg-payment-methods",
+          "icon": "payment",
+          "note": "Update the card on file"
+        },
+        {
+          "id": "cancel",
+          "label": "Cancel subscription",
+          "url": "/tg-cancel",
+          "icon": "cancel",
+          "note": ""
+        }
       ]
     }
   ]

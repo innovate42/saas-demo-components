@@ -1,3 +1,6 @@
+/* Subscription rate card set as printed matter: masthead, standfirst, one
+   image, and the plans as ruled columns. No gradient hero, no rounded cards. */
+
 .abp {
     --abp-accent: #0B5D33;
     --abp-accent-dark: #073B20;
@@ -5,17 +8,20 @@
     --abp-ink: #10221A;
     --abp-highlight: #D8A32B;
     --abp-highlight-ink: #16240B;
-    --abp-paper: #F6F5F1;
-    --abp-heading-font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --abp-paper: #F2F3F0;
+    --abp-heading-font: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+    --abp-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 
-    --abp-card: #ffffff;
-    --abp-border: rgba(16, 34, 26, 0.11);
-    --abp-muted: rgba(16, 34, 26, 0.6);
+    --abp-rule: rgba(16, 34, 26, 0.16);
+    --abp-hair: rgba(16, 34, 26, 0.09);
+    --abp-muted: rgba(16, 34, 26, 0.54);
 
     background: var(--abp-paper);
     color: var(--abp-ink);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    padding-bottom: 96px;
 }
 
 .abp *,
@@ -24,238 +30,202 @@
     box-sizing: border-box;
 }
 
-/* ---------------- Hero ---------------- */
+/* ---------------- Masthead ---------------- */
 
 .abp-hero {
-    position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(90% 120% at 82% 20%, color-mix(in srgb, var(--abp-accent) 22%, transparent), transparent 62%),
-        linear-gradient(158deg, var(--abp-accent) 0%, var(--abp-accent-dark) 100%);
-    color: #fff;
-    padding: 92px 24px 96px;
-}
-
-.abp-hero::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 64px;
-    background: var(--abp-paper);
-    clip-path: ellipse(72% 100% at 50% 100%);
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 28px 0;
 }
 
 .abp-hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1080px;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1fr) 268px;
     gap: 56px;
-    align-items: center;
+    align-items: end;
+    padding-bottom: 30px;
 }
 
 .abp-eyebrow {
-    margin: 0 0 14px;
+    margin: 0 0 18px;
+    font-family: var(--abp-mono);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--abp-highlight);
+    color: var(--abp-muted);
 }
 
 .abp-headline {
     margin: 0;
     font-family: var(--abp-heading-font);
-    font-size: clamp(34px, 5vw, 56px);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    font-weight: 800;
-    color: #fff;
+    font-size: clamp(42px, 7.2vw, 86px);
+    line-height: 0.92;
+    letter-spacing: -0.032em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-wrap: balance;
 }
 
 .abp-sub {
     margin: 20px 0 0;
-    font-size: 17px;
-    line-height: 1.6;
-    max-width: 34em;
-    color: rgba(255, 255, 255, 0.86);
+    font-size: 17.5px;
+    line-height: 1.55;
+    max-width: 46ch;
+    color: var(--abp-muted);
 }
 
 .abp-trust {
     list-style: none;
-    margin: 30px 0 0;
+    margin: 26px 0 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 6px 28px;
 }
 
 .abp-trust li {
     display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.94);
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--abp-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--abp-muted);
 }
 
 .abp-trust-tick {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--abp-highlight);
-    color: var(--abp-highlight-ink);
+    color: var(--abp-accent);
+    font-weight: 600;
 }
 
 .abp-trust-tick .abp-tick {
-    width: 14px;
-    height: 14px;
+    display: none;
 }
 
-/* Cover art */
+/* Cover — the single image, unframed */
 .abp-hero-art {
     position: relative;
-    display: flex;
-    justify-content: center;
-    perspective: 1400px;
 }
 
 .abp-cover {
     display: block;
     width: 100%;
-    max-width: 288px;
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    border-radius: 4px 10px 10px 4px;
-    transform: rotateY(-13deg) rotateX(2deg) translateZ(0);
-    transform-origin: right center;
-    box-shadow:
-        0 34px 60px -22px rgba(0, 0, 0, 0.62),
-        0 4px 14px rgba(0, 0, 0, 0.3);
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.abp-hero-art:hover .abp-cover {
-    transform: rotateY(-6deg) rotateX(0deg) translateY(-6px);
+    box-shadow: 0 22px 48px -28px rgba(16, 34, 26, 0.7);
 }
 
 .abp-issue {
-    position: absolute;
-    bottom: 14px;
-    right: 4px;
-    background: var(--abp-highlight);
-    color: var(--abp-highlight-ink);
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
+    display: block;
+    margin-top: 12px;
+    font-family: var(--abp-mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    padding: 7px 13px;
-    border-radius: 999px;
-    box-shadow: 0 8px 22px -8px rgba(0, 0, 0, 0.7);
-    white-space: nowrap;
+    color: var(--abp-muted);
 }
 
-/* ---------------- Plans ---------------- */
+/* ---------------- Plans as ruled columns ---------------- */
 
 .abp-plans {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 8px 24px 88px;
+    padding: 0 28px;
 }
 
 .abp-plans-heading {
-    margin: 0 0 36px;
-    text-align: center;
-    font-family: var(--abp-heading-font);
-    font-size: clamp(24px, 3vw, 34px);
-    letter-spacing: -0.02em;
-    font-weight: 700;
+    margin: 0;
+    padding: 14px 0;
+    border-top: 1px solid var(--abp-ink);
+    border-bottom: 1px solid var(--abp-ink);
+    font-family: var(--abp-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--abp-muted);
 }
 
 .abp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
-    gap: 22px;
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
 }
 
 .abp-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--abp-card);
-    border: 1px solid var(--abp-border);
-    border-radius: 16px;
-    padding: 30px 26px 26px;
-    box-shadow: 0 12px 32px -24px rgba(16, 34, 26, 0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    padding: 30px 28px 34px;
+    border-right: 1px solid var(--abp-hair);
+    border-bottom: 1px solid var(--abp-ink);
 }
 
-.abp-card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--abp-accent) 38%, transparent);
-    box-shadow: 0 26px 50px -28px rgba(16, 34, 26, 0.55);
+.abp-card:last-child {
+    border-right: 0;
 }
 
 .abp-card.is-best {
-    border-color: var(--abp-accent);
-    border-width: 2px;
-    box-shadow: 0 26px 54px -26px color-mix(in srgb, var(--abp-accent) 60%, transparent);
+    background: rgba(255, 255, 255, 0.66);
+    border-bottom-color: var(--abp-accent);
+    border-bottom-width: 3px;
 }
 
+/* A margin note, not a floating pill */
 .abp-badge {
-    position: absolute;
-    top: -13px;
-    left: 26px;
-    background: var(--abp-accent);
-    color: #fff;
+    display: block;
+    font-family: var(--abp-mono);
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 6px 13px;
-    border-radius: 999px;
+    color: var(--abp-accent);
+    margin-bottom: 10px;
+}
+
+.abp-card:not(.is-best) .abp-badge {
+    visibility: hidden;
 }
 
 .abp-card-name {
     margin: 0;
     font-family: var(--abp-heading-font);
-    font-size: 21px;
+    font-size: 26px;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.018em;
+    text-transform: uppercase;
+    line-height: 1.05;
 }
 
 .abp-price {
-    margin: 14px 0 0;
+    margin: 18px 0 0;
     display: flex;
     align-items: baseline;
-    gap: 8px;
+    gap: 9px;
     flex-wrap: wrap;
 }
 
 .abp-price-value {
     font-family: var(--abp-heading-font);
-    font-size: 40px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
 }
 
 .abp-price-cadence {
-    font-size: 14px;
+    font-family: var(--abp-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--abp-muted);
 }
 
 .abp-blurb {
-    margin-top: 12px;
-    font-size: 14.5px;
+    margin-top: 14px;
+    font-size: 15px;
     line-height: 1.5;
     color: var(--abp-muted);
 }
@@ -266,25 +236,25 @@
 
 .abp-features {
     list-style: none;
-    margin: 20px 0 26px;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--abp-border);
+    margin: 22px 0 30px;
+    padding: 18px 0 0;
+    border-top: 1px solid var(--abp-hair);
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 11px;
     flex: 1;
 }
 
 .abp-features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    font-size: 14.5px;
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 15px;
     line-height: 1.45;
 }
 
 .abp-features li.is-off {
-    color: rgba(16, 34, 26, 0.42);
+    color: rgba(16, 34, 26, 0.38);
 }
 
 .abp-features li.is-off s,
@@ -293,49 +263,60 @@
 }
 
 .abp-feature-tick {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-    background: var(--abp-accent-soft);
+    font-family: var(--abp-mono);
+    font-size: 13px;
     color: var(--abp-accent);
-    margin-top: 1px;
+    line-height: 1.5;
 }
 
 .abp-features li.is-off .abp-feature-tick {
-    background: rgba(16, 34, 26, 0.07);
-    color: rgba(16, 34, 26, 0.42);
+    color: rgba(16, 34, 26, 0.3);
+}
+
+.abp-feature-tick .abp-tick {
+    display: none;
 }
 
 .abp-features p {
     margin: 0;
 }
 
+/* Button reads as a decisive block, not a rounded pill */
 .abp-cta {
     margin-top: auto;
     width: 100%;
-    border: 0;
-    border-radius: 11px;
-    background: var(--abp-accent);
-    color: #fff;
-    font-family: inherit;
-    font-size: 15.5px;
-    font-weight: 700;
+    border: 1.5px solid var(--abp-ink);
+    border-radius: 0;
+    background: transparent;
+    color: var(--abp-ink);
+    font-family: var(--abp-heading-font);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
     padding: 15px 18px;
     cursor: pointer;
-    transition: background 0.18s ease, transform 0.18s ease;
+    transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
 }
 
 .abp-cta:hover:not(:disabled) {
+    background: var(--abp-ink);
+    color: var(--abp-paper);
+}
+
+.abp-card.is-best .abp-cta {
+    background: var(--abp-accent);
+    border-color: var(--abp-accent);
+    color: #fff;
+}
+
+.abp-card.is-best .abp-cta:hover:not(:disabled) {
     background: var(--abp-accent-dark);
-    transform: translateY(-1px);
+    border-color: var(--abp-accent-dark);
 }
 
 .abp-cta:disabled {
-    opacity: 0.65;
+    opacity: 0.55;
     cursor: progress;
 }
 
@@ -344,34 +325,38 @@
 @media (max-width: 900px) {
     .abp-hero-inner {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 34px;
+        align-items: start;
     }
 
     .abp-hero-art {
-        order: -1;
-        perspective: none;
+        max-width: 214px;
     }
 
-    .abp-cover {
-        max-width: 210px;
-        transform: none;
+    .abp-grid {
+        grid-template-columns: 1fr;
     }
 
-    .abp-hero-art:hover .abp-cover {
-        transform: translateY(-4px);
+    .abp-card {
+        border-right: 0;
+        border-bottom: 1px solid var(--abp-hair);
+    }
+
+    .abp-card:last-child {
+        border-bottom: 1px solid var(--abp-ink);
     }
 }
 
 @media (max-width: 600px) {
     .abp-hero {
-        padding: 48px 18px 64px;
+        padding: 40px 18px 0;
     }
 
     .abp-plans {
-        padding: 8px 18px 64px;
+        padding: 0 18px;
     }
 
     .abp-card {
-        padding: 26px 22px 22px;
+        padding: 26px 0 30px;
     }
 }

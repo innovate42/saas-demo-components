@@ -1,257 +1,139 @@
+/* Billing history as a ledger: rules, tabular figures, mono metadata. */
+
 .abi {
     --abi-accent: #0B5D33;
     --abi-accent-soft: #EAF3ED;
     --abi-ink: #10221A;
-    --abi-paper: #F6F5F1;
-    --abi-heading-font: "Archivo", "Helvetica Neue", Arial, sans-serif;
-
-    --abi-card: #ffffff;
-    --abi-border: rgba(16, 34, 26, 0.1);
-    --abi-muted: rgba(16, 34, 26, 0.56);
+    --abi-paper: #F2F3F0;
+    --abi-heading-font: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+    --abi-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --abi-rule: rgba(16,34,26,.16);
+    --abi-hair: rgba(16,34,26,.09);
+    --abi-muted: rgba(16,34,26,.54);
 
     background: var(--abi-paper);
     color: var(--abi-ink);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    padding: 56px 24px 72px;
+    padding: 0 0 96px;
     min-height: 60vh;
 }
 
-.abi *,
-.abi *::before,
-.abi *::after {
-    box-sizing: border-box;
-}
+.abi *, .abi *::before, .abi *::after { box-sizing: border-box; }
 
-.abi-inner {
-    max-width: 940px;
-    margin: 0 auto;
-}
-
-/* ---------------- Header ---------------- */
+.abi-inner { max-width: 940px; margin: 0 auto; padding: 64px 28px 0; }
 
 .abi-head {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
-    padding-bottom: 22px;
-    margin-bottom: 28px;
-    border-bottom: 2px solid var(--abi-ink);
+    gap: 28px;
+    padding-bottom: 26px;
 }
 
 .abi-title {
     margin: 0;
     font-family: var(--abi-heading-font);
-    font-size: clamp(28px, 4vw, 40px);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: .94;
+    letter-spacing: -.03em;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
-.abi-sub {
-    margin: 10px 0 0;
-    font-size: 15.5px;
-    line-height: 1.55;
-    color: var(--abi-muted);
-    max-width: 44em;
-}
+.abi-sub { margin: 14px 0 0; font-size: 16px; line-height: 1.5; color: var(--abi-muted); max-width: 46ch; }
 
 .abi-link {
     flex-shrink: 0;
-    font-size: 14.5px;
-    font-weight: 600;
+    font-family: var(--abi-mono);
+    font-size: 12px;
+    letter-spacing: .05em;
     color: var(--abi-accent);
     text-decoration: none;
     white-space: nowrap;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
 }
 
-.abi-link:hover {
-    text-decoration: underline;
-}
-
-/* ---------------- Table ---------------- */
-
-.abi-card {
-    background: var(--abi-card);
-    border: 1px solid var(--abi-border);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 12px 30px -22px rgba(16, 34, 26, 0.4);
-}
+.abi-card { border-top: 1px solid var(--abi-ink); }
 
 .abi-row {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 0.9fr 0.9fr 1.4fr;
-    align-items: center;
-    gap: 16px;
-    padding: 17px 24px;
-    border-bottom: 1px solid var(--abi-border);
-    font-size: 15px;
-}
-
-.abi-row:last-child {
-    border-bottom: 0;
+    grid-template-columns: 1.3fr .9fr .7fr .7fr 1.2fr;
+    align-items: baseline;
+    gap: 20px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--abi-hair);
+    font-size: 16px;
 }
 
 .abi-row-head {
-    background: color-mix(in srgb, var(--abi-accent) 5%, #fff);
+    font-family: var(--abi-mono);
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.13em;
+    font-weight: 500;
+    letter-spacing: .12em;
     text-transform: uppercase;
     color: var(--abi-muted);
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--abi-ink);
 }
 
-.abi-row:not(.abi-row-head):hover {
-    background: color-mix(in srgb, var(--abi-accent) 3.5%, #fff);
-}
+.abi-right { text-align: right; }
 
-.abi-right {
-    text-align: right;
-}
-
-.abi-number {
-    font-family: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
-    font-size: 13.5px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-}
-
-.abi-date {
-    color: var(--abi-muted);
-}
+.abi-number { font-family: var(--abi-mono); font-size: 14px; letter-spacing: .02em; }
+.abi-date { color: var(--abi-muted); font-variant-numeric: tabular-nums; }
 
 .abi-amount {
+    font-family: var(--abi-heading-font);
     font-weight: 700;
-    font-size: 16px;
+    font-size: 21px;
+    letter-spacing: -.015em;
     font-variant-numeric: tabular-nums;
 }
 
 .abi-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
     font-style: normal;
+    font-family: var(--abi-mono);
     font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    padding: 5px 11px;
-    border-radius: 999px;
 }
 
-.abi-pill::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-}
+.abi-pill.is-paid { color: var(--abi-accent); }
+.abi-pill.is-due  { color: #8A5A12; }
 
-.abi-pill.is-paid {
-    background: var(--abi-accent-soft);
-    color: var(--abi-accent);
-}
-
-.abi-pill.is-due {
-    background: #FDF1E3;
-    color: #96591A;
-}
-
-.abi-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-}
+.abi-actions { display: flex; gap: 18px; justify-content: flex-end; }
 
 .abi-action {
-    font-size: 13.5px;
-    font-weight: 600;
+    font-family: var(--abi-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
     text-decoration: none;
-    color: var(--abi-ink);
-    border: 1px solid var(--abi-border);
-    border-radius: 9px;
-    padding: 8px 14px;
-    transition: border-color 0.16s ease, background 0.16s ease;
+    color: var(--abi-muted);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
 }
 
-.abi-action:hover {
-    border-color: var(--abi-accent);
-    background: var(--abi-accent-soft);
-    color: var(--abi-accent);
-}
-
-.abi-action.is-primary {
-    background: var(--abi-accent);
-    border-color: var(--abi-accent);
-    color: #fff;
-}
-
-.abi-action.is-primary:hover {
-    filter: brightness(0.93);
-    color: #fff;
-}
-
-/* ---------------- Empty ---------------- */
+.abi-action:hover { color: var(--abi-accent); border-bottom-color: currentColor; }
+.abi-action.is-primary { color: var(--abi-accent); border-bottom-color: currentColor; }
 
 .abi-empty {
-    background: var(--abi-card);
-    border: 1px dashed var(--abi-border);
-    border-radius: 14px;
-    padding: 56px 28px;
-    text-align: center;
+    border-top: 1px solid var(--abi-ink);
+    padding: 64px 0;
     color: var(--abi-muted);
 }
 
-.abi-empty-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: var(--abi-accent-soft);
-    color: var(--abi-accent);
-    margin-bottom: 16px;
-}
+.abi-empty-mark { display: none; }
+.abi-empty p { margin: 0; font-size: 17px; max-width: 40ch; }
 
-.abi-empty p {
-    margin: 0;
-    font-size: 15.5px;
-    max-width: 34em;
-    margin-inline: auto;
-}
-
-/* ---------------- Responsive ---------------- */
-
-@media (max-width: 780px) {
-    .abi-row {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 8px;
-    }
-
-    .abi-row-head {
-        display: none;
-    }
-
-    .abi-right,
-    .abi-actions {
-        text-align: left;
-        justify-content: flex-start;
-    }
+@media (max-width: 760px) {
+    .abi-row { grid-template-columns: 1fr auto; row-gap: 6px; }
+    .abi-row-head { display: none; }
+    .abi-right, .abi-actions { text-align: left; justify-content: flex-start; }
 }
 
 @media (max-width: 600px) {
-    .abi {
-        padding: 34px 16px 48px;
-    }
-
-    .abi-head {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
+    .abi-inner { padding: 40px 18px 0; }
+    .abi-head { flex-direction: column; align-items: flex-start; gap: 14px; }
 }

@@ -4,8 +4,8 @@ import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
 /* ------------------------------------------------------------------ *
- * Small inline helpers — this component is deliberately self-contained
- * so it renders identically in Storybook, the Page Builder and the shop.
+ * Self-contained helpers so this renders identically in Storybook,
+ * the Page Builder and the shop.
  * ------------------------------------------------------------------ */
 
 const MONTHS = [
@@ -24,8 +24,7 @@ const formatMoney = (amount, currency) => {
   if (amount === null || amount === undefined || amount === "") return null
   const n = typeof amount === "number" ? amount : parseFloat(String(amount).replace(/[^0-9.-]/g, ""))
   if (isNaN(n)) return null
-  const symbols = { GBP: "£", USD: "$", EUR: "€" }
-  const symbol = symbols[currency] || "£"
+  const symbol = { GBP: "£", USD: "$", EUR: "€" }[currency] || "£"
   return `${symbol}${n.toFixed(2)}`
 }
 
@@ -52,8 +51,7 @@ const getNextPayment = (subscription) => {
   const now = Date.now()
   const upcoming = schedule
     .filter((item) => {
-      const status = item?.status
-      if (status === "cancelled") return false
+      if (item?.status === "cancelled") return false
       const date = item?.data?.date ? new Date(item.data.date).getTime() : null
       return date && date >= now
     })
@@ -61,86 +59,13 @@ const getNextPayment = (subscription) => {
   return upcoming[0] || null
 }
 
-/* ------------------------------------------------------------------ *
- * Icons
- * ------------------------------------------------------------------ */
-
-const Icon = ({ name }) => {
-  const common = {
-    width: 20,
-    height: 20,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.7,
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    "aria-hidden": "true",
-  }
-  switch (name) {
-    case "plan":
-      return (
-        <svg {...common}>
-          <path d="M3 7h18M3 12h18M3 17h10" />
-        </svg>
-      )
-    case "delivery":
-      return (
-        <svg {...common}>
-          <path d="M3 8h11v9H3zM14 11h4l3 3v3h-7z" />
-          <circle cx="7" cy="19" r="1.6" />
-          <circle cx="17.5" cy="19" r="1.6" />
-        </svg>
-      )
-    case "billing":
-      return (
-        <svg {...common}>
-          <rect x="2.5" y="5.5" width="19" height="13" rx="2" />
-          <path d="M2.5 10h19" />
-        </svg>
-      )
-    case "cancel":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M9 9l6 6M15 9l-6 6" />
-        </svg>
-      )
-    case "gift":
-      return (
-        <svg {...common}>
-          <rect x="3" y="9" width="18" height="12" rx="1.5" />
-          <path d="M3 13h18M12 9v12M12 9S9.5 4 7.5 5.5 9 9 12 9zM12 9s2.5-5 4.5-3.5S15 9 12 9z" />
-        </svg>
-      )
-    default:
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
-        </svg>
-      )
-  }
-}
-
-const Check = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
-
-/* ------------------------------------------------------------------ *
- * Generated magazine cover — used when no cover image is supplied.
- * ------------------------------------------------------------------ */
-
-const GeneratedCover = ({ brandName, issueLabel, lines, headingFont }) => (
+const GeneratedCover = ({ brandName, issueLabel, lines }) => (
   <div className="abh-cover-art" role="img" aria-label={`${brandName} cover, ${issueLabel}`}>
-    <div className="abh-cover-masthead" style={{ fontFamily: headingFont }}>
-      {brandName}
-    </div>
+    <div className="abh-cover-masthead">{brandName}</div>
     <div className="abh-cover-issue">{issueLabel}</div>
     <div className="abh-cover-lines">
       {lines.map((line, i) => (
-        <span key={line.id || i} className={`abh-cover-line abh-cover-line-${i % 3}`}>
+        <span key={line.id || i} className="abh-cover-line">
           {line.label}
         </span>
       ))}
@@ -164,12 +89,13 @@ const AbMmaHero = () => {
     accentSoftColor__limio_color: accentSoft = "#EAF3ED",
     inkColor__limio_color: ink = "#10221A",
     highlightColor__limio_color: highlight = "#D8A32B",
-    headingFont = '"Georgia", "Times New Roman", serif',
+    headingFont = '"IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif',
+    paperColor__limio_color: paper = "#F2F3F0",
     coverImage = "",
     coverLines = [],
     issueLabel = "",
     greeting = "Welcome back",
-    membershipLabel = "Subscriber number",
+    membershipLabel = "Subscriber no.",
     deliveryHeading = "Your next issue",
     deliveryStatusText = "",
     deliveryEtaText = "",
@@ -190,14 +116,10 @@ const AbMmaHero = () => {
     if (!subscription) return null
     const offer = getStandardOffer(subscription)
     const offerAttributes = offer?.data?.attributes || {}
-    const nextPayment = getNextPayment(subscription)
-    const paymentData = nextPayment?.data || {}
+    const paymentData = getNextPayment(subscription)?.data || {}
     return {
       planName:
-        offerAttributes.display_name__limio ||
-        offer?.data?.name ||
-        subscription.name ||
-        "Subscription",
+        offerAttributes.display_name__limio || offer?.data?.name || subscription.name || "Subscription",
       term: offerAttributes.term__limio || "",
       status: subscription.status || "active",
       reference: subscription.reference || subscription.id || "",
@@ -208,16 +130,7 @@ const AbMmaHero = () => {
   }, [subscription])
 
   const firstName = attributes?.firstName || attributes?.given_name || ""
-
-  /* The self-service pages resolve which subscription they are acting on from
-     ?subId — without it they render "problem retrieving your subscription
-     offers". Carry it through on every action link. */
-  const withSubId = (url) => {
-    const id = subscription?.id
-    if (!url || !id) return url || "#"
-    if (url.indexOf("subId=") !== -1) return url
-    return url + (url.indexOf("?") === -1 ? "?" : "&") + "subId=" + encodeURIComponent(id)
-  }
+  const cancelled = details?.status === "cancelled"
 
   const styleVars = {
     "--abh-accent": accentColor,
@@ -225,59 +138,75 @@ const AbMmaHero = () => {
     "--abh-ink": ink,
     "--abh-highlight": highlight,
     "--abh-heading-font": headingFont,
+    "--abh-paper": paper,
+  }
+
+  const withSubId = (url) => {
+    const id = subscription?.id
+    if (!url || !id) return url || "#"
+    if (url.indexOf("subId=") !== -1) return url
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "subId=" + encodeURIComponent(id)
   }
 
   const steps = [
-    { label: "Printed", done: true },
-    { label: "Dispatched", done: true },
-    { label: "On its way", done: false },
+    { label: "Printed", note: "11 Aug", done: true },
+    { label: "Dispatched", note: "12 Aug", done: true },
+    { label: "With Royal Mail", note: "Due 18 Aug", done: false },
   ]
 
   return (
     <section className="abh" style={styleVars}>
       <div className="abh-inner">
-        {/* ---------- Masthead ---------- */}
         <header className="abh-masthead">
-          <div>
-            <p className="abh-eyebrow">
-              {greeting}
-              {firstName ? `, ${firstName}` : ""}
-            </p>
-            <h1 className="abh-title">Your {brandName} subscription</h1>
-            {brandTagline ? <p className="abh-tagline">{brandTagline}</p> : null}
+          <p className="abh-eyebrow">
+            {greeting}
+            {firstName ? `, ${firstName}` : ""}
+          </p>
+          <h1 className="abh-title">Your {brandName} subscription</h1>
+          {brandTagline ? <p className="abh-tagline">{brandTagline}</p> : null}
+
+          <div className="abh-metaline">
+            {details?.reference ? (
+              <span>
+                {membershipLabel} <b>{details.reference}</b>
+              </span>
+            ) : null}
+            {details?.started ? (
+              <span>
+                Subscriber since <b>{details.started}</b>
+              </span>
+            ) : null}
+            {details?.nextDate ? (
+              <span>
+                Renews <b>{details.nextDate}</b>
+              </span>
+            ) : null}
+            <span>
+              Fulfilment <b>{fulfilmentPartner}</b>
+            </span>
           </div>
-          {details?.reference ? (
-            <div className="abh-ref">
-              <span className="abh-ref-label">{membershipLabel}</span>
-              <span className="abh-ref-value">{details.reference}</span>
-            </div>
-          ) : null}
         </header>
 
-        {/* ---------- Main card ---------- */}
         <div className="abh-grid">
           <div className="abh-cover-wrap">
             {coverImage ? (
               <img className="abh-cover-img" src={coverImage} alt={`${brandName} — ${issueLabel}`} />
             ) : (
-              <GeneratedCover
-                brandName={brandName}
-                issueLabel={issueLabel}
-                lines={coverLines}
-                headingFont={headingFont}
-              />
+              <GeneratedCover brandName={brandName} issueLabel={issueLabel} lines={coverLines} />
             )}
-            <span className="abh-cover-badge">{issueLabel}</span>
+            {issueLabel ? (
+              <span className="abh-cover-caption">Current issue — {issueLabel}</span>
+            ) : null}
           </div>
 
-          <div className="abh-panel">
-            <div className="abh-panel-head">
+          <div>
+            <div className="abh-plan-head">
               <div>
                 <span className="abh-label">Current plan</span>
                 <h2 className="abh-plan">{details?.planName || "Print + Digital"}</h2>
               </div>
-              <span className={`abh-pill abh-pill-${details?.status === "cancelled" ? "off" : "on"}`}>
-                {details?.status === "cancelled" ? "Cancelled" : "Active"}
+              <span className={`abh-status ${cancelled ? "is-off" : ""}`}>
+                {cancelled ? "Cancelled" : "Active"}
               </span>
             </div>
 
@@ -285,11 +214,7 @@ const AbMmaHero = () => {
               <div className="abh-row">
                 <dt>Next payment</dt>
                 <dd>
-                  {details?.nextAmount ? (
-                    <strong>{details.nextAmount}</strong>
-                  ) : (
-                    <span className="abh-muted">—</span>
-                  )}
+                  {details?.nextAmount ? <strong>{details.nextAmount}</strong> : <span className="abh-muted">—</span>}
                   {details?.nextDate ? <span className="abh-sub"> on {details.nextDate}</span> : null}
                 </dd>
               </div>
@@ -298,8 +223,8 @@ const AbMmaHero = () => {
                 <dd>{details?.term || "Monthly, rolling"}</dd>
               </div>
               <div className="abh-row">
-                <dt>Subscriber since</dt>
-                <dd>{details?.started || "—"}</dd>
+                <dt>Delivery address</dt>
+                <dd>Rockwood House, Haywards Heath RH16 3TW</dd>
               </div>
             </dl>
 
@@ -311,29 +236,25 @@ const AbMmaHero = () => {
                     Fulfilled by <strong>{fulfilmentPartner}</strong>
                   </span>
                 </div>
-                <div className="abh-track" role="list">
-                  {steps.map((step, i) => (
-                    <div
-                      key={step.label}
-                      role="listitem"
-                      className={`abh-step ${step.done ? "is-done" : "is-next"}`}
-                    >
-                      <span className="abh-dot">{step.done ? <Check /> : null}</span>
+                <div className="abh-track">
+                  {steps.map((step) => (
+                    <div key={step.label} className={`abh-step ${step.done ? "is-done" : "is-next"}`}>
                       <span className="abh-step-label">{step.label}</span>
-                      {i < steps.length - 1 ? <span className="abh-bar" aria-hidden="true" /> : null}
+                      <span className="abh-step-note">{step.note}</span>
                     </div>
                   ))}
                 </div>
-                <p className="abh-delivery-text">
-                  {deliveryStatusText}
-                  {deliveryEtaText ? <strong> · {deliveryEtaText}</strong> : null}
-                </p>
+                {deliveryStatusText ? (
+                  <p className="abh-delivery-text">
+                    {deliveryStatusText}
+                    {deliveryEtaText ? <strong> · {deliveryEtaText}</strong> : null}
+                  </p>
+                ) : null}
               </div>
             ) : null}
           </div>
         </div>
 
-        {/* ---------- Quick actions ---------- */}
         {actions?.length ? (
           <nav className="abh-actions" aria-label="Manage your subscription">
             {actions.map((action, i) => (
@@ -342,13 +263,11 @@ const AbMmaHero = () => {
                 className={`abh-action ${action.icon === "cancel" ? "is-quiet" : ""}`}
                 href={withSubId(action.url)}
               >
-                <span className="abh-action-icon">
-                  <Icon name={action.icon} />
-                </span>
-                <span className="abh-action-label">{action.label}</span>
-                <span className="abh-action-arrow" aria-hidden="true">
+                <span className="abh-action-index" aria-hidden="true">
                   →
                 </span>
+                <span className="abh-action-label">{action.label}</span>
+                {action.note ? <span className="abh-action-note">{action.note}</span> : <span />}
               </a>
             ))}
           </nav>
