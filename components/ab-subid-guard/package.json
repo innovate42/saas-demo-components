@@ -1,0 +1,11 @@
+{
+  "name": "@limio/ab-subid-guard",
+  "version": "1.0.0",
+  "description": "Invisible guard: ensures self-service pages always have a ?subId, so arriving without one never errors.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": { "react": "*" },
+  "limioProps": [
+    { "id": "loadingText", "label": "Text shown while resolving", "type": "string", "default": "Loading your subscription…" }
+  ]
+}

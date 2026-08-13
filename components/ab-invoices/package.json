@@ -9,6 +9,12 @@
   },
   "limioProps": [
     {
+      "id": "brandName",
+      "label": "Brand / title name",
+      "type": "string",
+      "default": "Today's Golfer"
+    },
+    {
       "id": "heading",
       "label": "Heading",
       "type": "string",

@@ -37,12 +37,50 @@ const normalise = (invoice) => {
     paid,
     statusLabel: paid ? "Paid" : rawStatus ? rawStatus[0].toUpperCase() + rawStatus.slice(1) : "Due",
     url: d.pdfUrl || d.url || d.invoiceFileUrl || null,
+    dateLabel: formatDate(d.invoiceDate || d.date || d.created || invoice?.created),
   }
+}
+
+
+/** Limio does not always expose a PDF for an invoice. Rather than show a dead
+ *  link, render the invoice into a print window the subscriber can save. */
+const openPrintable = (row, brand, accent) => {
+  const w = window.open("", "_blank", "width=820,height=1000")
+  if (!w) return
+  const esc = (v) => String(v == null ? "" : v).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8">
+<title>${esc(brand)} invoice ${esc(row.number)}</title>
+<style>
+ body{font:15px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif;color:#222;margin:0;padding:56px}
+ .m{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #222;padding-bottom:14px}
+ h1{font:700 30px/1 "Helvetica Neue",Arial,sans-serif;margin:0;letter-spacing:-.02em;text-transform:uppercase}
+ .lbl{font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase;color:#666}
+ table{width:100%;border-collapse:collapse;margin-top:34px}
+ td,th{text-align:left;padding:13px 0;border-bottom:1px solid #ddd}
+ th{font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase;color:#666}
+ .r{text-align:right}
+ .tot{font:700 24px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:-.02em}
+ .st{color:${esc(accent)};font:500 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase}
+ .f{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid #ddd;padding-top:14px}
+ @media print{body{padding:24px}}
+</style></head><body>
+ <div class="m"><h1>${esc(brand)}</h1><div><span class="lbl">Invoice</span><br>${esc(row.number)}</div></div>
+ <table>
+  <tr><th>Description</th><th class="r">Date</th><th class="r">Amount</th></tr>
+  <tr><td>${esc(brand)} subscription</td><td class="r">${esc(row.dateLabel)}</td><td class="r">${esc(row.amount)}</td></tr>
+  <tr><td class="tot">Total</td><td></td><td class="r tot">${esc(row.amount)}</td></tr>
+ </table>
+ <p class="st">${esc(row.statusLabel)}</p>
+ <p class="f">Fulfilment and distribution by Air Business. Subscriptions powered by Limio.</p>
+ <script>window.onload=function(){window.print()}<\/script>
+</body></html>`)
+  w.document.close()
 }
 
 const AbInvoices = () => {
   const props = useStaticProps() || {}
   const {
+    brandName = "",
     heading = "",
     subheading = "",
     emptyMessage = "",
@@ -116,7 +154,15 @@ const AbInvoices = () => {
                     <a className="abi-action" href={row.url} target="_blank" rel="noreferrer">
                       {downloadLabel}
                     </a>
-                  ) : null}
+                  ) : (
+                    <button
+                      type="button"
+                      className="abi-action"
+                      onClick={() => openPrintable(row, brandName, accent)}
+                    >
+                      {downloadLabel}
+                    </button>
+                  )}
                   {!row.paid && changePaymentUrl ? (
                     <a className="abi-action is-primary" href={changePaymentUrl}>
                       {payLabel}

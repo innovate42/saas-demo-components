@@ -4,7 +4,7 @@
     --abc-accent: #0B5D33;
     --abc-accent-soft: #EAF3ED;
     --abc-ink: #10221A;
-    --abc-paper: #F2F3F0;
+    --abc-paper: #FFFFFF;
     --abc-heading-font: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
     --abc-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
     --abc-rule: rgba(16,34,26,.16);
@@ -38,11 +38,10 @@
 .abc-title {
     margin: 0;
     font-family: var(--abc-heading-font);
-    font-size: clamp(38px, 6.4vw, 66px);
-    line-height: .94;
-    letter-spacing: -.03em;
+    font-size: clamp(28px, 3.6vw, 42px);
+    line-height: 1.06;
+    letter-spacing: -.02em;
     font-weight: 700;
-    text-transform: uppercase;
     text-wrap: balance;
 }
 
@@ -55,8 +54,8 @@
     gap: 16px;
     margin: 32px 0 0;
     padding: 11px 0;
-    border-top: 1px solid var(--abc-ink);
-    border-bottom: 1px solid var(--abc-ink);
+    border-top: 1px solid var(--abc-hair);
+    border-bottom: 1px solid var(--abc-hair);
     font-family: var(--abc-mono);
     font-size: 12px;
     letter-spacing: .06em;
@@ -107,8 +106,8 @@
 
 .abc-reason-label {
     font-family: var(--abc-heading-font);
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 19px;
+    font-weight: 700;
     letter-spacing: -.012em;
     line-height: 1.15;
 }
@@ -126,8 +125,7 @@
     font-family: var(--abc-heading-font);
     font-size: 17px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .01em;
+    letter-spacing: .005em;
     padding: 15px 34px;
     border: 1.5px solid var(--abc-accent);
     transition: background .14s ease;

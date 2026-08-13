@@ -4,7 +4,7 @@
     --abi-accent: #0B5D33;
     --abi-accent-soft: #EAF3ED;
     --abi-ink: #10221A;
-    --abi-paper: #F2F3F0;
+    --abi-paper: #FFFFFF;
     --abi-heading-font: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
     --abi-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
     --abi-rule: rgba(16,34,26,.16);
@@ -35,11 +35,10 @@
 .abi-title {
     margin: 0;
     font-family: var(--abi-heading-font);
-    font-size: clamp(38px, 6vw, 68px);
-    line-height: .94;
-    letter-spacing: -.03em;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.06;
+    letter-spacing: -.02em;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 .abi-sub { margin: 14px 0 0; font-size: 16px; line-height: 1.5; color: var(--abi-muted); max-width: 46ch; }
@@ -56,7 +55,7 @@
     padding-bottom: 2px;
 }
 
-.abi-card { border-top: 1px solid var(--abi-ink); }
+.abi-card { border-top: 2px solid var(--abi-accent); }
 
 .abi-row {
     display: grid;
@@ -76,7 +75,7 @@
     text-transform: uppercase;
     color: var(--abi-muted);
     padding: 11px 0;
-    border-bottom: 1px solid var(--abi-ink);
+    border-bottom: 1px solid var(--abi-hair);
 }
 
 .abi-right { text-align: right; }
@@ -105,7 +104,7 @@
 
 .abi-actions { display: flex; gap: 18px; justify-content: flex-end; }
 
-.abi-action {
+.abi-action { background: none; border: 0; cursor: pointer; font-family: inherit; padding: 0; 
     font-family: var(--abi-mono);
     font-size: 12px;
     letter-spacing: .04em;
