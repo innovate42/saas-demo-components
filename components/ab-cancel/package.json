@@ -9,6 +9,12 @@
   },
   "limioProps": [
     {
+      "id": "offerLabel",
+      "label": "Offer label for this title",
+      "type": "string",
+      "default": "todaysgolfer"
+    },
+    {
       "id": "eyebrow",
       "label": "Eyebrow",
       "type": "string",

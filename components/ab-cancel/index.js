@@ -23,6 +23,7 @@ const AbCancel = () => {
   const props = useStaticProps() || {}
   const {
     eyebrow = "",
+    offerLabel = "",
     heading = "",
     subheading = "",
     continueLabel = "Continue",
@@ -50,8 +51,19 @@ const AbCancel = () => {
       const match = list.find((s) => s?.id === subId)
       if (match) return match
     }
-    return list.find((s) => s?.status === "active") || list[0] || null
-  }, [subscriptions])
+    const labelOf = (sub) => {
+      const out = []
+      for (const entry of sub?.offers || []) {
+        const l = entry?.data?.offer?.data?.attributes?.label__limio
+        if (Array.isArray(l)) out.push(...l)
+        else if (l) out.push(l)
+      }
+      return out
+    }
+    const branded = offerLabel ? list.filter((s) => labelOf(s).indexOf(offerLabel) !== -1) : []
+    const pick = (arr) => arr.find((s) => s?.status === "active") || arr[0] || null
+    return pick(branded) || pick(list)
+  }, [subscriptions, offerLabel])
 
   const planName = useMemo(() => {
     const offer = getStandardOffer(subscription)

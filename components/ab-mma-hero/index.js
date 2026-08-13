@@ -95,6 +95,7 @@ const AbMmaHero = () => {
   const {
     brandName = "Today's Golfer",
     brandTagline = "",
+    offerLabel = "",
     accentColor__limio_color: accentColor = "#0B5D33",
     accentSoftColor__limio_color: accentSoft = "#EAF3ED",
     inkColor__limio_color: ink = "#10221A",
@@ -119,10 +120,24 @@ const AbMmaHero = () => {
   const { attributes = {} } = useUser() || {}
   const { subscriptions } = useSubscriptions() || {}
 
+  /* One browser session can hold subscriptions for several titles, so match on
+     the offer's label before falling back to "any active one". */
   const subscription = useMemo(() => {
     const list = subscriptions || []
-    return list.find((s) => s?.status === "active") || list[0] || null
-  }, [subscriptions])
+    const mine = (sub) => {
+      if (!offerLabel) return false
+      const labels = []
+      for (const entry of sub?.offers || []) {
+        const l = entry?.data?.offer?.data?.attributes?.label__limio
+        if (Array.isArray(l)) labels.push(...l)
+        else if (l) labels.push(l)
+      }
+      return labels.indexOf(offerLabel) !== -1
+    }
+    const branded = list.filter(mine)
+    const pick = (arr) => arr.find((s) => s?.status === "active") || arr[0] || null
+    return pick(branded) || pick(list)
+  }, [subscriptions, offerLabel])
 
   const details = useMemo(() => {
     if (!subscription) return null

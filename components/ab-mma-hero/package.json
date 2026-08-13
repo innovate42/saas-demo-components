@@ -15,6 +15,12 @@
       "default": "Today's Golfer"
     },
     {
+      "id": "offerLabel",
+      "label": "Offer label for this title",
+      "type": "string",
+      "default": "todaysgolfer"
+    },
+    {
       "id": "brandTagline",
       "label": "Brand tagline",
       "type": "string",
