@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react"
-import { useSubscriptions } from "@limio/sdk"
+import { useBasket, useSubscriptions } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -41,7 +41,9 @@ const AbCancel = () => {
   } = props
 
   const { subscriptions } = useSubscriptions() || {}
+  const { initiateCheckout } = useBasket() || {}
   const [selected, setSelected] = useState("")
+  const [busy, setBusy] = useState(false)
 
   const subscription = useMemo(() => {
     const list = subscriptions || []
@@ -86,6 +88,28 @@ const AbCancel = () => {
     const sep = chosen.url.indexOf("?") === -1 ? "?" : "&"
     return `${chosen.url}${sep}subId=${encodeURIComponent(id)}&reason=${encodeURIComponent(chosen.id || "")}`
   }, [chosen, subscription])
+
+  const go = async (event) => {
+    if (!chosen) return
+    if (chosen.mode !== "update" || !initiateCheckout || !subscription?.id) return
+    event.preventDefault()
+    setBusy(true)
+    try {
+      const basket = await initiateCheckout({
+        order: { order_type: "update_subscription", forSubscription: { id: subscription.id } },
+      })
+      const checkoutId = basket?.order?.checkoutId
+      const base = chosen.url || ""
+      window.location.href = checkoutId
+        ? `${base}${base.indexOf("?") === -1 ? "?" : "&"}basket=${encodeURIComponent(checkoutId)}`
+        : destination
+    } catch (error) {
+      console.error("ab-cancel: could not start the subscription update", error)
+      window.location.href = destination
+    } finally {
+      setBusy(false)
+    }
+  }
 
   const styleVars = {
     "--abc-accent": accent,
@@ -144,10 +168,11 @@ const AbCancel = () => {
             href={destination || "#"}
             aria-disabled={destination ? "false" : "true"}
             onClick={(event) => {
-              if (!destination) event.preventDefault()
+              if (!destination) { event.preventDefault(); return }
+              go(event)
             }}
           >
-            {continueLabel}
+            {busy ? "One moment…" : continueLabel}
           </a>
           {backUrl && backLabel ? (
             <a className="abc-back" href={backUrl}>

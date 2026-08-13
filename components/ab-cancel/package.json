@@ -80,6 +80,11 @@
           "id": "url",
           "label": "Destination URL",
           "type": "string"
+        },
+        "mode": {
+          "id": "mode",
+          "label": "Mode (blank | update)",
+          "type": "string"
         }
       },
       "default": [
