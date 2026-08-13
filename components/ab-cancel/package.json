@@ -1,0 +1,52 @@
+{
+  "name": "@limio/ab-cancel",
+  "version": "1.0.0",
+  "description": "Cancellation reason capture that routes each reason to the right outcome — save offer, downgrade or cancel.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "eyebrow", "label": "Eyebrow", "type": "string", "default": "Before you go" },
+    { "id": "heading", "label": "Heading", "type": "string", "default": "Tell us what's not working" },
+    {
+      "id": "subheading",
+      "label": "Sub-heading",
+      "type": "string",
+      "default": "Whatever the reason, there's usually something we can do about it. Pick the closest one and we'll take it from there."
+    },
+    { "id": "continueLabel", "label": "Continue button", "type": "string", "default": "Continue" },
+    { "id": "backLabel", "label": "Back link", "type": "string", "default": "Keep my subscription" },
+    { "id": "backUrl", "label": "Back URL", "type": "string", "default": "/tg-account" },
+    { "id": "planSummaryLabel", "label": "Plan summary label", "type": "string", "default": "You're cancelling" },
+    {
+      "id": "reasons",
+      "label": "Reasons",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Reason", "type": "string" },
+        "description": { "id": "description", "label": "Helper text", "type": "string" },
+        "url": { "id": "url", "label": "Destination URL", "type": "string" }
+      },
+      "default": [
+        { "id": "price", "label": "It's too expensive", "description": "We may be able to find you a better price.", "url": "/tg-cancel-save" },
+        { "id": "usage", "label": "I don't read it often enough", "description": "A cheaper or less frequent plan might suit you better.", "url": "/tg-direct-update-sub" },
+        { "id": "format", "label": "I only want the digital edition", "description": "You can drop the print copy and keep reading.", "url": "/tg-direct-update-sub" },
+        { "id": "delivery", "label": "My copies aren't arriving properly", "description": "Let us fix the delivery before you go.", "url": "/tg-cancel-save" },
+        { "id": "other", "label": "Something else", "description": "", "url": "/tg-cancel-save" }
+      ]
+    },
+    { "id": "accentColor__limio_color", "label": "Accent colour", "type": "color", "default": "#0B5D33" },
+    { "id": "accentSoftColor__limio_color", "label": "Accent tint", "type": "color", "default": "#EAF3ED" },
+    { "id": "inkColor__limio_color", "label": "Ink colour", "type": "color", "default": "#10221A" },
+    { "id": "paperColor__limio_color", "label": "Page background", "type": "color", "default": "#F6F5F1" },
+    {
+      "id": "headingFont",
+      "label": "Heading font stack",
+      "type": "string",
+      "default": "'Archivo', 'Helvetica Neue', Arial, sans-serif"
+    }
+  ]
+}

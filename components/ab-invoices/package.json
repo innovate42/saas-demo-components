@@ -1,0 +1,34 @@
+{
+  "name": "@limio/ab-invoices",
+  "version": "1.0.0",
+  "description": "Subscriber billing history — brand-styled invoice list with status, totals and downloads.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "heading", "label": "Heading", "type": "string", "default": "Billing history" },
+    {
+      "id": "subheading",
+      "label": "Sub-heading",
+      "type": "string",
+      "default": "Every payment on your subscription, ready to download whenever you need it."
+    },
+    { "id": "emptyMessage", "label": "Empty state", "type": "string", "default": "No invoices yet — your first one will appear here after your next payment." },
+    { "id": "downloadLabel", "label": "Download link text", "type": "string", "default": "Download" },
+    { "id": "payLabel", "label": "Pay now text", "type": "string", "default": "Pay now" },
+    { "id": "changePaymentUrl", "label": "Payment methods URL", "type": "string", "default": "/tg-payment-methods" },
+    { "id": "changePaymentLabel", "label": "Payment methods link text", "type": "string", "default": "Manage payment methods" },
+    { "id": "accentColor__limio_color", "label": "Accent colour", "type": "color", "default": "#0B5D33" },
+    { "id": "accentSoftColor__limio_color", "label": "Accent tint", "type": "color", "default": "#EAF3ED" },
+    { "id": "inkColor__limio_color", "label": "Ink colour", "type": "color", "default": "#10221A" },
+    { "id": "paperColor__limio_color", "label": "Page background", "type": "color", "default": "#F6F5F1" },
+    {
+      "id": "headingFont",
+      "label": "Heading font stack",
+      "type": "string",
+      "default": "'Archivo', 'Helvetica Neue', Arial, sans-serif"
+    }
+  ]
+}
