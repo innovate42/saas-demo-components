@@ -1,0 +1,18 @@
+{
+  "name": "component-mockup-icims",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./index.tsx",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Hero heading",
+      "type": "string",
+      "default": "Finally, an ATS made to support the needs of global enterprises"
+    }
+  ]
+}
