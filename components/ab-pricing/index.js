@@ -76,6 +76,7 @@ const AbPricing = () => {
     accentSoftColor__limio_color: accentSoft = "#EAF3ED",
     inkColor__limio_color: ink = "#10221A",
     highlightColor__limio_color: highlight = "#D8A32B",
+    highlightInkColor__limio_color: highlightInk = "#16240B",
     paperColor__limio_color: paper = "#F6F5F1",
     headingFont = "'Archivo', 'Helvetica Neue', Arial, sans-serif",
     trustPoints = [],
@@ -119,6 +120,7 @@ const AbPricing = () => {
     "--abp-accent-soft": accentSoft,
     "--abp-ink": ink,
     "--abp-highlight": highlight,
+    "--abp-highlight-ink": highlightInk,
     "--abp-paper": paper,
     "--abp-heading-font": headingFont,
   }

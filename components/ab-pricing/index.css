@@ -4,6 +4,7 @@
     --abp-accent-soft: #EAF3ED;
     --abp-ink: #10221A;
     --abp-highlight: #D8A32B;
+    --abp-highlight-ink: #16240B;
     --abp-paper: #F6F5F1;
     --abp-heading-font: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
@@ -32,7 +33,7 @@
         radial-gradient(90% 120% at 82% 20%, color-mix(in srgb, var(--abp-accent) 22%, transparent), transparent 62%),
         linear-gradient(158deg, var(--abp-accent) 0%, var(--abp-accent-dark) 100%);
     color: #fff;
-    padding: 72px 24px 84px;
+    padding: 92px 24px 96px;
 }
 
 .abp-hero::after {
@@ -110,7 +111,7 @@
     height: 22px;
     border-radius: 50%;
     background: var(--abp-highlight);
-    color: #16240b;
+    color: var(--abp-highlight-ink);
 }
 
 .abp-trust-tick .abp-tick {
@@ -150,7 +151,7 @@
     bottom: 14px;
     right: 4px;
     background: var(--abp-highlight);
-    color: #16240b;
+    color: var(--abp-highlight-ink);
     font-size: 10.5px;
     font-weight: 800;
     letter-spacing: 0.14em;
