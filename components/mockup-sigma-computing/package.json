@@ -1,0 +1,15 @@
+{
+  "name": "component-mockup-sigma-computing",
+  "version": "1.0.0",
+  "description": "Look-alike of the Sigma Computing 'Sigma for Finance Teams' page for a Limio qualify-agent mockup",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "heading", "label": "Hero heading", "type": "text", "default": "Sigma for Finance Teams" },
+    { "id": "subheading", "label": "Hero subheading", "type": "text", "default": "Act on rising risk. Optimize FTEs with AI. Maximize margin." }
+  ]
+}
