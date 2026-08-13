@@ -61,7 +61,12 @@ const AbCancel = () => {
       return out
     }
     const branded = offerLabel ? list.filter((s) => labelOf(s).indexOf(offerLabel) !== -1) : []
-    const pick = (arr) => arr.find((s) => s?.status === "active") || arr[0] || null
+    const byNewest = (arr) =>
+      [...arr].sort((a, b) => new Date(b?.created || 0) - new Date(a?.created || 0))
+    const pick = (arr) => {
+      const sorted = byNewest(arr)
+      return sorted.find((s) => s?.status === "active") || sorted[0] || null
+    }
     return pick(branded) || pick(list)
   }, [subscriptions, offerLabel])
 

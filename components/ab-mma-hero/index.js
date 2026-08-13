@@ -137,7 +137,13 @@ const AbMmaHero = () => {
       return labels.indexOf(offerLabel) !== -1
     }
     const branded = list.filter(mine)
-    const pick = (arr) => arr.find((s) => s?.status === "active") || arr[0] || null
+    /* newest first — a demo tenant accumulates older subscriptions */
+    const byNewest = (arr) =>
+      [...arr].sort((a, b) => new Date(b?.created || 0) - new Date(a?.created || 0))
+    const pick = (arr) => {
+      const sorted = byNewest(arr)
+      return sorted.find((s) => s?.status === "active") || sorted[0] || null
+    }
     return pick(branded) || pick(list)
   }, [subscriptions, offerLabel])
 
