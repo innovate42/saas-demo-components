@@ -1,0 +1,52 @@
+{
+  "name": "@limio/ab-pricing",
+  "version": "1.0.0",
+  "description": "Editorial subscription pricing page for publisher titles — cover-led hero plus brand-styled plan cards.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "brandName", "label": "Brand / title name", "type": "string", "default": "Today's Golfer" },
+    { "id": "eyebrow", "label": "Eyebrow", "type": "string", "default": "Subscribe today" },
+    { "id": "headline", "label": "Headline", "type": "string", "default": "Play better golf, every month" },
+    {
+      "id": "subheadline",
+      "label": "Sub-headline",
+      "type": "string",
+      "default": "13 issues a year of the tests, tuition and course guides that actually lower your scores. In print, digital, or both."
+    },
+    { "id": "coverImage", "label": "Cover image URL", "type": "string", "default": "" },
+    { "id": "issueLabel", "label": "Issue label", "type": "string", "default": "September 2026" },
+    { "id": "plansHeading", "label": "Plans heading", "type": "string", "default": "Choose your subscription" },
+    { "id": "bestValueLabel", "label": "Best value badge", "type": "string", "default": "Most popular" },
+    { "id": "ctaFallback", "label": "Fallback CTA text", "type": "string", "default": "Subscribe" },
+    { "id": "accentColor__limio_color", "label": "Accent colour", "type": "color", "default": "#0B5D33" },
+    { "id": "accentDarkColor__limio_color", "label": "Accent (dark)", "type": "color", "default": "#073B20" },
+    { "id": "accentSoftColor__limio_color", "label": "Accent tint", "type": "color", "default": "#EAF3ED" },
+    { "id": "inkColor__limio_color", "label": "Ink / text colour", "type": "color", "default": "#10221A" },
+    { "id": "highlightColor__limio_color", "label": "Highlight colour", "type": "color", "default": "#D8A32B" },
+    { "id": "paperColor__limio_color", "label": "Page background", "type": "color", "default": "#F6F5F1" },
+    {
+      "id": "headingFont",
+      "label": "Heading font stack",
+      "type": "string",
+      "default": "'Archivo', 'Helvetica Neue', Arial, sans-serif"
+    },
+    {
+      "id": "trustPoints",
+      "label": "Trust points",
+      "type": "list",
+      "fields": {
+        "id": { "id": "id", "label": "ID", "type": "string" },
+        "label": { "id": "label", "label": "Label", "type": "string" }
+      },
+      "default": [
+        { "id": "t1", "label": "Free UK delivery, fulfilled by Air Business" },
+        { "id": "t2", "label": "Cancel or change your plan any time" },
+        { "id": "t3", "label": "Instant digital access from the moment you subscribe" }
+      ]
+    }
+  ]
+}
