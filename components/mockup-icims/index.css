@@ -1,0 +1,173 @@
+/* iCIMS enterprise ATS page replica — mockup component */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+.icims-mock {
+  --purple: #7c3be2;
+  --teal: #053535;
+  --lime: #d6ff57;
+  --ink: #212529;
+  --muted: #5b6266;
+  --line: #e6e8ea;
+  --soft: #f5f3fb;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  background: #ffffff;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.icims-mock *,
+.icims-mock *::before,
+.icims-mock *::after { box-sizing: border-box; }
+
+/* ---- promo bar ---- */
+.icims-mock .im-promo {
+  background: var(--purple);
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 16px;
+}
+.icims-mock .im-promo strong { font-weight: 800; letter-spacing: .3px; }
+.icims-mock .im-promo a { color: #fff; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+/* ---- header ---- */
+.icims-mock .im-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; padding: 18px 40px; max-width: 1280px; margin: 0 auto;
+}
+.icims-mock .im-logo { height: 34px; }
+.icims-mock .im-nav { display: flex; gap: 30px; align-items: center; }
+.icims-mock .im-nav a { color: var(--teal); font-weight: 600; font-size: 15px; text-decoration: none; }
+.icims-mock .im-nav a:hover { color: var(--purple); }
+.icims-mock .im-topcontact { font-size: 12px; color: var(--muted); }
+.icims-mock .im-topcontact a { color: var(--purple); text-decoration: none; font-weight: 600; }
+
+/* ---- buttons ---- */
+.icims-mock .im-btn {
+  display: inline-block; background: var(--lime); color: var(--teal);
+  border: 3px solid var(--lime); border-radius: 30px; font-weight: 700;
+  font-size: 14px; padding: 10px 25px; text-decoration: none; cursor: pointer;
+  font-family: inherit; letter-spacing: .3px; white-space: nowrap;
+}
+.icims-mock .im-btn:hover { background: #cbf83e; border-color: #cbf83e; }
+.icims-mock .im-btn--ghost {
+  background: transparent; border-color: var(--purple); color: var(--purple);
+}
+.icims-mock .im-btn--ghost:hover { background: var(--soft); }
+.icims-mock .im-link {
+  color: var(--purple); font-weight: 700; font-size: 15px; text-decoration: none;
+}
+.icims-mock .im-link::after { content: ' ›'; }
+
+/* ---- layout ---- */
+.icims-mock .im-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* ---- hero ---- */
+.icims-mock .im-hero {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center;
+  max-width: 1200px; margin: 0 auto; padding: 56px 40px 64px;
+}
+.icims-mock .im-eyebrow {
+  color: var(--teal); font-weight: 700; font-size: 15px; margin: 0 0 14px;
+}
+.icims-mock .im-hero h1 {
+  color: var(--purple); font-size: 46px; line-height: 1.08; font-weight: 700;
+  margin: 0 0 22px; letter-spacing: -.5px;
+}
+.icims-mock .im-hero p { font-size: 18px; color: var(--ink); margin: 0 0 28px; max-width: 30em; }
+.icims-mock .im-hero-cta { display: flex; align-items: center; gap: 26px; }
+.icims-mock .im-hero-media {
+  position: relative; border-radius: 20px; overflow: hidden;
+  min-height: 340px; background: #d8dde0;
+  background-image: url('https://cdn31.icims.com/wp-content/uploads/2026/02/24100654/ats-hero-image.webp');
+  background-size: cover; background-position: center;
+}
+.icims-mock .im-card {
+  position: absolute; right: 18px; top: 22px; width: 260px; background: #fff;
+  border: 1px solid var(--line); border-radius: 16px; padding: 16px;
+  box-shadow: 0 20px 45px rgba(5,53,53,.18); font-size: 12px;
+}
+.icims-mock .im-card-head { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--teal); margin-bottom: 12px; }
+.icims-mock .im-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--soft); border-radius: 10px; padding: 8px 10px; color: var(--teal); font-weight: 600; width: 100%; justify-content: space-between; margin-bottom: 14px; }
+.icims-mock .im-chip span:last-child { background: var(--purple); color:#fff; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+.icims-mock .im-card-label { font-weight: 700; color: var(--teal); font-size: 11px; text-align: center; margin: 6px 0 10px; }
+.icims-mock .im-cand { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 10px; margin-bottom: 8px; }
+.icims-mock .im-cand-ring { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--purple); flex: 0 0 auto; background: var(--soft); }
+.icims-mock .im-cand-name { font-weight: 700; color: var(--teal); font-size: 12px; }
+.icims-mock .im-bar { height: 5px; border-radius: 4px; background: var(--soft); margin-top: 4px; overflow: hidden; }
+.icims-mock .im-bar > i { display:block; height:100%; background: var(--purple); }
+
+/* ---- section shells ---- */
+.icims-mock .im-section { padding: 64px 0; }
+.icims-mock .im-section h2 {
+  color: var(--purple); font-size: 34px; font-weight: 700; margin: 0 0 14px; line-height: 1.15;
+}
+.icims-mock .im-section .im-lead { font-size: 18px; color: var(--muted); max-width: 46em; margin: 0 0 8px; }
+
+/* feature rows */
+.icims-mock .im-feature {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center;
+  padding: 34px 0; border-top: 1px solid var(--line);
+}
+.icims-mock .im-feature:first-of-type { border-top: none; }
+.icims-mock .im-feature h3 { color: var(--teal); font-size: 23px; font-weight: 700; margin: 0 0 14px; }
+.icims-mock .im-feature ul { margin: 0 0 18px; padding: 0; list-style: none; }
+.icims-mock .im-feature li { position: relative; padding-left: 26px; margin-bottom: 10px; color: var(--ink); font-size: 15px; }
+.icims-mock .im-feature li::before {
+  content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--lime); box-shadow: inset 0 0 0 2px var(--teal);
+}
+.icims-mock .im-feature-art {
+  border-radius: 18px; min-height: 240px; background: var(--soft);
+  border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+  color: var(--purple); font-weight: 700; overflow: hidden;
+}
+.icims-mock .im-feature-art img { width: 100%; height: 100%; object-fit: cover; }
+
+/* pillars */
+.icims-mock .im-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 34px; }
+.icims-mock .im-pillar { background: var(--soft); border-radius: 16px; padding: 22px; }
+.icims-mock .im-pillar h4 { color: var(--purple); font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+.icims-mock .im-pillar p { font-size: 14px; color: var(--muted); margin: 0; }
+
+/* stats band */
+.icims-mock .im-stats {
+  background: var(--purple); color: #fff; border-radius: 22px;
+  padding: 44px; display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 34px; align-items: center;
+}
+.icims-mock .im-stat b { display: block; font-size: 52px; font-weight: 800; line-height: 1; }
+.icims-mock .im-stat span { font-size: 15px; opacity: .92; }
+.icims-mock .im-quote { font-size: 15px; font-style: italic; line-height: 1.6; border-left: 3px solid var(--lime); padding-left: 18px; }
+.icims-mock .im-quote cite { display: block; margin-top: 10px; font-style: normal; font-weight: 700; opacity: .9; }
+
+/* coalesce band */
+.icims-mock .im-coalesce {
+  background: var(--teal); color: #fff; border-radius: 22px; padding: 48px;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 34px; align-items: center;
+}
+.icims-mock .im-coalesce h2 { color: #fff; font-size: 32px; margin: 0 0 14px; }
+.icims-mock .im-coalesce p { font-size: 16px; opacity: .92; margin: 0 0 22px; }
+.icims-mock .im-coalesce .im-glyph { font-size: 92px; text-align: center; color: var(--lime); }
+
+/* FAQ */
+.icims-mock .im-faq { margin-top: 30px; border-top: 1px solid var(--line); }
+.icims-mock .im-faq-item { border-bottom: 1px solid var(--line); padding: 20px 4px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.icims-mock .im-faq-item span { font-weight: 600; color: var(--teal); font-size: 16px; }
+.icims-mock .im-faq-item i { color: var(--purple); font-style: normal; font-size: 22px; font-weight: 700; }
+
+/* footer cta */
+.icims-mock .im-footcta { background: var(--purple); color:#fff; text-align:center; padding: 56px 40px; border-radius: 22px; margin: 20px 0 0; }
+.icims-mock .im-footcta h2 { color:#fff; font-size: 30px; margin: 0 0 20px; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .icims-mock .im-hero,
+  .icims-mock .im-feature,
+  .icims-mock .im-stats,
+  .icims-mock .im-coalesce { grid-template-columns: 1fr; }
+  .icims-mock .im-pillars { grid-template-columns: 1fr 1fr; }
+  .icims-mock .im-nav, .icims-mock .im-topcontact { display: none; }
+  .icims-mock .im-hero h1 { font-size: 34px; }
+  .icims-mock .im-card { position: static; width: 100%; margin-top: 16px; }
+}
