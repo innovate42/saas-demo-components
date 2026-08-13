@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-simployer",
+  "version": "1.0.0",
+  "description": "Simployer homepage look-alike mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "heading", "label": "Hero heading", "type": "text", "default": "Finally. The HR system that lets you spend more time with people." }
+  ]
+}
