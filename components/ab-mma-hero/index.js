@@ -1,5 +1,5 @@
-import React, { useMemo } from "react"
-import { useUser, useSubscriptions } from "@limio/sdk"
+import React, { useMemo, useState } from "react"
+import { useBasket, useUser, useSubscriptions } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -118,6 +118,8 @@ const AbMmaHero = () => {
   } = props
 
   const { attributes = {} } = useUser() || {}
+  const { initiateCheckout } = useBasket() || {}
+  const [busy, setBusy] = useState("")
   const { subscriptions } = useSubscriptions() || {}
 
   /* One browser session can hold subscriptions for several titles, so match on
@@ -175,6 +177,30 @@ const AbMmaHero = () => {
     if (!url || !id) return url || "#"
     if (url.indexOf("subId=") !== -1) return url
     return url + (url.indexOf("?") === -1 ? "?" : "&") + "subId=" + encodeURIComponent(id)
+  }
+
+  /* Change-of-plan cannot be a plain link: the stock update pages read
+     nextActions from checkout state, which only exists once an
+     "update_subscription" checkout has been initiated for this subscription. */
+  const startUpdate = async (event, action) => {
+    if (!initiateCheckout || !subscription?.id) return
+    event.preventDefault()
+    setBusy(action.id || action.label)
+    try {
+      const basket = await initiateCheckout({
+        order: { order_type: "update_subscription", forSubscription: { id: subscription.id } },
+      })
+      const checkoutId = basket?.order?.checkoutId
+      const base = action.url || ""
+      window.location.href = checkoutId
+        ? `${base}${base.indexOf("?") === -1 ? "?" : "&"}basket=${encodeURIComponent(checkoutId)}`
+        : withSubId(base)
+    } catch (error) {
+      console.error("ab-mma-hero: could not start the subscription update", error)
+      window.location.href = withSubId(action.url)
+    } finally {
+      setBusy("")
+    }
   }
 
   const steps = [
@@ -291,11 +317,13 @@ const AbMmaHero = () => {
                 key={action.id || i}
                 className={`abh-action ${action.icon === "cancel" ? "is-quiet" : ""}`}
                 href={withSubId(action.url)}
+                onClick={action.mode === "update" ? (event) => startUpdate(event, action) : undefined}
+                aria-busy={busy === (action.id || action.label) ? "true" : undefined}
               >
                 <span className="abh-action-index" aria-hidden="true">
                   →
                 </span>
-                <span className="abh-action-label">{action.label}</span>
+                <span className="abh-action-label">{busy === (action.id || action.label) ? "One moment…" : action.label}</span>
                 {action.note ? <span className="abh-action-note">{action.note}</span> : <span />}
               </a>
             ))}

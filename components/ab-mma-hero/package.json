@@ -188,6 +188,11 @@
           "id": "note",
           "label": "Right-hand note",
           "type": "string"
+        },
+        "mode": {
+          "id": "mode",
+          "label": "Mode (blank | update)",
+          "type": "string"
         }
       },
       "default": [
@@ -196,7 +201,8 @@
           "label": "Change plan",
           "url": "/tg-direct-update-sub",
           "icon": "plan",
-          "note": "Upgrade, downgrade or switch term"
+          "note": "Upgrade, downgrade or switch term",
+          "mode": "update"
         },
         {
           "id": "billing",
