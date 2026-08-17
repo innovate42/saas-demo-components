@@ -152,7 +152,9 @@ const SectionTitle = ({ title, sub }: { title: string; sub?: string }) => (
   </div>
 );
 
-export default function SumsubMockup() {
+export default function SumsubMockup({
+  heading = "AI-powered trust infrastructure for compliance operations at scale",
+}: { heading?: string }) {
   return (
     <div className="ssb-root">
       {/* ---------------- header ---------------- */}
@@ -204,7 +206,7 @@ export default function SumsubMockup() {
       <section className="ssb-hero">
         <div className="ssb-wrap">
           <div className="ssb-container ssb-hero__content">
-            <h1 className="ssb-hero__title">AI-powered trust infrastructure for compliance operations at scale</h1>
+            <h1 className="ssb-hero__title">{heading}</h1>
             <p className="ssb-hero__sub">
               Connect workflows, reduce manual steps, and expand into new markets without piling on more tools, teams, or processes
             </p>
