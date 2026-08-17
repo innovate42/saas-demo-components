@@ -1,0 +1,1341 @@
+/* ==========================================================================
+   Mockup replica: mylighthouse.com  (scoped under .mockup-my-lighthouse)
+   All sizes matched to measured getBoundingClientRect / computed styles
+   of the live page at a 1280px viewport.
+   ========================================================================== */
+
+.mockup-my-lighthouse {
+  --mlh-cream: #fefbf5;
+  --mlh-cream-2: #fefbf6;
+  --mlh-navy: #333645;
+  --mlh-navy-dark: #232636;
+  --mlh-muted: #a2aab9;
+  --mlh-body: #464e5d;
+  --mlh-orange: #f26522;
+  --mlh-orange-2: #ff5a06;
+  --mlh-lilac: #eceefd;
+  --mlh-pink: #ea2568;
+  --mlh-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  --mlh-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+
+  background-color: var(--mlh-cream);
+  color: #212529;
+  font-family: var(--mlh-sans);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.mockup-my-lighthouse *,
+.mockup-my-lighthouse *::before,
+.mockup-my-lighthouse *::after {
+  box-sizing: border-box;
+}
+
+.mockup-my-lighthouse p,
+.mockup-my-lighthouse h1,
+.mockup-my-lighthouse h2,
+.mockup-my-lighthouse h3,
+.mockup-my-lighthouse h4,
+.mockup-my-lighthouse ul,
+.mockup-my-lighthouse li {
+  margin: 0;
+  padding: 0;
+}
+
+.mockup-my-lighthouse ul {
+  list-style: none;
+}
+
+.mockup-my-lighthouse a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mockup-my-lighthouse img,
+.mockup-my-lighthouse video {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------------------- HEADER */
+/* measured: header h=104, inner bar 1256x72, radius 100px, bg rgba(254,251,246,.6) */
+.mockup-my-lighthouse .mlh-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 104px;
+  padding: 12px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.mockup-my-lighthouse .mlh-header-bar {
+  width: 100%;
+  max-width: 1256px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 8px 0 32px;
+  border-radius: 100px;
+  background: rgba(254, 251, 246, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* measured logo svg: 186 x 38 */
+.mockup-my-lighthouse .mlh-logo-link {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.mockup-my-lighthouse .mlh-logo {
+  width: 186px;
+  height: 38px;
+  color: var(--mlh-navy);
+}
+
+.mockup-my-lighthouse .mlh-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 28px;
+  flex: 1 1 auto;
+}
+
+/* measured nav item: 100.7 wide, font 16/24, weight 400, ls -0.16px, gap 12px */
+.mockup-my-lighthouse .mlh-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: -0.16px;
+  color: var(--mlh-navy);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mockup-my-lighthouse .mlh-chev {
+  width: 10px;
+  height: 7px;
+  color: var(--mlh-navy);
+  flex: 0 0 auto;
+}
+
+.mockup-my-lighthouse .mlh-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.mockup-my-lighthouse .mlh-lang,
+.mockup-my-lighthouse .mlh-login {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  color: var(--mlh-navy);
+  white-space: nowrap;
+}
+
+/* measured: 151.6 x 56, radius 45px, 18px/600, bg rgb(255,90,6) */
+.mockup-my-lighthouse .mlh-btn-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 7px 24px 9px;
+  border-radius: 45px;
+  background: var(--mlh-orange-2);
+  color: #fff;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ HERO */
+/* measured wrapper: 1280 x 1493.3, padding-top 104px, full-bleed cover photo */
+.mockup-my-lighthouse .mlh-hero-wrap {
+  position: relative;
+  margin-top: -104px;
+  padding-top: 104px;
+  background-image: url("https://a.storyblok.com/f/288416513769651/3100x1744/d0ec798c88/blog-indie-pricing-tool-3.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: var(--mlh-navy);
+}
+
+/* measured hero: h=405.9, padding 102.4px 0 32px */
+.mockup-my-lighthouse .mlh-hero {
+  padding: 102.4px 0 32px;
+  text-align: center;
+}
+
+.mockup-my-lighthouse .mlh-hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* measured eyebrow: 12.16px / lh 18.24 / weight 700 / ls 2.1888px / #f26522 */
+.mockup-my-lighthouse .mlh-hero-eyebrow {
+  font-size: 12.16px;
+  line-height: 18.24px;
+  font-weight: 700;
+  letter-spacing: 2.1888px;
+  color: var(--mlh-orange);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* measured h1: 71.68px / lh 78.848px / weight 100 / ls -1.2px / #333645 */
+.mockup-my-lighthouse .mlh-hero-headline {
+  font-size: 71.68px;
+  line-height: 78.848px;
+  font-weight: 100;
+  letter-spacing: -1.2px;
+  color: var(--mlh-navy);
+}
+
+.mockup-my-lighthouse .mlh-hero-line {
+  display: block;
+}
+
+.mockup-my-lighthouse .mlh-hero-period {
+  color: var(--mlh-orange);
+}
+
+.mockup-my-lighthouse .mlh-hero-cursor {
+  display: inline-block;
+  width: 4.3px;
+  height: 68.1px;
+  margin-left: 6px;
+  vertical-align: -12px;
+  background: var(--mlh-orange);
+}
+
+/* measured subhead: 880px max, 19.84px / lh 27.776 / weight 600 / ls -0.0992px */
+.mockup-my-lighthouse .mlh-hero-subhead {
+  max-width: 880px;
+  margin: 20px auto 0;
+  font-size: 19.84px;
+  line-height: 27.776px;
+  font-weight: 600;
+  letter-spacing: -0.0992px;
+  color: var(--mlh-navy);
+}
+
+/* ------------------------------------------------------ ERNEST SHOWCASE */
+/* measured section: 1280 x 983.4, padding 64px 0; inner padding 0 12px */
+.mockup-my-lighthouse .mlh-showcase {
+  padding: 64px 0;
+}
+
+.mockup-my-lighthouse .mlh-showcase-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* measured app frame: 1256 x 769.4, radius 20px, white */
+.mockup-my-lighthouse .mlh-app-frame {
+  width: 100%;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(35, 38, 54, 0.14);
+}
+
+/* measured video zone: 1254 x 705.4  (ratio 1254/705.4 = 1.7777) */
+.mockup-my-lighthouse .mlh-video-zone {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1254 / 705.4;
+  background: #f5f4f1;
+  overflow: hidden;
+}
+
+.mockup-my-lighthouse .mlh-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* measured play/pause button: 34 x 34, radius 50%, bg rgba(0,0,0,.4) */
+.mockup-my-lighthouse .mlh-play-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.mockup-my-lighthouse .mlh-pause-bar {
+  width: 2.3px;
+  height: 9.3px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* measured button zone: 1254 x 62, padding 12px, gap 8px */
+.mockup-my-lighthouse .mlh-button-zone {
+  height: 62px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* measured tab btn: 125 x 38, padding 12px 20px, radius 999px, 14px/500 */
+.mockup-my-lighthouse .mlh-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 125px;
+  height: 38px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  background: transparent;
+}
+
+.mockup-my-lighthouse .mlh-tab-active {
+  background: var(--mlh-lilac);
+}
+
+.mockup-my-lighthouse .mlh-showcase-cta-row {
+  display: flex;
+  justify-content: center;
+  padding-top: 28px;
+}
+
+/* measured CTA: 186.6 x 50, padding 16px 32px, radius 999px, 18px/600, #f26522 */
+.mockup-my-lighthouse .mlh-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  background: var(--mlh-orange);
+  color: #fff;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------- DON'T SETTLE */
+/* measured section: 1280 x 621.6, padding 60px 12px (transparent bg) */
+.mockup-my-lighthouse .mlh-settle {
+  padding: 60px 12px;
+}
+
+/* measured wrapper: 1256 x 501.6, padding 32px, radius 20px + orange radial */
+.mockup-my-lighthouse .mlh-settle-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px;
+  border-radius: 20px;
+  background-image: radial-gradient(
+    circle at 0px 50%,
+    rgb(253, 130, 55) 0px,
+    rgb(255, 197, 91) 50%,
+    rgb(254, 251, 245) 70%
+  );
+}
+
+/* measured grid: 1192 wide, cols 340px 410px 410px, gap 16px */
+.mockup-my-lighthouse .mlh-settle-grid {
+  display: grid;
+  grid-template-columns: 340px 410px 410px;
+  gap: 16px;
+}
+
+/* measured headline col: 340 wide, padding 16px 8px, spans both rows */
+.mockup-my-lighthouse .mlh-settle-headline-col {
+  grid-row: span 2;
+  padding: 16px 8px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* measured h2: 44.8px / lh 49.28 / weight 100 / ls -0.88px / #232636 */
+.mockup-my-lighthouse .mlh-settle-headline {
+  font-size: 44.8px;
+  line-height: 49.28px;
+  font-weight: 100;
+  letter-spacing: -0.88px;
+  color: var(--mlh-navy-dark);
+}
+
+/* measured cards: padding 22px 28px, radius 16px, bg rgba(255,255,255,.85) */
+.mockup-my-lighthouse .mlh-settle-card {
+  padding: 22px 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* card 1 spans both right columns (measured 836 x 185.2) */
+.mockup-my-lighthouse .mlh-settle-card-top {
+  grid-column: 2 / span 2;
+  min-height: 185.2px;
+}
+
+/* cards 2 and 3 measured 410 x 236.4 */
+.mockup-my-lighthouse .mlh-settle-card-bl,
+.mockup-my-lighthouse .mlh-settle-card-br {
+  min-height: 236.4px;
+}
+
+/* measured icon tile: 40 x 40, radius 10px */
+.mockup-my-lighthouse .mlh-settle-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #f4f2fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.mockup-my-lighthouse .mlh-settle-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* measured card title: 20px / lh 22 / weight 700 / ls -0.4px / #232636 */
+.mockup-my-lighthouse .mlh-settle-card-title {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--mlh-navy-dark);
+  margin-bottom: 12px;
+}
+
+.mockup-my-lighthouse .mlh-settle-card-body {
+  font-size: 16px;
+  line-height: 25.6px;
+  font-weight: 400;
+  color: #464e5d;
+}
+
+/* ------------------------------------------- BUILT FOR HOTELS (lilac bg) */
+/* measured wrapper: 1280 x 1351.2, bg #fefbf5 + lilac radial from bottom */
+.mockup-my-lighthouse .mlh-ernest-bg {
+  background-color: var(--mlh-cream-2);
+  background-image: radial-gradient(
+    100% 65% at 50% 100%,
+    rgb(245, 238, 255) 0px,
+    rgb(245, 238, 255) 60%,
+    rgba(0, 0, 0, 0) 80%
+  );
+}
+
+.mockup-my-lighthouse .mlh-builtfor {
+  padding: 80px 12px 24px;
+}
+
+.mockup-my-lighthouse .mlh-builtfor-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* measured h2: 48px / lh 52.8 / weight 100 / ls -1.44px / #333645 */
+.mockup-my-lighthouse .mlh-builtfor-heading {
+  font-size: 48px;
+  line-height: 52.8px;
+  font-weight: 100;
+  letter-spacing: -1.44px;
+  color: var(--mlh-navy);
+}
+
+.mockup-my-lighthouse .mlh-builtfor-sub {
+  margin-top: 14px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 300;
+  color: var(--mlh-navy);
+}
+
+/* measured tab: 14px / lh 14 / ls 0.14px / padding 20px 16px / h 54 */
+.mockup-my-lighthouse .mlh-builtfor-tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 28px;
+}
+
+.mockup-my-lighthouse .mlh-bf-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 54px;
+  padding: 20px 16px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+  letter-spacing: 0.14px;
+  color: var(--mlh-muted);
+  white-space: nowrap;
+}
+
+.mockup-my-lighthouse .mlh-bf-tab-active {
+  font-weight: 600;
+  color: var(--mlh-navy);
+  box-shadow: inset 0 -2px 0 0 var(--mlh-navy);
+}
+
+/* measured product grid: 3 x 388.664px, gap 20px */
+.mockup-my-lighthouse .mlh-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* measured card: radius 16px, padding 28px 28px 0, bg #fefbf6 */
+.mockup-my-lighthouse .mlh-product-card {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px 0;
+  border-radius: 16px;
+  background: var(--mlh-cream-2);
+  overflow: hidden;
+}
+
+/* measured eyebrow: 13px / lh 19.5 / weight 500 */
+.mockup-my-lighthouse .mlh-product-eyebrow {
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 500;
+  color: #7b5ea7;
+}
+
+/* measured h4: 20px / lh 24 / weight 700 / ls -0.4px */
+.mockup-my-lighthouse .mlh-product-title {
+  margin-top: 6px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--mlh-navy-dark);
+}
+
+.mockup-my-lighthouse .mlh-product-body {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 25.6px;
+  color: #6b7280;
+}
+
+/* measured pill: padding 10px 22px, radius 50px, 13px / weight 600, #333645 */
+.mockup-my-lighthouse .mlh-pill-dark {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: var(--mlh-navy);
+  color: #fff;
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+}
+
+/* measured product image: 389 x 219, object-fit cover */
+.mockup-my-lighthouse .mlh-product-img {
+  width: calc(100% + 56px);
+  margin: 24px -28px 0;
+  aspect-ratio: 389 / 219;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* --------------------------------------------------------- AI CAPABILITIES */
+/* measured section: padding 24px 12px 80px; inner max 1280 */
+.mockup-my-lighthouse .mlh-aicaps {
+  padding: 24px 12px 80px;
+}
+
+.mockup-my-lighthouse .mlh-aicaps-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* measured headline: 14px / lh 15.4 / weight 700 / ls 0.84px / #1a1a1a */
+.mockup-my-lighthouse .mlh-aicaps-headline {
+  font-size: 14px;
+  line-height: 15.4px;
+  font-weight: 700;
+  letter-spacing: 0.84px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* measured grid: 3 x 405.33px, gap 20px */
+.mockup-my-lighthouse .mlh-aicaps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* measured card: 405.3 x 277.4, padding 28px 28px 0, radius 16px, bg rgba(255,255,255,.2) */
+.mockup-my-lighthouse .mlh-aicap-card {
+  min-height: 277.4px;
+  padding: 28px 28px 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  gap: 12px;
+}
+
+.mockup-my-lighthouse .mlh-aicap-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* measured eyebrow: 13px / lh 19.5 / weight 500 / rgb(123,94,167) */
+.mockup-my-lighthouse .mlh-aicap-eyebrow {
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 500;
+  color: #7b5ea7;
+}
+
+/* measured title: 20px / lh 24 / weight 700 / ls -0.4px / #232636 */
+.mockup-my-lighthouse .mlh-aicap-title {
+  margin-top: 6px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--mlh-navy-dark);
+}
+
+/* measured body: 16px / lh 25.6 / rgb(107,114,128) */
+.mockup-my-lighthouse .mlh-aicap-body {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 25.6px;
+  color: #6b7280;
+}
+
+/* measured cta: 39.5 tall, padding 10px 22px, radius 50px, 13px/600, bg #232636 */
+.mockup-my-lighthouse .mlh-aicap-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 28px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: var(--mlh-navy-dark);
+  color: #fff;
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------- TESTIMONIALS */
+/* measured: 1280 x 791.2, padding 104px 70px, warm gold radial gradient */
+.mockup-my-lighthouse .mlh-testi {
+  padding: 104px 70px;
+  background-image: radial-gradient(
+    94.43% 100.04% at 51.35% 100.04%,
+    rgb(253, 210, 132) 0px,
+    rgb(254, 251, 245) 100%
+  );
+}
+
+.mockup-my-lighthouse .mlh-testi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* measured h3: 56px / lh 61.6 / weight 400 / ls -0.56px / #000 */
+.mockup-my-lighthouse .mlh-testi-heading {
+  font-size: 56px;
+  line-height: 61.6px;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+  color: #000;
+}
+
+.mockup-my-lighthouse .mlh-testi-arrows {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+/* measured icon button: 56 x 56, radius 500px */
+.mockup-my-lighthouse .mlh-arrow-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 500px;
+  border: 1px solid rgba(16, 16, 16, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.mockup-my-lighthouse .mlh-arrow-muted {
+  color: rgba(16, 16, 16, 0.3);
+}
+
+.mockup-my-lighthouse .mlh-arrow-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* measured slide: 1140 padded 0 16px, item 1108 x 473.6 (752 text + 376 side) */
+.mockup-my-lighthouse .mlh-testi-track {
+  max-width: 1140px;
+  margin: 48px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.mockup-my-lighthouse .mlh-testi-slide {
+  display: grid;
+  grid-template-columns: 752px 376px;
+  min-height: 473.6px;
+  padding: 0 16px;
+}
+
+.mockup-my-lighthouse .mlh-testi-main {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* measured customer logo: ~100 x 24 */
+.mockup-my-lighthouse .mlh-testi-logo {
+  width: 100px;
+  height: 24px;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 28px;
+}
+
+/* measured quote: 652 wide, 32px / lh 38.4 / weight 500 / ls -0.32px / #000 */
+.mockup-my-lighthouse .mlh-testi-quote {
+  max-width: 652px;
+  font-size: 32px;
+  line-height: 38.4px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  color: #000;
+}
+
+/* measured name/role: 18px / lh 27 / weight 300 / ls -0.18px, serif stack */
+.mockup-my-lighthouse .mlh-testi-name,
+.mockup-my-lighthouse .mlh-testi-role {
+  font-family: var(--mlh-serif);
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 300;
+  letter-spacing: -0.18px;
+  color: #000;
+}
+
+.mockup-my-lighthouse .mlh-testi-name {
+  margin-top: 28px;
+}
+
+/* measured: 238.1 x 56, padding 11px 32px 14px, radius 45px, 20px/500, #333645 */
+.mockup-my-lighthouse .mlh-btn-story {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  margin-top: 24px;
+  padding: 11px 32px 14px;
+  border-radius: 45px;
+  background: var(--mlh-navy);
+  color: #fff;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+}
+
+/* measured side column: 356 content, gap 20px */
+.mockup-my-lighthouse .mlh-testi-side {
+  width: 356px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* measured stat: 56px / lh 61.6 / weight 400 / ls -0.56px */
+.mockup-my-lighthouse .mlh-testi-stat {
+  font-size: 56px;
+  line-height: 61.6px;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+  color: #000;
+}
+
+/* measured caption: 18px / lh 27 / weight 300, serif */
+.mockup-my-lighthouse .mlh-testi-caption {
+  font-family: var(--mlh-serif);
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 300;
+  letter-spacing: -0.18px;
+  color: #000;
+}
+
+/* measured cover: 356 x 290 */
+.mockup-my-lighthouse .mlh-testi-cover {
+  width: 356px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: auto;
+}
+
+/* ---------------------------------------------------------- INTEGRATIONS */
+/* measured: 1280 x 1059.6, padding 104px 80px */
+.mockup-my-lighthouse .mlh-integrations {
+  padding: 104px 80px;
+  text-align: center;
+}
+
+/* measured h3: 1120 wide max 1184, 56px / lh 61.6 / weight 400 / padding-bottom 48px */
+.mockup-my-lighthouse .mlh-integ-heading {
+  max-width: 1184px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+  font-size: 56px;
+  line-height: 61.6px;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+  color: #000;
+}
+
+/* measured intro: 800 max, 22px / lh 26 / weight 400 / #000 */
+.mockup-my-lighthouse .mlh-integ-intro {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #000;
+}
+
+/* measured tabs list: gap 24px; tab h 54, padding 20px 16px, 14px/lh 14, ls .14px */
+.mockup-my-lighthouse .mlh-integ-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 40px auto 24px;
+}
+
+.mockup-my-lighthouse .mlh-integ-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 54px;
+  padding: 20px 16px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+  letter-spacing: 0.14px;
+  color: var(--mlh-muted);
+  white-space: nowrap;
+}
+
+.mockup-my-lighthouse .mlh-integ-tab-active {
+  font-weight: 600;
+  color: var(--mlh-navy);
+  box-shadow: inset 0 -2px 0 0 var(--mlh-navy);
+}
+
+/* measured wall: flex wrap, gap 12px 24px, cell padding 32px */
+.mockup-my-lighthouse .mlh-logo-wall {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 24px;
+}
+
+.mockup-my-lighthouse .mlh-logo-cell {
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* measured logo img: 100 x 55 */
+.mockup-my-lighthouse .mlh-logo-img {
+  width: 100px;
+  height: 55px;
+  object-fit: contain;
+}
+
+/* -------------------------------------------------------------- RESOURCES */
+/* measured: 1280 x 655.3, padding 60px 12px 80px, bg #fefbf5 */
+.mockup-my-lighthouse .mlh-resources {
+  padding: 60px 12px 80px;
+  background: var(--mlh-cream-2);
+}
+
+.mockup-my-lighthouse .mlh-resources-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.mockup-my-lighthouse .mlh-resources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* measured heading: 44.8px / lh 49.28 / weight 100 / ls -1.344px / #333645 */
+.mockup-my-lighthouse .mlh-resources-heading {
+  font-size: 44.8px;
+  line-height: 49.28px;
+  font-weight: 100;
+  letter-spacing: -1.344px;
+  color: var(--mlh-navy);
+}
+
+/* measured cta: 155.5 x 49, padding 14px 28px, radius 28px, 14px/600, #333645 */
+.mockup-my-lighthouse .mlh-resources-cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  height: 49px;
+  padding: 14px 28px;
+  border-radius: 28px;
+  background: var(--mlh-navy);
+  color: #fff;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* measured grid: 616px 616px, gap 24px, total h 430 */
+.mockup-my-lighthouse .mlh-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+/* measured resource image: 616 x 104 (wide crop), object-fit cover */
+.mockup-my-lighthouse .mlh-resource-img {
+  width: 100%;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.mockup-my-lighthouse .mlh-resource-date {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+  color: var(--mlh-body);
+}
+
+.mockup-my-lighthouse .mlh-resource-title {
+  margin-top: 10px;
+  font-size: 28px;
+  line-height: 33.6px;
+  font-weight: 300;
+  letter-spacing: -0.28px;
+  color: var(--mlh-navy);
+}
+
+/* ------------------------------------------------------------ COMBINED CTA */
+/* measured: 1280 x 448.9, padding 80px 12px, bg #f0ede8 */
+.mockup-my-lighthouse .mlh-cta {
+  padding: 80px 12px;
+  background: #f0ede8;
+}
+
+/* measured inner: 616px 616px, gap 24px */
+.mockup-my-lighthouse .mlh-cta-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* measured card: 616 x 288.9, padding 40px, radius 20px, white */
+.mockup-my-lighthouse .mlh-cta-card {
+  min-height: 288.9px;
+  padding: 40px;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* measured headline: 44.8px / lh 49.28 / weight 100 / ls -1.344px / #232636 */
+.mockup-my-lighthouse .mlh-cta-headline {
+  font-size: 44.8px;
+  line-height: 49.28px;
+  font-weight: 100;
+  letter-spacing: -1.344px;
+  color: var(--mlh-navy-dark);
+}
+
+/* measured bullets block: 536 x 75.6 (3 lines of ~25.2px) */
+.mockup-my-lighthouse .mlh-cta-bullets {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mockup-my-lighthouse .mlh-cta-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 25.2px;
+  color: #212529;
+}
+
+.mockup-my-lighthouse .mlh-check {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* measured cta btn: h 44, padding 14px 32px, radius 28px, 14px/600 */
+.mockup-my-lighthouse .mlh-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  margin-top: auto;
+  padding: 14px 32px;
+  border-radius: 28px;
+  background: var(--mlh-navy);
+  color: #fff;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* measured second cta bg: rgb(234,37,104) */
+.mockup-my-lighthouse .mlh-cta-btn-pink {
+  background: var(--mlh-pink);
+}
+
+/* ----------------------------------------------------------------- FOOTER */
+/* measured: 1280 x 1253, radius 24px, bg rgba(254,251,246,.6), pad-top 40px */
+.mockup-my-lighthouse .mlh-footer {
+  border-radius: 24px;
+  background: rgba(254, 251, 246, 0.6);
+  font-family: var(--mlh-serif);
+  color: var(--mlh-body);
+}
+
+.mockup-my-lighthouse .mlh-footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 0 0;
+}
+
+/* measured top row: 25% brand col (310) + 75% links col (930) */
+.mockup-my-lighthouse .mlh-footer-top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.mockup-my-lighthouse .mlh-footer-brand {
+  width: 25%;
+  padding: 0 20px;
+  flex: 0 0 25%;
+}
+
+.mockup-my-lighthouse .mlh-footer-logo {
+  width: 170px;
+  height: 34px;
+  color: var(--mlh-navy);
+}
+
+.mockup-my-lighthouse .mlh-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.mockup-my-lighthouse .mlh-social {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(51, 54, 69, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mlh-navy);
+}
+
+.mockup-my-lighthouse .mlh-social svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mockup-my-lighthouse .mlh-footer-links {
+  width: 75%;
+  flex: 0 0 75%;
+  display: flex;
+  gap: 0;
+}
+
+.mockup-my-lighthouse .mlh-footer-group {
+  flex: 1 1 0;
+  padding: 0 20px;
+  min-width: 0;
+}
+
+.mockup-my-lighthouse .mlh-footer-group-heading {
+  font-family: var(--mlh-sans);
+  font-size: 14px;
+  line-height: 15.4px;
+  font-weight: 700;
+  letter-spacing: 0.84px;
+  color: var(--mlh-navy);
+  margin-bottom: 20px;
+}
+
+.mockup-my-lighthouse .mlh-footer-list li {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  color: var(--mlh-body);
+  margin-bottom: 6px;
+}
+
+/* measured mid row: badges 373.3 x 96.4 flex gap 20px; form col 683 wide */
+.mockup-my-lighthouse .mlh-footer-mid {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 48px 20px 0;
+}
+
+.mockup-my-lighthouse .mlh-footer-badges {
+  flex: 0 0 373.3px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* measured badge: 78 x 96 */
+.mockup-my-lighthouse .mlh-badge {
+  width: 78px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.mockup-my-lighthouse .mlh-signup {
+  flex: 1 1 auto;
+  max-width: 683px;
+}
+
+.mockup-my-lighthouse .mlh-signup-row {
+  display: flex;
+  gap: 15px;
+}
+
+.mockup-my-lighthouse .mlh-field {
+  display: block;
+  flex: 1 1 0;
+  margin-bottom: 12px;
+}
+
+.mockup-my-lighthouse .mlh-field-wide {
+  width: 100%;
+}
+
+.mockup-my-lighthouse .mlh-field-label {
+  display: block;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 300;
+  color: var(--mlh-body);
+  margin-bottom: 6px;
+}
+
+.mockup-my-lighthouse .mlh-req {
+  color: var(--mlh-orange);
+}
+
+/* measured input: h 75, padding 16px 12px, radius 12px */
+.mockup-my-lighthouse .mlh-input {
+  display: block;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(51, 54, 69, 0.18);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.mockup-my-lighthouse .mlh-signup-note {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 300;
+  color: var(--mlh-body);
+  margin-bottom: 12px;
+}
+
+.mockup-my-lighthouse .mlh-consent {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300;
+  color: var(--mlh-body);
+}
+
+.mockup-my-lighthouse .mlh-consent a {
+  text-decoration: underline;
+}
+
+/* measured bottom: submenu 890 wide, padding 16px 0, links gap 32px */
+.mockup-my-lighthouse .mlh-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 20px 24px;
+}
+
+.mockup-my-lighthouse .mlh-footer-submenu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 16px 0;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  color: var(--mlh-body);
+}
+
+.mockup-my-lighthouse .mlh-footer-lang {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 300;
+  color: var(--mlh-body);
+}
+
+/* ------------------------------------------------------------ RESPONSIVE */
+@media (max-width: 1180px) {
+  .mockup-my-lighthouse .mlh-settle-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mockup-my-lighthouse .mlh-settle-headline-col {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+  .mockup-my-lighthouse .mlh-settle-card-top {
+    grid-column: 1 / -1;
+  }
+  .mockup-my-lighthouse .mlh-testi-slide {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .mockup-my-lighthouse .mlh-testi-side {
+    width: 100%;
+  }
+  .mockup-my-lighthouse .mlh-testi-cover {
+    width: 100%;
+  }
+  .mockup-my-lighthouse .mlh-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .mockup-my-lighthouse .mlh-hero-headline {
+    font-size: 48px;
+    line-height: 54px;
+  }
+  .mockup-my-lighthouse .mlh-hero-cursor {
+    height: 44px;
+    vertical-align: -8px;
+  }
+  .mockup-my-lighthouse .mlh-product-grid,
+  .mockup-my-lighthouse .mlh-aicaps-grid,
+  .mockup-my-lighthouse .mlh-resources-grid,
+  .mockup-my-lighthouse .mlh-cta-inner {
+    grid-template-columns: 1fr;
+  }
+  .mockup-my-lighthouse .mlh-settle-grid {
+    grid-template-columns: 1fr;
+  }
+  .mockup-my-lighthouse .mlh-testi,
+  .mockup-my-lighthouse .mlh-integrations {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .mockup-my-lighthouse .mlh-testi-heading,
+  .mockup-my-lighthouse .mlh-integ-heading {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .mockup-my-lighthouse .mlh-footer-top,
+  .mockup-my-lighthouse .mlh-footer-mid,
+  .mockup-my-lighthouse .mlh-footer-links {
+    flex-direction: column;
+  }
+  .mockup-my-lighthouse .mlh-footer-brand,
+  .mockup-my-lighthouse .mlh-footer-links {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  .mockup-my-lighthouse .mlh-footer-badges {
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+  }
+}
