@@ -1,0 +1,715 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap");
+
+.spr {
+  --spr-mulberry: #650a41;
+  --spr-orange: #fd8c25;
+  --spr-slate: #49505b;
+  --spr-cream: #f6f5f2;
+  --spr-heading: #141012;
+  --spr-navy: #0b1320;
+  --spr-bg-soft: #fcf7f5;
+  --spr-bg-peach: #fcf2ee;
+  --spr-footer: #131012;
+
+  font-family: Inter, sans-serif;
+  color: #000;
+  background: #ffffff;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+.spr *,
+.spr *::before,
+.spr *::after {
+  box-sizing: border-box;
+}
+
+.spr img {
+  max-width: 100%;
+  display: block;
+}
+
+.spr h1,
+.spr h2,
+.spr h3 {
+  font-family: "Instrument Sans", sans-serif;
+  margin: 0;
+}
+
+.spr p {
+  margin: 0;
+}
+
+/* ---------- shared ---------- */
+
+.spr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.spr-btn--lg {
+  padding: 16px 28px;
+  font-size: 16px;
+}
+
+.spr-btn--white {
+  background: #ffffff;
+  color: var(--spr-mulberry);
+}
+
+.spr-btn--outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.spr-h2 {
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: -1.428px;
+  color: var(--spr-heading);
+  line-height: 1.15;
+  text-align: center;
+}
+
+.spr-h2--navy {
+  color: var(--spr-navy);
+}
+
+.spr-link {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--spr-mulberry);
+  border-bottom: 1px solid rgba(101, 10, 65, 0.35);
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.spr-divider {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- hero ---------- */
+
+.spr-hero {
+  position: relative;
+  background-color: var(--spr-mulberry);
+  background-image: url("https://sprinto.com/wp-content/uploads/2026/03/bg-overlay.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-bottom: 56px;
+  overflow: hidden;
+}
+
+.spr-nav {
+  padding: 22px 0;
+}
+
+.spr-nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.spr-nav__logo {
+  width: 132px;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.spr-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex: 1 1 auto;
+}
+
+.spr-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.spr-nav__link {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.spr-hero__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 48px 32px 0;
+  text-align: center;
+  position: relative;
+}
+
+.spr-hero__title {
+  font-size: 80px;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -2.72px;
+  color: var(--spr-cream);
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.spr-hero__body {
+  margin: 28px auto 0;
+  max-width: 820px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(246, 245, 242, 0.85);
+}
+
+.spr-hero__cta {
+  margin-top: 34px;
+}
+
+.spr-hero__badges {
+  margin-top: 64px;
+}
+
+.spr-hero__eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(246, 245, 242, 0.7);
+  margin-bottom: 24px;
+}
+
+.spr-hero__badgerow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+}
+
+.spr-hero__badge {
+  width: 120px;
+  height: auto;
+}
+
+/* ---------- customer logos ---------- */
+
+.spr-logos {
+  background: var(--spr-bg-soft);
+  padding: 72px 32px 80px;
+  text-align: center;
+}
+
+.spr-logos__label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--spr-slate);
+  margin-bottom: 40px;
+}
+
+.spr-logos__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 22px 44px;
+}
+
+.spr-logos__logo {
+  max-height: 30px;
+  max-width: 132px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+}
+
+/* ---------- built for every stage ---------- */
+
+.spr-stage {
+  background: var(--spr-bg-peach);
+  padding: 88px 32px 96px;
+}
+
+.spr-stage__tabs {
+  max-width: 1180px;
+  margin: 44px auto 0;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.spr-stage__tab {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--spr-slate);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(101, 10, 65, 0.14);
+  border-radius: 100px;
+  padding: 12px 22px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.spr-stage__tab.is-active {
+  background: var(--spr-mulberry);
+  border-color: var(--spr-mulberry);
+  color: var(--spr-cream);
+}
+
+.spr-stage__panel {
+  max-width: 1180px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.spr-stage__h3 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--spr-navy);
+  letter-spacing: -1px;
+}
+
+.spr-stage__body {
+  margin: 22px 0 26px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--spr-slate);
+}
+
+.spr-stage__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* ---------- unified platform ---------- */
+
+.spr-platform {
+  background: var(--spr-bg-soft);
+  padding: 92px 32px 96px;
+}
+
+.spr-platform__list {
+  max-width: 1180px;
+  margin: 60px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.spr-product {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.spr-product:nth-child(even) .spr-product__copy {
+  order: 2;
+}
+
+.spr-product__label {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--spr-navy);
+  letter-spacing: -0.8px;
+}
+
+.spr-product__body {
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--spr-slate);
+}
+
+.spr-product__links {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.spr-product__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* ---------- built to cover everything ---------- */
+
+.spr-coverage {
+  background-color: var(--spr-bg-soft);
+  background-image: url("https://sprinto.com/wp-content/uploads/2026/03/Lines-bg-new-scaled.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 92px 32px 96px;
+}
+
+.spr-coverage__cards {
+  max-width: 1180px;
+  margin: 60px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.spr-coverage__card {
+  background: #ffffff;
+  border: 1px solid rgba(101, 10, 65, 0.1);
+  border-radius: 24px;
+  padding: 48px 48px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.spr-coverage__h3 {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--spr-navy);
+  letter-spacing: -0.9px;
+}
+
+.spr-coverage__body {
+  margin: 18px auto 24px;
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--spr-slate);
+}
+
+.spr-coverage__media {
+  margin-top: 40px;
+}
+
+.spr-coverage__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ---------- testimonials ---------- */
+
+.spr-quotes {
+  background: var(--spr-bg-soft);
+  padding: 92px 32px 96px;
+}
+
+.spr-quotes__grid {
+  max-width: 1180px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.spr-quote {
+  background: #ffffff;
+  border: 1px solid rgba(101, 10, 65, 0.1);
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.spr-quote__photo {
+  aspect-ratio: 702 / 500;
+  overflow: hidden;
+  background: var(--spr-bg-peach);
+}
+
+.spr-quote__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.spr-quote__copy {
+  padding: 28px 28px 32px;
+  flex: 1 1 auto;
+}
+
+.spr-quote__mark {
+  width: 40px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.spr-quote__text {
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--spr-slate);
+}
+
+.spr-quote__name {
+  margin-top: 22px;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--spr-navy);
+}
+
+.spr-quote__title {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--spr-slate);
+}
+
+/* ---------- comparison ---------- */
+
+.spr-compare {
+  background: var(--spr-bg-soft);
+  padding: 92px 32px 96px;
+}
+
+.spr-compare__sub {
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 18px;
+  color: var(--spr-slate);
+}
+
+.spr-compare__table {
+  max-width: 1000px;
+  margin: 52px auto 0;
+  background: #ffffff;
+  border: 1px solid rgba(101, 10, 65, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.spr-compare__head,
+.spr-compare__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+}
+
+.spr-compare__row + .spr-compare__row,
+.spr-compare__row {
+  border-top: 1px solid rgba(101, 10, 65, 0.1);
+}
+
+.spr-compare__cell {
+  padding: 22px 26px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--spr-slate);
+  display: flex;
+  align-items: center;
+}
+
+.spr-compare__cell--label {
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 700;
+  color: var(--spr-navy);
+}
+
+.spr-compare__head .spr-compare__cell {
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--spr-navy);
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.spr-compare__cell--sprinto {
+  background: rgba(101, 10, 65, 0.05);
+  color: var(--spr-mulberry);
+  font-weight: 500;
+}
+
+.spr-compare__head .spr-compare__cell--sprinto img {
+  width: 118px;
+  height: auto;
+}
+
+/* ---------- final cta ---------- */
+
+.spr-final {
+  background: var(--spr-bg-soft);
+  padding: 72px 32px 88px;
+}
+
+.spr-final__banner {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--spr-mulberry);
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 84px 40px;
+}
+
+.spr-final__deco {
+  position: absolute;
+  pointer-events: none;
+}
+
+.spr-final__deco--tl {
+  top: 0;
+  left: 0;
+  width: 80px;
+}
+
+.spr-final__deco--tr {
+  top: 24px;
+  right: 0;
+  width: 240px;
+}
+
+.spr-final__deco--cr {
+  top: 50%;
+  right: 0;
+  width: 180px;
+  transform: translateY(-50%);
+}
+
+.spr-final__deco--bl {
+  bottom: 24px;
+  left: 32px;
+  width: 80px;
+}
+
+.spr-final__deco--br {
+  bottom: 0;
+  right: 0;
+  width: 300px;
+}
+
+.spr-final__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.spr-final__title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -2.1px;
+  color: var(--spr-cream);
+}
+
+.spr-final__body {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(246, 245, 242, 0.85);
+}
+
+.spr-final__cta {
+  margin-top: 34px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- footer ---------- */
+
+.spr-footer {
+  background: var(--spr-footer);
+  padding: 56px 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.spr-footer__logo {
+  width: 150px;
+  height: auto;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1024px) {
+  .spr-hero__title {
+    font-size: 56px;
+    letter-spacing: -1.8px;
+  }
+  .spr-h2,
+  .spr-final__title {
+    font-size: 34px;
+    letter-spacing: -1px;
+  }
+  .spr-nav__links {
+    display: none;
+  }
+  .spr-stage__panel,
+  .spr-product {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .spr-product:nth-child(even) .spr-product__copy {
+    order: 0;
+  }
+  .spr-quotes__grid {
+    grid-template-columns: 1fr;
+  }
+  .spr-compare__head,
+  .spr-compare__row {
+    grid-template-columns: 1fr;
+  }
+  .spr-compare__row .spr-compare__cell {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .spr-compare__row .spr-compare__cell--label {
+    padding-top: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .spr-hero__title {
+    font-size: 38px;
+    letter-spacing: -1.2px;
+  }
+  .spr-hero__body,
+  .spr-final__body {
+    font-size: 16px;
+  }
+  .spr-hero__badge {
+    width: 88px;
+  }
+  .spr-coverage__card {
+    padding: 32px 24px 0;
+  }
+  .spr-final__banner {
+    padding: 56px 24px;
+  }
+}
