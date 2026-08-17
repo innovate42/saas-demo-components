@@ -1,0 +1,19 @@
+{
+  "name": "component-mockup-bonterra-tech",
+  "version": "1.0.0",
+  "description": "Bonterra homepage replica mockup component",
+  "type": "module",
+  "main": "./index.tsx",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "ctaLabel",
+      "label": "CTA button label",
+      "type": "text",
+      "default": "Request a demo"
+    }
+  ]
+}
