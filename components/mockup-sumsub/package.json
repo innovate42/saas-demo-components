@@ -8,8 +8,12 @@
   "peerDependencies": {
     "react": "*"
   },
-  "limioProps": {
-    "displayName": "Sumsub Mockup",
-    "props": {}
-  }
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Hero heading",
+      "type": "text",
+      "default": "AI-powered trust infrastructure for compliance operations at scale"
+    }
+  ]
 }
