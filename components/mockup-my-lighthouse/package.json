@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-my-lighthouse",
+  "version": "1.0.0",
+  "description": "Full-page visual replica of mylighthouse.com for prospect mockup",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
