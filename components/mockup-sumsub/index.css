@@ -1,0 +1,252 @@
+/* Sumsub homepage replica */
+.ssb-root {
+  --primary-black: #0A0C0E;
+  --brand-mint: #1BEDBA;
+  --cta-blue: #1764FF;
+  --cta-mint: #34FFC2;
+  --soft: #F4F5FB;
+  --soft2: #F3F4F7;
+  --line: #E0E4EB;
+  --muted: #A5ACC0;
+  --sand: #DEC4A6;
+  font-family: "Aeonik Pro", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #000;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.ssb-root *,
+.ssb-root *::before,
+.ssb-root *::after { box-sizing: border-box; }
+.ssb-root p, .ssb-root h1, .ssb-root h2, .ssb-root h3, .ssb-root h4, .ssb-root ul, .ssb-root li, .ssb-root figure {
+  margin: 0; padding: 0; list-style: none;
+}
+.ssb-root img { display: block; max-width: 100%; }
+.ssb-root button { font: inherit; cursor: pointer; border: 0; }
+
+.ssb-wrap { width: 100%; padding: 0 24px; }
+.ssb-container { width: 100%; max-width: 1232px; margin: 0 auto; }
+
+/* buttons */
+.ssb-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 8px; font-size: 18px; line-height: 25.2px; font-weight: 500;
+  padding: 15.5px 32px; white-space: nowrap; text-decoration: none;
+}
+.ssb-btn--blue { background: var(--cta-blue); color: #fff; }
+.ssb-btn--mint { background: var(--cta-mint); color: var(--primary-black); }
+.ssb-btn--white { background: #fff; color: #001133; }
+.ssb-btn--sm { font-size: 16px; line-height: 22.4px; padding: 8px 12px; }
+
+/* ---------- header ---------- */
+.ssb-header { background: #fff; border-bottom: 1px solid var(--line); }
+.ssb-topstrip {
+  display: flex; align-items: center; justify-content: flex-end; gap: 16px;
+  height: 44px; font-size: 14px; color: rgb(22,24,29);
+}
+.ssb-topstrip a { display: inline-flex; align-items: center; gap: 6px; color: rgb(22,24,29); text-decoration: none; }
+.ssb-pill { background: var(--soft); border-radius: 999px; padding: 6px 12px; }
+.ssb-navbar { display: flex; align-items: center; gap: 32px; height: 67px; }
+.ssb-logo { flex: 0 0 auto; display: flex; align-items: center; }
+.ssb-logo svg { width: 141px; height: 32px; display: block; }
+.ssb-nav { display: flex; align-items: center; gap: 28px; flex: 1 1 auto; }
+.ssb-nav a { font-size: 16px; color: rgb(22,24,29); text-decoration: none; }
+.ssb-navactions { display: flex; align-items: center; gap: 8px; }
+.ssb-navactions .ssb-btn--white { border: 1px solid var(--line); color: var(--primary-black); }
+
+/* ---------- hero ---------- */
+.ssb-hero { padding: 64px 0 0; }
+.ssb-hero__content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ssb-hero__title {
+  font-size: 56px; line-height: 56px; font-weight: 400; color: var(--primary-black);
+  max-width: 1000px; letter-spacing: -0.01em;
+}
+.ssb-hero__sub { margin-top: 24px; font-size: 20px; line-height: 28px; color: rgb(22,24,29); max-width: 700px; }
+.ssb-hero__btn { margin-top: 40px; }
+
+/* ---------- video poster ---------- */
+.ssb-video { padding: 40px 0 0; }
+.ssb-video__frame {
+  position: relative; border-radius: 24px; overflow: hidden; background: var(--primary-black);
+  aspect-ratio: 1232 / 433;
+}
+.ssb-video__frame img { width: 100%; height: 100%; object-fit: cover; }
+.ssb-video__overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px;
+  background: linear-gradient(180deg, rgba(10,12,14,0.05) 0%, rgba(10,12,14,0.45) 100%);
+}
+.ssb-video__play {
+  width: 72px; height: 72px; border-radius: 999px; background: rgba(255,255,255,0.92);
+  display: flex; align-items: center; justify-content: center;
+}
+.ssb-video__play svg { width: 26px; height: 26px; }
+.ssb-video__title { font-size: 24px; line-height: 32px; font-weight: 700; color: #fff; }
+
+.ssb-spacer { height: 72px; }
+
+/* ---------- four column value row ---------- */
+.ssb-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ssb-cards__item {
+  background: var(--soft); border-radius: 24px; padding: 24px; min-height: 248px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
+}
+.ssb-cards__title { font-size: 24px; line-height: 24px; font-weight: 400; color: var(--primary-black); }
+.ssb-cards__text { font-size: 16px; line-height: 22.4px; color: rgb(22,24,29); }
+
+/* ---------- what is trust (dark) ---------- */
+.ssb-trust {
+  position: relative; background-color: var(--primary-black);
+  background-image: url("https://sumsub.com/_next/image/?url=https%3A%2F%2Fsumsub.com%2Fwp%2Fwp-content%2Fuploads%2F2026%2F07%2Ftrust-infrastructure-bg-scaled.jpg&w=1440&q=75");
+  background-size: cover; background-position: center; color: #fff;
+  padding: 80px 0 96px; overflow: hidden;
+}
+.ssb-trust::before { content: ""; position: absolute; inset: 0; background: rgba(10,12,14,0.78); }
+.ssb-trust .ssb-wrap { position: relative; }
+.ssb-trust__title { font-size: 32px; line-height: 36px; font-weight: 400; color: rgba(255,255,255,0.698); }
+.ssb-trust__lede { margin-top: 24px; max-width: 720px; display: flex; flex-direction: column; gap: 12px; }
+.ssb-trust__lede p { font-size: 18px; line-height: 26px; color: rgba(255,255,255,0.698); }
+.ssb-trust__tabs { display: flex; gap: 32px; margin-top: 48px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.ssb-trust__tab { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.698); }
+.ssb-trust__tab.is-active { color: #fff; }
+.ssb-trust__group { margin-top: 48px; }
+.ssb-trust__grouptitle { font-size: 48px; line-height: 44.16px; font-weight: 400; color: rgba(255,255,255,0.698); }
+.ssb-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.ssb-pill--outline {
+  border: 1px solid rgba(255,255,255,0.28); border-radius: 8px; padding: 10px 16px;
+  font-size: 20px; line-height: 20px; color: #fff; background: transparent;
+}
+.ssb-pill--filled {
+  background: rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 16px;
+  font-size: 20px; line-height: 20px; color: #fff;
+}
+.ssb-partners { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 40px; margin-top: 24px; }
+.ssb-partners img { height: 28px; width: auto; opacity: 0.85; filter: brightness(0) invert(1); }
+
+/* ---------- industries ---------- */
+.ssb-industries {
+  background-color: var(--sand);
+  background-image: url("https://sumsub.com/_next/image/?url=https%3A%2F%2Fsumsub.com%2Fwp%2Fwp-content%2Fuploads%2F2026%2F07%2Findustries-bg-1-scaled.jpg&w=1440&q=100");
+  background-size: cover; background-position: center;
+  min-height: 640px; display: flex; align-items: center; padding: 72px 0;
+}
+.ssb-industries__title { font-size: 40px; line-height: 44px; font-weight: 400; color: var(--primary-black); }
+.ssb-industries__sub { margin-top: 12px; font-size: 18px; line-height: 25.2px; color: rgb(22,24,29); }
+.ssb-industries__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 40px; }
+.ssb-industries__item {
+  background: var(--soft2); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+  font-size: 18px; line-height: 25.2px; font-weight: 500; color: #000; min-height: 75px;
+  display: flex; align-items: center;
+}
+.ssb-industries__btn { margin-top: 40px; }
+
+/* ---------- ROI ---------- */
+.ssb-roi { background: var(--primary-black); color: #fff; min-height: 395px; display: flex; align-items: center; padding: 72px 0; }
+.ssb-roi__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.ssb-roi__title { font-size: 40px; line-height: 44px; font-weight: 400; color: #fff; max-width: 340px; }
+.ssb-roi__text { margin-top: 20px; font-size: 16px; line-height: 22.4px; color: var(--muted); max-width: 520px; }
+.ssb-roi__btn { margin-top: 32px; }
+.ssb-roi__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.ssb-roi__num { font-size: 64px; line-height: 64px; font-weight: 400; color: #fff; }
+.ssb-roi__label { margin-top: 12px; font-size: 16px; line-height: 22.4px; font-weight: 500; color: #fff; }
+
+/* ---------- section titles ---------- */
+.ssb-title { text-align: center; }
+.ssb-title h2 { font-size: 40px; line-height: 44px; font-weight: 400; color: var(--primary-black); }
+.ssb-title p { margin-top: 12px; font-size: 18px; line-height: 25.2px; color: rgb(22,24,29); }
+
+/* ---------- compliance grid ---------- */
+.ssb-compliance { margin-top: 40px; }
+.ssb-compliance__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line); border-radius: 24px; overflow: hidden;
+}
+.ssb-compliance__grid li {
+  background: #fff; min-height: 218px; display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.ssb-compliance__badge {
+  border: 1px solid var(--line); border-radius: 12px; width: 134px; height: 68px;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 13px; line-height: 16px; font-weight: 500; color: var(--muted);
+  background: #FCFCFD; padding: 8px;
+}
+
+/* ---------- integration / AI agent ---------- */
+.ssb-integration { background: var(--soft); border-radius: 24px; padding: 32px; display: flex; gap: 16px; margin-top: 40px; }
+.ssb-integration__inner { flex: 0 0 554px; max-width: 554px; display: flex; flex-direction: column; gap: 24px; }
+.ssb-integration__tabs { display: flex; gap: 8px; }
+.ssb-integration__tab {
+  border-radius: 8px; padding: 8px 16px; font-size: 16px; line-height: 22.4px; font-weight: 500;
+  background: transparent; color: rgb(22,24,29); border: 1px solid var(--line);
+}
+.ssb-integration__tab.is-active { background: var(--primary-black); color: #fff; border-color: var(--primary-black); }
+.ssb-integration__panels { display: flex; flex-direction: column; gap: 20px; }
+.ssb-integration__panel h3 { font-size: 20px; line-height: 28px; font-weight: 500; color: var(--primary-black); }
+.ssb-integration__panel p { margin-top: 8px; font-size: 16px; line-height: 22.4px; color: rgb(22,24,29); }
+.ssb-integration__media { flex: 1 1 auto; border-radius: 9.13px; overflow: hidden; min-height: 371px; background: #fff; }
+.ssb-integration__media img { width: 100%; height: 100%; object-fit: cover; min-height: 371px; }
+.ssb-integration__btn { align-self: flex-start; }
+
+/* ---------- reviews ---------- */
+.ssb-reviews { margin-top: 40px; overflow: hidden; }
+.ssb-reviews__track { display: flex; gap: 24px; }
+.ssb-reviews__card {
+  flex: 0 0 604px; max-width: 604px; background: var(--soft); border-radius: 24px; padding: 32px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 320px;
+}
+.ssb-reviews__quote { font-size: 20px; line-height: 28px; color: var(--primary-black); }
+.ssb-reviews__person { display: flex; align-items: center; gap: 16px; }
+.ssb-reviews__person img { width: 80px; height: 80px; border-radius: 999px; object-fit: cover; flex: 0 0 80px; }
+.ssb-reviews__name { font-size: 18px; line-height: 25.2px; font-weight: 500; color: var(--primary-black); }
+.ssb-reviews__role { margin-top: 4px; font-size: 16px; line-height: 22.4px; color: rgb(22,24,29); }
+
+/* ---------- CTA banner ---------- */
+.ssb-cta {
+  border-radius: 24px; min-height: 498px; display: flex; align-items: center;
+  background-color: var(--primary-black);
+  background-image: url("https://sumsub.com/_next/image/?url=https%3A%2F%2Fsumsub.com%2Fwp%2Fwp-content%2Fuploads%2F2026%2F07%2Fcta-banner-bg-scaled.jpg&w=1440&q=75");
+  background-size: cover; background-position: center; padding: 64px;
+}
+.ssb-cta__title { font-size: 48px; line-height: 52.8px; font-weight: 500; color: #fff; max-width: 560px; }
+.ssb-cta__btn { margin-top: 32px; }
+
+/* ---------- footer ---------- */
+.ssb-footer { background: var(--primary-black); color: #fff; padding: 72px 0 160px; margin-top: 72px; }
+.ssb-footer__top { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+.ssb-footer__logo svg { width: 141px; height: 32px; }
+.ssb-footer__logo svg path { fill: #fff; }
+.ssb-footer__logo svg path:nth-of-type(2) { fill: var(--brand-mint); }
+.ssb-footer__apps { display: flex; gap: 12px; margin-top: 24px; }
+.ssb-footer__apps img { height: 30px; width: auto; }
+.ssb-footer__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin-top: 56px; }
+.ssb-footer__coltitle { font-size: 18px; line-height: 25.2px; font-weight: 500; color: #fff; margin-bottom: 20px; }
+.ssb-footer__subtitle { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 20px 0 10px; }
+.ssb-footer__list li { font-size: 15px; line-height: 24px; color: rgba(255,255,255,0.698); }
+.ssb-footer__bottom {
+  margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 14px; color: var(--muted); max-width: 900px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .ssb-cards { grid-template-columns: repeat(2, 1fr); }
+  .ssb-compliance__grid { grid-template-columns: repeat(2, 1fr); }
+  .ssb-industries__grid { grid-template-columns: repeat(3, 1fr); }
+  .ssb-integration { flex-direction: column; }
+  .ssb-integration__inner { flex: 1 1 auto; max-width: none; }
+  .ssb-roi__grid { grid-template-columns: 1fr; }
+  .ssb-footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .ssb-nav, .ssb-topstrip { display: none; }
+  .ssb-hero__title { font-size: 36px; line-height: 40px; }
+  .ssb-trust__grouptitle { font-size: 32px; line-height: 36px; }
+  .ssb-title h2, .ssb-industries__title, .ssb-roi__title { font-size: 30px; line-height: 34px; }
+  .ssb-cta__title { font-size: 32px; line-height: 38px; }
+  .ssb-cta { padding: 32px; }
+  .ssb-cards { grid-template-columns: 1fr; }
+  .ssb-industries__grid { grid-template-columns: repeat(2, 1fr); }
+  .ssb-reviews__card { flex: 0 0 300px; max-width: 300px; }
+  .ssb-footer__cols { grid-template-columns: 1fr; }
+  .ssb-roi__stats { grid-template-columns: 1fr; }
+}
