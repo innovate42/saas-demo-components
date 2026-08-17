@@ -1,0 +1,22 @@
+{
+  "name": "component-mockup-cast-ai",
+  "version": "1.0.0",
+  "description": "Full-page visual replica of the Cast AI homepage as a Limio custom component.",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "text",
+      "default": "Cast AI"
+    }
+  ]
+}
