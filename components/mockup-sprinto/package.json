@@ -1,0 +1,25 @@
+{
+  "name": "component-mockup-sprinto",
+  "version": "1.0.0",
+  "description": "Sprinto homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Hero heading",
+      "type": "text",
+      "default": "Trust doesn't wait for your next audit. Neither does Sprinto."
+    },
+    {
+      "id": "ctaLabel",
+      "label": "Hero CTA label",
+      "type": "text",
+      "default": "Book a demo"
+    }
+  ]
+}
