@@ -1,0 +1,15 @@
+{
+  "name": "component-mockup-sumsub",
+  "version": "1.0.0",
+  "description": "Sumsub homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": {
+    "displayName": "Sumsub Mockup",
+    "props": {}
+  }
+}
