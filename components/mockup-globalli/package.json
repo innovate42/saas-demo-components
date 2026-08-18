@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-globalli",
+  "version": "1.0.0",
+  "description": "Globalli homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
