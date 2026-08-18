@@ -1,0 +1,1304 @@
+/* ==========================================================================
+   Hallmark Health Care Solutions homepage replica
+   All rules scoped under .mockup-hallmark so nothing leaks into the host page.
+   Geometry matched to live measurements at 1280px viewport.
+   ========================================================================== */
+
+.mockup-hallmark {
+  --hm-black: #000000;
+  --hm-ink: #212121;
+  --hm-white: #ffffff;
+  --hm-cyan: #00eade;
+  --hm-mint: #ccfbf8;
+  --hm-mint-pale: #dbfffd;
+  --hm-teal: #047d82;
+  --hm-grey: #e9e9e9;
+
+  --hm-sans: aptos, "Aptos", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hm-display: "ivypresto-display", "ivypresto-headline", "Playfair Display",
+    Georgia, "Times New Roman", serif;
+
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  background: var(--hm-white);
+  color: var(--hm-black);
+  font-family: var(--hm-sans);
+  font-size: 16px;
+  line-height: 1.29;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.mockup-hallmark *,
+.mockup-hallmark *::before,
+.mockup-hallmark *::after {
+  box-sizing: border-box;
+}
+
+.mockup-hallmark p,
+.mockup-hallmark h1,
+.mockup-hallmark h2,
+.mockup-hallmark h3,
+.mockup-hallmark h4,
+.mockup-hallmark h5,
+.mockup-hallmark ul,
+.mockup-hallmark li {
+  margin: 0;
+  padding: 0;
+}
+
+.mockup-hallmark ul {
+  list-style: none;
+}
+
+.mockup-hallmark img {
+  display: block;
+  max-width: 100%;
+}
+
+.mockup-hallmark a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Shared section container: 1232px content shell inside 24px side padding */
+.mockup-hallmark .hm-section {
+  width: 100%;
+  padding: 0 24px;
+}
+
+.mockup-hallmark .hm-container {
+  width: 100%;
+  max-width: 1232px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   S0. Announcement bar (black, 55px)
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-announce {
+  background: var(--hm-black);
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-announce-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 20px;
+}
+
+.mockup-hallmark .hm-announce-text {
+  font-size: 15px;
+  line-height: 18px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-announce-text strong {
+  font-weight: 700;
+}
+
+.mockup-hallmark .hm-announce-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mockup-hallmark .hm-announce-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 18px;
+  border-radius: 4px;
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mockup-hallmark .hm-announce-close {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--hm-white);
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   S1. Nav — grey utility strip (55px) + white main bar (80px) = 135px
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-nav {
+  background: var(--hm-grey);
+}
+
+.mockup-hallmark .hm-nav-utility {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 10px 18px;
+  height: 55px;
+}
+
+.mockup-hallmark .hm-signin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 24px;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--hm-black);
+  font-size: 15px;
+}
+
+.mockup-hallmark .hm-nav-main {
+  background: var(--hm-white);
+  height: 80px;
+}
+
+.mockup-hallmark .hm-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 40px;
+  padding: 18px;
+  height: 80px;
+}
+
+.mockup-hallmark .hm-logo {
+  width: 358px;
+  height: 41px;
+  object-fit: contain;
+  object-position: left center;
+  flex: 0 0 auto;
+}
+
+.mockup-hallmark .hm-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14.4px;
+}
+
+.mockup-hallmark .hm-nav-link {
+  font-size: 19px;
+  line-height: 25px;
+  color: var(--hm-black);
+  white-space: nowrap;
+}
+
+.mockup-hallmark .hm-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7.5px 24px;
+  border-radius: 5px;
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+  font-size: 19px;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   S2. Hero — black, 576px, right-anchored contain background
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-hero {
+  background-color: var(--hm-black);
+  background-image: url("https://hallmarkhcs.com/wp-content/uploads/Hallmark-homepage-background.png");
+  background-size: contain;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  min-height: 576px;
+}
+
+.mockup-hallmark .hm-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  min-height: 576px;
+}
+
+.mockup-hallmark .hm-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1192px;
+}
+
+.mockup-hallmark .hm-eyebrow {
+  font-size: 24px;
+  line-height: 30.96px;
+  font-weight: 600;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-hero-title {
+  max-width: 647px;
+  font-family: var(--hm-display);
+  font-size: 60px;
+  line-height: 67.2px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-hero-sub {
+  max-width: 647px;
+  font-size: 24px;
+  line-height: 30.96px;
+  font-weight: 400;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-hero-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
+}
+
+.mockup-hallmark .hm-btn-cyan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid var(--hm-cyan);
+  border-radius: 5px;
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-btn-outline-cyan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border: 1px solid var(--hm-cyan);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--hm-white);
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-play-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--hm-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   S3. Trust / testimonials — mint band, two columns (310 + 834)
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-trust {
+  background-color: var(--hm-mint);
+}
+
+.mockup-hallmark .hm-trust-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 20px 40px;
+}
+
+.mockup-hallmark .hm-trust-cols {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  width: 100%;
+  max-width: 1192px;
+}
+
+.mockup-hallmark .hm-trust-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  flex: 0 0 310px;
+  width: 310px;
+}
+
+.mockup-hallmark .hm-trust-mark {
+  width: 66px;
+  height: 66px;
+}
+
+.mockup-hallmark .hm-trust-title {
+  font-family: var(--hm-display);
+  font-size: 48px;
+  line-height: 53.76px;
+  font-weight: 600;
+  color: var(--hm-black);
+  text-align: left;
+}
+
+.mockup-hallmark .hm-trust-right {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.mockup-hallmark .hm-quote-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.mockup-hallmark .hm-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 367px;
+  padding: 28px;
+  border-radius: 10px;
+  background: var(--hm-white);
+}
+
+.mockup-hallmark .hm-quote-logo {
+  height: 60px;
+  max-width: 160px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.mockup-hallmark .hm-quote-text {
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-ink);
+}
+
+.mockup-hallmark .hm-quote-attr {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-quote-attr span {
+  display: block;
+  font-weight: 400;
+  color: var(--hm-ink);
+}
+
+.mockup-hallmark .hm-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 31px;
+  margin-top: 10px;
+}
+
+.mockup-hallmark .hm-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--hm-teal);
+  background: transparent;
+}
+
+.mockup-hallmark .hm-dot.is-active {
+  background: var(--hm-teal);
+}
+
+.mockup-hallmark .hm-logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1192px;
+}
+
+.mockup-hallmark .hm-logo-strip img {
+  width: 240px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.mockup-hallmark .hm-logo-strip img.hm-logo-square {
+  width: 120px;
+}
+
+.mockup-hallmark .hm-link-teal {
+  font-size: 18px;
+  line-height: 23.22px;
+  font-weight: 600;
+  color: var(--hm-teal);
+}
+
+/* --------------------------------------------------------------------------
+   S4. Why / problem band — black rounded panel 1192 wide, 80/60 padding
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-why {
+  padding: 0 24px;
+  background: var(--hm-white);
+}
+
+.mockup-hallmark .hm-why-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 1192px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  border-radius: 10px;
+  background-color: var(--hm-black);
+  background-image: url("https://hallmarkhcs.com/wp-content/uploads/bg-healthcare.svg");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  color: var(--hm-white);
+  text-align: center;
+}
+
+.mockup-hallmark .hm-why-title {
+  max-width: 900px;
+  font-family: var(--hm-display);
+  font-size: 47px;
+  line-height: 52.64px;
+  font-weight: 600;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-why-intro {
+  max-width: 900px;
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-video-cover {
+  width: 100%;
+  max-width: 1072px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.mockup-hallmark .hm-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 250px));
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1072px;
+}
+
+.mockup-hallmark .hm-problem-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  min-height: 368px;
+  padding: 24px;
+  border: 1px solid var(--hm-cyan);
+  border-radius: 16px;
+  background: transparent;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-problem-title {
+  font-size: 24px;
+  line-height: 30.96px;
+  font-weight: 700;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-problem-body {
+  font-size: 18px;
+  line-height: 23.22px;
+  font-weight: 400;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-problem-stat {
+  margin-top: auto;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 600;
+  color: var(--hm-cyan);
+}
+
+.mockup-hallmark .hm-why-close {
+  max-width: 900px;
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-why-punch {
+  max-width: 900px;
+  font-size: 40px;
+  line-height: 44.8px;
+  font-weight: 600;
+  color: var(--hm-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   S5. How it works — mint band, three BLACK cards 376x466, radius 10
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-hiw {
+  background: var(--hm-mint);
+}
+
+.mockup-hallmark .hm-hiw-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-hiw-title {
+  font-family: var(--hm-display);
+  font-size: 47px;
+  line-height: 47px;
+  font-weight: 600;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-hiw-intro {
+  max-width: 1000px;
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 376px));
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 1232px;
+  padding: 0 24px;
+  margin-top: 12px;
+}
+
+.mockup-hallmark .hm-hiw-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-height: 466px;
+  padding: 58px 40px;
+  border-radius: 10px;
+  background: var(--hm-black);
+  color: var(--hm-white);
+  text-align: center;
+}
+
+.mockup-hallmark .hm-hiw-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.mockup-hallmark .hm-hiw-icon svg {
+  display: block;
+  height: 100px;
+  width: auto;
+}
+
+.mockup-hallmark .hm-hiw-card-title {
+  font-size: 24px;
+  line-height: 30.96px;
+  font-weight: 700;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-hiw-card-body {
+  font-size: 18px;
+  line-height: 23.22px;
+  color: var(--hm-white);
+}
+
+/* --------------------------------------------------------------------------
+   S6. Missing layer diagram
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-diagram-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 80px 20px 40px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-h3 {
+  font-family: var(--hm-display);
+  font-size: 47px;
+  line-height: 47px;
+  font-weight: 600;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-sub {
+  max-width: 900px;
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-diagram-img {
+  width: 100%;
+  max-width: 1100px;
+  height: auto;
+  margin-top: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   S7. Modules — product suite diagram + two BLACK cards 516x284
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-modules-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 20px 80px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-modules-sub {
+  max-width: 841px;
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-modules-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 516px));
+  justify-content: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 1080px;
+  margin-top: 16px;
+}
+
+.mockup-hallmark .hm-module-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-height: 284px;
+  padding: 24px;
+  border-radius: 10px;
+  background: var(--hm-black);
+  color: var(--hm-white);
+  text-align: left;
+}
+
+.mockup-hallmark .hm-module-title {
+  font-size: 24px;
+  line-height: 30.96px;
+  font-weight: 700;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-module-body {
+  flex: 1 1 auto;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-btn-cyan-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 36px;
+  border-radius: 3px;
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   S8. Partner / services — pale mint, two columns 572 + 572
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-partner {
+  background: var(--hm-mint-pale);
+}
+
+.mockup-hallmark .hm-partner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.mockup-hallmark .hm-partner-cols {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  width: 100%;
+  max-width: 1192px;
+}
+
+.mockup-hallmark .hm-partner-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 38px;
+  flex: 1 1 572px;
+  min-width: 0;
+}
+
+.mockup-hallmark .hm-partner-title {
+  font-family: var(--hm-display);
+  font-size: 47px;
+  line-height: 47px;
+  font-weight: 600;
+  color: var(--hm-black);
+  text-align: left;
+}
+
+.mockup-hallmark .hm-partner-body {
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-btn-cyan-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7.5px 24px;
+  border-radius: 5px;
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+  font-size: 19px;
+  line-height: 25px;
+}
+
+.mockup-hallmark .hm-partner-right {
+  position: relative;
+  flex: 1 1 572px;
+  min-width: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.mockup-hallmark .hm-partner-img {
+  width: 100%;
+  height: 338px;
+  object-fit: cover;
+}
+
+.mockup-hallmark .hm-partner-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  color: var(--hm-white);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+.mockup-hallmark .hm-partner-caption h4 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-partner-caption p {
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-white);
+}
+
+/* --------------------------------------------------------------------------
+   S9. Stats band — four 302.5px columns, 72px serif numbers
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-stats-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+}
+
+.mockup-hallmark .hm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 1240px;
+}
+
+.mockup-hallmark .hm-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 0 12px;
+  text-align: center;
+}
+
+.mockup-hallmark .hm-stat-num {
+  font-family: var(--hm-display);
+  font-size: 72px;
+  line-height: 72px;
+  font-weight: 600;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-stat-label {
+  font-size: 24px;
+  line-height: 30.96px;
+  color: var(--hm-black);
+}
+
+/* --------------------------------------------------------------------------
+   S10. Outcomes band — mint + line artwork background
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-outcomes {
+  background-color: var(--hm-mint);
+  background-image: url("https://hallmarkhcs.com/wp-content/uploads/bg-blue-line-2400-optimized-scaled.png");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.mockup-hallmark .hm-outcomes-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 60px;
+  min-height: 330px;
+}
+
+.mockup-hallmark .hm-outcomes-title {
+  flex: 0 1 696px;
+  font-family: var(--hm-display);
+  font-size: 48px;
+  line-height: 53.28px;
+  font-weight: 600;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-outcomes-body {
+  flex: 1 1 auto;
+  max-width: 769px;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-black);
+}
+
+/* --------------------------------------------------------------------------
+   S11. Personas — mint band, image cards 572x500 with overlay label
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-personas {
+  background: var(--hm-mint);
+}
+
+.mockup-hallmark .hm-personas-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 60px 20px 80px;
+}
+
+.mockup-hallmark .hm-persona-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1192px;
+  margin-bottom: 12px;
+}
+
+.mockup-hallmark .hm-persona-tab {
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: var(--hm-black);
+  color: var(--hm-white);
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 700;
+}
+
+.mockup-hallmark .hm-persona-tab.is-active {
+  background: var(--hm-cyan);
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-persona-list {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 100%;
+  max-width: 1192px;
+}
+
+.mockup-hallmark .hm-persona {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 48px;
+}
+
+.mockup-hallmark .hm-persona:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.mockup-hallmark .hm-persona-figure {
+  position: relative;
+  flex: 0 0 572px;
+  max-width: 572px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.mockup-hallmark .hm-persona-figure img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.mockup-hallmark .hm-persona-label {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 700;
+  color: var(--hm-white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.mockup-hallmark .hm-persona-bullets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.mockup-hallmark .hm-persona-bullets li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 18px;
+  line-height: 23.4px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-persona-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--hm-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   S12. CTA — cyan-to-mint gradient panel, radius 10, padding 85/24
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 20px;
+}
+
+.mockup-hallmark .hm-cta-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 44px;
+  width: 100%;
+  max-width: 1192px;
+  padding: 85px 24px;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--hm-cyan) 0%,
+    var(--hm-mint) 99.5%
+  );
+  text-align: center;
+}
+
+.mockup-hallmark .hm-cta-lead {
+  max-width: 858px;
+  font-size: 25px;
+  line-height: 32.25px;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-cta-title {
+  max-width: 960px;
+  font-family: var(--hm-display);
+  font-size: 40px;
+  line-height: 44.4px;
+  font-weight: 600;
+  color: var(--hm-black);
+}
+
+.mockup-hallmark .hm-cta-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
+}
+
+.mockup-hallmark .hm-btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 21px 24px;
+  border: 1px solid var(--hm-black);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--hm-black);
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.mockup-hallmark .hm-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20.5px 24px;
+  border: 1px solid var(--hm-black);
+  border-radius: 5px;
+  background: var(--hm-black);
+  color: var(--hm-white);
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   S13. Footer — dark artwork background, 3 columns
+   -------------------------------------------------------------------------- */
+.mockup-hallmark .hm-footer {
+  background-color: var(--hm-black);
+  background-image: url("https://hallmarkhcs.com/wp-content/uploads/Footer-new.svg");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 509px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 145px 60px 20px;
+}
+
+.mockup-hallmark .hm-footer-cols {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1160px;
+}
+
+.mockup-hallmark .hm-footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 58px;
+  flex: 0 0 754px;
+}
+
+.mockup-hallmark .hm-footer-links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mockup-hallmark .hm-footer-links a {
+  font-size: 19px;
+  line-height: 25px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-footer-logo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex: 0 0 232px;
+}
+
+.mockup-hallmark .hm-footer-logo {
+  height: 108px;
+  width: auto;
+  object-fit: contain;
+  object-position: left top;
+}
+
+.mockup-hallmark .hm-footer-address-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 53px;
+  flex: 0 0 174px;
+}
+
+.mockup-hallmark .hm-footer-address {
+  font-size: 20px;
+  line-height: 26px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-footer-address strong {
+  font-weight: 700;
+}
+
+.mockup-hallmark .hm-footer-social a {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--hm-white);
+}
+
+.mockup-hallmark .hm-footer-copy {
+  width: 100%;
+  max-width: 1160px;
+  font-size: 15px;
+  line-height: 19px;
+  color: var(--hm-white);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive fallbacks (desktop fidelity is the target; these prevent breaks)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .mockup-hallmark .hm-problem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mockup-hallmark .hm-hiw-grid,
+  .mockup-hallmark .hm-modules-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mockup-hallmark .hm-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+
+  .mockup-hallmark .hm-trust-cols,
+  .mockup-hallmark .hm-partner-cols,
+  .mockup-hallmark .hm-outcomes-inner,
+  .mockup-hallmark .hm-persona,
+  .mockup-hallmark .hm-persona:nth-child(even) {
+    flex-direction: column;
+  }
+
+  .mockup-hallmark .hm-trust-left,
+  .mockup-hallmark .hm-persona-figure {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  .mockup-hallmark .hm-quote-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mockup-hallmark .hm-nav-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .mockup-hallmark .hm-nav-row,
+  .mockup-hallmark .hm-nav-main {
+    height: auto;
+  }
+
+  .mockup-hallmark .hm-hero {
+    background-size: cover;
+  }
+}
+
+@media (max-width: 720px) {
+  .mockup-hallmark .hm-hero-title {
+    font-size: 40px;
+    line-height: 46px;
+  }
+
+  .mockup-hallmark .hm-trust-title,
+  .mockup-hallmark .hm-outcomes-title {
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  .mockup-hallmark .hm-why-title,
+  .mockup-hallmark .hm-hiw-title,
+  .mockup-hallmark .hm-h3,
+  .mockup-hallmark .hm-partner-title {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .mockup-hallmark .hm-why-panel {
+    padding: 48px 20px;
+  }
+
+  .mockup-hallmark .hm-problem-grid,
+  .mockup-hallmark .hm-stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mockup-hallmark .hm-footer-cols {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .mockup-hallmark .hm-footer-links,
+  .mockup-hallmark .hm-footer-logo-col,
+  .mockup-hallmark .hm-footer-address-col {
+    flex: 1 1 auto;
+  }
+
+  .mockup-hallmark .hm-footer-inner {
+    padding: 60px 24px 24px;
+  }
+}
