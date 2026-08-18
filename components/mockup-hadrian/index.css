@@ -1,0 +1,753 @@
+.hadrian-mock {
+  font-family: Suisse, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #100719;
+  background: #ffffff;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.hadrian-mock a {
+  text-decoration: none;
+}
+
+.hadrian-mock img {
+  max-width: 100%;
+  display: block;
+}
+
+.hadrian-mock .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---------- Header ---------- */
+.hadrian-mock .h-header {
+  background: #ffffff;
+  position: relative;
+  z-index: 20;
+}
+
+.hadrian-mock .h-header_utility {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 32px;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(16, 7, 25, 0.08);
+}
+
+.hadrian-mock .h-header_utility a {
+  color: #100719;
+}
+
+.hadrian-mock .h-header_lang {
+  display: flex;
+  gap: 6px;
+  color: #645870;
+}
+
+.hadrian-mock .h-header_main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1232px;
+  margin: 0 auto;
+  height: 76px;
+  padding: 0 32px;
+}
+
+.hadrian-mock .h-header_logo {
+  display: flex;
+  align-items: center;
+}
+
+.hadrian-mock .h-header_nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.hadrian-mock .h-header_nav a {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #100719;
+}
+
+.hadrian-mock .h-header_cta {
+  font-weight: 500;
+  color: #ffffff !important;
+  background-color: #ff003c !important;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ---------- Generic section paddings ---------- */
+.hadrian-mock .sec {
+  padding: 120px 32px;
+  position: relative;
+}
+
+.hadrian-mock .sec-dark {
+  background: #100719;
+  color: #fdfcfe;
+}
+
+.hadrian-mock .sec-light {
+  background: #fdfcfe;
+  color: #100719;
+}
+
+.hadrian-mock .tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.hadrian-mock .tag-icon {
+  width: 10px;
+  height: 10px;
+  display: flex;
+}
+
+.hadrian-mock .tag-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hadrian-mock .tag-label {
+  font-family: "Suisse mono", monospace, sans-serif;
+  font-size: 13px;
+  line-height: 13px;
+  text-transform: uppercase;
+  color: #a894b3;
+  letter-spacing: 0.05em;
+}
+
+.hadrian-mock .sec-light .tag-label {
+  color: #645870;
+}
+
+/* ---------- Hero ---------- */
+.hadrian-mock .hero {
+  background: #100719;
+  text-align: center;
+  padding: 120px 32px;
+}
+
+.hadrian-mock .hero_wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.hadrian-mock .hero h1 {
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 73.6px;
+  color: #fdfcfe;
+  margin: 0;
+}
+
+.hadrian-mock .hero p {
+  font-size: 20px;
+  line-height: 30px;
+  color: #a894b3;
+  max-width: 512px;
+  margin: 0;
+}
+
+.hadrian-mock .btn-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hadrian-mock .btn-primary {
+  font-weight: 500;
+  color: #ffffff !important;
+  background-color: #ff003c !important;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.hadrian-mock .btn-secondary {
+  font-weight: 500;
+  color: #fdfcfe !important;
+  background-color: #100719 !important;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(253, 252, 254, 0.12);
+  font-size: 16px;
+}
+
+.hadrian-mock .btn-third {
+  font-weight: 500;
+  color: #100719 !important;
+  background-color: #fdfcfe !important;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(16, 7, 25, 0.12);
+  font-size: 16px;
+}
+
+/* ---------- Media / lottie placeholder ---------- */
+.hadrian-mock .media-section {
+  background: #100719;
+  padding: 0 32px 40px;
+}
+
+.hadrian-mock .media-placeholder {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 500px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 30%, rgba(255,0,60,0.25), rgba(16,7,25,0.9) 70%);
+}
+
+/* ---------- Marquee ---------- */
+.hadrian-mock .marquee-section {
+  background: #100719;
+  padding: 80px 32px;
+  overflow: hidden;
+}
+
+.hadrian-mock .marquee-track {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  width: max-content;
+}
+
+.hadrian-mock .marquee-track img {
+  max-width: 160px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1) opacity(0.8);
+}
+
+/* ---------- Grid feature sections (asset discovery / remediation) ---------- */
+.hadrian-mock .heading-block {
+  margin-bottom: 80px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hadrian-mock .heading-block h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 57.6px;
+  color: #fdfcfe;
+  margin: 0;
+}
+
+.hadrian-mock .sec-light .heading-block h2,
+.hadrian-mock h2.dark-title {
+  color: #100719;
+}
+
+.hadrian-mock .feature-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.hadrian-mock .feature-card {
+  background: #1d1327;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.hadrian-mock .feature-card.wide {
+  grid-column: 1 / -1;
+}
+
+.hadrian-mock .feature-card_text {
+  padding: 32px;
+}
+
+.hadrian-mock .feature-card_text h4 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #fdfcfe;
+  margin: 0 0 16px 0;
+}
+
+.hadrian-mock .feature-card_text p {
+  font-size: 18px;
+  line-height: 26px;
+  color: #a894b3;
+  margin: 0;
+  max-width: 608px;
+}
+
+.hadrian-mock .feature-card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ---------- Technology section ---------- */
+.hadrian-mock .tech-section {
+  background: #100719;
+  position: relative;
+  overflow: hidden;
+}
+
+.hadrian-mock .tech-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hadrian-mock .tech-grid h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 57.6px;
+  color: #fdfcfe;
+  margin: 0 0 24px 0;
+}
+
+.hadrian-mock .tech-grid p {
+  color: #a894b3;
+  margin: 0 0 16px 0;
+}
+
+.hadrian-mock .tech-video-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2a1a3a, #100719);
+  min-height: 400px;
+}
+
+.hadrian-mock .tech-video-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Scalable solutions (cards row) ---------- */
+.hadrian-mock .section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 80px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hadrian-mock .section-title-row h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 57.6px;
+  margin: 0;
+}
+
+.hadrian-mock .cards-scroll {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.hadrian-mock .solution-card {
+  min-width: 282px;
+  width: 282px;
+  height: 392px;
+  background: #100719;
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.hadrian-mock .solution-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+}
+
+.hadrian-mock .solution-card h5 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fdfcfe;
+  margin: 0 0 16px 0;
+}
+
+.hadrian-mock .solution-card_footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fdfcfe;
+  font-weight: 500;
+}
+
+.hadrian-mock .solution-card_footer svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- Case study / testimonial slider (static) ---------- */
+.hadrian-mock .stories-section {
+  background: #fdfcfe;
+  padding: 120px 32px;
+}
+
+.hadrian-mock .stories-slide {
+  background: #100719;
+  border-radius: 16px;
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1168px;
+  margin: 0 auto 24px auto;
+  overflow: hidden;
+  min-height: 460px;
+}
+
+.hadrian-mock .stories-slide_video {
+  width: 45%;
+  position: relative;
+  min-height: 460px;
+}
+
+.hadrian-mock .stories-slide_video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hadrian-mock .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ff003c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hadrian-mock .play-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+.hadrian-mock .stories-slide_content {
+  width: 55%;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fdfcfe;
+}
+
+.hadrian-mock .stories-slide_content img {
+  max-width: 140px;
+  filter: brightness(0) invert(1);
+  margin-bottom: 24px;
+}
+
+.hadrian-mock .stories-quote {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+  margin: 0 0 24px 0;
+  color: #fdfcfe;
+}
+
+.hadrian-mock .stories-author {
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0;
+  color: #fdfcfe;
+}
+
+.hadrian-mock .stories-role {
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0;
+  color: #a894b3;
+}
+
+/* ---------- Gigaom / leading the pack ---------- */
+.hadrian-mock .gigaom-section {
+  background: #fdfcfe;
+  padding: 120px 32px;
+}
+
+.hadrian-mock .gigaom-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.hadrian-mock .gigaom-content {
+  max-width: 512px;
+}
+
+.hadrian-mock .gigaom-content h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 57.6px;
+  margin: 0 0 32px 0;
+  color: #100719;
+}
+
+.hadrian-mock .gigaom-content p {
+  font-size: 18px;
+  line-height: 26px;
+  color: #645870;
+  max-width: 400px;
+  margin: 0 0 40px 0;
+}
+
+.hadrian-mock .gigaom-image {
+  max-width: 480px;
+  flex-shrink: 0;
+}
+
+/* ---------- Resources / articles ---------- */
+.hadrian-mock .articles-section {
+  background: #fdfcfe;
+  padding: 120px 32px;
+}
+
+.hadrian-mock .articles-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.hadrian-mock .article-card {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f6f1fa;
+  display: block;
+}
+
+.hadrian-mock .article-card img {
+  width: 100%;
+  height: 216px;
+  object-fit: cover;
+}
+
+.hadrian-mock .article-card_text {
+  padding: 32px;
+}
+
+.hadrian-mock .article-tag {
+  font-family: "Suisse mono", monospace, sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #645870;
+  margin: 0 0 16px 0;
+}
+
+.hadrian-mock .article-card h4 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #100719;
+  margin: 0 0 16px 0;
+}
+
+.hadrian-mock .article-read-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #100719;
+}
+
+.hadrian-mock .article-read-more svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- CTA band ---------- */
+.hadrian-mock .cta-section {
+  background: #990024;
+  padding: 120px 32px;
+  text-align: center;
+  position: relative;
+}
+
+.hadrian-mock .cta-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hadrian-mock .cta-wrap h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 57.6px;
+  color: #fdfcfe;
+  margin: 0;
+}
+
+.hadrian-mock .cta-wrap p {
+  font-size: 18px;
+  line-height: 26px;
+  color: #a894b3;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ---------- Footer ---------- */
+.hadrian-mock .footer {
+  background: #100719;
+  color: #a894b3;
+  padding: 80px 32px 0;
+}
+
+.hadrian-mock .footer_top {
+  max-width: 1168px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.hadrian-mock .footer_logo {
+  margin-bottom: 40px;
+}
+
+.hadrian-mock .footer_grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 32px;
+}
+
+.hadrian-mock .footer_col h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fdfcfe;
+  margin: 0 0 24px 0;
+}
+
+.hadrian-mock .footer_col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hadrian-mock .footer_col a {
+  color: #a894b3;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.hadrian-mock .footer_soc {
+  margin-top: 32px;
+}
+
+.hadrian-mock .footer_soc img {
+  max-width: 88px;
+}
+
+.hadrian-mock .footer_divider {
+  max-width: 1232px;
+  margin: 80px auto 0;
+  border-top: 1px solid rgba(253, 252, 254, 0.12);
+}
+
+.hadrian-mock .footer_meta {
+  max-width: 1168px;
+  margin: 0 auto;
+  padding: 32px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.hadrian-mock .footer_meta_copy {
+  color: #645870;
+  font-size: 14px;
+}
+
+.hadrian-mock .footer_social {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.hadrian-mock .footer_social a {
+  color: #a894b3;
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.hadrian-mock .footer_social svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1024px) {
+  .hadrian-mock .h-header_nav { display: none; }
+  .hadrian-mock .feature-grid,
+  .hadrian-mock .tech-grid,
+  .hadrian-mock .gigaom-grid,
+  .hadrian-mock .articles-grid { grid-template-columns: 1fr; }
+  .hadrian-mock .feature-card.wide { grid-column: auto; }
+  .hadrian-mock .footer_grid { grid-template-columns: repeat(2, 1fr); }
+  .hadrian-mock .stories-slide { flex-direction: column; }
+  .hadrian-mock .stories-slide_video, .hadrian-mock .stories-slide_content { width: 100%; }
+}
