@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-virtuoso-qa",
+  "version": "1.0.0",
+  "description": "Full-page visual replica of the Virtuoso QA homepage as a Limio custom component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
