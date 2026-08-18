@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-invent-ai",
+  "version": "1.0.0",
+  "description": "invent.ai homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}

@@ -1,0 +1,1178 @@
+/* invent.ai homepage replica
+   Geometry taken from the captured inventory (1280px viewport, 1232px content wrap). */
+
+.ia-root {
+  --ia-black: #000000;
+  --ia-white: #ffffff;
+  --ia-offwhite: #fbfbfb;
+  --ia-grey: #a39a9a;
+  --ia-grey-2: #b2b1b1;
+  --ia-grey-3: #b7b7b7;
+  --ia-panel: #d9d9d9;
+  --ia-light: #f2f2f2;
+  --ia-magenta: #de5dec;
+  --ia-magenta-2: #c638d5;
+  --ia-magenta-3: #ab2fb8;
+  --ia-magenta-soft: #dfafe4;
+  --ia-lime: #ddfa5e;
+
+  background: var(--ia-black);
+  color: var(--ia-white);
+  font-family: "Suisse Intl", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.ia-root *,
+.ia-root *::before,
+.ia-root *::after {
+  box-sizing: border-box;
+}
+
+.ia-root img {
+  max-width: 100%;
+  display: block;
+}
+
+.ia-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ia-root ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ia-root h1,
+.ia-root h2,
+.ia-root h3,
+.ia-root h4,
+.ia-root p,
+.ia-root figure,
+.ia-root blockquote {
+  margin: 0;
+}
+
+/* ---- shared layout: content column measured at 1232px ---- */
+.ia-wrap {
+  width: 100%;
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.ia-sec {
+  position: relative;
+}
+
+/* ---- type scale from measured computed styles ---- */
+.ia-h1 {
+  font-size: 70px;
+  line-height: 70px;
+  font-weight: 400;
+  letter-spacing: -3px;
+  color: var(--ia-offwhite);
+}
+
+.ia-h2-70 {
+  font-size: 70px;
+  line-height: 77px;
+  font-weight: 450;
+  letter-spacing: -3.5px;
+  color: var(--ia-white);
+}
+
+.ia-h2-40,
+.ia-h3-40 {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 450;
+  letter-spacing: -2px;
+  color: var(--ia-offwhite);
+}
+
+.ia-h4-24 {
+  font-size: 24px;
+  line-height: 28.8px;
+  font-weight: 400;
+  color: var(--ia-white);
+}
+
+.ia-h2-center {
+  text-align: center;
+}
+
+.ia-body {
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+  color: var(--ia-white);
+}
+
+.ia-body + .ia-body {
+  margin-top: 19.2px;
+}
+
+/* ---- buttons ---- */
+.ia-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.ia-btn-primary {
+  background: var(--ia-magenta);
+  color: var(--ia-black);
+  border-radius: 42px;
+  padding: 13px 42px;
+  min-height: 48px;
+}
+
+.ia-btn-dark {
+  background: var(--ia-black);
+  color: var(--ia-white);
+  border-radius: 18px;
+  padding: 7px 39px;
+  font-size: 14px;
+  line-height: 19.6px;
+  min-height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.ia-nav {
+  background: var(--ia-black);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ia-nav-inner {
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.ia-nav-logo img {
+  width: 128px;
+  height: auto;
+  /* wordmark asset is black; invert for the dark nav */
+  filter: invert(1) brightness(2);
+}
+
+.ia-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-left: auto;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--ia-white);
+}
+
+.ia-nav-links a:hover {
+  color: var(--ia-magenta);
+}
+
+.ia-nav-cta {
+  padding: 10px 26px;
+  min-height: 40px;
+  font-size: 15px;
+}
+
+/* =========================================================
+   0 — HERO (two-col). Measured: section h 790, copy col 579, img 579x784
+   ========================================================= */
+.ia-hero {
+  padding: 80px 0 60px;
+  background: var(--ia-black);
+}
+
+.ia-hero-grid {
+  display: grid;
+  grid-template-columns: 579px 579px;
+  gap: 74px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.ia-hero-copy > * + * {
+  margin-top: 19.2px;
+}
+
+.ia-hero-copy .ia-h1 {
+  margin-bottom: 8px;
+}
+
+.ia-hero-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 559px;
+  max-width: 100%;
+}
+
+.ia-hero-list li {
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--ia-white);
+  padding-left: 20px;
+  position: relative;
+}
+
+.ia-hero-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ia-magenta);
+}
+
+.ia-hero-copy .ia-btn-primary {
+  margin-top: 28px;
+  width: 260px;
+}
+
+.ia-hero-media img {
+  width: 579px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+/* =========================================================
+   1 — TRUST LOGO MARQUEE. Measured section h 75, logos ~200x70
+   ========================================================= */
+.ia-trust {
+  background: var(--ia-black);
+  padding: 26px 0 40px;
+}
+
+.ia-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.ia-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  width: max-content;
+  animation: ia-scroll 60s linear infinite;
+}
+
+@keyframes ia-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ia-marquee-track {
+    animation: none;
+  }
+}
+
+.ia-trust-logo {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+  opacity: 0.9;
+}
+
+/* =========================================================
+   2 — PROVEN VALUE. Measured section h 471, title 322x80 @40px,
+       stats 70px/70px, icons 36x36. Light band, black text.
+   ========================================================= */
+.ia-proven {
+  background: var(--ia-light);
+  color: var(--ia-black);
+  padding: 96px 0;
+}
+
+.ia-proven .ia-proven-title {
+  color: var(--ia-black);
+  width: 322px;
+  max-width: 100%;
+  margin-bottom: 72px;
+}
+
+.ia-proven-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.ia-proven-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ia-proven-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 28px;
+}
+
+.ia-stat {
+  font-size: 70px;
+  line-height: 70px;
+  font-weight: 450;
+  letter-spacing: -3.5px;
+  color: var(--ia-black);
+}
+
+.ia-stat-label {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--ia-black);
+  max-width: 260px;
+}
+
+/* =========================================================
+   3 — RETAIL BRANDS / testimonials. Measured section h 525,
+       card copy width 298, logos: alo 109x70, tailored 298x53, tecovas 298x105.
+       Black quote text -> light band.
+   ========================================================= */
+.ia-brands {
+  background: var(--ia-white);
+  color: var(--ia-black);
+  padding: 90px 0;
+}
+
+.ia-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 298px);
+  gap: 70px;
+  justify-content: space-between;
+}
+
+.ia-quote-card {
+  display: flex;
+  flex-direction: column;
+  width: 298px;
+  max-width: 100%;
+}
+
+.ia-quote-logo {
+  height: 105px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.ia-quote-logo img {
+  max-height: 105px;
+  width: auto;
+  object-fit: contain;
+}
+
+.ia-quote-text {
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+  color: var(--ia-black);
+}
+
+.ia-quote-attrib {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--ia-black);
+}
+
+.ia-quote-org {
+  color: var(--ia-magenta-3);
+}
+
+/* =========================================================
+   4 — DECISIONS (two-col). Measured: h2 1045x292 @70px/84px centered,
+       pad-bottom 124px; body cols 569 / list 529. Section h 671.
+   ========================================================= */
+.ia-decisions {
+  background: var(--ia-black);
+  padding: 110px 0 100px;
+}
+
+.ia-decisions-title {
+  max-width: 1045px;
+  margin: 0 auto;
+  line-height: 84px;
+  padding-bottom: 124px;
+}
+
+.ia-decisions-grid {
+  display: grid;
+  grid-template-columns: 569px 569px;
+  gap: 46px;
+  justify-content: space-between;
+}
+
+.ia-decisions-col > * + * {
+  margin-top: 19.2px;
+}
+
+.ia-decisions-list {
+  width: 529px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.ia-decisions-list li {
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--ia-white);
+  padding-left: 22px;
+  position: relative;
+}
+
+.ia-decisions-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ia-magenta);
+}
+
+.ia-body-accent {
+  color: var(--ia-magenta);
+}
+
+/* =========================================================
+   5 — FLOW (tab-with-content). Measured: h2 1045x140 @70px/70px centered,
+       intro col 594, step h3 16px/600 (first is magenta ab2fb8),
+       step p 16px/17.6px, step body width ~548. Section h 849.
+   ========================================================= */
+.ia-flow {
+  background: var(--ia-black);
+  padding: 100px 0;
+}
+
+.ia-flow .ia-h2-70 {
+  max-width: 1045px;
+  margin: 0 auto;
+  line-height: 70px;
+}
+
+.ia-flow-intro {
+  width: 594px;
+  max-width: 100%;
+  margin: 56px 0 60px;
+}
+
+.ia-flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.ia-flow-step {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  align-items: start;
+}
+
+.ia-flow-num {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 450;
+  color: var(--ia-grey-3);
+  letter-spacing: normal;
+}
+
+.ia-flow-body {
+  max-width: 548px;
+}
+
+.ia-flow-h {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--ia-white);
+  padding-bottom: 20px;
+}
+
+.ia-flow-step.is-active .ia-flow-num {
+  color: var(--ia-magenta-3);
+}
+
+.ia-flow-step.is-active .ia-flow-h {
+  color: var(--ia-magenta-3);
+}
+
+.ia-flow-p {
+  font-size: 16px;
+  line-height: 17.6px;
+  color: var(--ia-white);
+}
+
+.ia-flow-outro {
+  width: 594px;
+  max-width: 100%;
+  margin-top: 48px;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--ia-white);
+}
+
+/* =========================================================
+   6 — LIFECYCLE (delighted-customers). Measured: h3 700x80 @40px,
+       h4 700x86 @24px/28.8px, link 243x21, card title 254 @17px/20.4px,
+       card body 254 @16px/32px colour a39a9a, quote col 246,
+       arrow link 43x33, favicon mark 17x16. Section h 1369.
+   ========================================================= */
+.ia-lifecycle {
+  background: var(--ia-black);
+  padding: 100px 0;
+}
+
+.ia-lifecycle-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: 72px;
+}
+
+.ia-lifecycle-head > div {
+  max-width: 700px;
+}
+
+.ia-lifecycle-head .ia-h3-40 {
+  width: 700px;
+  max-width: 100%;
+}
+
+.ia-lifecycle-head .ia-h4-24 {
+  width: 700px;
+  max-width: 100%;
+  margin-top: 24px;
+}
+
+.ia-lifecycle-link {
+  width: 243px;
+  flex: 0 0 auto;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 450;
+  color: var(--ia-grey-2);
+  text-align: right;
+}
+
+.ia-lifecycle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.ia-life-card {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 24px;
+}
+
+.ia-life-top {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.ia-life-mark {
+  width: 17px;
+  height: 16px;
+  margin-bottom: 22px;
+}
+
+.ia-life-title {
+  width: 254px;
+  max-width: 100%;
+  font-size: 17px;
+  line-height: 20.4px;
+  font-weight: 450;
+  color: var(--ia-offwhite);
+}
+
+.ia-life-body {
+  width: 254px;
+  max-width: 100%;
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--ia-grey);
+}
+
+.ia-life-bullets {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ia-life-bullets li {
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--ia-white);
+  padding-left: 18px;
+  position: relative;
+}
+
+.ia-life-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ia-magenta);
+}
+
+/* measured: lifecycle arrow link 43x33 */
+.ia-arrowcircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 33px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--ia-white);
+  flex: 0 0 auto;
+  margin-top: 22px;
+}
+
+/* measured: quote col 246 wide, text + attrib colour rgb(0,0,0)
+   -> the quote sits on a light sub-panel inside the dark section */
+.ia-life-quote {
+  width: 246px;
+  max-width: 100%;
+  margin-top: 34px;
+  padding: 22px 20px;
+  background: var(--ia-light);
+  color: var(--ia-black);
+  border-radius: 14px;
+}
+
+.ia-life-quote-text {
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--ia-black);
+}
+
+.ia-life-quote-attrib {
+  margin-top: 19.2px;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: #555555;
+}
+
+/* =========================================================
+   7 / 10 — LIBRARY SECTIONS. Measured: h2 1232x40 @40px centered,
+       card img 396x213, card h3 336 @25px/27.5px, Read More 134x33.
+       Section h 1445 / 1335.
+   ========================================================= */
+.ia-library {
+  background: var(--ia-black);
+  padding: 100px 0;
+}
+
+/* measured: h2 1232x40 @40px/40px centered.
+   s7 heading measured rgb(0,0,0) on its light strip; s10 measured white. */
+.ia-library .ia-h2-40 {
+  width: 100%;
+  color: var(--ia-white);
+  margin-bottom: 72px;
+}
+
+.ia-library:not(.ia-library-alt) {
+  background: linear-gradient(
+    180deg,
+    var(--ia-light) 0,
+    var(--ia-light) 200px,
+    var(--ia-black) 200px,
+    var(--ia-black) 100%
+  );
+}
+
+.ia-library:not(.ia-library-alt) .ia-h2-40 {
+  color: var(--ia-black);
+}
+
+.ia-library-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 46px;
+}
+
+.ia-lib-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ia-lib-img {
+  width: 100%;
+  max-width: 396px;
+  aspect-ratio: 396 / 213;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #151515;
+}
+
+.ia-lib-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ia-lib-img-blank {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a1c2c 55%, #3a1f3d 100%);
+}
+
+.ia-lib-kicker {
+  margin-top: 28px;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 450;
+  color: var(--ia-magenta);
+  text-transform: none;
+}
+
+.ia-lib-title {
+  width: 336px;
+  max-width: 100%;
+  margin-top: 16px;
+  font-size: 25px;
+  line-height: 27.5px;
+  font-weight: 450;
+  letter-spacing: normal;
+  color: var(--ia-offwhite);
+}
+
+.ia-lib-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: 134px;
+  height: 33px;
+  margin-top: 28px;
+  font-size: 16px;
+  line-height: 17.6px;
+  font-weight: 450;
+  color: var(--ia-white);
+}
+
+.ia-lib-more .ia-arrowcircle {
+  margin-top: 0;
+}
+
+/* =========================================================
+   8 — REINVENT. Measured: flex section h 800, h2 686x154 @70px/77px,
+       p 425x77.
+   ========================================================= */
+.ia-reinvent {
+  background: var(--ia-light);
+  color: var(--ia-black);
+  padding: 100px 0;
+}
+
+.ia-reinvent-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 72px;
+}
+
+.ia-reinvent-left {
+  flex: 0 0 686px;
+  max-width: 686px;
+}
+
+/* measured: h2 686x154 @70px/77px, colour rgb(0,0,0) */
+.ia-reinvent-left .ia-h2-70 {
+  width: 686px;
+  max-width: 100%;
+  color: var(--ia-black);
+}
+
+.ia-reinvent-right {
+  flex: 0 0 425px;
+  max-width: 425px;
+}
+
+/* measured: p 425x77 @16px/19.2px, colour rgb(0,0,0) */
+.ia-reinvent-right .ia-body {
+  width: 425px;
+  max-width: 100%;
+  color: var(--ia-black);
+}
+
+.ia-reinvent-matrix {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.ia-reinvent-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.ia-reinvent-cell {
+  font-size: 14px;
+  line-height: 20px;
+  color: #4a4a4a;
+  padding: 4px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 40px;
+}
+
+.ia-reinvent-cell.is-head {
+  color: var(--ia-black);
+  background: var(--ia-magenta);
+  border-color: var(--ia-magenta);
+}
+
+/* =========================================================
+   9 — WHY CHOOSE. Measured: panel 1240x600, pad 60px 54px,
+       bg rgb(217,217,217), h2 415x140 @70px/70px black,
+       copy col 415.
+   ========================================================= */
+.ia-why {
+  background: var(--ia-black);
+  padding: 60px 0 100px;
+}
+
+.ia-why-panel {
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 600px;
+  padding: 60px 54px;
+  background: var(--ia-panel);
+  color: var(--ia-black);
+  border-radius: 24px;
+}
+
+.ia-why-grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.ia-why-title {
+  flex: 0 0 415px;
+  width: 415px;
+  max-width: 100%;
+  line-height: 70px;
+  color: var(--ia-black);
+}
+
+.ia-why-copy {
+  flex: 0 0 415px;
+  width: 415px;
+  max-width: 100%;
+}
+
+.ia-why-copy .ia-body {
+  color: var(--ia-black);
+}
+
+/* =========================================================
+   11 — CTA BANNER. Measured: flex section h 314, h2 1100x280
+       @70px/70px fw 400 centered, pad-bottom 70px;
+       button 258x34 black bg, br 18px, pad 7px 39px, 14px/19.6px.
+   ========================================================= */
+.ia-cta {
+  background: var(--ia-magenta);
+  color: var(--ia-black);
+  padding: 90px 0;
+}
+
+.ia-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ia-cta-title {
+  max-width: 1100px;
+  font-size: 70px;
+  line-height: 70px;
+  font-weight: 400;
+  letter-spacing: -3.5px;
+  color: var(--ia-black);
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.ia-footer {
+  background: var(--ia-black);
+  color: var(--ia-white);
+  padding: 80px 0 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ia-footer-top {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 48px;
+}
+
+.ia-footer-logo {
+  width: 150px;
+  height: auto;
+  filter: invert(1) brightness(2);
+}
+
+.ia-footer-tag {
+  font-size: 16px;
+  line-height: 19.2px;
+  color: var(--ia-grey-2);
+}
+
+.ia-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 28px;
+  padding-bottom: 56px;
+}
+
+.ia-footer-head {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--ia-white);
+  margin-bottom: 16px;
+}
+
+.ia-footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ia-footer-col a {
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--ia-grey);
+}
+
+.ia-footer-col a:hover {
+  color: var(--ia-magenta);
+}
+
+.ia-footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ia-grey-3);
+}
+
+.ia-footer-legal a {
+  color: var(--ia-grey-3);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1200px) {
+  .ia-hero-grid,
+  .ia-decisions-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .ia-hero-media img {
+    width: 100%;
+  }
+
+  .ia-brands-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .ia-quote-card {
+    width: auto;
+  }
+
+  .ia-lifecycle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .ia-reinvent-grid {
+    flex-direction: column;
+  }
+
+  .ia-reinvent-left,
+  .ia-reinvent-right {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  .ia-reinvent-left .ia-h2-70,
+  .ia-reinvent-right .ia-body {
+    width: auto;
+  }
+
+  .ia-footer-cols {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ia-nav-links {
+    display: none;
+  }
+
+  .ia-h1,
+  .ia-h2-70,
+  .ia-cta-title,
+  .ia-why-title {
+    font-size: 44px;
+    line-height: 46px;
+    letter-spacing: -1.8px;
+  }
+
+  .ia-decisions-title {
+    line-height: 46px;
+    padding-bottom: 56px;
+  }
+
+  .ia-h2-40,
+  .ia-h3-40 {
+    font-size: 30px;
+    line-height: 32px;
+    letter-spacing: -1.2px;
+  }
+
+  .ia-stat {
+    font-size: 46px;
+    line-height: 48px;
+    letter-spacing: -2px;
+  }
+
+  .ia-proven-grid,
+  .ia-brands-grid,
+  .ia-library-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ia-proven .ia-proven-title {
+    width: auto;
+    margin-bottom: 44px;
+  }
+
+  .ia-lifecycle-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ia-lifecycle-head .ia-h3-40,
+  .ia-lifecycle-head .ia-h4-24 {
+    width: auto;
+  }
+
+  .ia-lifecycle-link {
+    text-align: left;
+  }
+
+  .ia-lifecycle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ia-life-title,
+  .ia-life-body,
+  .ia-life-quote,
+  .ia-lib-title,
+  .ia-decisions-list,
+  .ia-hero-list {
+    width: auto;
+  }
+
+  .ia-why-grid {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .ia-why-title,
+  .ia-why-copy {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .ia-why-panel {
+    padding: 40px 24px;
+    min-height: 0;
+  }
+
+  .ia-footer-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ia-footer-legal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
