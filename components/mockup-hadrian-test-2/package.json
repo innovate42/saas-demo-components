@@ -1,0 +1,12 @@
+{
+  "name": "component-mockup-hadrian-test-2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.tsx",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
