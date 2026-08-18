@@ -1,0 +1,12 @@
+{
+  "name": "component-mockup-protomiq",
+  "version": "1.0.0",
+  "description": "Protomiq homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
