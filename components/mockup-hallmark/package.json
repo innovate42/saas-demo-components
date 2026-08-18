@@ -1,0 +1,31 @@
+{
+  "name": "component-mockup-hallmark",
+  "version": "1.0.0",
+  "description": "Full-page replica of the Hallmark Health Care Solutions homepage",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "showAnnouncementBar",
+      "label": "Show announcement bar",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showNav",
+      "label": "Show navigation bar",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showFooter",
+      "label": "Show footer",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
