@@ -1,0 +1,12 @@
+{
+  "name": "component-mockup-hook",
+  "version": "1.0.0",
+  "description": "Hook homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}

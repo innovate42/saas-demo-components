@@ -1,0 +1,970 @@
+/* Hook (hook.co) homepage replica */
+
+.hk-root {
+  font-family: Inter, "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.hk-root *,
+.hk-root *::before,
+.hk-root *::after {
+  box-sizing: border-box;
+}
+
+.hk-root p,
+.hk-root h2,
+.hk-root h3,
+.hk-root h4,
+.hk-root h5,
+.hk-root h6,
+.hk-root ul,
+.hk-root ol,
+.hk-root address {
+  margin: 0;
+  padding: 0;
+}
+
+.hk-root ul,
+.hk-root ol {
+  list-style: none;
+}
+
+.hk-root a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hk-root img {
+  display: block;
+  max-width: 100%;
+}
+
+.hk-serif {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, "Times New Roman", serif;
+}
+
+.hk-grotesk {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+}
+
+/* ---------------- Grid primitives ---------------- */
+
+.hk-grid {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hk-row {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hk-row--pad {
+  padding-right: 68px;
+  padding-left: 68px;
+}
+
+/* ---------------- Header ---------------- */
+
+.hk-header {
+  font-family: Inter, "Inter Fallback", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  padding: 12px;
+  width: 100%;
+  height: 84px;
+  position: relative;
+  background-color: #000000;
+}
+
+.hk-header-inner {
+  padding: 8px;
+  margin-right: 48px;
+  margin-left: 48px;
+  height: 60px;
+  max-width: 1320px;
+  position: relative;
+}
+
+.hk-header-row {
+  height: 44px;
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hk-header-logo-col {
+  width: 106px;
+  height: 44px;
+  max-width: 16.6667%;
+}
+
+.hk-logo {
+  padding: 12px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hk-logo-word {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 26px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgb(246, 234, 223);
+}
+
+.hk-header-nav-col {
+  flex: 1;
+  height: 40px;
+}
+
+.hk-header-navigation {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hk-nav {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hk-nav-list {
+  height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+}
+
+.hk-nav-item {
+  height: 40px;
+  display: list-item;
+}
+
+.hk-nav-toggle {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgb(246, 234, 223);
+  background: transparent;
+  border: none;
+  padding: 12px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hk-nav-toggle svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.hk-header-actions {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hk-btn-blank {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  color: rgb(255, 255, 255) !important;
+  white-space: nowrap;
+}
+
+.hk-btn-dark-filled {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0) !important;
+  background-color: rgb(207, 255, 0) !important;
+  padding: 12px 16px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+/* ---------------- Section 01: Chat with your data ---------------- */
+
+.hk-sec-chat {
+  font-family: Inter, "Inter Fallback", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.hk-chat-col-left {
+  padding-right: 12px;
+  padding-left: 12px;
+  width: 543.328px;
+  max-width: 41.6667%;
+}
+
+.hk-eyebrow-dark {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+}
+
+.hk-h2-serif {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 55.9493px;
+  font-weight: 500;
+  line-height: 55.9493px;
+  color: rgb(246, 234, 223);
+  margin-bottom: 24px;
+}
+
+.hk-chat-lede {
+  font-weight: 500;
+  line-height: 22.4px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+}
+
+.hk-usecases {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hk-usecase-trigger {
+  color: rgb(0, 0, 0);
+  background: transparent;
+  border: none;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  border-radius: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hk-usecase-trigger--active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hk-progress-circle {
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+}
+
+.hk-progress-disc {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hk-indicator-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hk-indicator-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.hk-usecase-body {
+  margin-top: 8px;
+}
+
+.hk-usecase-title {
+  font-weight: 500;
+  line-height: 22.4px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.hk-usecase-copy {
+  font-weight: 500;
+  line-height: 22.4px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hk-chat-col-right {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-left: 108.664px;
+  width: 652px;
+  max-width: 50%;
+}
+
+.hk-carousel-wrapper {
+  width: 100%;
+  height: 375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hk-carousel-viewport {
+  width: 100%;
+  height: 375px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hk-carousel-container {
+  width: 100%;
+  height: 375px;
+  display: flex;
+}
+
+.hk-carousel-slide {
+  width: 100%;
+  height: 375px;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hk-carousel-slide img {
+  width: 375px;
+  height: 375px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.hk-carousel-dots {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.hk-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.hk-carousel-dot--active {
+  background-color: rgb(246, 234, 223);
+}
+
+/* ---------------- Section 02: Go live in 7 days (light band) ---------------- */
+
+.hk-sec-steps {
+  font-family: Inter, "Inter Fallback", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  background-color: #f6eadf;
+  color: rgb(0, 0, 0);
+  width: 100%;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.hk-steps-col {
+  padding-right: 12px;
+  padding-left: 12px;
+  width: 652px;
+  max-width: 50%;
+}
+
+.hk-steps-header {
+  position: sticky;
+  top: 40px;
+}
+
+.hk-eyebrow-light {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  margin-bottom: 24px;
+  max-width: 450px;
+}
+
+.hk-steps-title {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 55.9493px;
+  font-weight: 500;
+  line-height: 55.9493px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hk-steps-title svg {
+  margin-top: -4px;
+  width: 55.9453px;
+  height: 55.9453px;
+  flex: none;
+}
+
+.hk-steps-content {
+  line-height: 22.4px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 24px;
+  max-width: 450px;
+}
+
+.hk-steps-actions {
+  margin-bottom: 120px;
+  height: 44px;
+}
+
+.hk-btn-light-filled {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(0, 0, 0) !important;
+  padding: 14px 24px;
+  height: 44px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 16px;
+  white-space: nowrap;
+}
+
+.hk-btn-light-filled svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.hk-rated {
+  max-width: 470px;
+}
+
+.hk-rated-title {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  margin-bottom: 24px;
+}
+
+.hk-rated-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hk-rated-logo {
+  width: 81px;
+  height: 81px;
+  padding: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+}
+
+.hk-rated-logo img {
+  width: 53px;
+  height: 53px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.hk-steps-list {
+  color: rgb(0, 0, 0);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.hk-step {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 52px minmax(0, 544px);
+  position: relative;
+}
+
+.hk-step-num {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  color: rgb(0, 0, 0);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.hk-step-title {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 39.6px;
+  margin-bottom: 16px;
+}
+
+.hk-step-copy {
+  line-height: 22.4px;
+  margin-bottom: 32px;
+}
+
+.hk-step-image img {
+  width: 375px;
+  height: 375px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* ---------------- Section 03: Testimonial ---------------- */
+
+.hk-sec-testimonial {
+  font-family: Inter, "Inter Fallback", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.hk-testimonial-col {
+  padding-right: 12px;
+  padding-left: 12px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.hk-testimonial {
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgb(103, 11, 51), rgb(188, 164, 174) 116.95%);
+  padding: 48px;
+  width: 100%;
+  border-radius: 32px;
+}
+
+.hk-testimonial-left {
+  padding-right: 12px;
+  padding-left: 12px;
+  width: 503.328px;
+  max-width: 41.6667%;
+}
+
+.hk-testimonial-right {
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-left: 201.328px;
+  width: 503.328px;
+  max-width: 41.6667%;
+}
+
+.hk-testimonial-eyebrow {
+  margin-bottom: 75px;
+  height: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.hk-quote-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+}
+
+.hk-quote-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.hk-testimonial-label {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 13px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+}
+
+.hk-testimonial-quote {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 55.9493px;
+  font-weight: 500;
+  line-height: 55.9493px;
+  margin-bottom: 32px;
+}
+
+.hk-testimonial-attrib {
+  font-weight: 500;
+  line-height: 22.4px;
+  margin-bottom: 80px;
+}
+
+.hk-testimonial-logo {
+  height: 112px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.hk-testimonial-logo img {
+  width: 112px;
+  height: 112px;
+  max-width: 112px;
+  object-fit: contain;
+}
+
+.hk-testimonial-media {
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-top: 20px;
+  margin-bottom: 13px;
+  height: 375px;
+}
+
+.hk-testimonial-media img {
+  width: 375px;
+  height: 375px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* ---------------- Footer ---------------- */
+
+.hk-footer {
+  font-family: Inter, "Inter Fallback", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(0deg, rgb(203, 148, 145) 6.25%, rgb(85, 68, 93));
+  padding-bottom: 80px;
+  padding-top: 40px;
+  width: 100%;
+}
+
+.hk-footer-outer {
+  margin-right: 32px;
+  margin-left: 32px;
+}
+
+.hk-footer-container {
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 48px 48px 32px 48px;
+  margin-right: 28px;
+  margin-left: 28px;
+  max-width: 1320px;
+  border-radius: 32px;
+}
+
+.hk-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 0;
+  max-width: 1440px;
+}
+
+.hk-footer-col {
+  width: 25%;
+  max-width: 25%;
+  padding-right: 12px;
+}
+
+.hk-footer-logo {
+  height: 30.5px;
+  display: flex;
+  align-items: center;
+}
+
+.hk-footer-logo-word {
+  font-family: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+}
+
+.hk-list-title {
+  font-family: "Space Grotesk", "Space Grotesk Fallback", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 14.3px;
+  letter-spacing: 0.1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hk-list {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hk-list-item {
+  font-size: 14px;
+  line-height: 21px;
+  display: list-item;
+}
+
+.hk-footer-address {
+  font-size: 14px;
+  line-height: 21px;
+  font-style: normal;
+  margin-bottom: 16px;
+}
+
+.hk-footer-contact {
+  font-size: 14px;
+  line-height: 19.6px;
+  margin-bottom: 16px;
+}
+
+.hk-footer-cookies {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.hk-footer-border {
+  color: rgb(128, 128, 128);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 1px;
+  max-width: 1320px;
+}
+
+.hk-footer-bottom-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 24px 0;
+  max-width: 1440px;
+}
+
+.hk-footer-bottom-col {
+  width: 50%;
+  max-width: 50%;
+}
+
+.hk-footer-bottom-col--right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hk-list-row {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hk-list-row .hk-list-item {
+  font-size: 12px;
+  line-height: 18px;
+  width: auto;
+}
+
+.hk-footer-copy {
+  font-size: 12px;
+  line-height: 16.8px;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1100px) {
+  .hk-row--pad {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .hk-chat-col-left,
+  .hk-chat-col-right,
+  .hk-steps-col,
+  .hk-testimonial-left,
+  .hk-testimonial-right {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .hk-testimonial-right {
+    margin-top: 32px;
+  }
+
+  .hk-chat-col-right {
+    margin-top: 40px;
+  }
+
+  .hk-steps-header {
+    position: static;
+  }
+
+  .hk-h2-serif,
+  .hk-steps-title,
+  .hk-testimonial-quote {
+    font-size: 40px;
+    line-height: 42px;
+  }
+
+  .hk-steps-title svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hk-header-inner {
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .hk-nav {
+    display: none;
+  }
+
+  .hk-footer-col {
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .hk-footer-col,
+  .hk-footer-bottom-col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hk-footer-bottom-col--right {
+    justify-content: flex-start;
+  }
+
+  .hk-testimonial {
+    padding: 24px;
+  }
+
+  .hk-footer-container {
+    padding: 24px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .hk-footer-outer {
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+}
