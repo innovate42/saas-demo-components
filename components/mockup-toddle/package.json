@@ -1,0 +1,14 @@
+{
+  "name": "component-mockup-toddle",
+  "version": "1.0.0",
+  "description": "Toddle homepage replica mockup component",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
