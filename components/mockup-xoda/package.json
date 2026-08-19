@@ -1,0 +1,12 @@
+{
+  "name": "component-mockup-xoda",
+  "version": "1.0.0",
+  "description": "Full-page replica of the XODA homepage as a Limio custom component.",
+  "main": "./index.tsx",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": []
+}
