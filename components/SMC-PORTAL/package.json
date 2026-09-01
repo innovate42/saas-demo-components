@@ -1,0 +1,50 @@
+{
+  "name": "@limio/smc-portal",
+  "version": "1.0.0",
+  "description": "SMC-PORTAL - static replica of the Sendmarc User Management portal screen",
+  "main": "index.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "pageTitle",
+      "label": "Page Title",
+      "type": "string",
+      "default": "User Management"
+    },
+    {
+      "id": "accountName",
+      "label": "Breadcrumb Account Name",
+      "type": "string",
+      "default": "SENDMARC - INTERNAL USERS"
+    },
+    {
+      "id": "rowOneName",
+      "label": "Row 1 Name",
+      "type": "string",
+      "default": "Sam"
+    },
+    {
+      "id": "rowTwoName",
+      "label": "Row 2 Name",
+      "type": "string",
+      "default": "Sendmarc - Administrator"
+    },
+    {
+      "id": "quotaPercent",
+      "label": "Quota Percent Used",
+      "type": "string",
+      "default": "18.9"
+    },
+    {
+      "id": "quotaValue",
+      "label": "Quota Value Label",
+      "type": "string",
+      "default": "47.2K / 250K"
+    }
+  ]
+}
