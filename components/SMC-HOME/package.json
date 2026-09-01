@@ -1,0 +1,38 @@
+{
+  "name": "@limio/smc-home",
+  "version": "1.0.0",
+  "description": "SMC-HOME - static landing page replica with a configurable Login button",
+  "main": "index.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "loginUrl",
+      "label": "Login Button URL",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "loginLabel",
+      "label": "Login Button Text",
+      "type": "string",
+      "default": "Login"
+    },
+    {
+      "id": "openLoginInNewTab",
+      "label": "Open Login In New Tab",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "stickyHeader",
+      "label": "Sticky Header",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
