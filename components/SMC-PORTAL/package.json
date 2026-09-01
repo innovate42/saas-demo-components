@@ -1,6 +1,6 @@
 {
   "name": "@limio/smc-portal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SMC-PORTAL - static replica of the Sendmarc User Management portal screen",
   "main": "index.js",
   "sideEffects": [
