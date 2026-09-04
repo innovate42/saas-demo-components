@@ -1,0 +1,35 @@
+{
+  "name": "@limio/celtic-homepage",
+  "version": "1.0.0",
+  "description": "Pixel-faithful replica of the celticfc.com homepage, with an extra configurable MEMBERSHIPS tab in the global nav.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "membershipsLabel",
+      "label": "Memberships tab label",
+      "type": "string",
+      "default": "Memberships"
+    },
+    {
+      "id": "membershipsHref",
+      "label": "Memberships tab link (redirect)",
+      "type": "string",
+      "default": "/memberships"
+    },
+    {
+      "id": "membershipsNewTab",
+      "label": "Open Memberships tab in a new tab",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "showMembershipsTab",
+      "label": "Show the Memberships tab",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
