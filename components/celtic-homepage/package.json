@@ -1,6 +1,6 @@
 {
   "name": "@limio/celtic-homepage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pixel-faithful replica of the celticfc.com homepage, with an extra configurable MEMBERSHIPS tab in the global nav.",
   "main": "./index.js",
   "peerDependencies": {
