@@ -7,11 +7,7 @@ import {
   sanitiseHTML,
   useLimioContext,
 } from "@limio/sdk"
-import { createTheme, ThemeProvider, StyledEngineProvider } from "@mui/material/styles"
-import { CssBaseline, Button, Box, Typography } from "@mui/material"
-import xss from "xss"
 import packageData from "./package.json"
-import "./fonts.css"
 import "./index.css"
 
 const defaultProps = getPropsFromPackageJson(packageData)
@@ -73,12 +69,6 @@ const themeStyles = {
     text: "#3C3C3C",
   },
 }
-
-const theme = createTheme({
-  typography: {
-    fontFamily: `'Inter', 'system-ui', 'Helvetica Neue', Arial, sans-serif`,
-  },
-})
 
 // ---------- Pure helpers (exported for unit testing) ----------
 
@@ -164,70 +154,28 @@ const OnetimeUpsellBanner = () => {
   ).replace("{count}", String(displayCount))
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box
-          className="onetime-upsell-banner oub-banner"
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            alignItems: { xs: "stretch", sm: "center" },
-            justifyContent: "space-between",
-            gap: 2,
-            p: { xs: 2, sm: 3 },
-            borderRadius: 2,
-            bgcolor: palette.background,
-            border: `1px solid ${palette.borderColor}`,
-            color: palette.text,
-          }}
-        >
-          <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Typography
-              component="div"
-              sx={{
-                fontWeight: 600,
-                color: palette.text,
-                fontSize: { xs: "1rem", sm: "1.0625rem" },
-                lineHeight: 1.4,
-              }}
-            >
-              {heading}
-            </Typography>
-            {subheading__limio_richtext && (
-              <Box
-                className="oub-subheading"
-                sx={{ mt: 0.5, color: palette.text, opacity: 0.85, fontSize: "0.9375rem" }}
-                dangerouslySetInnerHTML={{
-                  __html:
-                    sanitiseHTML(subheading__limio_richtext) ||
-                    xss(subheading__limio_richtext),
-                }}
-              />
-            )}
-          </Box>
-          <Button
-            variant="contained"
-            href={learnMoreUrl || "#"}
-            disableElevation
-            sx={{
-              flexShrink: 0,
-              bgcolor: palette.primary,
-              color: "#fff",
-              textTransform: "none",
-              fontWeight: 600,
-              borderRadius: 999,
-              px: 3,
-              py: 1,
-              alignSelf: { xs: "flex-start", sm: "center" },
-              "&:hover": { bgcolor: palette.borderColor },
-            }}
-          >
-            {ctaLabel || "Learn more"}
-          </Button>
-        </Box>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <div
+      className="onetime-upsell-banner oub-banner"
+      style={{
+        "--oub-background": palette.background,
+        "--oub-border": palette.borderColor,
+        "--oub-text": palette.text,
+        "--oub-primary": palette.primary,
+      }}
+    >
+      <div className="oub-content">
+        <div className="oub-heading">{heading}</div>
+        {subheading__limio_richtext && (
+          <div
+            className="oub-subheading"
+            dangerouslySetInnerHTML={{ __html: sanitiseHTML(subheading__limio_richtext) }}
+          />
+        )}
+      </div>
+      <a className="oub-cta" href={learnMoreUrl || "#"}>
+        {ctaLabel || "Learn more"}
+      </a>
+    </div>
   )
 }
 
