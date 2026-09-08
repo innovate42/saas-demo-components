@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Suspense } from "react";
 import { ErrorBoundary } from "@limio/sdk";
-import * as limioSdk from "@limio/sdk";
+import * as checkoutSdk from "@limio/internal-checkout-sdk";
 import { Stack, Typography, Button } from "../mui";
 import { ReceiptIcon, CreditCardIcon } from "../mui-icons";
 import { getPaymentMethodInfo } from "../helpers/PaymentMethod";
@@ -11,12 +11,22 @@ import "../styles/index.css";
 type PaymentMethodsResult = { payment_methods?: PaymentMethodRecord[] };
 
 /**
+ * Payment methods live on @limio/internal-checkout-sdk (not @limio/sdk) — the
+ * same import the shop's payments table uses.
+ *
  * Resolved once at module scope so the hook identity is stable across renders,
- * and falls back to an empty result rather than throwing if the SDK export moves.
+ * and falls back to an empty result rather than throwing if the export moves.
+ * The fallback warns, so a hidden payment method is diagnosable from the console
+ * instead of looking like "no payment method on this subscription".
  */
 const useSubscriptionPaymentMethods: (subscriptionId: string) => PaymentMethodsResult =
-  (limioSdk as unknown as Record<string, any>).useLimioUserSubscriptionPaymentMethods ??
-  (() => ({}));
+  (checkoutSdk as unknown as Record<string, any>).useLimioUserSubscriptionPaymentMethods ??
+  (() => {
+    console.warn(
+      "[subscription-summary-table] useLimioUserSubscriptionPaymentMethods not found on @limio/internal-checkout-sdk — payment method hidden",
+    );
+    return {};
+  });
 
 type Props = {
   subscriptionId: string;
@@ -39,7 +49,14 @@ function PaymentMethodContent({
   const paymentMethod = getPaymentMethodInfo(paymentMethods);
 
   // Nothing to describe: render nothing rather than guess at a payment state.
-  if (!paymentMethod) return null;
+  if (!paymentMethod) {
+    console.debug(
+      "[subscription-summary-table] no payment method for",
+      subscriptionId,
+      paymentMethods,
+    );
+    return null;
+  }
 
   const showPayInvoice = Boolean(
     paymentMethod.isInvoice && showPayInvoiceButton && payInvoiceLink,

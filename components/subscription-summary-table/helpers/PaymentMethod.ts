@@ -15,7 +15,10 @@ type ProviderResult = {
 export type PaymentMethodRecord = {
   start?: string
   type?: string
-  data?: Record<string, { result?: ProviderResult } | undefined>
+  data?: Record<string, any> & {
+    isExternalIntegration?: boolean
+    integrationData?: { self_service?: { label?: string } }
+  }
 }
 
 export type PaymentMethodInfo = {
@@ -59,6 +62,12 @@ export function getPaymentMethodInfo(
 
   if (!type) return null
   if (type === "invoice") return { label: "Invoice", isInvoice: true }
+
+  // External payment integrations supply their own label.
+  if (current?.data?.isExternalIntegration) {
+    const label = current?.data?.integrationData?.self_service?.label
+    return label ? { label, isInvoice: false } : null
+  }
 
   const result = current?.data?.[type]?.result
   const providerType = result?.Type
