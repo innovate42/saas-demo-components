@@ -1,6 +1,6 @@
 {
   "name": "@limio/irmi-home",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "IRMI-HOME - static replica of the irmi.com landing page with a configurable Login button",
   "main": "./index.js",
   "sideEffects": [
