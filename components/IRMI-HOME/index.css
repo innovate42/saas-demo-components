@@ -1,0 +1,862 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Crimson+Pro:wght@400;500;600&display=swap");
+
+/* IRMI-HOME — static replica of the irmi.com landing page.
+   Values below are taken from the source page's computed styles. */
+
+.irmi-home {
+    --irmi-navy: #002942;
+    --irmi-blue: #003e74;
+    --irmi-link: #005aaa;
+    --irmi-orange: #bd4700;
+    --irmi-orange-light: #ea7200;
+    --irmi-gray-fill: #f7f7f7;
+    --irmi-text: #1e252b;
+    --irmi-text-2: #292929;
+    --irmi-border: #b8b8b8;
+    --irmi-border-light: #e0e0e0;
+    --irmi-quote: #cccccc;
+    --irmi-dot: #7daed3;
+
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32px;
+    color: var(--irmi-text);
+    background: #ffffff;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.irmi-home *,
+.irmi-home *::before,
+.irmi-home *::after {
+    box-sizing: border-box;
+}
+
+.irmi-home img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.irmi-home p {
+    margin: 0 0 20px;
+}
+
+.irmi-home ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.irmi-home h1,
+.irmi-home h2,
+.irmi-home h3,
+.irmi-home h4 {
+    font-family: "Crimson Pro", Georgia, serif;
+    font-weight: 400;
+    margin: 0;
+    color: inherit;
+}
+
+.irmi-home h2 {
+    font-size: 50px;
+    line-height: 50px;
+    margin: 0 0 20px;
+}
+
+.irmi-container {
+    max-width: 1175px;
+    margin: 0 auto;
+    padding: 0 7.5px;
+    position: relative;
+}
+
+.irmi-center { text-align: center; }
+.irmi-spacer-60 { height: 60px; }
+.irmi-nowrap { white-space: nowrap; }
+.irmi-linkish { color: var(--irmi-link); }
+
+.irmi-home hr {
+    height: 1px;
+    border: 0;
+    background: var(--irmi-quote);
+    opacity: 0.25;
+    margin: 0 0 30px;
+}
+
+/* ── Buttons (all inert except the login anchor) ───────────────── */
+
+.irmi-btn {
+    display: inline-block;
+    background: var(--irmi-orange);
+    border: 2px solid var(--irmi-orange);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    padding: 7px 20px;
+    border-radius: 0;
+}
+
+.irmi-pill {
+    display: inline-block;
+    background: var(--irmi-orange);
+    border: 1px solid var(--irmi-orange);
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    padding: 2px 10px;
+    white-space: nowrap;
+}
+
+a.irmi-pill:hover,
+a.irmi-pill:focus {
+    background: #a03c00;
+    border-color: #a03c00;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.irmi-pill--outline {
+    background: transparent;
+    color: var(--irmi-orange);
+}
+
+.irmi-cta {
+    display: inline-block;
+    color: var(--irmi-orange);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+
+.irmi-cta__icon {
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: -1px;
+}
+
+.irmi-icon { display: block; }
+
+/* ── Header ────────────────────────────────────────────────────── */
+
+.irmi-header {
+    background: #ffffff;
+    padding: 14px 0;
+}
+
+.irmi-header__inner {
+    display: flex;
+    align-items: center;
+}
+
+.irmi-header__menu {
+    color: var(--irmi-text);
+    margin-right: 18px;
+}
+
+.irmi-header__logo img {
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.irmi-header__links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.irmi-header__icon {
+    color: var(--irmi-text);
+    margin-left: 22px;
+    position: relative;
+}
+
+.irmi-header__badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    border-radius: 100%;
+    background: var(--irmi-orange);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+}
+
+.irmi-header__links .irmi-pill {
+    margin-left: 20px;
+}
+
+/* ── Sub navigation ────────────────────────────────────────────── */
+
+.irmi-nav {
+    background: var(--irmi-navy);
+    color: #ffffff;
+    position: relative;
+    z-index: 5;
+}
+
+.irmi-nav__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.irmi-nav__item {
+    position: relative;
+}
+
+.irmi-nav__link {
+    display: block;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+
+.irmi-nav__item:hover .irmi-nav__link {
+    color: var(--irmi-orange-light);
+}
+
+.irmi-nav__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    min-width: 280px;
+    background: var(--irmi-navy);
+    padding: 6px 20px 18px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.irmi-nav__item:hover .irmi-nav__menu { display: block; }
+
+.irmi-nav__menu-title {
+    display: block;
+    font-family: "Crimson Pro", Georgia, serif;
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+}
+
+.irmi-nav__menu li span {
+    display: block;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 26px;
+}
+
+.irmi-nav__menu li:hover span { color: var(--irmi-orange-light); }
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+
+.irmi-hero {
+    position: relative;
+    background: var(--irmi-navy);
+    color: #ffffff;
+    padding: 40px 40px 190px;
+    overflow: hidden;
+}
+
+.irmi-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+}
+
+.irmi-hero__content { position: relative; }
+
+.irmi-hero__copy {
+    max-width: 530px;
+    margin-left: 10px;
+}
+
+.irmi-hero h1 {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 55px;
+    color: #ffffff;
+    margin: 0 0 20px;
+}
+
+.irmi-hero p {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+    color: #ffffff;
+    margin: 0 0 30px;
+}
+
+/* ── Three overlapping membership cards ────────────────────────── */
+
+.irmi-banner-cards {
+    padding: 0 40px;
+    margin-top: -150px;
+    position: relative;
+    z-index: 2;
+    color: var(--irmi-text-2);
+}
+
+.irmi-banner-cards__row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.irmi-bcard {
+    flex: 1 1 0;
+    margin: 5px;
+    background: #ffffff;
+    border: 4px solid var(--irmi-orange);
+    border-radius: 10px;
+    padding: 20px 20px 0;
+    color: #212529;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.irmi-bcard__title {
+    font-size: 28px;
+    line-height: 30px;
+    color: #212529;
+    margin: 0 0 5px;
+}
+
+.irmi-bcard__img { margin: 0 0 10px; }
+
+.irmi-bcard__img img { width: 100%; }
+
+.irmi-bcard__text { margin: 0; }
+
+/* ── Product Wizard promo ──────────────────────────────────────── */
+
+.irmi-promo {
+    background: var(--irmi-gray-fill);
+    color: #000000;
+    padding: 60px 0 20px;
+    overflow: visible;
+}
+
+.irmi-promo__wrap {
+    position: relative;
+    padding-left: 545px;
+    min-height: 270px;
+}
+
+.irmi-promo__card {
+    position: absolute;
+    top: -110px;
+    left: -15px;
+    width: 490px;
+    height: 480px;
+    background: #ffffff;
+    border: 1px solid var(--irmi-border-light);
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.irmi-promo__card img {
+    width: 468px;
+    max-width: 100%;
+}
+
+.irmi-promo h2 {
+    font-size: 50px;
+    line-height: 50px;
+    color: #000000;
+    margin: 0 0 26px;
+}
+
+.irmi-promo p {
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0 0 30px;
+}
+
+/* ── Plain text trays ──────────────────────────────────────────── */
+
+.irmi-text-tray {
+    background: #ffffff;
+    color: var(--irmi-text-2);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 36px;
+    padding: 40px 0 20px;
+}
+
+.irmi-text-tray .irmi-cta {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 15px;
+    margin: 0;
+}
+
+.irmi-narrow {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.irmi-narrow--wide { max-width: 768px; }
+
+.irmi-narrow h4 {
+    font-size: 24px;
+    line-height: 26px;
+    margin: 0 0 26px;
+}
+
+.irmi-intro {
+    max-width: 1160px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.irmi-heading { margin-bottom: 0; }
+
+.irmi-text-tray--empty { height: 60px; padding: 0; }
+
+/* ── Video placeholders ────────────────────────────────────────── */
+
+.irmi-video {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000000;
+    overflow: hidden;
+    margin-bottom: 96px;
+}
+
+.irmi-video img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.irmi-video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.92;
+}
+
+.irmi-video__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.35);
+    display: block;
+}
+
+.irmi-video__progress {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--irmi-orange-light);
+}
+
+/* ── Choose Your Specialty ─────────────────────────────────────── */
+
+.irmi-specialty {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 -15px;
+}
+
+.irmi-specialty__copy {
+    flex: 1 1 auto;
+    padding: 0 15px;
+}
+
+.irmi-specialty__img {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0 15px;
+}
+
+.irmi-specialty__img img {
+    width: 300px;
+    max-width: 100%;
+}
+
+.irmi-topic {
+    color: var(--irmi-orange);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 25px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+}
+
+.irmi-h1 {
+    font-family: "Crimson Pro", Georgia, serif;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 40px;
+    color: var(--irmi-text-2);
+    margin: 0 0 30px;
+}
+
+.irmi-h1 strong { font-weight: 700; }
+
+.irmi-specialty p {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 36px;
+}
+
+/* ── Icon card grids ───────────────────────────────────────────── */
+
+.irmi-icon-cards {
+    color: var(--irmi-text);
+    padding: 60px 0;
+}
+
+.irmi-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 15px;
+    row-gap: 40px;
+}
+
+.irmi-grid--2 > * { flex: 0 0 calc((100% - 15px) / 2); max-width: calc((100% - 15px) / 2); }
+.irmi-grid--3 > * { flex: 0 0 calc((100% - 30px) / 3); max-width: calc((100% - 30px) / 3); }
+.irmi-grid--4 > * { flex: 0 0 calc((100% - 45px) / 4); max-width: calc((100% - 45px) / 4); }
+
+.irmi-icard {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid var(--irmi-border);
+    padding: 20px 20px 72px;
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.irmi-icard__head { text-align: center; }
+
+.irmi-icard__img {
+    margin: 0 0 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.irmi-icard__img img { width: 60px; height: 60px; }
+
+.irmi-icard h3 {
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 30px;
+    color: var(--irmi-text);
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+.irmi-icard__cta {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    text-align: center;
+}
+
+.irmi-icard__cta .irmi-cta { margin: 0; }
+
+/* ── Choose Your Path ──────────────────────────────────────────── */
+
+.irmi-path {
+    background: var(--irmi-gray-fill);
+    color: var(--irmi-text);
+    padding: 60px 0 40px;
+}
+
+.irmi-path .irmi-grid { row-gap: 30px; }
+
+.irmi-lcard {
+    background: #ffffff;
+    padding: 15px 15px 5px;
+    margin: 0;
+    color: #3d3d3d;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.irmi-lcard h3 {
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 24px;
+    color: var(--irmi-text);
+    margin: 0 0 10px;
+}
+
+.irmi-lcard p { margin: 0 0 10px; }
+
+.irmi-lcard .irmi-cta { margin: 10px 0 0; }
+
+/* ── Testimonial ───────────────────────────────────────────────── */
+
+.irmi-testimonial {
+    position: relative;
+    background: var(--irmi-navy);
+    color: var(--irmi-quote);
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
+.irmi-testimonial__inner {
+    padding-bottom: 0;
+}
+
+.irmi-testimonial__mark {
+    position: absolute;
+    font-family: Georgia, "Crimson Pro", serif;
+    font-size: 400px;
+    line-height: 32px;
+    color: #ffffff;
+    opacity: 0.11;
+    pointer-events: none;
+    user-select: none;
+}
+
+.irmi-testimonial__mark:first-child { top: 130px; left: 0; }
+.irmi-testimonial__mark:last-child { bottom: 60px; right: 0; }
+
+.irmi-testimonial blockquote {
+    position: relative;
+    margin: 0;
+    padding: 100px 0 80px;
+}
+
+.irmi-testimonial__quote {
+    display: block;
+    font-family: "Crimson Pro", Georgia, serif;
+    font-size: 40px;
+    line-height: 40px;
+    color: var(--irmi-quote);
+    margin: 0 0 30px;
+}
+
+.irmi-testimonial cite {
+    display: block;
+    font-size: 20px;
+    font-style: normal;
+    line-height: 28px;
+    color: var(--irmi-quote);
+}
+
+.irmi-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 15px;
+}
+
+.irmi-dot {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin: 0 5px;
+    border-radius: 100%;
+    background: var(--irmi-dot);
+    border: 1px solid var(--irmi-dot);
+    text-indent: -9999px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.irmi-dot--active { opacity: 1; }
+
+/* ── Footer ────────────────────────────────────────────────────── */
+
+.irmi-footer {
+    background: #ffffff;
+    color: var(--irmi-text);
+    font-size: 15px;
+    line-height: 32px;
+}
+
+.irmi-footer__top {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.irmi-footer__cols {
+    display: flex;
+    flex: 1 1 0;
+}
+
+.irmi-footer__col {
+    flex: 1 1 0;
+    padding: 0 15px;
+}
+
+.irmi-footer__heading {
+    display: block;
+    font-family: "Crimson Pro", Georgia, serif;
+    font-size: 22px;
+    line-height: 24px;
+    color: var(--irmi-text);
+    margin: 0 0 10px;
+}
+
+.irmi-footer__col li span {
+    display: block;
+    color: var(--irmi-link);
+    font-size: 15px;
+    line-height: 32px;
+}
+
+.irmi-footer__brand {
+    flex: 0 0 26%;
+    max-width: 26%;
+    padding: 0 15px;
+    text-align: center;
+    order: 0;
+}
+
+.irmi-footer__brand img {
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+.irmi-footer__tagline {
+    font-family: "Crimson Pro", Georgia, serif;
+    font-size: 22px;
+    line-height: 26px;
+    color: #525252;
+    text-align: center;
+    margin: 0 0 40px;
+}
+
+.irmi-footer__social {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+    color: var(--irmi-link);
+}
+
+.irmi-footer__social span { color: var(--irmi-link); }
+
+.irmi-footer__bottom {
+    background: var(--irmi-blue);
+    color: #ffffff;
+    max-width: none;
+    padding: 30px 0 10px;
+    text-align: center;
+}
+
+.irmi-footer__bottom p {
+    max-width: 1175px;
+    margin: 0 auto 20px;
+    padding: 0 7.5px;
+    font-size: 15px;
+    line-height: 24px;
+    color: #ffffff;
+}
+
+.irmi-footer__bottom .irmi-linkish { color: #ffffff; }
+
+.irmi-pipe {
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 12px;
+    vertical-align: middle;
+}
+
+.irmi-footer__copyright {
+    font-size: 15px;
+    line-height: 18px;
+    color: #e0e0e0;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+
+@media (max-width: 1199px) {
+    .irmi-promo__wrap { padding-left: 460px; }
+    .irmi-promo__card { width: 420px; height: 420px; top: -80px; }
+    .irmi-promo__card img { width: 400px; }
+}
+
+@media (max-width: 991px) {
+    .irmi-nav { display: none; }
+    .irmi-hero { padding: 40px 20px 150px; }
+    .irmi-hero h1 { font-size: 40px; line-height: 44px; }
+    .irmi-banner-cards { padding: 0 20px; }
+    .irmi-banner-cards__row { flex-wrap: wrap; }
+    .irmi-bcard { flex: 0 0 100%; margin: 5px 0 20px; }
+    .irmi-promo__wrap { padding-left: 0; }
+    .irmi-promo__card {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 0 auto 30px;
+    }
+    .irmi-promo h2 { font-size: 38px; line-height: 42px; }
+    .irmi-specialty { flex-wrap: wrap; }
+    .irmi-specialty__img { flex: 0 0 100%; max-width: 100%; }
+    .irmi-specialty__img img { margin: 0 auto; }
+    .irmi-grid--3 > *,
+    .irmi-grid--4 > * { flex: 0 0 calc((100% - 15px) / 2); max-width: calc((100% - 15px) / 2); }
+    .irmi-footer__top { flex-wrap: wrap; }
+    .irmi-footer__brand { flex: 0 0 100%; max-width: 100%; order: -1; }
+    .irmi-footer__cols { flex: 0 0 100%; }
+    .irmi-testimonial__mark { font-size: 200px; }
+}
+
+@media (max-width: 767px) {
+    .irmi-header__logo img { width: 120px; }
+    .irmi-header__links .irmi-pill--outline { display: none; }
+    .irmi-home h2 { font-size: 34px; line-height: 38px; }
+    .irmi-hero h1 { font-size: 34px; line-height: 38px; }
+    .irmi-hero p { font-size: 20px; line-height: 26px; }
+    .irmi-grid--2 > *,
+    .irmi-grid--3 > *,
+    .irmi-grid--4 > * { flex: 0 0 100%; max-width: 100%; }
+    .irmi-testimonial__quote { font-size: 28px; line-height: 34px; }
+    .irmi-footer__cols { flex-wrap: wrap; }
+    .irmi-footer__col { flex: 0 0 50%; }
+}

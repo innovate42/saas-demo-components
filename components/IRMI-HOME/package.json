@@ -1,0 +1,33 @@
+{
+  "name": "@limio/irmi-home",
+  "version": "1.0.0",
+  "description": "IRMI-HOME - static replica of the irmi.com landing page with a configurable Login button",
+  "main": "./index.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "loginUrl",
+      "label": "Login Button URL",
+      "type": "string",
+      "default": "/leemeeo-billing"
+    },
+    {
+      "id": "loginLabel",
+      "label": "Login Button Text",
+      "type": "string",
+      "default": "Log In"
+    },
+    {
+      "id": "openLoginInNewTab",
+      "label": "Open Login In New Tab",
+      "type": "boolean",
+      "default": false
+    }
+  ]
+}
