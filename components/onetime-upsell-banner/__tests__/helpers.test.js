@@ -1,6 +1,6 @@
 import { isOneTimeOffer, countOnetimeOnlySubs, hasAnyRecurringSub } from "../index"
 
-// Avoid loading MUI / @limio/sdk during these pure-helper tests by mocking them.
+// Avoid loading @limio/sdk during these pure-helper tests by mocking it.
 jest.mock("@limio/sdk", () => ({
   useUser: () => ({ loginStatus: "logged_in", loaded: true }),
   useSubscriptions: () => ({ subscriptions: [] }),
@@ -9,31 +9,7 @@ jest.mock("@limio/sdk", () => ({
   sanitiseHTML: (h) => h || "",
   useLimioContext: () => ({ isInPageBuilder: false }),
 }))
-jest.mock(
-  "@mui/material/styles",
-  () => ({
-    createTheme: () => ({}),
-    ThemeProvider: ({ children }) => children,
-    StyledEngineProvider: ({ children }) => children,
-  }),
-  { virtual: true }
-)
-jest.mock(
-  "@mui/material",
-  () => ({
-    CssBaseline: () => null,
-    Button: () => null,
-    Box: () => null,
-    Typography: () => null,
-  }),
-  { virtual: true }
-)
-jest.mock("../fonts.css", () => ({}), { virtual: true })
 jest.mock("../index.css", () => ({}), { virtual: true })
-jest.mock("@fontsource/inter/400.css", () => ({}), { virtual: true })
-jest.mock("@fontsource/inter/500.css", () => ({}), { virtual: true })
-jest.mock("@fontsource/inter/600.css", () => ({}), { virtual: true })
-jest.mock("@fontsource/inter/700.css", () => ({}), { virtual: true })
 
 // --- Fixtures -------------------------------------------------------
 

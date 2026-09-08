@@ -1,6 +1,36 @@
-/* Fallback / non-MUI styling. Most layout lives in the MUI sx props in index.js. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .oub-banner {
     font-family: 'Inter', 'system-ui', 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--oub-background);
+    border: 1px solid var(--oub-border);
+    color: var(--oub-text);
+}
+
+.oub-banner .oub-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.oub-banner .oub-heading {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--oub-text);
+}
+
+.oub-banner .oub-subheading {
+    margin-top: 4px;
+    font-size: 0.9375rem;
+    opacity: 0.85;
+    color: var(--oub-text);
 }
 
 .oub-banner .oub-subheading p {
@@ -9,4 +39,45 @@
 
 .oub-banner .oub-subheading p + p {
     margin-top: 4px;
+}
+
+.oub-banner .oub-cta {
+    flex-shrink: 0;
+    align-self: flex-start;
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 999px;
+    background-color: var(--oub-primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    cursor: pointer;
+}
+
+.oub-banner .oub-cta:hover,
+.oub-banner .oub-cta:focus {
+    background-color: var(--oub-border);
+    color: #fff;
+    text-decoration: none;
+}
+
+@media (min-width: 600px) {
+    .oub-banner {
+        flex-direction: row;
+        align-items: center;
+        padding: 24px;
+    }
+
+    .oub-banner .oub-heading {
+        font-size: 1.0625rem;
+    }
+
+    .oub-banner .oub-cta {
+        align-self: center;
+    }
 }

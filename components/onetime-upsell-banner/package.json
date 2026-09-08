@@ -10,13 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "xss": "^1.0.8",
-    "@mui/material": "5.17.1",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@fontsource/inter": "^4.5.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "*"
   },
@@ -50,12 +44,36 @@
       "label": "Theme color",
       "type": "picklist",
       "options": [
-        { "id": "orange", "label": "Orange", "value": "orange" },
-        { "id": "blue", "label": "Blue", "value": "blue" },
-        { "id": "red", "label": "Red", "value": "red" },
-        { "id": "green", "label": "Green", "value": "green" },
-        { "id": "black", "label": "Black", "value": "black" },
-        { "id": "grey", "label": "Grey", "value": "grey" }
+        {
+          "id": "orange",
+          "label": "Orange",
+          "value": "orange"
+        },
+        {
+          "id": "blue",
+          "label": "Blue",
+          "value": "blue"
+        },
+        {
+          "id": "red",
+          "label": "Red",
+          "value": "red"
+        },
+        {
+          "id": "green",
+          "label": "Green",
+          "value": "green"
+        },
+        {
+          "id": "black",
+          "label": "Black",
+          "value": "black"
+        },
+        {
+          "id": "grey",
+          "label": "Grey",
+          "value": "grey"
+        }
       ],
       "default": "orange"
     },
