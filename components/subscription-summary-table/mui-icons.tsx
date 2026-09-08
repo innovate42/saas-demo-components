@@ -20,6 +20,8 @@ const PATHS: Record<string, string> = {
   Cancel: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12z",
   CalendarToday: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 18H4V8h16z",
   TableRows: "M21 8H3V4h18zm0 2H3v4h18zm0 6H3v4h18z",
+  Receipt: "M18 17H6v-2h12zm0-4H6v-2h12zm0-4H6V7h12zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2z",
+  CreditCard: "M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2m0 14H4v-6h16zm0-10H4V6h16z",
   Error: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2zm0-4h-2V7h2z",
 }
 
@@ -59,3 +61,5 @@ export const CancelIcon = makeIcon("Cancel")
 export const CalendarTodayIcon = makeIcon("CalendarToday")
 export const TableRowsIcon = makeIcon("TableRows")
 export const ErrorIcon = makeIcon("Error")
+export const ReceiptIcon = makeIcon("Receipt")
+export const CreditCardIcon = makeIcon("CreditCard")

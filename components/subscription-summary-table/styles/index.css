@@ -1,59 +1,215 @@
-.subscription-details-table td.cell-base {
-  font-size: 0.825rem;
-  border-bottom: none;
-  padding-top: 15px;
-  padding-bottom: 15px;
+/* ============================================================
+   Subscription Summary Table — styling
+   The component renders through the MUI-free shim in ../mui.tsx,
+   so every MUI class here needs its own visual treatment. Inline
+   styles from the shim's `sx` mapping are overridden with
+   !important only where unavoidable.
+   ============================================================ */
+
+.subscription-summary {
+  --sst-ink: #2d3135;
+  --sst-muted: #8a9099;
+  --sst-line: #e6e8eb;
+  --sst-surface: #fff;
+  --sst-radius: 12px;
+  --sst-gutter: clamp(16px, 4vw, 40px);
+
+  padding-inline: var(--sst-gutter);
+  color: var(--sst-ink);
 }
 
-.subscription-details-table td.label-cell {
+.subscription-summary * {
+  box-sizing: border-box;
+}
+
+.subscription-summary .MuiContainer-root {
+  max-width: 1080px;
+}
+
+/* ── Page header ─────────────────────────────── */
+
+/* The header Stack is the one holding both the title block and the CTA. */
+.subscription-summary .MuiStack-root:has(> .MuiBox-root):has(> .MuiButton-root) {
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end !important;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--sst-line);
+  margin-bottom: 20px !important;
+}
+
+.subscription-summary .MuiTypography-h4 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.subscription-summary .MuiTypography-body2 {
+  font-size: 0.875rem;
+  line-height: 1.45;
   color: #6c757d;
-  font-weight: 500;
-  width: 15%;
-  white-space: nowrap;
 }
 
-.subscription-details-table td.label-cell-wide {
-  color: #6c757d;
-  font-weight: 500;
-  width: 40%;
+/* ── Filter bar (count + status select) ──────── */
+
+/* Sits on one row and lines its right edge up with the header CTA. */
+.subscription-summary .MuiStack-root:has(> .MuiFormControl-root) {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
 }
 
-.subscription-details-table td.value-cell {
-  color: #2d3135;
-  font-weight: 600;
-  width: 15%;
+.subscription-summary .MuiFormControl-root {
+  gap: 6px;
+}
+
+.subscription-summary .MuiInputLabel-root {
+  font-size: 0.6875rem !important;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sst-muted) !important;
+}
+
+.subscription-summary .MuiSelect-select {
+  min-height: 38px;
+  padding: 8px 34px 8px 12px !important;
+  border: 1px solid #d3d8dd !important;
+  border-radius: 8px !important;
+  /* Shorthand + !important: the shim sets `background: #fff` inline. */
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%236c757d' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M4 6.5 8 10.5l4-4'/%3E%3C/svg%3E")
+    no-repeat right 10px center / 14px !important;
+  color: var(--sst-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.subscription-summary .MuiSelect-select:focus-visible {
+  outline: none;
+  border-color: var(--accent-color, #1a1a1a) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color, #1a1a1a) 18%, transparent);
 }
 
 /* ── Buttons ─────────────────────────────────── */
 
-.subscription-summary .btn-dark {
-  background-color: #1a1a1a;
-  color: #fff;
+.subscription-summary .MuiButton-root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
   white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.subscription-summary .MuiButton-sizeSmall {
+  min-height: 34px;
+  padding: 0 13px;
+  font-size: 0.8125rem;
+}
+
+.subscription-summary .MuiButton-root:focus-visible {
+  outline: 2px solid var(--accent-color, #1a1a1a);
+  outline-offset: 2px;
+}
+
+.subscription-summary .MuiButton-root:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Icons come in at 1.5rem inline — too heavy next to 14px labels. */
+.subscription-summary .MuiButton-icon {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
 }
 
-.subscription-summary .btn-dark:hover {
-  background-color: var(--accent-color-dark, #d24a1f);
+.subscription-summary .MuiButton-icon .MuiSvgIcon-root {
+  font-size: 1.05rem !important;
+}
+
+.subscription-summary .MuiButton-sizeSmall .MuiButton-icon .MuiSvgIcon-root {
+  font-size: 0.95rem !important;
+}
+
+.subscription-summary .btn-dark {
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+.subscription-summary .btn-dark:hover:not(:disabled) {
+  background-color: var(--accent-color, #000);
+  border-color: var(--accent-color, #000);
 }
 
 .subscription-summary .btn-cancel {
+  background-color: #fff;
+  border-color: #d3d8dd;
   color: #6c757d;
-  border-color: #6c757d;
 }
 
-.subscription-summary .btn-cancel:hover {
+.subscription-summary .btn-cancel:hover:not(:disabled) {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
 }
 
-/* ── Status chip ─────────────────────────────── */
+/* ── Chips ───────────────────────────────────── */
+
+.subscription-summary .MuiChip-root {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 26px;
+  padding: 2px 10px;
+  border-radius: 6px !important;
+  background-color: #f1f3f5;
+  color: var(--sst-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* The renewal chip ships `padding-inline: 4px` inline. */
+.subscription-summary .MuiChip-sizeSmall {
+  padding-inline: 10px !important;
+}
+
+.subscription-summary .MuiChip-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subscription-summary .MuiChip-root .MuiSvgIcon-root {
+  font-size: 0.85rem !important;
+}
 
 .subscription-summary .status-chip {
   text-transform: capitalize;
-  font-weight: 500;
-  border-radius: 4px;
+  font-weight: 600;
 }
 
 .subscription-summary .status-chip-active {
@@ -64,6 +220,233 @@
 .subscription-summary .status-chip-cancelled {
   color: #591414;
   background-color: #fbeaea;
+}
+
+/* ── Subscription card ───────────────────────── */
+
+.subscription-summary .MuiCard-root {
+  padding: 0 !important;
+  background-color: var(--sst-surface);
+  border: 1px solid var(--sst-line);
+  border-radius: var(--sst-radius);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+  overflow: hidden;
+}
+
+/* Card header: sub ID on the left, chips on the right. */
+.subscription-summary .MuiCard-root > .MuiBox-root:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  padding: 18px 20px 16px !important;
+}
+
+.subscription-summary .MuiCard-root > .MuiBox-root:first-child > .MuiBox-root {
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.subscription-summary .MuiCard-root > .MuiBox-root:first-child .MuiTypography-body2 {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sst-muted);
+}
+
+.subscription-summary .MuiCard-root > .MuiBox-root:first-child .MuiTypography-h6 {
+  margin-top: 2px !important;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.subscription-summary .MuiCard-root > .MuiBox-root:first-child .MuiStack-root {
+  align-self: flex-start;
+  gap: 6px !important;
+}
+
+.subscription-summary .MuiCard-root hr.MuiDivider-root {
+  height: 0;
+  margin: 0 !important;
+  border: 0;
+  border-top: 1px solid var(--sst-line);
+}
+
+/* Inset the details block so the offer band never runs card-edge to card-edge. */
+.subscription-summary .MuiCardContent-root {
+  padding: 16px 20px !important;
+}
+
+/* Footer: payment method on the left, actions on the right */
+.subscription-summary .MuiCard-root > .MuiStack-root {
+  gap: 8px 16px !important;
+  padding: 14px 20px !important;
+  justify-content: space-between;
+  background-color: #fcfcfd;
+}
+
+.subscription-summary .payment-method-summary {
+  flex-wrap: wrap;
+  gap: 12px !important;
+}
+
+.subscription-summary .payment-method-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+}
+
+.subscription-summary .payment-method-text .MuiSvgIcon-root {
+  font-size: 1rem !important;
+  color: #9aa1a9;
+}
+
+.subscription-summary .payment-method-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sst-muted);
+}
+
+.subscription-summary .payment-method-value {
+  font-weight: 600;
+  color: var(--sst-ink);
+}
+
+.subscription-summary .subscription-action-buttons {
+  flex-wrap: wrap;
+  gap: 8px !important;
+  justify-content: flex-end;
+}
+
+.subscription-summary .btn-pay-invoice {
+  background-color: var(--accent-color, #1a1a1a);
+  border-color: var(--accent-color, #1a1a1a);
+  color: #fff;
+}
+
+.subscription-summary .btn-pay-invoice:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+/* ── Details table ──────────────────────────── */
+
+.subscription-summary .subscription-details-table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+/* Offer / add-on band: a contained, rounded strip with a hugging chip. */
+.subscription-summary .subscription-details-table tr:has(td[colspan]) > td {
+  padding: 10px 14px !important;
+  border-top: none !important;
+  border-radius: 8px;
+}
+
+.subscription-summary .subscription-details-table td[colspan] > .MuiBox-root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.subscription-summary .subscription-details-table td[colspan] .MuiTypography-body2 {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+/* Detail row: label above value, four to a row. */
+.subscription-summary .subscription-details-table tr:has(> td.cell-base) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 4px;
+  padding: 14px 14px 20px;
+}
+
+.subscription-summary .subscription-details-table td.cell-base {
+  width: auto;
+  padding: 0 !important;
+  border-bottom: none;
+  font-size: 0.9375rem;
+}
+
+.subscription-summary .subscription-details-table td.label-cell,
+.subscription-summary .subscription-details-table td.label-cell-wide {
+  grid-row: 1;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sst-muted);
+  white-space: normal;
+}
+
+.subscription-summary .subscription-details-table td.value-cell {
+  grid-row: 2;
+  font-weight: 600;
+  color: var(--sst-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Responsive ─────────────────────────────── */
+
+@media (max-width: 900px) {
+  .subscription-summary .subscription-details-table tr:has(> td.cell-base) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .subscription-summary .MuiStack-root:has(> .MuiBox-root):has(> .MuiButton-root) {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .subscription-summary .MuiStack-root:has(> .MuiFormControl-root) {
+    align-items: stretch !important;
+  }
+
+  .subscription-summary .MuiFormControl-root {
+    width: 100%;
+  }
+
+  .subscription-summary .MuiCard-root > .MuiBox-root:first-child > .MuiBox-root {
+    flex-direction: column;
+  }
+
+  .subscription-summary .MuiCard-root > .MuiBox-root:first-child .MuiStack-root {
+    align-items: flex-start !important;
+  }
+
+  .subscription-summary .MuiCard-root > .MuiStack-root {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .subscription-summary .payment-method-summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .subscription-summary .subscription-action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .subscription-summary .subscription-details-table tr:has(> td.cell-base) {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 12px;
+  }
 }
 
 /* ── Cancellation notice modal ───────────────── */
@@ -79,7 +462,7 @@
 
 .subscription-modal .modal-btn-cancel {
   color: #6c757d;
-  border-color: #6c757d;
+  border-color: #d3d8dd;
 }
 
 .subscription-modal .modal-btn-cancel:hover {
@@ -87,10 +470,10 @@
 }
 
 .subscription-modal .modal-btn-confirm {
-  background-color: var(--accent-color-dark, #d24a1f);
+  background-color: var(--accent-color, #1a1a1a);
   color: #fff;
 }
 
 .subscription-modal .modal-btn-confirm:hover {
-  filter: brightness(0.85);
+  filter: brightness(0.9);
 }

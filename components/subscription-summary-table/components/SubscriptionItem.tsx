@@ -15,6 +15,7 @@ import {
 import { checkActiveOffersAndAddOns } from "../helpers/OfferDetails";
 import { CancellationNoticeModal } from "./CancellationNoticeModal";
 import { useButtonActions } from "../helpers/ButtonActions";
+import { PaymentMethodFooter } from "./PaymentMethodFooter";
 import type { Subscription } from "@limio/types";
 import "../styles/index.css";
 
@@ -57,6 +58,11 @@ export function SubscriptionItem({
     editAddOnsButtonText,
     renewalDateLabel,
     offerChipColor,
+    showPaymentMethod,
+    paymentMethodLabel,
+    showPayInvoiceButton,
+    payInvoiceButtonText,
+    payInvoiceLink,
   } = useComponentStaticProps();
 
   const termEndDate =
@@ -144,14 +150,34 @@ export function SubscriptionItem({
 
       <Divider sx={{ mx: 1 }} />
 
-      {/* Bottom: Action buttons (right-aligned) */}
+      {/* Bottom: payment method (left) + actions (right) */}
       <Stack
         direction="row"
         spacing={1}
         alignItems="center"
-        justifyContent="flex-end"
+        justifyContent="space-between"
+        className="subscription-footer"
         sx={{ flexWrap: "wrap", px: 1.5, py: 1 }}
       >
+        {showPaymentMethod ? (
+          <PaymentMethodFooter
+            subscriptionId={subscription.id}
+            label={paymentMethodLabel}
+            showPayInvoiceButton={showPayInvoiceButton}
+            payInvoiceButtonText={payInvoiceButtonText}
+            payInvoiceLink={payInvoiceLink}
+          />
+        ) : (
+          <span />
+        )}
+
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          className="subscription-action-buttons"
+          sx={{ flexWrap: "wrap" }}
+        >
         {showUpdateButton && (
           <Button
             variant="contained"
@@ -207,6 +233,7 @@ export function SubscriptionItem({
             )}
           </>
         )}
+        </Stack>
       </Stack>
     </Card>
   );

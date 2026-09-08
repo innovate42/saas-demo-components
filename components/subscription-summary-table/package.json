@@ -1,6 +1,6 @@
 {
   "name": "component-subscription-summary-table",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -228,6 +228,36 @@
       "label": "Renewal date chip label",
       "type": "string",
       "default": "Renewal Date"
+    },
+    {
+      "id": "showPaymentMethod",
+      "label": "Show payment method on the subscription card",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "paymentMethodLabel",
+      "label": "Payment method label text",
+      "type": "string",
+      "default": "Payment Method"
+    },
+    {
+      "id": "showPayInvoiceButton",
+      "label": "Show pay invoice button when billed by invoice",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "payInvoiceButtonText",
+      "label": "Pay invoice button text",
+      "type": "string",
+      "default": "Pay invoice"
+    },
+    {
+      "id": "payInvoiceLink",
+      "label": "Link to invoices / pay invoice page",
+      "type": "string",
+      "default": "/leemeeo-invoices"
     }
   ]
 }

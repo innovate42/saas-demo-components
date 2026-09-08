@@ -37,6 +37,11 @@ type StaticProps = {
   addOnChipColor: string
   primaryTextColor: string
   renewalDateLabel: string
+  showPaymentMethod: boolean
+  paymentMethodLabel: string
+  showPayInvoiceButton: boolean
+  payInvoiceButtonText: string
+  payInvoiceLink: string
 }
 
 export function useComponentStaticProps(): StaticProps {
