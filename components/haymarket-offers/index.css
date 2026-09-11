@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&display=swap");
+
+/* Haymarket corporate licence cards
+   Brand tokens taken from haymarket.com's own CSS variables.
+   Layout/UX mirrors the Leemeeo offer cards; only the skin is Haymarket. */
+
+.hm-offers {
+  --hm-indigo: #161677;
+  --hm-purple: #261655;
+  --hm-blue: #0516aa;
+  --hm-red: #e50027;
+  --hm-border: #d7d2ec;
+  --hm-font: "Epilogue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  font-family: var(--hm-font);
+}
+
+.hm-offers h2,
+.hm-offers h3,
+.hm-offers p,
+.hm-offers li,
+.hm-offers button,
+.hm-offers input,
+.hm-offers label,
+.hm-offers span,
+.hm-offers strong {
+  font-family: var(--hm-font);
+}
+
+.hm-heading {
+  line-height: 1.15;
+}
+
+.hm-subheading {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.hm-muted {
+  opacity: 0.7;
+}
+
+/* ---------- card ---------- */
+
+.hm-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--hm-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(22, 22, 119, 0.06),
+    0 8px 24px rgba(22, 22, 119, 0.07);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.hm-card:hover {
+  box-shadow: 0 2px 4px rgba(22, 22, 119, 0.08),
+    0 16px 40px rgba(22, 22, 119, 0.12);
+  transform: translateY(-2px);
+}
+
+.hm-best-value {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 7px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.hm-card-title {
+  line-height: 1.25;
+}
+
+.hm-price {
+  line-height: 1.1;
+}
+
+/* ---------- seat stepper ---------- */
+
+.hm-seats {
+  text-align: left;
+  background: #f7f6fc;
+  border: 1px solid var(--hm-border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.hm-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.hm-stepper button {
+  width: 34px;
+  height: 34px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.hm-stepper button:hover:not(:disabled) {
+  background: rgba(5, 22, 170, 0.08);
+}
+
+.hm-stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.hm-stepper input {
+  width: 54px;
+  height: 34px;
+  text-align: center;
+  font-weight: 700;
+  border: none;
+  border-left: 1px solid var(--hm-border);
+  border-right: 1px solid var(--hm-border);
+  background: #fff;
+  -moz-appearance: textfield;
+}
+
+.hm-stepper input::-webkit-outer-spin-button,
+.hm-stepper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hm-stepper input:focus-visible,
+.hm-stepper button:focus-visible {
+  outline: 2px solid var(--hm-blue);
+  outline-offset: -2px;
+}
+
+.hm-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 1px solid;
+  padding-top: 10px;
+}
+
+.hm-total strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+/* ---------- features ---------- */
+
+.hm-features {
+  line-height: 1.5;
+}
+
+/* ---------- CTA ---------- */
+
+.hm-cta {
+  display: block;
+  width: 100%;
+  color: #fff;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: filter 0.2s ease, background 0.2s ease;
+}
+
+.hm-cta:hover {
+  filter: brightness(1.12);
+}
+
+.hm-cta:focus-visible {
+  outline: 3px solid rgba(229, 0, 39, 0.5);
+  outline-offset: 2px;
+}
+
+.hm-cta-remove {
+  background: #fff !important;
+}
+
+/* ---------- term toggle ---------- */
+
+.hm-toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid var(--hm-border);
+  border-radius: 999px;
+}
+
+.hm-toggle-btn {
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 9px 22px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.hm-footnote a {
+  color: var(--hm-blue);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .hm-card {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}

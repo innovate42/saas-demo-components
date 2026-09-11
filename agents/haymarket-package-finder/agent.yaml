@@ -1,0 +1,98 @@
+# Haymarket Package Finder: the agent document. The prompt lives in prompt.md.
+# Push it back with: limio agents push -d agents/haymarket-package-finder
+description: >-
+  Recommends one Haymarket corporate package from the visitor's sector and team
+  size, lands on the annual licence, and takes them to checkout.
+streaming: true
+presentation:
+  title: Find your package
+  greeting: "Tell me what your business does and roughly how many people need access, and I'll point you at the right corporate licence."
+  pointers:
+    - "We're a marketing agency"
+    - "Access for a GP practice"
+    - "Annual or monthly?"
+    - "We need more than 250 seats"
+toolsets:
+  - name: fetch_offers
+    config:
+      label: hmb2b
+  - name: create_checkout
+  - name: knowledge
+    toolsetId: toolset-0da678be0dd3287cb69ff5f63f0d9c6a
+outcomes:
+  - id: qualified
+    label: Qualified
+    description: Sector and seats understood, one package settled on.
+    criteria: >-
+      You know what the business does and roughly how many seats it needs, and
+      you have settled on the package that fits. Choose this as soon as you have
+      settled on it, before you present it — presenting is what the steps below
+      do.
+
+      Do not choose this when the answer is over 250 seats, a bespoke package or
+      a discount; that is Corporate team handoff.
+    whatToDo: >-
+      Name the package, give the seat count and the yearly total in one sentence,
+      and say why it fits what they told you. Lead with annual and, if they were
+      leaning monthly, say what monthly costs them over a year. Offer printed
+      copies once at £95 per copy per year. Then give them the checkout link and
+      say they can pay by invoice against a PO.
+    style:
+      color: "#0516AA"
+  - id: corporate_team_handoff
+    label: Corporate team handoff
+    description: Bespoke, over 250 seats, a discount, or a title not sold online.
+    criteria: >-
+      The visitor needs something you must not quote — more than 250 seats, a
+      bespoke package, a discount, or a title that is not sold online — and has
+      given a work email so the corporate team can follow up.
+
+      Do not choose this merely because the fit is imperfect. If a package covers
+      what they asked for, that is Qualified.
+    whatToDo: >-
+      Confirm the email back to them, say in one line what you have passed on,
+      and tell them the corporate team replies within one working day. Do not
+      quote a price or promise terms.
+    tools:
+      - id: data_capture
+        tool: data_capture
+        config:
+          inputs:
+            - id: email
+              type: email
+              required: true
+            - id: sector
+              type: string
+              required: false
+              allowed:
+                - marcomms
+                - horticulture
+                - healthcare
+                - energy
+                - public_sector
+                - other
+            - id: seats
+              type: number
+              required: false
+            - id: request
+              type: string
+              required: false
+    style:
+      color: "#E50027"
+  - id: not_buying
+    label: Not buying
+    description: Ends without a recommendation — browsing, support, or an existing subscriber.
+    criteria: >-
+      The conversation ends without a recommendation: someone researching with no
+      intention of buying, an existing subscriber asking about their own account,
+      a billing or access problem, or a question unrelated to Haymarket.
+
+      Do not use it as an escape from a hard recommendation, and do not use it for
+      someone who was given a suitable package and simply has not decided yet —
+      that stays Qualified.
+    whatToDo: >-
+      Answer what they asked and leave the door open without pushing. For an
+      account or access problem, point them at the corporate team rather than
+      troubleshooting.
+    style:
+      color: "#636366"
