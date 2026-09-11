@@ -1,6 +1,6 @@
 {
   "name": "@limio/component-cancel-survey-radio-button-create-basket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./index.js",
   "scripts": {
