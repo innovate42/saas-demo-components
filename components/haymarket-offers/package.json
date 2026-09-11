@@ -1,0 +1,147 @@
+{
+  "name": "haymarket-offers",
+  "version": "1.0.0",
+  "description": "Haymarket corporate licence pricing cards - per-seat stepper, bulk print add-on, Haymarket brand",
+  "main": "./index.js",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Corporate licences, bought in minutes"
+    },
+    {
+      "id": "subheading",
+      "label": "Sub heading",
+      "type": "string",
+      "default": "Company-wide access across five Haymarket titles. Choose your seats, add printed copies, pay by invoice — no quote required."
+    },
+    {
+      "id": "seatLabel",
+      "label": "Seat stepper label",
+      "type": "string",
+      "default": "Seats"
+    },
+    {
+      "id": "seatHelpText",
+      "label": "Seat helper text",
+      "type": "string",
+      "default": "Named web logins. Add or remove seats at any time."
+    },
+    {
+      "id": "totalLabel",
+      "label": "Total label",
+      "type": "string",
+      "default": "Your licence"
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "hm-offers"
+    },
+    {
+      "id": "offerWidth",
+      "label": "Offer card width",
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary (CTA) colour",
+      "type": "color",
+      "default": "#0516AA"
+    },
+    {
+      "id": "headingColor__limio_color",
+      "label": "Heading colour",
+      "type": "color",
+      "default": "#161677"
+    },
+    {
+      "id": "bodyColor__limio_color",
+      "label": "Body colour",
+      "type": "color",
+      "default": "#261655"
+    },
+    {
+      "id": "accentColor__limio_color",
+      "label": "Accent colour",
+      "type": "color",
+      "default": "#E50027"
+    },
+    {
+      "id": "surfaceColor__limio_color",
+      "label": "Section background",
+      "type": "color",
+      "default": "#ECE8F9"
+    },
+    {
+      "id": "best_value_color__limio_color",
+      "label": "Best value colour",
+      "type": "color",
+      "default": "#E50027"
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Group offers",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "URL",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        }
+      },
+      "default": [
+        {
+          "id": "yearly",
+          "label": "Annual"
+        }
+      ]
+    },
+    {
+      "id": "footnote",
+      "label": "Footnote",
+      "type": "richText",
+      "default": "Need more than 250 seats, or a bespoke package? <a href=\"mailto:corporate@haymarket.com\">Talk to our corporate team</a>."
+    }
+  ]
+}

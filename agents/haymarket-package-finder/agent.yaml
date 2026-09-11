@@ -1,0 +1,103 @@
+# Haymarket Package Finder: the agent document. The prompt lives in prompt.md.
+# Push it back with: limio agents push -d agents/haymarket-package-finder
+description: >-
+  Recommends one Haymarket corporate package from the visitor's sector and team
+  size, lands on the annual licence, and takes them to checkout.
+streaming: true
+offerLabel: hmb2b
+presentation:
+  title: Find your package
+  greeting: "Tell me what your business does and roughly how many people need access, and I'll point you at the right corporate licence."
+  pointers:
+    - "We're a marketing agency"
+    - "Access for a GP practice"
+    - "Annual or monthly?"
+    - "We need more than 250 seats"
+toolsets:
+  - name: fetch_offers
+    config:
+      label: hmb2b
+  - name: create_checkout
+  - name: knowledge
+    toolsetId: toolset-0da678be0dd3287cb69ff5f63f0d9c6a
+outcomes:
+  - id: qualified
+    label: Qualified
+    description: Sector and seats understood, one package settled on.
+    criteria: >-
+      You know what the business does and roughly how many seats it needs, and
+      you have settled on the package that fits. Choose this as soon as you have
+      settled on it, before you present it — presenting is what the steps below
+      do.
+
+      Do not choose this when the answer is over 250 seats, a bespoke package or
+      a discount; that is Corporate team handoff.
+    whatToDo: >-
+      Name the package, give the seat count and the yearly total in one sentence,
+      and say why it fits what they told you, naming only titles that package
+      actually contains. Lead with annual and, if they were leaning monthly, say
+      what monthly costs them over a year. Then stop — do not mention printed
+      copies or a checkout link in that turn. Once they have said yes, offer
+      printed copies once at £95 per copy per year; after they answer, give the
+      checkout link and say they can pay by invoice, no card needed.
+    style:
+      color: "#0516AA"
+  - id: corporate_team_handoff
+    label: Corporate team handoff
+    description: Bespoke, over 250 seats, a discount, or a title not sold online.
+    criteria: >-
+      Only choose this when ONE of these is true: more than 250 seats;
+      company-wide or site-wide access; a bespoke combination of titles; a
+      discount or negotiated terms; a title the corporate team sells rather than
+      online. If none of those is true this outcome does not apply — a package
+      that covers what they asked for is Qualified, even if the fit is
+      imperfect, even if a tool failed, and even if you could not retrieve a
+      price. A tool failure is never grounds for this outcome. Choose it only
+      once they have given a work email.
+    whatToDo: >-
+      Confirm the email back to them, say in one line what you have passed on,
+      and tell them the corporate team replies within one working day. Do not
+      quote a price or promise terms.
+    tools:
+      - id: data_capture
+        tool: data_capture
+        config:
+          inputs:
+            - id: email
+              type: email
+              required: true
+            - id: sector
+              type: string
+              required: false
+              allowed:
+                - marcomms
+                - horticulture
+                - healthcare
+                - energy
+                - public_sector
+                - other
+            - id: seats
+              type: number
+              required: false
+            - id: request
+              type: string
+              required: false
+    style:
+      color: "#E50027"
+  - id: not_buying
+    label: Not buying
+    description: Ends without a recommendation — browsing, support, or an existing subscriber.
+    criteria: >-
+      The conversation ends without a recommendation: someone researching with no
+      intention of buying, an existing subscriber asking about their own account,
+      a billing or access problem, or a question unrelated to Haymarket.
+
+      Do not use it as an escape from a hard recommendation, and do not use it for
+      someone who was given a suitable package and simply has not decided yet —
+      that stays Qualified.
+    whatToDo: >-
+      Answer what they asked and leave the door open without pushing. For an
+      account or access problem, point them at the corporate team rather than
+      troubleshooting.
+    style:
+      color: "#636366"
