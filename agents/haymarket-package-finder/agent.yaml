@@ -4,6 +4,7 @@ description: >-
   Recommends one Haymarket corporate package from the visitor's sector and team
   size, lands on the annual licence, and takes them to checkout.
 streaming: true
+offerLabel: hmb2b
 presentation:
   title: Find your package
   greeting: "Tell me what your business does and roughly how many people need access, and I'll point you at the right corporate licence."
@@ -35,20 +36,23 @@ outcomes:
       Name the package, give the seat count and the yearly total in one sentence,
       and say why it fits what they told you. Lead with annual and, if they were
       leaning monthly, say what monthly costs them over a year. Offer printed
-      copies once at £95 per copy per year. Then give them the checkout link and
-      say they can pay by invoice against a PO.
+      copies once at £95 per copy per year — and stop there, letting them answer
+      before you close. On the next turn give them the checkout link and say they
+      can pay by invoice, no card needed.
     style:
       color: "#0516AA"
   - id: corporate_team_handoff
     label: Corporate team handoff
     description: Bespoke, over 250 seats, a discount, or a title not sold online.
     criteria: >-
-      The visitor needs something you must not quote — more than 250 seats, a
-      bespoke package, a discount, or a title that is not sold online — and has
-      given a work email so the corporate team can follow up.
-
-      Do not choose this merely because the fit is imperfect. If a package covers
-      what they asked for, that is Qualified.
+      Only choose this when ONE of these is true: more than 250 seats;
+      company-wide or site-wide access; a bespoke combination of titles; a
+      discount or negotiated terms; a title the corporate team sells rather than
+      online. If none of those is true this outcome does not apply — a package
+      that covers what they asked for is Qualified, even if the fit is
+      imperfect, even if a tool failed, and even if you could not retrieve a
+      price. A tool failure is never grounds for this outcome. Choose it only
+      once they have given a work email.
     whatToDo: >-
       Confirm the email back to them, say in one line what you have passed on,
       and tell them the corporate team replies within one working day. Do not

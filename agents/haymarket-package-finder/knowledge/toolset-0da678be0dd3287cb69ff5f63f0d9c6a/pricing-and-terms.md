@@ -16,10 +16,14 @@ docId: knowledge_doc-5c04fd0c3c54c44eddc44917a001ecfc
 
 ## Annual against monthly
 
+**Monthly billing exists only on All-Access Corporate.** Campaign Corporate,
+Horticulture Week Corporate and The Healthcare Package are annual-only.
+
 Monthly at £32 a seat is **£384 per seat over a year**. Annual All-Access is
 **£295**. Annual saves **£89 per seat — 23%**.
 
-Worked examples for All-Access:
+Worked examples — **All-Access only**. For any other package, multiply that
+package's seat price from the table above by the seat count.
 
 | Seats | Annual | Monthly over a year | Saved by going annual |
 |---|---|---|---|
