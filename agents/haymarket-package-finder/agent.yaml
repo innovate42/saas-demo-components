@@ -34,11 +34,12 @@ outcomes:
       a discount; that is Corporate team handoff.
     whatToDo: >-
       Name the package, give the seat count and the yearly total in one sentence,
-      and say why it fits what they told you. Lead with annual and, if they were
-      leaning monthly, say what monthly costs them over a year. Offer printed
-      copies once at £95 per copy per year — and stop there, letting them answer
-      before you close. On the next turn give them the checkout link and say they
-      can pay by invoice, no card needed.
+      and say why it fits what they told you, naming only titles that package
+      actually contains. Lead with annual and, if they were leaning monthly, say
+      what monthly costs them over a year. Then stop — do not mention printed
+      copies or a checkout link in that turn. Once they have said yes, offer
+      printed copies once at £95 per copy per year; after they answer, give the
+      checkout link and say they can pay by invoice, no card needed.
     style:
       color: "#0516AA"
   - id: corporate_team_handoff

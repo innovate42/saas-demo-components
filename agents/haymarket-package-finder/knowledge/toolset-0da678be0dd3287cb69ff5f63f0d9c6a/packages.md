@@ -15,7 +15,7 @@ For marketing, advertising, PR and media agencies.
 - Campaign's Annual Salary Survey
 - Global agency rankings and the bi-annual M&A round-up
 - School Reports and the Power 100
-- PRWeek is included for agency teams
+- **PRWeek is included** — name it to a PR agency
 
 ## Horticulture Week Corporate — £293 per seat per year
 For growers, nurseries, landscaping firms and garden retail.
@@ -38,8 +38,11 @@ For GP practices, pharmacy and clinical teams. Four titles in one licence:
 Replaces the old fixed "up to six users" package.
 
 ## All-Access Corporate — £295 per seat per year
-Every Haymarket business title: Campaign, PRWeek, Horticulture Week, Windpower
-Monthly and The ENDS Report.
+Exactly five titles: Campaign, PRWeek, Horticulture Week, Windpower Monthly and
+The ENDS Report.
+
+**It does not include The Healthcare Package.** MIMS, MIMS Learning, GPonline
+and GP Business are a separate licence. A business needing both buys both.
 
 This is the right answer when a business spans two or more subject areas, when it
 cannot be placed in a single sector, or when it wants energy and environment
