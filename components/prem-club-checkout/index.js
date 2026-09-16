@@ -76,16 +76,32 @@ const Field = ({ label, required, children, span = 12 }) => (
   </div>
 )
 
-const TextField = ({ label, required, span, value, onChange, type = "text", placeholder, maxLength }) => (
+const TextField = ({
+  label,
+  required,
+  span,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  maxLength,
+  locked,
+}) => (
   <Field label={label} required={required} span={span}>
-    <input
-      className="pcc-input"
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      maxLength={maxLength}
-      onChange={(event) => onChange(event.target.value)}
-    />
+    <span className={`pcc-input-wrap${locked ? " pcc-input-wrap--locked" : ""}`}>
+      <input
+        className={`pcc-input${locked ? " pcc-input--locked" : ""}`}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        readOnly={locked}
+        tabIndex={locked ? -1 : undefined}
+        aria-readonly={locked || undefined}
+        onChange={(event) => onChange(event.target.value)}
+      />
+      {locked ? <Lock className="pcc-input__lock" /> : null}
+    </span>
   </Field>
 )
 
@@ -221,14 +237,18 @@ const WalletPanel = ({ method, logoUrl }) => {
 // Step scaffolding
 // ------------------------------------------------------------------ //
 
+// Any step can be opened at any time. The real checkout is a strict
+// sequential wizard, but this is a demo surface — being able to jump
+// straight to Order Review matters more than enforcing the order.
 const StepHeader = ({ index, title, state, onEdit, onOpen }) => (
   <div
     className={`pcc-step-header pcc-step-header--${state}`}
     role="button"
     tabIndex={0}
-    onClick={state === "collapsed" ? onOpen : undefined}
+    aria-expanded={state === "active"}
+    onClick={state === "active" ? undefined : onOpen}
     onKeyDown={(event) => {
-      if (state === "collapsed" && (event.key === "Enter" || event.key === " ")) {
+      if (state !== "active" && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault()
         onOpen()
       }
@@ -272,7 +292,7 @@ const PremClubCheckout = () => {
   const planDescription = pick(props.planDescription, club.planDescription)
   const quantity = Math.max(1, toNumber(pick(props.quantity, 1)) || 1)
   const unitPrice = toNumber(pick(props.price, club.price))
-  const unitFee = toNumber(pick(props.transactionFee, club.fee))
+  const unitFee = props.showTransactionFee === true ? toNumber(pick(props.transactionFee, club.fee)) : 0
   const ddDiscount = toNumber(club.ddDiscount)
 
   const methods = PAYMENT_METHODS.filter((method) => props[method.prop] !== false)
@@ -321,6 +341,27 @@ const PremClubCheckout = () => {
   const [promoError, setPromoError] = useState("")
 
   const rootRef = useRef(null)
+
+  // The chat widget is a separate component on the page mounting at
+  // #limio-chat; the proper fix is removing it in Experience Manager, so
+  // this is only a convenience override from inside the checkout.
+  useEffect(() => {
+    const id = "pcc-hide-chat"
+    const existing = document.getElementById(id)
+    if (props.hideChatWidget === false) {
+      if (existing) existing.remove()
+      return undefined
+    }
+    if (existing) return undefined
+    const style = document.createElement("style")
+    style.id = id
+    style.textContent = "#limio-chat { display: none !important; }"
+    document.head.appendChild(style)
+    return () => {
+      const node = document.getElementById(id)
+      if (node) node.remove()
+    }
+  }, [props.hideChatWidget])
 
   // The club prop changes live in Experience Manager without a remount,
   // so the prefilled stadium address has to follow it.
@@ -410,6 +451,8 @@ const PremClubCheckout = () => {
   const backUrl = pick(props.backUrl, club.site)
   const initials = `${(customer.firstName || " ")[0] || ""}${(customer.lastName || " ")[0] || ""}`.toUpperCase()
 
+  const locked = props.lockCustomerDetails !== false
+
   const logoFor = (entry) => (entry && entry.logoProp ? props[entry.logoProp] : "")
   const activeMethod = methods.find((entry) => entry.id === method)
 
@@ -420,7 +463,11 @@ const PremClubCheckout = () => {
   }
 
   return (
-    <div className="pcc-root" style={theme} ref={rootRef}>
+    <div
+      className={`pcc-root${club.scheme === "dark" ? " pcc-root--dark" : ""}`}
+      style={theme}
+      ref={rootRef}
+    >
       <nav className="pcc-header">
         <a className="pcc-header__back" href={backUrl}>
           <Chevron className="pcc-header__chevron" />
@@ -498,6 +545,7 @@ const PremClubCheckout = () => {
                     span={6}
                     value={customer.firstName}
                     onChange={setCustomerField("firstName")}
+                    locked={locked}
                   />
                   <TextField
                     label="Last name"
@@ -505,6 +553,7 @@ const PremClubCheckout = () => {
                     span={6}
                     value={customer.lastName}
                     onChange={setCustomerField("lastName")}
+                    locked={locked}
                   />
                   <TextField
                     label="Contact Number"
@@ -520,6 +569,7 @@ const PremClubCheckout = () => {
                     type="email"
                     value={customer.email}
                     onChange={setCustomerField("email")}
+                    locked={locked}
                   />
                   <TextField
                     label="Address"
@@ -528,6 +578,7 @@ const PremClubCheckout = () => {
                     maxLength={35}
                     value={customer.address1}
                     onChange={setCustomerField("address1")}
+                    locked={locked}
                   />
                   <TextField
                     label="Address Line 2"
@@ -535,6 +586,7 @@ const PremClubCheckout = () => {
                     maxLength={35}
                     value={customer.address2}
                     onChange={setCustomerField("address2")}
+                    locked={locked}
                   />
                   <TextField
                     label="Town/City"
@@ -543,11 +595,13 @@ const PremClubCheckout = () => {
                     maxLength={35}
                     value={customer.city}
                     onChange={setCustomerField("city")}
+                    locked={locked}
                   />
                   <Field label="Country" required span={6}>
                     <select
-                      className="pcc-input pcc-select"
+                      className={`pcc-input pcc-select${locked ? " pcc-input--locked" : ""}`}
                       value={customer.country}
+                      disabled={locked}
                       onChange={(event) => setCustomerField("country")(event.target.value)}
                     >
                       {COUNTRIES.map(([code, name]) => (
@@ -564,6 +618,7 @@ const PremClubCheckout = () => {
                     maxLength={12}
                     value={customer.postalCode}
                     onChange={setCustomerField("postalCode")}
+                    locked={locked}
                   />
                 </div>
                 )}

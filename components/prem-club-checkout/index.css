@@ -232,8 +232,14 @@
   padding-top: 0;
 }
 
-.pcc-step-header--collapsed {
+.pcc-step-header--collapsed,
+.pcc-step-header--pending {
   cursor: pointer;
+}
+
+.pcc-step-header--pending:hover .pcc-step-header__title,
+.pcc-step-header--collapsed:hover .pcc-step-header__title {
+  color: var(--pcc-primary);
 }
 
 .pcc-step-header__row {
@@ -437,6 +443,48 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--pcc-accent) 22%, transparent);
 }
 
+/* Details that came from the member's account are shown but not editable.
+   Colours are mixed from the theme tokens so this works on a dark club
+   palette as well as a light one. */
+.pcc-input-wrap {
+  position: relative;
+  display: block;
+}
+
+.pcc-input--locked,
+.pcc-input--locked:hover {
+  background: color-mix(in srgb, var(--pcc-text) 7%, var(--pcc-surface));
+  border-color: var(--pcc-border);
+  color: var(--pcc-muted);
+  cursor: default;
+  padding-right: 34px;
+}
+
+.pcc-input--locked:focus {
+  outline: none;
+  border-color: var(--pcc-border);
+  box-shadow: none;
+}
+
+.pcc-input--locked:disabled {
+  opacity: 1;
+  -webkit-text-fill-color: var(--pcc-muted);
+}
+
+.pcc-input__lock {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--pcc-muted);
+  pointer-events: none;
+}
+
+select.pcc-input--locked {
+  cursor: default;
+  background-image: none;
+}
+
 .pcc-select {
   cursor: pointer;
   appearance: none;
@@ -516,6 +564,10 @@
 
 .pcc-wallet-btn:hover {
   filter: brightness(1.2);
+}
+
+.pcc-root--dark .pcc-wallet-btn {
+  border: 1px solid var(--pcc-border);
 }
 
 .pcc-wallet-btn--paypal {
@@ -694,10 +746,32 @@
   box-shadow: inset 0 0 0 1px var(--pcc-accent);
 }
 
-.pcc-assign__card input {
-  margin-top: 3px;
-  accent-color: var(--pcc-accent);
+.pcc-assign__card input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  border: 2px solid var(--pcc-border);
+  border-radius: 999px;
+  background: transparent;
   cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.pcc-assign__card input[type="radio"]:hover,
+.pcc-assign__card input[type="radio"]:checked {
+  border-color: var(--pcc-accent);
+}
+
+.pcc-assign__card input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 999px;
+  background: var(--pcc-accent);
 }
 
 .pcc-assign__card-body {
@@ -776,11 +850,40 @@
   cursor: pointer;
 }
 
-.pcc-check input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--pcc-accent);
+.pcc-check input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 2px solid var(--pcc-border);
+  border-radius: 3px;
+  background: transparent;
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.pcc-check input[type="checkbox"]:hover {
+  border-color: var(--pcc-accent);
+}
+
+.pcc-check input[type="checkbox"]:checked {
+  background: var(--pcc-accent);
+  border-color: var(--pcc-accent);
+}
+
+.pcc-check input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: solid var(--pcc-on-accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .pcc-submit {

@@ -93,21 +93,35 @@ export const CLUBS = {
     planName: "Adult Villa Membership",
     price: "35.00",
   }),
+  // Themed from the live afcb.co.uk memberships page markup:
+  //   --primary-800: 92 0 17          -> #5C0011
+  //   class="page bg-surface" + dark + !text-neutral-50  -> dark scheme
+  //   headings: font-heading font-bold + uppercase
+  //   buttons:  no rounding class     -> square corners
+  //   body copy: "£3 transaction fee will be added per purchase"
   bournemouth: club({
     name: "AFC Bournemouth",
     fullName: "AFC Bournemouth",
     initials: "AFCB",
     site: "https://www.afcb.co.uk",
+    scheme: "dark",
     primary: "#da291c",
     onPrimary: "#ffffff",
-    secondary: "#000000",
-    accent: "#000000",
+    secondary: "#5c0011",
+    accent: "#da291c",
     onAccent: "#ffffff",
-    display: "'Barlow Condensed', system-ui, sans-serif",
-    body: "'Barlow', system-ui, sans-serif",
-    ...CONDENSED,
-    displayWeight: "700",
-    radius: "4px",
+    surface: "#0f0f11",
+    surfaceAlt: "#1a181c",
+    text: "#fafafa",
+    muted: "#a1a1aa",
+    border: "#2c2c33",
+    display: "'Archivo', system-ui, sans-serif",
+    body: "'Inter', system-ui, sans-serif",
+    displayWeight: "800",
+    displayTransform: "uppercase",
+    displaySpacing: "0.01em",
+    radius: "0px",
+    fee: "3.00",
     stadium: {
       name: "Vitality Stadium",
       address1: "Vitality Stadium",
