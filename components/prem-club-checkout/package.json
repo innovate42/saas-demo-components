@@ -1,0 +1,391 @@
+{
+  "name": "@limio/prem-club-checkout",
+  "version": "1.0.0",
+  "description": "Premier League club checkout replica — the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
+  "main": "./index.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "club",
+      "label": "Club",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "arsenal",
+          "label": "Arsenal",
+          "value": "arsenal"
+        },
+        {
+          "id": "aston-villa",
+          "label": "Aston Villa",
+          "value": "aston-villa"
+        },
+        {
+          "id": "bournemouth",
+          "label": "AFC Bournemouth",
+          "value": "bournemouth"
+        },
+        {
+          "id": "brentford",
+          "label": "Brentford",
+          "value": "brentford"
+        },
+        {
+          "id": "brighton",
+          "label": "Brighton & Hove Albion",
+          "value": "brighton"
+        },
+        {
+          "id": "burnley",
+          "label": "Burnley",
+          "value": "burnley"
+        },
+        {
+          "id": "chelsea",
+          "label": "Chelsea",
+          "value": "chelsea"
+        },
+        {
+          "id": "crystal-palace",
+          "label": "Crystal Palace",
+          "value": "crystal-palace"
+        },
+        {
+          "id": "everton",
+          "label": "Everton",
+          "value": "everton"
+        },
+        {
+          "id": "fulham",
+          "label": "Fulham",
+          "value": "fulham"
+        },
+        {
+          "id": "leeds",
+          "label": "Leeds United",
+          "value": "leeds"
+        },
+        {
+          "id": "liverpool",
+          "label": "Liverpool",
+          "value": "liverpool"
+        },
+        {
+          "id": "man-city",
+          "label": "Manchester City",
+          "value": "man-city"
+        },
+        {
+          "id": "man-utd",
+          "label": "Manchester United",
+          "value": "man-utd"
+        },
+        {
+          "id": "newcastle",
+          "label": "Newcastle United",
+          "value": "newcastle"
+        },
+        {
+          "id": "nottm-forest",
+          "label": "Nottingham Forest",
+          "value": "nottm-forest"
+        },
+        {
+          "id": "sunderland",
+          "label": "Sunderland",
+          "value": "sunderland"
+        },
+        {
+          "id": "west-ham",
+          "label": "West Ham United",
+          "value": "west-ham"
+        },
+        {
+          "id": "wolves",
+          "label": "Wolves",
+          "value": "wolves"
+        }
+      ],
+      "default": "arsenal"
+    },
+    {
+      "id": "planName",
+      "label": "Plan name (blank = club default)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "planDescription",
+      "label": "Plan description (blank = club default)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "price",
+      "label": "Price, digits only e.g. 65.00 (blank = club default)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "quantity",
+      "label": "Quantity",
+      "type": "number",
+      "default": 1
+    },
+    {
+      "id": "transactionFee",
+      "label": "Transaction fee per item (blank = club default)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "currencySymbol",
+      "label": "Currency symbol",
+      "type": "string",
+      "default": "£"
+    },
+    {
+      "id": "promoCode",
+      "label": "Promo code that is accepted",
+      "type": "string",
+      "default": "MEMBER10"
+    },
+    {
+      "id": "promoDiscount",
+      "label": "Promo discount amount",
+      "type": "string",
+      "default": "10.00"
+    },
+    {
+      "id": "promoPlaceholder",
+      "label": "Promo input placeholder",
+      "type": "string",
+      "default": "Promo code"
+    },
+    {
+      "id": "showPromoCode",
+      "label": "Show promo code redemption",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showCard",
+      "label": "Payment method: Card",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showDirectDebit",
+      "label": "Payment method: Direct Debit",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showPayPal",
+      "label": "Payment method: PayPal",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showGooglePay",
+      "label": "Payment method: Google Pay",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "showApplePay",
+      "label": "Payment method: Apple Pay",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "defaultPaymentMethod",
+      "label": "Payment method selected on load",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "card",
+          "label": "Card",
+          "value": "card"
+        },
+        {
+          "id": "direct-debit",
+          "label": "Direct Debit",
+          "value": "direct-debit"
+        },
+        {
+          "id": "paypal",
+          "label": "PayPal",
+          "value": "paypal"
+        },
+        {
+          "id": "google-pay",
+          "label": "Google Pay",
+          "value": "google-pay"
+        },
+        {
+          "id": "apple-pay",
+          "label": "Apple Pay",
+          "value": "apple-pay"
+        }
+      ],
+      "default": "card"
+    },
+    {
+      "id": "directDebitNote",
+      "label": "Direct Debit incentive line (blank = hide)",
+      "type": "string",
+      "default": "{symbol}{amount} discount when you pay via Direct Debit"
+    },
+    {
+      "id": "backLabel",
+      "label": "Header back-link text",
+      "type": "string",
+      "default": "Back to Club Website"
+    },
+    {
+      "id": "backUrl",
+      "label": "Header back-link URL (blank = club site)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "breadcrumbLabel",
+      "label": "Breadcrumb text",
+      "type": "string",
+      "default": "Checkout"
+    },
+    {
+      "id": "breadcrumbUrl",
+      "label": "Breadcrumb URL",
+      "type": "string",
+      "default": "/memberships"
+    },
+    {
+      "id": "crestUrl",
+      "label": "Crest image URL (blank = colour roundel)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "customerFirstName",
+      "label": "Pre-filled first name",
+      "type": "string",
+      "default": "Sam"
+    },
+    {
+      "id": "customerLastName",
+      "label": "Pre-filled last name",
+      "type": "string",
+      "default": "Donoghue"
+    },
+    {
+      "id": "customerEmail",
+      "label": "Pre-filled email",
+      "type": "string",
+      "default": "sam@limio.com"
+    },
+    {
+      "id": "customerCrn",
+      "label": "Pre-filled client reference number",
+      "type": "string",
+      "default": "5540315"
+    },
+    {
+      "id": "showAssignmentStep",
+      "label": "Show the Assignment Details step",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "networkUrl",
+      "label": "Assignment: create-account link",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "addToNetworkUrl",
+      "label": "Assignment: add-to-network link",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "autoRenewLabel",
+      "label": "Order summary renewal label",
+      "type": "string",
+      "default": "Auto-Renews"
+    },
+    {
+      "id": "submitLabel",
+      "label": "Submit button text",
+      "type": "string",
+      "default": "Submit Payment"
+    },
+    {
+      "id": "termsText",
+      "label": "Terms copy above the checkbox",
+      "type": "richtext",
+      "default": "<p>By clicking Submit Payment, you agree to the 2026–27 Terms and Conditions. For information on how we may process your personal information, please refer to our Privacy Policy. Your booking will be submitted and payment processed. Your contract begins once payment is confirmed and ends after the event. Memberships are non-refundable and non-exchangeable except as stated in the Terms and Conditions.</p>"
+    },
+    {
+      "id": "marketingText",
+      "label": "Marketing consent copy",
+      "type": "string",
+      "default": "Send me exclusive member benefits and ticketing news including information on priority ticket access, discounts and more"
+    },
+    {
+      "id": "primaryColor",
+      "label": "Override: primary colour",
+      "type": "color",
+      "default": ""
+    },
+    {
+      "id": "onPrimaryColor",
+      "label": "Override: ink on primary",
+      "type": "color",
+      "default": ""
+    },
+    {
+      "id": "accentColor",
+      "label": "Override: accent colour",
+      "type": "color",
+      "default": ""
+    },
+    {
+      "id": "onAccentColor",
+      "label": "Override: ink on accent",
+      "type": "color",
+      "default": ""
+    },
+    {
+      "id": "secondaryColor",
+      "label": "Override: secondary colour",
+      "type": "color",
+      "default": ""
+    },
+    {
+      "id": "displayFont",
+      "label": "Override: heading font stack",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "bodyFont",
+      "label": "Override: body font stack",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "cornerRadius",
+      "label": "Override: corner radius e.g. 6px",
+      "type": "string",
+      "default": ""
+    }
+  ]
+}
