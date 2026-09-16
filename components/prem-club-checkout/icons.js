@@ -77,45 +77,114 @@ const PayPalIcon = () => (
   </svg>
 )
 
-const GooglePayIcon = () => (
-  <svg width="40" height="20" viewBox="0 0 40 20" fill="none" aria-hidden="true">
+// --- Brand marks -------------------------------------------------- //
+// Reproductions of the Google, PayPal and Apple marks drawn as inline SVG
+// so nothing has to be hosted. The Google "G" uses the real four-arc
+// geometry. Each can be swapped for an official asset from the relevant
+// brand centre via the *LogoUrl props.
+
+const GoogleG = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
     <path
-      d="M9.9 10.3v3.6H8.1V4.9h4c1 0 1.9.3 2.6 1a3 3 0 0 1 .3 4.2l-.3.3c-.7.6-1.5 1-2.6 1H9.9zm0-3.7v2.1h2.3c.6 0 1-.2 1.4-.6a1 1 0 0 0 0-1.5c-.4-.4-.8-.6-1.4-.6H9.9z"
-      fill="currentColor"
+      d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
+      fill="#4285F4"
     />
     <path
-      d="M19.4 7.4c1.2 0 2.1.3 2.8.9.7.6 1 1.4 1 2.5v5.1h-1.7v-1.3h-.1c-.5.9-1.3 1.3-2.3 1.3-.8 0-1.5-.2-2.1-.7a2.4 2.4 0 0 1-.8-1.9c0-.8.3-1.4.9-1.9.6-.5 1.4-.7 2.4-.7.9 0 1.6.2 2.1.5v-.4c0-.5-.2-1-.6-1.3a2 2 0 0 0-1.4-.5c-.8 0-1.4.3-1.9 1l-1.5-1c.7-1 1.8-1.6 3.2-1.6zm-2.3 6c0 .4.2.7.5 1 .3.2.7.3 1.1.3.6 0 1.1-.2 1.5-.6.5-.4.7-.9.7-1.5-.5-.3-1.1-.5-1.9-.5-.6 0-1 .1-1.4.4-.3.3-.5.6-.5.9z"
-      fill="currentColor"
-      transform="translate(0,-2)"
+      d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"
+      fill="#34A853"
     />
-    <path d="M32.9 7.6l-5.2 12h-1.8l1.9-4.2-3.4-7.8h1.9l2.5 5.9h.1l2.4-5.9h1.6z" fill="currentColor" />
-    <circle cx="3.6" cy="9.4" r="3.4" stroke="currentColor" strokeWidth="1.4" />
-    <path d="M3.6 9.4h3.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    <path
+      d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"
+      fill="#FBBC05"
+    />
+    <path
+      d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
+      fill="#EA4335"
+    />
   </svg>
 )
 
-const ApplePayIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+// The G Pay lockup: multicolour Google G followed by "Pay".
+const GooglePayMark = ({ height = 20, tone = "#5F6368" }) => (
+  <span className="pcc-brand pcc-brand--gpay" style={{ height }}>
+    <GoogleG size={height} />
+    <span className="pcc-brand__word" style={{ color: tone, fontSize: height * 0.86 }}>
+      Pay
+    </span>
+  </span>
+)
+
+// PayPal: the two-P monogram in the brand blues, plus the two-tone wordmark.
+const PayPalMonogram = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
     <path
-      d="M16.4 12.6c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.5 2 1 0 1.4-.6 2.6-.6s1.5.6 2.6.6 1.7-.9 2.4-1.8c.7-1.1 1-2.1 1-2.2 0 0-2-.7-2.1-3.3z"
-      fill="currentColor"
+      d="M8.6 21.9H5.9c-.3 0-.5-.3-.5-.6L8.2 3.5c.1-.4.4-.7.9-.7h5.7c3.6 0 5.8 1.8 5.3 5.3-.6 3.9-3.3 5.9-7.1 5.9h-2.6c-.4 0-.8.3-.9.8l-.9 6.4c0 .4-.4.7-.8.7z"
+      fill="#003087"
     />
     <path
-      d="M14.6 6.6c.5-.7.9-1.6.8-2.6-.8 0-1.8.5-2.4 1.2-.5.6-1 1.6-.8 2.6.9.1 1.8-.5 2.4-1.2z"
-      fill="currentColor"
+      d="M19.9 8.3c.1.6.1 1.2 0 1.9-.6 4-3.4 6.2-7.3 6.2h-1.7c-.4 0-.8.3-.9.8l-1 6.3c-.1.4-.4.6-.8.6h.4c.4 0 .8-.3.9-.7l.9-6.4c.1-.4.4-.8.9-.8h2.6c3.8 0 6.5-2 7.1-5.9.3-1.8-.2-3.1-1.1-4z"
+      fill="#009CDE"
     />
   </svg>
 )
 
-const PAYMENT_ICONS = {
-  card: CardIcon,
-  "direct-debit": BankIcon,
-  paypal: PayPalIcon,
-  "google-pay": GooglePayIcon,
-  "apple-pay": ApplePayIcon,
+const PayPalMark = ({ height = 20 }) => (
+  <span className="pcc-brand pcc-brand--paypal" style={{ height }}>
+    <PayPalMonogram size={height} />
+    <span className="pcc-brand__word" style={{ fontSize: height * 0.82 }}>
+      <span style={{ color: "#003087" }}>Pay</span>
+      <span style={{ color: "#009CDE" }}>Pal</span>
+    </span>
+  </span>
+)
+
+const AppleLogo = ({ size = 18, tone = "currentColor" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path
+      d="M17.2 12.7c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.8-1.6 0-3.1 1-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.8 2.5 3.1 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8 2.1-1.1 2.9-2.3c.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.5-1-2.9-3.8z"
+      fill={tone}
+    />
+    <path
+      d="M14.9 5.7c.7-.8 1.1-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.2-.6 2.9-1.4z"
+      fill={tone}
+    />
+  </svg>
+)
+
+const ApplePayMark = ({ height = 20, tone = "currentColor" }) => (
+  <span className="pcc-brand pcc-brand--apay" style={{ height }}>
+    <AppleLogo size={height} tone={tone} />
+    <span className="pcc-brand__word" style={{ color: tone, fontSize: height * 0.86 }}>
+      Pay
+    </span>
+  </span>
+)
+
+const TILE_MARKS = {
+  card: () => <CardIcon />,
+  "direct-debit": () => <BankIcon />,
+  paypal: () => <PayPalMonogram size={22} />,
+  "google-pay": () => <GoogleG size={22} />,
+  "apple-pay": () => <AppleLogo size={22} />,
 }
 
-export const PaymentIcon = ({ method }) => {
-  const Glyph = PAYMENT_ICONS[method]
-  return Glyph ? <Glyph /> : null
+const LOCKUPS = {
+  paypal: (props) => <PayPalMark {...props} />,
+  "google-pay": (props) => <GooglePayMark {...props} />,
+  "apple-pay": (props) => <ApplePayMark {...props} />,
+}
+
+// Small mark shown inside a payment-method tile. `logoUrl` lets a page
+// swap in an official brand asset.
+export const PaymentIcon = ({ method, logoUrl }) => {
+  if (logoUrl) return <img className="pcc-brand__img" src={logoUrl} alt="" aria-hidden="true" />
+  const Mark = TILE_MARKS[method]
+  return Mark ? <Mark /> : null
+}
+
+// Full brand lockup for the express pay button.
+export const WalletLockup = ({ method, logoUrl, tone }) => {
+  if (logoUrl) return <img className="pcc-brand__img pcc-brand__img--lockup" src={logoUrl} alt="" aria-hidden="true" />
+  const Lockup = LOCKUPS[method]
+  return Lockup ? <Lockup tone={tone} /> : null
 }

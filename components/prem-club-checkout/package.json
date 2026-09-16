@@ -1,6 +1,6 @@
 {
   "name": "@limio/prem-club-checkout",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Premier League club checkout replica — the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
   "main": "./index.js",
   "sideEffects": [
@@ -238,6 +238,24 @@
       "default": "card"
     },
     {
+      "id": "payPalLogoUrl",
+      "label": "Official PayPal logo URL (blank = built-in mark)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "googlePayLogoUrl",
+      "label": "Official Google Pay logo URL (blank = built-in mark)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "applePayLogoUrl",
+      "label": "Official Apple Pay logo URL (blank = built-in mark)",
+      "type": "string",
+      "default": ""
+    },
+    {
       "id": "directDebitNote",
       "label": "Direct Debit incentive line (blank = hide)",
       "type": "string",
@@ -257,15 +275,15 @@
     },
     {
       "id": "breadcrumbLabel",
-      "label": "Breadcrumb text",
+      "label": "Back-link text above the form",
       "type": "string",
-      "default": "Checkout"
+      "default": "Home"
     },
     {
       "id": "breadcrumbUrl",
-      "label": "Breadcrumb URL",
+      "label": "Back-link URL above the form",
       "type": "string",
-      "default": "/memberships"
+      "default": "/"
     },
     {
       "id": "crestUrl",
@@ -290,6 +308,18 @@
       "label": "Pre-filled email",
       "type": "string",
       "default": "sam@limio.com"
+    },
+    {
+      "id": "customerPhone",
+      "label": "Pre-filled contact number",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "prefillAddress",
+      "label": "Pre-fill the address with the club stadium",
+      "type": "boolean",
+      "default": true
     },
     {
       "id": "customerCrn",

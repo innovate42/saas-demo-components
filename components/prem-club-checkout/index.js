@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useStaticProps } from "./componentStaticProps"
 import { getClub } from "./clubs"
-import { Caret, Chevron, Lock, PaymentIcon, Refresh, Tick } from "./icons"
+import { Caret, Chevron, Lock, PaymentIcon, Refresh, Tick, WalletLockup } from "./icons"
 import "./index.css"
 
 // ------------------------------------------------------------------ //
@@ -15,10 +15,16 @@ import "./index.css"
 const PAYMENT_METHODS = [
   { id: "card", label: "Card", prop: "showCard" },
   { id: "direct-debit", label: "Direct Debit", prop: "showDirectDebit" },
-  { id: "paypal", label: "PayPal", prop: "showPayPal" },
-  { id: "google-pay", label: "Google Pay", prop: "showGooglePay" },
-  { id: "apple-pay", label: "Apple Pay", prop: "showApplePay" },
+  { id: "paypal", label: "PayPal", prop: "showPayPal", logoProp: "payPalLogoUrl" },
+  { id: "google-pay", label: "Google Pay", prop: "showGooglePay", logoProp: "googlePayLogoUrl" },
+  { id: "apple-pay", label: "Apple Pay", prop: "showApplePay", logoProp: "applePayLogoUrl" },
 ]
+
+// Wallets carry the payer's contact and billing details already, so
+// selecting one drops the whole customer-details block: that is the
+// point of express checkout.
+const EXPRESS_METHODS = ["paypal", "google-pay", "apple-pay"]
+const isExpress = (method) => EXPRESS_METHODS.indexOf(method) !== -1
 
 const COUNTRIES = [
   ["GB", "United Kingdom"],
@@ -184,18 +190,27 @@ const DirectDebitPanel = () => {
   )
 }
 
-const WalletPanel = ({ method, label }) => {
+const WalletPanel = ({ method, logoUrl }) => {
   const copy = {
-    paypal: "You will be redirected to PayPal to approve this payment. Your membership is confirmed as soon as you return.",
-    "google-pay": "Pay with a card saved to your Google account. You will be asked to confirm before anything is charged.",
-    "apple-pay": "Pay with a card in your Apple Wallet. Confirm with Face ID, Touch ID or your passcode.",
+    paypal:
+      "You will be redirected to PayPal to approve this payment. Your contact and billing details come straight from your PayPal account.",
+    "google-pay":
+      "Pay with a card saved to your Google account. Your contact and billing details come straight from your Google account.",
+    "apple-pay":
+      "Pay with a card in your Apple Wallet. Confirm with Face ID, Touch ID or your passcode — your details come from Apple Pay.",
   }[method]
 
+  // Apple Pay's mark is white-on-black; Google Pay's sits on white.
+  const tone = method === "apple-pay" ? "#ffffff" : undefined
+
   return (
-    <div className="pcc-pay-panel">
+    <div className="pcc-pay-panel pcc-pay-panel--express">
+      <p className="pcc-express__badge">
+        <Lock className="pcc-pay-panel__lock" />
+        Express checkout — no details to fill in
+      </p>
       <button type="button" className={`pcc-wallet-btn pcc-wallet-btn--${method}`}>
-        <PaymentIcon method={method} />
-        <span>{label}</span>
+        <WalletLockup method={method} logoUrl={logoUrl} tone={tone} />
       </button>
       <p className="pcc-pay-panel__note">{copy}</p>
     </div>
@@ -271,16 +286,25 @@ const PremClubCheckout = () => {
   const [completed, setCompleted] = useState({})
   const [submitted, setSubmitted] = useState(false)
 
+  // Signed-in members arrive with their details already known, so the
+  // form starts populated — using the club's own stadium address.
+  const stadiumAddress = (source) =>
+    props.prefillAddress === false
+      ? { address1: "", address2: "", city: "", postalCode: "" }
+      : {
+          address1: source.stadium.address1,
+          address2: source.stadium.address2,
+          city: source.stadium.city,
+          postalCode: source.stadium.postalCode,
+        }
+
   const [customer, setCustomer] = useState({
     firstName: props.customerFirstName || "",
     lastName: props.customerLastName || "",
-    phone: "",
+    phone: props.customerPhone || "",
     email: props.customerEmail || "",
-    address1: "",
-    address2: "",
-    city: "",
     country: "GB",
-    postalCode: "",
+    ...stadiumAddress(club),
   })
   const setCustomerField = (key) => (value) => setCustomer((current) => ({ ...current, [key]: value }))
 
@@ -297,6 +321,12 @@ const PremClubCheckout = () => {
   const [promoError, setPromoError] = useState("")
 
   const rootRef = useRef(null)
+
+  // The club prop changes live in Experience Manager without a remount,
+  // so the prefilled stadium address has to follow it.
+  useEffect(() => {
+    setCustomer((current) => ({ ...current, ...stadiumAddress(club) }))
+  }, [club, props.prefillAddress])
 
   // Props are edited live in Experience Manager — keep the selected
   // method valid when a club's method set changes underneath us.
@@ -380,11 +410,13 @@ const PremClubCheckout = () => {
   const backUrl = pick(props.backUrl, club.site)
   const initials = `${(customer.firstName || " ")[0] || ""}${(customer.lastName || " ")[0] || ""}`.toUpperCase()
 
+  const logoFor = (entry) => (entry && entry.logoProp ? props[entry.logoProp] : "")
+  const activeMethod = methods.find((entry) => entry.id === method)
+
   const paymentPanel = () => {
     if (method === "card") return <CardPanel />
     if (method === "direct-debit") return <DirectDebitPanel />
-    const label = (methods.find((entry) => entry.id === method) || {}).label || "Pay"
-    return <WalletPanel method={method} label={method === "paypal" ? "Pay with PayPal" : label} />
+    return <WalletPanel method={method} logoUrl={logoFor(activeMethod)} />
   }
 
   return (
@@ -446,7 +478,7 @@ const PremClubCheckout = () => {
                         onClick={() => setMethod(entry.id)}
                       >
                         <span className="pcc-method__icon">
-                          <PaymentIcon method={entry.id} />
+                          <PaymentIcon method={entry.id} logoUrl={logoFor(entry)} />
                         </span>
                         <span className="pcc-method__label">{entry.label}</span>
                       </button>
@@ -458,6 +490,7 @@ const PremClubCheckout = () => {
                   <p className="pcc-dd-note">{ddNote}</p>
                 ) : null}
 
+                {isExpress(method) ? null : (
                 <div className="pcc-grid">
                   <TextField
                     label="First name"
@@ -533,6 +566,7 @@ const PremClubCheckout = () => {
                     onChange={setCustomerField("postalCode")}
                   />
                 </div>
+                )}
 
                 {paymentPanel()}
 
