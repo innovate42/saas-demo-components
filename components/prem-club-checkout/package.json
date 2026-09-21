@@ -1,6 +1,6 @@
 {
   "name": "@limio/prem-club-checkout",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Premier League club checkout replica — the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
   "main": "./index.js",
   "sideEffects": [
@@ -90,6 +90,11 @@
           "id": "newcastle",
           "label": "Newcastle United",
           "value": "newcastle"
+        },
+        {
+          "id": "norwich",
+          "label": "Norwich City",
+          "value": "norwich"
         },
         {
           "id": "nottm-forest",

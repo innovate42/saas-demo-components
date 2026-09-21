@@ -416,6 +416,43 @@ export const CLUBS = {
     planName: "Adult Magpies Membership",
     price: "35.00",
   }),
+  // Norwich are Championship, not Premier League — added for a specific
+  // mockup. Themed from their live tickets.canaries.co.uk memberships page:
+  //   #003E14  .landing-button.primary2 / .header / comparison block
+  //   #F6D716  ticks, comp-price, bg-divider text, focus outline
+  //   "KippaxCondensed", Helvetica, Arial  font-weight 700, uppercase
+  //   border-radius: 4px on .landing-button
+  //   basket: City Membership £29.00, TotalCommissions £0.00
+  // KippaxCondensed is licensed to the club; Barlow Condensed 700 is the
+  // closest Google face. Swap it per page with the displayFont prop.
+  norwich: club({
+    name: "Norwich City",
+    fullName: "Norwich City Football Club",
+    initials: "NCFC",
+    site: "https://www.canaries.co.uk",
+    primary: "#003e14",
+    onPrimary: "#ffffff",
+    secondary: "#f6d716",
+    accent: "#f6d716",
+    onAccent: "#003e14",
+    display: "'Barlow Condensed', system-ui, sans-serif",
+    body: "'Inter', system-ui, sans-serif",
+    displayWeight: "700",
+    displayTransform: "uppercase",
+    displaySpacing: "0.01em",
+    radius: "4px",
+    fee: "0.00",
+    stadium: {
+      name: "Carrow Road",
+      address1: "Carrow Road",
+      address2: "Carrow Road",
+      city: "Norwich",
+      postalCode: "NR1 1JE",
+    },
+    planName: "City Membership",
+    planDescription: "Membership until 30/06/2027",
+    price: "29.00",
+  }),
   "nottm-forest": club({
     name: "Nottingham Forest",
     fullName: "Nottingham Forest Football Club",
