@@ -99,10 +99,7 @@ const AbCancel = () => {
         order: { order_type: "update_subscription", forSubscription: { id: subscription.id } },
       })
       const checkoutId = basket?.order?.checkoutId
-      const base = chosen.url || ""
-      window.location.href = checkoutId
-        ? `${base}${base.indexOf("?") === -1 ? "?" : "&"}basket=${encodeURIComponent(checkoutId)}`
-        : destination
+      window.location.href = checkoutId ? `${destination}&basket=${encodeURIComponent(checkoutId)}` : destination
     } catch (error) {
       console.error("ab-cancel: could not start the subscription update", error)
       window.location.href = destination

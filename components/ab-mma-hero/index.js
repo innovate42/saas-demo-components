@@ -197,10 +197,9 @@ const AbMmaHero = () => {
         order: { order_type: "update_subscription", forSubscription: { id: subscription.id } },
       })
       const checkoutId = basket?.order?.checkoutId
-      const base = action.url || ""
       window.location.href = checkoutId
-        ? `${base}${base.indexOf("?") === -1 ? "?" : "&"}basket=${encodeURIComponent(checkoutId)}`
-        : withSubId(base)
+        ? `${withSubId(action.url)}&basket=${encodeURIComponent(checkoutId)}`
+        : withSubId(action.url)
     } catch (error) {
       console.error("ab-mma-hero: could not start the subscription update", error)
       window.location.href = withSubId(action.url)

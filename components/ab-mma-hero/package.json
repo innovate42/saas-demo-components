@@ -1,6 +1,6 @@
 {
   "name": "@limio/ab-mma-hero",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Subscriber self-service hero: current subscription, next issue, delivery status and quick actions. Brand-driven for publisher titles.",
   "main": "./index.js",
   "dependencies": {},

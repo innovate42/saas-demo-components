@@ -1,6 +1,6 @@
 {
   "name": "@limio/ab-cancel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cancellation reason capture that routes each reason to the right outcome \u2014 save offer, downgrade or cancel.",
   "main": "./index.js",
   "dependencies": {},
