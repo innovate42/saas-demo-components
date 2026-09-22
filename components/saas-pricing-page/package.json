@@ -22,7 +22,7 @@
     "redux": "*"
   },
   "devDependencies": {
-    "@limio/sdk": "workspace:packages/limio-sdk"
+    "@limio/sdk": "workspace:^"
   },
   "limioProps": [
     {
