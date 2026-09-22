@@ -3,13 +3,11 @@ import { LoadingSpinner } from "@limio/design-system"
 import { sanitiseHTML } from "@limio/sdk"
 import * as R from "ramda"
 import { DateTime } from "@limio/date"
-import { PaymentDetails } from "@limio/old-shop-components/src/components/PaymentDetails"
 import { updateSubscriptionTermEndDate } from "@limio/sdk/subscription"
 import { parseString, encodeDates } from "@limio/shop/src/helpers/string.ts"
-import { formatCurrency, formatDate } from "@limio/shop/src/format"
+import { formatCurrency } from "@limio/shop/src/format"
 import { useComponentStaticProps } from "../componentStaticProps"
-import { getAppConfigValue } from "@limio/shop/src/shop/appConfig"
-import type { LimioObject, PaymentMethod, Subscription, ElasticOffer, Schedule } from "@limio/types"
+import type { LimioObject, Subscription, ElasticOffer, Schedule } from "@limio/types"
 
 type Props = {
   onConfirm: () => Promise<void>
@@ -19,22 +17,16 @@ type Props = {
   subscription: LimioObject<Subscription>
   prevSchedule: LimioObject<Schedule>
   previewSchedule: LimioObject<Schedule>
-  paymentMethod: LimioObject<PaymentMethod>
 }
 
-export function ConfirmDialog({ onConfirm, onCancel, nextSchedule, offer, subscription, prevSchedule, previewSchedule, paymentMethod }: Props) {
+export function ConfirmDialog({ onConfirm, onCancel, nextSchedule, offer, subscription, prevSchedule, previewSchedule }: Props) {
   const {
     confirmHeading,
     confirmSubheading,
     confirmationOk,
     confirmationCancel,
     redirectUrl,
-    showPaymentMethod,
-    imageUrl,
-    paymentMethodHeading,
-    paymentAmountLabel,
-    paymentDateLabel,
-    paymentFrequencyLabel
+    imageUrl
   } = useComponentStaticProps()
   let params = new URL(window.location).searchParams
   const subIdParam = params.get("subId") || ""
@@ -43,10 +35,6 @@ export function ConfirmDialog({ onConfirm, onCancel, nextSchedule, offer, subscr
   const { attributes = {}, attachments } = offer.data || {}
   const discount = attributes.discount__limio
   const discountedPrice = formatCurrency(previewSchedule?.[0]?.amount, nextSchedule?.data?.currency)
-
-  const dateFormat = getAppConfigValue(["shop", "default_date_format"])
-  const effectiveDate =
-    offer?.data?.attributes?.switch_date__limio === "immediate" ? DateTime.utc().toISO() : nextSchedule?.data?.schedule_date || subscription?.data?.termEndDate
 
   const nextPaymentSaving = (
     <span>
@@ -60,16 +48,6 @@ export function ConfirmDialog({ onConfirm, onCancel, nextSchedule, offer, subscr
   const currentPrice = formatCurrency(nextSchedule?.data?.amount, nextSchedule?.data?.currency)
   const currentOffer = offer?.data?.record_subtype === "discount"
   const discountData = offer?.data?.attributes?.discount__limio
-  const currentOfferTermData = offer?.data?.attributes?.term__limio
-  const { length: currentOfferTermLength, type: currentOfferTermType } = currentOfferTermData
-  const offerTerm = `${currentOfferTermLength} ${
-    currentOfferTermLength > 1 ? currentOfferTermType : currentOfferTermType?.substr(0, currentOfferTermType.length - 1)
-  }`
-  const paymentLabels = {
-    frequency: paymentFrequencyLabel,
-    amount: paymentAmountLabel,
-    nextBillDate: paymentDateLabel
-  } as const
   const { termLength, termType } = discountData
   let discountEndDate = ""
   if (discountData?.termType) {
@@ -101,16 +79,6 @@ export function ConfirmDialog({ onConfirm, onCancel, nextSchedule, offer, subscr
       <div className="offer-confirm-dialog">
         {confirmHeading && <div className="confirm-title">{confirmHeading}</div>}
         <div className="confirm-body">
-          {showPaymentMethod && paymentMethod && (
-            <PaymentDetails
-              paymentMethod={paymentMethod}
-              frequency={offerTerm}
-              amount={discountedPrice}
-              nextBillDate={formatDate(effectiveDate, dateFormat)}
-              paymentLabels={paymentLabels}
-              paymentHeading={paymentMethodHeading}
-            />
-          )}
           {currentOffer && confirmSubheading && (
             <div
               className="confirm-body-section"

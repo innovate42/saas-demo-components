@@ -11,13 +11,11 @@ import AdditionalButtons from "./components/AdditionalButtons.js"
 import { filterOffers } from "./helpers"
 import { parseString, encodeDates } from "@limio/shop/src/helpers/string.ts"
 import { getCurrentAddress } from "@limio/shop/src/shop/address/helpers"
-import { getCurrentPayment } from "@limio/shop/src/shop/payment_method/helpers"
 import { useComponentStaticProps } from "./componentStaticProps"
 import {
   useLimioUserSubscription,
   useLimioUser,
   useLimioUserSubscriptionAddresses,
-  useLimioUserSubscriptionPaymentMethods,
   useOrderPreview
 } from "@limio/internal-checkout-sdk"
 import { sanitiseHTML } from "@limio/sdk"
@@ -53,10 +51,7 @@ export function LoadOffer() {
 
   const { addresses } = useLimioUserSubscriptionAddresses(subIdParam)
 
-  const { payment_methods } = useLimioUserSubscriptionPaymentMethods(subIdParam)
-
   const { data: billingDetails } = getCurrentAddress("billing", addresses)
-  const paymentMethod = getCurrentPayment(payment_methods)
 
   const { schedule, mode } = userSubscription
 
@@ -179,7 +174,6 @@ export function LoadOffer() {
           subscription={userSubscription}
           prevSchedule={prevSchedule}
           previewSchedule={previewSchedule}
-          paymentMethod={paymentMethod}
         />
       )}
       <div className={"cancel-save-offer-body-container"}>
