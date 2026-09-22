@@ -77,6 +77,18 @@ const AbCancel = () => {
     return offer?.data?.attributes?.display_name__limio || offer?.data?.name || subscription?.name || ""
   }, [subscription])
 
+  /* Copy can name the plan and price with {{plan}} and {{price}}, filled from the subscription. */
+  const price = useMemo(() => {
+    const now = Date.now()
+    const next = (subscription?.schedule || [])
+      .filter((item) => item?.status !== "cancelled" && new Date(item?.data?.date).getTime() >= now)
+      .sort((a, b) => new Date(a.data.date) - new Date(b.data.date))[0]?.data
+    if (!next?.amount) return ""
+    const symbol = { GBP: "£", USD: "$", EUR: "€" }[next.currency] || "£"
+    return `${symbol}${parseFloat(next.amount).toFixed(2)}`
+  }, [subscription])
+  const fill = (text) => (text || "").replace(/{{\s*plan\s*}}/g, planName).replace(/{{\s*price\s*}}/g, price)
+
   const chosen = reasons.find((reason) => (reason.id || reason.label) === selected)
 
   /* Keep subId on the destination — the change-plan and save-offer pages both
@@ -123,8 +135,8 @@ const AbCancel = () => {
       <div className="abc-inner">
         <header className="abc-head">
           {eyebrow ? <p className="abc-eyebrow">{eyebrow}</p> : null}
-          {heading ? <h1 className="abc-title">{heading}</h1> : null}
-          {subheading ? <p className="abc-sub">{subheading}</p> : null}
+          {heading ? <h1 className="abc-title">{fill(heading)}</h1> : null}
+          {subheading ? <p className="abc-sub">{fill(subheading)}</p> : null}
         </header>
 
         {planName && planSummaryLabel ? (

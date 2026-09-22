@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from "react"
-import { useBasket, useUser, useSubscriptions } from "@limio/sdk"
+import React, { Suspense, useMemo, useState } from "react"
+import { ErrorBoundary, useBasket, useUser, useSubscriptions } from "@limio/sdk"
+import { useLimioUserSubscriptionAddresses } from "@limio/internal-checkout-sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
@@ -13,11 +14,57 @@ const MONTHS = [
   "July", "August", "September", "October", "November", "December",
 ]
 
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
 const formatDay = (value) => {
   if (!value) return null
   const d = new Date(value)
   if (isNaN(d.getTime())) return null
   return `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)} ${d.getFullYear()}`
+}
+
+const shortDay = (d) => `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)}`
+
+const addDays = (date, days) => new Date(date.getTime() + days * 24 * 60 * 60 * 1000)
+
+/** The issue being paid for now: the latest schedule date on or before today, else the start date. */
+const getCurrentIssueDate = (subscription) => {
+  const now = Date.now()
+  const paid = (subscription?.schedule || [])
+    .map((item) => new Date(item?.data?.schedule_date || item?.data?.date))
+    .filter((d) => !isNaN(d.getTime()) && d.getTime() <= now)
+    .sort((a, b) => b - a)
+  if (paid[0]) return paid[0]
+  const start = new Date(subscription?.start || subscription?.created)
+  return isNaN(start.getTime()) ? null : start
+}
+
+/* Print fulfilment runs off the payment date: printed the next day, dispatched the day after,
+   with Royal Mail inside the week. The fulfilment partner's middleware would supply the real events. */
+const getFulfilmentSteps = (issueDate) => {
+  if (!issueDate) return []
+  const now = Date.now()
+  const step = (label, days, pending) => {
+    const date = addDays(issueDate, days)
+    const done = date.getTime() <= now
+    return { label, date, done, note: done || !pending ? shortDay(date) : `${pending} ${shortDay(date)}` }
+  }
+  return [step("Printed", 1), step("Dispatched", 2), step("With Royal Mail", 6, "Due")]
+}
+
+const DeliveryAddress = ({ subscriptionId }) => {
+  const { addresses } = useLimioUserSubscriptionAddresses(subscriptionId)
+  const current = (addresses || [])
+    .filter((a) => a.relationship_type === "delivery" && a.status === "active")
+    .sort((a, b) => new Date(b.start) - new Date(a.start))[0]
+  if (!current) return null
+  const { address1, address2, city, postalCode } = current.data || {}
+  return (
+    <div className="abh-row">
+      <dt>Delivery address</dt>
+      <dd>{[address1, address2, city, postalCode].filter(Boolean).join(", ")}</dd>
+    </div>
+  )
 }
 
 const formatMoney = (amount, currency) => {
@@ -111,7 +158,6 @@ const AbMmaHero = () => {
     membershipLabel = "Subscriber no.",
     deliveryHeading = "Your next issue",
     deliveryStatusText = "",
-    deliveryEtaText = "",
     fulfilmentPartner = "Air Business",
     showFulfilmentPartner = true,
     actions = [],
@@ -164,6 +210,11 @@ const AbMmaHero = () => {
     }
   }, [subscription])
 
+  const issueDate = getCurrentIssueDate(subscription)
+  const steps = getFulfilmentSteps(issueDate)
+  const arriving = steps.find((step) => !step.done)
+  const currentIssue = issueLabel || (issueDate ? `${MONTHS[issueDate.getMonth()]} ${issueDate.getFullYear()}` : "")
+
   const firstName = attributes?.firstName || attributes?.given_name || ""
   const cancelled = details?.status === "cancelled"
 
@@ -208,12 +259,6 @@ const AbMmaHero = () => {
     }
   }
 
-  const steps = [
-    { label: "Printed", note: "11 Aug", done: true },
-    { label: "Dispatched", note: "12 Aug", done: true },
-    { label: "With Royal Mail", note: "Due 18 Aug", done: false },
-  ]
-
   return (
     <section className="abh" style={styleVars}>
       <div className="abh-inner">
@@ -250,12 +295,12 @@ const AbMmaHero = () => {
         <div className="abh-grid">
           <div className="abh-cover-wrap">
             {coverImage ? (
-              <img className="abh-cover-img" src={coverImage} alt={`${brandName} — ${issueLabel}`} />
+              <img className="abh-cover-img" src={coverImage} alt={`${brandName}, ${currentIssue}`} />
             ) : (
-              <GeneratedCover brandName={brandName} issueLabel={issueLabel} lines={coverLines} />
+              <GeneratedCover brandName={brandName} issueLabel={currentIssue} lines={coverLines} />
             )}
-            {issueLabel ? (
-              <span className="abh-cover-caption">Current issue — {issueLabel}</span>
+            {currentIssue ? (
+              <span className="abh-cover-caption">Current issue, {currentIssue}</span>
             ) : null}
           </div>
 
@@ -263,7 +308,7 @@ const AbMmaHero = () => {
             <div className="abh-plan-head">
               <div>
                 <span className="abh-label">Current plan</span>
-                <h2 className="abh-plan">{details?.planName || "Print + Digital"}</h2>
+                {details?.planName ? <h2 className="abh-plan">{details.planName}</h2> : null}
               </div>
               <span className={`abh-status ${cancelled ? "is-off" : ""}`}>
                 {cancelled ? "Cancelled" : "Active"}
@@ -278,17 +323,22 @@ const AbMmaHero = () => {
                   {details?.nextDate ? <span className="abh-sub"> on {details.nextDate}</span> : null}
                 </dd>
               </div>
-              <div className="abh-row">
-                <dt>Billing period</dt>
-                <dd>{details?.term || "Monthly, rolling"}</dd>
-              </div>
-              <div className="abh-row">
-                <dt>Delivery address</dt>
-                <dd>Rockwood House, Haywards Heath RH16 3TW</dd>
-              </div>
+              {details?.term ? (
+                <div className="abh-row">
+                  <dt>Billing period</dt>
+                  <dd>{details.term}</dd>
+                </div>
+              ) : null}
+              {subscription?.id ? (
+                <ErrorBoundary fallback={null}>
+                  <Suspense fallback={null}>
+                    <DeliveryAddress subscriptionId={subscription.id} />
+                  </Suspense>
+                </ErrorBoundary>
+              ) : null}
             </dl>
 
-            {showFulfilmentPartner ? (
+            {showFulfilmentPartner && steps.length ? (
               <div className="abh-delivery">
                 <div className="abh-delivery-head">
                   <span className="abh-label">{deliveryHeading}</span>
@@ -307,7 +357,7 @@ const AbMmaHero = () => {
                 {deliveryStatusText ? (
                   <p className="abh-delivery-text">
                     {deliveryStatusText}
-                    {deliveryEtaText ? <strong> · {deliveryEtaText}</strong> : null}
+                    {arriving ? <strong> · Arriving {DAYS[arriving.date.getDay()]} {shortDay(arriving.date)}</strong> : null}
                   </p>
                 ) : null}
               </div>
