@@ -19,9 +19,9 @@
     "react": "*"
   },
   "devDependencies": {
-    "@limio/sdk": "*",
-    "@limio/swr": "*",
-    "@limio/ui-preview-context": "*"
+    "@limio/sdk": "workspace:^",
+    "@limio/swr": "workspace:^",
+    "@limio/ui-preview-context": "workspace:^"
   },
   "limioProps": [
     {

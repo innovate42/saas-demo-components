@@ -14,7 +14,7 @@
     "reactstrap": "^8.9.0"
   },
   "peerDependencies": {
-    "@limio/swr": "*",
+    "@limio/swr": "workspace:^",
     "@sentry/browser": "*",
     "react": "*",
     "react-dom": "*",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
-    "@limio/sdk": "workspace:packages/limio-sdk"
+    "@limio/sdk": "workspace:^"
   },
   "limioProps": [
     {
