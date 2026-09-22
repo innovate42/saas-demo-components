@@ -42,22 +42,39 @@ const CONDENSED = {
   displaySpacing: "0.01em",
 }
 
-const club = (entry) => ({ ...BASE, ...entry })
+const club = (entry) => {
+  const merged = { ...BASE, ...entry }
+  if (!merged.btnRadius) merged.btnRadius = merged.radius
+  return merged
+}
 
 export const CLUBS = {
+  // From the live /membership/red markup:
+  //   #D80026  thead background, benefit links, JOIN NOW button
+  //   #B50020  button hover      #1E252D  tfoot panel
+  //   #F5F5F5  table ground      #E0E0E0  row borders
+  //   buttons: border-radius 50px, uppercase 700, letter-spacing 2px
+  //   headings: uppercase, font-weight 800, letter-spacing 2px
+  //   tfoot price: £38 "Per Season"
   arsenal: club({
     name: "Arsenal",
     fullName: "Arsenal Football Club",
     initials: "AFC",
     site: "https://www.arsenal.com",
-    primary: "#ef0107",
+    primary: "#d80026",
     onPrimary: "#ffffff",
-    secondary: "#063672",
-    accent: "#9c824a",
+    secondary: "#1e252d",
+    accent: "#d80026",
     onAccent: "#ffffff",
+    surfaceAlt: "#f5f5f5",
+    border: "#e0e0e0",
     display: "'Archivo', system-ui, sans-serif",
     body: "'Inter', system-ui, sans-serif",
+    displayWeight: "800",
+    displayTransform: "uppercase",
+    displaySpacing: "0.09em",
     radius: "2px",
+    btnRadius: "50px",
     stadium: {
       name: "Emirates Stadium",
       address1: "Emirates Stadium",
@@ -65,8 +82,9 @@ export const CLUBS = {
       city: "London",
       postalCode: "N7 7AJ",
     },
-    planName: "Adult Red Membership",
-    price: "40.00",
+    planName: "Red Membership",
+    planDescription: "Adult (18+)",
+    price: "38.00",
   }),
   "aston-villa": club({
     name: "Aston Villa",
@@ -132,6 +150,12 @@ export const CLUBS = {
     planName: "Adult Cherries Membership",
     price: "30.00",
   }),
+  // From the live /en/memberships-2026-27 page. That page is class-driven
+  // (--red / --darkRed / --lightGrey) and exposes no hex values, so the
+  // colours below are Brentford's brand red plus a dark red for the
+  // darkRed blocks — the page confirms the palette structure, not the
+  // exact values. Plan name, age tag and price are straight from the
+  // membership card: Adult, "For ages 25+", £45.45 / SEASON.
   brentford: club({
     name: "Brentford",
     fullName: "Brentford Football Club",
@@ -139,12 +163,13 @@ export const CLUBS = {
     site: "https://www.brentfordfc.com",
     primary: "#e30613",
     onPrimary: "#ffffff",
-    secondary: "#140e0c",
-    accent: "#fbb800",
-    onAccent: "#140e0c",
+    secondary: "#a30410",
+    accent: "#e30613",
+    onAccent: "#ffffff",
+    surfaceAlt: "#f2f2f2",
     display: "'Rubik', system-ui, sans-serif",
     body: "'Rubik', system-ui, sans-serif",
-    radius: "8px",
+    radius: "4px",
     stadium: {
       name: "Gtech Community Stadium",
       address1: "Gtech Community Stadium",
@@ -152,22 +177,27 @@ export const CLUBS = {
       city: "Brentford",
       postalCode: "TW8 0RU",
     },
-    planName: "Adult Bees Membership",
-    price: "35.00",
+    planName: "Adult Membership",
+    planDescription: "For ages 25+",
+    price: "45.45",
   }),
   brighton: club({
     name: "Brighton & Hove Albion",
     fullName: "Brighton & Hove Albion Football Club",
     initials: "BHA",
     site: "https://www.brightonandhovealbion.com",
-    primary: "#0057b8",
+    primary: "#004899",
     onPrimary: "#ffffff",
-    secondary: "#ffcd00",
-    accent: "#ffcd00",
-    onAccent: "#0057b8",
-    display: "'Archivo', system-ui, sans-serif",
-    body: "'Inter', system-ui, sans-serif",
-    radius: "6px",
+    secondary: "#42e1ae",
+    accent: "#42e1ae",
+    onAccent: "#1f1f1f",
+    display: "'Montserrat', system-ui, sans-serif",
+    body: "'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif",
+    displayWeight: "700",
+    displayTransform: "uppercase",
+    displaySpacing: "0.01em",
+    radius: "3px",
+    fee: "0.00",
     stadium: {
       name: "American Express Stadium",
       address1: "American Express Stadium",
@@ -175,8 +205,9 @@ export const CLUBS = {
       city: "Brighton",
       postalCode: "BN1 9BL",
     },
-    planName: "Adult Albion Membership",
-    price: "35.00",
+    planName: "MyAlbion+ Adult (UK)",
+    planDescription: "Membership until 31/05/2027",
+    price: "42.00",
   }),
   burnley: club({
     name: "Burnley",

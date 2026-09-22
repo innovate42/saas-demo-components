@@ -9,7 +9,7 @@
  * page or with Limio's Tailwind layer.
  * ------------------------------------------------------------------ */
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700&family=Teko:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Oswald:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Teko:wght@500;600;700&display=swap");
 
 .pcc-root {
   /* Fallbacks only — index.js overwrites these inline per club. */
@@ -24,6 +24,7 @@
   --pcc-muted: #5d6470;
   --pcc-border: #dfe3e8;
   --pcc-radius: 6px;
+  --pcc-btn-radius: 6px;
   --pcc-font-display: "Archivo", system-ui, sans-serif;
   --pcc-font-body: "Inter", system-ui, sans-serif;
   --pcc-display-weight: 700;
@@ -305,7 +306,7 @@
   min-width: 180px;
   padding: 12px 28px;
   border: 0;
-  border-radius: var(--pcc-radius);
+  border-radius: var(--pcc-btn-radius);
   background: var(--pcc-primary);
   color: var(--pcc-on-primary);
   font-family: var(--pcc-font-display);
@@ -553,7 +554,7 @@ select.pcc-input--locked {
   min-height: 50px;
   padding: 0 24px;
   border: 0;
-  border-radius: var(--pcc-radius);
+  border-radius: var(--pcc-btn-radius);
   background: #111111;
   color: #ffffff;
   font-family: inherit;
@@ -812,7 +813,7 @@ select.pcc-input--locked {
 .pcc-assign__confirm-btn {
   padding: 10px 22px;
   border: 1px solid var(--pcc-accent);
-  border-radius: var(--pcc-radius);
+  border-radius: var(--pcc-btn-radius);
   background: var(--pcc-accent);
   color: var(--pcc-on-accent);
   font-family: inherit;
@@ -891,7 +892,7 @@ select.pcc-input--locked {
   width: 100%;
   padding: 15px 24px;
   border: 0;
-  border-radius: var(--pcc-radius);
+  border-radius: var(--pcc-btn-radius);
   background: var(--pcc-primary);
   color: var(--pcc-on-primary);
   font-family: var(--pcc-font-display);
@@ -1020,7 +1021,7 @@ select.pcc-input--locked {
   padding: 0 18px;
   height: 40px;
   border: 1px solid var(--pcc-accent);
-  border-radius: var(--pcc-radius);
+  border-radius: var(--pcc-btn-radius);
   background: transparent;
   color: var(--pcc-accent);
   font-family: inherit;

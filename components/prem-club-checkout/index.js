@@ -388,6 +388,7 @@ const PremClubCheckout = () => {
       "--pcc-muted": club.muted,
       "--pcc-border": club.border,
       "--pcc-radius": pick(props.cornerRadius, club.radius),
+      "--pcc-btn-radius": pick(props.cornerRadius, club.btnRadius),
       "--pcc-font-display": pick(props.displayFont, club.display),
       "--pcc-font-body": pick(props.bodyFont, club.body),
       "--pcc-display-weight": club.displayWeight,

@@ -128,9 +128,13 @@ const PayPalMonogram = ({ size = 18 }) => (
   </svg>
 )
 
-const PayPalMark = ({ height = 20 }) => (
+const PayPalMark = ({ height = 20, logoUrl }) => (
   <span className="pcc-brand pcc-brand--paypal" style={{ height }}>
-    <PayPalMonogram size={height} />
+    {logoUrl ? (
+      <img className="pcc-brand__img" src={logoUrl} alt="" aria-hidden="true" style={{ height }} />
+    ) : (
+      <PayPalMonogram size={height} />
+    )}
     <span className="pcc-brand__word" style={{ fontSize: height * 0.82 }}>
       <span style={{ color: "#003087" }}>Pay</span>
       <span style={{ color: "#009CDE" }}>Pal</span>
@@ -184,7 +188,11 @@ export const PaymentIcon = ({ method, logoUrl }) => {
 
 // Full brand lockup for the express pay button.
 export const WalletLockup = ({ method, logoUrl, tone }) => {
-  if (logoUrl) return <img className="pcc-brand__img pcc-brand__img--lockup" src={logoUrl} alt="" aria-hidden="true" />
   const Lockup = LOCKUPS[method]
-  return Lockup ? <Lockup tone={tone} /> : null
+  if (!Lockup) return null
+  // PayPal keeps its wordmark and swaps only the monogram; the others take
+  // a supplied asset as the complete lockup.
+  if (method === "paypal") return <Lockup tone={tone} logoUrl={logoUrl} />
+  if (logoUrl) return <img className="pcc-brand__img pcc-brand__img--lockup" src={logoUrl} alt="" aria-hidden="true" />
+  return <Lockup tone={tone} />
 }

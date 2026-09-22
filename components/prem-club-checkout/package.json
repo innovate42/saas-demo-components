@@ -1,6 +1,6 @@
 {
   "name": "@limio/prem-club-checkout",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Premier League club checkout replica — the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
   "main": "./index.js",
   "sideEffects": [
@@ -252,7 +252,7 @@
       "id": "payPalLogoUrl",
       "label": "Official PayPal logo URL (blank = built-in mark)",
       "type": "string",
-      "default": ""
+      "default": "https://saas-dev.prod.limio.com/public/1d59e882-1d0e-48db-be60-82dec3a4c513/paypal.svg"
     },
     {
       "id": "googlePayLogoUrl",
