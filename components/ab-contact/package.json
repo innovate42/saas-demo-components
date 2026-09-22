@@ -1,6 +1,6 @@
 {
   "name": "@limio/ab-contact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Contact page: office details (address, map link, phone, email, hours) beside a data-capture enquiry form. Brand-driven for publisher titles.",
   "main": "./index.js",
   "dependencies": {},

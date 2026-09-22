@@ -72,8 +72,13 @@ const splitAddress = (address) =>
     .map((line) => line.trim())
     .filter(Boolean)
 
-/** Digits only, so the tel: link works from a phone. */
-const telHref = (phone) => `tel:${String(phone || "").replace(/[^\d+]/g, "")}`
+/** Digits only, so the tel: link works from a phone. The bracketed trunk code
+    in "+44 (0)1727 890 600" is for domestic dialling and must not survive into
+    an international tel: link. */
+const telHref = (phone) =>
+  `tel:${String(phone || "")
+    .replace(/\(\s*0\s*\)/g, "")
+    .replace(/[^\d+]/g, "")}`
 
 const mapFallback = (office) =>
   office?.mapUrl ||
