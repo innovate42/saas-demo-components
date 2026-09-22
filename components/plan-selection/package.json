@@ -15,14 +15,14 @@
   "peerDependencies": {
     "@sentry/browser": "*",
     "react": "*",
-    "@limio/ui-preview-context": "*",
-    "@limio/swr": "*",
-    "@limio/design-system": "*",
-    "@limio/shop-redux": "*"
+    "@limio/ui-preview-context": "workspace:^",
+    "@limio/swr": "workspace:^",
+    "@limio/design-system": "workspace:^",
+    "@limio/shop-redux": "workspace:^"
   },
   "devDependencies": {
-    "@limio/sdk": "*",
-    "@limio/swr": "*"
+    "@limio/sdk": "workspace:^",
+    "@limio/swr": "workspace:^"
   },
   "limioProps": [
     {
