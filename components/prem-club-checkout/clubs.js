@@ -261,6 +261,44 @@ export const CLUBS = {
   // below are Palace's own. From the page: the entry-level tier is the
   // 2026/27 Adult Membership at £25.00 (Gold is £60.00, International
   // £45.00 or £35.00 digital-only).
+  // Themed from the live eticketing.co.uk/ccfc memberships page markup.
+  // That page is the Ticketmaster/eticketing platform and is entirely
+  // class-driven (button_primary, membership-title, hero-block) with no
+  // hex values anywhere, so only the text below is evidenced:
+  //   <title>2026/27 Memberships | Coventry City FC Tickets</title>
+  //   membership-title "Adult Sky Blues Membership 26/27"  *£45.00
+  //   (Teen £35.00, Junior £30.00)
+  //   "Membership prices exclusive of delivery, payment and/or admin fees."
+  //   footer: Coventry Building Society Arena, Judds Lane, Coventry, CV6 6AQ
+  // The sky blue / navy palette below is the club's own identity, not
+  // something the page gave us.
+  coventry: club({
+    name: "Coventry City",
+    fullName: "Coventry City Football Club",
+    initials: "CCFC",
+    site: "https://www.ccfc.co.uk",
+    primary: "#6cace4",
+    onPrimary: "#10243f",
+    secondary: "#10243f",
+    accent: "#10243f",
+    onAccent: "#ffffff",
+    display: "'Archivo', system-ui, sans-serif",
+    body: "'Inter', system-ui, sans-serif",
+    displayWeight: "700",
+    displayTransform: "uppercase",
+    displaySpacing: "0.02em",
+    radius: "6px",
+    stadium: {
+      name: "Coventry Building Society Arena",
+      address1: "Coventry Building Society Arena",
+      address2: "Judds Lane",
+      city: "Coventry",
+      postalCode: "CV6 6AQ",
+    },
+    planName: "Adult Sky Blues Membership 26/27",
+    planDescription: "Adult",
+    price: "45.00",
+  }),
   "crystal-palace": club({
     name: "Crystal Palace",
     fullName: "Crystal Palace Football Club",
