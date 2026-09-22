@@ -20,7 +20,7 @@
     "react": "*"
   },
   "devDependencies": {
-    "@limio/sdk": "workspace:packages/limio-sdk",
+    "@limio/sdk": "workspace:^",
     "@limio/swr": "*"
   },
   "limioProps": []
