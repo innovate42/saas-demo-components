@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@limio/sdk": "workspace:^",
-    "@limio/swr": "*"
+    "@limio/swr": "workspace:^"
   },
   "limioProps": []
 }
