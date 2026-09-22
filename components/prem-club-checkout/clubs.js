@@ -257,6 +257,10 @@ export const CLUBS = {
     planName: "Adult True Blue Membership",
     price: "45.00",
   }),
+  // Same Ticketmaster platform again — no hex values, so the blue and red
+  // below are Palace's own. From the page: the entry-level tier is the
+  // 2026/27 Adult Membership at £25.00 (Gold is £60.00, International
+  // £45.00 or £35.00 digital-only).
   "crystal-palace": club({
     name: "Crystal Palace",
     fullName: "Crystal Palace Football Club",
@@ -269,8 +273,9 @@ export const CLUBS = {
     onAccent: "#ffffff",
     display: "'Saira Condensed', system-ui, sans-serif",
     body: "'Inter', system-ui, sans-serif",
-    ...CONDENSED,
     displayWeight: "700",
+    displayTransform: "uppercase",
+    displaySpacing: "0.01em",
     radius: "4px",
     stadium: {
       name: "Selhurst Park",
@@ -279,9 +284,15 @@ export const CLUBS = {
       city: "London",
       postalCode: "SE25 6PU",
     },
-    planName: "Adult Eagles Membership",
-    price: "35.00",
+    planName: "2026/27 Adult Membership",
+    planDescription: "Adult",
+    price: "25.00",
   }),
+  // Same Ticketmaster platform as Fulham and Palace — no hex values on the
+  // page, so the blues below are Everton's own. From the page: the standard
+  // adult tier is 26/27 Forever Blue at £35.00 (Forever Blue+ is £60.00),
+  // and "Prices inclusive of delivery, payment and/or admin fees" -> £0 fee.
+  // The page also confirms the ground is now Hill Dickinson Stadium.
   everton: club({
     name: "Everton",
     fullName: "Everton Football Club",
@@ -295,6 +306,7 @@ export const CLUBS = {
     display: "'Archivo', system-ui, sans-serif",
     body: "'Inter', system-ui, sans-serif",
     radius: "4px",
+    fee: "0.00",
     stadium: {
       name: "Hill Dickinson Stadium",
       address1: "Hill Dickinson Stadium",
@@ -302,9 +314,15 @@ export const CLUBS = {
       city: "Liverpool",
       postalCode: "L3 0BW",
     },
-    planName: "Adult Toffees Membership",
+    planName: "26/27 Forever Blue",
+    planDescription: "Adult",
     price: "35.00",
   }),
+  // eticketing.co.uk/fulhamfc is the Ticketmaster platform: entirely
+  // class-driven (button_primary, membership-title) with no hex values
+  // anywhere, so the palette below is Fulham's own, NOT evidenced by the
+  // page. Plan name and price are: 26-27 Adult Membership, £50.00,
+  // "prices exclusive of delivery, payment and/or admin fees".
   fulham: club({
     name: "Fulham",
     fullName: "Fulham Football Club",
@@ -325,24 +343,35 @@ export const CLUBS = {
       city: "London",
       postalCode: "SW6 6HH",
     },
-    planName: "Adult Cottagers Membership",
-    price: "35.00",
+    planName: "26-27 Adult Membership",
+    planDescription: "Adult",
+    price: "50.00",
   }),
+  // From the live tickets.leedsunited.com/memberships page:
+  //   #1D4189 is the ONLY hex on the page (.comparison-chart emphasis text)
+  //   fonts loaded: Oswald + Source Sans Pro + Montserrat
+  //   My Leeds Membership: Adults £51.50, Under 16s £31.50
+  //   (My Leeds+ is £76.50 / £46.50)
+  //   "*Price includes a £1.50 booking fee."
+  // Primary is the evidenced navy; the yellow is Leeds' own but appears
+  // nowhere in the markup, so it sits as the accent.
   leeds: club({
     name: "Leeds United",
     fullName: "Leeds United Football Club",
     initials: "LUFC",
     site: "https://www.leedsunited.com",
-    primary: "#ffcd00",
-    onPrimary: "#1d428a",
-    secondary: "#1d428a",
-    accent: "#1d428a",
-    onAccent: "#ffffff",
-    display: "'Bebas Neue', system-ui, sans-serif",
-    body: "'Inter', system-ui, sans-serif",
-    ...CONDENSED,
-    displaySpacing: "0.03em",
+    primary: "#1d4189",
+    onPrimary: "#ffffff",
+    secondary: "#ffcd00",
+    accent: "#ffcd00",
+    onAccent: "#1d4189",
+    display: "'Oswald', system-ui, sans-serif",
+    body: "'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif",
+    displayWeight: "600",
+    displayTransform: "uppercase",
+    displaySpacing: "0.02em",
     radius: "0px",
+    fee: "1.50",
     stadium: {
       name: "Elland Road",
       address1: "Elland Road",
@@ -350,8 +379,9 @@ export const CLUBS = {
       city: "Leeds",
       postalCode: "LS11 0ES",
     },
-    planName: "Adult Whites Membership",
-    price: "35.00",
+    planName: "My Leeds Membership",
+    planDescription: "Adult",
+    price: "51.50",
   }),
   liverpool: club({
     name: "Liverpool",
