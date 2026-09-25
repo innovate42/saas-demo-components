@@ -1,0 +1,411 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap");
+
+/* ------------------------------------------------------------------ *
+ * millwall-landing — replica of the Millwall FC eticketing memberships
+ * list page. Every value here was read off the live page with
+ * getComputedStyle / getBoundingClientRect at a 1280px viewport.
+ *
+ * The live site ships two single-weight families, Barlow_Light and
+ * Barlow_Medium. Google's variable Barlow stands in for both: the
+ * numeric weights below are chosen to match what the originals render.
+ * ------------------------------------------------------------------ */
+
+.mwl-root {
+    --mwl-navy: #00194a;
+    --mwl-navy-deep: #001234;
+    --mwl-cyan: #00a2dc;
+    --mwl-text: #454545;
+    --mwl-link: #122514;
+    --mwl-grey: #f2f2f2;
+    --mwl-border: #d7d7d7;
+    --mwl-img-bg: #919191;
+    --mwl-pad: 40px;
+
+    box-sizing: border-box;
+    font-family: Barlow, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+    color: var(--mwl-text);
+    background: #fff;
+    text-align: left;
+}
+.mwl-root *,
+.mwl-root *::before,
+.mwl-root *::after { box-sizing: border-box; }
+.mwl-root img { max-width: 100%; display: block; }
+/* :where() keeps this at zero specificity, so the rules further down can
+   still set their own margins (an ordinary element reset out-specifies a
+   single class and silently eats them). */
+.mwl-root :where(h1, h2, h3, p, ul, li) {
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Top utility bar ─────────────────────────────────────────────── */
+.mwl-topbar {
+    height: 48px;
+    background: var(--mwl-navy);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+}
+.mwl-topbar__block { display: flex; align-items: center; gap: 20px; }
+.mwl-topbar__link {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.mwl-topbar__ext { display: inline-flex; color: #fff; }
+.mwl-topbar__mode {
+    background: #fff;
+    color: var(--mwl-navy);
+    border-radius: 32px;
+    padding: 3.2px 9.6px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+/* ── Main header ─────────────────────────────────────────────────── */
+.mwl-header { background: var(--mwl-navy); height: 115px; }
+.mwl-header__inner {
+    height: 115px;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+}
+.mwl-header__home { display: flex; align-items: center; gap: 14px; }
+.mwl-header__logo img { width: 80px; height: 80px; object-fit: contain; }
+.mwl-header__title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.2px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.mwl-header__desc {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28.8px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.mwl-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; }
+.mwl-nav__item { position: relative; }
+.mwl-nav__link {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+.mwl-nav__chev { display: inline-flex; }
+.mwl-nav__submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    margin-top: 12px;
+    min-width: 220px;
+    background: #fff;
+    padding: 8px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    z-index: 20;
+}
+.mwl-nav__item:hover .mwl-nav__submenu { display: block; }
+.mwl-nav__subitem {
+    display: block;
+    padding: 9px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--mwl-text);
+    white-space: nowrap;
+}
+.mwl-nav__subitem:hover { background: var(--mwl-grey); }
+
+.mwl-header__icons { display: flex; align-items: center; gap: 22px; margin-left: 30px; }
+.mwl-header__icon { display: inline-flex; color: #fff; }
+
+/* ── Hero ────────────────────────────────────────────────────────── */
+.mwl-hero { height: 466px; background: var(--mwl-img-bg); overflow: hidden; }
+.mwl-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Membership grid ─────────────────────────────────────────────── */
+.mwl-main { padding: 0 var(--mwl-pad); background: #fff; }
+.mwl-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 50px;
+    margin: 64px 0 100px;
+    background: #fff;
+}
+.mwl-group__title {
+    grid-column: 1 / -1;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 2px;
+    color: var(--mwl-text);
+    margin-bottom: 10px;
+}
+
+/* Card */
+.mwl-card {
+    position: relative;
+    filter: drop-shadow(rgba(0, 0, 0, 0.2) 0 0 4px);
+}
+.mwl-card__flag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 6px;
+    z-index: 2;
+}
+.mwl-card__flag > span {
+    display: block;
+    background: var(--mwl-navy-deep);
+    color: var(--mwl-cyan);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    text-transform: uppercase;
+    padding: 2px 12px;
+    clip-path: polygon(
+        10px 0%,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+    );
+}
+/* The signature eticketing corner cut: top-left and bottom-right. */
+.mwl-card__body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    clip-path: polygon(
+        20px 0%,
+        100% 0,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        0 100%,
+        0 20px
+    );
+}
+.mwl-card__img {
+    width: 100%;
+    height: 229px;
+    object-fit: cover;
+    background: var(--mwl-img-bg);
+    flex: 0 0 auto;
+}
+.mwl-card__text {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 24px;
+    background: #fff;
+}
+.mwl-card__title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--mwl-text);
+}
+.mwl-card__subtitle {
+    font-size: 18.72px;
+    font-weight: 500;
+    line-height: 22.464px;
+    color: var(--mwl-text);
+    margin-bottom: 12px;
+}
+.mwl-card__desc {
+    flex: 1 1 auto;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+    color: var(--mwl-text);
+    margin-bottom: 12px;
+}
+.mwl-card__desc strong { font-weight: 700; }
+.mwl-card__desc ul { margin: 0; padding: 0; list-style: disc; }
+.mwl-card__desc li {
+    margin: 0 0 14px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+.mwl-card__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 12px;
+}
+.mwl-card__price-desc { min-height: 0; margin-bottom: 12px; }
+
+/* Inert stand-in for the levels <select> */
+.mwl-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid var(--mwl-border);
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--mwl-text);
+}
+.mwl-select__value { flex: 1 1 auto; }
+.mwl-select__arrow { display: inline-flex; color: var(--mwl-text); }
+
+.mwl-card__fees {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.5px;
+    color: var(--mwl-text);
+}
+.mwl-bold { font-weight: 700; }
+
+/* Buttons. Only .mwl-btn--primary on the Official card is a real <a>. */
+.mwl-btn {
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22.5px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    max-width: 100%;
+}
+.mwl-btn--primary {
+    background: var(--mwl-navy);
+    border: 1px solid var(--mwl-navy);
+    border-radius: 4px;
+    color: #fff;
+    padding: 12px 20px;
+}
+a.mwl-btn--primary:hover,
+a.mwl-btn--primary:focus { background: #002a72; border-color: #002a72; color: #fff; }
+.mwl-btn--link {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--mwl-link);
+    padding: 0;
+}
+
+/* ── Fees strip ──────────────────────────────────────────────────── */
+.mwl-fees { background: var(--mwl-grey); padding: 48px 0; }
+.mwl-fees__inner {
+    margin: 0 var(--mwl-pad);
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17.5px;
+    color: var(--mwl-text);
+}
+.mwl-fees__link {
+    display: inline-block;
+    margin: 8px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    text-transform: none;
+    color: var(--mwl-link);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.mwl-footer { background: var(--mwl-navy); color: #fff; }
+.mwl-footer__logos { padding: 68px 28px 40px; }
+.mwl-footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 0 20px;
+}
+.mwl-footer__sponsor { display: flex; margin-bottom: 20px; }
+.mwl-footer__sponsor img { width: 120px; height: 100px; object-fit: contain; }
+.mwl-footer__legal { min-height: 4px; }
+.mwl-footer__links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px 40px;
+    margin-top: 40px;
+}
+.mwl-footer__poweredby {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17.5px;
+    color: #fff;
+    margin-bottom: 14px;
+}
+/* Inline, not flex: the baseline-aligned mark is what makes this line 22px
+   tall on the live page, which sets the footer's overall height. */
+.mwl-footer__tm { display: inline-block; vertical-align: middle; color: #fff; }
+.mwl-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.mwl-footer__nav-item { margin: 0 10px; }
+.mwl-footer__nav-link {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17.5px;
+    color: #fff;
+}
+
+/* ── Breakpoints ─────────────────────────────────────────────────── */
+@media (max-width: 1199px) {
+    .mwl-root { --mwl-pad: 24px; }
+    .mwl-nav { gap: 20px; }
+    .mwl-nav__link { font-size: 14px; letter-spacing: 1px; }
+    .mwl-header__inner { padding: 0 20px; }
+}
+
+@media (max-width: 991px) {
+    .mwl-group { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
+    .mwl-hero { height: 340px; }
+    .mwl-nav { display: none; }
+    .mwl-group__title { font-size: 32px; line-height: 34px; }
+}
+
+@media (max-width: 767px) {
+    .mwl-root { --mwl-pad: 16px; }
+    .mwl-topbar { padding: 10px 16px; }
+    .mwl-header__inner { padding: 0 16px; }
+    .mwl-header__logo img { width: 56px; height: 56px; }
+    .mwl-header__desc { font-size: 19px; line-height: 23px; }
+    .mwl-header__title { font-size: 13px; }
+    .mwl-hero { height: 220px; }
+    .mwl-group { grid-template-columns: 1fr; gap: 32px; margin: 40px 0 64px; }
+    .mwl-group__title { font-size: 28px; line-height: 30px; }
+    .mwl-footer__links { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .mwl-footer__nav { justify-content: flex-start; }
+    .mwl-footer__nav-item { margin: 0 14px 6px 0; }
+}
