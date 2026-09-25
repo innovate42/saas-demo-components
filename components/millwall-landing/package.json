@@ -1,6 +1,6 @@
 {
   "name": "@limio/millwall-landing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "millwall-landing - static replica of the Millwall FC eticketing memberships list page. Visual only: the single working control is the Official Membership ADD TO BASKET button.",
   "main": "./index.js",
   "sideEffects": [
