@@ -1,0 +1,374 @@
+/* Next-fixtures block. Every class is prefixed `bff-` so nothing collides
+   with the host page. Colours and fonts come in as CSS variables from the
+   component props. */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap");
+
+.bff {
+  --bff-primary: #e30613;
+  --bff-ink: #1a1a1a;
+  --bff-bg: #ffffff;
+  --bff-card: #f7f7f7;
+  --bff-heading-font: "Barlow Condensed", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --bff-body-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bff-muted: rgba(0, 0, 0, 0.58);
+  --bff-hair: rgba(0, 0, 0, 0.1);
+
+  background: var(--bff-bg);
+  color: var(--bff-ink);
+  font-family: var(--bff-body-font);
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 56px 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bff *,
+.bff *::before,
+.bff *::after {
+  box-sizing: border-box;
+}
+
+.bff-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------------- Header ---------------- */
+
+.bff-head {
+  margin-bottom: 28px;
+}
+
+.bff-eyebrow {
+  margin: 0 0 6px;
+  font-family: var(--bff-heading-font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bff-primary);
+}
+
+.bff-heading {
+  margin: 0;
+  font-family: var(--bff-heading-font);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.bff-standfirst {
+  margin: 12px 0 0;
+  max-width: 560px;
+  color: var(--bff-muted);
+}
+
+/* ---------------- Cards ---------------- */
+
+.bff-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.bff-card {
+  display: grid;
+  grid-template-columns: 88px auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 22px 18px 18px;
+  background: var(--bff-card);
+  border-left: 4px solid transparent;
+  border-radius: 6px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.bff-card--home {
+  border-left-color: var(--bff-primary);
+}
+
+.bff-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.bff-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  border-right: 1px solid var(--bff-hair);
+  font-family: var(--bff-heading-font);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.bff-date__day {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bff-muted);
+}
+
+.bff-date__num {
+  margin: 4px 0;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--bff-primary);
+}
+
+.bff-date__month {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.bff-body {
+  min-width: 0;
+}
+
+.bff-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.bff-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-family: var(--bff-heading-font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.bff-badge--home {
+  background: var(--bff-primary);
+  color: #fff;
+}
+
+.bff-badge--away {
+  background: transparent;
+  color: var(--bff-ink);
+  border: 1px solid var(--bff-ink);
+}
+
+.bff-competition {
+  font-size: 13px;
+  color: var(--bff-muted);
+}
+
+.bff-opponent {
+  margin: 0;
+  font-family: var(--bff-heading-font);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.bff-vs {
+  font-weight: 600;
+  color: var(--bff-muted);
+  text-transform: lowercase;
+}
+
+.bff-details {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--bff-muted);
+}
+
+.bff-dot {
+  margin: 0 8px;
+}
+
+/* ---------------- Club badge ---------------- */
+
+.bff-badge-wrap {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bff-club-badge {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.bff-badge--live {
+  background: #111;
+  color: #fff;
+}
+
+/* ---------------- CTA ---------------- */
+
+.bff-button {
+  display: inline-block;
+  padding: 12px 22px;
+  background: var(--bff-primary);
+  color: #fff;
+  font-family: var(--bff-heading-font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: filter 120ms ease;
+}
+
+.bff-button:hover,
+.bff-button:focus-visible {
+  filter: brightness(0.9);
+  text-decoration: none;
+  color: #fff;
+}
+
+.bff-button--disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bff-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.bff-ticket-note {
+  font-size: 12px;
+  color: var(--bff-muted);
+  white-space: nowrap;
+}
+
+/* ---------------- Notices ---------------- */
+
+.bff-notice {
+  margin: 0;
+  padding: 16px 18px;
+  background: var(--bff-card);
+  border-radius: 6px;
+  color: var(--bff-muted);
+}
+
+.bff-notice--error {
+  color: #9b1c1c;
+}
+
+.bff-notice--hint {
+  margin-top: 12px;
+  font-size: 13px;
+  border: 1px dashed var(--bff-hair);
+  background: transparent;
+}
+
+.bff-attribution {
+  margin: 18px 0 0;
+  font-size: 12px;
+  color: var(--bff-muted);
+}
+
+/* ---------------- Skeleton ---------------- */
+
+.bff-skel {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.1) 37%, rgba(0, 0, 0, 0.06) 63%);
+  background-size: 400% 100%;
+  animation: bff-shimmer 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+.bff-card--skeleton .bff-date {
+  height: 72px;
+  border-right: 0;
+}
+
+.bff-skel--line {
+  height: 12px;
+  margin-bottom: 10px;
+}
+
+.bff-skel--tall {
+  height: 24px;
+}
+
+.bff-skel--button {
+  width: 130px;
+  height: 44px;
+}
+
+@keyframes bff-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 640px) {
+  .bff {
+    padding: 40px 0;
+  }
+
+  .bff-inner {
+    padding: 0 16px;
+  }
+
+  .bff-heading {
+    font-size: 36px;
+  }
+
+  .bff-card {
+    grid-template-columns: 64px auto 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .bff-badge-wrap {
+    width: 44px;
+    height: 44px;
+  }
+
+  .bff-date__num {
+    font-size: 30px;
+  }
+
+  .bff-opponent {
+    font-size: 22px;
+  }
+
+  .bff-cta {
+    grid-column: 1 / -1;
+    align-items: stretch;
+  }
+
+  .bff-ticket-note {
+    text-align: center;
+    white-space: normal;
+  }
+
+  .bff-button {
+    display: block;
+    text-align: center;
+  }
+}
