@@ -1,0 +1,185 @@
+{
+  "name": "@limio/brentford-fixtures",
+  "version": "1.0.0",
+  "description": "Next fixtures for Brentford FC, fetched live (no API key) from ESPN's public schedule feed. Shows the next N games across all competitions with date, kick-off, opponent, club badges, venue and a tickets link. Falls back to sample fixtures if the feed fails so it always renders in the Page Builder.",
+  "main": "./index.js",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "type": "string",
+      "default": "Fixtures"
+    },
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Next games"
+    },
+    {
+      "id": "standfirst",
+      "label": "Standfirst",
+      "type": "string",
+      "default": "The next three matches across all competitions, with tickets."
+    },
+    {
+      "id": "teamId",
+      "label": "ESPN team ID (Brentford = 337)",
+      "type": "string",
+      "default": "337"
+    },
+    {
+      "id": "competitions",
+      "label": "Competitions",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "all",
+          "label": "All competitions",
+          "value": "all"
+        },
+        {
+          "id": "eng.1",
+          "label": "Premier League only",
+          "value": "eng.1"
+        }
+      ],
+      "default": "all"
+    },
+    {
+      "id": "maxGames",
+      "label": "Number of games to show",
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "id": "showBadges",
+      "label": "Show club badges",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "ctaLabel",
+      "label": "Button label",
+      "type": "string",
+      "default": "Buy tickets"
+    },
+    {
+      "id": "ticketsSource",
+      "label": "Tickets button links to",
+      "type": "picklist",
+      "options": [
+        {
+          "id": "fixed",
+          "label": "Fixed URL (club ticketing)",
+          "value": "fixed"
+        },
+        {
+          "id": "feed",
+          "label": "Resale link from the feed (when available)",
+          "value": "feed"
+        },
+        {
+          "id": "none",
+          "label": "Hide the button",
+          "value": "none"
+        }
+      ],
+      "default": "fixed"
+    },
+    {
+      "id": "ticketsUrl",
+      "label": "Fixed tickets URL",
+      "type": "string",
+      "default": "https://www.brentfordfc.com/en/tickets"
+    },
+    {
+      "id": "homeLabel",
+      "label": "Home badge",
+      "type": "string",
+      "default": "Home"
+    },
+    {
+      "id": "awayLabel",
+      "label": "Away badge",
+      "type": "string",
+      "default": "Away"
+    },
+    {
+      "id": "liveLabel",
+      "label": "Live badge",
+      "type": "string",
+      "default": "Live"
+    },
+    {
+      "id": "timeTbcLabel",
+      "label": "Kick-off not yet confirmed",
+      "type": "string",
+      "default": "time TBC"
+    },
+    {
+      "id": "emptyMessage",
+      "label": "Message when no fixtures are on sale",
+      "type": "string",
+      "default": "No upcoming fixtures are on sale right now. Check back soon."
+    },
+    {
+      "id": "errorMessage",
+      "label": "Message when the feed fails",
+      "type": "string",
+      "default": "We couldn't load the fixtures. Please try again later."
+    },
+    {
+      "id": "useSampleWhenUnavailable",
+      "label": "Show sample fixtures if the feed fails",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "attribution",
+      "label": "Attribution line",
+      "type": "string",
+      "default": "Fixture data provided by ESPN."
+    },
+    {
+      "id": "primaryColor__limio_color",
+      "label": "Primary colour",
+      "type": "color",
+      "default": "#E30613"
+    },
+    {
+      "id": "inkColor__limio_color",
+      "label": "Ink / text colour",
+      "type": "color",
+      "default": "#1A1A1A"
+    },
+    {
+      "id": "backgroundColor__limio_color",
+      "label": "Section background",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "id": "cardColor__limio_color",
+      "label": "Card background",
+      "type": "color",
+      "default": "#F7F7F7"
+    },
+    {
+      "id": "headingFont",
+      "label": "Heading font stack",
+      "type": "string",
+      "default": "'Barlow Condensed', 'Roboto Condensed', 'Helvetica Neue', Arial, sans-serif"
+    },
+    {
+      "id": "bodyFont",
+      "label": "Body font stack",
+      "type": "string",
+      "default": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    }
+  ]
+}
