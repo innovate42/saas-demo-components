@@ -490,6 +490,50 @@ export const CLUBS = {
     planName: "Adult Official Membership",
     price: "40.00",
   }),
+  // Themed from the live eticketing.co.uk/millwallfc memberships page.
+  // Unusually for this platform that page carries real hex values, so
+  // almost everything here is evidenced rather than brand knowledge:
+  //   header / footer / button_primary background  rgb(0,25,74)   -> #00194A
+  //   "MOST POPULAR" flag  bg rgb(0,18,52) #001234, text rgb(0,162,220) #00A2DC
+  //   body + display type  Barlow_Light / Barlow_Medium -> Barlow
+  //   buttons and inputs   border-radius 4px
+  //   membership-title     "26/27 Official Membership", Adult *£37.00
+  //   "Booking Fee up to £2.00"
+  // Only the stadium address is brand knowledge — the page names The Den
+  // in its copy but never gives the postal address.
+  millwall: club({
+    name: "Millwall",
+    fullName: "Millwall Football Club",
+    initials: "MFC",
+    site: "https://www.millwallfc.co.uk",
+    primary: "#00194a",
+    onPrimary: "#ffffff",
+    secondary: "#00a2dc",
+    // Accent drives the CTAs, and Millwall's own CTA colour is the navy
+    // (.button_primary background is rgb(0,25,74)) — the cyan only ever
+    // appears as small text on the dark "MOST POPULAR" flag, never as a
+    // fill. Using the navy is both truer to the page and keeps the promo
+    // Apply button readable; cyan on white is only 2.92:1.
+    accent: "#00194a",
+    onAccent: "#ffffff",
+    display: "'Barlow', system-ui, sans-serif",
+    body: "'Barlow', system-ui, sans-serif",
+    displayWeight: "700",
+    displayTransform: "none",
+    displaySpacing: "0.02em",
+    radius: "4px",
+    fee: "2.00",
+    stadium: {
+      name: "The Den",
+      address1: "The Den",
+      address2: "Zampa Road",
+      city: "London",
+      postalCode: "SE16 3LN",
+    },
+    planName: "26/27 Official Membership",
+    planDescription: "Adult",
+    price: "37.00",
+  }),
   newcastle: club({
     name: "Newcastle United",
     fullName: "Newcastle United Football Club",
