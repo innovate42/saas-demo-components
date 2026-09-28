@@ -5,29 +5,65 @@ interface Offer {
     attributes: {
       [key: string]: unknown
     }
+    products?: { attributes?: { [key: string]: unknown } }[]
   }
+}
+
+interface BasketItem {
+  id: string
+  parentId?: string
+  offer?: Offer
 }
 
 interface AddToBasketParams {
   offer: Offer
+  orderItems?: BasketItem[]
   isSubmitting: boolean
   setIsSubmitting: (v: boolean) => void
   setHasError: (v: boolean) => void
   addOfferToBasket: (args: { offer: Offer }) => Promise<void>
   initiateCheckout: (args: { order: { orderItems: { offer: Offer }[] } }) => Promise<void>
+  swapOffer: (itemId: string, offer: Offer) => Promise<void>
   navigateToCheckout: () => Promise<void>
   pageOptions?: { pushToCheckout?: boolean }
   getCurrentBasketId: () => string | null | undefined
   captureException: (error: unknown) => void
 }
 
+// Product attribute: a stand-alone product is never in the basket with another item
+const STANDALONE_ATTRIBUTE = "standalone_in_basket"
+
+export function isStandalone(offer?: Offer): boolean {
+  return (offer?.data?.products || []).some((product) => product?.attributes?.[STANDALONE_ATTRIBUTE] === true)
+}
+
+// Adding a stand-alone offer, or adding next to one, replaces the basket instead of adding to it.
+// Add-ons (items with a parentId) belong to their parent, so only parent items count.
+export function shouldReplaceBasket(offer: Offer, orderItems: BasketItem[] = []): boolean {
+  const parents = orderItems.filter((item) => !item?.parentId)
+  if (parents.length === 0) return false
+  return isStandalone(offer) || parents.some((item) => isStandalone(item.offer))
+}
+
+async function replaceBasket(offer: Offer, orderItems: BasketItem[], { swapOffer, initiateCheckout }: Pick<AddToBasketParams, "swapOffer" | "initiateCheckout">) {
+  if (orderItems.length === 1) {
+    // One item and no add-ons: swap it in the same basket, in one operation
+    await swapOffer(orderItems[0].id, offer)
+  } else {
+    // Otherwise start a new basket that holds only this offer, also in one operation
+    await initiateCheckout({ order: { orderItems: [{ offer }] } })
+  }
+}
+
 export async function addSelectionToBasket({
   offer,
+  orderItems = [],
   isSubmitting,
   setIsSubmitting,
   setHasError,
   addOfferToBasket,
   initiateCheckout,
+  swapOffer,
   navigateToCheckout,
   pageOptions,
   getCurrentBasketId,
@@ -41,6 +77,8 @@ export async function addSelectionToBasket({
     const checkoutId = getCurrentBasketId()
     if (!checkoutId) {
       await initiateCheckout({ order: { orderItems: [{ offer }] } })
+    } else if (shouldReplaceBasket(offer, orderItems)) {
+      await replaceBasket(offer, orderItems, { swapOffer, initiateCheckout })
     } else {
       await addOfferToBasket({ offer })
     }

@@ -28,18 +28,20 @@ export const AddToBasketButton: React.FC<AddToBasketButtonProps> = ({
   ctaGradientHover,
   ctaTextColor,
 }: AddToBasketButtonProps) => {
-  const { addOfferToBasket, initiateCheckout, navigateToCheckout, pageOptions } = useBasket()
+  const { addOfferToBasket, initiateCheckout, swapOffer, navigateToCheckout, pageOptions, orderItems, basketLoading } = useBasket()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [hasError, setHasError] = useState(false)
 
   function handleAddToBasket() {
     addSelectionToBasket({
       offer,
+      orderItems,
       isSubmitting,
       setIsSubmitting,
       setHasError,
       addOfferToBasket,
       initiateCheckout,
+      swapOffer,
       navigateToCheckout,
       pageOptions,
       getCurrentBasketId,
@@ -54,7 +56,8 @@ export const AddToBasketButton: React.FC<AddToBasketButtonProps> = ({
         fullWidth
         variant="contained"
         onClick={handleAddToBasket}
-        disabled={isSubmitting}
+        // Only one basket operation can run at a time; a second one throws
+        disabled={isSubmitting || basketLoading}
         sx={{
           ".offer-cards-material &": {
             display: "inline-flex",
