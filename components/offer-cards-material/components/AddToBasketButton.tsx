@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import * as Sentry from "@sentry/browser"
 import { Button } from "@mui/material"
 import { useBasket } from "@limio/sdk"
@@ -31,22 +31,30 @@ export const AddToBasketButton: React.FC<AddToBasketButtonProps> = ({
   const { addOfferToBasket, initiateCheckout, swapOffer, navigateToCheckout, pageOptions, orderItems, basketLoading } = useBasket()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [hasError, setHasError] = useState(false)
+  // A ref, unlike state, already reads true for a second click in the same instant
+  const inFlight = useRef(false)
 
-  function handleAddToBasket() {
-    addSelectionToBasket({
-      offer,
-      orderItems,
-      isSubmitting,
-      setIsSubmitting,
-      setHasError,
-      addOfferToBasket,
-      initiateCheckout,
-      swapOffer,
-      navigateToCheckout,
-      pageOptions,
-      getCurrentBasketId,
-      captureException: Sentry.captureException,
-    })
+  async function handleAddToBasket() {
+    if (inFlight.current) return
+    inFlight.current = true
+    try {
+      await addSelectionToBasket({
+        offer,
+        orderItems,
+        isSubmitting,
+        setIsSubmitting,
+        setHasError,
+        addOfferToBasket,
+        initiateCheckout,
+        swapOffer,
+        navigateToCheckout,
+        pageOptions,
+        getCurrentBasketId,
+        captureException: Sentry.captureException,
+      })
+    } finally {
+      inFlight.current = false
+    }
   }
 
   return (
