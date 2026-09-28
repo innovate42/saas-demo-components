@@ -1,0 +1,139 @@
+{
+  "name": "@limio/offer-cards-material",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.tsx",
+  "scripts": {
+    "build": "yarn component:webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.28.0",
+    "xss": "^1.0.8",
+    "@mui/material": "5.17.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "5.17.1",
+    "@fontsource/inter": "^4.5.0"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "heading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Subscribe today"
+    },
+    {
+      "id": "subheading",
+      "label": "Heading",
+      "type": "string",
+      "default": "Join today for instant access."
+    },
+    {
+      "id": "showImage",
+      "label": "Show image",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "componentId",
+      "label": "Component Id",
+      "type": "string",
+      "default": "offers-limio"
+    },
+    {
+      "id": "offerWidth",
+      "label": "Offer card width",
+      "type": "number",
+      "default": "2"
+    },
+    {
+      "id": "groupLabels",
+      "label": "Group labels",
+      "type": "list",
+      "fields": {
+        "name": {
+          "id": "id",
+          "label": "ID",
+          "type": "string"
+        },
+        "url": {
+          "id": "label",
+          "label": "URL",
+          "type": "string"
+        },
+        "thumbnail": {
+          "id": "thumbnail",
+          "label": "Thumbnail",
+          "type": "string",
+          "format": "uri",
+          "purpose": "image"
+        }
+      },
+      "default": [
+        {
+          "id": "digital",
+          "label": "Digital"
+        },
+        {
+          "id": "bundle",
+          "label": "Print + Digital"
+        }
+      ]
+    },
+    {
+      "id": "showGroupedOffers",
+      "label": "Group offers",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "freeTrialLink",
+      "label": "Free trial link",
+      "type": "richText",
+      "default": "Start a free trial"
+    },
+    {
+      "id": "primaryColor",
+      "label": "Primary color",
+      "type": "string",
+      "default": "#01271e"
+    },
+    {
+      "id": "accentColor",
+      "label": "Accent color",
+      "type": "string",
+      "default": "#59e87a"
+    },
+    {
+      "id": "backgroundColor",
+      "label": "Background color",
+      "type": "string",
+      "default": "#f2f4f4"
+    },
+    {
+      "id": "cardBackgroundColor",
+      "label": "Card background color",
+      "type": "string",
+      "default": "#faf8f6"
+    },
+    {
+      "id": "ctaGradient",
+      "label": "CTA button gradient",
+      "type": "string",
+      "default": "linear-gradient(135deg, #dcff64, #54eb77)"
+    },
+    {
+      "id": "ctaGradientHover",
+      "label": "CTA button gradient (hover)",
+      "type": "string",
+      "default": "linear-gradient(135deg, #d4f75c, #4ce36f)"
+    }
+  ]
+}
