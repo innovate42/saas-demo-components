@@ -9,7 +9,7 @@
  * page or with Limio's Tailwind layer.
  * ------------------------------------------------------------------ */
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Oswald:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Teko:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Oswald:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Rubik:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Teko:wght@500;600;700&display=swap");
 
 .pcc-root {
   /* Fallbacks only — index.js overwrites these inline per club. */

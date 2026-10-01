@@ -86,6 +86,60 @@ export const CLUBS = {
     planDescription: "Adult (18+)",
     price: "38.00",
   }),
+  // Themed from the live ascot.com King Edward VII Membership page.
+  // Colours and type were read off that page with getComputedStyle, so
+  // the palette here is evidenced rather than brand knowledge:
+  //   header / hero band            #071023   (white h1 on it, 18.96:1)
+  //   "Tickets" CTA + accent        #1635E7   (white on it, 7.79:1)
+  //   body copy                     #4F5254 on #F4F5F5
+  //   CTAs                          border-radius 0px, title case
+  //   headings                      weight 800, no letter-spacing
+  //   plan + price                  "King Edward VII Membership",
+  //                                 "£470pp | £180 joining fee for new members"
+  //
+  // Ascot ships two licensed faces this registry can't: "SLTF The Silver
+  // Editorial" (a high-contrast Didone, used for every heading) and
+  // "Geograph" (the body grotesque). Playfair Display and Inter stand in
+  // — Playfair is the closest editorial serif on Google Fonts, though it
+  // is a little less hairline than the original.
+  //
+  // `fee` is the £180 joining fee, which is the only charge the page
+  // states on top of the £470. It is not a card or booking fee, and the
+  // transaction-fee toggle is off by default, so it only ever shows if
+  // someone turns it on.
+  //
+  // The postal address is the one piece of brand knowledge here: the
+  // page never gives it.
+  ascot: club({
+    name: "Ascot",
+    fullName: "Ascot Racecourse",
+    initials: "ASCOT",
+    site: "https://www.ascot.com",
+    primary: "#071023",
+    onPrimary: "#ffffff",
+    secondary: "#1635e7",
+    accent: "#1635e7",
+    onAccent: "#ffffff",
+    text: "#4f5254",
+    surfaceAlt: "#f4f5f5",
+    display: "'Playfair Display', Georgia, serif",
+    body: "'Inter', system-ui, sans-serif",
+    displayWeight: "800",
+    displayTransform: "none",
+    displaySpacing: "0",
+    radius: "0px",
+    fee: "180.00",
+    stadium: {
+      name: "Ascot Racecourse",
+      address1: "Ascot Racecourse",
+      address2: "High Street",
+      city: "Ascot",
+      postalCode: "SL5 7JX",
+    },
+    planName: "King Edward VII Membership",
+    planDescription: "Annual Membership",
+    price: "470.00",
+  }),
   "aston-villa": club({
     name: "Aston Villa",
     fullName: "Aston Villa Football Club",
