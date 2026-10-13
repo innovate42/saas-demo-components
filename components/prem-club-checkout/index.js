@@ -295,6 +295,13 @@ const PremClubCheckout = () => {
   const unitFee = props.showTransactionFee === true ? toNumber(pick(props.transactionFee, club.fee)) : 0
   const ddDiscount = toNumber(club.ddDiscount)
 
+  // Optional charity line in the cart. The name falls back to a generic
+  // "<Club> Foundation" rather than a real registered charity — the
+  // registry doesn't carry those, so set `donationName` per demo.
+  const donationEnabled = props.showDonation === true
+  const donationName = pick(props.donationName, `${club.name} Foundation`)
+  const donationNote = pick(props.donationNote, "")
+
   const methods = PAYMENT_METHODS.filter((method) => props[method.prop] !== false)
   const fallbackMethod = methods.length ? methods[0].id : "card"
   const initialMethod = methods.some((method) => method.id === props.defaultPaymentMethod)
@@ -302,6 +309,10 @@ const PremClubCheckout = () => {
     : fallbackMethod
 
   const [method, setMethod] = useState(initialMethod)
+  const [donationAmount, setDonationAmount] = useState(() =>
+    String(pick(props.donationAmount, "10"))
+  )
+  const [donationRemoved, setDonationRemoved] = useState(false)
   const [step, setStep] = useState(1)
   const [completed, setCompleted] = useState({})
   const [submitted, setSubmitted] = useState(false)
@@ -401,10 +412,18 @@ const PremClubCheckout = () => {
   const money = (value) =>
     `${symbol}${value.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 
-  const subtotal = unitPrice * quantity
+  const membershipSubtotal = unitPrice * quantity
+  const donationShown = donationEnabled && !donationRemoved
+  const donation = donationShown ? Math.max(0, toNumber(donationAmount)) : 0
+  const subtotal = membershipSubtotal + donation
   const fees = unitFee * quantity
-  const ddSaving = method === "direct-debit" && ddDiscount > 0 ? Math.min(ddDiscount, subtotal) : 0
-  const promoSaving = promo ? Math.min(promo.amount, Math.max(0, subtotal - ddSaving)) : 0
+  // Direct-debit and promo savings cap against the membership, not the
+  // donation — discounting someone's charitable gift would be wrong.
+  const ddSaving =
+    method === "direct-debit" && ddDiscount > 0 ? Math.min(ddDiscount, membershipSubtotal) : 0
+  const promoSaving = promo
+    ? Math.min(promo.amount, Math.max(0, membershipSubtotal - ddSaving))
+    : 0
   const total = Math.max(0, subtotal + fees - ddSaving - promoSaving)
 
   const assignmentEnabled = props.showAssignmentStep !== false
@@ -842,6 +861,41 @@ const PremClubCheckout = () => {
                 </div>
                 <div className="pcc-summary__item-price">{money(unitPrice * quantity)}</div>
               </li>
+
+              {donationShown ? (
+                <li className="pcc-summary__item pcc-summary__item--donation">
+                  <span className="pcc-donation__crest" aria-hidden="true">
+                    {club.initials}
+                  </span>
+                  <div className="pcc-summary__item-body">
+                    <div className="pcc-summary__item-name">{donationName}</div>
+                    {donationNote ? (
+                      <div className="pcc-summary__item-desc">{donationNote}</div>
+                    ) : null}
+                  </div>
+                  <div className="pcc-donation__amount">
+                    <span className="pcc-donation__symbol">{symbol}</span>
+                    <input
+                      className="pcc-donation__input"
+                      type="text"
+                      inputMode="decimal"
+                      value={donationAmount}
+                      aria-label={`${donationName} amount`}
+                      onChange={(event) =>
+                        setDonationAmount(event.target.value.replace(/[^0-9.]/g, ""))
+                      }
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="pcc-donation__remove"
+                    aria-label={`Remove ${donationName}`}
+                    onClick={() => setDonationRemoved(true)}
+                  >
+                    &times;
+                  </button>
+                </li>
+              ) : null}
             </ul>
 
             {props.showPromoCode !== false ? (

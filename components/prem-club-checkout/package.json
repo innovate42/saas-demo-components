@@ -1,7 +1,7 @@
 {
   "name": "@limio/prem-club-checkout",
-  "version": "1.8.0",
-  "description": "Premier League club checkout replica — the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
+  "version": "1.9.0",
+  "description": "Premier League club checkout replica \u2014 the Tottenham Hotspur membership checkout layout, re-themed per club from a built-in theme registry. Visual only: the submit button does not place an order.",
   "main": "./index.js",
   "sideEffects": [
     "*.css"
@@ -174,7 +174,7 @@
       "id": "currencySymbol",
       "label": "Currency symbol",
       "type": "string",
-      "default": "£"
+      "default": "\u00a3"
     },
     {
       "id": "promoCode",
@@ -199,6 +199,30 @@
       "label": "Show promo code redemption",
       "type": "boolean",
       "default": true
+    },
+    {
+      "id": "showDonation",
+      "label": "Show charity donation in cart",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "id": "donationName",
+      "label": "Donation name (blank = <Club> Foundation)",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "id": "donationAmount",
+      "label": "Donation default amount",
+      "type": "string",
+      "default": "10"
+    },
+    {
+      "id": "donationNote",
+      "label": "Donation note under the name",
+      "type": "string",
+      "default": "Payments taken monthly, cancel any time from your account."
     },
     {
       "id": "showCard",
@@ -399,7 +423,7 @@
       "id": "termsText",
       "label": "Terms copy above the checkbox",
       "type": "richtext",
-      "default": "<p>By clicking Submit Payment, you agree to the 2026–27 Terms and Conditions. For information on how we may process your personal information, please refer to our Privacy Policy. Your booking will be submitted and payment processed. Your contract begins once payment is confirmed and ends after the event. Memberships are non-refundable and non-exchangeable except as stated in the Terms and Conditions.</p>"
+      "default": "<p>By clicking Submit Payment, you agree to the 2026\u201327 Terms and Conditions. For information on how we may process your personal information, please refer to our Privacy Policy. Your booking will be submitted and payment processed. Your contract begins once payment is confirmed and ends after the event. Memberships are non-refundable and non-exchangeable except as stated in the Terms and Conditions.</p>"
     },
     {
       "id": "marketingText",

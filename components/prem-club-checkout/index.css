@@ -988,6 +988,109 @@ select.pcc-input--locked {
   font-size: 15px;
 }
 
+/* ── Charity donation row ────────────────────────────────────────── *
+ * Optional second cart line, enabled with the `showDonation` prop.
+ * The crest is a monogram built from the club's own initials rather
+ * than an image, so the row needs no external asset.
+ * ------------------------------------------------------------------ */
+/* `.pcc-root li` in the reset block is (0,1,1) and zeroes margin, padding
+   and border, so this needs the extra class to win. */
+.pcc-root .pcc-summary__item--donation {
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--pcc-border);
+}
+
+/* Lets the name and note wrap instead of forcing the row wider. */
+.pcc-summary__item--donation .pcc-summary__item-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pcc-donation__crest {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pcc-primary);
+  color: var(--pcc-on-primary);
+  font-family: var(--pcc-font-display);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.pcc-donation__amount {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 8px;
+  border: 1px solid var(--pcc-border);
+  border-radius: var(--pcc-radius);
+  background: var(--pcc-surface);
+}
+
+.pcc-donation__amount:focus-within {
+  border-color: var(--pcc-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pcc-accent) 22%, transparent);
+}
+
+.pcc-donation__symbol {
+  color: var(--pcc-muted);
+  font-size: 14px;
+}
+
+.pcc-donation__input {
+  width: 40px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--pcc-text);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+  padding: 0;
+}
+
+.pcc-donation__remove {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--pcc-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--pcc-radius);
+}
+
+.pcc-donation__remove:hover,
+.pcc-donation__remove:focus-visible {
+  color: var(--pcc-text);
+  background: var(--pcc-surface-alt);
+}
+
+@media (max-width: 767px) {
+  .pcc-root .pcc-summary__item--donation {
+    flex-wrap: wrap;
+  }
+  .pcc-donation__amount {
+    margin-left: 46px;
+  }
+}
+
 .pcc-promo {
   padding-top: 16px;
 }
