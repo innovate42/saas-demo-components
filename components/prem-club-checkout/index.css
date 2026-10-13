@@ -990,8 +990,6 @@ select.pcc-input--locked {
 
 /* ── Charity donation row ────────────────────────────────────────── *
  * Optional second cart line, enabled with the `showDonation` prop.
- * The crest is a monogram built from the club's own initials rather
- * than an image, so the row needs no external asset.
  * ------------------------------------------------------------------ */
 /* `.pcc-root li` in the reset block is (0,1,1) and zeroes margin, padding
    and border, so this needs the extra class to win. */
@@ -1007,23 +1005,6 @@ select.pcc-input--locked {
 .pcc-summary__item--donation .pcc-summary__item-body {
   flex: 1 1 auto;
   min-width: 0;
-}
-
-.pcc-donation__crest {
-  flex: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--pcc-primary);
-  color: var(--pcc-on-primary);
-  font-family: var(--pcc-font-display);
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  line-height: 1;
 }
 
 .pcc-donation__amount {
@@ -1085,9 +1066,6 @@ select.pcc-input--locked {
 @media (max-width: 767px) {
   .pcc-root .pcc-summary__item--donation {
     flex-wrap: wrap;
-  }
-  .pcc-donation__amount {
-    margin-left: 46px;
   }
 }
 

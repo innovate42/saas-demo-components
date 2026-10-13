@@ -864,9 +864,6 @@ const PremClubCheckout = () => {
 
               {donationShown ? (
                 <li className="pcc-summary__item pcc-summary__item--donation">
-                  <span className="pcc-donation__crest" aria-hidden="true">
-                    {club.initials}
-                  </span>
                   <div className="pcc-summary__item-body">
                     <div className="pcc-summary__item-name">{donationName}</div>
                     {donationNote ? (
