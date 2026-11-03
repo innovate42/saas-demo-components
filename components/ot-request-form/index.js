@@ -75,7 +75,8 @@ const OtRequestForm = () => {
         if (busy) return
         setBusy(true)
         const body = new URLSearchParams()
-        body.append("orgid", orgId)
+        // Web-to-Lead names the org parameter "oid"; Web-to-Case names it "orgid".
+        body.append(mode === "case" ? "orgid" : "oid", orgId)
         body.append("retURL", window.location.href)
         const detail = [
             form.reason && `${reasonLabel || "Reason"}: ${form.reason}`,
