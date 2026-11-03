@@ -24,8 +24,9 @@ sort, checkbox, put that in the cart… paying with credit card."* (Rich, Anatol
 
 1. **`/ot-store`** — on-brand OpenText (header, Inter, blue gradient). Three products, *one* store:
    Essentials (portal), **Trading Grid Foundation** (ERP-integrated), Enterprise (talk to us).
-2. Flip the region pill **Americas → United Kingdom → Europe**: "from" prices switch $ → £ → €. *"One page,
-   three currencies; the region also decides which data centre we provision in — your EMEA ops-centre point."*
+2. Open the **region picker in the header** (globe, defaults to Americas · USD) → **United Kingdom → Europe**:
+   "from" prices switch $ → £ → €. *"One page, three currencies; the region also decides which data centre
+   we provision in — your EMEA ops-centre point."*
 3. The **"which fits you?"** helper: answer *ERP / 5–15 partners / OpenText sets it up* → recommends Trading Grid.
    *"This is your demand-gen persona — finance and supply-chain people, not IT."*
 
@@ -44,11 +45,15 @@ sort, checkbox, put that in the cart… paying with credit card."* (Rich, Anatol
 
 **Their words:** *"Templatised sales order form and T&Cs… make it a credit card process."*
 
-1. **`/ot-checkout`** — company, tax ID, industry; cart shows plan + ERP adapter + extra partner + onboarding,
-   with **cross-sell** (premium support).
+1. **`/ot-checkout`** — three collapsible steps: **1 Your details** → *Continue* → **2 Company & billing**
+   (company, tax ID, industry; type the street and pick it from the **Loqate** list) → *Continue to payment* →
+   **3 Payment**. Finished steps collapse to a one-line summary with *Edit*. The cart (plan + ERP adapter +
+   extra partner + onboarding) and **cross-sell** (premium support) stay on the right.
 2. Promo **`GOLIVE20`** — 20% off the first 3 months (launch offer for the relaunch campaign).
 3. Payment: **card or ACH**. Tick **"I accept the OpenText Business Network order form and terms on behalf of
    my company"** — that *is* the signed order form. Place order.
+4. **Warm-up:** place one throwaway order ~10 min before the call. The first order after a quiet spell can
+   return a gateway 504 while Zuora is cold, even though the order still goes through (~30 s).
 
 ## Act 4 — Behind the click: Salesforce, provisioning, entitlements (~6 min)  ★
 
@@ -67,7 +72,9 @@ automate that integration with provisioning."*
 
 ## Act 5 — Onboarding assistant: "sweat onboarding" (~4 min)
 
-1. On **`/ot-confirm`** the **OpenText onboarding assistant** opens: it reads the order back ("Foundation 5,
+1. **`/ot-confirm`** is an onboarding page, not a receipt: *"You're in. Let's get you trading in 9 days"*, the
+   order recap, four steps (set-up details → invite your team → connect your ERP → test with partners) and a
+   Day 0 → Day 9 timeline. Click **Talk to the onboarding assistant**: it reads the order back ("Foundation 5,
    NetSuite, Walmart, Target…"), then asks **one question at a time**: NetSuite version, AS2 vs SFTP
    (recommends SFTP if unsure), EDI ID (*"no ID yet? we'll use ZZ:ACMESUPPLY"*), admin users, go-live date.
 2. It reads everything back, the customer confirms → outcome **Onboarding details captured**.
@@ -112,7 +119,7 @@ automate that integration with provisioning."*
 | Add-ons | `/add_ons/OT <ERP Adapter\|Extra Trading Partner\|Premium Support> <Monthly\|Annual> <CUR>`, `/add_ons/OT Guided Onboarding <CUR>` |
 | Zuora | Products `OT-BN-ESSENTIALS`, `OT-BN-TGFOUNDATION`, `OT-BN-ADDONS` (Media Tenant 39825) |
 | Pages | `/ot-store`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payment-methods`, `/ot-cancel` |
-| Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123) |
+| Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124) |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
 | Onboarding → Salesforce | Limio agent `ot-bn-onboarding` → `OTOnboardingSync` (run on demand) |
 | Order custom fields | `OT_Product`, `OT_ERP`, `OT_ERP_Adapter`, `OT_TradingPartners`, `OT_PartnerCount`, `OT_Documents`, `OT_Region`, `OT_DataCentre`, `OT_Onboarding` |
