@@ -45,15 +45,21 @@ sort, checkbox, put that in the cart… paying with credit card."* (Rich, Anatol
 
 **Their words:** *"Templatised sales order form and T&Cs… make it a credit card process."*
 
-1. **`/ot-checkout`** — three collapsible steps: **1 Your details** → *Continue* → **2 Company & billing**
+1. **Sign in / Register** — checkout is behind the **Trading Grid Online** sign-in (Auth0, `opentext-auth0`):
+   same navy look as `tradinggrid.opentext.com`, but **Register** is open self-serve (first name, last name,
+   company) instead of invitation-only. Email/password or Google. *"Same login as the portal they'll live in."*
+2. **`/ot-checkout`** — three collapsible steps: **1 Your details** → *Continue* → **2 Company & billing**
    (company, tax ID, industry; type the street and pick it from the **Loqate** list) → *Continue to payment* →
-   **3 Payment**. Finished steps collapse to a one-line summary with *Edit*. The cart (plan + ERP adapter +
-   extra partner + onboarding) and **cross-sell** (premium support) stay on the right.
-2. Promo **`GOLIVE20`** — 20% off the first 3 months (launch offer for the relaunch campaign).
-3. Payment: **card or ACH**. Tick **"I accept the OpenText Business Network order form and terms on behalf of
+   **3 Payment**. Finished steps collapse to a one-line summary with *Edit*; Enter works as *Continue*. The cart
+   (plan + ERP adapter + extra partner + onboarding) stays on the right with an **Upgrade your plan** card
+   (Essentials Plus / next tier) and **Add to your plan** add-ons.
+3. Promo **`GOLIVE20`** — 20% off the first 3 months (launch offer for the relaunch campaign).
+4. Payment: **card or ACH**. Tick **"I accept the OpenText Business Network order form and terms on behalf of
    my company"** — that *is* the signed order form. Place order.
-4. **Warm-up:** place one throwaway order ~10 min before the call. The first order after a quiet spell can
+5. **Warm-up:** place one throwaway order ~10 min before the call. The first order after a quiet spell can
    return a gateway 504 while Zuora is cold, even though the order still goes through (~30 s).
+6. **Morning of the demo:** open every page once and reload it. The first visit after a publish can still
+   serve the previous build.
 
 ## Act 4 — Behind the click: Salesforce, provisioning, entitlements (~6 min)  ★
 
@@ -96,7 +102,7 @@ automate that integration with provisioning."*
 1. Salesforce → **Acme Fasteners – Trading Grid Foundation 10** (Proposal stage, Dynamics 365 BC, Home Depot /
    Lowe's / Ace / Tractor Supply / Menards).
 2. Rep generates a **checkout link** (Limio for Salesforce) with the negotiated bundle → sends it.
-3. Customer pays on the same OpenText checkout → **the rep's opportunity flips to Closed Won** (channel
+3. Customer signs in or registers, then pays on the same OpenText checkout → **the rep's opportunity flips to Closed Won** (channel
    *Sales-assisted checkout link*) and the provisioning order is created — same automation as self-serve.
    *"Reps sell, the store collects — no contract, no PS ticket."*
 
@@ -120,6 +126,7 @@ automate that integration with provisioning."*
 | Zuora | Products `OT-BN-ESSENTIALS`, `OT-BN-TGFOUNDATION`, `OT-BN-ADDONS` (Media Tenant 39825) |
 | Pages | `/ot-store`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payment-methods`, `/ot-cancel` |
 | Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124) |
+| Login | Auth0 tenant `limio`, app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`) → Limio provider `opentext-auth0` on checkout, confirm and the 6 portal pages; store/product pages stay public. See `ot-AUTH0-SETUP.md`. |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
 | Onboarding → Salesforce | Limio agent `ot-bn-onboarding` → `OTOnboardingSync` (run on demand) |
 | Order custom fields | `OT_Product`, `OT_ERP`, `OT_ERP_Adapter`, `OT_TradingPartners`, `OT_PartnerCount`, `OT_Documents`, `OT_Region`, `OT_DataCentre`, `OT_Onboarding` |
