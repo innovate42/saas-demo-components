@@ -1,0 +1,70 @@
+{
+  "name": "@limio/ot-onboarding",
+  "version": "1.0.0",
+  "description": "OpenText order-confirmation onboarding: welcome + recap of what was bought (product, ERP, trading partners, data centre), a four-step 'get started' checklist, the day-0-to-9 go-live timeline, and a 'Not sure? Talk to our onboarding assistant' action that opens the Limio onboarding agent (window.LimioChat).",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "Order confirmed. Your Trading Grid tenant is being created." },
+    { "id": "headline", "label": "Headline", "type": "string", "default": "You're in. Let's get you trading in 9 days." },
+    { "id": "subheadline", "label": "Subheadline", "type": "richtext", "default": "<p>We've already started provisioning. Four quick steps and your first purchase order flows straight into your business. Our onboarding assistant can do step 1 with you right now, in about ten minutes.</p>" },
+    {
+      "id": "steps",
+      "label": "Get-started steps",
+      "type": "list",
+      "fields": {
+        "icon": { "id": "icon", "label": "Icon (chat | users | plug | test | flag)", "type": "string" },
+        "when": { "id": "when", "label": "When", "type": "string" },
+        "title": { "id": "title", "label": "Title", "type": "string" },
+        "body": { "id": "body", "label": "Body", "type": "string" },
+        "cta": { "id": "cta", "label": "Link text", "type": "string" },
+        "action": { "id": "action", "label": "Action (assistant | link)", "type": "string" },
+        "href": { "id": "href", "label": "Link", "type": "string" }
+      },
+      "default": [
+        { "icon": "chat", "when": "Today · 10 min", "title": "Tell us about your setup", "body": "Your ERP version, how you want to connect (AS2, SFTP or VAN) and your EDI ID. No EDI expertise needed: we'll suggest the defaults.", "cta": "Start with the assistant", "action": "assistant", "href": "" },
+        { "icon": "users", "when": "Today", "title": "Invite your team", "body": "Add the people who will manage orders, ASNs and invoices. They get access to the Trading Grid portal as soon as your tenant is live.", "cta": "Manage your account", "action": "link", "href": "/ot-account" },
+        { "icon": "plug", "when": "Day 1-4", "title": "Connect your ERP", "body": "We install your ERP adapter and set up connectivity. If you chose guided onboarding, your B2B specialist books a kickoff call with you.", "cta": "", "action": "link", "href": "" },
+        { "icon": "test", "when": "Day 3-9", "title": "Test with your partners, then go live", "body": "We load each partner's maps and run test documents with them. When every partner certifies, your first production order flows.", "cta": "", "action": "link", "href": "" }
+      ]
+    },
+    { "id": "timelineTitle", "label": "Timeline title", "type": "string", "default": "Your road to go-live" },
+    {
+      "id": "timeline",
+      "label": "Timeline",
+      "type": "list",
+      "fields": {
+        "day": { "id": "day", "label": "Day", "type": "string" },
+        "title": { "id": "title", "label": "Title", "type": "string" },
+        "body": { "id": "body", "label": "Body", "type": "string" }
+      },
+      "default": [
+        { "day": "Day 0", "title": "Order confirmed", "body": "Tenant created in your region" },
+        { "day": "Day 1-2", "title": "ERP connected", "body": "Adapter installed, users invited" },
+        { "day": "Day 2-4", "title": "Connectivity live", "body": "AS2, SFTP or VAN configured" },
+        { "day": "Day 3-8", "title": "Partner testing", "body": "Maps loaded, test documents exchanged" },
+        { "day": "Day 9", "title": "Go live", "body": "First production purchase order" }
+      ]
+    },
+    { "id": "assistantTitle", "label": "Assistant band title", "type": "string", "default": "Not sure where to start? Talk to our onboarding assistant." },
+    { "id": "assistantBody", "label": "Assistant band body", "type": "richtext", "default": "<p>It knows your order, explains AS2 vs SFTP in plain English, suggests an EDI ID if you don't have one, and hands everything to your OpenText specialist.</p>" },
+    { "id": "assistantCta", "label": "Assistant button", "type": "string", "default": "Talk to the onboarding assistant" },
+    { "id": "assistantFallbackHref", "label": "Fallback link if the assistant is unavailable", "type": "string", "default": "" },
+    {
+      "id": "secondaryLinks",
+      "label": "Secondary links (first one shows next to the main button)",
+      "type": "list",
+      "fields": {
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "href": { "id": "href", "label": "Link", "type": "string" }
+      },
+      "default": [
+        { "label": "Go to my account", "href": "/ot-account" },
+        { "label": "Download your invoice", "href": "/ot-invoices" },
+        { "label": "Talk to a specialist", "href": "/ot-enterprise" }
+      ]
+    }
+  ]
+}

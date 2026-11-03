@@ -178,35 +178,40 @@
 .ot-store__cta {
     display: inline-block;
     text-align: center;
-    background: var(--ot-blue);
-    border: 2px solid var(--ot-blue);
+    background: #1a6aff;
+    border: 0;
     color: #fff;
-    border-radius: 16px;
-    padding: 11px 24px;
-    font-weight: 700;
-    font-size: 15px;
+    border-radius: 50px;
+    padding: 14px 28px;
+    font-weight: 500;
+    font-size: 16px;
     text-decoration: none;
+    letter-spacing: 0;
+    transition: background 0.3s ease-out;
 }
 
 .ot-store__cta:hover {
-    background: var(--ot-blue-dark);
-    border-color: var(--ot-blue-dark);
+    background: #0b55e0;
+    border-color: #0b55e0;
 }
 
 .ot-store__cta--outline {
     background: #fff;
-    color: var(--ot-blue);
+    color: #1a6aff;
+    border-radius: 50px;
+    border: 1.5px solid #1a6aff;
+    font-weight: 500;
 }
 
 .ot-store__cta--outline:hover {
-    background: var(--ot-tint);
-    color: var(--ot-blue);
+    background: #ebf2ff;
+    color: #1a6aff;
 }
 
 .ot-store__cta--light {
     background: #fff;
     border-color: #fff;
-    color: var(--ot-ink);
+    color: #101c2f;
 }
 
 .ot-store__cta--light:hover {
@@ -258,16 +263,17 @@
     text-align: left;
     background: #fff;
     border: 1.5px solid var(--ot-line);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 9px 12px;
     font-size: 14px;
     color: var(--ot-ink);
 }
 
 .ot-store__answer--on {
-    border-color: var(--ot-blue);
-    background: var(--ot-tint);
+    border-color: #222f39;
+    background: #222f39;
     font-weight: 600;
+    color: #fff;
 }
 
 .ot-store__verdict {

@@ -103,21 +103,23 @@
     grid-column: 1 / -1;
     justify-self: start;
     display: inline-block;
-    background: var(--ot-blue);
-    border: 2px solid var(--ot-blue);
+    background: #1a6aff;
+    border: 0;
     color: #fff;
-    border-radius: 16px;
-    padding: 11px 28px;
-    font-weight: 700;
-    font-size: 15px;
+    border-radius: 50px;
+    padding: 14px 32px;
+    font-weight: 500;
+    font-size: 16px;
     font-family: inherit;
     text-decoration: none;
     cursor: pointer;
+    letter-spacing: 0;
+    transition: background 0.3s ease-out;
 }
 
 .ot-form__btn:hover:not(:disabled) {
-    background: var(--ot-blue-dark);
-    border-color: var(--ot-blue-dark);
+    background: #0b55e0;
+    border-color: #0b55e0;
 }
 
 .ot-form__aside {

@@ -1,0 +1,32 @@
+{
+  "name": "@limio/ot-step-continue",
+  "version": "1.0.0",
+  "description": "Checkout accordion Continue button (custom subcomponent for the stock checkout form). Validates the fields of its own step before advancing, reopens the right step on a failed submit or a declined payment. Pairs with ot-step-header.",
+  "main": "./index.tsx",
+  "isCustomSubcomponent": true,
+  "scripts": {
+    "build": "yarn component:webpack"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    {
+      "id": "stepNumber",
+      "label": "Step this button closes",
+      "type": "picklist",
+      "options": [
+        { "id": "1", "label": "1", "value": "1" },
+        { "id": "2", "label": "2", "value": "2" },
+        { "id": "3", "label": "3", "value": "3" },
+        { "id": "4", "label": "4", "value": "4" }
+      ],
+      "default": "1"
+    },
+    { "id": "label", "label": "Button label", "type": "string", "default": "Continue" }
+  ]
+}
