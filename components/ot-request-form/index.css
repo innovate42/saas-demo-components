@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
+
+.ot-form {
+    --ot-blue: #0066ff;
+    --ot-blue-dark: #024cbb;
+    --ot-ink: #101c2f;
+    --ot-body: #3f4d62;
+    --ot-line: #e7eaef;
+    --ot-tint: #ebf2ff;
+    font-family: "Inter var", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ot-body);
+    font-weight: 300;
+    background: linear-gradient(#e7eaef 0%, #ffffff 320px);
+}
+
+.ot-form *,
+.ot-form *::before,
+.ot-form *::after {
+    box-sizing: border-box;
+}
+
+.ot-form__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 32px;
+    align-items: start;
+}
+
+.ot-form__main {
+    background: #fff;
+    border: 1px solid var(--ot-line);
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.ot-form__kicker {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ot-blue);
+}
+
+.ot-form__title {
+    margin: 0 0 10px;
+    font-size: 34px;
+    line-height: 40px;
+    font-weight: 800;
+    color: var(--ot-ink);
+    letter-spacing: -0.022em;
+}
+
+.ot-form__intro {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.ot-form__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+}
+
+.ot-form__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ot-ink);
+}
+
+.ot-form__wide {
+    grid-column: 1 / -1;
+}
+
+.ot-form__form input,
+.ot-form__form select,
+.ot-form__form textarea {
+    border: 1.5px solid var(--ot-line);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 400;
+    color: var(--ot-ink);
+    background: #fff;
+}
+
+.ot-form__form input:focus,
+.ot-form__form select:focus,
+.ot-form__form textarea:focus {
+    outline: none;
+    border-color: var(--ot-blue);
+}
+
+.ot-form__btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+    display: inline-block;
+    background: var(--ot-blue);
+    border: 2px solid var(--ot-blue);
+    color: #fff;
+    border-radius: 16px;
+    padding: 11px 28px;
+    font-weight: 700;
+    font-size: 15px;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ot-form__btn:hover:not(:disabled) {
+    background: var(--ot-blue-dark);
+    border-color: var(--ot-blue-dark);
+}
+
+.ot-form__aside {
+    background: linear-gradient(135deg, #024cbb 11%, #000066 48%);
+    color: #dbe6ff;
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.ot-form__aside h2 {
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ot-form__aside ul {
+    margin: 0;
+    padding-left: 18px;
+    line-height: 26px;
+}
+
+@media (max-width: 900px) {
+    .ot-form__inner {
+        grid-template-columns: 1fr;
+    }
+    .ot-form__form {
+        grid-template-columns: 1fr;
+    }
+}
