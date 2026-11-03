@@ -4,9 +4,9 @@ import { useStaticProps } from "./componentStaticProps"
 import { ERPS, INDUSTRIES, PARTNERS } from "./data"
 import "./index.css"
 
-// One page, three currencies. The shopper's region picks the currency (and the
-// data centre the order is provisioned in), and is shared with ot-header and
-// ot-store through localStorage + a window event.
+// One page, three currencies. The shopper picks a region in ot-header; it sets
+// the currency (USD by default) and the data centre the order is provisioned
+// in. ot-header shares it through localStorage + an "ot-region-change" event.
 const REGIONS = {
     NA: { label: "Americas", currency: "USD", dataCentre: "North America", partnerRegion: "NA" },
     UK: { label: "United Kingdom", currency: "GBP", dataCentre: "EMEA (UK)", partnerRegion: "EMEA" },
@@ -46,19 +46,6 @@ const readRegion = () => {
         // storage blocked
     }
     return "NA"
-}
-
-const saveRegion = (region) => {
-    try {
-        window.localStorage.setItem("ot-region", region)
-    } catch (e) {
-        // storage blocked: the choice still applies to this page
-    }
-    try {
-        window.dispatchEvent(new CustomEvent("ot-region-change", { detail: region }))
-    } catch (e) {
-        // old browsers
-    }
 }
 
 const featureRows = (html) =>
@@ -137,7 +124,19 @@ const OtBuy = () => {
     const [busy, setBusy] = useState(false)
     const [error, setError] = useState("")
 
-    useEffect(() => setRegion(readRegion()), [])
+    useEffect(() => {
+        setRegion(readRegion())
+        // the region is picked in ot-header; follow it live and reset the partner
+        // picks, which are region-specific
+        const onChange = (e) => {
+            if (e?.detail && REGIONS[e.detail]) {
+                setRegion(e.detail)
+                setSelected([])
+            }
+        }
+        window.addEventListener("ot-region-change", onChange)
+        return () => window.removeEventListener("ot-region-change", onChange)
+    }, [])
 
     const r = REGIONS[region]
     const currency = r.currency
@@ -217,12 +216,6 @@ const OtBuy = () => {
         setCustom("")
     }
 
-    const changeRegion = (key) => {
-        setRegion(key)
-        saveRegion(key)
-        setSelected([])
-    }
-
     const docsNeeded = Array.from(
         new Set(selected.flatMap((n) => PARTNERS.find((p) => p.name === n)?.docs || []))
     )
@@ -285,20 +278,6 @@ const OtBuy = () => {
                     {subheadline && (
                         <div className="ot-buy__sub" dangerouslySetInnerHTML={{ __html: sanitize(subheadline) }} />
                     )}
-                    <div className="ot-buy__regions" role="radiogroup" aria-label="Your region">
-                        {Object.entries(REGIONS).map(([key, val]) => (
-                            <button
-                                key={key}
-                                type="button"
-                                role="radio"
-                                aria-checked={region === key}
-                                className={`ot-buy__region${region === key ? " ot-buy__region--on" : ""}`}
-                                onClick={() => changeRegion(key)}
-                            >
-                                {val.label} <span>{val.currency}</span>
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </div>
 

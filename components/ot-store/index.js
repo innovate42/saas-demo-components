@@ -93,16 +93,6 @@ const OtStore = () => {
         return () => window.removeEventListener("ot-region-change", onChange)
     }, [])
 
-    const changeRegion = (key) => {
-        setRegion(key)
-        try {
-            window.localStorage.setItem("ot-region", key)
-            window.dispatchEvent(new CustomEvent("ot-region-change", { detail: key }))
-        } catch (e) {
-            // storage blocked
-        }
-    }
-
     const currency = REGIONS[region].currency
     const done = Object.keys(answers).length === QUIZ.length
     const scores = { essentials: 0, tradinggrid: 0, enterprise: 0 }
@@ -120,19 +110,6 @@ const OtStore = () => {
                     {kicker && <p className="ot-store__kicker">{kicker}</p>}
                     <h1 className="ot-store__headline">{headline}</h1>
                     <div className="ot-store__sub" dangerouslySetInnerHTML={{ __html: sanitize(subheadline) }} />
-                    <div className="ot-store__regions">
-                        <span>Shopping from</span>
-                        {Object.entries(REGIONS).map(([key, val]) => (
-                            <button
-                                key={key}
-                                type="button"
-                                className={`ot-store__region${region === key ? " ot-store__region--on" : ""}`}
-                                onClick={() => changeRegion(key)}
-                            >
-                                {val.label} · {val.currency}
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </section>
 

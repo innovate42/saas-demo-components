@@ -4,8 +4,9 @@ import { useStaticProps } from "./componentStaticProps"
 import { OpenTextLogo } from "./logo"
 import "./index.css"
 
-// Region is chosen on the store and buying pages and remembered per browser,
-// so every page in the journey shows the same market. Keys match ot-buy.
+// The header owns the region picker (like opentext.com's country selector).
+// The choice is remembered per browser and broadcast with an
+// "ot-region-change" event, so ot-store and ot-buy follow it. Default: USD.
 const REGIONS = {
     NA: { label: "Americas", currency: "USD" },
     UK: { label: "United Kingdom", currency: "GBP" },
@@ -43,11 +44,20 @@ const OtHeader = () => {
     const [open, setOpen] = useState(false)
     useEffect(() => {
         setRegion(readRegion())
-        // ot-buy and ot-store broadcast region changes so the pill stays in sync
         const onChange = (e) => e?.detail && REGIONS[e.detail] && setRegion(e.detail)
         window.addEventListener("ot-region-change", onChange)
         return () => window.removeEventListener("ot-region-change", onChange)
     }, [])
+
+    const choose = (key) => {
+        setRegion(key)
+        try {
+            window.localStorage.setItem("ot-region", key)
+        } catch (e) {
+            // storage blocked: the choice still applies to this page
+        }
+        window.dispatchEvent(new CustomEvent("ot-region-change", { detail: key }))
+    }
 
     const here = typeof window !== "undefined" ? window.location.pathname : ""
     const r = REGIONS[region]
@@ -81,9 +91,19 @@ const OtHeader = () => {
                         </a>
                     ))}
                     {showRegion && r && (
-                        <span className="ot-header__region" title="Prices and data centre follow your region">
-                            {r.label} · {SYMBOL[r.currency]} {r.currency}
-                        </span>
+                        <label className="ot-header__region" title="Prices, currency and data centre follow your region">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" className="ot-header__globe">
+                                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                                <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                            </svg>
+                            <select value={region} onChange={(e) => choose(e.target.value)} aria-label="Region">
+                                {Object.entries(REGIONS).map(([key, val]) => (
+                                    <option key={key} value={key}>
+                                        {val.label} ({SYMBOL[val.currency]} {val.currency})
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
                     )}
                     {accountLabel?.trim() && (
                         <a className="ot-header__link ot-header__link--account" href={accountHref}>

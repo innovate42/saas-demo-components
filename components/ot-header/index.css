@@ -78,30 +78,54 @@
 }
 
 .ot-header__region {
-    font-size: 13px;
-    color: var(--ot-body);
-    background: #f6f7f7;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--ot-ink);
     border: 1px solid var(--ot-line);
-    border-radius: 999px;
-    padding: 4px 12px;
+    border-radius: 6px;
+    padding: 4px 6px 4px 10px;
+    background: #fff;
     white-space: nowrap;
+}
+
+.ot-header__globe {
+    width: 16px;
+    height: 16px;
+    color: var(--ot-blue);
+}
+
+.ot-header__region select {
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding-right: 2px;
+}
+
+.ot-header__region select:focus {
+    outline: none;
 }
 
 .ot-header__cta {
-    background: var(--ot-blue);
-    border: 2px solid var(--ot-blue);
+    background: #1a6aff;
+    border: 0;
     color: #fff;
-    border-radius: 16px;
-    padding: 7px 20px;
-    font-weight: 700;
+    border-radius: 50px;
+    padding: 9px 22px;
+    font-weight: 500;
     font-size: 15px;
     text-decoration: none;
     white-space: nowrap;
+    letter-spacing: 0;
+    transition: background 0.3s ease-out;
 }
 
 .ot-header__cta:hover {
-    background: var(--ot-blue-dark);
-    border-color: var(--ot-blue-dark);
+    background: #0b55e0;
+    border-color: #0b55e0;
 }
 
 .ot-header__burger {
