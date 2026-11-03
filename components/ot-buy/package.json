@@ -1,0 +1,37 @@
+{
+  "name": "@limio/ot-buy",
+  "version": "1.0.0",
+  "description": "OpenText Business Network guided buying: pick your ERP (Trading Grid), search and select trading partners from a directory with the EDI documents each one needs, get the plan recommended for your partner count, choose self-service or guided onboarding, then check out. One page serves USD, GBP and EUR; the region picker also sets the provisioning data centre. Selections travel on the order as customFields (OT_ERP, OT_TradingPartners, OT_Region, …).",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "mode", "label": "Product family (tradinggrid | essentials)", "type": "string", "default": "tradinggrid" },
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "OpenText Trading Grid Foundation" },
+    { "id": "headline", "label": "Headline", "type": "string", "default": "Connect your ERP to your retailers. Live in days, not months." },
+    { "id": "subheadline", "label": "Subheadline", "type": "richtext", "default": "<p>Tell us which ERP you run and who you trade with. We recommend the right bundle, and our automation sets up your connections the moment you check out.</p>" },
+    { "id": "erpTitle", "label": "Step: ERP title", "type": "string", "default": "Which ERP runs your business?" },
+    { "id": "erpHint", "label": "Step: ERP hint", "type": "string", "default": "We connect it to the Trading Grid with a pre-built adapter, so there is no mapping project." },
+    { "id": "partnerTitle", "label": "Step: partners title", "type": "string", "default": "Who do you need to trade with?" },
+    { "id": "partnerHint", "label": "Step: partners hint", "type": "string", "default": "More than a million businesses are already connected to the OpenText Business Network. Pick the ones asking you for EDI." },
+    { "id": "planTitle", "label": "Step: plan title", "type": "string", "default": "Your recommended bundle" },
+    { "id": "planHint", "label": "Step: plan hint", "type": "string", "default": "Sized to your partners. Change plan or add partners any time from your account." },
+    { "id": "onboardingTitle", "label": "Step: onboarding title", "type": "string", "default": "How do you want to go live?" },
+    { "id": "onboardingHint", "label": "Step: onboarding hint", "type": "string", "default": "Either way, our onboarding assistant collects your setup details right after checkout." },
+    { "id": "diyTitle", "label": "Self-service option title", "type": "string", "default": "Self-service setup" },
+    { "id": "diyBody", "label": "Self-service option body", "type": "string", "default": "Our onboarding assistant walks you through ERP, SFTP/AS2 and partner testing. Most customers are live in 9 days." },
+    { "id": "guidedTitle", "label": "Guided option title", "type": "string", "default": "Guided onboarding" },
+    { "id": "guidedBody", "label": "Guided option body", "type": "string", "default": "A named OpenText B2B specialist configures your connection, maps your documents and tests every partner with you." },
+    { "id": "premiumLabel", "label": "Premium support checkbox label", "type": "string", "default": "Add 24/7 premium support with a named B2B specialist" },
+    { "id": "enterpriseThreshold", "label": "Partner count that triggers the Enterprise nudge", "type": "number", "default": 15 },
+    { "id": "enterpriseHref", "label": "Enterprise link", "type": "string", "default": "/ot-enterprise" },
+    { "id": "enterpriseNudge", "label": "Enterprise nudge text", "type": "richtext", "default": "<p>Trading with more than 15 partners or need a custom integration? <strong>Trading Grid Enterprise</strong> is built for you.</p>" },
+    { "id": "promoHint", "label": "Promo hint under the summary", "type": "richtext", "default": "<p>Launch offer: use code <strong>GOLIVE20</strong> at checkout for 20% off your first 3 months.</p>" },
+    { "id": "termsNote", "label": "Terms note", "type": "richtext", "default": "<p>Prices exclude tax. You accept the OpenText Business Network order form and terms at checkout — no contract negotiation needed.</p>" },
+    { "id": "ctaLabel", "label": "Checkout button", "type": "string", "default": "Continue to checkout" },
+    { "id": "monthlyLabel", "label": "Monthly toggle label", "type": "string", "default": "Monthly" },
+    { "id": "annualLabel", "label": "Annual toggle label", "type": "string", "default": "Annual" },
+    { "id": "annualSaving", "label": "Annual saving chip", "type": "string", "default": "2 months free" }
+  ]
+}

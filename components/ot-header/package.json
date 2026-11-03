@@ -1,0 +1,32 @@
+{
+  "name": "@limio/ot-header",
+  "version": "1.0.0",
+  "description": "OpenText Business Network store header — inline OpenText logo (no fetchable logo URL exists, so the stock nav-header cannot be used), store navigation, the shopper's region/currency and a My account link.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "logoHref", "label": "Logo link", "type": "string", "default": "/ot-store" },
+    { "id": "storeLabel", "label": "Label beside the logo", "type": "string", "default": "Business Network Store" },
+    {
+      "id": "items",
+      "label": "Navigation links",
+      "type": "list",
+      "fields": {
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "url": { "id": "url", "label": "URL", "type": "string" }
+      },
+      "default": [
+        { "label": "B2B Integration Essentials", "url": "/ot-essentials" },
+        { "label": "Trading Grid", "url": "/ot-trading-grid" },
+        { "label": "Enterprise", "url": "/ot-enterprise" }
+      ]
+    },
+    { "id": "showRegion", "label": "Show the region/currency pill", "type": "boolean", "default": true },
+    { "id": "accountLabel", "label": "Account link label", "type": "string", "default": "My account" },
+    { "id": "accountHref", "label": "Account link", "type": "string", "default": "/ot-account" },
+    { "id": "ctaLabel", "label": "Header button label (blank hides it)", "type": "string", "default": "Talk to sales" },
+    { "id": "ctaHref", "label": "Header button link", "type": "string", "default": "/ot-enterprise" }
+  ]
+}

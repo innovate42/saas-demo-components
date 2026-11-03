@@ -1,0 +1,41 @@
+{
+  "name": "@limio/ot-request-form",
+  "version": "1.0.0",
+  "description": "OpenText-styled request form that posts to Salesforce Web-to-Lead (mode=lead: Enterprise enquiries, upgrade to Enterprise) or Web-to-Case (mode=case: cancellation requests), so sales-led and service requests land in the same Salesforce org as self-serve orders.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "mode", "label": "Mode (lead | case)", "type": "string", "default": "lead" },
+    { "id": "orgId", "label": "Salesforce org ID", "type": "string", "default": "00DQH000002gPQf" },
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "Trading Grid Enterprise" },
+    { "id": "title", "label": "Title", "type": "string", "default": "Talk to a Business Network specialist" },
+    { "id": "intro", "label": "Intro", "type": "richtext", "default": "<p>Tell us about your trading network. A specialist in your region will contact you within one business day with a tailored proposal.</p>" },
+    { "id": "reasonLabel", "label": "Reason field label", "type": "string", "default": "What are you looking for?" },
+    {
+      "id": "reasons",
+      "label": "Reason options",
+      "type": "list",
+      "fields": { "label": { "id": "label", "label": "Option", "type": "string" } },
+      "default": [
+        { "label": "Upgrade my plan to Enterprise" },
+        { "label": "More than 15 trading partners" },
+        { "label": "Custom ERP or API integration" },
+        { "label": "Managed services" },
+        { "label": "Multi-region rollout" }
+      ]
+    },
+    { "id": "leadSource", "label": "Lead source", "type": "string", "default": "Web" },
+    { "id": "caseOrigin", "label": "Case origin", "type": "string", "default": "Web" },
+    { "id": "caseType", "label": "Case type", "type": "string", "default": "" },
+    { "id": "caseSubject", "label": "Case subject", "type": "string", "default": "" },
+    { "id": "submitLabel", "label": "Submit button", "type": "string", "default": "Contact me" },
+    { "id": "successTitle", "label": "Success title", "type": "string", "default": "Thanks — we're on it" },
+    { "id": "successBody", "label": "Success body", "type": "richtext", "default": "<p>Your request is with our team. A Business Network specialist will be in touch within one business day.</p>" },
+    { "id": "backLabel", "label": "Back link label", "type": "string", "default": "Back to the store" },
+    { "id": "backHref", "label": "Back link", "type": "string", "default": "/ot-store" },
+    { "id": "asideTitle", "label": "Side panel title", "type": "string", "default": "What Enterprise adds" },
+    { "id": "asideBody", "label": "Side panel body", "type": "richtext", "default": "<ul><li>Unlimited trading partners and document volume</li><li>Managed services: we run your B2B operations</li><li>Custom integrations and API access</li><li>Regional account team and SLAs</li></ul>" }
+  ]
+}
