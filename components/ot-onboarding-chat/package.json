@@ -1,0 +1,16 @@
+{
+  "name": "@limio/ot-onboarding-chat",
+  "version": "1.0.0",
+  "description": "OpenText order-confirmation: opens the Limio chat embed (window.LimioChat) and sends the onboarding agent a first message with the order reference and email of the order just placed, so the agent can look the order up through the Limio API connector. Renders nothing; sends once per order.",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "autoOpen", "label": "Open the assistant automatically when the page loads", "type": "boolean", "default": true },
+    { "id": "openDelayMs", "label": "Delay before opening (ms)", "type": "number", "default": 1500 },
+    { "id": "sendOnManualOpen", "label": "If not opened automatically, send the order details the first time the visitor opens the chat", "type": "boolean", "default": true },
+    { "id": "messageTemplate", "label": "First message ({orderReference}, {email})", "type": "string", "default": "Hi, I've just placed order {orderReference} with {email}. Let's set up my onboarding." },
+    { "id": "emailOnlyTemplate", "label": "First message when there is no order reference ({email})", "type": "string", "default": "Hi, I've just placed an order with {email}. Let's set up my onboarding." }
+  ]
+}
