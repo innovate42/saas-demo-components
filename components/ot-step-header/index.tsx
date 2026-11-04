@@ -28,8 +28,8 @@ const GROUPS = ["customerDetails", "billingDetails", "deliveryDetails"]
 
 // Login claim names to try for each customerDetails field, in order.
 const LOGIN_CLAIMS: Record<string, string[]> = {
-  firstName: ["given_name", "firstName", "first_name"],
-  lastName: ["family_name", "lastName", "last_name"],
+  firstName: ["first_name", "given_name", "firstName"],
+  lastName: ["last_name", "family_name", "lastName"],
   email: ["email"],
   companyName: ["company_name", "companyName", "company"]
 }
