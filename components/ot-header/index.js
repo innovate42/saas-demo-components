@@ -74,6 +74,13 @@ const OtHeader = () => {
         accountHref = "/ot-account",
         ctaLabel = "",
         ctaHref = "#",
+        variant = "store",
+        accountTitle = "",
+        accountNav = [],
+        backLabel = "",
+        backHref = "/ot-store",
+        signOutLabel = "",
+        signOutHref = "",
     } = props
 
     const [region, setRegion] = useState("NA")
@@ -130,6 +137,57 @@ const OtHeader = () => {
     const groups = groupProducts(products)
     const productActive = (products || []).some((p) => p.url === here)
     const showProducts = productsLabel?.trim() && groups.length > 0
+
+    // Account variant: the self-service pages get the Trading Grid Online navy
+    // bar with the account sections instead of the store navigation.
+    if (variant === "account") {
+        const trimmed = (url) => String(url || "").replace(/\/$/, "")
+        return (
+            <header className="ot-header ot-header--account">
+                <div className="ot-header__inner">
+                    <a className="ot-header__brand" href={accountHref}>
+                        <OpenTextLogo className="ot-header__logo" />
+                        {accountTitle?.trim() && <span className="ot-header__store">{accountTitle}</span>}
+                    </a>
+                    <button
+                        type="button"
+                        className="ot-header__burger"
+                        aria-label="Menu"
+                        aria-expanded={open}
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+                    <nav className={`ot-header__nav${open ? " ot-header__nav--open" : ""}`}>
+                        {(accountNav || []).map((item, i) => (
+                            <a
+                                key={i}
+                                href={item.url}
+                                className={`ot-header__link${trimmed(here) === trimmed(item.url) ? " ot-header__link--active" : ""}`}
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                        {backLabel?.trim() && (
+                            <a className="ot-header__back" href={backHref}>
+                                <svg viewBox="0 0 12 12" aria-hidden="true" className="ot-header__chevron ot-header__chevron--back">
+                                    <path d="M7.5 3l-3 3 3 3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                                </svg>
+                                {backLabel}
+                            </a>
+                        )}
+                        {signOutLabel?.trim() && signOutHref && (
+                            <a className="ot-header__signout" href={signOutHref}>
+                                {signOutLabel}
+                            </a>
+                        )}
+                    </nav>
+                </div>
+            </header>
+        )
+    }
 
     return (
         <header className="ot-header">
