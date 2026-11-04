@@ -10,6 +10,9 @@ import packageData from "./package.json"
 // `{{customerDetails.email}}`-style templates, plus an Edit link.
 // With prefillFromLogin on, it also fills empty name, email and company fields
 // from the signed-in user's login claims (Trading Grid Online registration).
+// The shop's own login token drops custom claims such as company_name, so it
+// also asks Auth0 for a fresh ID token through a hidden prompt=none iframe
+// (the customer is already signed in there) and reads the claims from that.
 
 type Props = {
   stepNumber: number | string
@@ -19,6 +22,8 @@ type Props = {
   totalSteps: number | string
   summary: string
   prefillFromLogin: boolean
+  authDomain: string
+  authClientId: string
 }
 
 const ACTIVE = "data-active-step"
@@ -40,6 +45,64 @@ function claim(attributes: Record<string, unknown>, keys: string[]): string {
     if (typeof value === "string" && value.trim()) return value.trim()
   }
   return ""
+}
+
+// The shop's login token only keeps a few standard claims (email, name), so
+// when there is no first/last name claim, split "First Last" from `name`.
+function loginValues(attributes: Record<string, unknown>): Record<string, string> {
+  const values: Record<string, string> = {}
+  Object.entries(LOGIN_CLAIMS).forEach(([field, keys]) => {
+    values[field] = claim(attributes, keys)
+  })
+  const name = claim(attributes, ["name"])
+  if (name && !name.includes("@") && !values.firstName && !values.lastName) {
+    const [first, ...rest] = name.split(/\s+/)
+    values.firstName = first
+    values.lastName = rest.join(" ")
+  }
+  return values
+}
+
+// Silent sign-in: an ID token for the user already signed in to Auth0, or null.
+// Needs the shop origin in the Auth0 app's callbacks and web origins, and the
+// implicit grant. Fails quietly (e.g. third-party cookies blocked).
+function silentClaims(domain: string, clientId: string, timeoutMs = 8000): Promise<Record<string, unknown> | null> {
+  return new Promise((resolve) => {
+    if (!domain || !clientId) return resolve(null)
+    const random = (): string => Math.random().toString(36).slice(2)
+    const params = new URLSearchParams({
+      client_id: clientId,
+      response_type: "id_token",
+      response_mode: "web_message",
+      redirect_uri: window.location.origin,
+      scope: "openid profile email",
+      prompt: "none",
+      nonce: random(),
+      state: random()
+    })
+    const frame = document.createElement("iframe")
+    frame.style.display = "none"
+    const done = (claims: Record<string, unknown> | null): void => {
+      clearTimeout(timer)
+      window.removeEventListener("message", onMessage)
+      frame.remove()
+      resolve(claims)
+    }
+    const onMessage = (event: MessageEvent): void => {
+      if (event.origin !== `https://${domain}` || event.data?.type !== "authorization_response") return
+      const token: string = event.data.response?.id_token || ""
+      try {
+        const part = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")
+        done(JSON.parse(decodeURIComponent(escape(window.atob(part)))))
+      } catch (e) {
+        done(null)
+      }
+    }
+    const timer = setTimeout(() => done(null), timeoutMs)
+    window.addEventListener("message", onMessage)
+    frame.src = `https://${domain}/authorize?${params.toString()}`
+    document.body.appendChild(frame)
+  })
 }
 
 // Sets an input the way typing would, so the form's own state picks it up.
@@ -102,6 +165,7 @@ function OtStepHeader(reactProps: Partial<Props>): React.JSX.Element {
   const user = useUser() as { attributes?: Record<string, unknown> } | undefined
   const basket = useBasket() as { updateBasketDetails?: (payload: unknown) => Promise<unknown> } | undefined
   const attributes = user?.attributes
+  const loginKey = attributes ? String(attributes.sub || attributes.email || "signed-in") : ""
 
   const step = Number(props.stepNumber) || 1
   const total = Number(props.totalSteps) || 3
@@ -139,14 +203,14 @@ function OtStepHeader(reactProps: Partial<Props>): React.JSX.Element {
   }, [inBuilder])
 
   React.useEffect(() => {
-    if (inBuilder || !props.prefillFromLogin || !attributes) return
+    if (inBuilder || !props.prefillFromLogin || !loginKey || !attributes) return
     let done = false
+    let found = loginValues(attributes)
     const prefill = (): void => {
       const form = findForm()
       if (done || !form) return
       const values: Record<string, string> = {}
-      Object.entries(LOGIN_CLAIMS).forEach(([field, keys]) => {
-        const value = claim(attributes, keys)
+      Object.entries(found).forEach(([field, value]) => {
         const el = form.querySelector<HTMLInputElement>(`input[name="customerDetails.${field}"]`)
         if (value && el && !el.value) {
           setInput(el, value)
@@ -159,8 +223,23 @@ function OtStepHeader(reactProps: Partial<Props>): React.JSX.Element {
     }
     // The fields can mount after this header, so try again shortly after.
     const timers = [0, 400, 1500].map((ms) => setTimeout(prefill, ms))
-    return () => timers.forEach(clearTimeout)
-  }, [attributes, basket, findForm, inBuilder, props.prefillFromLogin])
+    let cancelled = false
+    silentClaims(props.authDomain, props.authClientId).then((claims) => {
+      if (cancelled || !claims) return
+      const fromAuth = loginValues(claims)
+      found = { ...found }
+      Object.keys(fromAuth).forEach((field) => {
+        if (fromAuth[field]) found[field] = fromAuth[field]
+      })
+      done = false
+      prefill()
+    })
+    return () => {
+      cancelled = true
+      timers.forEach(clearTimeout)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginKey, basket, findForm, inBuilder, props.prefillFromLogin, props.authDomain, props.authClientId])
 
   const isActive = active === step
   const isDone = active > step

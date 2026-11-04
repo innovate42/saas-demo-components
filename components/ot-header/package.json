@@ -1,7 +1,7 @@
 {
   "name": "@limio/ot-header",
-  "version": "1.0.0",
-  "description": "OpenText Business Network store header — inline OpenText logo (no fetchable logo URL exists, so the stock nav-header cannot be used), store navigation, the shopper's region/currency and a My account link.",
+  "version": "1.1.0",
+  "description": "OpenText Business Network store header — inline OpenText logo (no fetchable logo URL exists, so the stock nav-header cannot be used), a Products menu that unrolls into a panel (like limio.com's Features menu), store navigation, the shopper's region/currency and a My account link.",
   "main": "./index.js",
   "peerDependencies": {
     "react": "*"
@@ -9,17 +9,42 @@
   "limioProps": [
     { "id": "logoHref", "label": "Logo link", "type": "string", "default": "/ot-store" },
     { "id": "storeLabel", "label": "Label beside the logo", "type": "string", "default": "Business Network Store" },
+    { "id": "productsLabel", "label": "Products menu label (blank hides the menu)", "type": "string", "default": "Products" },
+    {
+      "id": "products",
+      "label": "Products menu entries (grouped into columns by Group)",
+      "type": "list",
+      "fields": {
+        "group": { "id": "group", "label": "Group (column heading)", "type": "string" },
+        "label": { "id": "label", "label": "Label", "type": "string" },
+        "description": { "id": "description", "label": "One-line description", "type": "string" },
+        "url": { "id": "url", "label": "URL", "type": "string" },
+        "icon": { "id": "icon", "label": "Icon (portal | grid | enterprise | plug | partners | onboarding | support)", "type": "string" }
+      },
+      "default": [
+        { "group": "Buy online", "label": "B2B Integration Essentials", "description": "Web EDI portal, pre-mapped to your retailers", "url": "/ot-essentials", "icon": "portal" },
+        { "group": "Buy online", "label": "Trading Grid Foundation", "description": "EDI connected to your ERP, live in 9 days", "url": "/ot-trading-grid", "icon": "grid" },
+        { "group": "Add to your plan", "label": "ERP adapters", "description": "NetSuite, Dynamics 365, SAP Business One and more", "url": "/ot-trading-grid", "icon": "plug" },
+        { "group": "Add to your plan", "label": "Extra trading partners", "description": "Connect another retailer or distributor", "url": "/ot-trading-grid", "icon": "partners" },
+        { "group": "Add to your plan", "label": "Guided onboarding", "description": "Our team sets up and tests your connections", "url": "/ot-trading-grid", "icon": "onboarding" },
+        { "group": "Talk to us", "label": "Trading Grid Enterprise", "description": "High volumes, managed services, global hubs", "url": "/ot-enterprise", "icon": "enterprise" },
+        { "group": "Talk to us", "label": "Premium support", "description": "24/7 support with a named contact", "url": "/ot-enterprise", "icon": "support" }
+      ]
+    },
+    { "id": "featureKicker", "label": "Products menu card: kicker", "type": "string", "default": "Not sure which fits?" },
+    { "id": "featureTitle", "label": "Products menu card: title", "type": "string", "default": "Live with your retailers in 9 days" },
+    { "id": "featureText", "label": "Products menu card: text", "type": "string", "default": "Answer a few questions and we'll recommend the right plan for your ERP and trading partners." },
+    { "id": "featureLinkLabel", "label": "Products menu card: link label", "type": "string", "default": "Help me choose" },
+    { "id": "featureHref", "label": "Products menu card: link", "type": "string", "default": "/ot-help-me-choose" },
     {
       "id": "items",
-      "label": "Navigation links",
+      "label": "Navigation links (after the Products menu)",
       "type": "list",
       "fields": {
         "label": { "id": "label", "label": "Label", "type": "string" },
         "url": { "id": "url", "label": "URL", "type": "string" }
       },
       "default": [
-        { "label": "B2B Integration Essentials", "url": "/ot-essentials" },
-        { "label": "Trading Grid", "url": "/ot-trading-grid" },
         { "label": "Enterprise", "url": "/ot-enterprise" },
         { "label": "Help me choose", "url": "/ot-help-me-choose" }
       ]
