@@ -392,3 +392,14 @@
         line-height: 38px;
     }
 }
+
+.ot-store__quiz-chat {
+    margin: 16px 0 0;
+    font-size: 15px;
+}
+
+.ot-store__quiz-chat a {
+    color: var(--ot-blue);
+    font-weight: 700;
+    text-decoration: none;
+}

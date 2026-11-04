@@ -1,0 +1,127 @@
+# ot-help-me-choose: OpenText Business Network "Help me choose" agent (saas-dev demo).
+# Modelled on the Webroot help-me-choose agent. The prompt lives in prompt.md.
+description: OpenText Business Network plan advisor. Qualifies new customers and recommends Essentials, Trading Grid Foundation or Enterprise with a link; opens a Salesforce case for existing customers.
+streaming: true
+maxSteps: 8
+toolsets:
+- name: knowledge
+  toolsetId: toolset-abf4f1c20d9af5bc51da53162d78e5ed
+outcomes:
+- id: ot_new_customer_qualified
+  label: Qualified - plan recommended
+  criteria: A new customer's needs are understood (ERP or not, roughly how many trading partners, and anything that points to Enterprise) and you have settled on one plan to recommend. Choose it as soon as the plan is settled, including an Enterprise recommendation. Not for existing customers, and not while you are still establishing what they need.
+  whatToDo: 'Give the recommendation: the plan, why it fits in one sentence tied to their answers, the price with any add-on that applies (ERP adapter when their ERP has one, Guided Onboarding if they want OpenText to set it up, extra partners), and the full link. If they have not said who will set it up, mention Guided Onboarding in one line. Then offer the follow-up once: they can leave a work email for an OpenText specialist, or just use the link.'
+  style:
+    color: '#16a34a'
+- id: ot_lead_contact_given
+  label: Lead - contact details given
+  criteria: After a plan was recommended, the new customer has typed their work email address in the conversation so an OpenText specialist can follow up. Only when an actual email address is present.
+  whatToDo: 'Save the lead with @data_capture. Thank them by name if you have it, in one line: an OpenText Business Network specialist will follow up by email about the recommended plan. Repeat the link once. No recap of the conversation.'
+  style:
+    color: '#0b7a3e'
+  tools:
+  - id: data_capture
+    tool: data_capture
+    config:
+      inputs:
+      - id: lead_email
+        type: email
+        required: true
+        description: The work email the visitor typed.
+      - id: lead_name
+        type: string
+        required: true
+        description: Their name, or 'unknown'.
+      - id: lead_company
+        type: string
+        required: true
+        description: Their company, or 'unknown'.
+      - id: lead_plan
+        type: string
+        required: true
+        allowed:
+        - essentials_starter
+        - essentials_plus
+        - tg_foundation_5
+        - tg_foundation_10
+        - enterprise
+        description: The plan you recommended.
+      - id: lead_details
+        type: string
+        required: true
+        description: 'One line of what drove the recommendation, e.g. ''ERP: NetSuite; partners: Walmart, Target; region: US; add-ons: ERP adapter, Guided Onboarding''.'
+- id: ot_existing_customer_case
+  label: Existing customer - case opened
+  criteria: 'The visitor already has an OpenText Business Network, Trading Grid or Essentials subscription and
+
+    has a request or problem, has given their email and a description of the issue, and has said yes to
+
+    opening a support case. Do not choose it before they have agreed to the case.'
+  whatToDo: 'Record the case with @data_capture. Tell them a support case is open with the OpenText Business Network team, in one or two sentences:
+
+    what it is about, that a specialist will reply by email, and the response target from the knowledge
+
+    document on existing customers. If it is urgent (orders not flowing), say it is flagged urgent.
+
+    Do not invent a case number.'
+  style:
+    color: '#0066FF'
+  tools:
+  - id: data_capture
+    tool: data_capture
+    config:
+      inputs:
+      - id: case_email
+        type: email
+        required: true
+        description: The customer's email.
+      - id: case_company
+        type: string
+        required: true
+        description: Their company, or 'unknown'.
+      - id: case_subject
+        type: string
+        required: true
+        description: Short subject, e.g. 'Walmart purchase orders not arriving in NetSuite'.
+      - id: case_description
+        type: string
+        required: true
+        description: One to three sentences on the request or problem, including their name and any subscription reference they gave.
+      - id: case_priority
+        type: string
+        required: true
+        allowed:
+        - normal
+        - urgent
+        description: '''urgent'' when orders or invoices are not flowing, otherwise ''normal''.'
+- id: not_buying_other
+  label: Not buying - other
+  criteria: 'The conversation ends without a recommendation or a case: browsing or research with no intent to buy,
+
+    a question that is not about OpenText Business Network, an existing customer who did not want a case,
+
+    or someone who decided against buying before a plan was identified. Not an escape from a hard
+
+    recommendation, and not for someone who got a recommendation and is still thinking.'
+  whatToDo: 'Answer what you can, point to https://saas-dev-shop.prod.limio.com/ot-store for the plans or
+
+    https://saas-dev-shop.prod.limio.com/ot-enterprise to talk to a person, and leave the door open
+
+    without pushing.'
+  style:
+    color: '#91ade8'
+presentation:
+  title: OpenText Business Network assistant
+  greeting: Hi, I'm the OpenText Business Network assistant. Tell me a little about how you trade with your customers and I'll point you to the right plan. It usually takes three or four questions. Already a customer? I can open a support case for you.
+  placeholder: e.g. We use NetSuite and Walmart wants EDI
+  pointers:
+  - Help me choose a plan
+  - I'm already an OpenText customer
+  - What does EDI involve?
+  greetingPopup: false
+  footer: AI assistant. Answers may be imperfect; check the plan page before you buy.
+  theme:
+    accentColor: '#0066FF'
+    bubbleStyle: rounded
+    headerColor: '#0066FF'
+    userBubbleColor: '#0066FF'
