@@ -1,15 +1,15 @@
 # OpenText Business Network — branded login (Auth0) setup
 
-> **Status, 3 Nov 2026: ready to apply, not applied.** The OT portal pages run on saas-dev's
-> Anonymous Auth (`saas-dev-shop.prod.limio.com`) so the demo works today. This adds an
-> OpenText-branded sign-in ("My OpenText") for the self-service portal, following the
-> `limio-media-auth0` recipe on stripe-demo (itself cloned from `brentford-auth0`).
-> Two steps need a person: editing the **shared** Auth0 login page, and pasting the client
-> secret into Limio. About 20 minutes.
+> **Status, 3 Nov 2026: applied.** Auth0 app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`,
+> tenant `limio`) and the Limio provider `opentext-auth0` are live. The sign-in page uses the Trading Grid Online
+> look (navy-to-teal gradient, white OpenText logo, pill button) with open self-serve **Register** (first name,
+> last name, company) instead of Trading Grid's invitation code. The theme is one CSS block and one
+> `CLIENT_THEMES` entry added to the shared Classic login page; removing those two blocks restores the original.
+> Brentford was re-checked after saving.
 
-Pages that should require login: `OT Account`, `OT Direct Update`, `OT Direct Update Sub`,
-`OT Invoices`, `OT Payment Methods`, `OT Cancel`. **Store, buying pages, checkout and confirm stay on
-Anonymous Auth** (guest checkout, like buy.webroot.com), so the purchase never stops at a login wall.
+Pages on `opentext-auth0`: `OT Checkout`, `OT Confirm`, `OT Account`, `OT Direct Update`,
+`OT Direct Update Sub`, `OT Invoices`, `OT Payment Methods`, `OT Cancel`. The store and buying pages
+(`OT Store`, `OT Trading Grid`, `OT Essentials`, `OT Enterprise`) stay public.
 
 ## 1. Auth0: create the app
 
@@ -90,7 +90,7 @@ named **`opentext-auth0`**. Copy every field from an existing Auth0 provider; on
 | jwks_uri | `https://limio.us.auth0.com/.well-known/jwks.json` |
 | client_id / client_secret | from step 1 (secret pasted by hand) |
 | scope | `openid profile email` |
-| token_endpoint_type | `POST` |
+| token_endpoint_type | `POST` (the Auth0 app uses `client_secret_post`) |
 
 Check it with `limio api GET /api/connect/authprovider -e saas-dev` (it should list `opentext-auth0`
 with `record_variant: "openid_connect"`).
@@ -101,7 +101,7 @@ with `record_variant: "openid_connect"`).
 ## 4. Switch the portal pages and republish
 
 ```bash
-for p in "OT Account" "OT Direct Update" "OT Direct Update Sub" "OT Invoices" "OT Payment Methods" "OT Cancel"; do
+for p in "OT Checkout" "OT Confirm" "OT Account" "OT Direct Update" "OT Direct Update Sub" "OT Invoices" "OT Payment Methods" "OT Cancel"; do
   limio catalog put "pages2/$p" --set 'data.pageAuthProvider="opentext-auth0"' -e saas-dev
   limio publish "$p" -e saas-dev
 done
