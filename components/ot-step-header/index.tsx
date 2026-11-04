@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useComponentProps, getPropsFromPackageJson, useLimioContext } from "@limio/sdk"
+import { useComponentProps, getPropsFromPackageJson, useLimioContext, useUser, useBasket } from "@limio/sdk"
 import packageData from "./package.json"
 
 // Accordion step header for the stock checkout form (custom subcomponent).
@@ -8,6 +8,8 @@ import packageData from "./package.json"
 // (each field carries `ot-section-N` in its className props). When a step is
 // collapsed the header shows a one-line summary of what was entered, built from
 // `{{customerDetails.email}}`-style templates, plus an Edit link.
+// With prefillFromLogin on, it also fills empty name, email and company fields
+// from the signed-in user's login claims (Trading Grid Online registration).
 
 type Props = {
   stepNumber: number | string
@@ -16,12 +18,38 @@ type Props = {
   editLabel: string
   totalSteps: number | string
   summary: string
+  prefillFromLogin: boolean
 }
 
 const ACTIVE = "data-active-step"
 const FORM = "form[name='checkout-form']"
 const EVENT = "ot-active-step-changed"
 const GROUPS = ["customerDetails", "billingDetails", "deliveryDetails"]
+
+// Login claim names to try for each customerDetails field, in order.
+const LOGIN_CLAIMS: Record<string, string[]> = {
+  firstName: ["given_name", "firstName", "first_name"],
+  lastName: ["family_name", "lastName", "last_name"],
+  email: ["email"],
+  companyName: ["company_name", "companyName", "company"]
+}
+
+function claim(attributes: Record<string, unknown>, keys: string[]): string {
+  for (const key of keys) {
+    const value = attributes[key]
+    if (typeof value === "string" && value.trim()) return value.trim()
+  }
+  return ""
+}
+
+// Sets an input the way typing would, so the form's own state picks it up.
+function setInput(el: HTMLInputElement, value: string): void {
+  const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set
+  if (setter) setter.call(el, value)
+  else el.value = value
+  el.dispatchEvent(new Event("input", { bubbles: true }))
+  el.dispatchEvent(new Event("change", { bubbles: true }))
+}
 
 function paymentLabel(form: HTMLFormElement): string {
   const checked = form.querySelector<HTMLInputElement>('input[name="paymentType"]:checked')
@@ -71,6 +99,10 @@ function OtStepHeader(reactProps: Partial<Props>): React.JSX.Element {
   const ctx = useLimioContext() as { isInPageBuilder?: boolean } | undefined
   const inBuilder = Boolean(ctx?.isInPageBuilder)
 
+  const user = useUser() as { attributes?: Record<string, unknown> } | undefined
+  const basket = useBasket() as { updateBasketDetails?: (payload: unknown) => Promise<unknown> } | undefined
+  const attributes = user?.attributes
+
   const step = Number(props.stepNumber) || 1
   const total = Number(props.totalSteps) || 3
   const [active, setActiveState] = React.useState<number>(step === 1 ? 1 : 0)
@@ -105,6 +137,30 @@ function OtStepHeader(reactProps: Partial<Props>): React.JSX.Element {
     document.addEventListener(EVENT, onChange)
     return () => document.removeEventListener(EVENT, onChange)
   }, [inBuilder])
+
+  React.useEffect(() => {
+    if (inBuilder || !props.prefillFromLogin || !attributes) return
+    let done = false
+    const prefill = (): void => {
+      const form = findForm()
+      if (done || !form) return
+      const values: Record<string, string> = {}
+      Object.entries(LOGIN_CLAIMS).forEach(([field, keys]) => {
+        const value = claim(attributes, keys)
+        const el = form.querySelector<HTMLInputElement>(`input[name="customerDetails.${field}"]`)
+        if (value && el && !el.value) {
+          setInput(el, value)
+          values[field] = value
+        }
+      })
+      if (!Object.keys(values).length) return
+      done = true
+      basket?.updateBasketDetails?.({ data: { order: { customerDetails: values } } })?.catch(() => undefined)
+    }
+    // The fields can mount after this header, so try again shortly after.
+    const timers = [0, 400, 1500].map((ms) => setTimeout(prefill, ms))
+    return () => timers.forEach(clearTimeout)
+  }, [attributes, basket, findForm, inBuilder, props.prefillFromLogin])
 
   const isActive = active === step
   const isDone = active > step
