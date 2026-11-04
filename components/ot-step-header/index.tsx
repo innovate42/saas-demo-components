@@ -47,14 +47,20 @@ function claim(attributes: Record<string, unknown>, keys: string[]): string {
   return ""
 }
 
-// The shop's login token only keeps a few standard claims (email, name), so
-// when there is no first/last name claim, split "First Last" from `name`.
+// The shop's login token only keeps email, name, given_name and family_name.
+// The Auth0 Action sends the company inside name as "First Last (Company)",
+// so read it from the brackets; with no first/last name claim, split the rest.
 function loginValues(attributes: Record<string, unknown>): Record<string, string> {
   const values: Record<string, string> = {}
   Object.entries(LOGIN_CLAIMS).forEach(([field, keys]) => {
     values[field] = claim(attributes, keys)
   })
-  const name = claim(attributes, ["name"])
+  let name = claim(attributes, ["name"])
+  const bracketed = name.match(/^(.*?)\s*\(([^()]+)\)$/)
+  if (bracketed) {
+    name = bracketed[1].trim()
+    if (!values.companyName) values.companyName = bracketed[2].trim()
+  }
   if (name && !name.includes("@") && !values.firstName && !values.lastName) {
     const [first, ...rest] = name.split(/\s+/)
     values.firstName = first
