@@ -31,6 +31,7 @@
     { "id": "subtitle", "label": "Subtitle (shown while open)", "type": "string", "default": "" },
     { "id": "editLabel", "label": "Edit link label", "type": "string", "default": "Edit" },
     { "id": "totalSteps", "label": "Total steps", "type": "string", "default": "3" },
-    { "id": "summary", "label": "Collapsed summary template, e.g. {{customerDetails.firstName}} · {{customerDetails.email}} (use {{paymentType}} for the payment step)", "type": "string", "default": "" }
+    { "id": "summary", "label": "Collapsed summary template, e.g. {{customerDetails.firstName}} · {{customerDetails.email}} (use {{paymentType}} for the payment step)", "type": "string", "default": "" },
+    { "id": "prefillFromLogin", "label": "Fill name, email and company from the signed-in user (use on step 1)", "type": "boolean", "default": false }
   ]
 }
