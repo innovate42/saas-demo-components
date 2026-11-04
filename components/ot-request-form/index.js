@@ -40,16 +40,17 @@ const OtRequestForm = () => {
         asideBody = "",
     } = props
 
-    let user = null
-    try {
-        user = useUser()
-    } catch (e) {
-        user = null
-    }
+    // Called plainly: on signed-in pages useUser() suspends while the session
+    // loads, and catching that broke the hook order (React error #311).
+    const user = useUser()
 
     const [form, setForm] = useState({ first: "", last: "", email: "", company: "", phone: "", country: "", partners: "", reason: "", details: "", subscription: "" })
     const [sent, setSent] = useState(false)
     const [busy, setBusy] = useState(false)
+
+    // useUser() returns a new object on every render, so key the prefill on the
+    // email string rather than the object.
+    const signedInEmail = userEmail(user)
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -61,12 +62,12 @@ const OtRequestForm = () => {
         }
         setForm((f) => ({
             ...f,
-            email: f.email || userEmail(user) || params.get("email") || "",
+            email: f.email || signedInEmail || params.get("email") || "",
             subscription: params.get("subscription") || f.subscription,
             reason: params.get("reason") || f.reason,
             partners: f.partners || selection.OT_PartnerCount || "",
         }))
-    }, [user])
+    }, [signedInEmail])
 
     const set = (k) => (e) => setForm({ ...form, [k]: e.target.value })
 

@@ -78,8 +78,11 @@ a supplier the way a seller would on a call.
    (plan + ERP adapter + extra partner + onboarding) stays on the right with an **Upgrade your plan** card
    (Essentials Plus / next tier) and **Add to your plan** add-ons.
 3. Promo **`GOLIVE20`** — 20% off the first 3 months (launch offer for the relaunch campaign).
-4. Payment: **card or ACH**. Tick **"I accept the OpenText Business Network order form and terms on behalf of
-   my company"** — that *is* the signed order form. Place order.
+4. Payment: **card or ACH**. The Zuora payment form looks like the rest of the checkout: card number, then
+   expiry + CVV, then name on card (ACH: name on account, routing + account number, account type + bank name).
+   Pick the billing **country first** in step 2 — Loqate and the payment form both wait for it. Tick **"I accept
+   the OpenText Business Network order form and terms on behalf of my company"** — that *is* the signed order
+   form. Place order.
 5. **Warm-up:** place one throwaway order ~10 min before the call. The first order after a quiet spell can
    return a gateway 504 while Zuora is cold, even though the order still goes through (~30 s).
 6. **Morning of the demo:** open every page once and reload it. The first visit after a publish can still
@@ -113,14 +116,25 @@ automate that integration with provisioning."*
    connection method, EDI ID, ERP version, admin users, go-live date, **AI summary + full transcript**, and a
    Task lands on the opportunity. *"The 9-day promise, with nobody re-keying an Excel file."*
 
-## Act 6 — Self-service portal (~3 min)
+## Act 6 — Self-service portal (~4 min)
 
-1. **`/ot-account`** — subscription, **Add partners & add-ons** (`/ot-direct-update`, prorated),
-   **Change plan** (`/ot-direct-update-sub`): Essentials Plus → **Trading Grid Foundation 5** (cross-product
-   upgrade) or Monthly → Annual. Each change is a new Closed Won "plan change" opportunity in Salesforce.
-2. **Upgrade to Trading Grid Enterprise** → `/ot-enterprise` → **Web-to-Lead** lands in Salesforce.
-3. **Request cancellation** → `/ot-cancel` → **Web-to-Case** in Salesforce (service owns retention, as today).
-4. Invoices and payment methods are self-serve.
+**Their words:** *"See invoices, see payment methods, see last payments and manage that."*
+
+Every account page has its own **My account** bar (Trading Grid Online navy, like the sign-in):
+**Subscription · Invoices · Payments · Payment methods** and **Back to store**.
+
+1. **Subscription** (`/ot-account`) — status, renewal date, price, payment method on file.
+   **Add partners & add-ons** (`/ot-direct-update`, prorated), **Change plan** (`/ot-direct-update-sub`):
+   Essentials Plus → **Trading Grid Foundation 5** (cross-product upgrade) or Monthly → Annual. Each change is a
+   new Closed Won "plan change" opportunity in Salesforce. *Plan changes need a card or ACH on file — an
+   invoice-paid subscription can't submit an update order (known Zuora/Limio issue).*
+2. **Invoices** (`/ot-invoices`) — every invoice, balance, **download PDF**, pay an open balance.
+3. **Payments** (`/ot-payments`) — payment history: date, status, amount, card/ACH used.
+4. **Payment methods** (`/ot-payment-methods`) — saved cards/ACH, set default, remove;
+   **Add payment method** (`/ot-add-payment-method`) — card or ACH through the same Zuora form as checkout,
+   back to Payment methods when saved. *"Finance updates the card themselves — no ticket."*
+5. **Upgrade to Trading Grid Enterprise** → `/ot-enterprise` → **Web-to-Lead** lands in Salesforce.
+6. **Request cancellation** → `/ot-cancel` → **Web-to-Case** in Salesforce (service owns retention, as today).
 
 ## Act 7 — Sales hands off to self-serve (Limio for Salesforce) (~3 min)
 
@@ -149,7 +163,9 @@ automate that integration with provisioning."*
 | Offers | `/offers2/OT <Essentials Starter\|Essentials Plus\|Trading Grid Foundation 5\|10> <Monthly\|Annual> <USD\|GBP\|EUR>` (24) |
 | Add-ons | `/add_ons/OT <ERP Adapter\|Extra Trading Partner\|Premium Support> <Monthly\|Annual> <CUR>`, `/add_ons/OT Guided Onboarding <CUR>` |
 | Zuora | Products `OT-BN-ESSENTIALS`, `OT-BN-TGFOUNDATION`, `OT-BN-ADDONS` (Media Tenant 39825) |
-| Pages | `/ot-store`, `/ot-help-me-choose`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payment-methods`, `/ot-cancel` |
+| Payment forms | Zuora hosted pages "saas-demo CC" / "saas-demo ACH" (Payments > Setup Payment Pages). **Shared by every saas-dev-shop demo.** Field order + CSS restyled 2026-11-04; old CSS backed up in Chrome localStorage on apisandbox.zuora.com (`limio-backup-saas-demo-CC-css-2026-11-04`, `…-ACH-…`). Saving asks to confirm the existing security threshold. |
+| Account header | `ot-header` with `variant: "account"` on the 8 account pages |
+| Pages | `/ot-store`, `/ot-help-me-choose`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payments`, `/ot-payment-methods`, `/ot-add-payment-method`, `/ot-cancel` |
 | Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124); `ot-help-me-choose` + stock `limio-chat-side-panel` |
 | Login | Auth0 tenant `limio`, app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`) → Limio provider `opentext-auth0` on checkout, confirm and the 6 portal pages; store/product pages stay public. See `ot-AUTH0-SETUP.md`. |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
