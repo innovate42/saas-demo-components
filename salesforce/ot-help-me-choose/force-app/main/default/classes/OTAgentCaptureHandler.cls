@@ -8,13 +8,19 @@
  * - ot_existing_customer_case: a Case, linked to the Contact/Account by email.
  * - ot_lead_contact_given: a Lead carrying the recommended plan and the
  *   qualification answers.
+ * - onboarding_captured (the ot-bn-onboarding assistant on the order
+ *   confirmation page): the details go onto the provisioning order for that
+ *   order reference, with a Task on its opportunity.
  *
- * Captures from other agents on the same tenant are ignored.
+ * The plugin's payload carries the captured fields but not the outcome id, so
+ * the outcome is recognised from the fields when outcomeId is missing (only
+ * OTHelpMeChooseSync adds it). Captures from other agents are ignored.
  */
 public without sharing class OTAgentCaptureHandler {
 
     public static final String CASE_OUTCOME = 'ot_existing_customer_case';
     public static final String LEAD_OUTCOME = 'ot_lead_contact_given';
+    public static final String ONBOARDING_OUTCOME = 'onboarding_captured';
 
     static final Map<String, String> PLAN_NAMES = new Map<String, String>{
         'essentials_starter' => 'B2B Integration Essentials Starter',
@@ -27,20 +33,42 @@ public without sharing class OTAgentCaptureHandler {
     public static void handle(List<i42as__OrderEvent__e> events) {
         List<Case> cases = new List<Case>();
         List<Lead> leads = new List<Lead>();
+        List<Map<String, Object>> onboardings = new List<Map<String, Object>>();
         for (i42as__OrderEvent__e e : events) {
             try {
                 Map<String, Object> data = captureOf(e);
-                String outcome = str(data, 'outcomeId');
+                String outcome = outcomeOf(data);
                 if (outcome == CASE_OUTCOME) {
                     cases.add(buildCase(data));
                 } else if (outcome == LEAD_OUTCOME) {
                     leads.add(buildLead(data));
+                } else if (outcome == ONBOARDING_OUTCOME) {
+                    onboardings.add(data);
                 }
             } catch (Exception ex) {
                 System.debug(LoggingLevel.ERROR, 'OT agent capture failed: ' + ex.getMessage() + ' ' + ex.getStackTraceString());
             }
         }
         save(cases, leads);
+        applyOnboarding(onboardings);
+    }
+
+    @TestVisible
+    static String outcomeOf(Map<String, Object> d) {
+        String outcome = str(d, 'outcomeId');
+        if (outcome != null) {
+            return outcome;
+        }
+        if (str(d, 'case_email') != null) {
+            return CASE_OUTCOME;
+        }
+        if (str(d, 'lead_email') != null) {
+            return LEAD_OUTCOME;
+        }
+        if (str(d, 'edi_interchange_id') != null && (str(d, 'order_reference') != null || str(d, 'contact_email') != null)) {
+            return ONBOARDING_OUTCOME;
+        }
+        return null;
     }
 
     // Upsert on the conversation id so the event path and OTHelpMeChooseSync
@@ -74,6 +102,103 @@ public without sharing class OTAgentCaptureHandler {
         }
         if (!plainLeads.isEmpty()) {
             insert plainLeads;
+        }
+    }
+
+    // ---------------------------------------------------------------- onboarding
+
+    // Same fields as OTOnboardingSync, which skips any provisioning order that
+    // already carries the conversation id, so the two paths never double up.
+    public static void applyOnboarding(List<Map<String, Object>> captures) {
+        if (captures.isEmpty()) {
+            return;
+        }
+        Set<String> refs = new Set<String>();
+        Set<String> emails = new Set<String>();
+        for (Map<String, Object> d : captures) {
+            if (str(d, 'order_reference') != null) {
+                refs.add(str(d, 'order_reference'));
+            }
+            if (str(d, 'contact_email') != null) {
+                emails.add(str(d, 'contact_email'));
+            }
+        }
+        Map<String, i42as__ioProvisioningOrder__c> byRef = new Map<String, i42as__ioProvisioningOrder__c>();
+        Map<String, i42as__ioProvisioningOrder__c> byEmail = new Map<String, i42as__ioProvisioningOrder__c>();
+        for (i42as__ioProvisioningOrder__c p : [SELECT Id, OT_Opportunity__c, i42as__OrderReference__c, OT_Customer_Email__c
+                                                FROM i42as__ioProvisioningOrder__c
+                                                WHERE i42as__OrderReference__c IN :refs OR OT_Customer_Email__c IN :emails
+                                                ORDER BY CreatedDate DESC]) {
+            if (p.i42as__OrderReference__c != null && !byRef.containsKey(p.i42as__OrderReference__c)) {
+                byRef.put(p.i42as__OrderReference__c, p);
+            }
+            if (p.OT_Customer_Email__c != null && !byEmail.containsKey(p.OT_Customer_Email__c.toLowerCase())) {
+                byEmail.put(p.OT_Customer_Email__c.toLowerCase(), p);
+            }
+        }
+
+        Map<Id, i42as__ioProvisioningOrder__c> updates = new Map<Id, i42as__ioProvisioningOrder__c>();
+        List<Task> tasks = new List<Task>();
+        Id owner = ownerId();
+        for (Map<String, Object> d : captures) {
+            String email = str(d, 'contact_email');
+            i42as__ioProvisioningOrder__c p = byRef.get(str(d, 'order_reference'));
+            if (p == null && email != null) {
+                p = byEmail.get(email.toLowerCase());
+            }
+            if (p == null) {
+                System.debug(LoggingLevel.WARN, 'OT onboarding capture: no provisioning order for ' + str(d, 'order_reference'));
+                continue;
+            }
+
+            String captured = '';
+            for (String k : new List<String>{ 'order_reference', 'contact_email', 'erp_version', 'connection_method',
+                                              'edi_interchange_id', 'partners_confirmed', 'admin_users', 'go_live_date' }) {
+                captured += line(k, str(d, k));
+            }
+            String summary = str(d, 'conversationSummary');
+            String link = str(d, 'conversationLink');
+
+            p.OT_Conversation_Id__c = conversationId(d);
+            p.OT_ERP_Version__c = str(d, 'erp_version') == null ? null : str(d, 'erp_version').left(120);
+            p.OT_Connection_Method__c = str(d, 'connection_method') == null ? null : str(d, 'connection_method').left(80);
+            p.OT_EDI_ID__c = str(d, 'edi_interchange_id').left(120);
+            p.OT_Admin_Users__c = str(d, 'admin_users') == null ? null : str(d, 'admin_users').left(255);
+            String goLive = str(d, 'go_live_date');
+            if (goLive != null) {
+                try {
+                    p.OT_Go_Live_Target__c = Date.valueOf(goLive.left(10));
+                } catch (Exception ignore) {
+                    // free text date: it is in the summary
+                }
+            }
+            p.OT_Onboarding_Status__c = 'Onboarding details captured';
+            p.i42as__Status__c = 'InProgress';
+            p.OT_Onboarding_Summary__c = ('CAPTURED BY THE ONBOARDING ASSISTANT\n' + captured
+                + '\nSUMMARY\n' + (summary == null ? '' : summary)
+                + '\n\nConversation: ' + (link == null ? '' : link)).left(32000);
+            updates.put(p.Id, p);
+
+            if (p.OT_Opportunity__c != null) {
+                Task t = new Task(
+                    WhatId = p.OT_Opportunity__c,
+                    Subject = 'Onboarding details captured by the OpenText onboarding assistant',
+                    Description = (captured + '\n' + (summary == null ? '' : summary) + '\n\nConversation: ' + (link == null ? '' : link)).left(32000),
+                    Status = 'Completed',
+                    Priority = 'Normal',
+                    ActivityDate = Date.today()
+                );
+                if (owner != null) {
+                    t.OwnerId = owner;
+                }
+                tasks.add(t);
+            }
+        }
+        if (!updates.isEmpty()) {
+            update updates.values();
+        }
+        if (!tasks.isEmpty()) {
+            insert tasks;
         }
     }
 
