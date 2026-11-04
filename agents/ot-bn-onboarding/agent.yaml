@@ -1,0 +1,83 @@
+# ot-bn-onboarding: the agent document. The prompt lives in prompt.md.
+# Push it back with: limio agents push -d agents/ot-bn-onboarding
+outcomes:
+  - criteria: The customer has confirmed the read-back of their connection method, EDI interchange ID, trading partner list and admin users for their new OpenText order.
+    id: onboarding_captured
+    label: Onboarding details captured
+    style:
+      color: "#16a34a"
+    tools:
+      - config:
+          inputs:
+            - id: contact_email
+              required: true
+              type: email
+            - id: order_reference
+              required: false
+              type: string
+            - id: erp_version
+              required: false
+              type: string
+            - allowed:
+                - AS2
+                - SFTP
+                - VAN
+                - API
+                - Web portal
+              id: connection_method
+              required: true
+              type: string
+            - id: edi_interchange_id
+              required: true
+              type: string
+            - id: partners_confirmed
+              required: true
+              type: string
+            - id: admin_users
+              required: true
+              type: string
+            - id: go_live_date
+              required: false
+              type: string
+        id: data_capture
+        tool: data_capture
+    whatToDo: Use @data_capture to record every detail the customer confirmed, exactly as read back. Then explain the next nine days using the knowledge timeline, and tell them their specialist already has these details.
+  - criteria: The customer asked for a person, is blocked by their IT or a retailer, or needs something the assistant cannot complete.
+    id: needs_specialist
+    label: Needs an OpenText specialist
+    style:
+      color: "#f59e0b"
+    tools:
+      - config:
+          inputs:
+            - id: specialist_email
+              required: true
+              type: email
+            - id: specialist_reason
+              required: true
+              type: string
+        id: data_capture
+        tool: data_capture
+    whatToDo: Use @data_capture to record their email and reason. Tell them a B2B specialist will contact them within one business day.
+presentation:
+  greeting: "Thanks for your order. I'm your OpenText onboarding assistant: give me ten minutes and I'll collect everything we need so your connections go live as fast as possible."
+  greetingPopup: true
+  greetingPopupDelay: 2
+  greetingPopupMessage: Ready to set up your trading partners? It takes about ten minutes.
+  placeholder: Answer here, or ask about your setup
+  pointers:
+    - Let's get started
+    - What happens next?
+    - I'm not sure what an EDI ID is
+    - I'd like to talk to a person
+  theme:
+    accentColor: "#0066FF"
+    bubbleStyle: rounded
+    headerColor: "#0066FF"
+    userBubbleColor: "#0066FF"
+  title: OpenText onboarding assistant
+toolsets:
+  - name: knowledge
+    toolsetId: toolset-4fb44bbd7c5a08fcfbabca63c87f411b
+  - name: mcp
+    toolsetId: toolset-1b30a11166360e6e86e83b8a1ff13b70
