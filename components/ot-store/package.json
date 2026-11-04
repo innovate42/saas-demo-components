@@ -32,6 +32,8 @@
       ]
     },
     { "id": "quizTitle", "label": "Quiz title", "type": "string", "default": "Not sure which fits? Answer three questions." },
+    { "id": "quizChatLabel", "label": "Quiz link to the assistant (blank hides it)", "type": "string", "default": "Rather talk it through? Ask our assistant →" },
+    { "id": "quizChatHref", "label": "Quiz assistant link", "type": "string", "default": "/ot-help-me-choose" },
     { "id": "statsTitle", "label": "Stats title", "type": "string", "default": "Why suppliers choose OpenText" },
     {
       "id": "stats",

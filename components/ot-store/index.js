@@ -78,6 +78,8 @@ const OtStore = () => {
         stepsTitle = "",
         steps = [],
         quizTitle = "",
+        quizChatLabel = "",
+        quizChatHref = "/ot-help-me-choose",
         bandTitle = "",
         bandBody = "",
         bandCta = "",
@@ -161,6 +163,11 @@ const OtStore = () => {
                             </div>
                         ))}
                     </div>
+                    {quizChatLabel && (
+                        <p className="ot-store__quiz-chat">
+                            <a href={quizChatHref}>{quizChatLabel}</a>
+                        </p>
+                    )}
                     {done && winnerCard && (
                         <div className="ot-store__verdict">
                             <span>

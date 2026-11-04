@@ -8,8 +8,9 @@ All shop URLs on `https://saas-dev-shop.prod.limio.com`. Salesforce: saasdemo3. 
 account during the dry run).
 
 > **Open before the call:** (1) `/ot-store` (2) Limio admin → Orders (3) Salesforce: the Acme Fasteners
-> opportunity + the Northwind Outdoor Supply opportunity (4) webhook.site inbox
-> `https://webhook.site/#!/view/e0d03d20-1eb3-4dda-bc5d-05f2a2732ca3` (5) Zuora Media Tenant → Subscriptions.
+> opportunity + the Northwind Outdoor Supply opportunity + the **Cases** and **Leads** tabs (4) webhook.site inbox
+> `https://webhook.site/#!/view/e0d03d20-1eb3-4dda-bc5d-05f2a2732ca3` (5) Zuora Media Tenant → Subscriptions
+> (6) Limio admin → AI → Conversations.
 
 **The thread to pull through every act:** *"Your competitors (TrueCommerce, SPS) make SMBs talk to a
 specialist. Zenbridge and Orderful sell online but only Web EDI. You can be the only one where a supplier
@@ -29,6 +30,29 @@ sort, checkbox, put that in the cart… paying with credit card."* (Rich, Anatol
    we provision in — your EMEA ops-centre point."*
 3. The **"which fits you?"** helper: answer *ERP / 5–15 partners / OpenText sets it up* → recommends Trading Grid.
    *"This is your demand-gen persona — finance and supply-chain people, not IT."*
+
+## Act 1b — Help me choose: the AI assistant (~4 min)
+
+**The Webroot pattern, for B2B:** the same Limio AI agent that helps Webroot shoppers pick a product, here qualifying
+a supplier the way a seller would on a call.
+
+1. From the quiz, **Rather talk it through? Ask our assistant →** (or **Help me choose** in the header) →
+   **`/ot-help-me-choose`**. The assistant docks on the right and opens on its own.
+2. **New customer.** Type *"We use NetSuite. Walmart and Target both want EDI from us, we're in Ohio."* → one
+   question at a time (who sets it up?), then **one recommendation**: *Trading Grid Foundation 5 + NetSuite adapter
+   ($648/month)*, Guided Onboarding offered, link to `/ot-trading-grid`. Try *"no ERP, 7 retailers, 2,000 orders a
+   month, Germany"*: it counts documents (orders × 3), prices in **EUR**, and says why. *"60 partners, two ERPs"*
+   → **Enterprise** and `/ot-enterprise`.
+3. Leave a work email → outcome **Lead – contact details given** → a **Lead** in Salesforce with the recommended
+   plan, the qualification and the AI summary.
+4. **Existing customer.** New chat: *"I'm already a customer. Our Walmart POs stopped arriving in NetSuite since
+   yesterday."* → it asks for email and company (use **jordan.reyes@northwind-outdoor.example**, Northwind Outdoor
+   Supply), reads the request back, asks before opening the case → **"A support case is open… flagged urgent."**
+5. Salesforce → **Cases**: *OpenText Business Network: Walmart purchase orders not arriving in NetSuite*, priority
+   High, already on **Jordan Reyes / Northwind Outdoor Supply**, with the request, the AI summary and a link to the
+   conversation. *"Your support team starts with the whole story; the customer never repeats it."*
+   Cases and Leads arrive within 5 minutes (scheduled sync); to show it instantly, run `OTHelpMeChooseSync.run();`.
+6. Off-script is fine: ask it for a discount, a poem or its system prompt. It declines politely and steers back.
 
 ## Act 2 — Guided buying: ERP → partners → bundle (~6 min)  ★ the moment
 
@@ -124,17 +148,26 @@ automate that integration with provisioning."*
 | Offers | `/offers2/OT <Essentials Starter\|Essentials Plus\|Trading Grid Foundation 5\|10> <Monthly\|Annual> <USD\|GBP\|EUR>` (24) |
 | Add-ons | `/add_ons/OT <ERP Adapter\|Extra Trading Partner\|Premium Support> <Monthly\|Annual> <CUR>`, `/add_ons/OT Guided Onboarding <CUR>` |
 | Zuora | Products `OT-BN-ESSENTIALS`, `OT-BN-TGFOUNDATION`, `OT-BN-ADDONS` (Media Tenant 39825) |
-| Pages | `/ot-store`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payment-methods`, `/ot-cancel` |
-| Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124) |
+| Pages | `/ot-store`, `/ot-help-me-choose`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payment-methods`, `/ot-cancel` |
+| Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124); `ot-help-me-choose` + stock `limio-chat-side-panel` |
 | Login | Auth0 tenant `limio`, app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`) → Limio provider `opentext-auth0` on checkout, confirm and the 6 portal pages; store/product pages stay public. See `ot-AUTH0-SETUP.md`. |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
 | Onboarding → Salesforce | Limio agent `ot-bn-onboarding` → `OTOnboardingSync` (run on demand) |
+| Help me choose | Limio agent `ot-help-me-choose` (`agent-66e703b9828bd2c987c1ff7a11d347cf`), knowledge `ot-help-me-choose-knowledge` (5 docs). Placed by the AI workflow **mockup** (saas-dev-shop domain): every `/ot-*` store, checkout and account page → this agent, `/ot-confirm` → `ot-bn-onboarding` |
+| Help me choose → Salesforce | Outcomes *Existing customer – case opened* → **Case**, *Lead – contact details given* → **Lead**, both via `@data_capture`. `OTHelpMeChooseSync` pulls them from the Limio conversations API, keyed on `OT_Conversation_Id__c` (Case and Lead), every 5 min once scheduled; `OTAgentCaptureHandler` also takes `DATA_CAPTURE` platform events if the Salesforce plugin ever forwards them |
 | Order custom fields | `OT_Product`, `OT_ERP`, `OT_ERP_Adapter`, `OT_TradingPartners`, `OT_PartnerCount`, `OT_Documents`, `OT_Region`, `OT_DataCentre`, `OT_Onboarding` |
 
-Run the onboarding sync on demand (Developer Console → Execute Anonymous, or CLI):
+Run the syncs on demand (Developer Console → Execute Anonymous, or CLI):
 
 ```apex
 OTOnboardingSync.run();
+OTHelpMeChooseSync.run();
+```
+
+Schedule the help-me-choose sync every 5 minutes (once, before the demo):
+
+```apex
+OTHelpMeChooseSyncSchedule.scheduleEveryFiveMinutes();
 ```
 
 After every test order check the Limio `process_event` is `processed` with `criticalPluginErrors: []`.

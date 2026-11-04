@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
+
+.ot-hmc {
+    --ot-blue: #0066ff;
+    --ot-blue-dark: #024cbb;
+    --ot-ink: #101c2f;
+    --ot-body: #3f4d62;
+    --ot-line: #e7eaef;
+    --ot-mist: #f6f7f7;
+    --ot-tint: #ebf2ff;
+    font-family: "Inter var", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ot-body);
+    font-weight: 300;
+    letter-spacing: -0.011em;
+    background: #fff;
+}
+
+.ot-hmc *,
+.ot-hmc *::before,
+.ot-hmc *::after {
+    box-sizing: border-box;
+}
+
+.ot-hmc button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.ot-hmc__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.ot-hmc__hero {
+    background: linear-gradient(135deg, #024cbb 11%, #000066 48%);
+    color: #fff;
+    padding: 64px 0 72px;
+}
+
+.ot-hmc__kicker {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #a9c6ff;
+}
+
+.ot-hmc__headline {
+    margin: 0 0 16px;
+    max-width: 760px;
+    font-size: 44px;
+    line-height: 52px;
+    font-weight: 800;
+    letter-spacing: -0.024em;
+    color: #fff;
+}
+
+.ot-hmc__sub {
+    max-width: 680px;
+    font-size: 19px;
+    line-height: 29px;
+    color: #dbe6ff;
+}
+
+.ot-hmc__sub p {
+    margin: 0;
+}
+
+.ot-hmc__actions {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ot-hmc__cta {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 2px solid var(--ot-blue);
+    border-radius: 16px;
+    background: var(--ot-blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ot-hmc__cta:hover {
+    background: var(--ot-blue-dark);
+    border-color: var(--ot-blue-dark);
+}
+
+.ot-hmc__cta--ghost {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.ot-hmc__cta--ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+}
+
+.ot-hmc__cta--light {
+    background: #fff;
+    border-color: #fff;
+    color: var(--ot-blue);
+}
+
+.ot-hmc__cta--light:hover {
+    background: var(--ot-tint);
+    border-color: var(--ot-tint);
+}
+
+.ot-hmc__h2 {
+    margin: 0 0 24px;
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 700;
+    letter-spacing: -0.019em;
+    color: var(--ot-ink);
+}
+
+.ot-hmc__steps-wrap {
+    padding-top: 56px;
+    padding-bottom: 56px;
+}
+
+.ot-hmc__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.ot-hmc__steps li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.ot-hmc__steps strong {
+    color: var(--ot-ink);
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.ot-hmc__step-n {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--ot-tint);
+    color: var(--ot-blue);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ot-hmc__plans-wrap {
+    background: linear-gradient(#e7eaef 0%, #ffffff 100%);
+    padding: 56px 0;
+}
+
+.ot-hmc__plans {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.ot-hmc__plan {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--ot-line);
+    border-radius: 16px;
+    color: var(--ot-body);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.ot-hmc__plan:hover {
+    border-color: var(--ot-blue);
+    box-shadow: 0 12px 32px -16px rgba(16, 28, 47, 0.35);
+}
+
+.ot-hmc__plan-family {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ot-blue);
+}
+
+.ot-hmc__plan-title {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 800;
+    color: var(--ot-ink);
+}
+
+.ot-hmc__plan-body {
+    flex: 1;
+}
+
+.ot-hmc__plan-price {
+    color: var(--ot-ink);
+}
+
+.ot-hmc__plan-price strong {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.ot-hmc__band {
+    background: linear-gradient(135deg, #024cbb 11%, #000066 48%);
+    color: #dbe6ff;
+    padding: 48px 0;
+}
+
+.ot-hmc__band-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.ot-hmc__band h2 {
+    margin: 0 0 8px;
+    font-size: 26px;
+    line-height: 32px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.ot-hmc__band p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 26px;
+}
+
+@media (max-width: 1100px) {
+    .ot-hmc__plans {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .ot-hmc__headline {
+        font-size: 34px;
+        line-height: 42px;
+    }
+    .ot-hmc__steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ot-hmc__plans {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ot-hmc__band-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 520px) {
+    .ot-hmc__steps,
+    .ot-hmc__plans {
+        grid-template-columns: 1fr;
+    }
+}
