@@ -60,7 +60,7 @@
 }
 
 .ot-buy__sub {
-    max-width: 720px;
+    max-width: 880px;
     font-size: 18px;
     line-height: 28px;
     color: #dbe6ff;
@@ -726,4 +726,31 @@
     .ot-buy__custom {
         flex-direction: column;
     }
+}
+
+/* "View features" toggle under the plan cards */
+.ot-buy__features-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: #1a6aff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ot-buy__chev {
+    display: inline-block;
+    line-height: 1;
+    transform: translateY(-2px);
+    transition: transform 0.15s ease-out;
+}
+
+.ot-buy__chev--up {
+    transform: rotate(180deg) translateY(-2px);
 }
