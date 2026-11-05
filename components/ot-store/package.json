@@ -1,6 +1,6 @@
 {
   "name": "@limio/ot-store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "OpenText Business Network store front: hero with region/currency picker, product cards (B2B Integration Essentials, Trading Grid Foundation, Enterprise) with 'from' prices in the shopper's currency, a three-question 'which fits you?' helper, proof stats, how-it-works steps and a talk-to-sales band.",
   "main": "./index.js",
   "peerDependencies": {
@@ -9,7 +9,7 @@
   "limioProps": [
     { "id": "kicker", "label": "Kicker", "type": "string", "default": "OpenText Business Network Store" },
     { "id": "headline", "label": "Headline", "type": "string", "default": "Trade with Walmart, Target, Tesco and a million more — starting today." },
-    { "id": "subheadline", "label": "Subheadline", "type": "richtext", "default": "<p>Buy EDI and B2B integration online, on transparent pricing. Pick your trading partners, check out with a card, and our automation starts setting you up the moment you do.</p>" },
+    { "id": "subheadline", "label": "Subheadline", "type": "richtext", "default": "<p>Buy EDI online at transparent prices. We start setting you up the moment you check out.</p>" },
     {
       "id": "products",
       "label": "Product cards",
@@ -26,9 +26,9 @@
         "featured": { "id": "featured", "label": "Featured", "type": "boolean" }
       },
       "default": [
-        { "key": "essentials", "kicker": "For small suppliers", "title": "B2B Integration Essentials", "body": "<ul><li>Web portal for orders, ASNs and invoices</li><li>Pre-mapped retailers, no EDI expertise needed</li><li>2 to 5 trading partners</li></ul>", "cta": "Build your Essentials plan", "href": "/ot-essentials", "badge": "", "featured": false },
-        { "key": "tradinggrid", "kicker": "For growing, ERP-run suppliers", "title": "Trading Grid Foundation", "body": "<ul><li>Your ERP connected to the Trading Grid</li><li>AS2, SFTP or VAN connectivity</li><li>5 to 10 trading partners, live in as little as 9 days</li></ul>", "cta": "Build your Trading Grid bundle", "href": "/ot-trading-grid", "badge": "Most popular", "featured": true },
-        { "key": "enterprise", "kicker": "For complex, high-volume networks", "title": "Trading Grid Enterprise", "body": "<ul><li>Unlimited trading partners and volume</li><li>Managed services and custom integrations</li><li>Named account team in your region</li></ul>", "priceText": "Tailored pricing", "cta": "Talk to our team", "href": "/ot-enterprise", "badge": "", "featured": false }
+        { "key": "essentials", "kicker": "For small suppliers", "title": "B2B Integration Essentials", "body": "<ul><li>Web portal for orders, ASNs and invoices</li><li>2 to 5 pre-mapped retailers</li></ul>", "cta": "Build your Essentials plan", "href": "/ot-essentials", "badge": "", "featured": false },
+        { "key": "tradinggrid", "kicker": "For growing, ERP-run suppliers", "title": "Trading Grid Foundation", "body": "<ul><li>Your ERP connected to the Trading Grid</li><li>5 to 10 partners, live in 9 days</li></ul>", "cta": "Build your Trading Grid bundle", "href": "/ot-trading-grid", "badge": "Most popular", "featured": true },
+        { "key": "enterprise", "kicker": "For complex, high-volume networks", "title": "Trading Grid Enterprise", "body": "<ul><li>Unlimited partners and volume</li><li>Managed services, named account team</li></ul>", "priceText": "Tailored pricing", "cta": "Talk to our team", "href": "/ot-enterprise", "badge": "", "featured": false }
       ]
     },
     { "id": "quizTitle", "label": "Quiz title", "type": "string", "default": "Not sure which fits? Answer three questions." },
@@ -59,15 +59,10 @@
         "title": { "id": "title", "label": "Title", "type": "string" },
         "body": { "id": "body", "label": "Body", "type": "string" }
       },
-      "default": [
-        { "title": "Choose your partners", "body": "Search the network, pick who you trade with and get the right bundle." },
-        { "title": "Check out in minutes", "body": "Card or ACH, click-through order form. No contract negotiation." },
-        { "title": "Answer a few questions", "body": "Our onboarding assistant captures your ERP, connection and EDI IDs." },
-        { "title": "We provision automatically", "body": "Your order triggers the Trading Grid automation templates in the right data centre." }
-      ]
+      "default": []
     },
     { "id": "bandTitle", "label": "Band title", "type": "string", "default": "Need more than 15 partners or a custom integration?" },
-    { "id": "bandBody", "label": "Band body", "type": "string", "default": "Trading Grid Enterprise gives you a named team, managed services and tailored pricing." },
+    { "id": "bandBody", "label": "Band body", "type": "string", "default": "A named team, managed services and tailored pricing." },
     { "id": "bandCta", "label": "Band button", "type": "string", "default": "Talk to our team" },
     { "id": "bandHref", "label": "Band link", "type": "string", "default": "/ot-enterprise" }
   ]

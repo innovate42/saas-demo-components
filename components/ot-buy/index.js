@@ -106,6 +106,7 @@ const OtBuy = () => {
         monthlyLabel = "Monthly",
         annualLabel = "Annual",
         annualSaving = "2 months free",
+        featuresLabel = "View features",
     } = props
 
     const showErp = mode === "tradinggrid"
@@ -123,6 +124,7 @@ const OtBuy = () => {
     const [premium, setPremium] = useState(false)
     const [busy, setBusy] = useState(false)
     const [error, setError] = useState("")
+    const [showFeatures, setShowFeatures] = useState(false)
 
     useEffect(() => {
         setRegion(readRegion())
@@ -250,7 +252,19 @@ const OtBuy = () => {
             OT_Onboarding: onboarding === "guided" ? "Guided onboarding" : "Self-service",
         }
         try {
-            window.sessionStorage.setItem("ot-selection", JSON.stringify({ ...fields, partners: selected }))
+            window.sessionStorage.setItem(
+                "ot-selection",
+                JSON.stringify({
+                    ...fields,
+                    partners: selected,
+                    // read back by ot-onboarding's "Order complete" card
+                    plan: attrs(plan).display_name__limio || "",
+                    total: recurringTotal,
+                    oneOff: oneOffTotal,
+                    currency,
+                    per,
+                })
+            )
         } catch (e) {
             // storage blocked: the order still carries the fields
         }
@@ -297,9 +311,7 @@ const OtBuy = () => {
                                             {e.short}
                                         </span>
                                         <span className="ot-buy__erp-name">{e.name}</span>
-                                        {e.adapter ? (
-                                            <span className="ot-buy__erp-tag">Pre-built adapter</span>
-                                        ) : (
+                                        {!e.adapter && (
                                             <span className="ot-buy__erp-tag ot-buy__erp-tag--muted">File / API connection</span>
                                         )}
                                     </button>
@@ -357,9 +369,6 @@ const OtBuy = () => {
                                             <span className="ot-buy__partner-name">
                                                 {p.name}
                                                 {p.popular && <span className="ot-buy__popular">Popular</span>}
-                                            </span>
-                                            <span className="ot-buy__partner-meta">
-                                                {p.industry} · {p.docs.join(" · ")}
                                             </span>
                                         </span>
                                     </button>
@@ -433,23 +442,36 @@ const OtBuy = () => {
                                             className="ot-buy__plan-price"
                                             dangerouslySetInnerHTML={{ __html: sanitize(a.display_price__limio) }}
                                         />
-                                        <span
-                                            className="ot-buy__plan-detail"
-                                            dangerouslySetInnerHTML={{ __html: sanitize(a.detailed_display_price__limio) }}
-                                        />
-                                        <ul className="ot-buy__plan-features">
-                                            {featureRows(a.offer_features__limio).map((f, i) => (
-                                                <li key={i}>
-                                                    <Check />
-                                                    <span dangerouslySetInnerHTML={{ __html: sanitize(f) }} />
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        <span className="ot-buy__plan-detail">
+                                            {a.trading_partners__limio ? `${a.trading_partners__limio} partners · ` : ""}
+                                            billed {term === "yearly" ? "annually" : "monthly"}
+                                        </span>
+                                        {showFeatures && (
+                                            <ul className="ot-buy__plan-features">
+                                                {featureRows(a.offer_features__limio).map((f, i) => (
+                                                    <li key={i}>
+                                                        <Check />
+                                                        <span dangerouslySetInnerHTML={{ __html: sanitize(f) }} />
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </button>
                                 )
                             })}
                             {plans.length === 0 && <p className="ot-buy__empty">Plans load from the catalog in the live shop.</p>}
                         </div>
+                        {plans.length > 0 && featuresLabel && (
+                            <button
+                                type="button"
+                                className="ot-buy__features-toggle"
+                                aria-expanded={showFeatures}
+                                onClick={() => setShowFeatures(!showFeatures)}
+                            >
+                                {showFeatures ? "Hide features" : featuresLabel}
+                                <span className={`ot-buy__chev${showFeatures ? " ot-buy__chev--up" : ""}`} aria-hidden="true">⌄</span>
+                            </button>
+                        )}
                         {overThreshold && enterpriseNudge && (
                             <div className="ot-buy__nudge">
                                 <span dangerouslySetInnerHTML={{ __html: sanitize(enterpriseNudge) }} />

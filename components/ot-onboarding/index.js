@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { ErrorBoundary, sanitiseHTML } from "@limio/sdk"
+import { useCompleteCheckoutSession } from "@limio/internal-checkout-sdk"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
-// Order-confirmation onboarding: turns "thanks for your order" into a guided
-// start. The recap comes from what ot-buy stored for this checkout; the
-// assistant button opens the Limio onboarding agent (window.LimioChat).
+// Order confirmation, in the order a customer reads it: "Order complete" with
+// the reference, plan and total, then ONE next step — the onboarding assistant
+// (window.LimioChat, opened by ot-onboarding-chat) — then a single line on what
+// happens after. The order comes from the completed checkout session; what
+// ot-buy stored for this checkout fills any gaps.
 
 const sanitize = (s) => sanitiseHTML(s || "")
 
@@ -29,172 +32,140 @@ const openAssistant = () => {
     return false
 }
 
-const Icon = ({ name }) => {
-    const paths = {
-        chat: "M4 5h16v11H8l-4 4V5Z",
-        users: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7 1a2.5 2.5 0 1 0 0-5M3 19c0-3 2.7-5 6-5s6 2 6 5M15 14c3 0 5 1.6 5 4",
-        plug: "M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0V8Zm6 9v4",
-        test: "M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3",
-        flag: "M5 21V4m0 0h11l-2 4 2 4H5",
+const money = (value, currency) => {
+    const n = Number(value)
+    if (!Number.isFinite(n) || n <= 0) return ""
+    try {
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: currency || "USD",
+            minimumFractionDigits: n % 1 === 0 ? 0 : 2,
+            maximumFractionDigits: 2,
+        }).format(n)
+    } catch (e) {
+        return `${n} ${currency || ""}`.trim()
     }
-    return (
-        <svg viewBox="0 0 24 24" className="ot-onb__icon" aria-hidden="true">
-            <path d={paths[name] || paths.flag} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-    )
 }
+
+const fill = (template, vars) => String(template || "").replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "")
+
+const attrs = (o) => o?.data?.attributes || {}
+const charge = (o) => attrs(o).price__limio?.[0] || {}
 
 const OtOnboarding = () => {
     const props = useStaticProps() || {}
     const {
-        kicker = "",
-        headline = "",
-        subheadline = "",
-        steps = [],
-        timelineTitle = "",
-        timeline = [],
-        assistantTitle = "",
-        assistantBody = "",
-        assistantCta = "",
+        successTitle = "",
+        successBody = "",
+        successBodyNoEmail = "",
+        nextKicker = "",
+        nextTitle = "",
+        nextBody = "",
+        nextCta = "",
         assistantFallbackHref = "",
+        whatsNextLabel = "",
+        whatsNext = "",
         secondaryLinks = [],
     } = props
+
+    const { useCheckoutSelector } = useCompleteCheckoutSession?.() || {}
+    const order = useCheckoutSelector?.((s) => s?.order) || {}
 
     const [sel, setSel] = useState({})
     const [hint, setHint] = useState("")
     useEffect(() => setSel(readSelection()), [])
+
+    const items = Array.isArray(order.orderItems) ? order.orderItems : []
+    const base = items.find((i) => i?.offer && i.type !== "add_on") || items.find((i) => i?.offer)
+    const orderTotal = items.reduce((sum, i) => sum + (Number(charge(i.offer).value) || 0) * (Number(i.quantity) || 1), 0)
+    const currency = charge(base?.offer).currencyCode || order.currency || sel.currency || "USD"
+    const per = sel.per || (attrs(base?.offer).group__limio === "yearly" ? "year" : "month")
+
+    const reference = order.order_reference || ""
+    const email = order.customerDetails?.email || ""
+    const plan = attrs(base?.offer).display_name__limio || sel.plan || sel.OT_Product || ""
+    const total = money(orderTotal || sel.total, currency)
+    const partners = Number(sel.OT_PartnerCount) || 0
+
+    const facts = [
+        reference && { label: "Order", value: reference },
+        plan && { label: "Plan", value: plan },
+        total && { label: "Total", value: `${total}/${per === "year" ? "yr" : "mo"}` },
+        partners > 0 && { label: "Trading partners", value: String(partners) },
+    ].filter(Boolean)
 
     const startAssistant = () => {
         if (!openAssistant()) {
             if (assistantFallbackHref) {
                 window.location.href = assistantFallbackHref
             } else {
-                setHint("The assistant is starting up. Look for the chat button at the bottom right.")
+                setHint("The assistant is starting up. It opens at the bottom right.")
             }
         }
     }
 
-    const partners = (sel.partners && sel.partners.length ? sel.partners : (sel.OT_TradingPartners || "").split(";"))
-        .map((p) => String(p).trim())
-        .filter(Boolean)
-
-    const recap = [
-        sel.OT_Product && { label: "Product", value: sel.OT_Product },
-        sel.OT_ERP && !String(sel.OT_ERP).startsWith("n/a") && { label: "ERP", value: sel.OT_ERP },
-        partners.length > 0 && { label: "Trading partners", value: `${partners.length}` },
-        sel.OT_DataCentre && { label: "Data centre", value: sel.OT_DataCentre },
-        sel.OT_Onboarding && { label: "Onboarding", value: sel.OT_Onboarding },
-    ].filter(Boolean)
-
     return (
         <div className="ot-onb">
-            <section className="ot-onb__hero">
-                <div className="ot-onb__inner ot-onb__hero-grid">
-                    <div>
-                        <p className="ot-onb__kicker">
-                            <span className="ot-onb__tick">✓</span> {kicker}
-                        </p>
-                        <h1 className="ot-onb__headline">{headline}</h1>
-                        <div className="ot-onb__sub" dangerouslySetInnerHTML={{ __html: sanitize(subheadline) }} />
-                        <div className="ot-onb__hero-actions">
-                            <button type="button" className="ot-onb__btn" onClick={startAssistant}>
-                                {assistantCta}
-                            </button>
-                            {(secondaryLinks || []).slice(0, 1).map((l, i) => (
-                                <a key={i} className="ot-onb__btn ot-onb__btn--ghost" href={l.href}>
-                                    {l.label}
-                                </a>
+            <div className="ot-onb__wrap">
+                <section className="ot-onb__done" aria-labelledby="ot-onb-done">
+                    <span className="ot-onb__check" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </span>
+                    <div className="ot-onb__done-text">
+                        <h1 id="ot-onb-done" className="ot-onb__title">
+                            {successTitle}
+                        </h1>
+                        <p className="ot-onb__receipt">{email ? fill(successBody, { email }) : successBodyNoEmail}</p>
+                    </div>
+                    {facts.length > 0 && (
+                        <dl className="ot-onb__facts">
+                            {facts.map((f) => (
+                                <div key={f.label}>
+                                    <dt>{f.label}</dt>
+                                    <dd>{f.value}</dd>
+                                </div>
                             ))}
-                        </div>
+                        </dl>
+                    )}
+                </section>
+
+                <section className="ot-onb__next" aria-labelledby="ot-onb-next">
+                    <div className="ot-onb__next-text">
+                        {nextKicker && <p className="ot-onb__kicker">{nextKicker}</p>}
+                        <h2 id="ot-onb-next" className="ot-onb__next-title">
+                            {nextTitle}
+                        </h2>
+                        {nextBody && <div className="ot-onb__next-body" dangerouslySetInnerHTML={{ __html: sanitize(nextBody) }} />}
                         {hint && <p className="ot-onb__hint">{hint}</p>}
                     </div>
-                    {recap.length > 0 && (
-                        <aside className="ot-onb__recap">
-                            <h2>Your order</h2>
-                            <dl>
-                                {recap.map((r) => (
-                                    <div key={r.label}>
-                                        <dt>{r.label}</dt>
-                                        <dd>{r.value}</dd>
-                                    </div>
-                                ))}
-                            </dl>
-                            {partners.length > 0 && (
-                                <ul className="ot-onb__partners">
-                                    {partners.map((p) => (
-                                        <li key={p}>{p}</li>
-                                    ))}
-                                </ul>
-                            )}
-                        </aside>
+                    {nextCta && (
+                        <button type="button" className="ot-onb__btn" onClick={startAssistant}>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 5h16v11H8l-4 4V5Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+                            </svg>
+                            {nextCta}
+                        </button>
                     )}
-                </div>
-            </section>
+                </section>
 
-            <section className="ot-onb__inner ot-onb__steps-wrap">
-                <h2 className="ot-onb__h2">Get started in four steps</h2>
-                <ol className="ot-onb__steps">
-                    {(steps || []).map((s, i) => (
-                        <li key={i} className={`ot-onb__step${i === 0 ? " ot-onb__step--now" : ""}`}>
-                            <div className="ot-onb__step-head">
-                                <span className="ot-onb__step-n">{i + 1}</span>
-                                <Icon name={s.icon} />
-                                {s.when && <span className="ot-onb__when">{s.when}</span>}
-                            </div>
-                            <h3>{s.title}</h3>
-                            <p>{s.body}</p>
-                            {s.cta &&
-                                (s.action === "assistant" ? (
-                                    <button type="button" className="ot-onb__link" onClick={startAssistant}>
-                                        {s.cta} →
-                                    </button>
-                                ) : (
-                                    <a className="ot-onb__link" href={s.href}>
-                                        {s.cta} →
-                                    </a>
-                                ))}
-                        </li>
-                    ))}
-                </ol>
-            </section>
+                {whatsNext && (
+                    <p className="ot-onb__whatsnext">
+                        {whatsNextLabel && <strong>{whatsNextLabel}</strong>} {whatsNext}
+                    </p>
+                )}
 
-            {(timeline || []).length > 0 && (
-                <section className="ot-onb__inner ot-onb__timeline-wrap">
-                    <h2 className="ot-onb__h2">{timelineTitle}</h2>
-                    <div className="ot-onb__timeline">
-                        {timeline.map((t, i) => (
-                            <div key={i} className="ot-onb__milestone">
-                                <span className="ot-onb__day">{t.day}</span>
-                                <span className="ot-onb__dot" />
-                                <strong>{t.title}</strong>
-                                <span>{t.body}</span>
-                            </div>
+                {(secondaryLinks || []).length > 0 && (
+                    <nav className="ot-onb__links">
+                        {secondaryLinks.map((l, i) => (
+                            <a key={i} href={l.href}>
+                                {l.label}
+                            </a>
                         ))}
-                    </div>
-                </section>
-            )}
-
-            <section className="ot-onb__band">
-                <div className="ot-onb__inner ot-onb__band-inner">
-                    <div>
-                        <h2>{assistantTitle}</h2>
-                        <div dangerouslySetInnerHTML={{ __html: sanitize(assistantBody) }} />
-                    </div>
-                    <button type="button" className="ot-onb__btn ot-onb__btn--light" onClick={startAssistant}>
-                        {assistantCta}
-                    </button>
-                </div>
-            </section>
-
-            {(secondaryLinks || []).length > 1 && (
-                <section className="ot-onb__inner ot-onb__links">
-                    {secondaryLinks.slice(1).map((l, i) => (
-                        <a key={i} href={l.href}>
-                            {l.label} →
-                        </a>
-                    ))}
-                </section>
-            )}
+                    </nav>
+                )}
+            </div>
         </div>
     )
 }
