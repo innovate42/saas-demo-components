@@ -1,5 +1,6 @@
 # ot-bn-onboarding: the agent document. The prompt lives in prompt.md.
 # Push it back with: limio agents push -d agents/ot-bn-onboarding
+narrate: true
 outcomes:
   - criteria: The customer has confirmed the read-back of their connection method, EDI interchange ID, trading partner list and admin users for their new OpenText order.
     id: onboarding_captured
@@ -41,7 +42,7 @@ outcomes:
               type: string
         id: data_capture
         tool: data_capture
-    whatToDo: Use @data_capture to record every detail the customer confirmed, exactly as read back. Then explain the next nine days using the knowledge timeline, and tell them their specialist already has these details.
+    whatToDo: Use @data_capture to record every detail the customer confirmed, exactly as read back. Then tell them their onboarding checklist has just been emailed to them, their specialist already has these details, and briefly what happens over the next nine days using the knowledge timeline.
   - criteria: The customer asked for a person, is blocked by their IT or a retailer, or needs something the assistant cannot complete.
     id: needs_specialist
     label: Needs an OpenText specialist
@@ -76,6 +77,7 @@ presentation:
     headerColor: "#0066FF"
     userBubbleColor: "#0066FF"
   title: OpenText onboarding assistant
+streaming: true
 toolsets:
   - name: knowledge
     toolsetId: toolset-4fb44bbd7c5a08fcfbabca63c87f411b

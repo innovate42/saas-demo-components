@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Email the Provisioning Owner a recap of the onboarding details, so the provisioning team can take over.</description>
+    <flowDefinition>OT_Send_Provisioning_Recap</flowDefinition>
+    <label>Send Provisioning Owner a recap email</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

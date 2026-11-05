@@ -114,11 +114,20 @@ automate that integration with provisioning."*
    time**: NetSuite version, AS2 vs SFTP (recommends SFTP if unsure), EDI ID (*"no ID yet? we'll use
    ZZ:ACMESUPPLY"*), admin users, go-live date. Underneath, one line says what happens next: tenant today,
    ERP by day 4, live by day 9.
-3. It reads everything back, the customer confirms → outcome **Onboarding details captured**.
+3. It reads everything back, the customer confirms → outcome **Onboarding details captured**. The assistant
+   closes by saying the onboarding checklist has **just been emailed**.
 4. Salesforce: refresh the provisioning order — within seconds it shows connection method, EDI ID, ERP version,
    admin users, go-live date, the **AI summary** and a link to the full conversation, and a Task sits on the
    opportunity. Nobody runs anything: the outcome reaches Salesforce as a Limio platform event.
    *"The 9-day promise, with nobody re-keying an Excel file."*
+5. Same moment, Salesforce sent **"Welcome to the OpenText Business Network, your onboarding checklist"**: their
+   answers as a checklist plus the Day 0 → Day 9 milestones. Show it in the inbox, then on the provisioning
+   order's **activity timeline** (right column) and on the contact. Sent once per order, never again.
+6. **Provisioning Owner** (on the provisioning order, defaults to Amaury) → click **Send Provisioning Owner a
+   recap email**: "Recap sent to … Your provisioning team can take it from here." The owner gets a
+   "Ready to provision: <customer> (<order>)" hand-off with every captured detail, a button to the record and a
+   link to the conversation; it lands in the same timeline. *"Now your team takes over and sets them up."*
+   Demo safety: every email goes to amaury@limio.com (or a +alias), whatever address is on the record.
 
 ## Act 6 — Self-service portal (~4 min)
 

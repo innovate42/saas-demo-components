@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>OpenText demo: see and edit the Provisioning Owner, see when the welcome email went out, and run the recap action.</description>
+    <classAccesses>
+        <apexClass>OTProvisioningRecap</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>i42as__ioProvisioningOrder__c.OT_Provisioning_Owner__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>i42as__ioProvisioningOrder__c.OT_Welcome_Email_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>OT_Send_Provisioning_Recap</flow>
+    </flowAccesses>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>OT Provisioning</label>
+</PermissionSet>

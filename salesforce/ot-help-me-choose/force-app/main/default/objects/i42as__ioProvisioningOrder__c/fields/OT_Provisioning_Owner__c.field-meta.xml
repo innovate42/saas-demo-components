@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OT_Provisioning_Owner__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The person on the OpenText provisioning team who takes this customer from onboarding to go-live. Defaults to the OT record owner (label OT_Record_Owner_Username) when the provisioning order is created.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Who on the provisioning team sets this customer up. Use "Send Provisioning Owner a recap email" to hand it over.</inlineHelpText>
+    <label>Provisioning Owner</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>OT_Provisioning_Orders</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
