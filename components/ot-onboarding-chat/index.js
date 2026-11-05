@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React, { Suspense, useEffect } from "react"
 import { useUser } from "@limio/sdk"
 import { useCompleteCheckoutSession } from "@limio/internal-checkout-sdk"
 import { useStaticProps } from "./componentStaticProps"
@@ -122,4 +122,12 @@ const OtOnboardingChat = () => {
     return null
 }
 
-export default OtOnboardingChat
+// The completed-checkout hook suspends while the order loads; keep that from
+// showing a spinner on the page — this component renders nothing anyway.
+const Wrapped = () => (
+    <Suspense fallback={null}>
+        <OtOnboardingChat />
+    </Suspense>
+)
+
+export default Wrapped

@@ -51,7 +51,7 @@ a supplier the way a seller would on a call.
 5. Salesforce → **Cases**: *OpenText Business Network: Walmart purchase orders not arriving in NetSuite*, priority
    High, already on **Jordan Reyes / Northwind Outdoor Supply**, with the request, the AI summary and a link to the
    conversation. *"Your support team starts with the whole story; the customer never repeats it."*
-   Cases and Leads arrive within 5 minutes (scheduled sync); to show it instantly, run `OTHelpMeChooseSync.run();`.
+   The Case (or Lead) arrives within seconds of the outcome: Limio publishes it to Salesforce as a platform event.
 6. Off-script is fine: ask it for a discount, a poem or its system prompt. It declines politely and steers back.
 
 ## Act 2 — Guided buying: ERP → partners → bundle (~6 min)  ★ the moment
@@ -115,10 +115,10 @@ automate that integration with provisioning."*
    ZZ:ACMESUPPLY"*), admin users, go-live date. Underneath, one line says what happens next: tenant today,
    ERP by day 4, live by day 9.
 3. It reads everything back, the customer confirms → outcome **Onboarding details captured**.
-4. Salesforce: the sync is **not scheduled** (no CronTrigger in saasdemo3), so run it right after the chat —
-   Developer Console → Execute Anonymous → `OTOnboardingSync.run();` — then refresh the provisioning order:
-   connection method, EDI ID, ERP version, admin users, go-live date, **AI summary + full transcript**, and a
-   Task on the opportunity. *"The 9-day promise, with nobody re-keying an Excel file."*
+4. Salesforce: refresh the provisioning order — within seconds it shows connection method, EDI ID, ERP version,
+   admin users, go-live date, the **AI summary** and a link to the full conversation, and a Task sits on the
+   opportunity. Nobody runs anything: the outcome reaches Salesforce as a Limio platform event.
+   *"The 9-day promise, with nobody re-keying an Excel file."*
 
 ## Act 6 — Self-service portal (~4 min)
 
@@ -174,22 +174,10 @@ Every account page has its own **My account** bar (Trading Grid Online navy, lik
 | Login | Auth0 tenant `limio`, app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`) → Limio provider `opentext-auth0` on checkout, confirm and the 6 portal pages; store/product pages stay public. See `ot-AUTH0-SETUP.md`. |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
 | Onboarding agent | Limio agent `ot-bn-onboarding` (`agent-78d3f0e0ce6e4136fa08c289780d1711`, source in `agents/ot-bn-onboarding`). Component `ot-onboarding-chat` on `/ot-confirm` opens the chat embed and sends the order reference + email; the agent finds the order with MCP connector `limio-api` (`toolset-1b30a11166360e6e86e83b8a1ff13b70`, saas-dev `/mcp`, `limio_call_api`) and only uses it when the order's email matches. `get_order_items` is not used: the script embed never passes the completed basket, so it always answers "no order" |
-| Onboarding → Salesforce | Limio agent `ot-bn-onboarding` → `OTOnboardingSync` — not scheduled: run `OTOnboardingSync.run();` after the chat |
+| Onboarding → Salesforce | Outcome *Onboarding details captured* (`@data_capture`) → Limio Salesforce plugin publishes `i42as__OrderEvent__e` (Type `DATA_CAPTURE`) → `OTOrderEventTrigger` → `OTAgentCaptureHandler` fills the provisioning order (matched on order reference, else email) and adds a Task to the opportunity. Needs `data_capture` in saas-dev's order processing `orderTypes` (set 2026-11-04) |
 | Help me choose | Limio agent `ot-help-me-choose` (`agent-66e703b9828bd2c987c1ff7a11d347cf`), knowledge `ot-help-me-choose-knowledge` (5 docs). Placed by the AI workflow **mockup** (saas-dev-shop domain): every `/ot-*` store, checkout and account page → this agent, `/ot-confirm` → `ot-bn-onboarding` |
-| Help me choose → Salesforce | Outcomes *Existing customer – case opened* → **Case**, *Lead – contact details given* → **Lead**, both via `@data_capture`. `OTHelpMeChooseSync` pulls them from the Limio conversations API, keyed on `OT_Conversation_Id__c` (Case and Lead), every 5 min once scheduled; `OTAgentCaptureHandler` also takes `DATA_CAPTURE` platform events if the Salesforce plugin ever forwards them |
+| Help me choose → Salesforce | Outcomes *Existing customer – case opened* → **Case**, *Lead – contact details given* → **Lead**, both via `@data_capture` → the same `DATA_CAPTURE` platform event → `OTAgentCaptureHandler`, upserted on `OT_Conversation_Id__c` |
 | Order custom fields | `OT_Product`, `OT_ERP`, `OT_ERP_Adapter`, `OT_TradingPartners`, `OT_PartnerCount`, `OT_Documents`, `OT_Region`, `OT_DataCentre`, `OT_Onboarding` |
 
-Run the syncs on demand (Developer Console → Execute Anonymous, or CLI):
-
-```apex
-OTOnboardingSync.run();
-OTHelpMeChooseSync.run();
-```
-
-Schedule the help-me-choose sync every 5 minutes (once, before the demo):
-
-```apex
-OTHelpMeChooseSyncSchedule.scheduleEveryFiveMinutes();
-```
-
-After every test order check the Limio `process_event` is `processed` with `criticalPluginErrors: []`.
+After every test order or agent outcome check the Limio `process_event` is `processed` with `criticalPluginErrors: []`.
+`OTOnboardingSync` / `OTHelpMeChooseSync` are left in the org as unused fallbacks; nothing in the demo calls them.
