@@ -138,6 +138,7 @@ public without sharing class OTAgentCaptureHandler {
         }
 
         Map<Id, i42as__ioProvisioningOrder__c> updates = new Map<Id, i42as__ioProvisioningOrder__c>();
+        Map<Id, String> partnersByOrder = new Map<Id, String>();
         List<Task> tasks = new List<Task>();
         Id owner = ownerId();
         for (Map<String, Object> d : captures) {
@@ -178,6 +179,7 @@ public without sharing class OTAgentCaptureHandler {
                 + '\nSUMMARY\n' + (summary == null ? '' : summary)
                 + '\n\nConversation: ' + (link == null ? '' : link)).left(32000);
             updates.put(p.Id, p);
+            partnersByOrder.put(p.Id, str(d, 'partners_confirmed'));
 
             if (p.OT_Opportunity__c != null) {
                 Task t = new Task(
@@ -200,6 +202,8 @@ public without sharing class OTAgentCaptureHandler {
         if (!tasks.isEmpty()) {
             insert tasks;
         }
+        // The welcome + onboarding checklist email, once per provisioning order.
+        OTWelcomeEmail.send(partnersByOrder);
     }
 
     // ---------------------------------------------------------------- parse
