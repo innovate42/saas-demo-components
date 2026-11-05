@@ -219,3 +219,18 @@
         line-height: 32px;
     }
 }
+
+/* receipt line + facts take part in the card grid: receipt under the title,
+   facts across the full width */
+.ot-onb__details {
+    display: contents;
+}
+
+.ot-onb__check {
+    grid-row: 1 / span 2;
+}
+
+.ot-onb__details .ot-onb__receipt {
+    grid-column: 2;
+    margin-top: 0;
+}

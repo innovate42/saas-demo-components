@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { ErrorBoundary, sanitiseHTML } from "@limio/sdk"
 import { useCompleteCheckoutSession } from "@limio/internal-checkout-sdk"
 import { useStaticProps } from "./componentStaticProps"
@@ -52,29 +52,9 @@ const fill = (template, vars) => String(template || "").replace(/\{(\w+)\}/g, (_
 const attrs = (o) => o?.data?.attributes || {}
 const charge = (o) => attrs(o).price__limio?.[0] || {}
 
-const OtOnboarding = () => {
-    const props = useStaticProps() || {}
-    const {
-        successTitle = "",
-        successBody = "",
-        successBodyNoEmail = "",
-        nextKicker = "",
-        nextTitle = "",
-        nextBody = "",
-        nextCta = "",
-        assistantFallbackHref = "",
-        whatsNextLabel = "",
-        whatsNext = "",
-        secondaryLinks = [],
-    } = props
-
-    const { useCheckoutSelector } = useCompleteCheckoutSession?.() || {}
-    const order = useCheckoutSelector?.((s) => s?.order) || {}
-
-    const [sel, setSel] = useState({})
-    const [hint, setHint] = useState("")
-    useEffect(() => setSel(readSelection()), [])
-
+// Receipt line + reference/plan/total/partners. Pure, so it renders both from
+// the completed order and, while that loads, from what ot-buy stored.
+const OrderDetails = ({ order = {}, sel = {}, successBody, successBodyNoEmail }) => {
     const items = Array.isArray(order.orderItems) ? order.orderItems : []
     const base = items.find((i) => i?.offer && i.type !== "add_on") || items.find((i) => i?.offer)
     const orderTotal = items.reduce((sum, i) => sum + (Number(charge(i.offer).value) || 0) * (Number(i.quantity) || 1), 0)
@@ -93,6 +73,53 @@ const OtOnboarding = () => {
         total && { label: "Total", value: `${total}/${per === "year" ? "yr" : "mo"}` },
         partners > 0 && { label: "Trading partners", value: String(partners) },
     ].filter(Boolean)
+
+    return (
+        <>
+            <p className="ot-onb__receipt">{email ? fill(successBody, { email }) : successBodyNoEmail}</p>
+            {facts.length > 0 && (
+                <dl className="ot-onb__facts">
+                    {facts.map((f) => (
+                        <div key={f.label}>
+                            <dt>{f.label}</dt>
+                            <dd>{f.value}</dd>
+                        </div>
+                    ))}
+                </dl>
+            )}
+        </>
+    )
+}
+
+// The completed-checkout hook suspends until the order loads (seconds when the
+// page is opened without a fresh order), so it lives here, under its own
+// Suspense, instead of holding back the whole page.
+const CompletedOrderDetails = (props) => {
+    const { useCheckoutSelector } = useCompleteCheckoutSession?.() || {}
+    const order = useCheckoutSelector?.((s) => s?.order) || {}
+    return <OrderDetails {...props} order={order} />
+}
+
+const OtOnboarding = () => {
+    const props = useStaticProps() || {}
+    const {
+        successTitle = "",
+        successBody = "",
+        successBodyNoEmail = "",
+        nextKicker = "",
+        nextTitle = "",
+        nextBody = "",
+        nextCta = "",
+        assistantFallbackHref = "",
+        whatsNextLabel = "",
+        whatsNext = "",
+        secondaryLinks = [],
+    } = props
+
+    const [sel, setSel] = useState({})
+    const [hint, setHint] = useState("")
+    useEffect(() => setSel(readSelection()), [])
+    const details = { sel, successBody, successBodyNoEmail }
 
     const startAssistant = () => {
         if (!openAssistant()) {
@@ -117,18 +144,12 @@ const OtOnboarding = () => {
                         <h1 id="ot-onb-done" className="ot-onb__title">
                             {successTitle}
                         </h1>
-                        <p className="ot-onb__receipt">{email ? fill(successBody, { email }) : successBodyNoEmail}</p>
                     </div>
-                    {facts.length > 0 && (
-                        <dl className="ot-onb__facts">
-                            {facts.map((f) => (
-                                <div key={f.label}>
-                                    <dt>{f.label}</dt>
-                                    <dd>{f.value}</dd>
-                                </div>
-                            ))}
-                        </dl>
-                    )}
+                    <div className="ot-onb__details">
+                        <Suspense fallback={<OrderDetails {...details} />}>
+                            <CompletedOrderDetails {...details} />
+                        </Suspense>
+                    </div>
                 </section>
 
                 <section className="ot-onb__next" aria-labelledby="ot-onb-next">
