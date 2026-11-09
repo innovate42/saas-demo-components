@@ -229,13 +229,17 @@ const OtBuy = () => {
         if (!ready || busy) return
         setBusy(true)
         setError("")
-        const { initiateCheckout, updateCustomField, navigateToCheckout } = basket
-        const orderItems = [{ offer: plan, quantity: 1 }]
-        const child = (offer, quantity = 1) => ({ offer, quantity, type: "add_on", parentId: plan.id })
-        if (erpAddon) orderItems.push(child(erpAddon))
-        if (partnerAddon) orderItems.push(child(partnerAddon, extra))
-        if (premiumAddon) orderItems.push(child(premiumAddon))
-        if (guidedAddon) orderItems.push(child(guidedAddon))
+        const { initiateCheckout, addOfferToBasket, updateCustomField, navigateToCheckout } = basket
+        // Add-ons are added after the plan, under the plan's basket line: an
+        // add-on's parentId must be that line's id, which initiateCheckout only
+        // assigns once the checkout exists. With the offer id instead, the cart
+        // hides the add-on and Zuora drops it from the subscription.
+        const addOns = [
+            erpAddon && [erpAddon, 1],
+            partnerAddon && [partnerAddon, extra],
+            premiumAddon && [premiumAddon, 1],
+            guidedAddon && [guidedAddon, 1],
+        ].filter(Boolean)
 
         // Everything provisioning needs travels on the order as custom fields:
         // they land in order.customFields, the entitlement webhook and the
@@ -269,7 +273,15 @@ const OtBuy = () => {
             // storage blocked: the order still carries the fields
         }
         try {
-            await initiateCheckout({ order: { orderItems, customFields: fields } })
+            const started = await initiateCheckout({
+                order: { orderItems: [{ offer: plan, quantity: 1 }], customFields: fields },
+            })
+            const lines = (started && started.order && started.order.orderItems) || []
+            const planLine = lines.find((i) => i && i.offer && i.offer.id === plan.id) || lines[0]
+            if (addOns.length && !(planLine && planLine.id)) throw new Error("ot-buy: no plan line to attach add-ons to")
+            for (const [offer, quantity] of addOns) {
+                await addOfferToBasket({ offer, quantity, type: "add_on", parentId: planLine.id })
+            }
             if (typeof updateCustomField === "function") {
                 Object.entries(fields).forEach(([k, v]) => updateCustomField(k, v))
             }
