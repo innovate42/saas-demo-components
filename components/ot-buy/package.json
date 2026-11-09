@@ -1,6 +1,6 @@
 {
   "name": "@limio/ot-buy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "OpenText Business Network guided buying: pick your ERP (Trading Grid), search and select trading partners from a directory with the EDI documents each one needs, get the plan recommended for your partner count, choose self-service or guided onboarding, then check out. One page serves USD, GBP and EUR; the region picker also sets the provisioning data centre. Selections travel on the order as customFields (OT_ERP, OT_TradingPartners, OT_Region, …).",
   "main": "./index.js",
   "peerDependencies": {
