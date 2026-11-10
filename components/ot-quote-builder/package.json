@@ -1,6 +1,6 @@
 {
   "name": "@limio/ot-quote-builder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "OpenText Trading Grid Enterprise self-serve quote builder. The buyer describes their trading network, picks a term and add-ons and gets a priced quote (live catalog prices from the page's offers and add-ons) with a quote reference. Submitting sends a Limio data_capture order; the Salesforce v3 plugin turns it into an i42as__OrderEvent__e (DATA_CAPTURE) and Apex creates the Account, Contact, Opportunity and Limio quote. Needs an auth provider on the page (anonymous auth).",
   "main": "./index.js",
   "peerDependencies": {
