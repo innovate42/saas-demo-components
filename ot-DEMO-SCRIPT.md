@@ -65,6 +65,39 @@ a supplier the way a seller would on a call.
 4. Step 4 **Guided onboarding** (one-off) vs self-service — *"your PS team as a product, not a hand-hold."*
 5. Summary shows ERP, partners, **data centre**, monthly + one-off. **Continue to checkout.**
 
+## Act 2b — Enterprise: the buyer builds their own quote (~4 min)
+
+**Rich's words:** *"Competitors quote in < 2 days. OT quoting takes weeks."* Packaging stays complex; the buyer
+gets a quote in minutes anyway, and sales gets it in Salesforce as a real quote, not an Excel attachment.
+
+1. **`/ot-store`** → Trading Grid Enterprise card → **Build a quote →** (next to *Talk to our team*) → **`/ot-quote`**.
+   **Demo shortcut — no typing:** open
+   **https://saas-dev-shop.prod.limio.com/ot-quote?demo=1&region=NA** (bookmark it). The form fills itself with
+   the buyer below, then `demo=1` drops out of the address bar so the prospect never sees it. Each load uses a new
+   email (`amaury+q<yyMMddHHmmss>@limio.com`) and a new company (*Harbor Foods Distribution* + 3 random
+   characters), so every quote lands on a fresh Salesforce Account/Contact. Nothing is submitted; every field
+   stays editable. `&region=NA` keeps it in USD (drop it or switch the header region for £/€).
+2. Fill the form like Atlassian's: you, company, **trading network** (ERP *Oracle NetSuite*, **40 partners**, key
+   partners *Walmart, Kroger, Costco, Sysco*), **3-year** commitment, start date, Premium Support + Guided
+   onboarding, billing and technical contacts, PO, tax exemption. With `?demo=1` this is already done: show the
+   filled sections, then change the partner count live to reprice.
+   The **Your quote** panel prices it live from the catalog: Foundation 10 + 30 additional partners + ERP adapter +
+   Premium Support = **$36,170/yr**, $1,500 one-off, **$110,010 over 3 years**. Change the partner count or the
+   region (header, $ → £ → €) and it reprices.
+3. **Create my quote** → **"Your quote is ready"**: quote reference (*OTQ-…*), valid 30 days, line items, totals,
+   **Download PDF** for procurement. *"Day 1, not week 3."*
+4. Salesforce (seconds later): **Opportunity** *<Company> – Trading Grid Enterprise quote OTQ-…* at
+   Proposal/Price Quote (lead source *OT Quote Builder*, ERP, partners, data centre, full brief in the description),
+   **Account** + **Contact**, a High-priority **Task** *Review customer-built quote OTQ-…* for the owner, and a
+   **Limio quote** on the opportunity → open it: the same lines and prices, editable (discount, price, quantity)
+   by the rep in Limio for Salesforce. *"Sales starts from a priced quote, not a blank sheet."*
+
+Behind it: the page sends a Limio `data_capture` order (no basket) → Limio's Salesforce plugin publishes
+`i42as__OrderEvent__e` (Type `DATA_CAPTURE`) → `OTOrderEventTrigger` → `OTQuoteRequestHandler`, which reads the
+offers from Limio's catalog and writes the quote in the shape Limio for Salesforce uses.
+Not in the demo: the rep sending a checkout link from that quote. The quote page's link flow in saasdemo3 still
+points at the Amazing Life checkout (`/al-checkout`).
+
 ## Act 3 — Checkout: card or ACH + click-through order form (~3 min)
 
 **Their words:** *"Templatised sales order form and T&Cs… make it a credit card process."*
@@ -178,7 +211,7 @@ Every account page has its own **My account** bar (Trading Grid Online navy, lik
 | Zuora | Products `OT-BN-ESSENTIALS`, `OT-BN-TGFOUNDATION`, `OT-BN-ADDONS` (Media Tenant 39825) |
 | Payment forms | Zuora hosted pages "saas-demo CC" / "saas-demo ACH" (Payments > Setup Payment Pages). **Shared by every saas-dev-shop demo.** Field order + CSS restyled 2026-11-04; old CSS backed up in Chrome localStorage on apisandbox.zuora.com (`limio-backup-saas-demo-CC-css-2026-11-04`, `…-ACH-…`). Saving asks to confirm the existing security threshold. |
 | Account header | `ot-header` with `variant: "account"` on the 8 account pages |
-| Pages | `/ot-store`, `/ot-help-me-choose`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payments`, `/ot-payment-methods`, `/ot-add-payment-method`, `/ot-cancel` |
+| Pages | `/ot-store`, `/ot-help-me-choose`, `/ot-trading-grid`, `/ot-essentials`, `/ot-enterprise`, `/ot-quote` (anonymous auth, label `ottg`), `/ot-checkout`, `/ot-confirm`, `/ot-account`, `/ot-direct-update`, `/ot-direct-update-sub`, `/ot-invoices`, `/ot-payments`, `/ot-payment-methods`, `/ot-add-payment-method`, `/ot-cancel` |
 | Components | `ot-header`, `ot-store`, `ot-buy`, `ot-request-form` (innovate42/saas-demo-components#123); `ot-step-header`, `ot-step-continue`, `ot-onboarding` (#124); `ot-help-me-choose` + stock `limio-chat-side-panel` |
 | Login | Auth0 tenant `limio`, app *OpenText Business Network* (`w3UFQVwqy6beMqyZ4CKaRINYOf4jB8fJ`) → Limio provider `opentext-auth0` on checkout, confirm and the 6 portal pages; store/product pages stay public. See `ot-AUTH0-SETUP.md`. |
 | Order → Salesforce | `OTOrderEventTrigger` on `i42as__OrderEvent__e` → `OTOrderEventHandler` |
@@ -186,6 +219,7 @@ Every account page has its own **My account** bar (Trading Grid Online navy, lik
 | Onboarding → Salesforce | Outcome *Onboarding details captured* (`@data_capture`) → Limio Salesforce plugin publishes `i42as__OrderEvent__e` (Type `DATA_CAPTURE`) → `OTOrderEventTrigger` → `OTAgentCaptureHandler` fills the provisioning order (matched on order reference, else email) and adds a Task to the opportunity. Needs `data_capture` in saas-dev's order processing `orderTypes` (set 2026-11-04) |
 | Help me choose | Limio agent `ot-help-me-choose` (`agent-66e703b9828bd2c987c1ff7a11d347cf`), knowledge `ot-help-me-choose-knowledge` (5 docs). Placed by the AI workflow **mockup** (saas-dev-shop domain): every `/ot-*` store, checkout and account page → this agent, `/ot-confirm` → `ot-bn-onboarding` |
 | Help me choose → Salesforce | Outcomes *Existing customer – case opened* → **Case**, *Lead – contact details given* → **Lead**, both via `@data_capture` → the same `DATA_CAPTURE` platform event → `OTAgentCaptureHandler`, upserted on `OT_Conversation_Id__c` |
+| Quote → Salesforce | `/ot-quote` (`ot-quote-builder`, innovate42/saas-demo-components#139, #140) sends `data_capture` with `form: "ot_quote_request"` → `DATA_CAPTURE` platform event → `OTOrderEventTrigger` → `OTQuoteRequestHandler` (Queueable, catalog callouts over the `limio` named credential): Account + Contact + Opportunity (`OT_Quote_Ref__c`, idempotent) + `i42as__Limio_Quote__c` (In Progress, approval Needed) + Task. A Lead is not enough: the Limio quote requires an Opportunity and takes its contact from `Opportunity.ContactId`. Permission set `OT_Quote_Builder`. AI workflow **mockup**: `/ot-quote` → `ot-help-me-choose` |
 | Order custom fields | `OT_Product`, `OT_ERP`, `OT_ERP_Adapter`, `OT_TradingPartners`, `OT_PartnerCount`, `OT_Documents`, `OT_Region`, `OT_DataCentre`, `OT_Onboarding` |
 
 After every test order or agent outcome check the Limio `process_event` is `processed` with `criticalPluginErrors: []`.
