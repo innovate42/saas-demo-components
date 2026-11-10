@@ -208,6 +208,21 @@
     color: #1a6aff;
 }
 
+.ot-store__cta2 {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    color: #1a6aff;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.ot-store__cta2:hover {
+    color: #024cbb;
+    text-decoration: underline;
+}
+
 .ot-store__cta--light {
     background: #fff;
     border-color: #fff;

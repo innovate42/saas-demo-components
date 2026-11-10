@@ -1,0 +1,25 @@
+{
+  "name": "@limio/ot-quote-builder",
+  "version": "1.0.0",
+  "description": "OpenText Trading Grid Enterprise self-serve quote builder. The buyer describes their trading network, picks a term and add-ons and gets a priced quote (live catalog prices from the page's offers and add-ons) with a quote reference. Submitting sends a Limio data_capture order; the Salesforce v3 plugin turns it into an i42as__OrderEvent__e (DATA_CAPTURE) and Apex creates the Account, Contact, Opportunity and Limio quote. Needs an auth provider on the page (anonymous auth).",
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": "*"
+  },
+  "limioProps": [
+    { "id": "kicker", "label": "Kicker", "type": "string", "default": "Trading Grid Enterprise" },
+    { "id": "title", "label": "Title", "type": "string", "default": "Build your quote" },
+    { "id": "intro", "label": "Intro", "type": "richtext", "default": "<p>Tell us about your trading network and get a priced quote in minutes. No call needed.</p>" },
+    { "id": "basePlanKey", "label": "Base plan (tier_rank__limio of the Trading Grid offer to quote on)", "type": "string", "default": "4" },
+    { "id": "defaultPartners", "label": "Default number of trading partners", "type": "string", "default": "25" },
+    { "id": "managedServicesLabel", "label": "Managed services option", "type": "string", "default": "Managed services: OpenText runs your B2B operations (priced by your account team)" },
+    { "id": "validityDays", "label": "Quote validity (days)", "type": "string", "default": "30" },
+    { "id": "submitLabel", "label": "Submit button", "type": "string", "default": "Create my quote" },
+    { "id": "successTitle", "label": "Success title", "type": "string", "default": "Your quote is ready" },
+    { "id": "successBody", "label": "Success body", "type": "richtext", "default": "<p>We've sent it to your account team. They'll confirm it and send you a link to accept and pay.</p>" },
+    { "id": "asideTitle", "label": "Summary title", "type": "string", "default": "Your quote" },
+    { "id": "termsNote", "label": "Small print under the summary", "type": "richtext", "default": "<p>List prices, excluding tax. Your account team confirms the quote, including any multi-year or managed-services pricing.</p>" },
+    { "id": "backLabel", "label": "Back link label", "type": "string", "default": "Back to the store" },
+    { "id": "backHref", "label": "Back link", "type": "string", "default": "/ot-store" }
+  ]
+}

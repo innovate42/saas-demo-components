@@ -136,6 +136,11 @@ const OtStore = () => {
                             <a className={`ot-store__cta${p.featured ? "" : " ot-store__cta--outline"}`} href={p.href}>
                                 {p.cta}
                             </a>
+                            {p.cta2 && p.href2 && (
+                                <a className="ot-store__cta2" href={p.href2}>
+                                    {p.cta2} <span aria-hidden="true">→</span>
+                                </a>
+                            )}
                         </article>
                     )
                 })}
