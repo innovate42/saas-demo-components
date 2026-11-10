@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { ErrorBoundary, useCampaign, useLimioContext, sanitiseHTML } from "@limio/sdk"
-import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.js"
+import { sendOrder, getRecaptchaToken } from "@limio/shop/src/shop/helpers/postRequests.ts"
 import { useStaticProps } from "./componentStaticProps"
 import "./index.css"
 
