@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>OpenText demo: see the reference of quotes buyers build on the store (ot-quote-builder) on the opportunity.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Opportunity.OT_Quote_Ref__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>OT Quote Builder</label>
+</PermissionSet>

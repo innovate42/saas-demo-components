@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OT_Quote_Ref__c</fullName>
+    <description>Reference of a quote the buyer built on the OpenText store (ot-quote-builder), e.g. OTQ-261110-AB12. Set by OTQuoteRequestHandler, which uses it to never create the same quote twice.</description>
+    <externalId>true</externalId>
+    <label>OT Quote Ref</label>
+    <length>40</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+    <caseSensitive>false</caseSensitive>
+</CustomField>
