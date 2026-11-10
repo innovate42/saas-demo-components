@@ -71,9 +71,16 @@ a supplier the way a seller would on a call.
 gets a quote in minutes anyway, and sales gets it in Salesforce as a real quote, not an Excel attachment.
 
 1. **`/ot-store`** → Trading Grid Enterprise card → **Build a quote →** (next to *Talk to our team*) → **`/ot-quote`**.
+   **Demo shortcut — no typing:** open
+   **https://saas-dev-shop.prod.limio.com/ot-quote?demo=1&region=NA** (bookmark it). The form fills itself with
+   the buyer below, then `demo=1` drops out of the address bar so the prospect never sees it. Each load uses a new
+   email (`amaury+q<yyMMddHHmmss>@limio.com`) and a new company (*Harbor Foods Distribution* + 3 random
+   characters), so every quote lands on a fresh Salesforce Account/Contact. Nothing is submitted; every field
+   stays editable. `&region=NA` keeps it in USD (drop it or switch the header region for £/€).
 2. Fill the form like Atlassian's: you, company, **trading network** (ERP *Oracle NetSuite*, **40 partners**, key
    partners *Walmart, Kroger, Costco, Sysco*), **3-year** commitment, start date, Premium Support + Guided
-   onboarding, billing and technical contacts, PO, tax exemption.
+   onboarding, billing and technical contacts, PO, tax exemption. With `?demo=1` this is already done: show the
+   filled sections, then change the partner count live to reprice.
    The **Your quote** panel prices it live from the catalog: Foundation 10 + 30 additional partners + ERP adapter +
    Premium Support = **$36,170/yr**, $1,500 one-off, **$110,010 over 3 years**. Change the partner count or the
    region (header, $ → £ → €) and it reprices.
