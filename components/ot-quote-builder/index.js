@@ -162,6 +162,81 @@ const EMPTY = {
     comments: "",
 }
 
+// Demo prefill: open the page with ?demo=1 and the form fills with a realistic
+// Enterprise buyer, priced the way the demo script quotes it (40 partners, 3 years,
+// Premium Support + Guided onboarding = $36,170/yr, $110,010 over 3 years in USD).
+// The param is then removed from the address bar, so the prospect never sees it.
+// Every run gets a new email and company suffix: Salesforce matches the contact on
+// email, and a reused one attaches the quote to that contact's existing account.
+// Nothing is submitted and every field stays editable.
+const DEMO_PARAM = "demo"
+
+const isDemoRequested = () => {
+    try {
+        const v = new URLSearchParams(window.location.search).get(DEMO_PARAM)
+        return v !== null && !["0", "false", "no"].includes(v.toLowerCase())
+    } catch (e) {
+        return false
+    }
+}
+
+const dropDemoParam = () => {
+    try {
+        const url = new URL(window.location.href)
+        url.searchParams.delete(DEMO_PARAM)
+        window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`)
+    } catch (e) {
+        // history blocked: the param just stays in the address bar
+    }
+}
+
+const pad = (n) => String(n).padStart(2, "0")
+
+// 1st of the month after next, in local time (toISOString would shift it a day east of UTC).
+const demoStartDate = (now) => {
+    const d = new Date(now.getFullYear(), now.getMonth() + 2, 1)
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-01`
+}
+
+export const demoValues = (now = new Date(), rand = Math.random) => {
+    const stamp = `${String(now.getFullYear()).slice(2)}${pad(now.getMonth() + 1)}${pad(now.getDate())}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`
+    const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+    const suffix = Array.from({ length: 3 }, () => alphabet[Math.floor(rand() * alphabet.length)]).join("")
+    return {
+        firstName: "Jordan",
+        lastName: "Reyes",
+        email: `amaury+q${stamp}@limio.com`,
+        phone: "+1 312 555 0147",
+        jobTitle: "Director of Supply Chain Systems",
+        company: `Harbor Foods Distribution ${suffix}`,
+        industry: "Distribution & logistics",
+        employees: "1,000 – 4,999",
+        country: "US",
+        erp: "Oracle NetSuite",
+        partners: "40",
+        keyPartners: "Walmart, Kroger, Costco, Sysco",
+        volume: "100,000 – 500,000",
+        tradeRegions: ["North America", "Latin America"],
+        termYears: "3",
+        startDate: demoStartDate(now),
+        erpAdapters: "1",
+        premiumSupport: true,
+        guidedOnboarding: true,
+        managedServices: false,
+        billingSame: true,
+        addressLine1: "1200 Harbor Point Blvd, Suite 400",
+        city: "Chicago",
+        state: "IL",
+        postcode: "60601",
+        billingCountry: "US",
+        techName: "Sam Okafor",
+        techEmail: `amaury+q${stamp}it@limio.com`,
+        poRequired: true,
+        poNumber: `HFD-PO-${stamp.slice(0, 6)}-${suffix}`,
+        comments: "We'd like Walmart and Kroger live first, ahead of our Q1 ordering cycle.",
+    }
+}
+
 const Section = ({ n, title, hint, children }) => (
     <section className="ot-qb__section">
         <div className="ot-qb__section-head">
@@ -221,6 +296,10 @@ const OtQuoteBuilder = () => {
             billingCountry: f.billingCountry || DEFAULT_COUNTRY[r],
             startDate: f.startDate || isoDate(addDays(30)),
         }))
+        if (isDemoRequested()) {
+            if (!isInPageBuilder) setForm((f) => ({ ...f, ...demoValues() }))
+            dropDemoParam()
+        }
         const onChange = (e) => e?.detail && REGIONS[e.detail] && setRegion(e.detail)
         window.addEventListener("ot-region-change", onChange)
         return () => window.removeEventListener("ot-region-change", onChange)
