@@ -286,6 +286,10 @@ const OtBuy = () => {
             OT_ERP: erpInfo ? erpInfo.name : "n/a (web portal)",
             OT_ERP_Adapter: pilot ? "included" : erpAddon ? "yes" : "no",
             OT_Kits: kitIds.join("; ").slice(0, 255),
+            // partner -> kit ID for provisioning (the Salesforce order event drops line attributes)
+            OT_KitMap: JSON.stringify(
+                Object.fromEntries(kitAddons.map((k) => [attrs(k).kit_partner__limio, attrs(k).kit_id__limio]))
+            ),
             OT_TradingPartners: selected.join("; ").slice(0, 255),
             OT_PartnerCount: String(count),
             OT_Documents: docsNeeded.join(", ").slice(0, 255),
