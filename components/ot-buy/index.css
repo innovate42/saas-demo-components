@@ -209,6 +209,13 @@
     font-weight: 400;
 }
 
+.ot-buy__erp-tag--instant {
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: 50px;
+    background: #e6f4ec;
+}
+
 /* ---- Partners ---------------------------------------------------------- */
 .ot-buy__filters {
     display: flex;
