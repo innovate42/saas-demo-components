@@ -6,6 +6,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>i42as__ioProvisioningOrderItem__c.OT_Kit_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>i42as__ioProvisioningOrder__c.OT_Provisioning_Owner__c</field>
         <readable>true</readable>

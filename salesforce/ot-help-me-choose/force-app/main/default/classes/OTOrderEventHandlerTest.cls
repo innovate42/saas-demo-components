@@ -124,4 +124,14 @@ private class OTOrderEventHandlerTest {
         Test.stopTest();
         System.assertEquals(1, [SELECT COUNT() FROM Opportunity WHERE OT_Limio_Order__c = 'O-TEST-3']);
     }
+
+    @IsTest
+    static void kitsAreReadFromTheKitAddOns() {
+        Map<String, Object> order = (Map<String, Object>) JSON.deserializeUntyped(
+            '{"orderItems":[{"offer":{"path":"/offers2/OT Trading Grid Foundation 5 Annual USD","data":{"attributes":{}}}},'
+            + '{"offer":{"path":"/add_ons/OT Kit TPK-WALMART-US USD","data":{"attributes":{"kit_id__limio":"TPK-WALMART-US","kit_partner__limio":"Walmart"}}}}]}');
+        Map<String, String> kits = OTOrderEventHandler.kitsByPartner(order);
+        System.assertEquals(1, kits.size());
+        System.assertEquals('TPK-WALMART-US', kits.get('Walmart'));
+    }
 }
