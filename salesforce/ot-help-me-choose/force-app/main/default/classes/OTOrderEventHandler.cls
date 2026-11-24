@@ -332,7 +332,7 @@ public without sharing class OTOrderEventHandler {
         i42as__ioProvisioningOrderItem__c conn = item(prov, orderNumber, orderType, 'Connectivity', 'Configure connectivity (AS2 / SFTP / VAN)', null, null, 'Draft');
         items.add(conn);
         List<i42as__ioProvisioningOrderItem__c> partnerItems = new List<i42as__ioProvisioningOrderItem__c>();
-        Map<String, String> kits = kitsByPartner(order);
+        Map<String, String> kits = kitsByPartner(order, custom);
         if (String.isNotBlank(partnersRaw)) {
             for (String p : partnersRaw.split(';')) {
                 if (String.isNotBlank(p.trim())) {
@@ -392,10 +392,25 @@ public without sharing class OTOrderEventHandler {
     }
 
     // Trading partner kits are zero-priced add-ons carrying their kit ID
-    // (kit_id__limio) and the partner they connect (kit_partner__limio).
+    // (kit_id__limio) and the partner they connect (kit_partner__limio). The
+    // order event Salesforce receives drops line attributes, so ot-buy also
+    // sends the map as the OT_KitMap custom field (JSON partner -> kit ID).
     @TestVisible
-    static Map<String, String> kitsByPartner(Map<String, Object> order) {
+    static Map<String, String> kitsByPartner(Map<String, Object> order, Map<String, Object> custom) {
         Map<String, String> out = new Map<String, String>();
+        String raw = str(custom, 'OT_KitMap');
+        if (String.isNotBlank(raw)) {
+            try {
+                Object parsed = JSON.deserializeUntyped(raw);
+                if (parsed instanceof Map<String, Object>) {
+                    for (String partner : ((Map<String, Object>) parsed).keySet()) {
+                        out.put(partner, String.valueOf(((Map<String, Object>) parsed).get(partner)));
+                    }
+                }
+            } catch (Exception e) {
+                System.debug(LoggingLevel.WARN, 'OT_KitMap is not JSON: ' + e.getMessage());
+            }
+        }
         for (Object o : listOf(order, 'orderItems')) {
             Map<String, Object> attrs = mapOf(mapOf(mapOf((Map<String, Object>) o, 'offer'), 'data'), 'attributes');
             String kit = str(attrs, 'kit_id__limio');

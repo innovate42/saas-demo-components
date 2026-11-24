@@ -130,8 +130,16 @@ private class OTOrderEventHandlerTest {
         Map<String, Object> order = (Map<String, Object>) JSON.deserializeUntyped(
             '{"orderItems":[{"offer":{"path":"/offers2/OT Trading Grid Foundation 5 Annual USD","data":{"attributes":{}}}},'
             + '{"offer":{"path":"/add_ons/OT Kit TPK-WALMART-US USD","data":{"attributes":{"kit_id__limio":"TPK-WALMART-US","kit_partner__limio":"Walmart"}}}}]}');
-        Map<String, String> kits = OTOrderEventHandler.kitsByPartner(order);
+        Map<String, String> kits = OTOrderEventHandler.kitsByPartner(order, new Map<String, Object>());
         System.assertEquals(1, kits.size());
         System.assertEquals('TPK-WALMART-US', kits.get('Walmart'));
+    }
+
+    @IsTest
+    static void kitsAreReadFromTheKitMapCustomField() {
+        Map<String, Object> custom = new Map<String, Object>{ 'OT_KitMap' => '{"Walmart":"TPK-WALMART-US","Tesco":"TPK-TESCO-GB"}' };
+        Map<String, String> kits = OTOrderEventHandler.kitsByPartner(new Map<String, Object>(), custom);
+        System.assertEquals('TPK-TESCO-GB', kits.get('Tesco'));
+        System.assertEquals(2, kits.size());
     }
 }
