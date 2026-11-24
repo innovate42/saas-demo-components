@@ -1,0 +1,281 @@
+{
+  "_note": "Placeholder trading partner kits for the Business Central pilot demo. Replace with Anatoly's pilot kit list, then run sync-kits.py.",
+  "kits": [
+    {
+      "kitId": "TPK-WALMART-US",
+      "partner": "Walmart",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-TARGET-US",
+      "partner": "Target",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-COSTCO-US",
+      "partner": "Costco",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-AMAZON-US",
+      "partner": "Amazon Vendor Central",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-HOMEDEPOT-US",
+      "partner": "The Home Depot",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-LOWES-US",
+      "partner": "Lowe's",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-KROGER-US",
+      "partner": "Kroger",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-ALBERTSONS-US",
+      "partner": "Albertsons",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-PUBLIX-US",
+      "partner": "Publix",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-CVS-US",
+      "partner": "CVS Health",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-WALGREENS-US",
+      "partner": "Walgreens",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-MCKESSON-US",
+      "partner": "McKesson",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-BESTBUY-US",
+      "partner": "Best Buy",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-NORDSTROM-US",
+      "partner": "Nordstrom",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-MACYS-US",
+      "partner": "Macy's",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-DOLLARGENERAL-US",
+      "partner": "Dollar General",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-TRACTORSUPPLY-US",
+      "partner": "Tractor Supply",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-ACE-US",
+      "partner": "Ace Hardware",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-WAYFAIR-US",
+      "partner": "Wayfair",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-SYSCO-US",
+      "partner": "Sysco",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-AUTOZONE-US",
+      "partner": "AutoZone",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-OREILLY-US",
+      "partner": "O'Reilly Auto Parts",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-ADVANCEAUTO-US",
+      "partner": "Advance Auto Parts",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-NAPA-US",
+      "partner": "NAPA (Genuine Parts)",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-GM-US",
+      "partner": "General Motors",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-FORD-US",
+      "partner": "Ford Motor Company",
+      "region": "NA",
+      "country": "US"
+    },
+    {
+      "kitId": "TPK-TESCO-GB",
+      "partner": "Tesco",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-SAINSBURYS-GB",
+      "partner": "Sainsbury's",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-ASDA-GB",
+      "partner": "Asda",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-MANDS-GB",
+      "partner": "Marks & Spencer",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-BOOTS-GB",
+      "partner": "Boots",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-BANDQ-GB",
+      "partner": "B&Q (Kingfisher)",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-SCREWFIX-GB",
+      "partner": "Screwfix",
+      "region": "EMEA",
+      "country": "GB"
+    },
+    {
+      "kitId": "TPK-CARREFOUR-FR",
+      "partner": "Carrefour",
+      "region": "EMEA",
+      "country": "FR"
+    },
+    {
+      "kitId": "TPK-METRO-DE",
+      "partner": "Metro AG",
+      "region": "EMEA",
+      "country": "DE"
+    },
+    {
+      "kitId": "TPK-LIDL-DE",
+      "partner": "Lidl",
+      "region": "EMEA",
+      "country": "DE"
+    },
+    {
+      "kitId": "TPK-AHOLD-NL",
+      "partner": "Ahold Delhaize",
+      "region": "EMEA",
+      "country": "NL"
+    },
+    {
+      "kitId": "TPK-ZALANDO-DE",
+      "partner": "Zalando",
+      "region": "EMEA",
+      "country": "DE"
+    },
+    {
+      "kitId": "TPK-AMAZON-EU",
+      "partner": "Amazon EU",
+      "region": "EMEA",
+      "country": "EU"
+    },
+    {
+      "kitId": "TPK-VW-DE",
+      "partner": "Volkswagen Group",
+      "region": "EMEA",
+      "country": "DE"
+    },
+    {
+      "kitId": "TPK-WOOLWORTHS-AU",
+      "partner": "Woolworths Group",
+      "region": "APAC",
+      "country": "AU"
+    },
+    {
+      "kitId": "TPK-COLES-AU",
+      "partner": "Coles",
+      "region": "APAC",
+      "country": "AU"
+    },
+    {
+      "kitId": "TPK-BUNNINGS-AU",
+      "partner": "Bunnings",
+      "region": "APAC",
+      "country": "AU"
+    },
+    {
+      "kitId": "TPK-AEON-JP",
+      "partner": "AEON",
+      "region": "APAC",
+      "country": "JP"
+    },
+    {
+      "kitId": "TPK-TOYOTA-JP",
+      "partner": "Toyota",
+      "region": "APAC",
+      "country": "JP"
+    },
+    {
+      "kitId": "TPK-LAZADA-SG",
+      "partner": "Lazada",
+      "region": "APAC",
+      "country": "SG"
+    }
+  ]
+}

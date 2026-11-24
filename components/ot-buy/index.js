@@ -2,7 +2,15 @@ import React, { useEffect, useMemo, useState } from "react"
 import { ErrorBoundary, useBasket, useCampaign, useLimioContext, sanitiseHTML } from "@limio/sdk"
 import { useStaticProps } from "./componentStaticProps"
 import { ERPS, INDUSTRIES, PARTNERS } from "./data"
+import { KITS } from "./kits"
 import "./index.css"
+
+// Trading Grid sells the Business Central pilot: one ERP bought online, the
+// adapter included, annual terms only, and a zero-priced trading partner kit per
+// partner. Every other ERP is assisted setup.
+const INSTANT_ERP = "d365-bc"
+const KITS_PER_PACK = 5
+const MAX_ONLINE_PARTNERS = 50
 
 // One page, three currencies. The shopper picks a region in ot-header; it sets
 // the currency (USD by default) and the data centre the order is provisioned
@@ -110,9 +118,10 @@ const OtBuy = () => {
     } = props
 
     const showErp = mode === "tradinggrid"
+    const pilot = mode === "tradinggrid"
 
     const [region, setRegion] = useState("NA")
-    const [term, setTerm] = useState("monthly")
+    const [term, setTerm] = useState(pilot ? "yearly" : "monthly")
     const [erp, setErp] = useState("")
     const [selected, setSelected] = useState([])
     const [custom, setCustom] = useState("")
@@ -162,34 +171,56 @@ const OtBuy = () => {
         )
 
     const count = selected.length
-    // Recommend the cheapest way to cover every selected partner: a bigger
-    // bundle, or a smaller one topped up with additional-partner add-ons.
-    const partnerUnit = priceOf(addon("extra_trading_partner"))
-    const costFor = (p) => {
-        const missing = Math.max(0, count - (attrs(p).trading_partners__limio || 0))
-        if (missing === 0) return priceOf(p)
-        return partnerUnit ? priceOf(p) + missing * partnerUnit : Infinity
-    }
-    const recommended = useMemo(() => {
-        if (plans.length === 0) return null
-        return plans.reduce((best, p) => (costFor(p) < costFor(best) ? p : best), plans[0])
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [plans, count, partnerUnit])
-
-    // A plan the shopper picked by hand wins, but only while it still exists in
-    // the current currency/term; otherwise fall back to the recommendation.
-    const plan =
-        plans.find((p) => attrs(p).display_name__limio === chosenPlan) || recommended
-    const included = attrs(plan).trading_partners__limio || 0
-    const extra = Math.max(0, count - included)
     const erpInfo = ERPS.find((e) => e.id === erp)
-    const needsAdapter = showErp && erpInfo?.adapter
+    const assisted = pilot && !!erp && erp !== INSTANT_ERP
+
+    let plan
+    let recommended = null
+    let packs = 0
+    let erpAddon = null
+    let partnerAddon = null
+    let extra = 0
+    let kitAddons = []
+    let packAddon = null
+    if (pilot) {
+        // 1–5 partners: Foundation 5; 6–10: Foundation 10; 11–50: Foundation 10
+        // plus packs of five kits. A plan picked by hand wins, topped up with packs.
+        const byKits = (n) => plans.find((p) => (attrs(p).trading_partners__limio || 0) >= n)
+        const largest = plans[plans.length - 1]
+        const recommendedPilot = byKits(Math.max(count, 1)) || largest
+        recommended = recommendedPilot
+        plan = plans.find((p) => attrs(p).display_name__limio === chosenPlan) || recommended
+        const included = attrs(plan).trading_partners__limio || 0
+        packs = Math.ceil(Math.max(0, count - included) / KITS_PER_PACK)
+        packAddon = packs > 0 ? addon("partner_pack") : null
+        kitAddons = selected
+            .map((name) => KITS[name] && addOns.find((a) => attrs(a).kit_id__limio === KITS[name] && currencyOf(a) === currency))
+            .filter(Boolean)
+    } else {
+        // Recommend the cheapest way to cover every selected partner: a bigger
+        // bundle, or a smaller one topped up with additional-partner add-ons.
+        const partnerUnit = priceOf(addon("extra_trading_partner"))
+        const costFor = (p) => {
+            const missing = Math.max(0, count - (attrs(p).trading_partners__limio || 0))
+            if (missing === 0) return priceOf(p)
+            return partnerUnit ? priceOf(p) + missing * partnerUnit : Infinity
+        }
+        const cheapest = plans.length ? plans.reduce((best, p) => (costFor(p) < costFor(best) ? p : best), plans[0]) : null
+        recommended = cheapest
+        plan = plans.find((p) => attrs(p).display_name__limio === chosenPlan) || recommended
+        extra = Math.max(0, count - (attrs(plan).trading_partners__limio || 0))
+        erpAddon = showErp && erpInfo?.adapter ? addon("erp_adapter") : null
+        partnerAddon = extra > 0 ? addon("extra_trading_partner") : null
+    }
 
     const lines = []
     if (plan) lines.push({ label: attrs(plan).display_name__limio, amount: priceOf(plan), recurring: true })
-    const erpAddon = needsAdapter ? addon("erp_adapter") : null
+    if (pilot && plan) lines.push({ label: "Business Central adapter", amount: 0, recurring: true, included: true })
+    if (pilot && count > 0)
+        lines.push({ label: `${count} trading partner kit${count > 1 ? "s" : ""}`, amount: 0, recurring: true, included: true })
+    if (packAddon)
+        lines.push({ label: `${packs} extra partner pack${packs > 1 ? "s" : ""}`, amount: priceOf(packAddon) * packs, recurring: true })
     if (erpAddon) lines.push({ label: `ERP adapter · ${erpInfo.name}`, amount: priceOf(erpAddon), recurring: true })
-    const partnerAddon = extra > 0 ? addon("extra_trading_partner") : null
     if (partnerAddon)
         lines.push({ label: `${extra} additional partner${extra > 1 ? "s" : ""}`, amount: priceOf(partnerAddon) * extra, recurring: true })
     const premiumAddon = premium ? addon("premium_support") : null
@@ -200,6 +231,9 @@ const OtBuy = () => {
     const recurringTotal = lines.filter((l) => l.recurring).reduce((s, l) => s + l.amount, 0)
     const oneOffTotal = lines.filter((l) => !l.recurring).reduce((s, l) => s + l.amount, 0)
     const per = term === "yearly" ? "year" : "month"
+    // annual plans show their price per month, billed annually
+    const perMonth = pilot && term === "yearly"
+    const shown = (amount) => (perMonth ? amount / 12 : amount)
 
     const visiblePartners = useMemo(() => {
         const q = query.trim().toLowerCase()
@@ -222,8 +256,8 @@ const OtBuy = () => {
         new Set(selected.flatMap((n) => PARTNERS.find((p) => p.name === n)?.docs || []))
     )
 
-    const ready = !!plan && count > 0 && (!showErp || !!erp)
-    const overThreshold = count > Number(enterpriseThreshold || 15)
+    const overThreshold = pilot ? count > MAX_ONLINE_PARTNERS : count > Number(enterpriseThreshold || 15)
+    const ready = !!plan && count > 0 && (!showErp || !!erp) && !assisted && !(pilot && overThreshold)
 
     const checkout = async () => {
         if (!ready || busy) return
@@ -235,11 +269,14 @@ const OtBuy = () => {
         // assigns once the checkout exists. With the offer id instead, the cart
         // hides the add-on and Zuora drops it from the subscription.
         const addOns = [
+            ...kitAddons.map((k) => [k, 1]),
+            packAddon && [packAddon, packs],
             erpAddon && [erpAddon, 1],
             partnerAddon && [partnerAddon, extra],
             premiumAddon && [premiumAddon, 1],
             guidedAddon && [guidedAddon, 1],
         ].filter(Boolean)
+        const kitIds = kitAddons.map((k) => attrs(k).kit_id__limio)
 
         // Everything provisioning needs travels on the order as custom fields:
         // they land in order.customFields, the entitlement webhook and the
@@ -247,7 +284,8 @@ const OtBuy = () => {
         const fields = {
             OT_Product: mode === "tradinggrid" ? "Trading Grid Foundation" : "B2B Integration Essentials",
             OT_ERP: erpInfo ? erpInfo.name : "n/a (web portal)",
-            OT_ERP_Adapter: erpAddon ? "yes" : "no",
+            OT_ERP_Adapter: pilot ? "included" : erpAddon ? "yes" : "no",
+            OT_Kits: kitIds.join("; ").slice(0, 255),
             OT_TradingPartners: selected.join("; ").slice(0, 255),
             OT_PartnerCount: String(count),
             OT_Documents: docsNeeded.join(", ").slice(0, 255),
@@ -312,7 +350,7 @@ const OtBuy = () => {
                     {showErp && (
                         <Step n={1} title={erpTitle} hint={erpHint}>
                             <div className="ot-buy__erps">
-                                {ERPS.map((e) => (
+                                {(pilot ? [...ERPS].sort((a, b) => Number(b.id === INSTANT_ERP) - Number(a.id === INSTANT_ERP)) : ERPS).map((e) => (
                                     <button
                                         key={e.id}
                                         type="button"
@@ -323,12 +361,27 @@ const OtBuy = () => {
                                             {e.short}
                                         </span>
                                         <span className="ot-buy__erp-name">{e.name}</span>
-                                        {!e.adapter && (
+                                        {pilot && e.id === INSTANT_ERP && (
+                                            <span className="ot-buy__erp-tag ot-buy__erp-tag--instant">Instant setup</span>
+                                        )}
+                                        {pilot && e.id !== INSTANT_ERP && (
+                                            <span className="ot-buy__erp-tag ot-buy__erp-tag--muted">Assisted setup</span>
+                                        )}
+                                        {!pilot && !e.adapter && (
                                             <span className="ot-buy__erp-tag ot-buy__erp-tag--muted">File / API connection</span>
                                         )}
                                     </button>
                                 ))}
                             </div>
+                            {assisted && (
+                                <div className="ot-buy__nudge">
+                                    <span>
+                                        {erpInfo.name} is assisted setup: a specialist connects it with you. Business Central is
+                                        the one ERP you can buy and set up online today.
+                                    </span>
+                                    <a href={enterpriseHref}>Talk to us →</a>
+                                </div>
+                            )}
                         </Step>
                     )}
 
@@ -418,7 +471,7 @@ const OtBuy = () => {
                     </Step>
 
                     <Step n={showErp ? 3 : 2} title={planTitle} hint={planHint}>
-                        <div className="ot-buy__terms" role="tablist">
+                        {!pilot && <div className="ot-buy__terms" role="tablist">
                             <button
                                 type="button"
                                 className={`ot-buy__term${term === "monthly" ? " ot-buy__term--on" : ""}`}
@@ -433,7 +486,7 @@ const OtBuy = () => {
                             >
                                 {annualLabel} <span className="ot-buy__saving">{annualSaving}</span>
                             </button>
-                        </div>
+                        </div>}
                         <div className="ot-buy__plans">
                             {plans.map((p) => {
                                 const a = attrs(p)
@@ -455,7 +508,9 @@ const OtBuy = () => {
                                             dangerouslySetInnerHTML={{ __html: sanitize(a.display_price__limio) }}
                                         />
                                         <span className="ot-buy__plan-detail">
-                                            {a.trading_partners__limio ? `${a.trading_partners__limio} partners · ` : ""}
+                                            {a.trading_partners__limio
+                                                ? `${a.trading_partners__limio} ${pilot ? "trading partner kits" : "partners"} · `
+                                                : ""}
                                             billed {term === "yearly" ? "annually" : "monthly"}
                                         </span>
                                         {showFeatures && (
@@ -520,7 +575,9 @@ const OtBuy = () => {
                             <span>
                                 {premiumLabel}
                                 {addon("premium_support") && (
-                                    <strong> +{money(priceOf(addon("premium_support")), currency)}/{per}</strong>
+                                    <strong>
+                                        {" "}+{money(shown(priceOf(addon("premium_support"))), currency)}/{perMonth ? "month" : per}
+                                    </strong>
                                 )}
                             </span>
                         </label>
@@ -545,8 +602,11 @@ const OtBuy = () => {
                             <li key={i}>
                                 <span>{l.label}</span>
                                 <span>
-                                    {money(l.amount, currency)}
-                                    {l.recurring ? `/${per === "month" ? "mo" : "yr"}` : ""}
+                                    {l.included
+                                        ? "Included"
+                                        : `${money(l.recurring ? shown(l.amount) : l.amount, currency)}${
+                                              l.recurring ? (perMonth || per === "month" ? "/mo" : "/yr") : ""
+                                          }`}
                                 </span>
                             </li>
                         ))}
@@ -554,9 +614,15 @@ const OtBuy = () => {
                     <div className="ot-buy__total">
                         <span>Total</span>
                         <span>
-                            {money(recurringTotal, currency)}/{per}
+                            {money(shown(recurringTotal), currency)}/{perMonth ? "month" : per}
                         </span>
                     </div>
+                    {perMonth && (
+                        <div className="ot-buy__total ot-buy__total--small">
+                            <span>Billed annually, invoice net 30</span>
+                            <span>{money(recurringTotal, currency)}/year</span>
+                        </div>
+                    )}
                     {oneOffTotal > 0 && (
                         <div className="ot-buy__total ot-buy__total--small">
                             <span>Due today, one-off</span>
@@ -568,7 +634,11 @@ const OtBuy = () => {
                     </button>
                     {!ready && (
                         <p className="ot-buy__sum-hint">
-                            {showErp && !erp ? "Pick your ERP and " : "Pick "}at least one trading partner to continue.
+                            {assisted
+                                ? `${erpInfo.name} is assisted setup: talk to us to get started.`
+                                : pilot && overThreshold
+                                ? `Over ${MAX_ONLINE_PARTNERS} partners is an Enterprise plan: talk to us.`
+                                : `${showErp && !erp ? "Pick your ERP and " : "Pick "}at least one trading partner to continue.`}
                         </p>
                     )}
                     {error && <p className="ot-buy__error">{error}</p>}
