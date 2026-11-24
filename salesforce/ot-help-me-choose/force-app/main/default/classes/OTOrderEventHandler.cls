@@ -394,12 +394,19 @@ public without sharing class OTOrderEventHandler {
     // Trading partner kits are zero-priced add-ons carrying their kit ID
     // (kit_id__limio) and the partner they connect (kit_partner__limio). The
     // order event Salesforce receives drops line attributes, so ot-buy also
-    // sends the map as the OT_KitMap custom field (JSON partner -> kit ID).
+    // sends the map as the OT_KitMap custom field ("Partner=KIT-ID; ...").
     @TestVisible
     static Map<String, String> kitsByPartner(Map<String, Object> order, Map<String, Object> custom) {
         Map<String, String> out = new Map<String, String>();
         String raw = str(custom, 'OT_KitMap');
-        if (String.isNotBlank(raw)) {
+        // "Walmart=TPK-WALMART-US; Target=TPK-TARGET-US"
+        if (String.isNotBlank(raw) && !raw.trim().startsWith('{')) {
+            for (String pair : raw.split(';')) {
+                if (pair.contains('=')) {
+                    out.put(pair.substringBeforeLast('=').trim(), pair.substringAfterLast('=').trim());
+                }
+            }
+        } else if (String.isNotBlank(raw)) {
             try {
                 Object parsed = JSON.deserializeUntyped(raw);
                 if (parsed instanceof Map<String, Object>) {

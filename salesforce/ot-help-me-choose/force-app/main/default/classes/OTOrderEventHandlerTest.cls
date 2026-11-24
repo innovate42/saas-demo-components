@@ -142,4 +142,12 @@ private class OTOrderEventHandlerTest {
         System.assertEquals('TPK-TESCO-GB', kits.get('Tesco'));
         System.assertEquals(2, kits.size());
     }
+
+    @IsTest
+    static void kitsAreReadFromThePlainTextKitMap() {
+        Map<String, Object> custom = new Map<String, Object>{ 'OT_KitMap' => 'Walmart=TPK-WALMART-US; B&Q (Kingfisher)=TPK-BANDQ-GB' };
+        Map<String, String> kits = OTOrderEventHandler.kitsByPartner(new Map<String, Object>(), custom);
+        System.assertEquals('TPK-BANDQ-GB', kits.get('B&Q (Kingfisher)'));
+        System.assertEquals(2, kits.size());
+    }
 }
